@@ -1,0 +1,8 @@
+GHI CHÚ TỪ KHO (anh Tùng gửi qua Zalo, 08/10/2026) — dữ liệu giả lập
+
+- Kho hiện có 1 kho chính "WH/Stock" ở Thủ Đức. Hàng trả về hiện đang để chung, rất lộn xộn.
+- Đề nghị tạo 1 location riêng "WH/Returns" để chứa hàng trả chờ kiểm tra.
+- Hàng nguyên vẹn -> chuyển về WH/Stock để bán lại. Hàng lỗi -> chuyển "WH/Damaged".
+- Khi nhận hàng cần quét mã yêu cầu (in trên phiếu khách dán ngoài gói hàng) để tìm nhanh.
+- Kho làm trên máy tính bàn, không dùng điện thoại.
+- Vận chuyển gửi trả: khách tự gửi qua bưu cục GHN hoặc mang tới cửa hàng. Chưa tích hợp API GHN (để giai đoạn 2).

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(pandoc *)",
+      "Bash(npx mmdc *)",
+      "Bash(mmdc *)",
+      "Bash(git *)",
+      "Bash(gh pr *)"
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit — Storefront (Magento)</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* Chỉ dùng cho trang trưng bày kit, KHÔNG copy vào màn hình */
+  .kit-item { margin: 24px; background: #fff; border: 1px solid #ccc; }
+  .kit-item > h2 { margin: 0; padding: 8px 16px; background: #333; color: #fff; font-size: 14px; font-family: var(--wf-font-mono); }
+  .kit-demo { padding: 16px 0; position: relative; }
+</style>
+</head>
+<body>
+<!--
+  KIT STOREFRONT — kiểu Magento 2 (Luma).
+  Cách dùng: copy nguyên khối HTML trong .kit-demo vào màn hình, đổi nhãn/dữ liệu.
+  Không tạo class mới ngoài tokens.css. Chỉ dùng thêm style="" cho kích thước/khoảng cách khi thật cần.
+  Danh sách: sf-header, sf-nav, sf-footer, breadcrumb+title, sf-product-card, PLP, PDP, cart, checkout steps,
+             address form, sf-account (tài khoản khách), form field/trạng thái lỗi, upload, alert, toast, empty, loading, modal, table stack.
+-->
+<div class="wf-doc-header"><strong>Kit · Storefront</strong><span class="wf-doc-meta">Magento 2 style · 1440 / 390</span></div>
+
+<section class="kit-item" id="sf-header"><h2>sf-header + sf-nav (header, menu)</h2><div class="kit-demo">
+  <div class="sf-topbar">Miễn phí vận chuyển cho đơn từ 500.000₫</div>
+  <header class="sf-header"><div class="wf-container sf-header__inner">
+    <span class="sf-burger">☰</span>
+    <span class="wf-logo">LOGO</span>
+    <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+    <div class="sf-header__actions">
+      <span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Tài khoản</span></span>
+      <span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">2</span><span class="sf-label">Giỏ hàng</span></span>
+    </div>
+  </div></header>
+  <nav class="sf-nav"><div class="wf-container sf-nav__inner">
+    <span>Nam</span><span class="is-active">Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span>
+  </div></nav>
+</div></section>
+
+<section class="kit-item" id="sf-title"><h2>wf-breadcrumb + sf-page-title</h2><div class="kit-demo"><div class="wf-container">
+  <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Nữ</span><span>Áo</span></nav>
+  <div class="sf-page-title"><h1 class="wf-h1">Áo nữ</h1></div>
+</div></div></section>
+
+<section class="kit-item" id="sf-product-card"><h2>sf-product-card</h2><div class="kit-demo"><div class="wf-container">
+  <div class="sf-grid">
+    <div class="sf-product-card">
+      <span class="wf-img wf-img--square"></span>
+      <span class="sf-product-card__name">Áo thun cotton basic</span>
+      <span class="sf-rating">★★★★☆ <span class="wf-xs">(12)</span></span>
+      <span class="wf-row"><span class="wf-price">249.000₫</span><span class="wf-price-old">299.000₫</span></span>
+      <span class="wf-btn wf-btn--sm">Thêm vào giỏ</span>
+    </div>
+    <div class="sf-product-card">
+      <span class="wf-img wf-img--square"></span>
+      <span class="sf-product-card__name">Áo sơ mi linen</span>
+      <span class="wf-price">459.000₫</span>
+      <span class="wf-badge wf-badge--dashed">Hết hàng</span>
+    </div>
+  </div>
+</div></div></section>
+
+<section class="kit-item" id="sf-plp"><h2>sf-plp (Product listing: filter + toolbar + grid + pagination)</h2><div class="kit-demo"><div class="wf-container">
+  <div class="sf-plp">
+    <aside class="sf-filters">
+      <div class="sf-filter-group"><span class="wf-h3">Kích cỡ</span><label class="wf-check"><input type="checkbox" checked>S</label><label class="wf-check"><input type="checkbox">M</label></div>
+      <div class="sf-filter-group"><span class="wf-h3">Giá</span><label class="wf-check"><input type="checkbox">Dưới 300.000₫</label><label class="wf-check"><input type="checkbox">300.000₫ – 600.000₫</label></div>
+    </aside>
+    <div>
+      <div class="sf-toolbar"><span class="wf-btn wf-btn--sm sf-filter-toggle">Bộ lọc</span><span class="wf-muted">48 sản phẩm</span><span class="wf-spacer"></span><span class="wf-small">Sắp xếp</span><select class="wf-select" style="width:180px"><option>Mới nhất</option></select></div>
+      <div class="sf-grid">
+        <div class="sf-product-card"><span class="wf-img wf-img--square"></span><span class="sf-product-card__name">Sản phẩm A</span><span class="wf-price">199.000₫</span></div>
+        <div class="sf-product-card"><span class="wf-img wf-img--square"></span><span class="sf-product-card__name">Sản phẩm B</span><span class="wf-price">299.000₫</span></div>
+        <div class="sf-product-card"><span class="wf-img wf-img--square"></span><span class="sf-product-card__name">Sản phẩm C</span><span class="wf-price">399.000₫</span></div>
+      </div>
+      <div class="wf-row wf-row--end" style="margin-top:24px"><div class="wf-pagination"><span>‹</span><span class="is-active">1</span><span>2</span><span>3</span><span>›</span></div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<section class="kit-item" id="sf-pdp"><h2>sf-pdp (Product detail)</h2><div class="kit-demo"><div class="wf-container">
+  <div class="sf-pdp">
+    <div class="sf-gallery"><span class="wf-img wf-img--square"></span><div class="sf-gallery__thumbs"><span class="wf-img wf-img--thumb"></span><span class="wf-img wf-img--thumb"></span><span class="wf-img wf-img--thumb"></span></div></div>
+    <div class="sf-pdp-info">
+      <h1 class="wf-h1">Áo thun cotton basic</h1>
+      <span class="wf-muted wf-small">SKU: AT-001 · Còn hàng</span>
+      <span class="wf-price" style="font-size:24px">249.000₫</span>
+      <div class="wf-stack"><span class="wf-label">Kích cỡ</span><div class="sf-swatches"><span class="sf-swatch">S</span><span class="sf-swatch is-active">M</span><span class="sf-swatch is-disabled">L</span></div></div>
+      <div class="wf-row"><div class="sf-qty"><span>−</span><span>1</span><span>+</span></div><span class="wf-btn wf-btn--primary wf-btn--lg">Thêm vào giỏ</span></div>
+      <div class="wf-tabs"><span class="wf-tab is-active">Mô tả</span><span class="wf-tab">Chính sách đổi trả</span></div>
+      <div class="wf-stack"><span class="wf-skeleton" style="width:90%"></span><span class="wf-skeleton" style="width:70%"></span></div>
+    </div>
+  </div>
+</div></div></section>
+
+<section class="kit-item" id="sf-cart"><h2>sf-cart-item + sf-summary (giỏ hàng)</h2><div class="kit-demo"><div class="wf-container">
+  <div class="wf-split">
+    <div>
+      <div class="sf-cart-item"><span class="wf-img"></span><div class="wf-stack" style="gap:4px"><span class="wf-strong">Áo thun cotton basic</span><span class="wf-small wf-muted">Size M · Trắng</span></div><div class="sf-qty"><span>−</span><span>1</span><span>+</span></div><span class="wf-price">249.000₫</span></div>
+      <div class="sf-cart-item"><span class="wf-img"></span><div class="wf-stack" style="gap:4px"><span class="wf-strong">Quần jean slim</span><span class="wf-small wf-muted">Size 30</span></div><div class="sf-qty"><span>−</span><span>1</span><span>+</span></div><span class="wf-price">549.000₫</span></div>
+    </div>
+    <aside class="sf-summary">
+      <span class="wf-h3">Tóm tắt đơn hàng</span>
+      <div class="sf-summary__row"><span>Tạm tính</span><span>798.000₫</span></div>
+      <div class="sf-summary__row"><span>Vận chuyển</span><span>0₫</span></div>
+      <div class="sf-summary__total"><span>Tổng</span><span>798.000₫</span></div>
+      <span class="wf-btn wf-btn--primary wf-btn--block wf-btn--lg">Tiến hành thanh toán</span>
+    </aside>
+  </div>
+</div></div></section>
+
+<section class="kit-item" id="sf-checkout"><h2>wf-steps (checkout steps) + form địa chỉ</h2><div class="kit-demo"><div class="wf-container wf-stack wf-stack--lg">
+  <div class="wf-steps"><span class="wf-step is-done">Giỏ hàng</span><span class="wf-step is-active">Giao hàng</span><span class="wf-step">Thanh toán</span><span class="wf-step">Xác nhận</span></div>
+  <div class="wf-grid-2">
+    <div class="wf-field"><label class="wf-label wf-req">Họ và tên</label><input class="wf-input" value="Nguyễn Văn A"></div>
+    <div class="wf-field"><label class="wf-label wf-req">Số điện thoại</label><input class="wf-input" value="0901 234 567"></div>
+    <div class="wf-field wf-span-2"><label class="wf-label wf-req">Địa chỉ</label><input class="wf-input" placeholder="Số nhà, tên đường"></div>
+    <div class="wf-field"><label class="wf-label wf-req">Tỉnh/Thành phố</label><select class="wf-select"><option>Chọn tỉnh/thành</option></select></div>
+    <div class="wf-field wf-field--error"><label class="wf-label wf-req">Phường/Xã</label><select class="wf-select"><option>Chọn phường/xã</option></select><span class="wf-error-text">Vui lòng chọn phường/xã</span></div>
+  </div>
+  <div class="wf-row wf-row--between"><span class="wf-btn wf-btn--ghost">‹ Quay lại giỏ hàng</span><span class="wf-btn wf-btn--primary wf-btn--lg">Tiếp tục</span></div>
+</div></div></section>
+
+<section class="kit-item" id="sf-account"><h2>sf-account (trang tài khoản khách hàng) + wf-table--stack</h2><div class="kit-demo"><div class="wf-container">
+  <div class="sf-account">
+    <nav class="sf-account-nav"><span>Tài khoản của tôi</span><span class="is-active">Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span><span>Sổ địa chỉ</span></nav>
+    <div class="wf-stack">
+      <h1 class="wf-h1">Đơn hàng của tôi</h1>
+      <table class="wf-table wf-table--stack">
+        <thead><tr><th>Mã đơn</th><th>Ngày</th><th>Trạng thái</th><th class="num">Tổng</th><th></th></tr></thead>
+        <tbody>
+          <tr><td data-label="Mã đơn">000001234</td><td data-label="Ngày">12/10/2026</td><td data-label="Trạng thái"><span class="wf-badge wf-badge--solid">Hoàn tất</span></td><td class="num" data-label="Tổng">798.000₫</td><td><span class="wf-btn wf-btn--link">Xem</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div></div></section>
+
+<section class="kit-item" id="sf-upload"><h2>wf-upload + wf-textarea + wf-radio</h2><div class="kit-demo"><div class="wf-container wf-stack">
+  <div class="wf-field"><span class="wf-label wf-req">Lý do</span><label class="wf-radio"><input type="radio" checked name="r">Sản phẩm lỗi</label><label class="wf-radio"><input type="radio" name="r">Không vừa size</label></div>
+  <div class="wf-field"><label class="wf-label">Mô tả</label><textarea class="wf-textarea" placeholder="Mô tả tình trạng sản phẩm"></textarea><span class="wf-help">Tối đa 500 ký tự</span></div>
+  <div class="wf-upload"><span class="wf-icon">↑</span><span>Kéo thả ảnh vào đây hoặc <u>chọn tệp</u></span><span class="wf-xs">JPG/PNG, tối đa 5 ảnh, mỗi ảnh ≤ 5MB</span></div>
+  <div class="wf-file-list"><span class="wf-img wf-img--thumb"></span><span class="wf-img wf-img--thumb"></span></div>
+</div></div></section>
+
+<section class="kit-item" id="sf-feedback"><h2>wf-alert / wf-toast / wf-empty / wf-loading / wf-skeleton</h2><div class="kit-demo" style="min-height:420px"><div class="wf-container wf-stack">
+  <div class="wf-alert">Thông tin: yêu cầu sẽ được xử lý trong 2 ngày làm việc.</div>
+  <div class="wf-alert wf-alert--success">Gửi yêu cầu thành công.</div>
+  <div class="wf-alert wf-alert--error">Không thể gửi yêu cầu. Vui lòng thử lại sau.</div>
+  <div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Bạn chưa có đơn hàng nào</span><span>Các đơn hàng đã đặt sẽ hiển thị tại đây.</span><span class="wf-btn wf-btn--primary">Mua sắm ngay</span></div>
+  <div class="wf-loading"><span class="wf-spinner"></span><span>Đang tải...</span></div>
+</div>
+  <div class="wf-toast"><span>✓</span><span>Đã thêm vào giỏ hàng</span><span class="wf-spacer"></span><span class="wf-btn wf-btn--link">Xem giỏ</span></div>
+</div></section>
+
+<section class="kit-item" id="sf-modal"><h2>wf-overlay + wf-modal (đặt trong .wf-frame)</h2><div class="kit-demo" style="min-height:360px">
+  <div class="wf-overlay" style="padding-top:40px">
+    <div class="wf-modal">
+      <div class="wf-modal__header">Xác nhận huỷ yêu cầu</div>
+      <div class="wf-modal__body"><p>Bạn có chắc muốn huỷ yêu cầu đổi trả RMA-000045?</p></div>
+      <div class="wf-modal__footer"><span class="wf-spacer"></span><span class="wf-btn">Không</span><span class="wf-btn wf-btn--primary">Huỷ yêu cầu</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="kit-item" id="sf-footer"><h2>sf-footer</h2><div class="kit-demo">
+  <footer class="sf-footer"><div class="wf-container wf-grid-4">
+    <div><strong>Về chúng tôi</strong><span>Giới thiệu</span><span>Cửa hàng</span></div>
+    <div><strong>Hỗ trợ</strong><span>Chính sách đổi trả</span><span>Liên hệ</span></div>
+    <div><strong>Tài khoản</strong><span>Đơn hàng</span><span>Yêu cầu đổi trả</span></div>
+    <div><strong>Nhận tin</strong><div class="wf-row"><input class="wf-input" placeholder="Email" style="flex:1"><span class="wf-btn">Đăng ký</span></div></div>
+  </div></footer>
+</div></section>
+</body>
+</html>
