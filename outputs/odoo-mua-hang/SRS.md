@@ -70,7 +70,7 @@ flowchart LR
 | Quản trị hệ thống | Backend — Settings | Cấu hình người duyệt, ngưỡng, mẫu email |
 
 ### 2.3 Giả định & phụ thuộc
-- **Giả định:** xem mục 9.1 (AS-01 … AS-23).
+- **Giả định:** xem mục 9.1 (AS-01 … AS-25).
 - **Phụ thuộc:**
   - Odoo 17 Enterprise với các module `purchase`, `purchase_requisition` (Alternatives), `approvals`, `approval_purchase`, `stock`, `account_accountant` (AS-01).
   - Module tuỳ biến mới `purchase_flow_custom` (tên đề xuất) chứa toàn bộ thay đổi; không sửa mã nguồn lõi.
@@ -91,7 +91,7 @@ flowchart LR
   - BR-01.3: Chỉ sửa được phiếu ở trạng thái "Nháp".
   - BR-01.4: Tổng dự kiến = Σ (Số lượng × Đơn giá dự kiến), chỉ để tham khảo.
 - **Acceptance criteria:**
-  1. **Given** phiếu Nháp có 1 dòng số lượng 5 và ngày cần hàng là ngày mai **When** người đề xuất bấm "Gửi duyệt" **Then** phiếu nhận mã `YCMH/2026/0001`, chuyển "Chờ duyệt" và Nhân viên MH có activity hạn 1 ngày làm việc.
+  1. **Given** phiếu Nháp có 1 dòng số lượng 5 và ngày cần hàng là ngày mai **When** người đề xuất bấm "Gửi duyệt" **Then** phiếu nhận mã `YCMH/2026/0001`, chuyển "Chờ duyệt" và Nhân viên MH có activity hạn 1 ngày làm việc (AS-24).
   2. **Given** phiếu không có dòng **When** bấm "Gửi duyệt" **Then** hiện lỗi "Yêu cầu mua hàng phải có ít nhất một sản phẩm" và phiếu giữ "Nháp".
   3. **Given** ngày cần hàng là hôm qua **When** bấm "Gửi duyệt" **Then** hiện lỗi "Ngày cần hàng không được trước ngày hôm nay".
   4. **Given** dòng có số lượng 0 **When** bấm "Lưu" **Then** hiện lỗi "Số lượng phải lớn hơn 0" tại ô số lượng.
@@ -122,7 +122,7 @@ flowchart LR
 - **Input:** Lý do từ chối (text, bắt buộc).
 - **Output:** YCMH "Từ chối"; tin nhắn chatter "Từ chối bởi <người duyệt>: <lý do>"; email thông báo người đề xuất.
 - **Business rules:**
-  - BR-03.1: Lý do bắt buộc, tối thiểu 10 ký tự.
+  - BR-03.1: Lý do bắt buộc, tối thiểu 10 ký tự (AS-25).
   - BR-03.2: "Về nháp" đặt lại trạng thái mọi người duyệt; khi gửi lại duyệt từ cấp 1 (AS-09).
 - **Acceptance criteria:**
   1. **Given** Trưởng phòng bấm "Từ chối" **When** để trống lý do và bấm "Xác nhận" **Then** hiện lỗi "Vui lòng nhập lý do từ chối" và hộp thoại không đóng.
@@ -233,7 +233,7 @@ flowchart LR
 - **Business rules:**
   - BR-10.1: Ngưỡng Giám đốc mặc định 50.000.000₫ (tổng có thuế), cấu hình ở FR-18.
   - BR-10.2: Cấp 2 chỉ duyệt được khi cấp 1 đã duyệt.
-  - BR-10.3: Lý do từ chối bắt buộc, tối thiểu 10 ký tự; về "RFQ" giữ nguyên giá đã chọn (AS-09).
+  - BR-10.3: Lý do từ chối bắt buộc, tối thiểu 10 ký tự (AS-25); về "RFQ" giữ nguyên giá đã chọn (AS-09). Hộp thoại nhập lý do dùng chung mẫu với SCR-02 trạng thái "Từ chối - nhập lý do".
   - BR-10.4: Nhân viên MH gửi duyệt không được tự duyệt đơn của mình.
   - BR-10.5: Bộ lọc "Chờ tôi duyệt" trên danh sách đơn chỉ hiện đơn có activity duyệt của người đăng nhập.
 - **Acceptance criteria:**
@@ -324,7 +324,7 @@ flowchart LR
 - **Vai trò:** Hệ thống
 - **Truy vết:** US-05, US-14, US-15, US-16 · Màn hình: Không có UI
 - **Input:** Sự kiện chuyển trạng thái.
-- **Output:** Activity (hạn 1 ngày làm việc) + email theo bảng quy tắc.
+- **Output:** Activity (hạn 1 ngày làm việc, AS-24) + email theo bảng quy tắc.
 - **Business rules:**
   - BR-16.1: Sự kiện → người nhận: YCMH gửi duyệt → Nhân viên MH; MH duyệt → Trưởng phòng; YCMH từ chối → Người đề xuất; RFQ tạo → Nhân viên MH; đơn gửi duyệt → người duyệt cấp hiện tại; đơn từ chối → Nhân viên MH; ĐNTT gửi → nhóm Kế toán; ĐNTT từ chối → Nhân viên MH; phiếu DO tạo → nhóm Thủ kho.
   - BR-16.2: Activity của bước đã xử lý được đánh dấu hoàn thành tự động.
@@ -609,6 +609,8 @@ flowchart TD
 | AS-21 | Quy mô: 50 người dùng đồng thời, 20.000 đơn mua hàng/năm | Input chưa có số liệu | NFR-01 |
 | AS-22 | Khả dụng 99,5% giờ làm việc 08:00–18:00, thứ 2–thứ 7 | Thông lệ hệ thống nội bộ | NFR-05 |
 | AS-23 | Trình duyệt Chrome/Edge 2 phiên bản mới nhất, màn hình ≥ 1366px | Thông lệ Odoo backend | NFR-07 |
+| AS-24 | Activity duyệt/xử lý có hạn 1 ngày làm việc | Input chưa có SLA xử lý | FR-01, FR-16 |
+| AS-25 | Lý do từ chối/huỷ tối thiểu 10 ký tự | Tránh lý do rỗng nghĩa | FR-03, FR-10, FR-12, FR-15 |
 
 ### 9.2 Câu hỏi mở
 | Mã | Câu hỏi | Người cần trả lời | Ảnh hưởng tới |
@@ -633,3 +635,4 @@ flowchart TD
 | OQ-18 | Ngoài activity và email, có cần kênh thông báo khác (Zalo, SMS) không? | Khách hàng | FR-16 |
 | OQ-19 | Quy tắc đánh mã YCMH, ĐNTT theo mẫu công ty? | Kế toán | FR-01, FR-11 |
 | OQ-20 | Yêu cầu khả dụng, giờ làm việc và trình duyệt chuẩn của công ty? | IT khách hàng | NFR-05, NFR-07 |
+| OQ-21 | Thời hạn xử lý mỗi bước duyệt? Quá hạn có nhắc hoặc chuyển cấp không? Quy định về nội dung lý do từ chối? | Khách hàng | FR-03, FR-16 |
