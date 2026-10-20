@@ -6,3 +6,4 @@
 | Thời điểm | File | Nguồn | Trạng thái | SHA-256 | Phiên bản trước | Ghi chú |
 |---|---|---|---|---|---|---|
 | 2026-10-20 07:47 | khao-sat-lan-2-yeu-cau-mua-hang.md | chat | mới | `34a6b62423` | — | Khảo sát lần 2 — chi tiết phiếu Yêu cầu mua hàng |
+| 2026-10-20 08:40 | tra-loi-cau-hoi-mo-lan-1.md | chat | mới | `9ddac11856` | — | Trả lời câu hỏi mở lần 1 (OQ-01, 02, 06, 08, 09 và gửi email RFQ) |
