@@ -8,6 +8,12 @@
 | Tài liệu liên quan | URD.md, brainstorm.md, ui/flows.md |
 | Trạng thái | Chờ review |
 
+**Lịch sử phiên bản**
+
+| Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
+|---|---|---|---|---|
+| 0.1 | 2026-10-20 | Bản đầu tiên | bien-ban-hop-kickoff.md, email-bo-sung-cskh.md, ghi-chu-kho.txt | Toàn bộ |
+
 ## 1. Giới thiệu
 
 ### 1.1 Mục đích
