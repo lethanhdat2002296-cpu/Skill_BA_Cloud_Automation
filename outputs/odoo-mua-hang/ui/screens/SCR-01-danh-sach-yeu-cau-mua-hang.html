@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  SCR-01 — Danh sách Yêu cầu mua hàng
+  FR: FR-01, FR-17
+  Loại: backend · Khung: 1440
+  Trạng thái: default, empty
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-01">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-01, FR-17">
+<title>SCR-01 — Danh sách Yêu cầu mua hàng</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-01 · Danh sách Yêu cầu mua hàng</strong><span class="wf-doc-meta">backend · FR-01, FR-17</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định — Người đề xuất, lọc Của tôi">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Phê duyệt</span><nav class="be-topbar__menu"><span class="is-active">Yêu cầu mua hàng</span><span>Việc cần duyệt</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><aside class="be-sidebar"><div class="be-sidebar__group">Yêu cầu mua hàng</div><span class="be-sidebar__item is-active">Của tôi</span><span class="be-sidebar__item">Chờ tôi duyệt</span><span class="be-sidebar__item">Tất cả</span></aside><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu mua hàng</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Của tôi</span><span class="be-facet"><span class="be-facet__type">Nhóm theo</span>Trạng thái</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span><span class="wf-btn wf-btn--sm">⚙ Thao tác</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>1-6 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><table class="wf-table"><thead><tr><th><input type="checkbox"></th><th>Mã</th><th>Người đề xuất</th><th>Phòng ban</th><th>Ngày cần hàng</th><th class="num">Tổng dự kiến</th><th>Trạng thái</th></tr></thead><tbody><tr class="be-list__group"><td colspan="7">▾ Chờ duyệt (2)</td></tr><tr><td><input type="checkbox"></td><td>YCMH/2026/0013</td><td>Nguyễn Thu Hà</td><td>Hành chính</td><td>10/11/2026</td><td class="num">2.150.000₫</td><td><span class="wf-badge wf-badge--soft">Chờ duyệt</span></td></tr><tr><td><input type="checkbox"></td><td>YCMH/2026/0011</td><td>Nguyễn Thu Hà</td><td>Hành chính</td><td>30/10/2026</td><td class="num">4.300.000₫</td><td><span class="wf-badge wf-badge--soft">Chờ duyệt</span></td></tr><tr class="be-list__group"><td colspan="7">▾ Đã duyệt (2)</td></tr><tr><td><input type="checkbox"></td><td>YCMH/2026/0012</td><td>Nguyễn Thu Hà</td><td>Hành chính</td><td>05/11/2026</td><td class="num">68.370.000₫</td><td><span class="wf-badge wf-badge--solid">Đã duyệt</span></td></tr><tr><td><input type="checkbox"></td><td>YCMH/2026/0008</td><td>Nguyễn Thu Hà</td><td>Hành chính</td><td>20/10/2026</td><td class="num">24.990.000₫</td><td><span class="wf-badge wf-badge--solid">Đã duyệt</span></td></tr><tr class="be-list__group"><td colspan="7">▾ Từ chối (1)</td></tr><tr><td><input type="checkbox"></td><td>YCMH/2026/0010</td><td>Nguyễn Thu Hà</td><td>Hành chính</td><td>28/10/2026</td><td class="num">1.200.000₫</td><td><span class="wf-badge wf-badge--dashed">Từ chối</span></td></tr><tr class="be-list__group"><td colspan="7">▸ Nháp (1)</td></tr></tbody></table></div></div></main></div></div>
+  </div>
+  <div class="wf-notes"><ol><li>Bộ lọc mặc định theo vai trò: Người đề xuất "Của tôi", Trưởng phòng "Bộ phận của tôi", MH "Đang xử lý" (FR-17).</li><li>Tổng dự kiến = Σ số lượng × đơn giá dự kiến, chỉ để tham khảo (BR-01.4).</li></ol></div>
+</section>
+<section class="wf-state" data-state="empty" data-label="Rỗng — chưa có yêu cầu">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Phê duyệt</span><nav class="be-topbar__menu"><span class="is-active">Yêu cầu mua hàng</span><span>Việc cần duyệt</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><aside class="be-sidebar"><div class="be-sidebar__group">Yêu cầu mua hàng</div><span class="be-sidebar__item is-active">Của tôi</span><span class="be-sidebar__item">Chờ tôi duyệt</span><span class="be-sidebar__item">Tất cả</span></aside><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu mua hàng</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Của tôi</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>0 / 0</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Chưa có yêu cầu mua hàng nào</span><span>Tạo yêu cầu để phòng Mua hàng mua sản phẩm bạn cần.</span><span class="wf-btn wf-btn--primary">Tạo yêu cầu mua hàng</span></div></div></div></main></div></div>
+  </div>
+  
+</section>
+</body>
+</html>

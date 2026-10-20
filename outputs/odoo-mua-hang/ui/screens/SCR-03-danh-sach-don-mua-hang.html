@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  SCR-03 — Danh sách RFQ và Đơn mua hàng
+  FR: FR-06, FR-10, FR-17
+  Loại: backend · Khung: 1440
+  Trạng thái: default, empty
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-03">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-06, FR-10, FR-17">
+<title>SCR-03 — Danh sách RFQ và Đơn mua hàng</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-03 · Danh sách RFQ và Đơn mua hàng</strong><span class="wf-doc-meta">backend · FR-06, FR-10, FR-17</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định — chọn 2 RFQ, gửi email hàng loạt">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Mua hàng</span><nav class="be-topbar__menu"><span class="is-active">Đơn hàng</span><span>Sản phẩm</span><span>Báo cáo</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu báo giá</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Đang xử lý</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span><span class="wf-btn wf-btn--sm">⚙ Thao tác (2 đã chọn)</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>1-7 / 7</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><table class="wf-table"><thead><tr><th><input type="checkbox"></th><th>Mã</th><th>Vendor</th><th>Yêu cầu mua hàng</th><th>Ngày đặt</th><th>Ngày cần hàng</th><th class="num">Tổng tiền</th><th>Trạng thái</th></tr></thead><tbody><tr class="is-selected"><td><input type="checkbox" checked></td><td>P00016</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>YCMH/2026/0013</td><td>21/10/2026</td><td>10/11/2026</td><td class="num">2.365.000₫</td><td><span class="wf-badge wf-badge--dashed">Nháp</span></td></tr><tr class="is-selected"><td><input type="checkbox" checked></td><td>P00017</td><td>Công ty CP Thiên Long</td><td>YCMH/2026/0013</td><td>21/10/2026</td><td>10/11/2026</td><td class="num">1.980.000₫</td><td><span class="wf-badge wf-badge--dashed">Nháp</span></td></tr><tr><td><input type="checkbox"></td><td>P00012</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>YCMH/2026/0012</td><td>20/10/2026</td><td>05/11/2026</td><td class="num">5.280.000₫</td><td><span class="wf-badge">RFQ</span></td></tr><tr><td><input type="checkbox"></td><td>P00013</td><td>Công ty TNHH Tin học Phong Vũ</td><td>YCMH/2026/0012</td><td>20/10/2026</td><td>05/11/2026</td><td class="num">69.927.000₫</td><td><span class="wf-badge wf-badge--soft">Chờ duyệt</span></td></tr><tr><td><input type="checkbox"></td><td>P00011</td><td>Công ty TNHH Nội thất Hòa Phát</td><td>YCMH/2026/0009</td><td>16/10/2026</td><td>28/10/2026</td><td class="num">18.700.000₫</td><td><span class="wf-badge">Đã duyệt</span></td></tr><tr><td><input type="checkbox"></td><td>P00010</td><td>Công ty CP Thế Giới Di Động</td><td>YCMH/2026/0008</td><td>12/10/2026</td><td>20/10/2026</td><td class="num">24.990.000₫</td><td><span class="wf-badge wf-badge--soft">Waiting PO</span></td></tr><tr><td><input type="checkbox"></td><td>P00009</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>YCMH/2026/0006</td><td>08/10/2026</td><td>15/10/2026</td><td class="num">3.410.000₫</td><td><span class="wf-badge wf-badge--solid">PO</span></td></tr></tbody></table></div></div></main></div></div><div class="wf-dropdown" style="top:150px; left:330px"><div class="wf-dropdown__title">Thao tác</div><div class="is-active">✉ Gửi email RFQ (2)</div><div>Xuất dữ liệu</div><div>Huỷ</div></div>
+  </div>
+  <div class="wf-notes"><ol><li>Gửi email RFQ hàng loạt: mỗi RFQ một email riêng tới vendor của RFQ (BR-06.2).</li><li>Cột Trạng thái dùng nhãn: Nháp, RFQ, Chờ duyệt, Đã duyệt, Waiting PO, PO, Đã huỷ (BR-17.3).</li></ol></div>
+</section>
+<section class="wf-state" data-state="empty" data-label="Rỗng — lọc Chờ tôi duyệt">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Mua hàng</span><nav class="be-topbar__menu"><span class="is-active">Đơn hàng</span><span>Sản phẩm</span><span>Báo cáo</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu báo giá</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Chờ tôi duyệt</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>0 / 0</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Không có đơn nào chờ bạn duyệt</span><span>Đơn mua hàng cần bạn duyệt sẽ xuất hiện tại đây và trong Hoạt động.</span></div></div></div></main></div></div>
+  </div>
+  <div class="wf-notes"><ol><li>Bộ lọc "Chờ tôi duyệt" chỉ hiện đơn có activity duyệt của người đăng nhập (BR-10.5).</li></ol></div>
+</section>
+</body>
+</html>
