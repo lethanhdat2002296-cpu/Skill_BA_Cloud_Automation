@@ -8,13 +8,21 @@ inputs/<du-an>/ → brainstorm → write-urd → write-srs → ui-spec → wiref
 
 ## Cách dùng nhanh
 
-1. Tạo thư mục `inputs/<du-an>/` (tên không dấu, nối `-`, vd. `inputs/rma-moc-an/`).
-2. Thả tài liệu khảo sát vào: `.md`, `.txt`, `.pdf`, `.docx`, `.eml`, ảnh chụp whiteboard, `.csv`…
-3. Commit + push lên GitHub.
-4. Mở session cloud trên repo tại claude.ai/code và gõ:
-   > **Làm SRS cho dự án `<du-an>`**
+Không cần tự tạo thư mục hay commit — mọi thứ làm ngay trong đoạn chat.
+
+1. Mở session cloud trên repo tại claude.ai/code.
+2. **Đưa tài liệu vào chat**: dán text (biên bản họp, email, ghi chú), đính kèm file (`.docx`, `.pdf`, `.xlsx`, ảnh), hoặc gửi link tải. Kèm tên dự án:
+   > Thêm tài liệu cho dự án **rma-moc-an**: *(dán nội dung / đính kèm file)*
+3. Claude (skill `ba-intake`) tự:
+   - chuyển text thành Markdown, lưu file vào `inputs/<du-an>/`, ghi nhật ký `_manifest.md`;
+   - commit + push lên GitHub (branch `docs/<du-an>`);
+   - nếu dự án đã có tài liệu: **giữ nguyên bản cũ** (bản mới lưu thành `__v2`, `__v3`…), lập bảng khác biệt cũ/mới trong `_changes/`, rồi **hỏi bạn**: merge thành bản tổng hợp, giữ cả hai, hay bạn tự mô tả khác biệt.
+4. Gõ **"Làm SRS cho dự án `<du-an>`"** (hoặc gộp luôn: "Làm SRS cho dự án X" + dán/đính kèm tài liệu trong cùng tin nhắn).
 5. Đợi Claude chạy xong → xem PR: `outputs/<du-an>/SRS.docx`, `ui/index.html`, danh sách **Open Questions** trong mô tả PR.
-6. Cần sửa → comment trực tiếp trên diff của PR, hoặc nhắn tiếp trong session ("Sửa FR-05: …").
+6. Có thông tin mới → lặp lại bước 2, rồi gõ **"Cập nhật SRS cho dự án `<du-an>`"**: SRS tăng phiên bản (0.1 → 0.2), giữ mã FR/SCR cũ, ghi "Lịch sử phiên bản".
+7. Cần sửa → comment trực tiếp trên diff của PR, hoặc nhắn tiếp trong session ("Sửa FR-05: …").
+
+Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công như trước.
 
 ## Kết quả sinh ra (`outputs/<du-an>/`)
 
@@ -35,7 +43,8 @@ inputs/<du-an>/ → brainstorm → write-urd → write-srs → ui-spec → wiref
 .claude/
   settings.json              quyền chạy sẵn (python, pandoc, mmdc, git, gh pr)
   skills/
-    srs-pipeline/            nhạc trưởng — chạy cả chuỗi, commit, mở PR, báo cáo
+    ba-intake/               nhận text/file/link từ chat → inputs/, giữ phiên bản, diff, push, hỏi merge
+    srs-pipeline/            nhạc trưởng — chạy cả chuỗi, commit, mở PR, báo cáo; chế độ cập nhật
     brainstorm/              phỏng vấn BA 7 phần, tự trả lời từ input
     write-urd/               URD + template-urd.md
     write-srs/               SRS + template-srs.md + checklist.md + scripts/{to_docx,check_srs}.py

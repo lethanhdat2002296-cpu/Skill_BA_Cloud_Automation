@@ -8,6 +8,12 @@
 | Tài liệu liên quan | URD.md, brainstorm.md, ui/flows.md |
 | Trạng thái | Chờ review |
 
+**Lịch sử phiên bản**
+
+| Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
+|---|---|---|---|---|
+| 0.1 | {{YYYY-MM-DD}} | Bản đầu tiên | {{các file trong inputs/<du-an>/}} | Toàn bộ |
+
 ## 1. Giới thiệu
 
 ### 1.1 Mục đích
