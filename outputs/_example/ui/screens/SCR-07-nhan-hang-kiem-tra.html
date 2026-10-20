@@ -1,0 +1,101 @@
+<!doctype html>
+<!--
+  SCR-07 — Nhận hàng & kiểm tra (Odoo)
+  FR: FR-13
+  Loại: backend · Khung: 1440
+  Trạng thái: default, error
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-07">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-13">
+<title>SCR-07 — Nhận hàng &amp; kiểm tra</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-07 · Nhận hàng &amp; kiểm tra</strong><span class="wf-doc-meta">backend · FR-13</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định (đã quét RMA-000045)">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span>Yêu cầu</span><span class="is-active">Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">TK</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Nhận hàng đổi trả</span></nav></div>
+          <div class="be-controlpanel__right"></div>
+        </div>
+        <div class="be-form-layout be-form-layout--full">
+          <div class="be-sheet">
+            <div class="wf-field"><label class="wf-label">Quét hoặc nhập mã yêu cầu <span class="wf-anno">1</span></label>
+              <div class="wf-row"><input class="wf-input" value="RMA-000045" style="max-width:420px; height:44px; font-size:18px"><span class="wf-btn wf-btn--lg">Tìm</span></div></div>
+            <div class="be-fields">
+              <div class="be-field"><span class="be-field__label">Yêu cầu</span><span class="be-field__value is-readonly">RMA-000045 · <span class="wf-badge wf-badge--soft">Đã duyệt</span></span></div>
+              <div class="be-field"><span class="be-field__label">Loại</span><span class="be-field__value is-readonly">Đổi size</span></div>
+              <div class="be-field"><span class="be-field__label">Khách hàng</span><span class="be-field__value is-readonly">Trần Thị Bích</span></div>
+              <div class="be-field"><span class="be-field__label">Phiếu nhập kho</span><span class="be-field__value is-readonly">WH/IN/RET/00045 → WH/Returns</span></div>
+            </div>
+            <div class="be-o2m">
+              <table class="wf-table">
+                <thead><tr><th>Sản phẩm</th><th class="num">SL yêu cầu</th><th class="num">SL thực nhận</th><th>Tình trạng <span class="wf-anno">2</span></th><th>Location đích</th><th>Ghi chú</th></tr></thead>
+                <tbody>
+                  <tr><td>[AT-001] Áo thun cotton basic – M – Trắng</td><td class="num">1</td><td class="num"><input class="wf-input" value="1" style="width:72px; text-align:right"></td><td><select class="wf-select" style="width:180px"><option>Nguyên vẹn</option></select></td><td>WH/Stock</td><td><input class="wf-input" placeholder="Ghi chú kiểm tra"></td></tr>
+                  <tr><td>[QJ-030] Quần jean slim – 30</td><td class="num">1</td><td class="num"><input class="wf-input" value="1" style="width:72px; text-align:right"></td><td><select class="wf-select" style="width:180px"><option>Lỗi</option></select></td><td>WH/Damaged</td><td><input class="wf-input" value="Rách gấu quần"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="wf-row"><span class="wf-btn wf-btn--primary">Xác nhận nhận hàng</span><span class="wf-btn">Huỷ</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Ô nhận input từ máy quét mã vạch (dạng bàn phím, kết thúc bằng Enter) hoặc gõ tay; chỉ nhận yêu cầu Đã duyệt (FR-13 BR-13.1).</li>
+    <li>Tình trạng: Nguyên vẹn → WH/Stock; Lỗi, Thiếu phụ kiện → WH/Damaged. SL thực nhận &lt; SL yêu cầu hoặc Thiếu phụ kiện → gắn cờ "Cần CSKH xem xét" (BR-13.3, OQ-07). Xác nhận xong: Trả hàng → credit note nháp (FR-14); Đổi size → đơn đổi 0đ (FR-15).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="error" data-label="Lỗi (mã không hợp lệ / thiếu tình trạng)">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span>Yêu cầu</span><span class="is-active">Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">TK</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Nhận hàng đổi trả</span></nav></div>
+          <div class="be-controlpanel__right"></div>
+        </div>
+        <div class="be-form-layout be-form-layout--full">
+          <div class="be-sheet">
+            <div class="wf-field wf-field--error"><label class="wf-label">Quét hoặc nhập mã yêu cầu</label>
+              <div class="wf-row"><input class="wf-input" value="RMA-999999" style="max-width:420px; height:44px; font-size:18px"><span class="wf-btn wf-btn--lg">Tìm</span></div>
+              <span class="wf-error-text">Không tìm thấy yêu cầu RMA-999999</span></div>
+            <div class="wf-alert wf-alert--warning">Ví dụ lỗi khác: "Yêu cầu RMA-000123 chưa được duyệt" khi quét yêu cầu đang Chờ duyệt.</div>
+            <div class="wf-divider"></div>
+            <span class="wf-h3">Lỗi khi xác nhận (RMA-000045)</span>
+            <div class="wf-alert wf-alert--error">Vui lòng chọn tình trạng cho tất cả sản phẩm.</div>
+            <div class="be-o2m">
+              <table class="wf-table">
+                <thead><tr><th>Sản phẩm</th><th class="num">SL yêu cầu</th><th class="num">SL thực nhận</th><th>Tình trạng</th><th>Location đích</th><th>Ghi chú</th></tr></thead>
+                <tbody>
+                  <tr><td>[AT-001] Áo thun cotton basic – M – Trắng</td><td class="num">1</td><td class="num">1</td><td><select class="wf-select" style="width:180px"><option>Nguyên vẹn</option></select></td><td>WH/Stock</td><td></td></tr>
+                  <tr class="is-selected"><td>[QJ-030] Quần jean slim – 30</td><td class="num">1</td><td class="num">1</td><td><div class="wf-field wf-field--error"><select class="wf-select" style="width:180px"><option>— Chọn —</option></select><span class="wf-error-text">Bắt buộc</span></div></td><td>—</td><td></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="wf-row"><span class="wf-btn wf-btn--primary">Xác nhận nhận hàng</span><span class="wf-btn">Huỷ</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+</body>
+</html>

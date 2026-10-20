@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+  SCR-05 — Danh sách yêu cầu đổi trả (Odoo)
+  FR: FR-08, FR-12
+  Loại: backend · Khung: 1440
+  Trạng thái: default, filter, empty
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-05">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-08, FR-12">
+<title>SCR-05 — Danh sách yêu cầu đổi trả</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-05 · Danh sách yêu cầu đổi trả</strong><span class="wf-doc-meta">backend · FR-08, FR-12</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định (lọc Chờ duyệt)">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Chờ duyệt</span><span class="be-search__placeholder">Tìm mã RMA, mã đơn, khách hàng...</span><span>▾</span></div></div>
+          <div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm">⚙ Thao tác</span><span class="wf-small wf-muted">Yêu cầu được tạo từ website</span></div>
+          <div class="be-controlpanel__right"><div class="be-pager"><span>1-6 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div>
+        </div>
+        <div class="be-content">
+          <div class="be-list">
+            <table class="wf-table">
+              <thead><tr><th><input type="checkbox"></th><th>Mã</th><th>Khách hàng</th><th>Đơn hàng</th><th>Ngày tạo ▾</th><th>Loại</th><th>Lý do</th><th class="num">Giá trị</th><th>Người phụ trách</th><th>Trạng thái <span class="wf-anno">1</span></th></tr></thead>
+              <tbody>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000123</td><td>Nguyễn Văn An</td><td>000001234</td><td>20/10/2026 10:15</td><td>Trả hàng</td><td>Sản phẩm lỗi</td><td class="num">249.000₫</td><td>—</td><td><span class="wf-badge">Chờ duyệt</span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000121</td><td>Trần Thị Bích</td><td>000001229</td><td>19/10/2026 16:40</td><td>Đổi size</td><td>Không vừa size</td><td class="num">459.000₫</td><td>Lê Thị Cúc</td><td><span class="wf-badge">Chờ duyệt</span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000118</td><td>Phạm Minh Đức</td><td>000001215</td><td>18/10/2026 08:05</td><td>Trả hàng</td><td>Giao sai sản phẩm</td><td class="num">549.000₫</td><td>—</td><td><span class="wf-row" style="gap:4px"><span class="wf-badge">Chờ duyệt</span><span class="wf-badge wf-badge--solid">Quá hạn</span></span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000117</td><td>Võ Thu Hà</td><td>000001211</td><td>17/10/2026 21:30</td><td>Trả hàng</td><td>Đổi ý</td><td class="num">320.000₫</td><td>—</td><td><span class="wf-row" style="gap:4px"><span class="wf-badge">Chờ duyệt</span><span class="wf-badge wf-badge--solid">Quá hạn</span></span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000115</td><td>Đặng Quốc Huy</td><td>000001208</td><td>17/10/2026 11:12</td><td>Đổi size</td><td>Không vừa size</td><td class="num">389.000₫</td><td>Lê Thị Cúc</td><td><span class="wf-row" style="gap:4px"><span class="wf-badge">Chờ duyệt</span><span class="wf-badge wf-badge--solid">Quá hạn</span></span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="wf-mono">RMA-000112</td><td>Bùi Ngọc Lan</td><td>000001199</td><td>16/10/2026 09:48</td><td>Trả hàng</td><td>Không giống mô tả</td><td class="num">699.000₫</td><td>—</td><td><span class="wf-row" style="gap:4px"><span class="wf-badge">Chờ duyệt</span><span class="wf-badge wf-badge--solid">Quá hạn</span></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Nhãn "Quá hạn" khi yêu cầu Chờ duyệt đã tạo &gt; 48 giờ (cấu hình được) — job chạy mỗi giờ, gửi activity + email cho Trưởng CSKH một lần (FR-12). Không có nút "Mới": yêu cầu chỉ tạo từ website (FR-02).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="filter" data-label="Mở bộ lọc">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Chờ duyệt</span><span class="be-search__placeholder">Tìm mã RMA, mã đơn, khách hàng...</span><span>▾</span></div></div>
+          <div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm">⚙ Thao tác</span></div>
+          <div class="be-controlpanel__right"><div class="be-pager"><span>1-6 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div></div>
+        </div>
+        <div class="be-content"><div class="be-list wf-stack" style="padding:16px"><span class="wf-skeleton" style="width:70%"></span><span class="wf-skeleton" style="width:55%"></span><span class="wf-skeleton" style="width:62%"></span></div></div>
+      </main>
+    </div>
+    <div class="wf-dropdown" style="top:100px; right:16px; display:grid; grid-template-columns:repeat(3, 190px); padding:12px 0">
+      <div><div class="wf-dropdown__title" style="padding:4px 16px">Bộ lọc</div><div style="padding:4px 16px" class="is-active">✓ Chờ duyệt</div><div style="padding:4px 16px">Đã duyệt</div><div style="padding:4px 16px">Đã nhận hàng</div><div style="padding:4px 16px">Quá 48 giờ <span class="wf-anno">1</span></div><div style="padding:4px 16px">Của tôi</div></div>
+      <div><div class="wf-dropdown__title" style="padding:4px 16px">Nhóm theo</div><div style="padding:4px 16px">Trạng thái</div><div style="padding:4px 16px">Lý do</div><div style="padding:4px 16px">Người phụ trách</div></div>
+      <div><div class="wf-dropdown__title" style="padding:4px 16px">Yêu thích</div><div style="padding:4px 16px">Lưu bộ lọc hiện tại</div></div>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Bộ lọc "Quá 48 giờ" dùng cờ is_overdue (FR-08 BR-08.1, FR-12).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="empty" data-label="Rỗng">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Chờ duyệt</span><span class="be-search__placeholder">Tìm mã RMA, mã đơn, khách hàng...</span><span>▾</span></div></div>
+          <div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm">⚙ Thao tác</span></div>
+          <div class="be-controlpanel__right"><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div>
+        </div>
+        <div class="be-content">
+          <div class="be-list"><div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Chưa có yêu cầu đổi trả nào</span><span>Yêu cầu khách hàng gửi từ website sẽ xuất hiện tại đây.</span></div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+</body>
+</html>

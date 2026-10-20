@@ -1,0 +1,127 @@
+<!doctype html>
+<!--
+  SCR-04 — Chi tiết yêu cầu đổi trả (khách)
+  FR: FR-06, FR-07
+  Loại: storefront · Khung: 1440 + 390
+  Trạng thái: default (Đã duyệt), cancel (Chờ duyệt + xác nhận huỷ), rejected
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-04">
+<meta name="wf-type" content="storefront">
+<meta name="wf-fr" content="FR-06, FR-07">
+<title>SCR-04 — Chi tiết yêu cầu đổi trả</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-04 · Chi tiết yêu cầu đổi trả</strong><span class="wf-doc-meta">storefront · FR-06, FR-07</span></div>
+
+<section class="wf-state" data-state="default" data-label="Đã duyệt">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section wf-stack wf-stack--lg">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Yêu cầu đổi trả</span><span>RMA-000045</span></nav>
+      <div class="wf-row"><h1 class="wf-h1">Yêu cầu RMA-000045</h1><span class="wf-badge wf-badge--soft">Đã duyệt</span><span class="wf-spacer"></span><span class="wf-small wf-muted">Đơn 000001177 · Tạo 02/10/2026</span></div>
+      <div class="wf-steps"><span class="wf-step is-done">Chờ duyệt</span><span class="wf-step is-active">Đã duyệt</span><span class="wf-step">Đã nhận hàng</span><span class="wf-step">Hoàn tất</span></div>
+      <div class="wf-split">
+        <div class="wf-stack wf-stack--lg">
+          <div class="wf-card"><div class="wf-card__header">Sản phẩm · Đổi size</div>
+            <div class="wf-card__body">
+              <table class="wf-table wf-table--stack">
+                <thead><tr><th>Sản phẩm</th><th class="num">SL</th><th>Size mới</th></tr></thead>
+                <tbody><tr><td data-label="Sản phẩm"><div class="wf-row"><span class="wf-img wf-img--thumb"></span><div class="wf-stack" style="gap:2px"><span class="wf-strong">Áo thun cotton basic</span><span class="wf-xs wf-muted">Size M · Trắng</span></div></div></td><td class="num" data-label="SL">1</td><td data-label="Size mới">L</td></tr></tbody>
+              </table>
+            </div></div>
+          <div class="wf-card"><div class="wf-card__header">Lý do và hình ảnh</div>
+            <div class="wf-card__body wf-stack">
+              <dl class="wf-kv"><dt>Lý do</dt><dd>Không vừa size</dd><dt>Mô tả</dt><dd>Áo hơi chật ở vai.</dd></dl>
+              <div class="wf-file-list"><span class="wf-img wf-img--thumb"></span></div>
+            </div></div>
+        </div>
+        <div class="wf-card"><div class="wf-card__header">Hướng dẫn gửi hàng <span class="wf-anno">1</span></div>
+          <div class="wf-card__body wf-stack">
+            <ol class="wf-small">
+              <li>Đóng gói sản phẩm còn nguyên tem, mác.</li>
+              <li>Ghi mã <span class="wf-strong wf-mono">RMA-000045</span> bên ngoài gói hàng hoặc dán phiếu gửi hàng.</li>
+              <li>Gửi qua bưu cục GHN hoặc mang tới cửa hàng.</li>
+            </ol>
+            <dl class="wf-kv wf-small"><dt>Địa chỉ nhận</dt><dd>Kho Mộc An – Thủ Đức, TP.HCM</dd><dt>Người nhận</dt><dd>Kho đổi trả · 1900 0000</dd></dl>
+            <span class="wf-btn wf-btn--primary wf-btn--block">In phiếu gửi hàng</span>
+          </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Chỉ hiện khi trạng thái Đã duyệt; phiếu gửi hàng là PDF có mã vạch RMA để kho quét (FR-06 BR-06.2, OQ-09). Không có nút "Huỷ yêu cầu" từ trạng thái Đã duyệt (FR-07).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="cancel" data-label="Chờ duyệt – xác nhận huỷ">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section wf-stack wf-stack--lg">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Yêu cầu đổi trả</span><span>RMA-000123</span></nav>
+      <div class="wf-row"><h1 class="wf-h1">Yêu cầu RMA-000123</h1><span class="wf-badge">Chờ duyệt</span><span class="wf-spacer"></span><span class="wf-btn">Huỷ yêu cầu</span></div>
+      <div class="wf-steps"><span class="wf-step is-active">Chờ duyệt</span><span class="wf-step">Đã duyệt</span><span class="wf-step">Đã nhận hàng</span><span class="wf-step">Hoàn tất</span></div>
+      <div class="wf-split">
+        <div class="wf-card"><div class="wf-card__header">Sản phẩm · Trả hàng</div>
+          <div class="wf-card__body">
+            <table class="wf-table wf-table--stack">
+              <thead><tr><th>Sản phẩm</th><th class="num">SL</th><th class="num">Giá trị</th></tr></thead>
+              <tbody><tr><td data-label="Sản phẩm">Áo thun cotton basic – M</td><td class="num" data-label="SL">1</td><td class="num" data-label="Giá trị">249.000₫</td></tr></tbody>
+            </table>
+          </div></div>
+        <div class="wf-card"><div class="wf-card__body"><div class="wf-alert">CSKH sẽ phản hồi trong 24 giờ. Bạn có thể huỷ yêu cầu trước khi được duyệt.</div></div></div>
+      </div>
+    </div>
+    <div class="wf-overlay">
+      <div class="wf-modal">
+        <div class="wf-modal__header">Huỷ yêu cầu RMA-000123?</div>
+        <div class="wf-modal__body"><p>Sau khi huỷ, bạn có thể tạo yêu cầu mới cho sản phẩm này nếu đơn hàng vẫn còn hạn đổi trả.</p></div>
+        <div class="wf-modal__footer"><span class="wf-spacer"></span><span class="wf-btn">Không</span><span class="wf-btn wf-btn--primary">Huỷ yêu cầu</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Nếu Odoo đã duyệt trước khi lệnh huỷ tới: hiện thông báo "Yêu cầu đã được duyệt, không thể huỷ" và tải lại trạng thái (FR-07 BR-07.2).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="rejected" data-label="Từ chối">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section wf-stack wf-stack--lg">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Yêu cầu đổi trả</span><span>RMA-000027</span></nav>
+      <div class="wf-row"><h1 class="wf-h1">Yêu cầu RMA-000027</h1><span class="wf-badge wf-badge--dashed">Từ chối</span></div>
+      <div class="wf-alert wf-alert--error"><div class="wf-stack" style="gap:4px"><span class="wf-strong">Yêu cầu bị từ chối: Sản phẩm đã qua sử dụng</span><span class="wf-small">Ghi chú từ CSKH: Ảnh cho thấy sản phẩm đã giặt và mất tem. Vui lòng liên hệ hotline 1900 0000 nếu cần hỗ trợ.</span></div></div>
+      <div class="wf-card"><div class="wf-card__header">Sản phẩm · Trả hàng</div>
+        <div class="wf-card__body">
+          <table class="wf-table wf-table--stack">
+            <thead><tr><th>Sản phẩm</th><th class="num">SL</th><th>Lý do</th></tr></thead>
+            <tbody><tr><td data-label="Sản phẩm">Đầm linen xếp ly – S</td><td class="num" data-label="SL">1</td><td data-label="Lý do">Không giống mô tả</td></tr></tbody>
+          </table>
+        </div></div>
+      <div class="wf-row"><span class="wf-btn wf-btn--ghost">‹ Danh sách yêu cầu</span></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

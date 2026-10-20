@@ -1,0 +1,92 @@
+<!doctype html>
+<!--
+  SCR-01 — Đơn hàng của tôi
+  FR: FR-01
+  Loại: storefront · Khung: 1440 + 390
+  Trạng thái: default, empty
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-01">
+<meta name="wf-type" content="storefront">
+<meta name="wf-fr" content="FR-01">
+<title>SCR-01 — Đơn hàng của tôi</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-01 · Đơn hàng của tôi</strong><span class="wf-doc-meta">storefront · FR-01</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Tài khoản</span><span>Đơn hàng của tôi</span></nav>
+      <div class="sf-account" style="margin-top:16px">
+        <nav class="sf-account-nav"><span>Tài khoản của tôi</span><span class="is-active">Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span><span>Sổ địa chỉ</span></nav>
+        <div class="wf-stack">
+          <h1 class="wf-h1">Đơn hàng của tôi</h1>
+          <table class="wf-table wf-table--stack">
+            <thead><tr><th>Mã đơn</th><th>Ngày đặt</th><th>Ngày giao</th><th class="num">Tổng tiền</th><th>Trạng thái</th><th>Đổi trả <span class="wf-anno">1</span></th><th></th></tr></thead>
+            <tbody>
+              <tr><td data-label="Mã đơn">000001234</td><td data-label="Ngày đặt">08/10/2026</td><td data-label="Ngày giao">14/10/2026</td><td class="num" data-label="Tổng tiền">798.000₫</td><td data-label="Trạng thái"><span class="wf-badge wf-badge--solid">Đã giao</span></td>
+                <td data-label="Đổi trả"><div class="wf-stack" style="gap:4px"><span class="wf-btn wf-btn--sm">Yêu cầu đổi trả</span><span class="wf-xs wf-muted">Còn 1 ngày (đến 21/10/2026)</span></div></td><td><span class="wf-btn wf-btn--link">Xem đơn</span></td></tr>
+              <tr><td data-label="Mã đơn">000001198</td><td data-label="Ngày đặt">01/10/2026</td><td data-label="Ngày giao">04/10/2026</td><td class="num" data-label="Tổng tiền">459.000₫</td><td data-label="Trạng thái"><span class="wf-badge wf-badge--solid">Đã giao</span></td>
+                <td data-label="Đổi trả"><span class="wf-small wf-muted">Đã hết hạn đổi trả</span></td><td><span class="wf-btn wf-btn--link">Xem đơn</span></td></tr>
+              <tr><td data-label="Mã đơn">000001177</td><td data-label="Ngày đặt">28/09/2026</td><td data-label="Ngày giao">30/09/2026</td><td class="num" data-label="Tổng tiền">249.000₫</td><td data-label="Trạng thái"><span class="wf-badge wf-badge--solid">Đã giao</span></td>
+                <td data-label="Đổi trả"><span class="wf-small wf-muted">Đã yêu cầu đổi trả toàn bộ</span></td><td><span class="wf-btn wf-btn--link">Xem đơn</span></td></tr>
+              <tr><td data-label="Mã đơn">000001260</td><td data-label="Ngày đặt">18/10/2026</td><td data-label="Ngày giao">—</td><td class="num" data-label="Tổng tiền">1.250.000₫</td><td data-label="Trạng thái"><span class="wf-badge">Đang giao</span></td>
+                <td data-label="Đổi trả"><span class="wf-small wf-muted">—</span></td><td><span class="wf-btn wf-btn--link">Xem đơn</span></td></tr>
+            </tbody>
+          </table>
+          <div class="wf-row wf-row--between"><span class="wf-small wf-muted">Hiển thị 1–4 / 4 đơn</span><div class="wf-pagination"><span>‹</span><span class="is-active">1</span><span>›</span></div></div>
+        </div>
+      </div>
+    </div>
+    <footer class="sf-footer"><div class="wf-container wf-grid-4">
+      <div><strong>Về Mộc An</strong><span>Giới thiệu</span><span>Hệ thống cửa hàng</span></div>
+      <div><strong>Hỗ trợ</strong><span>Chính sách đổi trả</span><span>Liên hệ</span></div>
+      <div><strong>Tài khoản</strong><span>Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span></div>
+      <div><strong>Hotline</strong><span>1900 0000</span></div>
+    </div></footer>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Nút "Yêu cầu đổi trả" chỉ hiện khi đơn Đã giao, còn hạn (ngày giao + 7 ngày; VIP + 15 ngày) và còn số lượng chưa yêu cầu. Ngược lại hiện lý do: "Đã hết hạn đổi trả" / "Đã yêu cầu đổi trả toàn bộ" (FR-01).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="empty" data-label="Rỗng">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Tài khoản</span><span>Đơn hàng của tôi</span></nav>
+      <div class="sf-account" style="margin-top:16px">
+        <nav class="sf-account-nav"><span>Tài khoản của tôi</span><span class="is-active">Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span><span>Sổ địa chỉ</span></nav>
+        <div class="wf-stack">
+          <h1 class="wf-h1">Đơn hàng của tôi</h1>
+          <div class="wf-card"><div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Bạn chưa có đơn hàng nào</span><span>Các đơn hàng đã đặt sẽ hiển thị tại đây.</span><span class="wf-btn wf-btn--primary">Mua sắm ngay</span></div></div>
+        </div>
+      </div>
+    </div>
+    <footer class="sf-footer"><div class="wf-container wf-grid-4">
+      <div><strong>Về Mộc An</strong><span>Giới thiệu</span><span>Hệ thống cửa hàng</span></div>
+      <div><strong>Hỗ trợ</strong><span>Chính sách đổi trả</span><span>Liên hệ</span></div>
+      <div><strong>Tài khoản</strong><span>Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span></div>
+      <div><strong>Hotline</strong><span>1900 0000</span></div>
+    </div></footer>
+  </div>
+</section>
+</body>
+</html>

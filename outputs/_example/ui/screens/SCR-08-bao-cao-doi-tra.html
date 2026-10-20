@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  SCR-08 — Báo cáo đổi trả theo lý do (Odoo)
+  FR: FR-16
+  Loại: backend · Khung: 1440
+  Trạng thái: default
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-08">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-16">
+<title>SCR-08 — Báo cáo đổi trả theo lý do</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-08 · Báo cáo đổi trả theo lý do</strong><span class="wf-doc-meta">backend · FR-16</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định (6 tháng gần nhất)">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span>Yêu cầu</span><span>Nhận hàng</span><span class="is-active">Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">NH</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Báo cáo đổi trả theo lý do</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Ngày tạo</span>05/2026 – 10/2026</span><span class="be-facet"><span class="be-facet__type">Nhóm theo</span>Lý do › Tháng</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div>
+          <div class="be-controlpanel__left"><span class="wf-btn wf-btn--primary wf-btn--sm">Xuất Excel</span><span class="wf-btn wf-btn--sm">Loại: Tất cả ▾</span></div>
+          <div class="be-controlpanel__right"><div class="be-views"><span class="is-active">▥</span><span>⊞</span></div></div>
+        </div>
+        <div class="be-content wf-stack">
+          <div class="wf-card">
+            <div class="wf-card__header">Số yêu cầu theo lý do và tháng<span class="wf-spacer"></span>
+              <div class="wf-legend"><span><span class="wf-legend__swatch" style="background:var(--wf-gray-800)"></span>Sản phẩm lỗi</span><span><span class="wf-legend__swatch" style="background:var(--wf-gray-600)"></span>Giao sai</span><span><span class="wf-legend__swatch" style="background:var(--wf-gray-400)"></span>Không vừa size</span><span><span class="wf-legend__swatch" style="background:var(--wf-gray-300)"></span>Khác (Không giống mô tả, Đổi ý)</span></div>
+            </div>
+            <div class="wf-card__body">
+              <div class="wf-chart">
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:30%"></span><span class="wf-chart__bar" style="height:12%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:55%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:25%"></span></div>
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:35%"></span><span class="wf-chart__bar" style="height:10%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:60%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:22%"></span></div>
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:28%"></span><span class="wf-chart__bar" style="height:15%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:70%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:30%"></span></div>
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:40%"></span><span class="wf-chart__bar" style="height:8%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:65%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:28%"></span></div>
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:45%"></span><span class="wf-chart__bar" style="height:14%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:80%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:35%"></span></div>
+                <div class="wf-chart__group"><span class="wf-chart__bar wf-chart__bar--dark" style="height:50%"></span><span class="wf-chart__bar" style="height:18%; background:var(--wf-gray-600)"></span><span class="wf-chart__bar" style="height:95%; background:var(--wf-gray-400)"></span><span class="wf-chart__bar wf-chart__bar--light" style="height:40%"></span></div>
+              </div>
+              <div class="wf-chart__labels"><span>05/2026</span><span>06/2026</span><span>07/2026</span><span>08/2026</span><span>09/2026</span><span>10/2026</span></div>
+            </div>
+          </div>
+          <div class="be-list">
+            <table class="wf-table">
+              <thead><tr><th>Lý do</th><th class="num">05/2026</th><th class="num">06/2026</th><th class="num">07/2026</th><th class="num">08/2026</th><th class="num">09/2026</th><th class="num">10/2026</th><th class="num">Tổng</th></tr></thead>
+              <tbody>
+                <tr><td>Sản phẩm lỗi</td><td class="num">18</td><td class="num">21</td><td class="num">17</td><td class="num">24</td><td class="num">27</td><td class="num">30</td><td class="num">137</td></tr>
+                <tr><td>Giao sai sản phẩm</td><td class="num">7</td><td class="num">6</td><td class="num">9</td><td class="num">5</td><td class="num">8</td><td class="num">11</td><td class="num">46</td></tr>
+                <tr><td>Không vừa size</td><td class="num">33</td><td class="num">36</td><td class="num">42</td><td class="num">39</td><td class="num">48</td><td class="num">57</td><td class="num">255</td></tr>
+                <tr><td>Không giống mô tả</td><td class="num">9</td><td class="num">8</td><td class="num">11</td><td class="num">10</td><td class="num">12</td><td class="num">13</td><td class="num">63</td></tr>
+                <tr><td>Đổi ý</td><td class="num">6</td><td class="num">5</td><td class="num">7</td><td class="num">7</td><td class="num">9</td><td class="num">11</td><td class="num">45</td></tr>
+              </tbody>
+              <tfoot><tr><td>Tổng</td><td class="num">73</td><td class="num">76</td><td class="num">86</td><td class="num">85</td><td class="num">104</td><td class="num">122</td><td class="num">546</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Không tính yêu cầu Đã huỷ (FR-16 BR-16.1). Bấm vào ô số → mở list yêu cầu tương ứng (SCR-05). "Xuất Excel" xuất đúng dữ liệu đang lọc.</li>
+  </ol></div>
+</section>
+</body>
+</html>

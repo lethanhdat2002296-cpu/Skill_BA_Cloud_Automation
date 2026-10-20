@@ -1,0 +1,161 @@
+<!doctype html>
+<!--
+  SCR-06 — Form yêu cầu đổi trả (Odoo)
+  FR: FR-09, FR-10, FR-14, FR-15
+  Loại: backend · Khung: 1440
+  Trạng thái: default (Chờ duyệt), reject-error, approved
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-06">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-09, FR-10, FR-14, FR-15">
+<title>SCR-06 — Form yêu cầu đổi trả</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-06 · Form yêu cầu đổi trả</strong><span class="wf-doc-meta">backend · FR-09, FR-10, FR-14, FR-15</span></div>
+
+<section class="wf-state" data-state="default" data-label="Chờ duyệt">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span><span>RMA-000123</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-pager"><span>1 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div></div>
+        </div>
+        <div class="be-form-header">
+          <span class="wf-btn wf-btn--primary wf-btn--sm">Duyệt</span>
+          <span class="wf-btn wf-btn--sm">Từ chối</span> <span class="wf-anno">1</span>
+          <div class="be-statusbar"><span class="be-status is-active">Chờ duyệt</span><span class="be-status">Đã duyệt</span><span class="be-status">Đã nhận hàng</span><span class="be-status">Hoàn tất</span></div>
+        </div>
+        <div class="be-form-layout">
+          <div class="be-sheet">
+            <div class="be-smart-buttons"><span class="be-smart-btn"><span class="wf-icon">⇄</span><span><strong>0</strong>Phiếu nhập kho</span></span><span class="be-smart-btn"><span class="wf-icon">₫</span><span><strong>0</strong>Credit note</span></span><span class="be-smart-btn"><span class="wf-icon">S</span><span><strong>0</strong>Đơn đổi</span></span></div>
+            <div><div class="be-title-label">Mã yêu cầu</div><div class="be-title">RMA-000123</div></div>
+            <div class="be-fields">
+              <div class="be-field"><span class="be-field__label">Khách hàng</span><span class="be-field__value is-readonly">Nguyễn Văn An · 0901 234 567</span></div>
+              <div class="be-field"><span class="be-field__label">Ngày tạo</span><span class="be-field__value is-readonly">20/10/2026 10:15</span></div>
+              <div class="be-field"><span class="be-field__label">Đơn hàng</span><span class="be-field__value is-readonly">000001234 (COD)</span></div>
+              <div class="be-field be-field--required"><span class="be-field__label">Người phụ trách</span><span class="be-field__value">Lê Thị Cúc ▾</span></div>
+              <div class="be-field"><span class="be-field__label">Loại</span><span class="be-field__value is-readonly">Trả hàng</span></div>
+              <div class="be-field"><span class="be-field__label">Lý do</span><span class="be-field__value is-readonly">Sản phẩm lỗi</span></div>
+            </div>
+            <div class="be-notebook">
+              <div class="wf-tabs"><span class="wf-tab is-active">Sản phẩm</span><span class="wf-tab">Hình ảnh (2)</span><span class="wf-tab">Hoàn tiền</span></div>
+              <div class="be-o2m">
+                <table class="wf-table wf-table--compact">
+                  <thead><tr><th>Sản phẩm</th><th class="num">SL mua</th><th class="num">SL yêu cầu</th><th>Size mới</th><th class="num">Đơn giá</th><th class="num">Thành tiền</th></tr></thead>
+                  <tbody><tr><td>[AT-001] Áo thun cotton basic – M – Trắng</td><td class="num">1</td><td class="num">1</td><td>—</td><td class="num">249.000₫</td><td class="num">249.000₫</td></tr></tbody>
+                  <tfoot><tr><td colspan="5">Tổng</td><td class="num">249.000₫</td></tr></tfoot>
+                </table>
+              </div>
+              <div class="wf-stack" style="margin-top:12px"><span class="be-field__label">Mô tả của khách</span><span class="wf-small">Đường may ở vai bị bung sau lần giặt đầu tiên.</span></div>
+            </div>
+          </div>
+          <aside class="be-chatter">
+            <div class="be-chatter__actions"><span class="wf-btn wf-btn--sm wf-btn--dark">Gửi tin nhắn</span><span class="wf-btn wf-btn--sm">Ghi chú</span><span class="wf-btn wf-btn--sm">Hoạt động</span></div>
+            <div class="be-chatter__date">Hôm nay</div>
+            <div class="be-msg"><span class="wf-avatar">HT</span><div><div class="be-msg__head"><span class="be-msg__author">Hệ thống</span><span class="be-msg__time">10:16</span></div><div class="be-msg__body">Yêu cầu được tạo từ website (đơn 000001234).</div><ul class="be-tracking"><li>Trạng thái: Chờ duyệt</li></ul></div></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Nút "Duyệt"/"Từ chối" chỉ hiện ở trạng thái Chờ duyệt cho nhóm RMA / Nhân viên trở lên (FR-09 BR-09.1). Duyệt: tạo phiếu nhập kho dự kiến vào WH/Returns, đồng bộ trạng thái và email khách (FR-09, FR-11).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="reject-error" data-label="Từ chối – lỗi thiếu lý do">
+  <div class="wf-frame" style="min-height:720px">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span><span>RMA-000123</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-pager"><span>1 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div></div>
+        </div>
+        <div class="be-form-header">
+          <span class="wf-btn wf-btn--primary wf-btn--sm">Duyệt</span><span class="wf-btn wf-btn--sm">Từ chối</span>
+          <div class="be-statusbar"><span class="be-status is-active">Chờ duyệt</span><span class="be-status">Đã duyệt</span><span class="be-status">Đã nhận hàng</span><span class="be-status">Hoàn tất</span></div>
+        </div>
+        <div class="be-form-layout"><div class="be-sheet"><div class="be-title">RMA-000123</div><span class="wf-skeleton" style="width:60%"></span><span class="wf-skeleton" style="width:40%"></span></div><aside class="be-chatter"><div class="be-chatter__actions"><span class="wf-btn wf-btn--sm wf-btn--dark">Gửi tin nhắn</span></div></aside></div>
+      </main>
+    </div>
+    <div class="wf-overlay">
+      <div class="wf-modal">
+        <div class="wf-modal__header">Từ chối yêu cầu RMA-000123</div>
+        <div class="wf-modal__body">
+          <div class="wf-alert wf-alert--error">Bắt buộc chọn lý do từ chối.</div>
+          <div class="wf-field wf-field--error"><label class="wf-label wf-req">Lý do từ chối</label><select class="wf-select"><option>— Chọn lý do —</option></select><span class="wf-error-text">Bắt buộc chọn lý do từ chối</span></div>
+          <div class="wf-field"><label class="wf-label">Ghi chú gửi khách hàng</label><textarea class="wf-textarea" placeholder="Nội dung này hiển thị trên website và email gửi khách"></textarea><span class="wf-help">Bắt buộc khi lý do là "Khác" · tối đa 500 ký tự</span></div>
+        </div>
+        <div class="wf-modal__footer"><span class="wf-btn wf-btn--primary">Xác nhận từ chối</span><span class="wf-btn">Huỷ</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Lý do từ chối lấy từ cấu hình: Quá hạn đổi trả, Sản phẩm đã qua sử dụng, Ảnh không chứng minh lỗi, Hàng sale không áp dụng trả, Khác (FR-10 BR-10.1).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="approved" data-label="Đã duyệt">
+  <div class="wf-frame">
+    <div class="be-app">
+      <header class="be-topbar"><span>☰</span><span class="be-topbar__app">Đổi trả</span>
+        <nav class="be-topbar__menu"><span class="is-active">Yêu cầu</span><span>Nhận hàng</span><span>Báo cáo</span><span>Cấu hình</span></nav>
+        <div class="be-topbar__right"><span class="wf-avatar">LC</span></div></header>
+      <main class="be-main">
+        <div class="be-controlpanel">
+          <div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu đổi trả</span><span>RMA-000123</span></nav></div>
+          <div class="be-controlpanel__right"><div class="be-pager"><span>1 / 6</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div></div>
+        </div>
+        <div class="be-form-header">
+          <span class="wf-small wf-muted">Chờ kho nhận hàng</span>
+          <div class="be-statusbar"><span class="be-status is-done">Chờ duyệt</span><span class="be-status is-active">Đã duyệt</span><span class="be-status">Đã nhận hàng</span><span class="be-status">Hoàn tất</span></div>
+        </div>
+        <div class="be-form-layout">
+          <div class="be-sheet">
+            <div class="be-smart-buttons"><span class="be-smart-btn"><span class="wf-icon">⇄</span><span><strong>1</strong>Phiếu nhập kho</span></span><span class="be-smart-btn"><span class="wf-icon">₫</span><span><strong>0</strong>Credit note</span></span><span class="be-smart-btn"><span class="wf-icon">S</span><span><strong>0</strong>Đơn đổi</span></span> <span class="wf-anno">1</span></div>
+            <div><div class="be-title-label">Mã yêu cầu</div><div class="be-title">RMA-000123</div></div>
+            <div class="be-fields">
+              <div class="be-field"><span class="be-field__label">Khách hàng</span><span class="be-field__value is-readonly">Nguyễn Văn An · 0901 234 567</span></div>
+              <div class="be-field"><span class="be-field__label">Ngày duyệt</span><span class="be-field__value is-readonly">20/10/2026 14:00</span></div>
+              <div class="be-field"><span class="be-field__label">Đơn hàng</span><span class="be-field__value is-readonly">000001234 (COD)</span></div>
+              <div class="be-field"><span class="be-field__label">Người phụ trách</span><span class="be-field__value is-readonly">Lê Thị Cúc</span></div>
+              <div class="be-field"><span class="be-field__label">Loại</span><span class="be-field__value is-readonly">Trả hàng</span></div>
+              <div class="be-field"><span class="be-field__label">Lý do</span><span class="be-field__value is-readonly">Sản phẩm lỗi</span></div>
+            </div>
+            <div class="be-notebook">
+              <div class="wf-tabs"><span class="wf-tab">Sản phẩm</span><span class="wf-tab">Hình ảnh (2)</span><span class="wf-tab is-active">Hoàn tiền</span></div>
+              <dl class="wf-kv"><dt>Phương thức hoàn</dt><dd>Chuyển khoản (đơn COD)</dd><dt>Ngân hàng</dt><dd>Vietcombank</dd><dt>Số tài khoản</dt><dd>******3456 <span class="wf-anno">2</span></dd><dt>Chủ tài khoản</dt><dd>NGUYEN VAN AN</dd><dt>Phí ship hoàn dự kiến</dt><dd>Tối đa 50.000₫ theo biên nhận</dd></dl>
+            </div>
+          </div>
+          <aside class="be-chatter">
+            <div class="be-chatter__actions"><span class="wf-btn wf-btn--sm wf-btn--dark">Gửi tin nhắn</span><span class="wf-btn wf-btn--sm">Ghi chú</span><span class="wf-btn wf-btn--sm">Hoạt động</span></div>
+            <div class="be-chatter__date">Hôm nay</div>
+            <div class="be-msg"><span class="wf-avatar">HT</span><div><div class="be-msg__head"><span class="be-msg__author">Hệ thống</span><span class="be-msg__time">14:01</span></div><div class="be-msg__body">Đã gửi email "Yêu cầu được duyệt" cho khách hàng.</div></div></div>
+            <div class="be-msg"><span class="wf-avatar">LC</span><div><div class="be-msg__head"><span class="be-msg__author">Lê Thị Cúc</span><span class="be-msg__time">14:00</span></div><ul class="be-tracking"><li>Trạng thái: Chờ duyệt → Đã duyệt</li><li>Người phụ trách: — → Lê Thị Cúc</li></ul></div></div>
+            <div class="be-msg be-msg--note"><span class="wf-avatar">LC</span><div><div class="be-msg__head"><span class="be-msg__author">Lê Thị Cúc</span><span class="be-msg__time">13:58</span></div><div class="be-msg__body">Ảnh cho thấy lỗi đường may, đồng ý trả hàng.</div></div></div>
+            <div class="be-msg"><span class="wf-avatar">HT</span><div><div class="be-msg__head"><span class="be-msg__author">Hệ thống</span><span class="be-msg__time">10:16</span></div><div class="be-msg__body">Yêu cầu được tạo từ website (đơn 000001234).</div></div></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>Smart button mở màn chuẩn Odoo: Phiếu nhập kho (WH/Returns), Credit note (tạo khi Trả hàng chuyển Đã nhận hàng — FR-14), Đơn đổi (tạo khi Đổi size nhận Nguyên vẹn — FR-15).</li>
+    <li>Số tài khoản che với mọi nhóm trừ Kế toán (NFR-05).</li>
+  </ol></div>
+</section>
+</body>
+</html>

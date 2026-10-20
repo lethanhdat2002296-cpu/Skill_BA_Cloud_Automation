@@ -1,0 +1,172 @@
+<!doctype html>
+<!--
+  SCR-02 — Tạo yêu cầu đổi trả
+  FR: FR-01, FR-02, FR-03, FR-04
+  Loại: storefront · Khung: 1440 + 390
+  Trạng thái: default, error, success
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-02">
+<meta name="wf-type" content="storefront">
+<meta name="wf-fr" content="FR-01, FR-02, FR-03, FR-04">
+<title>SCR-02 — Tạo yêu cầu đổi trả</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-02 · Tạo yêu cầu đổi trả</strong><span class="wf-doc-meta">storefront · FR-01, FR-02, FR-03, FR-04</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định (đơn COD, Trả hàng)">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section wf-stack wf-stack--lg">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span></nav>
+      <h1 class="wf-h1">Yêu cầu đổi trả – Đơn #000001234</h1>
+      <div class="wf-split">
+        <div class="wf-stack wf-stack--lg">
+          <fieldset class="wf-fieldset"><legend>1. Loại yêu cầu</legend>
+            <div class="wf-row" style="gap:24px"><label class="wf-radio"><input type="radio" name="t1" checked>Trả hàng – hoàn tiền</label><label class="wf-radio"><input type="radio" name="t1">Đổi size</label></div>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>2. Chọn sản phẩm <span class="wf-anno">1</span></legend>
+            <table class="wf-table wf-table--stack">
+              <thead><tr><th></th><th>Sản phẩm</th><th class="num">Đã mua</th><th class="num">Có thể trả</th><th>Số lượng</th><th>Size mới</th></tr></thead>
+              <tbody>
+                <tr><td><input type="checkbox" checked></td><td data-label="Sản phẩm"><div class="wf-row"><span class="wf-img wf-img--thumb"></span><div class="wf-stack" style="gap:2px"><span class="wf-strong">Áo thun cotton basic</span><span class="wf-xs wf-muted">Size M · Trắng · 249.000₫</span></div></div></td><td class="num" data-label="Đã mua">1</td><td class="num" data-label="Có thể trả">1</td><td data-label="Số lượng"><div class="sf-qty"><span>−</span><span>1</span><span>+</span></div></td><td data-label="Size mới"><span class="wf-xs wf-muted">Chỉ khi Đổi size</span></td></tr>
+                <tr><td><input type="checkbox"></td><td data-label="Sản phẩm"><div class="wf-row"><span class="wf-img wf-img--thumb"></span><div class="wf-stack" style="gap:2px"><span class="wf-strong">Quần jean slim</span><span class="wf-xs wf-muted">Size 30 · 549.000₫</span></div></div></td><td class="num" data-label="Đã mua">1</td><td class="num" data-label="Có thể trả">1</td><td data-label="Số lượng"><div class="sf-qty"><span>−</span><span>0</span><span>+</span></div></td><td data-label="Size mới">—</td></tr>
+                <tr><td><input type="checkbox" disabled></td><td data-label="Sản phẩm"><div class="wf-row"><span class="wf-img wf-img--thumb"></span><div class="wf-stack" style="gap:2px"><span class="wf-strong">Áo khoác gió (sale 60%)</span><span class="wf-xs wf-muted">Size L · 199.000₫</span><span><span class="wf-badge wf-badge--dashed">Chỉ đổi size</span><span class="wf-anno">2</span></span></div></div></td><td class="num" data-label="Đã mua">1</td><td class="num" data-label="Có thể trả">0</td><td data-label="Số lượng">—</td><td data-label="Size mới">—</td></tr>
+              </tbody>
+            </table>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>3. Lý do và hình ảnh</legend>
+            <div class="wf-stack">
+              <div class="wf-field"><label class="wf-label wf-req">Lý do</label><select class="wf-select"><option>Sản phẩm lỗi</option></select></div>
+              <div class="wf-alert">Phí gửi trả được hoàn theo biên nhận bưu cục, tối đa 50.000₫. <span class="wf-anno">3</span></div>
+              <div class="wf-field"><label class="wf-label">Mô tả</label><textarea class="wf-textarea">Đường may ở vai bị bung sau lần giặt đầu tiên.</textarea><span class="wf-help">47/500 ký tự</span></div>
+              <div class="wf-field"><span class="wf-label wf-req">Hình ảnh (bắt buộc với lý do Sản phẩm lỗi, Giao sai sản phẩm)</span>
+                <div class="wf-upload"><span class="wf-icon">↑</span><span>Kéo thả ảnh vào đây hoặc <u>chọn tệp</u></span><span class="wf-xs">JPG/PNG, tối đa 5 ảnh, mỗi ảnh ≤ 5MB</span></div>
+                <div class="wf-file-list"><span class="wf-img wf-img--thumb"></span><span class="wf-img wf-img--thumb"></span></div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>4. Thông tin nhận hoàn tiền <span class="wf-anno">4</span></legend>
+            <div class="wf-grid-2">
+              <div class="wf-field"><label class="wf-label wf-req">Ngân hàng</label><select class="wf-select"><option>Vietcombank</option></select></div>
+              <div class="wf-field"><label class="wf-label wf-req">Số tài khoản</label><input class="wf-input" value="0071000123456"></div>
+              <div class="wf-field wf-span-2"><label class="wf-label wf-req">Chủ tài khoản</label><input class="wf-input" value="NGUYEN VAN AN"><span class="wf-help">Chữ in hoa không dấu, đúng tên trên tài khoản</span></div>
+            </div>
+          </fieldset>
+        </div>
+        <aside class="sf-summary">
+          <span class="wf-h3">Thông tin đơn hàng</span>
+          <div class="sf-summary__row"><span>Mã đơn</span><span>000001234</span></div>
+          <div class="sf-summary__row"><span>Ngày giao</span><span>14/10/2026</span></div>
+          <div class="sf-summary__row"><span>Hạn đổi trả</span><span>21/10/2026</span></div>
+          <div class="sf-summary__row"><span>Thanh toán</span><span>COD</span></div>
+          <div class="sf-summary__total"><span>Giá trị yêu cầu</span><span>249.000₫</span></div>
+          <span class="wf-btn wf-btn--primary wf-btn--block wf-btn--lg">Gửi yêu cầu</span>
+          <span class="wf-xs wf-muted">Yêu cầu được CSKH phản hồi trong 24 giờ làm việc.</span>
+        </aside>
+      </div>
+      <div class="wf-row"><span class="wf-btn wf-btn--ghost">‹ Quay lại đơn hàng</span></div>
+    </div>
+  </div>
+  <div class="wf-notes"><ol>
+    <li>"Có thể trả" = SL mua − SL ở các yêu cầu khác chưa Từ chối/Đã huỷ (FR-01 BR-01.3).</li>
+    <li>Sản phẩm giảm giá &gt; 50%: không chọn được khi loại là Trả hàng; khi chuyển sang "Đổi size" thì chọn được và hiện cột Size mới (FR-01 BR-01.4).</li>
+    <li>Lý do "Đổi ý": thay bằng cảnh báo "Bạn chịu phí vận chuyển gửi trả" (FR-03 BR-03.3).</li>
+    <li>Chỉ hiện khi đơn COD và loại Trả hàng; đơn thẻ/VNPay hiện ghi chú hoàn về phương thức ban đầu (FR-04).</li>
+  </ol></div>
+</section>
+
+<section class="wf-state" data-state="error" data-label="Lỗi validate">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section wf-stack wf-stack--lg">
+      <nav class="wf-breadcrumb"><span>Trang chủ</span><span>Đơn hàng của tôi</span><span>Yêu cầu đổi trả</span></nav>
+      <h1 class="wf-h1">Yêu cầu đổi trả – Đơn #000001234</h1>
+      <div class="wf-alert wf-alert--error"><div class="wf-stack" style="gap:4px"><span class="wf-strong">Vui lòng kiểm tra 3 lỗi bên dưới</span><span class="wf-small">Số lượng vượt mức · Thiếu ảnh · Số tài khoản không hợp lệ</span></div></div>
+      <div class="wf-split">
+        <div class="wf-stack wf-stack--lg">
+          <fieldset class="wf-fieldset"><legend>1. Loại yêu cầu</legend>
+            <div class="wf-row" style="gap:24px"><label class="wf-radio"><input type="radio" name="t2" checked>Trả hàng – hoàn tiền</label><label class="wf-radio"><input type="radio" name="t2">Đổi size</label></div>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>2. Chọn sản phẩm</legend>
+            <table class="wf-table wf-table--stack">
+              <thead><tr><th></th><th>Sản phẩm</th><th class="num">Đã mua</th><th class="num">Có thể trả</th><th>Số lượng</th></tr></thead>
+              <tbody>
+                <tr><td><input type="checkbox" checked></td><td data-label="Sản phẩm"><div class="wf-row"><span class="wf-img wf-img--thumb"></span><div class="wf-stack" style="gap:2px"><span class="wf-strong">Áo thun cotton basic</span><span class="wf-xs wf-muted">Size M · Trắng · 249.000₫</span></div></div></td><td class="num" data-label="Đã mua">1</td><td class="num" data-label="Có thể trả">1</td>
+                  <td data-label="Số lượng"><div class="wf-field wf-field--error"><input class="wf-input" value="2" style="width:72px"><span class="wf-error-text">Số lượng tối đa có thể đổi trả là 1</span></div></td></tr>
+              </tbody>
+            </table>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>3. Lý do và hình ảnh</legend>
+            <div class="wf-stack">
+              <div class="wf-field"><label class="wf-label wf-req">Lý do</label><select class="wf-select"><option>Sản phẩm lỗi</option></select></div>
+              <div class="wf-field wf-field--error"><span class="wf-label wf-req">Hình ảnh</span>
+                <div class="wf-upload" style="border-color:var(--wf-gray-900)"><span class="wf-icon">↑</span><span>Kéo thả ảnh vào đây hoặc <u>chọn tệp</u></span><span class="wf-xs">JPG/PNG, tối đa 5 ảnh, mỗi ảnh ≤ 5MB</span></div>
+                <span class="wf-error-text">Vui lòng đính kèm ít nhất 1 ảnh</span>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="wf-fieldset"><legend>4. Thông tin nhận hoàn tiền</legend>
+            <div class="wf-grid-2">
+              <div class="wf-field"><label class="wf-label wf-req">Ngân hàng</label><select class="wf-select"><option>Vietcombank</option></select></div>
+              <div class="wf-field wf-field--error"><label class="wf-label wf-req">Số tài khoản</label><input class="wf-input" value="0071-000-ABC"><span class="wf-error-text">Số tài khoản chỉ gồm 6–19 chữ số</span></div>
+              <div class="wf-field wf-span-2"><label class="wf-label wf-req">Chủ tài khoản</label><input class="wf-input" value="NGUYEN VAN AN"></div>
+            </div>
+          </fieldset>
+        </div>
+        <aside class="sf-summary">
+          <span class="wf-h3">Thông tin đơn hàng</span>
+          <div class="sf-summary__row"><span>Mã đơn</span><span>000001234</span></div>
+          <div class="sf-summary__row"><span>Hạn đổi trả</span><span>21/10/2026</span></div>
+          <div class="sf-summary__row"><span>Thanh toán</span><span>COD</span></div>
+          <div class="sf-summary__total"><span>Giá trị yêu cầu</span><span>249.000₫</span></div>
+          <span class="wf-btn wf-btn--primary wf-btn--block wf-btn--lg">Gửi yêu cầu</span>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wf-state" data-state="success" data-label="Thành công">
+  <div class="wf-frame">
+    <header class="sf-header"><div class="wf-container sf-header__inner">
+      <span class="sf-burger">☰</span><span class="wf-logo">MỘC AN</span>
+      <div class="sf-search"><input class="wf-input" placeholder="Tìm sản phẩm..."><span class="wf-btn">Tìm</span></div>
+      <div class="sf-header__actions"><span class="wf-row"><span class="wf-icon wf-icon--round">A</span><span class="sf-label">Nguyễn Văn An</span></span><span class="wf-row sf-cart-icon"><span class="wf-icon">G</span><span class="sf-count">0</span><span class="sf-label">Giỏ hàng</span></span></div>
+    </div></header>
+    <nav class="sf-nav"><div class="wf-container sf-nav__inner"><span>Nam</span><span>Nữ</span><span>Trẻ em</span><span>Phụ kiện</span><span>Khuyến mãi</span></div></nav>
+    <div class="wf-container wf-section">
+      <div class="wf-card" style="max-width:720px; margin:24px auto">
+        <div class="wf-card__body wf-stack wf-stack--lg">
+          <div class="wf-alert wf-alert--success"><div class="wf-stack" style="gap:4px"><span class="wf-strong">Đã gửi yêu cầu đổi trả</span><span>Mã yêu cầu của bạn: <span class="wf-strong wf-mono">RMA-000123</span></span></div></div>
+          <div class="wf-stack">
+            <span class="wf-h3">Bước tiếp theo</span>
+            <ol class="wf-timeline">
+              <li class="is-done">Yêu cầu đã được ghi nhận (20/10/2026 10:15)</li>
+              <li>CSKH xem xét và phản hồi qua email trong 24 giờ</li>
+              <li>Khi được duyệt, bạn gửi hàng theo hướng dẫn trong email</li>
+            </ol>
+          </div>
+          <div class="wf-row wf-row--between"><span class="wf-btn wf-btn--ghost">Về đơn hàng của tôi</span><span class="wf-btn wf-btn--primary">Xem yêu cầu</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
