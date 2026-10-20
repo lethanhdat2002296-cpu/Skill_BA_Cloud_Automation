@@ -168,7 +168,7 @@
 | AS-34 | Trưởng nhóm = quản lý trực tiếp (Manager) trên hồ sơ nhân viên của người tạo; người tạo chưa có Trưởng nhóm thì chặn gửi duyệt. BOD = nhóm quyền "BOD", một thành viên duyệt là đủ | AS | US-14, US-24 |
 | AS-35 | Đầu phiếu giữ "Ngày cần hàng" (không bắt buộc, làm ngày dự kiến trên RFQ); "Lý do mua" bỏ, thay bằng "Ghi chú" (không bắt buộc) | AS | US-01 |
 | AS-36 | Tạo YCMH từ Hợp đồng / Báo giá NCC: chép mọi dòng, số lượng để trống cho người tạo nhập, dòng không cần thì xoá; NCC và đơn giá khoá theo chứng từ nguồn; được thêm dòng vật tư khác (tự tra giá) | AS | US-19, US-20 |
-| AS-37 | Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng sau chọn giá (AS-08) cho tới khi khảo sát phiếu tiếp theo | AS | US-10, US-15 |
+| AS-37 | *(Sửa v0.3)* Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng 1 cấp sau khi chọn NCC và tạo ĐNTT (AS-39) — khao-sat-lan-3-yeu-cau-bao-gia.md xác nhận còn bước duyệt đơn | AS | US-10, US-15 |
 | OQ-22 | Vật tư "Nhập kho" ứng với loại sản phẩm nào trong Odoo? Có dùng loại Tiêu dùng (consumable) không? | OQ | AS-26 |
 | OQ-23 | **Đã trả lời một phần (khao-sat-lan-3-yeu-cau-bao-gia.md):** đơn dịch vụ duyệt xong là PO, không tạo DO, không có bước nhận hàng. Còn mở: có cần nghiệm thu dịch vụ không | OQ | AS-27, US-25 |
 | OQ-24 | XXXX trong số phiếu đếm theo bộ phận hay toàn công ty? Về 0001 theo năm, tháng hay ngày? Mã BP lấy ở đâu? | OQ | AS-28, US-01 |
@@ -180,7 +180,7 @@
 | OQ-30 | Người tạo không có Trưởng nhóm thì xử lý thế nào? BOD cần một hay tất cả thành viên duyệt? Có phân ngưỡng giá trị không? | OQ | AS-34, US-24 |
 | OQ-31 | Có cần "Ngày cần hàng" và "Lý do mua" trên đầu phiếu không? | OQ | AS-35 |
 | OQ-32 | Tạo YCMH từ Hợp đồng / Báo giá: chép mọi dòng hay chọn dòng? Có được thêm vật tư ngoài chứng từ nguồn không? | OQ | AS-36, US-19, US-20 |
-| OQ-33 | BOD đã duyệt YCMH thì đơn mua hàng sau khi chọn giá còn cần duyệt nữa không? | OQ | AS-37 |
+| OQ-33 | **Đã trả lời (khao-sat-lan-3-yeu-cau-bao-gia.md):** đơn mua hàng vẫn duyệt sau khi chọn NCC và tạo ĐNTT; duyệt xong chuyển PO. Người duyệt: AS-39 | OQ | AS-37 |
 | AS-39 | Đơn mua hàng duyệt 1 cấp bởi Trưởng phòng Mua hàng, không phân ngưỡng giá trị | AS | US-15, US-18 |
 | AS-40 | Gửi duyệt đơn yêu cầu ĐNTT đã gửi Kế toán (trạng thái "Chờ kế toán duyệt" trở lên); không cần Kế toán duyệt xong | AS | US-10, US-11 |
 | AS-41 | ĐNTT bị Kế toán từ chối: đơn đang Chờ duyệt về RFQ (dịch vụ: Nháp); đơn đã PO giữ PO; MH tạo ĐNTT mới | AS | US-16 |

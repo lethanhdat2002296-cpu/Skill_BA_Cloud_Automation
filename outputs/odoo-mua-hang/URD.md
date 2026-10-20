@@ -356,7 +356,7 @@ Sơ đồ Activity – Swimlane (v0.3; đặc tả trong `ui/swimlanes/`, ảnh 
 | AS-17 | Chỉ dùng VND | Input không đề cập ngoại tệ | Phạm vi |
 | AS-18 | Thông báo qua activity Odoo + email | Kênh chuẩn của Odoo | Mục 5 |
 | AS-19 | (Sửa v0.2) Dòng bắt buộc: vật tư loại Nhập kho, đơn vị tính, kho nhận, số lượng > 0 (không để trống — khảo sát lần 2 xác nhận); ngày cần hàng không bắt buộc (AS-35) | Dữ liệu tối thiểu để tạo RFQ | US-01 |
-| AS-20 | (Sửa v0.2) Mã tự động: Yêu cầu mua hàng theo AS-28 (thay `YCMH/<năm>/<4 số>`), Đề nghị thanh toán `DNTT/<năm>/<4 số>`; RFQ/đơn dùng mã chuẩn Odoo `P<5 số>` | Theo quy ước sequence Odoo | US-01, US-11 |
+| AS-20 | *(Sửa v0.3)* Mã tự động: YCMH theo AS-28, `DNTT/<năm>/<4 số>`; RFQ/đơn theo AS-42 (thay mã chuẩn `P<5 số>`) | Theo quy ước sequence Odoo | US-01, US-11 |
 | AS-26 | Vật tư "Nhập kho" = sản phẩm loại Lưu kho (storable) của Odoo; vật tư "Dịch vụ" = sản phẩm loại Dịch vụ; không dùng loại Tiêu dùng | Khảo sát lần 2 chỉ nêu 2 loại | US-01, US-25 |
 | AS-27 | **[Đã thay — v0.3]** ~~Đơn dịch vụ dùng chung nút "Xác nhận đã nhận hàng"~~. Đơn dịch vụ duyệt xong là PO, không có bước nhận hàng (khao-sat-lan-3-yeu-cau-bao-gia.md) | Giữ một luồng trạng thái cho mọi đơn | US-25 |
 | AS-28 | Số phiếu YCMH = `<Mã BP>_<XXXX>_<DD>_<MM>_<YY>`: Mã BP là mã bộ phận của người tạo; XXXX đếm riêng theo bộ phận, về 0001 đầu mỗi năm; DD_MM_YY là ngày tạo (vd. `HC_0012_20_10_26`) | Mẫu số phiếu chưa nói cách đếm XXXX | US-01 |
@@ -368,7 +368,7 @@ Sơ đồ Activity – Swimlane (v0.3; đặc tả trong `ui/swimlanes/`, ảnh 
 | AS-34 | Trưởng nhóm = quản lý trực tiếp (Manager) trên hồ sơ nhân viên của người tạo; người tạo chưa có Trưởng nhóm thì chặn gửi duyệt. BOD = nhóm quyền "BOD", một thành viên duyệt là đủ | Input chỉ nêu "Trưởng nhóm (theo người tạo)" và "BOD" | US-14, US-24 |
 | AS-35 | Đầu phiếu giữ "Ngày cần hàng" (không bắt buộc, làm ngày dự kiến trên RFQ); "Lý do mua" bỏ, thay bằng "Ghi chú" (không bắt buộc) | Khảo sát lần 2 không nhắc 2 trường này | US-01 |
 | AS-36 | Tạo YCMH từ Hợp đồng / Báo giá NCC: chép mọi dòng, số lượng để trống cho người tạo nhập, dòng không cần thì xoá; NCC và đơn giá khoá theo chứng từ nguồn; được thêm dòng vật tư khác (tự tra giá) | Input chưa mô tả chi tiết | US-19, US-20 |
-| AS-37 | Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng sau chọn giá (AS-08) cho tới khi khảo sát phiếu tiếp theo | Khảo sát lần 2 mới đi chi tiết phiếu YCMH | US-10, US-15 |
+| AS-37 | *(Sửa v0.3)* Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng 1 cấp sau khi chọn NCC và tạo ĐNTT (AS-39) — khao-sat-lan-3-yeu-cau-bao-gia.md xác nhận còn bước duyệt đơn | Khảo sát lần 2 mới đi chi tiết phiếu YCMH | US-10, US-15 |
 | AS-39 | Đơn mua hàng duyệt 1 cấp bởi Trưởng phòng Mua hàng, không phân ngưỡng giá trị | tra-loi-cau-hoi-mo-lan-1.md: không có ngưỡng; người duyệt chưa nói | US-15, US-18 |
 | AS-40 | Gửi duyệt đơn yêu cầu ĐNTT đã gửi Kế toán (trạng thái "Chờ kế toán duyệt" trở lên); không cần Kế toán duyệt xong | khao-sat-lan-3-yeu-cau-bao-gia.md chỉ nói "bắt buộc tạo ĐNTT trước" | US-10, US-11 |
 | AS-41 | ĐNTT bị Kế toán từ chối: đơn đang Chờ duyệt về RFQ (dịch vụ: Nháp); đơn đã PO giữ PO; MH tạo ĐNTT mới | Input chưa nói | US-16 |
@@ -412,7 +412,7 @@ Sơ đồ Activity – Swimlane (v0.3; đặc tả trong `ui/swimlanes/`, ảnh 
 | OQ-30 | Người tạo không có Trưởng nhóm thì xử lý thế nào? BOD cần một hay tất cả thành viên duyệt? Có phân ngưỡng giá trị không? | Ban giám đốc | AS-34, US-24 |
 | OQ-31 | Có cần "Ngày cần hàng" và "Lý do mua" trên đầu phiếu không? | Khách hàng | AS-35 |
 | OQ-32 | Tạo YCMH từ Hợp đồng / Báo giá: chép mọi dòng hay chọn dòng? Có được thêm vật tư ngoài chứng từ nguồn không? | Phòng Mua hàng | AS-36, US-19, US-20 |
-| OQ-33 | BOD đã duyệt YCMH thì đơn mua hàng sau khi chọn giá còn cần duyệt nữa không? | Ban giám đốc | AS-37 |
+| OQ-33 | **Đã trả lời (khao-sat-lan-3-yeu-cau-bao-gia.md):** đơn mua hàng vẫn duyệt sau khi chọn NCC và tạo ĐNTT; duyệt xong chuyển PO. Người duyệt: AS-39 | Ban giám đốc | AS-37 |
 | OQ-34 | Gửi duyệt đơn chỉ cần tạo / gửi ĐNTT, hay phải chờ Kế toán duyệt ĐNTT? | Kế toán / Mua hàng | AS-40 |
 | OQ-35 | ĐNTT bị Kế toán từ chối thì đơn mua hàng xử lý thế nào? | Kế toán | AS-41 |
 | OQ-36 | Mẫu "Mã phòng ban-PO-XXXX-DD-MM-YYYY": XXXX và ngày lấy từ YCMH hay đếm riêng? 1 YCMH sinh nhiều RFQ thì phân biệt thế nào? PO dịch vụ đánh số ra sao? Mẫu này khác mẫu số YCMH "Mã BP_XXXX_DD_MM_YY" — có thống nhất không? | Kế toán / Mua hàng | AS-42, AS-28 |
