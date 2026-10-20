@@ -13,7 +13,7 @@
 | Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
 |---|---|---|---|---|
 | 0.1 | 2026-10-20 | Bản đầu tiên | inputs/odoo-mua-hang/khao-sat-lan-1.md | Toàn bộ |
-| 0.2 | 2026-10-20 | Khảo sát lần 2 — phiếu Yêu cầu mua hàng: phân loại vật tư Nhập kho / Dịch vụ; 3 cách tạo YCMH (trực tiếp, từ Hợp đồng, từ Báo giá NCC); số phiếu `Mã BP_XXXX_DD_MM_YY`; đầu phiếu và dòng mới (kho nhận theo dòng); duyệt 3 cấp Trưởng nhóm → MH → BOD; tự điền NCC và giá theo Hợp đồng → Price List; chặn trùng vật tư + NCC; mua dịch vụ bằng RFQ trực tiếp | inputs/odoo-mua-hang/khao-sat-lan-2-yeu-cau-mua-hang.md; inputs/odoo-mua-hang/_changes/20261020-074707.md | Sửa FR-01, FR-02, FR-03, FR-05, FR-13, FR-16, FR-17, NFR-02, SCR-01, SCR-02, SCR-03, SCR-04; thêm FR-19 → FR-25, SCR-11, SCR-12, AS-26 → AS-37, OQ-22 → OQ-33; OQ-04 đã trả lời |
+| 0.2 | 2026-10-20 | Khảo sát lần 2 — phiếu Yêu cầu mua hàng: phân loại vật tư Nhập kho / Dịch vụ; 3 cách tạo YCMH (trực tiếp, từ Hợp đồng, từ Báo giá NCC); số phiếu `Mã BP_XXXX_DD_MM_YY`; đầu phiếu và dòng mới (kho nhận theo dòng); duyệt 3 cấp Trưởng nhóm → MH → BOD; tự điền NCC và giá theo Hợp đồng → Price List; chặn trùng vật tư + NCC; mua dịch vụ bằng RFQ trực tiếp | inputs/odoo-mua-hang/khao-sat-lan-2-yeu-cau-mua-hang.md; inputs/odoo-mua-hang/_changes/20261020-074707.md | Sửa FR-01, FR-02, FR-03, FR-05, FR-13, FR-16, FR-17, NFR-02, SCR-01, SCR-02, SCR-03, SCR-04; thêm FR-19 → FR-25, SCR-11, SCR-12, AS-26 → AS-38, OQ-22 → OQ-33; OQ-04 đã trả lời; SCR-05 chỉ cập nhật nền (số phiếu, cột Nhập kho) |
 
 ## 1. Giới thiệu
 
@@ -93,7 +93,7 @@ flowchart LR
 | Quản trị hệ thống | Backend — Settings | Cấu hình người duyệt, ngưỡng, mẫu email |
 
 ### 2.3 Giả định & phụ thuộc
-- **Giả định:** xem mục 9.1 (AS-01 … AS-37).
+- **Giả định:** xem mục 9.1 (AS-01 … AS-38).
 - **Phụ thuộc:**
   - Odoo 17 Enterprise với các module `purchase`, `purchase_requisition` (Alternatives), `approvals`, `approval_purchase`, `stock`, `account_accountant` (AS-01).
   - Module tuỳ biến mới `purchase_flow_custom` (tên đề xuất) chứa toàn bộ thay đổi; không sửa mã nguồn lõi.
@@ -429,7 +429,7 @@ flowchart LR
   - BR-20.1: Chỉ vật tư Nhập kho (BR-19.1).
   - BR-20.2: Hiệu lực đến > Hiệu lực từ.
   - BR-20.3: Còn hiệu lực = trạng thái "Đang hiệu lực" và ngày hiện tại nằm trong [Hiệu lực từ, Hiệu lực đến] (AS-30).
-  - BR-20.4: Tác vụ chạy hằng ngày 00:05 chuyển hợp đồng quá "Hiệu lực đến" sang "Hết hiệu lực".
+  - BR-20.4: Tác vụ chạy hằng ngày 00:05 (AS-38) chuyển hợp đồng quá "Hiệu lực đến" sang "Hết hiệu lực".
   - BR-20.5: Không kiểm tra số lượng hợp đồng còn lại khi tạo YCMH hoặc tra giá (AS-30, OQ-26).
 - **Acceptance criteria:**
   1. **Given** hợp đồng Nháp đủ thông tin, có 1 dòng đơn giá > 0 **When** bấm "Xác nhận" **Then** hợp đồng chuyển "Đang hiệu lực".
@@ -447,7 +447,7 @@ flowchart LR
   - BR-21.1: Chỉ vật tư Nhập kho (BR-19.1).
   - BR-21.2: Hiệu lực đến ≥ Ngày báo giá.
   - BR-21.3: Báo giá NCC không tham gia tự tra giá FR-24 (AS-33).
-  - BR-21.4: Tác vụ hằng ngày 00:05 chuyển báo giá quá "Hiệu lực đến" sang "Hết hiệu lực".
+  - BR-21.4: Tác vụ hằng ngày 00:05 (AS-38) chuyển báo giá quá "Hiệu lực đến" sang "Hết hiệu lực".
 - **Acceptance criteria:**
   1. **Given** báo giá Nháp đủ thông tin, có tệp báo giá **When** bấm "Xác nhận" **Then** báo giá chuyển "Còn hiệu lực".
   2. **Given** báo giá chưa đính kèm tệp **When** bấm "Xác nhận" **Then** hiện lỗi "Vui lòng đính kèm file báo giá của NCC".
@@ -838,6 +838,7 @@ flowchart TD
 | AS-35 | Đầu phiếu giữ "Ngày cần hàng" (không bắt buộc, làm ngày dự kiến trên RFQ); "Lý do mua" bỏ, thay bằng "Ghi chú" (không bắt buộc) | Khảo sát lần 2 không nhắc 2 trường này | FR-01 |
 | AS-36 | Tạo YCMH từ Hợp đồng / Báo giá NCC: chép mọi dòng, số lượng để trống cho người tạo nhập, dòng không cần thì xoá; NCC và đơn giá khoá theo chứng từ nguồn; được thêm dòng vật tư khác (tự tra giá) | Input chưa mô tả chi tiết | FR-22, FR-23 |
 | AS-37 | Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng sau chọn giá (AS-08) cho tới khi khảo sát phiếu tiếp theo | Khảo sát lần 2 mới đi chi tiết phiếu YCMH | FR-09, FR-10 |
+| AS-38 | Tác vụ chuyển Hợp đồng / Báo giá NCC sang "Hết hiệu lực" chạy hằng ngày lúc 00:05 | Ngoài giờ làm việc, trước khi người dùng tra giá | FR-20, FR-21 |
 
 ### 9.2 Câu hỏi mở
 | Mã | Câu hỏi | Người cần trả lời | Ảnh hưởng tới |
