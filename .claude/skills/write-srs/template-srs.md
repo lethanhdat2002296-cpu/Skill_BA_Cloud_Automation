@@ -50,7 +50,9 @@ flowchart LR
 
 ## 3. Yêu cầu chức năng
 
-### FR-01 — {{Tên chức năng}}
+### 3.1 {{Phân hệ — mỗi phân hệ một file srs/03-NN-<phan-he>.md}}
+
+#### FR-01 — {{Tên chức năng}}
 - **Mô tả:** {{…}}
 - **Vai trò:** {{…}}
 - **Truy vết:** {{US-01, US-02}} · Màn hình: {{SCR-01 | Không có UI}}
@@ -62,7 +64,7 @@ flowchart LR
   1. **Given** {{…}} **When** {{…}} **Then** {{…}}.
 - **Độ ưu tiên:** {{Must | Should | Could}}
 
-### FR-02 — {{…}}
+#### FR-02 — {{…}}
 …
 
 ## 4. Yêu cầu phi chức năng
@@ -115,9 +117,7 @@ flowchart TD
 
 ## 8. Ma trận truy vết
 
-| FR | Tên | URD (US) | Màn hình (SCR) |
-|---|---|---|---|
-| FR-01 | {{…}} | {{US-01}} | {{SCR-01 | Không có UI}} |
+> Không viết tay — `build_srs.py` sinh từ dòng "Truy vết" của từng FR.
 
 ## 9. Assumptions & Open Questions
 

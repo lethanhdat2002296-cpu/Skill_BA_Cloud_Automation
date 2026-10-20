@@ -57,6 +57,7 @@ Quy tắc: **không thêm thông tin không có trong text**, không bỏ sót s
 ```bash
 python .claude/skills/ba-intake/scripts/intake.py <du-an> --file .intake/<chu-de>.md --file "<duong-dan-file-dinh-kem>" --url "<link>" --note "<mô tả 1 dòng>"
 ```
+Dự án **đã có** `inputs/<du-an>/` → thêm `--no-push`: push một lần duy nhất ở Bước 5 sau khi đã điền nhận định (bớt một vòng push).
 
 Script tự làm:
 - Chuyển sang branch `docs/<du-an>` (tạo từ `main` nếu chưa có; cloud không cho đổi branch → ở lại branch hiện tại).
@@ -75,7 +76,12 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
 
 ## Bước 5 — Dự án đã có tài liệu (`is_update = true`): mô tả khác biệt
 
-1. Đọc `change_report`, các file mới/phiên bản mới, và tài liệu cũ liên quan: `inputs/<du-an>/_tong-hop.md` (nếu có), các file cũ cùng chủ đề, `outputs/<du-an>/SRS.md` (nếu có — để biết ảnh hưởng FR/SCR).
+1. Đọc `change_report`, các file mới/phiên bản mới, và `inputs/<du-an>/_tong-hop.md` (nếu có). **Không đọc cả SRS** — để biết ảnh hưởng FR/SCR dùng:
+   ```bash
+   python .claude/skills/write-srs/scripts/build_srs.py <du-an> --index    # mã -> file, FR -> SCR
+   grep -rn "<từ khoá>" outputs/<du-an>/srs/ inputs/<du-an>/*.md          # tìm thông tin cũ liên quan
+   ```
+   Chỉ mở (Read có offset/limit) đúng đoạn cần so.
 2. So sánh **theo nghĩa**, không chỉ theo dòng: file mới hoàn toàn (không phải `__v2`) cũng phải so với thông tin cũ trong các file khác.
 3. Điền mục **"Nhận định của BA"** trong `change_report`:
 
@@ -84,14 +90,16 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
    | 1 | Hạn đổi trả khách VIP | 15 ngày (email-bo-sung-cskh.md) | 30 ngày (email-bo-sung-cskh__v2.md) | Sửa | FR-01, SCR-01 |
 
    Loại: **Thêm** (thông tin chưa từng có) · **Sửa** (giá trị khác) · **Bỏ** (bản mới không còn nhắc / nói rõ huỷ) · **Mâu thuẫn** (hai nguồn còn hiệu lực nói khác nhau, chưa rõ cái nào đúng). Ảnh hưởng: FR/NFR/SCR/AS/OQ trong SRS, hoặc "—" nếu chưa có SRS.
-4. Commit + push: `git add inputs/<du-an> && git commit -m "input(<du-an>): mô tả khác biệt <thoi-diem>" && git push`.
-5. Trình bày bảng khác biệt trong chat (ngắn gọn, đủ ý), rồi **hỏi người làm** bằng AskUserQuestion:
-   - Câu hỏi: "Xử lý khác biệt giữa thông tin cũ và mới thế nào?"
-   - `Merge thành bản tổng hợp (Recommended)` — gộp vào `_tong-hop.md`, thông tin mới thay thông tin cũ, mâu thuẫn chuyển thành câu hỏi mở.
-   - `Giữ cả hai, chưa merge` — chỉ lưu, SRS sau này coi bản mới là ưu tiên và ghi mâu thuẫn thành OQ.
-   - `Tôi mô tả lại khác biệt` — user tự giải thích (ô "Other"); ghi nguyên văn câu trả lời vào mục "Quyết định" rồi merge theo đó.
-
-   Nếu có dòng **Mâu thuẫn**, hỏi thêm một câu cho từng mâu thuẫn quan trọng (tối đa 3): "Giá trị nào đúng: A (nguồn) hay B (nguồn)?".
+4. Commit + push **một lần** (gồm cả file vừa nạp): `git add inputs/<du-an> && git commit -m "input(<du-an>): mô tả khác biệt <thoi-diem>" && git push -u origin HEAD`.
+5. Trình bày bảng khác biệt trong chat (ngắn gọn, đủ ý), rồi **hỏi người làm** bằng **một** lần gọi AskUserQuestion (gộp tất cả câu hỏi vào cùng một lần gọi, tối đa 4 câu):
+   - Câu 1: "Xử lý khác biệt giữa thông tin cũ và mới thế nào?"
+     - Dự án **đã có SRS**:
+       - `Merge + cập nhật SRS ngay (Recommended)` — gộp vào `_tong-hop.md`, rồi chạy `srs-update` luôn trong lượt này.
+       - `Merge, chưa cập nhật SRS` — chỉ gộp `_tong-hop.md`.
+       - `Giữ cả hai, chưa merge` — chỉ lưu; lần cập nhật SRS sau coi bản mới là ưu tiên, mâu thuẫn thành OQ.
+     - Dự án **chưa có SRS**: `Merge thành bản tổng hợp (Recommended)` / `Giữ cả hai, chưa merge`.
+     - User tự mô tả khác biệt qua ô "Other" → ghi nguyên văn vào mục "Quyết định", xử lý theo đó.
+   - Câu 2–4 (chỉ khi có dòng **Mâu thuẫn**, tối đa 3 mâu thuẫn quan trọng nhất): "<Mục>: giá trị nào đúng?" với lựa chọn `A — <giá trị> (<nguồn>)` / `B — <giá trị> (<nguồn>)`.
 
 **Chế độ tự động** (skill được gọi từ `srs-pipeline`, hoặc user nói "không cần hỏi"): **không hỏi** — chọn Merge, mâu thuẫn ghi thành `OQ-xx`, ghi "Quyết định: tự động merge (pipeline)" vào change report.
 
@@ -113,7 +121,8 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
   ```
   Thông tin bị thay thế **không xoá** — chuyển xuống "Lịch sử thay đổi". File gốc cũ/mới trong `inputs/` giữ nguyên.
 - **Giữ cả hai:** chỉ ghi quyết định vào change report.
-- Ghi mục **"Quyết định"** trong change report, commit + push: `input(<du-an>): merge <thoi-diem>`.
+- Ghi mục **"Quyết định"** trong change report, commit: `input(<du-an>): quyết định <thoi-diem>`.
+- **Merge + cập nhật SRS ngay** → không push ở đây; làm tiếp theo `.claude/skills/srs-update/SKILL.md` ngay trong lượt này (skill đó commit + push một lần ở cuối). Các lựa chọn khác → `git push` rồi báo cáo.
 
 ## Bước 7 — Báo cáo
 
@@ -124,8 +133,9 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
 - Khác biệt: <n> thêm, <n> sửa, <n> bỏ, <n> mâu thuẫn → <quyết định>
 - Ảnh hưởng tới SRS: FR-…, SCR-… (nếu đã có SRS)
 
-Bước tiếp: "Cập nhật SRS cho dự án <du-an>" để chạy lại srs-pipeline ở chế độ cập nhật.
+Bước tiếp: "Cập nhật SRS cho dự án <du-an>" (srs-update, vài phút) — hoặc "Xuất bản tài liệu dự án <du-an>" khi cần gửi khách.
 ```
+Nếu đã chạy `srs-update` trong lượt này → gộp báo cáo của hai skill thành một.
 
 ## Nguyên tắc
 - Không bao giờ ghi đè hay xoá file trong `inputs/` — mọi thay đổi là file mới hoặc phiên bản mới; git giữ lịch sử.
