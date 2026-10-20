@@ -58,12 +58,18 @@ def fr_blocks(text: str) -> list[dict]:
         trace = re.search(r"Truy vết:?\**:?\s*(.*)$", body, re.M)
         line = trace.group(1) if trace else ""
         us_part, _, scr_part = line.partition("Màn hình")
-        scrs = re.findall(r"SCR-\d+", scr_part)
-        no_ui = NO_UI_RE.search(scr_part)
+        scr_part = scr_part.lstrip(" :*")
+        no_ui = ""
+        if NO_UI_RE.match(scr_part):
+            # "Không có UI (kết quả hiển thị ở SCR-02)" vẫn là không có UI; SCR trong ngoặc chỉ là ghi chú
+            scrs = []
+            no_ui = "Không có UI (đã bỏ)" if re.search(r"đã\s+bỏ", scr_part, re.I) else "Không có UI"
+        else:
+            scrs = re.findall(r"SCR-\d+", scr_part)
         blocks.append({
             "id": m.group(1), "title": m.group(2).strip(),
             "us": re.findall(r"US-\d+", us_part),
-            "scr": scrs, "no_ui": ("Không có UI" if no_ui and not scrs else ""),
+            "scr": scrs, "no_ui": no_ui,
             "has_trace": bool(trace),
         })
     return blocks

@@ -12,7 +12,7 @@ Cách dùng:
     --source ghi vào manifest (mặc định: chat nếu file từ .intake/, attachment nếu file khác, url nếu --url).
     --note   ghi chú một dòng vào manifest (vd. "Email bổ sung của chị Hạnh").
     --no-push   chỉ commit, không push.
-    --no-branch không tự chuyển sang branch docs/<du-an>.
+    --no-branch không tự chuyển sang branch docs/<du-an>; vẫn commit (và push) trên branch hiện tại.
 
 Quy tắc giữ thông tin cũ:
   - Không bao giờ ghi đè. Trùng tên + khác nội dung -> lưu thành <ten>__v2.<ext>, __v3...
@@ -228,7 +228,14 @@ def main(argv: list[str]) -> int:
 
     du_an = slugify(args.du_an) if args.du_an != "_example" else "_example"
     warnings: list[str] = []
-    branch = "" if args.no_branch else ensure_branch(du_an, warnings)
+    if args.no_branch:
+        # ở lại branch hiện tại (cloud chỉ cho dùng branch của session) nhưng vẫn commit
+        code, cur = git("rev-parse", "--abbrev-ref", "HEAD")
+        branch = cur if code == 0 and cur != "HEAD" else ""
+        if not branch:
+            warnings.append("không xác định được branch hiện tại — bỏ qua commit/push")
+    else:
+        branch = ensure_branch(du_an, warnings)
 
     dest = REPO / "inputs" / du_an
     dest.mkdir(parents=True, exist_ok=True)
