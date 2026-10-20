@@ -18,6 +18,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_srs import build, needs_build  # noqa: E402
 
 SECTION_TITLES = {
     1: "Giới thiệu", 2: "Mô tả tổng quan", 3: "Yêu cầu chức năng", 4: "Yêu cầu phi chức năng",
@@ -66,6 +68,8 @@ def main(argv: list[str]) -> int:
         return 2
     du_an = args[0].strip("/\\")
     project = REPO / "outputs" / du_an
+    if needs_build(project):
+        build(project)
     srs_path = project / "SRS.md"
     if not srs_path.exists():
         print(f"ERROR: không có {srs_path.relative_to(REPO)}")
@@ -93,20 +97,20 @@ def main(argv: list[str]) -> int:
 
     # B. FR
     fr_blocks = {}
-    fr_ids = re.findall(r"^### +(FR-\d+)\b", text, flags=re.M)
+    fr_ids = re.findall(r"^#{3,4} +(FR-\d+)\b", text, flags=re.M)
     for k, c in Counter(fr_ids).items():
         if c > 1:
             errors.append(f"mã trùng: {k} xuất hiện {c} lần")
-    for m in re.finditer(r"^### +(FR-\d+)\b.*?(?=^#{2,3} |\Z)", text, flags=re.M | re.S):
+    for m in re.finditer(r"^#{3,4} +(FR-\d+)\b.*?(?=^#{2,4} |\Z)", text, flags=re.M | re.S):
         fr_blocks[m.group(1)] = m.group(0)
     for fr, block in fr_blocks.items():
         idx = block.lower().find("acceptance criteria")
         if idx < 0 or not re.search(r"^\s*(?:\d+\.|[-*])\s+\S", block[idx:], flags=re.M):
             errors.append(f"{fr}: thiếu Acceptance criteria (ít nhất 1 tiêu chí)")
     if not fr_ids:
-        errors.append("không có FR nào (heading phải dạng '### FR-01 — Tên')")
+        errors.append("không có FR nào (heading phải dạng '#### FR-01 — Tên' trong srs/03-*.md)")
 
-    nfr_ids = re.findall(r"^### +(NFR-\d+)\b", text, flags=re.M)
+    nfr_ids = re.findall(r"^#{3,4} +(NFR-\d+)\b", text, flags=re.M)
     for k, c in Counter(nfr_ids).items():
         if c > 1:
             errors.append(f"mã trùng: {k} xuất hiện {c} lần")

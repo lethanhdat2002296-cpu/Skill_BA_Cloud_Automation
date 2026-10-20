@@ -1,6 +1,6 @@
 ---
 name: srs-pipeline
-description: Chạy trọn gói chuỗi tài liệu BA cho một dự án — từ tài liệu khảo sát (dán/đính kèm ngay trong chat hoặc có sẵn trong inputs/<du-an>/) ra brainstorm, URD, SRS, wireframe UI, ảnh PNG và SRS.docx, rồi commit + mở PR; dự án đã có SRS thì chạy chế độ cập nhật (tăng phiên bản, giữ lịch sử). Dùng khi user nói "làm SRS cho dự án X", "làm tài liệu cho X", "cập nhật SRS cho X", "làm URD/SRS/wireframe trọn gói", "chạy pipeline tài liệu", kể cả khi kèm text/file trong cùng tin nhắn. Keywords - SRS pipeline, end-to-end BA documentation, requirements document, URD, software requirements specification, wireframe, docx export, Magento, Odoo. Chạy tự động hoàn toàn, không hỏi lại user; thiếu thông tin thì ghi Assumptions & Open Questions.
+description: Tạo mới trọn gói bộ tài liệu BA (phiên bản 0.1) cho một dự án CHƯA có SRS — từ tài liệu khảo sát (dán/đính kèm ngay trong chat hoặc có sẵn trong inputs/<du-an>/) ra brainstorm, URD, SRS (tách theo phân hệ trong srs/), wireframe UI, ảnh PNG và SRS.docx, rồi commit + mở PR. Dự án đã có SRS thì chuyển sang srs-update (cập nhật nhanh) hoặc srs-publish (xuất bản). Dùng khi user nói "làm SRS cho dự án X", "làm tài liệu cho X", "làm URD/SRS/wireframe trọn gói", "chạy pipeline tài liệu", kể cả khi kèm text/file trong cùng tin nhắn. Keywords - SRS pipeline, end-to-end BA documentation, requirements document, URD, software requirements specification, wireframe, docx export, Magento, Odoo. Chạy tự động hoàn toàn, không hỏi lại user; thiếu thông tin thì ghi Assumptions & Open Questions.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *), Bash(pandoc *), Bash(npx mmdc *), Bash(mmdc *), Bash(git *), Bash(gh pr *)
 disallowed-tools: AskUserQuestion
 ---
@@ -15,7 +15,7 @@ Bạn là BA lead chạy toàn bộ chuỗi **không có người can thiệp**.
 2. **Tin nhắn có kèm tài liệu** (text dán vào, file đính kèm, ảnh, link) → làm theo `.claude/skills/ba-intake/SKILL.md` ở **chế độ tự động** (không hỏi; khác biệt được tự merge, mâu thuẫn thành OQ) trước khi đi tiếp. Script của skill đó đã chuyển sang branch `docs/<du-an>` và push.
 3. Nếu user không nêu tên và không kèm tài liệu: chọn thư mục trong `inputs/` (bỏ qua `_example`) có thời điểm sửa mới nhất mà **chưa có** `outputs/<du-an>/SRS.md`. Nếu không có thư mục nào khác thì dùng `_example`. Ghi lựa chọn vào báo cáo cuối.
 4. Không tìm thấy `inputs/<du-an>/` → tìm thư mục gần đúng tên (không phân biệt hoa thường, bỏ dấu). Vẫn không có → báo lỗi ngắn gọn, gợi ý "dán hoặc đính kèm tài liệu vào chat", rồi dừng (đây là trường hợp duy nhất được dừng).
-5. **Chế độ:** `outputs/<du-an>/SRS.md` đã tồn tại → **chế độ cập nhật** (xem mục "Chế độ cập nhật" cuối file). Ngược lại → tạo mới.
+5. **Dự án đã có `outputs/<du-an>/SRS.md`** → KHÔNG chạy lại pipeline. Chuyển sang `.claude/skills/srs-update/SKILL.md` (cập nhật nhanh); nếu user nói thêm "xuất docx / gửi khách / xuất bản" thì sau đó chạy `.claude/skills/srs-publish/SKILL.md`. Kết thúc skill này.
 6. Lệnh Python: dùng `python3` nếu có, không thì `python`. Bên dưới viết `python`.
 
 ## Bước 1 — Git
@@ -48,7 +48,7 @@ Với mỗi bước: đọc `.claude/skills/<skill>/SKILL.md` của **repo này*
 |---|---|---|---|
 | 1 | `brainstorm` | `brainstorm.md` | `docs(<du-an>): brainstorm` |
 | 2 | `write-urd` | `URD.md` | `docs(<du-an>): URD` |
-| 3 | `write-srs` | `SRS.md` | `docs(<du-an>): SRS draft` |
+| 3 | `write-srs` | `srs/*.md` (tách phân hệ) → `SRS.md` | `docs(<du-an>): SRS draft` |
 | 4 | `ui-spec` | `ui/flows.md` | `docs(<du-an>): UI spec & flows` |
 | 5 | `wireframe` | `ui/screens/*.html`, `ui/index.html` | `docs(<du-an>): wireframes` |
 | 6 | `render-screens` | `ui/png/*.png`, `ui/diagrams/*.png` | `docs(<du-an>): render screens` |
@@ -59,7 +59,7 @@ git add outputs/<du-an>
 git commit -m "docs(<du-an>): <bước>"
 ```
 
-Nếu một bước phát hiện lỗi ở bước trước (vd. wireframe thấy SCR thiếu trường trong Screen Inventory) → **sửa ngược lại file nguồn** (SRS.md), không để hai tài liệu lệch nhau.
+Nếu một bước phát hiện lỗi ở bước trước (vd. wireframe thấy SCR thiếu trường trong Screen Inventory) → **sửa ngược lại file nguồn** (`srs/*.md`, rồi chạy `build_srs.py`), không để hai tài liệu lệch nhau.
 
 ## Bước 4 — Xuất Word
 
@@ -79,7 +79,7 @@ Script tự render Mermaid trong SRS.md, nhúng ảnh `ui/png/*.png`, dùng `tem
    `--final`: thiếu ảnh/HTML/docx tính là `ERROR`. Nếu PNG/docx không tạo được do thiếu công cụ (đã ghi báo cáo) thì các lỗi đó được chấp nhận, mọi lỗi khác phải sửa.
 2. Đọc `.claude/skills/write-srs/checklist.md`, đi từng mục, sửa mọi lỗi tìm thấy (SRS, URD, wireframe).
 3. Lặp lại bước 1–2 tới khi `check_srs.py` không còn `ERROR` (tối đa 3 vòng; còn lỗi thì ghi vào báo cáo).
-4. Nếu đã sửa SRS.md hoặc HTML → chạy lại `render-screens` (chỉ màn bị sửa) và `to_docx.py`.
+4. Nếu đã sửa `srs/*.md` hoặc HTML → chạy lại `render-screens` (chỉ màn bị sửa) và `to_docx.py`.
 5. Commit: `docs(<du-an>): self-review fixes` + `docs(<du-an>): export SRS.docx`.
 
 ## Bước 6 — Push + PR
@@ -113,20 +113,15 @@ gh pr create --base main --title "docs(<du-an>): URD + SRS + wireframe" --body-f
 - … (công cụ thiếu, bước bị bỏ qua, lỗi còn tồn tại)
 ```
 
-Danh sách Open Questions lấy nguyên từ mục 9 của SRS.md. Không bỏ sót mục nào.
+Danh sách Open Questions lấy nguyên từ `srs/09-gia-dinh-cau-hoi.md`. Không bỏ sót mục nào.
 
-## Chế độ cập nhật (dự án đã có SRS)
+## Sau phiên bản 0.1
 
-Mục tiêu: thêm thông tin mới mà **không làm mất thông tin cũ** và không làm đổi mã đã phát hành.
+Mọi thông tin mới (khảo sát, demo, khách trả lời câu hỏi) đi theo 2 nhịp, **không chạy lại pipeline này**:
+- **Cập nhật nhanh** (`srs-update`, vài phút): sửa đúng file phân hệ bị ảnh hưởng, 0.1 → 0.1.1, đánh dấu màn cần vẽ lại.
+- **Xuất bản** (`srs-publish`, khi gửi khách): vẽ lại màn đang chờ, xuất docx, 0.1.x → 0.2, PR.
 
-1. Xác định thay đổi: các `_changes/*.md` mới hơn phiên bản SRS hiện tại (so ngày trong bảng "Lịch sử phiên bản" của SRS với `_manifest.md`).
-2. Sửa **tại chỗ** brainstorm, URD, SRS — không viết lại từ đầu:
-   - Mã giữ nguyên. Yêu cầu mới → mã tiếp theo (FR-18…). Yêu cầu bị bỏ → giữ heading, thêm `**[Đã bỏ — v0.2]**` vào tên và lý do; trong ma trận truy vết ghi `Không có UI (đã bỏ)` nếu màn hình cũng bỏ.
-   - Giá trị thay đổi → sửa giá trị, ghi nguồn mới; OQ đã được trả lời → chuyển trạng thái "Đã trả lời: …" thay vì xoá.
-3. Tăng phiên bản (0.1 → 0.2…) ở bảng thuộc tính của URD và SRS, thêm dòng vào bảng **"Lịch sử phiên bản"** của SRS: phiên bản, ngày, tóm tắt thay đổi, nguồn (`_changes/<thoi-diem>.md`), FR/SCR bị ảnh hưởng.
-4. Chỉ vẽ lại / chụp lại màn bị ảnh hưởng (`shot.py --only SCR-xx`). Màn mới → file mới.
-5. Commit: `docs(<du-an>): update v0.2 — <tóm tắt>`. Báo cáo cuối thêm mục **"Thay đổi so với phiên bản trước"** (bảng mục / cũ / mới / FR-SCR).
-6. Bản cũ vẫn xem được qua git history và PR diff — không tạo bản sao file.
+`brainstorm.md` chỉ viết một lần ở đây; các lần sau không cập nhật (kiến thức hiện hành nằm ở `inputs/<du-an>/_tong-hop.md` và `srs/`).
 
 ## Nguyên tắc xuyên suốt
 - Không hỏi user. Không chờ xác nhận giữa các bước.

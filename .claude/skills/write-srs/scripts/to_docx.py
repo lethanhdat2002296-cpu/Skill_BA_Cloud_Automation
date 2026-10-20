@@ -31,6 +31,8 @@ REPO = Path(__file__).resolve().parents[4]
 REFERENCE_DOCX = REPO / "templates" / "reference.docx"
 sys.path.insert(0, str(REPO / ".claude" / "skills" / "render-screens" / "scripts"))
 from render_mermaid import render_markdown  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_srs import build, needs_build  # noqa: E402
 
 IMG_RE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)(\{[^}]*\})?')
 SCR_PNG_RE = re.compile(r"^ui/png/(SCR-\d{2,}-[a-z0-9-]+)\.png$")
@@ -116,6 +118,8 @@ def main(argv: list[str]) -> int:
         return 2
     du_an = argv[1].strip("/\\")
     project = REPO / "outputs" / du_an
+    if needs_build(project):
+        build(project)
     srs = project / "SRS.md"
     if not srs.exists():
         print(f"ERROR: không có {srs.relative_to(REPO)}")
