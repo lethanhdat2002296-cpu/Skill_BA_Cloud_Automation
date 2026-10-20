@@ -3,7 +3,7 @@
 | Thuộc tính | Giá trị |
 |---|---|
 | Mã dự án | odoo-mua-hang |
-| Phiên bản | 0.2 (cập nhật theo khảo sát lần 2 — Yêu cầu mua hàng) |
+| Phiên bản | 0.3 (cập nhật theo trả lời câu hỏi mở lần 1 và khảo sát lần 3 — Yêu cầu báo giá) |
 | Ngày | 2026-10-20 |
 | Tài liệu liên quan | URD.md, brainstorm.md, ui/flows.md |
 | Trạng thái | Chờ review |
@@ -14,6 +14,7 @@
 |---|---|---|---|---|
 | 0.1 | 2026-10-20 | Bản đầu tiên | inputs/odoo-mua-hang/khao-sat-lan-1.md | Toàn bộ |
 | 0.2 | 2026-10-20 | Khảo sát lần 2 — phiếu Yêu cầu mua hàng: phân loại vật tư Nhập kho / Dịch vụ; 3 cách tạo YCMH (trực tiếp, từ Hợp đồng, từ Báo giá NCC); số phiếu `Mã BP_XXXX_DD_MM_YY`; đầu phiếu và dòng mới (kho nhận theo dòng); duyệt 3 cấp Trưởng nhóm → MH → BOD; tự điền NCC và giá theo Hợp đồng → Price List; chặn trùng vật tư + NCC; mua dịch vụ bằng RFQ trực tiếp | inputs/odoo-mua-hang/khao-sat-lan-2-yeu-cau-mua-hang.md; inputs/odoo-mua-hang/_changes/20261020-074707.md | Sửa FR-01, FR-02, FR-03, FR-05, FR-13, FR-16, FR-17, NFR-02, SCR-01, SCR-02, SCR-03, SCR-04; thêm FR-19 → FR-25, SCR-11, SCR-12, AS-26 → AS-38, OQ-22 → OQ-33; OQ-04 đã trả lời; SCR-05 chỉ cập nhật nền (số phiếu, cột Nhập kho) |
+| 0.3 | 2026-10-20 | Trả lời câu hỏi mở lần 1: Odoo 17 Odoo.sh/on-premise; không gộp YCMH; đơn mua không ngưỡng; YCMH bị từ chối về Nháp + email. Khảo sát lần 3 — Yêu cầu báo giá: Dịch vụ tạo thẳng PO; ĐNTT bắt buộc trước khi duyệt; bỏ Waiting PO, duyệt xong → PO + tự tạo DO; RFQ kế thừa YCMH, thêm ngày dự kiến / thực tế nhận hàng, mã truy vết YCMH; "Send email" gửi riêng từng NCC; tự đọc Excel báo giá từ email reply; so sánh và chọn 1 NCC cho cả phiếu (bỏ RFQ thay thế); quy trình vẽ lại bằng Activity – Swimlane | inputs/odoo-mua-hang/tra-loi-cau-hoi-mo-lan-1.md; inputs/odoo-mua-hang/khao-sat-lan-3-yeu-cau-bao-gia.md; inputs/odoo-mua-hang/_changes/20261020-084051.md; inputs/odoo-mua-hang/_changes/20261020-093008.md | Sửa FR-03, FR-05, FR-06, FR-08 → FR-13, FR-15 → FR-18, FR-21, FR-25, NFR-08, SCR-02 → SCR-10, SCR-12, mục 7; bỏ FR-07; thêm FR-26, FR-27, NFR-10, AS-39 → AS-47, OQ-34 → OQ-39; OQ-01, OQ-06, OQ-11, OQ-16 đã trả lời |
 
 ## 1. Giới thiệu
 
@@ -26,12 +27,13 @@ Tài liệu đặc tả yêu cầu phần mềm cho quy trình mua hàng trên O
   - Phân loại vật tư Nhập kho / Dịch vụ; vật tư Dịch vụ mua bằng RFQ tạo trực tiếp, không qua YCMH, không có phiếu DO. *(v0.2)*
   - Danh mục Hợp đồng mua hàng và danh mục Báo giá NCC; tự điền NCC và đơn giá theo Hợp đồng → Price List. *(v0.2)*
   - Tự tạo RFQ gộp theo vendor khi yêu cầu được duyệt xong.
-  - Gửi email RFQ; RFQ thay thế cho vendor khác; so sánh và chọn giá theo dòng.
-  - Gửi duyệt và duyệt đơn mua hàng theo ngưỡng giá trị.
-  - Đề nghị thanh toán (chứng từ mới), Kế toán duyệt và ghi nhận thanh toán.
-  - Trạng thái mới `Đã duyệt`, `Waiting PO`; nút "Xác nhận đã nhận hàng" chuyển `PO` và tạo phiếu DO.
+  - Gửi email RFQ riêng tới N NCC từ một lần soạn ("Send email"); tự lưu email NCC trả lời và đọc file Excel báo giá; so sánh giá và chọn 1 NCC cho cả phiếu. *(v0.3 — bỏ RFQ thay thế)*
+  - Gửi duyệt và duyệt đơn mua hàng 1 cấp, không ngưỡng giá trị. *(v0.3)*
+  - Đề nghị thanh toán (chứng từ mới) bắt buộc tạo trước khi gửi duyệt đơn; Kế toán duyệt và ghi nhận thanh toán. *(v0.3)*
+  - Đơn duyệt xong chuyển `PO` và tự tạo phiếu DO theo kho nhận (vật tư Nhập kho); đơn Dịch vụ không tạo DO. *(v0.3 — bỏ trạng thái `Đã duyệt`, `Waiting PO` và nút "Xác nhận đã nhận hàng")*
+  - RFQ/PO đánh số theo mẫu `Mã phòng ban-PO-XXXX-DD-MM-YYYY`, ghi mã Yêu cầu mua hàng gốc và lưu ngầm mã để truy vấn. *(v0.3)*
   - Nhập kho theo phiếu DO, nhận thiếu tạo backorder.
-  - Cấu hình người duyệt và ngưỡng.
+  - Cấu hình người duyệt, mẫu email, mẫu Excel báo giá, hộp thư nhận báo giá. *(v0.3 — bỏ ngưỡng)*
 - **Ngoài phạm vi:** hoá đơn nhà cung cấp và đối chiếu 3 bên (AS-15); kiểm soát ngân sách; cổng vendor (AS-16); đa tiền tệ (AS-17); báo cáo phân tích mua hàng.
 
 ### 1.3 Thuật ngữ
@@ -39,12 +41,12 @@ Tài liệu đặc tả yêu cầu phần mềm cho quy trình mua hàng trên O
 |---|---|
 | Yêu cầu mua hàng (YCMH) | Phiếu đề xuất mua do Người đề xuất tạo, model `approval.request` loại Purchases |
 | RFQ | Request for Quotation — Yêu cầu báo giá gửi vendor, model `purchase.order` ở trạng thái Nháp / RFQ |
-| RFQ thay thế | RFQ cho vendor khác cùng nhu cầu, liên kết trong nhóm Alternatives để so sánh giá |
+| RFQ thay thế | **[Đã bỏ — v0.3]** RFQ cho vendor khác cùng nhu cầu (Alternatives); thay bằng gửi email riêng tới N NCC trên cùng 1 RFQ |
 | Đơn mua hàng | `purchase.order` từ trạng thái Chờ duyệt trở đi |
-| PO | Trạng thái đơn mua hàng đã xác nhận nhận hàng (state `purchase` của Odoo) |
-| Waiting PO | Trạng thái mới: đơn đã có Đề nghị thanh toán, đang chờ hàng về |
+| PO | Trạng thái đơn mua hàng đã duyệt xong (state `purchase` của Odoo); vật tư Nhập kho có phiếu DO *(sửa v0.3)* |
+| Waiting PO | **[Đã bỏ — v0.3]** Trạng thái chờ hàng về sau khi có ĐNTT |
 | Đề nghị thanh toán (ĐNTT) | Chứng từ mới yêu cầu Kế toán thanh toán cho vendor theo một đơn mua hàng |
-| Phiếu DO | Phiếu nhập kho (Receipt, `stock.picking` loại incoming) tạo khi xác nhận nhận hàng (AS-12) |
+| Phiếu DO | Phiếu nhập kho (Receipt, `stock.picking` loại incoming) tạo tự động khi đơn được duyệt (AS-12, sửa v0.3) |
 | Vendor | Nhà cung cấp (`res.partner` có bảng giá nhà cung cấp) |
 | MH | Phòng / Nhân viên Mua hàng |
 | Backorder | Phiếu DO mới cho phần hàng chưa nhận đủ |
@@ -60,6 +62,9 @@ Tài liệu đặc tả yêu cầu phần mềm cho quy trình mua hàng trên O
 | Trưởng nhóm | Quản lý trực tiếp của người tạo trên hồ sơ nhân viên, duyệt cấp 1 YCMH (AS-34) |
 | BOD | Ban giám đốc, duyệt cấp 3 YCMH (AS-34) |
 | Mã BP | Mã bộ phận của người tạo, phần đầu của số phiếu YCMH (AS-28) |
+| Send email | Nút trên RFQ: soạn 1 email, chọn nhiều NCC (ngăn cách ";"), hệ thống gửi riêng từng NCC (FR-06) |
+| Mã Yêu cầu mua hàng (trên RFQ) | Mã YCMH gốc của RFQ, hiển thị và lưu ngầm để truy vấn (FR-27) |
+| Ngày dự kiến / thực tế nhận hàng | Ngày dự kiến do MH nhập trên RFQ; ngày thực tế = ngày hoàn tất phiếu DO (AS-43) |
 
 ## 2. Mô tả tổng quan
 
@@ -73,9 +78,10 @@ flowchart LR
   BG[Purchase - Báo giá NCC] -->|Tạo YCMH| AP
   MH([Nhân viên MH - dịch vụ]) -->|RFQ trực tiếp| PU
   AP -->|Duyệt xong - tự tạo| PU[Purchase - RFQ và Đơn mua hàng]
-  PU -->|Email RFQ| VD([Vendor])
+  PU -->|Email RFQ riêng từng NCC| VD([Vendor])
+  VD -->|Reply kèm Excel báo giá| PU
   PU -->|Đề nghị thanh toán| AC[Accounting]
-  PU -->|Xác nhận nhận hàng - phiếu DO| IN[Inventory]
+  PU -->|Duyệt xong - tự tạo phiếu DO| IN[Inventory]
   AC -->|Thanh toán| VD
 ```
 
@@ -83,21 +89,23 @@ flowchart LR
 | Vai trò | Hệ thống | Quyền chính |
 |---|---|---|
 | Người đề xuất | Backend — Approvals, Purchase (đọc Hợp đồng, Báo giá NCC) | Tạo YCMH trực tiếp / từ Hợp đồng / từ Báo giá NCC; sửa, gửi, huỷ YCMH của mình |
-| Nhân viên MH | Backend — Approvals, Purchase, Accounting | Duyệt cấp 2 YCMH; quản lý Hợp đồng, Báo giá NCC; tạo RFQ dịch vụ trực tiếp; tạo, gửi, huỷ RFQ; chọn giá; gửi duyệt đơn; tạo ĐNTT; xác nhận nhận hàng |
+| Nhân viên MH | Backend — Approvals, Purchase, Accounting | Duyệt cấp 2 YCMH; quản lý Hợp đồng, Báo giá NCC; tạo PO dịch vụ trực tiếp; tạo, gửi email, huỷ RFQ; so sánh và chọn NCC; tạo ĐNTT; gửi duyệt đơn *(sửa v0.3)* |
 | Trưởng nhóm | Backend — Approvals | Duyệt cấp 1 YCMH do thành viên nhóm tạo *(v0.2, thay vai trò Trưởng phòng)* |
 | BOD | Backend — Approvals | Duyệt cấp 3 YCMH *(v0.2)* |
-| Trưởng phòng Mua hàng | Backend — Purchase | Duyệt đơn mua hàng (AS-08) |
-| Giám đốc | Backend — Purchase | Duyệt đơn mua hàng từ ngưỡng (AS-08) |
+| Trưởng phòng Mua hàng | Backend — Purchase | Duyệt đơn mua hàng 1 cấp, không ngưỡng (AS-39) |
+| Giám đốc | Backend — Purchase | **[Đã bỏ — v0.3]** ~~Duyệt đơn mua hàng từ ngưỡng~~ — không còn ngưỡng (tra-loi-cau-hoi-mo-lan-1.md) |
 | Kế toán | Backend — Accounting | Duyệt, từ chối ĐNTT; ghi nhận thanh toán |
 | Thủ kho | Backend — Inventory | Xác nhận phiếu DO, tạo backorder |
-| Quản trị hệ thống | Backend — Settings | Cấu hình người duyệt, ngưỡng, mẫu email |
+| Quản trị hệ thống | Backend — Settings | Cấu hình người duyệt, mẫu email, mẫu Excel báo giá, hộp thư nhận báo giá *(sửa v0.3)* |
 
 ### 2.3 Giả định & phụ thuộc
-- **Giả định:** xem mục 9.1 (AS-01 … AS-38).
+- **Giả định:** xem mục 9.1 (AS-01 … AS-47).
 - **Phụ thuộc:**
-  - Odoo 17 Enterprise với các module `purchase`, `purchase_requisition` (Alternatives), `approvals`, `approval_purchase`, `stock`, `account_accountant` (AS-01).
+  - Odoo 17 Enterprise với các module `purchase`, `purchase_requisition` (Blanket Order), `approvals`, `approval_purchase`, `stock`, `account_accountant` (AS-01).
   - Module tuỳ biến mới `purchase_flow_custom` (tên đề xuất) chứa toàn bộ thay đổi; không sửa mã nguồn lõi.
   - Máy chủ SMTP đã cấu hình trong Odoo.
+  - Incoming mail server (IMAP/POP) và alias email cho RFQ để nhận email NCC trả lời (AS-45). *(v0.3)*
+  - Thư viện đọc file `.xlsx` (openpyxl, có sẵn trong Odoo 17) cho FR-26. *(v0.3)*
   - Dữ liệu Price List (`product.supplierinfo`) và Hợp đồng mua hàng còn hiệu lực (AS-30, AS-31).
   - Vật tư được phân loại đúng Nhập kho / Dịch vụ trước go-live (AS-26).
   - Hồ sơ nhân viên có Bộ phận (kèm Mã BP) và Trưởng nhóm (Manager) (AS-28, AS-34).
@@ -150,18 +158,20 @@ flowchart LR
 - **Độ ưu tiên:** Must
 
 ### FR-03 — Từ chối và gửi lại Yêu cầu mua hàng
-- **Mô tả:** Người duyệt ở cấp bất kỳ từ chối YCMH kèm lý do; người đề xuất sửa và gửi lại.
+- **Mô tả:** Người duyệt ở cấp bất kỳ từ chối YCMH kèm lý do; YCMH về "Nháp" và hệ thống gửi email cho người tạo; người tạo sửa và gửi lại. *(Sửa v0.3 — nguồn: tra-loi-cau-hoi-mo-lan-1.md; _changes/20261020-084051.md #6. v0.2: phiếu chuyển "Từ chối", bấm "Về nháp" mới sửa được)*
 - **Vai trò:** Trưởng nhóm, Nhân viên MH, BOD, Người đề xuất
 - **Truy vết:** US-02, US-05, US-14, US-24 · Màn hình: SCR-02
 - **Input:** Lý do từ chối (text, bắt buộc).
-- **Output:** YCMH "Từ chối"; tin nhắn chatter "Từ chối bởi <người duyệt>: <lý do>"; email thông báo người đề xuất.
+- **Output:** YCMH "Nháp"; trạng thái mọi người duyệt đặt lại; tin nhắn chatter "Từ chối bởi <người duyệt> (cấp <n>): <lý do>"; email cho người tạo; thông báo lý do ở đầu phiếu.
 - **Business rules:**
   - BR-03.1: Lý do bắt buộc, tối thiểu 10 ký tự (AS-25).
-  - BR-03.2: "Về nháp" đặt lại trạng thái mọi người duyệt; khi gửi lại duyệt từ cấp 1 (AS-09).
+  - BR-03.2 *(sửa v0.3)*: Từ chối → YCMH về "Nháp" ngay, không còn trạng thái "Từ chối"; gửi lại thì duyệt từ cấp 1.
+  - BR-03.3 *(mới v0.3)*: Email gửi người tạo: tiêu đề "Yêu cầu mua hàng <số phiếu> bị từ chối", nội dung có người từ chối, cấp duyệt, lý do, link mở phiếu.
+  - BR-03.4 *(mới v0.3)*: Quy tắc về Nháp áp dụng cho YCMH; đơn mua hàng theo FR-10, ĐNTT theo FR-12 (_changes/20261020-084051.md #6: "trước mắt cứ là YCMH").
 - **Acceptance criteria:**
   1. **Given** thành viên BOD bấm "Từ chối" **When** để trống lý do và bấm "Xác nhận" **Then** hiện lỗi "Vui lòng nhập lý do từ chối" và hộp thoại không đóng.
-  2. **Given** lý do hợp lệ **When** bấm "Xác nhận" **Then** phiếu chuyển "Từ chối" và người đề xuất nhận email chứa lý do.
-  3. **Given** phiếu "Từ chối" **When** người đề xuất bấm "Về nháp", sửa và "Gửi duyệt" **Then** phiếu chuyển "Chờ duyệt" cấp 1 và chatter còn lịch sử lần từ chối trước.
+  2. **Given** lý do hợp lệ **When** bấm "Xác nhận" **Then** phiếu về "Nháp", đầu phiếu hiện lý do và người tạo nhận email tiêu đề "Yêu cầu mua hàng HC_0012_20_10_26 bị từ chối".
+  3. **Given** phiếu bị từ chối đã về "Nháp" **When** người tạo sửa và bấm "Gửi duyệt" **Then** phiếu chuyển "Chờ duyệt" cấp 1 và chatter còn lịch sử lần từ chối trước.
 - **Độ ưu tiên:** Must
 
 ### FR-04 — Huỷ Yêu cầu mua hàng
@@ -187,6 +197,8 @@ flowchart LR
   - BR-05.1: Nhóm dòng theo vendor; mỗi YCMH sinh RFQ riêng, không gộp vào RFQ của YCMH khác (AS-05).
   - BR-05.2 *(sửa v0.2)*: Dòng RFQ lấy vật tư, ghi chú, số lượng, đơn vị tính, kho nhận; ngày cần hàng (nếu có) → `date_planned`; đơn giá = đơn giá trên dòng YCMH (Hợp đồng / Báo giá NCC / Price List / nhập tay), trống thì = 0.
   - BR-05.5 *(mới v0.2)*: Không tách RFQ theo kho: dòng cùng NCC nhưng khác kho nhận vẫn chung 1 RFQ, mỗi dòng giữ kho nhận của mình (AS-29, quyết định #14).
+  - BR-05.7 *(mới v0.3)*: Kế thừa đầu phiếu từ YCMH: Người tạo YCMH, Bộ phận, Ghi chú; Ngày cần hàng → Ngày dự kiến nhận hàng (AS-43); NCC của RFQ = NCC của nhóm dòng, bắt buộc.
+  - BR-05.8 *(mới v0.3)*: Số RFQ và mã truy vết YCMH theo FR-27.
   - BR-05.6 *(mới v0.2)*: Dòng có nguồn giá Hợp đồng → RFQ liên kết hợp đồng đó (`requisition_id`); RFQ có dòng từ 2 hợp đồng khác nhau thì liên kết hợp đồng của dòng đầu tiên, các dòng còn lại ghi số hợp đồng ở ghi chú dòng.
   - BR-05.3: Chạy một lần cho mỗi YCMH (cờ `rfq_generated`); duyệt lại không tạo RFQ trùng.
   - BR-05.4: Lỗi khi tạo RFQ → huỷ toàn bộ giao dịch duyệt, YCMH giữ trạng thái cũ, hiện lỗi cho người duyệt.
@@ -198,26 +210,30 @@ flowchart LR
   5. **Given** dòng "Giấy A4 Double A 80gsm" có nguồn giá Hợp đồng HĐ-HH-2026-01 giá 78.000₫ **When** RFQ được tạo **Then** dòng RFQ có đơn giá 78.000₫ và RFQ liên kết HĐ-HH-2026-01.
 - **Độ ưu tiên:** Must
 
-### FR-06 — Gửi email RFQ cho vendor
-- **Mô tả:** Nhân viên MH gửi RFQ qua email cho vendor; RFQ chuyển trạng thái "RFQ". Gửi được hàng loạt từ danh sách.
+### FR-06 — Gửi email xin báo giá tới nhiều nhà cung cấp ("Send email")
+- **Mô tả:** Trên RFQ, nút "Send email" mở popup soạn email như email thường; ô "Gửi đến" chọn nhiều NCC, ngăn cách bằng ";"; khi gửi, hệ thống tách gửi riêng từng NCC. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md; v0.2: mỗi RFQ một email tới vendor của RFQ, gửi hàng loạt từ danh sách)*
 - **Vai trò:** Nhân viên MH
-- **Truy vết:** US-07 · Màn hình: SCR-03, SCR-04, SCR-05
-- **Input:** Người nhận (mặc định vendor của RFQ, thêm được người nhận khác), Tiêu đề, Nội dung (theo mẫu email "Yêu cầu báo giá"), Tệp đính kèm (PDF RFQ tự sinh).
-- **Output:** Email gửi đi; tin nhắn trên chatter RFQ; RFQ trạng thái "RFQ" (state `sent`).
+- **Truy vết:** US-07 · Màn hình: SCR-04, SCR-05
+- **Input:** Gửi đến (một hoặc nhiều NCC hoặc địa chỉ email, ngăn cách ";"; mặc định NCC của RFQ); Tiêu đề; Nội dung (mẫu "Yêu cầu báo giá", có bảng sản phẩm của phiếu); Tệp đính kèm (PDF RFQ, file Excel mẫu báo giá — AS-44).
+- **Output:** N email riêng, mỗi email 1 người nhận; 1 tin nhắn chatter liệt kê các NCC đã gửi; RFQ trạng thái "RFQ" (state `sent`); danh sách "NCC được hỏi giá" của RFQ cập nhật.
 - **Business rules:**
-  - BR-06.1: Vendor không có email → chặn gửi (AS-13).
-  - BR-06.2: Gửi hàng loạt: mỗi RFQ một email riêng tới vendor của RFQ đó.
-  - BR-06.3: Gửi lại RFQ đã ở trạng thái "RFQ" được phép; trạng thái giữ nguyên.
+  - BR-06.1: NCC không có email → chặn gửi, báo tên NCC, không gửi email nào (AS-13).
+  - BR-06.2 *(sửa v0.3)*: N người nhận → N email riêng; không dùng To/CC chung (_changes/20261020-093008.md #7).
+  - BR-06.3: Gửi lại được; trạng thái giữ nguyên; NCC mới được thêm vào danh sách hỏi giá.
+  - BR-06.4 *(mới v0.3)*: Reply-to của email là alias của RFQ để email trả lời gắn đúng RFQ (FR-26).
+  - BR-06.5 *(mới v0.3)*: PO Dịch vụ không có nút "Send email" (FR-25).
+  - BR-06.6 *(sửa v0.3)*: Bỏ thao tác gửi hàng loạt nhiều RFQ từ danh sách (SCR-03).
 - **Acceptance criteria:**
-  1. **Given** RFQ Nháp vendor có email **When** bấm "Gửi email RFQ" rồi "Gửi" **Then** email kèm `P00012.pdf` được gửi và RFQ chuyển "RFQ".
-  2. **Given** vendor không có email **When** bấm "Gửi" **Then** hiện lỗi "Vendor Công ty TNHH An Phát chưa có email" và RFQ giữ "Nháp".
-  3. **Given** chọn 3 RFQ Nháp của 3 vendor trên danh sách **When** chọn "Thao tác › Gửi email RFQ" và xác nhận **Then** 3 email riêng được gửi và cả 3 RFQ chuyển "RFQ".
+  1. **Given** RFQ HC-PO-0012-20-10-2026-02 "Nháp" **When** bấm "Send email", nhập "Công ty TNHH Tin học Phong Vũ; Công ty CP Thế Giới Di Động; Công ty TNHH Thiết bị Minh Khoa" và bấm "Gửi" **Then** hệ thống gửi 3 email riêng, mỗi email chỉ có 1 người nhận, RFQ chuyển "RFQ".
+  2. **Given** danh sách có "Công ty TNHH An Phát" chưa có email **When** bấm "Gửi" **Then** hiện lỗi "Nhà cung cấp Công ty TNHH An Phát chưa có email" và không email nào được gửi.
+  3. **Given** email đã gửi **When** mở chatter RFQ **Then** có 1 tin nhắn liệt kê 3 NCC đã gửi, tệp đính kèm và thời điểm.
 - **Độ ưu tiên:** Must
 
-### FR-07 — Tạo RFQ thay thế cho vendor khác
+### FR-07 — Tạo RFQ thay thế cho vendor khác **[Đã bỏ — v0.3]**
+- **Lý do bỏ:** giữ 1 RFQ, gửi email riêng tới N NCC (FR-06), so sánh và chọn NCC cho cả phiếu (FR-08) — khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md quyết định #8.
 - **Mô tả:** Từ một RFQ, Nhân viên MH tạo RFQ cho vendor khác với cùng dòng sản phẩm để so sánh giá (Alternatives, AS-06).
 - **Vai trò:** Nhân viên MH
-- **Truy vết:** US-08 · Màn hình: SCR-04
+- **Truy vết:** US-08 · Màn hình: Không có UI (đã bỏ)
 - **Input:** Vendor (bắt buộc); Sao chép dòng sản phẩm (mặc định bật).
 - **Output:** RFQ Nháp mới cùng nhóm thay thế; tab "Báo giá thay thế" ở các RFQ trong nhóm liệt kê nhau.
 - **Business rules:**
@@ -229,71 +245,76 @@ flowchart LR
   2. **Given** Thiên Long đã có RFQ trong nhóm **When** chọn lại Thiên Long **Then** hiện lỗi "Vendor Công ty CP Thiên Long đã có RFQ trong nhóm này".
 - **Độ ưu tiên:** Must
 
-### FR-08 — Nhập giá, so sánh và chọn giá
-- **Mô tả:** Nhân viên MH nhập đơn giá vendor báo về vào từng RFQ, mở màn hình so sánh theo dòng sản phẩm và chọn giá.
+### FR-08 — So sánh giá và chọn nhà cung cấp
+- **Mô tả:** Nút "So sánh giá" trên RFQ mở bảng so sánh báo giá của các NCC đã hỏi (đọc từ Excel theo FR-26 hoặc nhập tay); MH chọn 1 NCC cho cả phiếu; RFQ đổi NCC và đơn giá theo báo giá đó. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #8. v0.2: so sánh giữa các RFQ thay thế, chọn theo dòng)*
 - **Vai trò:** Nhân viên MH
 - **Truy vết:** US-09 · Màn hình: SCR-04, SCR-06
-- **Input:** Đơn giá, Ngày giao dự kiến trên từng dòng RFQ (nhập tay, AS-16); thao tác "Chọn" trên dòng.
-- **Output:** Dòng được chọn giữ số lượng; dòng cùng sản phẩm ở RFQ khác trong nhóm về số lượng 0; RFQ không còn dòng số lượng > 0 bị huỷ khi bấm "Hoàn tất chọn giá".
+- **Input:** Báo giá NCC gắn với RFQ (FR-26) hoặc nhập tay; thao tác "Chọn NCC này".
+- **Output:** RFQ có NCC = NCC được chọn; đơn giá, ngày giao từng dòng = báo giá; nguồn giá dòng "Báo giá NCC <số>"; chatter "Đổi NCC: A → B, tổng X → Y"; các báo giá còn lại đánh dấu "Không chọn".
 - **Business rules:**
-  - BR-08.1: Màn hình so sánh nhóm theo sản phẩm; mỗi nhóm hiện mọi vendor có báo giá; đánh dấu đơn giá thấp nhất và ngày giao sớm nhất.
-  - BR-08.2: Chọn theo dòng; cho phép chọn vendor khác nhau cho các sản phẩm khác nhau (AS-07).
-  - BR-08.3: Dòng đơn giá = 0 không chọn được.
-  - BR-08.4: "Hoàn tất chọn giá" huỷ các RFQ trong nhóm không còn dòng số lượng > 0, ghi chatter "Huỷ do không được chọn giá".
+  - BR-08.1 *(sửa v0.3)*: Bảng so sánh: mỗi vật tư của RFQ một hàng, mỗi NCC một cột (đơn giá, thành tiền), hàng tổng và ngày giao theo NCC; đánh dấu giá thấp nhất từng dòng và tổng thấp nhất.
+  - BR-08.2 *(sửa v0.3)*: Chọn 1 NCC cho cả phiếu, không tách theo dòng (_changes/20261020-093008.md #8).
+  - BR-08.3 *(sửa v0.3)*: NCC thiếu giá ở bất kỳ dòng nào → không chọn được.
+  - BR-08.4 *(sửa v0.3)*: Chỉ chọn được khi RFQ ở "Nháp" hoặc "RFQ" và chưa có ĐNTT; đã có ĐNTT thì đổi NCC làm ĐNTT chưa duyệt bị huỷ (BR-11.4).
+  - BR-08.5 *(mới v0.3)*: MH nhập tay báo giá cho một NCC khi file Excel lỗi hoặc NCC báo giá ngoài email (AS-45).
+  - BR-08.6 *(mới v0.3)*: Chỉ dùng báo giá mới nhất của mỗi NCC (báo giá cũ "Đã thay thế", AS-46).
 - **Acceptance criteria:**
-  1. **Given** sản phẩm "Bút bi Thiên Long TL-027" có giá 4.500₫ (Hồng Hà) và 4.200₫ (Thiên Long) **When** mở "So sánh báo giá" **Then** dòng 4.200₫ được đánh dấu "Giá thấp nhất".
-  2. **Given** bấm "Chọn" ở dòng Thiên Long **When** hệ thống ghi nhận **Then** dòng bút bi ở RFQ Hồng Hà có số lượng 0 và dòng ở RFQ Thiên Long giữ 200.
-  3. **Given** sau khi chọn, RFQ Hồng Hà không còn dòng số lượng > 0 **When** bấm "Hoàn tất chọn giá" **Then** RFQ Hồng Hà chuyển "Đã huỷ".
-  4. **Given** dòng có đơn giá 0 **When** bấm "Chọn" **Then** hiện lỗi "Chưa có giá từ vendor cho dòng này".
+  1. **Given** RFQ có báo giá Phong Vũ (tổng 63.570.000₫) và Thế Giới Di Động (tổng 64.200.000₫) **When** bấm "So sánh giá" **Then** bảng có 2 cột NCC và cột Phong Vũ được đánh dấu "Tổng thấp nhất".
+  2. **Given** NCC hiện tại là Phong Vũ **When** chọn cột Thế Giới Di Động, bấm "Chọn NCC này" và xác nhận **Then** RFQ đổi NCC sang Công ty CP Thế Giới Di Động, đơn giá các dòng theo báo giá này, chatter ghi "Đổi NCC: Công ty TNHH Tin học Phong Vũ → Công ty CP Thế Giới Di Động".
+  3. **Given** báo giá Minh Khoa thiếu giá "Máy in HP LaserJet M211dw" **When** bấm "Chọn NCC này" ở cột Minh Khoa **Then** hiện lỗi "Báo giá của Công ty TNHH Thiết bị Minh Khoa thiếu giá cho Máy in HP LaserJet M211dw".
+  4. **Given** RFQ chưa có báo giá nào **When** bấm "So sánh giá" **Then** màn hình hiện "Chưa có báo giá NCC nào được ghi nhận".
 - **Độ ưu tiên:** Must
 
 ### FR-09 — Gửi duyệt đơn mua hàng (Approve)
-- **Mô tả:** Sau khi chọn giá, Nhân viên MH bấm "Approve" để đơn vào quy trình duyệt.
+- **Mô tả:** Sau khi chọn NCC và tạo ĐNTT, Nhân viên MH bấm "Approve" để đơn vào quy trình duyệt; áp dụng cho RFQ vật tư Nhập kho và PO Dịch vụ. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md)*
 - **Vai trò:** Nhân viên MH
 - **Truy vết:** US-10 · Màn hình: SCR-04
-- **Input:** RFQ trạng thái "RFQ".
-- **Output:** Đơn trạng thái "Chờ duyệt" (state `to approve`); danh sách cấp duyệt cần có theo ngưỡng (FR-10); activity cho người duyệt cấp đầu.
+- **Input:** RFQ trạng thái "RFQ" (Nhập kho) hoặc PO dịch vụ "Nháp"; ĐNTT của đơn.
+- **Output:** Đơn trạng thái "Chờ duyệt" (state `to approve`); activity cho Trưởng phòng Mua hàng (FR-10).
 - **Business rules:**
   - BR-09.1: Mọi dòng số lượng > 0 phải có đơn giá > 0.
   - BR-09.2: Đơn phải có ít nhất 1 dòng số lượng > 0.
   - BR-09.3: Ghi nhận "Người gửi duyệt" và thời điểm.
+  - BR-09.4 *(mới v0.3)*: Bắt buộc có ĐNTT ở trạng thái "Chờ kế toán duyệt", "Đã duyệt" hoặc "Đã thanh toán" (AS-40).
 - **Acceptance criteria:**
-  1. **Given** RFQ "RFQ" tổng 12.500.000₫, mọi dòng có giá **When** bấm "Approve" **Then** đơn chuyển "Chờ duyệt" và Trưởng phòng Mua hàng có activity duyệt.
+  1. **Given** RFQ "RFQ", mọi dòng có giá, ĐNTT DNTT/2026/0007 "Chờ kế toán duyệt" **When** bấm "Approve" **Then** đơn chuyển "Chờ duyệt" và Trưởng phòng Mua hàng có activity duyệt.
   2. **Given** một dòng số lượng 10, đơn giá 0 **When** bấm "Approve" **Then** hiện lỗi "Chưa nhập đơn giá cho sản phẩm Mực in HP 107A" và đơn giữ "RFQ".
+  3. **Given** đơn chưa có ĐNTT **When** bấm "Approve" **Then** hiện lỗi "Phải tạo Đề nghị thanh toán trước khi gửi duyệt" và đơn giữ trạng thái.
 - **Độ ưu tiên:** Must
 
-### FR-10 — Duyệt hoặc từ chối đơn mua hàng theo ngưỡng
-- **Mô tả:** Đơn "Chờ duyệt" được duyệt theo cấp: Trưởng phòng Mua hàng; tổng ≥ ngưỡng thêm Giám đốc (AS-08).
-- **Vai trò:** Trưởng phòng Mua hàng, Giám đốc
+### FR-10 — Duyệt hoặc từ chối đơn mua hàng
+- **Mô tả:** Đơn "Chờ duyệt" được Trưởng phòng Mua hàng duyệt 1 cấp, không phân ngưỡng giá trị; duyệt xong đơn chuyển PO (FR-13). *(Sửa v0.3 — nguồn: tra-loi-cau-hoi-mo-lan-1.md; người duyệt: AS-39. v0.2: 2 cấp, ngưỡng 50.000.000₫)*
+- **Vai trò:** Trưởng phòng Mua hàng
 - **Truy vết:** US-15 · Màn hình: SCR-03, SCR-04
 - **Input:** Thao tác "Duyệt" / "Từ chối" + lý do.
-- **Output:** Duyệt đủ cấp → đơn "Đã duyệt" (state mới `approved`); từ chối → đơn về "RFQ".
+- **Output:** Duyệt → đơn "PO" và tạo phiếu DO (FR-13); Từ chối → đơn Nhập kho về "RFQ", đơn Dịch vụ về "Nháp".
 - **Business rules:**
-  - BR-10.1: Ngưỡng Giám đốc mặc định 50.000.000₫ (tổng có thuế), cấu hình ở FR-18.
-  - BR-10.2: Cấp 2 chỉ duyệt được khi cấp 1 đã duyệt.
-  - BR-10.3: Lý do từ chối bắt buộc, tối thiểu 10 ký tự (AS-25); về "RFQ" giữ nguyên giá đã chọn (AS-09). Hộp thoại nhập lý do dùng chung mẫu với SCR-02 trạng thái "Từ chối - nhập lý do".
+  - BR-10.1 *(sửa v0.3)*: Một cấp duyệt, không ngưỡng giá trị (AS-39).
+  - BR-10.2 *(bỏ v0.3)*: ~~Cấp 2 chỉ duyệt được khi cấp 1 đã duyệt~~ — không còn cấp 2.
+  - BR-10.3: Lý do từ chối bắt buộc, tối thiểu 10 ký tự (AS-25); về "RFQ" giữ nguyên NCC, giá đã chọn và ĐNTT; MH nhận email kèm lý do. Hộp thoại nhập lý do dùng chung mẫu với SCR-02 trạng thái "Từ chối - nhập lý do".
   - BR-10.4: Nhân viên MH gửi duyệt không được tự duyệt đơn của mình.
   - BR-10.5: Bộ lọc "Chờ tôi duyệt" trên danh sách đơn chỉ hiện đơn có activity duyệt của người đăng nhập.
 - **Acceptance criteria:**
-  1. **Given** đơn "Chờ duyệt" tổng 12.500.000₫ **When** Trưởng phòng Mua hàng bấm "Duyệt" **Then** đơn chuyển "Đã duyệt".
-  2. **Given** đơn tổng 68.000.000₫ **When** Trưởng phòng Mua hàng bấm "Duyệt" **Then** đơn giữ "Chờ duyệt", khối duyệt hiện cấp 1 "Đã duyệt", cấp 2 Giám đốc "Chờ duyệt" và Giám đốc có activity.
-  3. **Given** Giám đốc bấm "Từ chối" với lý do "Giá cao hơn hợp đồng năm" **When** xác nhận **Then** đơn về "RFQ" và Nhân viên MH nhận email chứa lý do.
+  1. **Given** đơn "Chờ duyệt" tổng 69.927.000₫ **When** Trưởng phòng Mua hàng bấm "Duyệt" **Then** đơn chuyển "PO".
+  2. **Given** đơn "Chờ duyệt" tổng 120.000.000₫ **When** Trưởng phòng Mua hàng bấm "Duyệt" **Then** đơn chuyển "PO", không có thêm cấp duyệt.
+  3. **Given** Trưởng phòng Mua hàng bấm "Từ chối" với lý do "Giá cao hơn hợp đồng năm" **When** xác nhận **Then** đơn về "RFQ" và Nhân viên MH nhận email chứa lý do.
 - **Độ ưu tiên:** Must
 
-### FR-11 — Tạo Đề nghị thanh toán và chuyển Waiting PO
-- **Mô tả:** Từ đơn "Đã duyệt", Nhân viên MH tạo ĐNTT và gửi Kế toán; đơn chuyển `Waiting PO`.
+### FR-11 — Tạo Đề nghị thanh toán trước khi gửi duyệt
+- **Mô tả:** Sau khi chọn NCC (Nhập kho) hoặc tạo PO dịch vụ, Nhân viên MH bắt buộc tạo ĐNTT và gửi Kế toán trước khi gửi duyệt đơn. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md. v0.2: ĐNTT tạo sau khi đơn được duyệt, đơn chuyển Waiting PO)*
 - **Vai trò:** Nhân viên MH
 - **Truy vết:** US-11 · Màn hình: SCR-04, SCR-08
-- **Input:** Đơn mua hàng (tự điền); Vendor (tự điền); Số tiền đề nghị (mặc định = tổng đơn, bắt buộc, > 0); Ngày đề nghị thanh toán (bắt buộc); Hình thức thanh toán (Chuyển khoản / Tiền mặt, bắt buộc); Tài khoản ngân hàng vendor (bắt buộc khi Chuyển khoản); Nội dung; Tệp đính kèm (báo giá, hợp đồng).
-- **Output:** ĐNTT mã `DNTT/<năm>/<4 số>` trạng thái "Chờ kế toán duyệt"; đơn mua hàng `Waiting PO` (AS-11); activity cho nhóm Kế toán.
+- **Input:** Đơn mua hàng (tự điền mã RFQ/PO); Vendor (tự điền); Số tiền đề nghị (mặc định = tổng đơn, bắt buộc, > 0); Ngày đề nghị thanh toán (bắt buộc); Hình thức thanh toán (Chuyển khoản / Tiền mặt, bắt buộc); Tài khoản ngân hàng vendor (bắt buộc khi Chuyển khoản); Nội dung; Tệp đính kèm (báo giá, hợp đồng).
+- **Output:** ĐNTT mã `DNTT/<năm>/<4 số>` trạng thái "Chờ kế toán duyệt"; đơn giữ trạng thái hiện tại và đủ điều kiện "Approve" (FR-09); activity cho nhóm Kế toán.
 - **Business rules:**
-  - BR-11.1: Chỉ tạo được từ đơn "Đã duyệt"; mỗi đơn tối đa 1 ĐNTT chưa bị từ chối.
+  - BR-11.1 *(sửa v0.3)*: Tạo được từ RFQ "RFQ" đã chọn NCC hoặc PO dịch vụ "Nháp"; mỗi đơn tối đa 1 ĐNTT chưa bị từ chối.
   - BR-11.2: Số tiền đề nghị ≤ tổng đơn.
-  - BR-11.3: Đơn chuyển `Waiting PO` khi ĐNTT được gửi ("Gửi kế toán"), không phải khi lưu nháp.
+  - BR-11.3 *(sửa v0.3)*: Bỏ trạng thái `Waiting PO`; gửi ĐNTT không đổi trạng thái đơn.
+  - BR-11.4 *(mới v0.3)*: Đổi NCC hoặc đơn giá sau khi tạo ĐNTT → ĐNTT chưa duyệt bị huỷ, MH tạo ĐNTT mới.
 - **Acceptance criteria:**
-  1. **Given** đơn P00014 "Đã duyệt" tổng 12.500.000₫ **When** bấm "Tạo đề nghị thanh toán" **Then** mở form ĐNTT điền sẵn vendor, P00014, số tiền 12.500.000₫.
-  2. **Given** ĐNTT hợp lệ **When** bấm "Gửi kế toán" **Then** ĐNTT "Chờ kế toán duyệt" và P00014 chuyển `Waiting PO`.
-  3. **Given** số tiền 13.000.000₫ > tổng đơn **When** bấm "Gửi kế toán" **Then** hiện lỗi "Số tiền đề nghị vượt tổng giá trị đơn mua hàng".
+  1. **Given** RFQ HC-PO-0012-20-10-2026-02 "RFQ", NCC Phong Vũ, tổng 69.927.000₫ **When** bấm "Tạo đề nghị thanh toán" **Then** mở form ĐNTT điền sẵn NCC, mã đơn, số tiền 69.927.000₫.
+  2. **Given** ĐNTT hợp lệ **When** bấm "Gửi kế toán" **Then** ĐNTT "Chờ kế toán duyệt", RFQ giữ "RFQ" và nút "Approve" dùng được.
+  3. **Given** số tiền 70.000.000₫ > tổng đơn **When** bấm "Gửi kế toán" **Then** hiện lỗi "Số tiền đề nghị vượt tổng giá trị đơn mua hàng".
   4. **Given** hình thức "Chuyển khoản" và không chọn tài khoản ngân hàng **When** bấm "Gửi kế toán" **Then** hiện lỗi tại trường "Tài khoản ngân hàng".
 - **Độ ưu tiên:** Must
 
@@ -304,34 +325,34 @@ flowchart LR
 - **Input:** Thao tác "Duyệt"/"Từ chối" + lý do; khi ghi nhận thanh toán: Sổ nhật ký (Ngân hàng/Tiền mặt), Ngày thanh toán, Số tiền.
 - **Output:** ĐNTT "Đã duyệt" / "Từ chối" / "Đã thanh toán"; bút toán thanh toán `account.payment` loại outbound cho vendor, liên kết ĐNTT.
 - **Business rules:**
-  - BR-12.1: Từ chối ĐNTT → đơn mua hàng về "Đã duyệt" để MH tạo lại ĐNTT.
+  - BR-12.1 *(sửa v0.3)*: Từ chối ĐNTT → đơn đang "Chờ duyệt" về "RFQ" (dịch vụ: "Nháp"); đơn đã "PO" giữ "PO"; MH tạo ĐNTT mới (AS-41).
   - BR-12.2: Thanh toán là khoản trả trước cho vendor (chưa đối trừ hoá đơn, AS-10); đối trừ hoá đơn theo chuẩn Odoo (AS-15).
   - BR-12.3: Số tiền ghi nhận thanh toán = số tiền đề nghị (không thanh toán một phần, AS-10).
-  - BR-12.4: Trạng thái `Waiting PO` của đơn không thay đổi khi ĐNTT được duyệt hoặc thanh toán.
+  - BR-12.4 *(sửa v0.3)*: ĐNTT được duyệt hoặc thanh toán không đổi trạng thái đơn.
 - **Acceptance criteria:**
   1. **Given** ĐNTT "Chờ kế toán duyệt" **When** Kế toán bấm "Duyệt" **Then** ĐNTT chuyển "Đã duyệt".
   2. **Given** ĐNTT "Đã duyệt" **When** bấm "Ghi nhận thanh toán", chọn sổ "Ngân hàng Vietcombank", ngày 25/10/2026, "Xác nhận" **Then** tạo payment 12.500.000₫ trạng thái Posted và ĐNTT chuyển "Đã thanh toán".
-  3. **Given** Kế toán bấm "Từ chối" với lý do hợp lệ **When** xác nhận **Then** ĐNTT "Từ chối", đơn về "Đã duyệt", Nhân viên MH nhận email lý do.
+  3. **Given** Kế toán bấm "Từ chối" với lý do hợp lệ **When** xác nhận **Then** ĐNTT "Từ chối", đơn đang "Chờ duyệt" về "RFQ", Nhân viên MH nhận email lý do.
 - **Độ ưu tiên:** Must
 
-### FR-13 — Xác nhận đã nhận hàng, chuyển PO và tạo phiếu DO
-- **Mô tả:** Khi hàng về, Nhân viên MH bấm "Xác nhận đã nhận hàng": đơn chuyển `PO` (xác nhận đơn chuẩn Odoo) và hệ thống tạo phiếu DO.
-- **Vai trò:** Nhân viên MH
-- **Truy vết:** US-12, US-25 · Màn hình: SCR-04
-- **Input:** Đơn `Waiting PO`; xác nhận trong hộp thoại.
-- **Output:** Đơn state `purchase` (hiển thị "PO"); phiếu DO (`stock.picking` incoming) trạng thái "Sẵn sàng", dòng = dòng đơn có số lượng > 0; activity cho Thủ kho.
+### FR-13 — Duyệt xong chuyển PO và tự tạo phiếu DO
+- **Mô tả:** Khi Trưởng phòng Mua hàng bấm "Duyệt", đơn chuyển `PO` (xác nhận đơn chuẩn Odoo) và hệ thống tự tạo phiếu DO cho vật tư Nhập kho; đơn Dịch vụ không tạo DO. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #3. v0.2: nút "Xác nhận đã nhận hàng" chuyển Waiting PO → PO)*
+- **Vai trò:** Hệ thống, Trưởng phòng Mua hàng
+- **Truy vết:** US-12, US-25 · Màn hình: SCR-04, SCR-09
+- **Input:** Đơn được duyệt (FR-10).
+- **Output:** Đơn state `purchase` (hiển thị "PO"); phiếu DO (`stock.picking` incoming) "Sẵn sàng" cho mỗi kho nhận; activity cho Thủ kho; "Ngày nhận hàng thực tế" cập nhật khi phiếu DO cuối cùng hoàn tất.
 - **Business rules:**
-  - BR-13.1: Chỉ hiện nút khi đơn `Waiting PO`.
+  - BR-13.1 *(sửa v0.3)*: Chạy tự động trong cùng giao dịch với thao tác "Duyệt"; không còn nút riêng.
   - BR-13.2: Gọi `button_confirm` chuẩn của Odoo để sinh phiếu nhập kho; không tự xác nhận phiếu DO (AS-12).
   - BR-13.3 *(sửa v0.2)*: Kho nhận lấy theo từng dòng đơn (kho nhận từ YCMH, AS-29).
   - BR-13.4 *(mới v0.2)*: Tạo một phiếu DO cho mỗi kho nhận khác nhau trên đơn (tuỳ biến, vì Odoo chuẩn nhận mỗi đơn vào một kho).
-  - BR-13.5 *(mới v0.2)*: Dòng vật tư Dịch vụ không sinh phiếu DO; đơn chỉ có dịch vụ thì chuyển `PO` mà không tạo phiếu nào (AS-27).
+  - BR-13.5 *(sửa v0.3)*: Đơn Dịch vụ duyệt xong là `PO`, không sinh phiếu DO.
+  - BR-13.6 *(mới v0.3)*: "Ngày nhận hàng thực tế" = ngày hoàn tất phiếu DO cuối cùng của đơn, chỉ đọc (AS-43).
 - **Acceptance criteria:**
-  1. **Given** P00014 `Waiting PO` có 2 dòng **When** MH bấm "Xác nhận đã nhận hàng" và "Xác nhận" **Then** P00014 chuyển `PO` và tạo phiếu `WH/IN/00031` "Sẵn sàng" có 2 dòng đúng số lượng.
-  2. **Given** P00014 đã `PO` **When** mở đơn **Then** nút "Xác nhận đã nhận hàng" không hiển thị và smart button "Phiếu DO" hiện 1.
-  3. **Given** hộp thoại xác nhận đang mở **When** MH bấm "Huỷ" **Then** đơn giữ `Waiting PO` và không có phiếu DO mới.
-  4. **Given** đơn có 2 dòng kho "Kho chính" và 1 dòng kho "Kho chi nhánh Bình Dương" **When** MH xác nhận đã nhận hàng **Then** tạo 2 phiếu DO: một phiếu 2 dòng vào Kho chính, một phiếu 1 dòng vào Kho chi nhánh Bình Dương.
-  5. **Given** đơn dịch vụ P00020 `Waiting PO` **When** MH xác nhận đã nhận hàng **Then** đơn chuyển `PO` và smart button "Phiếu DO" hiện 0.
+  1. **Given** đơn "Chờ duyệt" có 2 dòng cùng Kho chính **When** Trưởng phòng Mua hàng bấm "Duyệt" **Then** đơn chuyển "PO" và tạo phiếu `WH/IN/00031` "Sẵn sàng" có 2 dòng đúng số lượng.
+  2. **Given** đơn có 2 dòng Kho chính và 1 dòng Kho chi nhánh Bình Dương **When** được duyệt **Then** tạo 2 phiếu DO: một phiếu 2 dòng vào Kho chính, một phiếu 1 dòng vào Kho chi nhánh Bình Dương.
+  3. **Given** PO dịch vụ MH-PO-0003-21-10-2026 "Chờ duyệt" **When** được duyệt **Then** đơn chuyển "PO" và smart button "Phiếu DO" hiện 0.
+  4. **Given** phiếu WH/IN/00031 hoàn tất ngày 29/10/2026 **When** mở đơn **Then** "Ngày nhận hàng thực tế" hiện 29/10/2026.
 - **Độ ưu tiên:** Must
 
 ### FR-14 — Nhập kho theo phiếu DO
@@ -357,7 +378,7 @@ flowchart LR
 - **Business rules:**
   - BR-15.1: Không huỷ được đơn ở `PO` hoặc có ĐNTT "Đã thanh toán" (AS-14).
 - **Acceptance criteria:**
-  1. **Given** đơn `Waiting PO`, ĐNTT "Chờ kế toán duyệt" **When** MH bấm "Huỷ" với lý do hợp lệ **Then** đơn và ĐNTT cùng chuyển "Đã huỷ".
+  1. **Given** đơn "Chờ duyệt", ĐNTT "Chờ kế toán duyệt" **When** MH bấm "Huỷ" với lý do hợp lệ **Then** đơn và ĐNTT cùng chuyển "Đã huỷ".
   2. **Given** ĐNTT "Đã thanh toán" **When** MH bấm "Huỷ" **Then** hiện lỗi "Đơn đã được thanh toán, liên hệ Kế toán để xử lý".
 - **Độ ưu tiên:** Should
 
@@ -368,7 +389,7 @@ flowchart LR
 - **Input:** Sự kiện chuyển trạng thái.
 - **Output:** Activity (hạn 1 ngày làm việc, AS-24) + email theo bảng quy tắc.
 - **Business rules:**
-  - BR-16.1: Sự kiện → người nhận: YCMH gửi duyệt → Trưởng nhóm; Trưởng nhóm duyệt → Nhân viên MH; MH duyệt → nhóm BOD *(sửa v0.2)*; YCMH từ chối → Người đề xuất; RFQ tạo → Nhân viên MH; đơn gửi duyệt → người duyệt cấp hiện tại; đơn từ chối → Nhân viên MH; ĐNTT gửi → nhóm Kế toán; ĐNTT từ chối → Nhân viên MH; phiếu DO tạo → nhóm Thủ kho.
+  - BR-16.1 *(sửa v0.3)*: Sự kiện → người nhận: YCMH gửi duyệt → Trưởng nhóm; Trưởng nhóm duyệt → Nhân viên MH; MH duyệt → nhóm BOD; YCMH bị từ chối → người tạo (email, FR-03); RFQ tạo → Nhân viên MH; NCC gửi báo giá → Nhân viên MH (FR-26); đơn gửi duyệt → Trưởng phòng Mua hàng; đơn bị từ chối → Nhân viên MH; ĐNTT gửi → nhóm Kế toán; ĐNTT bị từ chối → Nhân viên MH; phiếu DO tạo → nhóm Thủ kho.
   - BR-16.2: Activity của bước đã xử lý được đánh dấu hoàn thành tự động.
 - **Acceptance criteria:**
   1. **Given** đơn gửi duyệt **When** Trưởng phòng Mua hàng duyệt **Then** activity của Trưởng phòng Mua hàng chuyển hoàn thành trong cùng thao tác.
@@ -383,25 +404,28 @@ flowchart LR
 - **Output:** Danh sách lọc; smart button có số đếm.
 - **Business rules:**
   - BR-17.1 *(sửa v0.2)*: Bộ lọc mặc định: Người đề xuất "Của tôi"; Trưởng nhóm "Nhóm của tôi"; MH "Đang xử lý"; BOD "Chờ tôi duyệt".
-  - BR-17.2 *(sửa v0.2)*: Smart button YCMH: "RFQ/Đơn mua hàng", "Hợp đồng" hoặc "Báo giá NCC" (khi tạo từ chứng từ đó); đơn: "Yêu cầu mua hàng", "Đề nghị thanh toán", "Phiếu DO"; Hợp đồng và Báo giá NCC: "Yêu cầu mua hàng".
-  - BR-17.3: Danh sách đơn có cột Trạng thái hiển thị nhãn: Nháp, RFQ, Chờ duyệt, Đã duyệt, Waiting PO, PO, Đã huỷ.
+  - BR-17.2 *(sửa v0.3)*: Smart button YCMH: "RFQ/Đơn mua hàng", "Hợp đồng" hoặc "Báo giá NCC" (khi tạo từ chứng từ đó); đơn: "Yêu cầu mua hàng", "Báo giá NCC" (số báo giá đã nhận), "Đề nghị thanh toán", "Phiếu DO"; Hợp đồng và Báo giá NCC: "Yêu cầu mua hàng".
+  - BR-17.3 *(sửa v0.3)*: Danh sách đơn có cột Trạng thái hiển thị nhãn: Nháp, RFQ, Chờ duyệt, PO, Đã huỷ; cột Loại: Nhập kho / Dịch vụ.
 - **Acceptance criteria:**
   1. **Given** YCMH sinh 2 RFQ **When** mở YCMH **Then** smart button "RFQ/Đơn mua hàng" hiện 2 và mở danh sách đúng 2 phiếu.
   2. **Given** Người đề xuất mở danh sách YCMH **When** không đổi bộ lọc **Then** chỉ thấy phiếu của mình.
 - **Độ ưu tiên:** Should
 
-### FR-18 — Cấu hình người duyệt và ngưỡng
-- **Mô tả:** Quản trị hệ thống cấu hình người duyệt đơn mua hàng, ngưỡng Giám đốc và mẫu email.
+### FR-18 — Cấu hình người duyệt, mẫu email và mẫu báo giá
+- **Mô tả:** Quản trị hệ thống cấu hình người duyệt đơn mua hàng, mẫu email, mẫu file Excel báo giá và hộp thư nhận báo giá. *(Sửa v0.3 — bỏ ngưỡng duyệt; nguồn: tra-loi-cau-hoi-mo-lan-1.md)*
 - **Vai trò:** Quản trị hệ thống
 - **Truy vết:** US-18 · Màn hình: SCR-10
-- **Input:** Người duyệt cấp 1 đơn mua hàng (user, bắt buộc); Người duyệt cấp 2 (user, bắt buộc); Ngưỡng duyệt cấp 2 (số tiền VND, > 0); Mẫu email RFQ; Mẫu email thông báo từ chối.
-- **Output:** Cấu hình lưu theo công ty; áp dụng cho đơn gửi duyệt sau thời điểm lưu.
+- **Input:** Người duyệt đơn mua hàng (user, bắt buộc); Mẫu email RFQ; Mẫu email thông báo từ chối; Mẫu file Excel báo giá (.xlsx); Hộp thư nhận báo giá (alias, bắt buộc).
+- **Output:** Cấu hình lưu theo công ty; áp dụng cho đơn gửi duyệt và email gửi sau thời điểm lưu.
 - **Business rules:**
   - BR-18.1: Chỉ nhóm "Quản trị mua hàng" thấy menu cấu hình.
-  - BR-18.2: Đơn đang "Chờ duyệt" giữ danh sách cấp duyệt đã tính lúc gửi.
+  - BR-18.2: Đơn đang "Chờ duyệt" giữ người duyệt đã giao lúc gửi.
+  - BR-18.3 *(mới v0.3)*: Mẫu Excel phải có đủ cột theo AS-44; thiếu cột thì không lưu được.
+  - BR-18.4 *(bỏ v0.3)*: ~~Ngưỡng duyệt cấp 2~~ — không còn ngưỡng.
 - **Acceptance criteria:**
-  1. **Given** đổi ngưỡng từ 50.000.000₫ sang 100.000.000₫ và lưu **When** MH gửi duyệt đơn 68.000.000₫ **Then** đơn chỉ cần Trưởng phòng Mua hàng duyệt.
-  2. **Given** nhập ngưỡng 0 **When** bấm "Lưu" **Then** hiện lỗi "Ngưỡng duyệt phải lớn hơn 0".
+  1. **Given** đổi người duyệt đơn mua hàng sang Phạm Thị Lan và lưu **When** MH gửi duyệt đơn mới **Then** Phạm Thị Lan nhận activity duyệt.
+  2. **Given** để trống "Người duyệt đơn mua hàng" **When** bấm "Lưu" **Then** hiện lỗi "Vui lòng chọn người duyệt đơn mua hàng".
+  3. **Given** tải lên mẫu Excel thiếu cột "Đơn giá" **When** bấm "Lưu" **Then** hiện lỗi "Mẫu báo giá thiếu cột: Đơn giá".
 - **Độ ưu tiên:** Should
 
 ### FR-19 — Phân loại vật tư Nhập kho / Dịch vụ
@@ -440,7 +464,7 @@ flowchart LR
 ### FR-21 — Danh mục Báo giá NCC
 - **Mô tả:** Nhân viên MH lưu báo giá NCC gửi công ty gồm vật tư, đơn giá, hạn hiệu lực; dùng để tạo YCMH (FR-23). Model mới `purchase.vendor.quote` (AS-33). *(Mới v0.2 — nguồn: khao-sat-lan-2-yeu-cau-mua-hang.md; _changes/20261020-074707.md quyết định #13)*
 - **Vai trò:** Nhân viên MH
-- **Truy vết:** US-23 · Màn hình: SCR-12
+- **Truy vết:** US-23, US-26 · Màn hình: SCR-12
 - **Input:** Số báo giá (bắt buộc); Nhà cung cấp (bắt buộc); Ngày báo giá (bắt buộc); Hiệu lực đến (bắt buộc); Người nhận; Tệp báo giá (bắt buộc). Dòng: Vật tư (Nhập kho), Đơn vị tính, Đơn giá (> 0), Số lượng tối thiểu, Ghi chú.
 - **Output:** Báo giá trạng thái Nháp → Còn hiệu lực → Hết hiệu lực; smart button "Yêu cầu mua hàng".
 - **Business rules:**
@@ -448,6 +472,7 @@ flowchart LR
   - BR-21.2: Hiệu lực đến ≥ Ngày báo giá.
   - BR-21.3: Báo giá NCC không tham gia tự tra giá FR-24 (AS-33).
   - BR-21.4: Tác vụ hằng ngày 00:05 (AS-38) chuyển báo giá quá "Hiệu lực đến" sang "Hết hiệu lực".
+  - BR-21.5 *(mới v0.3)*: Báo giá NCC cũng được tạo tự động từ email NCC trả lời (FR-26), có trường "RFQ liên quan"; báo giá mới của cùng NCC trên cùng RFQ chuyển báo giá cũ sang "Đã thay thế" (AS-46).
 - **Acceptance criteria:**
   1. **Given** báo giá Nháp đủ thông tin, có tệp báo giá **When** bấm "Xác nhận" **Then** báo giá chuyển "Còn hiệu lực".
   2. **Given** báo giá chưa đính kèm tệp **When** bấm "Xác nhận" **Then** hiện lỗi "Vui lòng đính kèm file báo giá của NCC".
@@ -506,19 +531,60 @@ flowchart LR
   4. **Given** hợp đồng HĐ-HH-2025-03 hết hiệu lực là nguồn duy nhất của vật tư **When** chọn vật tư **Then** hệ thống bỏ qua hợp đồng đó và tra Price List.
 - **Độ ưu tiên:** Must
 
-### FR-25 — Mua Dịch vụ bằng RFQ trực tiếp
-- **Mô tả:** Nhân viên MH tạo RFQ cho vật tư Dịch vụ ngay trong Purchase, không qua YCMH; đơn dịch vụ đi tiếp chọn giá, duyệt đơn, Đề nghị thanh toán; không có phiếu DO. *(Mới v0.2 — nguồn: khao-sat-lan-2-yeu-cau-mua-hang.md; _changes/20261020-074707.md quyết định #15)*
+### FR-25 — Mua Dịch vụ bằng PO trực tiếp
+- **Mô tả:** Nhân viên MH tạo thẳng PO cho vật tư Dịch vụ trong Purchase, không YCMH, không Yêu cầu báo giá; bắt buộc tạo ĐNTT trước khi gửi duyệt; duyệt xong là PO, không tạo DO. *(Sửa v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md. v0.2: RFQ trực tiếp, có gửi email và chọn giá)*
 - **Vai trò:** Nhân viên MH
 - **Truy vết:** US-25 · Màn hình: SCR-03, SCR-04
-- **Input:** NCC, dòng vật tư Dịch vụ (Vật tư, Số lượng, Đơn giá, Ngày thực hiện dự kiến).
-- **Output:** RFQ "Nháp" không có Yêu cầu mua hàng; các bước FR-06 → FR-13 áp dụng như đơn vật tư Nhập kho.
+- **Input:** NCC (bắt buộc); dòng vật tư Dịch vụ (Vật tư, Số lượng, Đơn giá, Ngày thực hiện dự kiến); Ngày dự kiến nhận hàng.
+- **Output:** PO dịch vụ "Nháp" số theo FR-27; trạng thái Nháp → Chờ duyệt → PO.
 - **Business rules:**
-  - BR-25.1: RFQ tạo trực tiếp chỉ chứa vật tư Dịch vụ (BR-19.3).
-  - BR-25.2: Xác nhận đã nhận hàng chuyển `PO`, không sinh phiếu DO (BR-13.5, AS-27).
-  - BR-25.3: Đơn dịch vụ không tính vào KPI "có YCMH làm gốc" (AS-02).
+  - BR-25.1: Đơn tạo trực tiếp chỉ chứa vật tư Dịch vụ (BR-19.3).
+  - BR-25.2 *(sửa v0.3)*: Không có bước "Send email", đọc báo giá, so sánh giá; statusbar không có bước "RFQ".
+  - BR-25.3 *(mới v0.3)*: Bắt buộc ĐNTT trước khi "Approve" (FR-09, FR-11).
+  - BR-25.4 *(sửa v0.3)*: Duyệt xong chuyển `PO`, không sinh phiếu DO (BR-13.5).
+  - BR-25.5: Đơn dịch vụ không tính vào KPI "có YCMH làm gốc" (AS-02).
 - **Acceptance criteria:**
-  1. **Given** MH bấm "Mới" ở danh sách RFQ, chọn NCC Sao Việt và vật tư "[DV-005] Vệ sinh công nghiệp văn phòng" **When** bấm "Lưu" **Then** RFQ P00020 được tạo, trường "Yêu cầu mua hàng" để trống.
-  2. **Given** RFQ tạo trực tiếp có dòng vật tư Nhập kho "Giấy A4 Double A 80gsm" **When** bấm "Lưu" **Then** hiện lỗi "Vật tư Nhập kho phải mua qua Yêu cầu mua hàng".
+  1. **Given** MH bấm "Mới" ở danh sách đơn mua, chọn NCC Sao Việt và vật tư "[DV-005] Vệ sinh công nghiệp văn phòng" **When** bấm "Lưu" **Then** PO dịch vụ MH-PO-0003-21-10-2026 "Nháp" được tạo, không có trường Yêu cầu mua hàng và không có nút "Send email".
+  2. **Given** đơn tạo trực tiếp có dòng vật tư Nhập kho "Giấy A4 Double A 80gsm" **When** bấm "Lưu" **Then** hiện lỗi "Vật tư Nhập kho phải mua qua Yêu cầu mua hàng".
+  3. **Given** PO dịch vụ chưa có ĐNTT **When** bấm "Approve" **Then** hiện lỗi "Phải tạo Đề nghị thanh toán trước khi gửi duyệt".
+  4. **Given** PO dịch vụ "Chờ duyệt" **When** Trưởng phòng Mua hàng duyệt **Then** đơn chuyển "PO" và không có phiếu DO.
+- **Độ ưu tiên:** Must
+
+### FR-26 — Nhận email trả lời và đọc file Excel báo giá
+- **Mô tả:** NCC reply email RFQ kèm file Excel; Odoo tự lưu email vào chatter RFQ, đính kèm file, đọc Excel lấy NCC – Vật tư – Đơn giá – Ngày giao và tạo Báo giá NCC gắn với RFQ. *(Mới v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md)*
+- **Vai trò:** Hệ thống, Nhân viên MH
+- **Truy vết:** US-26 · Màn hình: SCR-04, SCR-06
+- **Input:** Email trả lời tới alias của RFQ; tệp `.xlsx` theo mẫu (AS-44).
+- **Output:** Tin nhắn chatter kèm file; Báo giá NCC (FR-21) "Còn hiệu lực" có "RFQ liên quan" và dòng vật tư – giá; activity "Có báo giá mới" cho Nhân viên MH; lỗi đọc file ghi trên chatter.
+- **Business rules:**
+  - BR-26.1: Nhận email qua incoming mail server và alias của RFQ (AS-45); email trả lời ghép vào RFQ theo thread.
+  - BR-26.2: NCC xác định theo email người gửi khớp danh sách NCC đã gửi (FR-06); không khớp → chatter ghi "Không xác định được NCC", không tạo báo giá, MH gán tay.
+  - BR-26.3: Chỉ đọc file `.xlsx` theo mẫu, cột: Mã vật tư, Tên vật tư, ĐVT, Số lượng, Đơn giá, Ngày giao, Ghi chú; ghép dòng theo Mã vật tư của RFQ.
+  - BR-26.4: Sai mẫu, thiếu cột, đơn giá không phải số hoặc mã vật tư không có trên RFQ → không tạo báo giá, chatter ghi lỗi kèm tên file và lý do; MH nhập tay (BR-08.5).
+  - BR-26.5: Báo giá mới của cùng NCC → báo giá cũ "Đã thay thế" (AS-46).
+  - BR-26.6: Giới hạn file theo NFR-10.
+- **Acceptance criteria:**
+  1. **Given** NCC Phong Vũ reply kèm `BaoGia_PhongVu.xlsx` đúng mẫu có 2 dòng **When** Odoo nhận email **Then** chatter RFQ có email trả lời và file, RFQ có báo giá NCC mới của Phong Vũ: Mực in HP 107A 765.000₫, Máy in HP LaserJet M211dw 6.990.000₫.
+  2. **Given** Thế Giới Di Động trả lời kèm `BaoGia_TGDD.xlsx` thiếu cột "Đơn giá" **When** Odoo nhận email **Then** chatter ghi "Không đọc được BaoGia_TGDD.xlsx: thiếu cột Đơn giá" và không có báo giá mới.
+  3. **Given** email trả lời từ địa chỉ không thuộc NCC đã gửi **When** Odoo nhận email **Then** chatter ghi "Không xác định được NCC" và không tạo báo giá.
+  4. **Given** Phong Vũ gửi báo giá lần 2 **When** đọc xong **Then** báo giá lần 1 của Phong Vũ chuyển "Đã thay thế".
+- **Độ ưu tiên:** Must
+
+### FR-27 — Đánh số RFQ/PO và truy vết Yêu cầu mua hàng gốc
+- **Mô tả:** RFQ/PO đánh số theo mẫu "Mã phòng ban-PO-XXXX-DD-MM-YYYY" (AS-42); RFQ hiển thị Mã Yêu cầu mua hàng gốc và lưu ngầm mã đó để truy vấn. *(Mới v0.3 — nguồn: khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #6)*
+- **Vai trò:** Hệ thống, Người đề xuất, Nhân viên MH
+- **Truy vết:** US-27 · Màn hình: SCR-03, SCR-04
+- **Input:** YCMH gốc (nếu có); bộ phận; ngày.
+- **Output:** Số RFQ/PO; trường "Mã Yêu cầu mua hàng" (chỉ đọc, bấm mở YCMH); trường ẩn `origin_request_code` lưu mã YCMH dạng text.
+- **Business rules:**
+  - BR-27.1: RFQ từ YCMH: `<Mã BP YCMH>-PO-<XXXX YCMH>-<DD>-<MM>-<YYYY>-<NN>`; NN là thứ tự RFQ của YCMH (01, 02…) (AS-42).
+  - BR-27.2: PO dịch vụ: `<Mã BP người tạo>-PO-<XXXX>-<DD>-<MM>-<YYYY>`; XXXX đếm riêng theo bộ phận, về 0001 đầu năm (AS-42).
+  - BR-27.3: Mã YCMH lưu ngầm không đổi khi YCMH bị huỷ hoặc đổi số; tìm kiếm danh sách RFQ/PO theo cả trường ẩn.
+  - BR-27.4: Mã chuẩn Odoo của đơn (P00012…) không hiển thị.
+- **Acceptance criteria:**
+  1. **Given** YCMH HC_0012_20_10_26 có 2 NCC **When** BOD duyệt **Then** tạo 2 RFQ số HC-PO-0012-20-10-2026-01 (Hồng Hà) và HC-PO-0012-20-10-2026-02 (Phong Vũ), mỗi RFQ hiện "Mã Yêu cầu mua hàng" HC_0012_20_10_26.
+  2. **Given** gõ "HC_0012" ở ô tìm kiếm danh sách RFQ **When** tìm **Then** hiện đúng 2 RFQ của YCMH đó.
+  3. **Given** bộ phận MH đã có 2 PO dịch vụ năm 2026 **When** MH lưu PO dịch vụ mới ngày 21/10/2026 **Then** đơn nhận số MH-PO-0003-21-10-2026.
 - **Độ ưu tiên:** Must
 
 ## 4. Yêu cầu phi chức năng
@@ -552,12 +618,16 @@ flowchart LR
 - **Cách kiểm chứng:** Kiểm thử thủ công trên 2 trình duyệt.
 
 ### NFR-08 — Gửi email
-- **Yêu cầu:** Email gửi qua SMTP cấu hình sẵn; email lỗi hiện biểu tượng lỗi trên chatter và được cron chuẩn Odoo gửi lại; không chặn chuyển trạng thái.
+- **Yêu cầu:** Email gửi qua SMTP cấu hình sẵn; email lỗi hiện biểu tượng lỗi trên chatter và được cron chuẩn Odoo gửi lại; không chặn chuyển trạng thái. *(v0.3)* Hộp thư nhận báo giá đọc mỗi 5 phút; email trả lời gắn đúng RFQ ≥ 99% (đo trên 100 email thử).
 - **Cách kiểm chứng:** Tắt SMTP tạm thời, gửi RFQ, kiểm tra trạng thái và hàng đợi email.
 
 ### NFR-09 — Khả năng bảo trì
 - **Yêu cầu:** Toàn bộ tuỳ biến nằm trong module `purchase_flow_custom`, kế thừa model chuẩn, không sửa mã nguồn lõi; có unit test cho FR-01, FR-05, FR-08, FR-10, FR-11, FR-13, FR-24.
 - **Cách kiểm chứng:** Code review; chạy test suite khi nâng cấp.
+
+### NFR-10 — Xử lý file báo giá *(mới v0.3)*
+- **Yêu cầu:** Chỉ nhận `.xlsx`, ≤ 5 MB, ≤ 500 dòng; đọc xong ≤ 60 giây sau khi email tới hộp thư; file khác định dạng bị từ chối và ghi chatter (AS-47). Không chạy macro, không mở file `.xlsm`.
+- **Cách kiểm chứng:** Gửi 20 email thử với file đúng mẫu, sai mẫu, quá dung lượng; đo thời gian từ lúc email tới đến lúc có báo giá.
 
 ## 5. Tích hợp & dữ liệu
 
@@ -566,7 +636,8 @@ flowchart LR
 |---|---|---|---|---|---|
 | Approvals → Purchase | Tạo RFQ từ YCMH đã duyệt | ORM nội bộ Odoo | Approvals → Purchase | Realtime khi duyệt cấp cuối | Rollback giao dịch, hiện lỗi cho người duyệt |
 | Purchase → Accounting | ĐNTT, payment | ORM nội bộ Odoo | Purchase → Accounting | Realtime | Validate trước khi lưu, hiện lỗi |
-| Purchase → Inventory | Phiếu DO khi xác nhận nhận hàng | ORM nội bộ Odoo (`button_confirm`) | Purchase → Inventory | Realtime | Rollback, đơn giữ `Waiting PO` |
+| Purchase → Inventory | Phiếu DO khi đơn được duyệt *(sửa v0.3)* | ORM nội bộ Odoo (`button_confirm`) | Purchase → Inventory | Realtime | Rollback, đơn giữ "Chờ duyệt" |
+| Hộp thư đến (IMAP/POP) *(v0.3)* | Nhận email NCC trả lời kèm Excel | IMAP/TLS | NCC → Odoo | Cron đọc thư 5 phút | Thư không ghép được RFQ → hộp "Chưa xử lý", báo Nhân viên MH |
 | Máy chủ SMTP | Email RFQ, thông báo | SMTP/TLS | Odoo → vendor, người dùng | Hàng đợi email Odoo, cron mỗi 5 phút | Gửi lại theo cron chuẩn; lỗi hiện trên chatter |
 
 - Source of truth: CSDL Odoo cho mọi đối tượng.
@@ -584,6 +655,9 @@ flowchart LR
 | Tra NCC và giá *(v0.2)* | ORM | `approval.product.line._compute_vendor_price()` | vật tư, ĐVT, số lượng, ngày | NCC, đơn giá, nguồn giá |
 | Tạo YCMH từ Hợp đồng *(v0.2)* | ORM | `purchase.requisition.action_create_purchase_request()` | id hợp đồng | form `approval.request` mới |
 | Tạo YCMH từ Báo giá NCC *(v0.2)* | ORM | `purchase.vendor.quote.action_create_purchase_request()` | id báo giá | form `approval.request` mới |
+| Gửi email N NCC *(v0.3)* | ORM | `purchase.order.action_send_rfq_multi()` | id RFQ, danh sách NCC, tiêu đề, nội dung, tệp | N `mail.mail`, state `sent` |
+| Nhận email trả lời *(v0.3)* | ORM | `purchase.order.message_update()` → `_parse_quote_excel()` | email, tệp .xlsx | `purchase.vendor.quote` mới hoặc lỗi trên chatter |
+| So sánh / chọn NCC *(v0.3)* | ORM | `purchase.order.action_compare_quotes()`, `action_select_vendor_quote()` | id RFQ, id báo giá | bảng so sánh; RFQ đổi NCC và giá |
 | Hết hiệu lực hợp đồng / báo giá *(v0.2)* | Cron | `_cron_expire_contracts_quotes()` | — | trạng thái Hết hiệu lực |
 
 ### 5.3 Mapping trường dữ liệu
@@ -602,6 +676,11 @@ flowchart LR
 | `approval.request.source_document` (mới, v0.2) | — | reference | Hợp đồng hoặc Báo giá NCC nguồn |
 | `purchase.requisition.line.price_unit` | `approval.product.line.price_unit` | monetary | Tạo từ hợp đồng / tra giá |
 | `purchase.vendor.quote.line.price_unit` (model mới) | `approval.product.line.price_unit` | monetary | Tạo từ báo giá NCC |
+| `approval.request.name` *(v0.3)* | `purchase.order.origin_request_code` (mới, ẩn) | char | Lưu ngầm mã YCMH (BR-27.3) |
+| `approval.request.date_needed` *(v0.3)* | `purchase.order.date_expected_receipt` (mới) | date | Ngày dự kiến nhận hàng (AS-43) |
+| `stock.picking.date_done` (DO cuối cùng) *(v0.3)* | `purchase.order.date_actual_receipt` (mới) | date | Ngày nhận hàng thực tế (BR-13.6) |
+| Excel cột Mã vật tư, Đơn giá, Ngày giao *(v0.3)* | `purchase.vendor.quote.line.product_id`, `price_unit`, `date_planned` | many2one, monetary, date | FR-26; `purchase.vendor.quote.purchase_id` = RFQ |
+| `purchase.vendor.quote.line.price_unit` (báo giá được chọn) *(v0.3)* | `purchase.order.line.price_unit` | monetary | FR-08 chọn NCC |
 | `approval.request.date_needed` (mới) | `purchase.order.line.date_planned` | date | |
 | `purchase.order.id` | `purchase.payment.request.purchase_id` | many2one | Model mới |
 | `purchase.order.partner_id` | `purchase.payment.request.partner_id` | many2one | |
@@ -615,17 +694,17 @@ flowchart LR
 | SCR | Tên | Vai trò | Trường dữ liệu | Hành động | Trạng thái | FR | Loại |
 |---|---|---|---|---|---|---|---|
 | SCR-01 | Danh sách Yêu cầu mua hàng | Người đề xuất, Trưởng nhóm, Nhân viên MH, BOD | Số phiếu, Người tạo, Bộ phận, Ngày tạo, Nguồn tạo, Tổng dự kiến, Trạng thái | Mới, Tìm kiếm, Lọc, Nhóm theo | Mặc định, Rỗng | FR-01, FR-17 | backend |
-| SCR-02 | Yêu cầu mua hàng | Người đề xuất, Trưởng nhóm, Nhân viên MH, BOD | Số phiếu, Người tạo, Bộ phận, Ngày tạo, Nguồn tạo, Ngày cần hàng, Ghi chú, Dòng (Vật tư, Đơn vị tính, Nhập kho, Số lượng, Nhà cung cấp, Đơn giá, Nguồn giá, Thành tiền, Ghi chú), Tổng dự kiến, Người duyệt 3 cấp và trạng thái duyệt, Tệp đính kèm | Gửi duyệt, Duyệt, Từ chối, Về nháp, Huỷ, RFQ/Đơn mua hàng, Hợp đồng | Nháp, Tạo từ Hợp đồng, Chờ duyệt cấp 2, Đã duyệt, Từ chối - nhập lý do, Từ chối, Lỗi validate | FR-01, FR-02, FR-03, FR-04, FR-17, FR-19, FR-22, FR-23, FR-24 | backend |
-| SCR-03 | Danh sách RFQ và Đơn mua hàng | Nhân viên MH, Người duyệt đơn mua hàng | Mã, Vendor, Yêu cầu mua hàng, Ngày đặt, Ngày cần hàng, Tổng tiền, Trạng thái | Mới, Gửi email RFQ hàng loạt, Lọc Chờ tôi duyệt, Nhóm theo trạng thái | Mặc định, Rỗng | FR-06, FR-10, FR-17, FR-25 | backend |
-| SCR-04 | RFQ và Đơn mua hàng | Nhân viên MH, Người duyệt đơn mua hàng | Mã, Vendor, Yêu cầu mua hàng, Ngày đặt, Ngày cần hàng, Dòng (Sản phẩm, Số lượng, Đơn vị tính, Nhập kho, Đơn giá, Ngày giao dự kiến, Thành tiền), Tổng tiền, Báo giá thay thế, Cấp duyệt, Lý do | Gửi email RFQ, Tạo RFQ thay thế, So sánh báo giá, Approve, Duyệt, Từ chối, Tạo đề nghị thanh toán, Xác nhận đã nhận hàng, Huỷ, Yêu cầu mua hàng, Đề nghị thanh toán, Phiếu DO | Nháp, RFQ, Tạo RFQ thay thế, Lỗi chưa nhập giá, Chờ duyệt, Đã duyệt, Waiting PO, Xác nhận nhận hàng, PO, RFQ dịch vụ | FR-06, FR-07, FR-08, FR-09, FR-10, FR-11, FR-13, FR-15, FR-17, FR-19, FR-25 | backend |
+| SCR-02 | Yêu cầu mua hàng | Người đề xuất, Trưởng nhóm, Nhân viên MH, BOD | Số phiếu, Người tạo, Bộ phận, Ngày tạo, Nguồn tạo, Ngày cần hàng, Ghi chú, Dòng (Vật tư, Đơn vị tính, Nhập kho, Số lượng, Nhà cung cấp, Đơn giá, Nguồn giá, Thành tiền, Ghi chú), Tổng dự kiến, Người duyệt 3 cấp và trạng thái duyệt, Tệp đính kèm | Gửi duyệt, Duyệt, Từ chối, Về nháp, Huỷ, RFQ/Đơn mua hàng, Hợp đồng | Nháp, Tạo từ Hợp đồng, Chờ duyệt cấp 2, Đã duyệt, Từ chối - nhập lý do, Bị từ chối - về Nháp, Lỗi validate | FR-01, FR-02, FR-03, FR-04, FR-17, FR-19, FR-22, FR-23, FR-24 | backend |
+| SCR-03 | Danh sách RFQ và Đơn mua hàng | Nhân viên MH, Trưởng phòng Mua hàng | Số phiếu, Nhà cung cấp, Mã Yêu cầu mua hàng, Loại, Ngày dự kiến nhận hàng, Tổng tiền, Trạng thái | Mới, Tìm theo mã YCMH, Lọc Chờ tôi duyệt, Nhóm theo trạng thái | Mặc định, Rỗng | FR-10, FR-17, FR-25, FR-27 | backend |
+| SCR-04 | RFQ và Đơn mua hàng | Nhân viên MH, Trưởng phòng Mua hàng | Số phiếu, Nhà cung cấp, Mã Yêu cầu mua hàng, Người tạo YCMH, Bộ phận, Ngày dự kiến nhận hàng, Ngày nhận hàng thực tế, Ghi chú, Dòng (Vật tư, Số lượng, Đơn vị tính, Nhập kho, Đơn giá, Nguồn giá, Ngày giao dự kiến, Thành tiền), Tổng tiền, Báo giá NCC, Duyệt, Lý do | Send email, So sánh giá, Tạo đề nghị thanh toán, Approve, Duyệt, Từ chối, Huỷ, Yêu cầu mua hàng, Báo giá NCC, Đề nghị thanh toán, Phiếu DO | Nháp, RFQ - đã nhận báo giá, Lỗi chưa có ĐNTT, Chờ duyệt, PO, PO dịch vụ | FR-06, FR-08, FR-09, FR-10, FR-11, FR-13, FR-15, FR-17, FR-19, FR-25, FR-26, FR-27 | backend |
 | SCR-11 | Hợp đồng mua hàng | Nhân viên MH, Người đề xuất | Số hợp đồng, Nhà cung cấp, Loại, Hiệu lực từ, Hiệu lực đến, Người phụ trách, Tham chiếu NCC, Dòng (Vật tư, Đơn vị tính, Đơn giá, Số lượng hợp đồng, Đã đặt), Tệp hợp đồng | Tạo yêu cầu mua hàng, Xác nhận, Đóng hợp đồng, Yêu cầu mua hàng, RFQ/Đơn mua hàng | Đang hiệu lực, Hết hiệu lực | FR-20, FR-22 | backend |
-| SCR-12 | Báo giá NCC | Nhân viên MH, Người đề xuất | Số báo giá, Nhà cung cấp, Ngày báo giá, Hiệu lực đến, Người nhận, Tệp báo giá, Dòng (Vật tư, Đơn vị tính, Đơn giá, Số lượng tối thiểu, Ghi chú) | Tạo yêu cầu mua hàng, Xác nhận, Huỷ, Yêu cầu mua hàng | Còn hiệu lực, Hết hiệu lực | FR-21, FR-23 | backend |
-| SCR-05 | Gửi email yêu cầu báo giá | Nhân viên MH | Người nhận, Tiêu đề, Nội dung, Tệp đính kèm, Mẫu email | Gửi, Huỷ | Mặc định, Lỗi vendor chưa có email | FR-06 | backend |
-| SCR-06 | So sánh báo giá | Nhân viên MH | Sản phẩm, Vendor, RFQ, Số lượng, Đơn giá, Thành tiền, Ngày giao dự kiến, Nhãn Giá thấp nhất | Chọn, Bỏ chọn, Hoàn tất chọn giá | Mặc định, Đã chọn, Rỗng | FR-08 | backend |
+| SCR-12 | Báo giá NCC | Nhân viên MH, Người đề xuất | Số báo giá, Nhà cung cấp, Ngày báo giá, Hiệu lực đến, Người nhận, Tệp báo giá, RFQ liên quan, Dòng (Vật tư, Đơn vị tính, Đơn giá, Số lượng tối thiểu, Ghi chú) | Tạo yêu cầu mua hàng, Xác nhận, Huỷ, Yêu cầu mua hàng | Còn hiệu lực, Hết hiệu lực | FR-21, FR-23, FR-26 | backend |
+| SCR-05 | Gửi email yêu cầu báo giá | Nhân viên MH | Gửi đến (nhiều NCC, ngăn cách ";"), Tiêu đề, Nội dung (bảng sản phẩm), Tệp đính kèm (PDF RFQ, Excel mẫu báo giá), Mẫu email | Gửi, Huỷ | Mặc định, Lỗi NCC chưa có email, Đã gửi | FR-06 | backend |
+| SCR-06 | So sánh giá | Nhân viên MH | Vật tư, Số lượng, NCC (cột), Đơn giá, Thành tiền, Tổng theo NCC, Ngày giao, Nhãn Giá thấp nhất / Tổng thấp nhất, Nguồn báo giá (Excel / nhập tay) | Chọn NCC này, Nhập tay báo giá, Đóng | Mặc định, Đã chọn NCC, Rỗng | FR-08, FR-26 | backend |
 | SCR-07 | Danh sách Đề nghị thanh toán | Kế toán, Nhân viên MH | Mã, Đơn mua hàng, Vendor, Số tiền, Ngày đề nghị, Hình thức, Trạng thái | Lọc Chờ kế toán duyệt, Nhóm theo trạng thái, Tìm kiếm | Mặc định, Rỗng | FR-12 | backend |
-| SCR-08 | Đề nghị thanh toán | Nhân viên MH, Kế toán | Mã, Đơn mua hàng, Vendor, Số tiền, Ngày đề nghị, Hình thức thanh toán, Tài khoản ngân hàng, Nội dung, Tệp đính kèm, Thanh toán | Gửi kế toán, Duyệt, Từ chối, Ghi nhận thanh toán, Huỷ | Nháp, Lỗi validate, Chờ kế toán duyệt, Ghi nhận thanh toán, Đã thanh toán | FR-11, FR-12 | backend |
-| SCR-09 | Phiếu DO - nhập kho | Thủ kho | Mã, Vendor, Chứng từ gốc, Ngày dự kiến, Kho nhận, Dòng (Sản phẩm, Số lượng yêu cầu, Số lượng thực nhận, Đơn vị tính) | Xác nhận, Tạo backorder, Không tạo backorder | Sẵn sàng, Nhận thiếu - backorder, Hoàn tất | FR-14 | backend |
-| SCR-10 | Cấu hình duyệt mua hàng | Quản trị hệ thống | Người duyệt cấp 1, Người duyệt cấp 2, Ngưỡng duyệt cấp 2, Mẫu email RFQ, Mẫu email từ chối | Lưu, Huỷ bỏ | Mặc định, Lỗi validate | FR-18 | backend |
+| SCR-08 | Đề nghị thanh toán | Nhân viên MH, Kế toán | Mã, RFQ / Đơn mua hàng, Vendor, Số tiền, Ngày đề nghị, Hình thức thanh toán, Tài khoản ngân hàng, Nội dung, Tệp đính kèm, Thanh toán | Gửi kế toán, Duyệt, Từ chối, Ghi nhận thanh toán, Huỷ | Nháp, Lỗi validate, Chờ kế toán duyệt, Ghi nhận thanh toán, Đã thanh toán | FR-11, FR-12 | backend |
+| SCR-09 | Phiếu DO - nhập kho | Thủ kho | Mã, Vendor, Chứng từ gốc, Ngày dự kiến, Kho nhận, Dòng (Sản phẩm, Số lượng yêu cầu, Số lượng thực nhận, Đơn vị tính) | Xác nhận, Tạo backorder, Không tạo backorder | Sẵn sàng, Nhận thiếu - backorder, Hoàn tất | FR-13, FR-14 | backend |
+| SCR-10 | Cấu hình duyệt mua hàng | Quản trị hệ thống | Người duyệt đơn mua hàng, Mẫu email RFQ, Mẫu email từ chối, Mẫu file Excel báo giá, Hộp thư nhận báo giá | Lưu, Huỷ bỏ | Mặc định, Lỗi validate | FR-18 | backend |
 
 ### 6.2 Wireframe
 
@@ -640,22 +719,22 @@ Form YCMH: đầu phiếu theo khảo sát lần 2, dòng vật tư Nhập kho c
 ![SCR-02 — Yêu cầu mua hàng](ui/png/SCR-02-yeu-cau-mua-hang.png)
 
 #### SCR-03 — Danh sách RFQ và Đơn mua hàng
-Danh sách RFQ và đơn mua hàng với các trạng thái mới; hỗ trợ gửi email RFQ hàng loạt và lọc "Chờ tôi duyệt".
+Danh sách RFQ và đơn mua hàng: Nháp → RFQ → Chờ duyệt → PO; cột Mã Yêu cầu mua hàng và Loại; tìm theo mã YCMH, lọc "Chờ tôi duyệt". *(Sửa v0.3)*
 
 ![SCR-03 — Danh sách RFQ và Đơn mua hàng](ui/png/SCR-03-danh-sach-don-mua-hang.png)
 
 #### SCR-04 — RFQ và Đơn mua hàng
-Form trung tâm của quy trình: statusbar Nháp → RFQ → Chờ duyệt → Đã duyệt → Waiting PO → PO; nút đổi theo trạng thái.
+Form trung tâm: statusbar Nháp → RFQ → Chờ duyệt → PO (dịch vụ: Nháp → Chờ duyệt → PO); đầu phiếu kế thừa YCMH, có ngày dự kiến / thực tế nhận hàng và mã YCMH gốc; nút đổi theo trạng thái. *(Sửa v0.3)*
 
 ![SCR-04 — RFQ và Đơn mua hàng](ui/png/SCR-04-don-mua-hang.png)
 
 #### SCR-05 — Gửi email yêu cầu báo giá
-Cửa sổ soạn email gửi RFQ cho vendor, đính kèm PDF RFQ.
+Popup "Send email": chọn nhiều NCC ngăn cách ";", soạn như email thường, hệ thống gửi riêng từng NCC; đính kèm PDF RFQ và Excel mẫu báo giá. *(Sửa v0.3)*
 
 ![SCR-05 — Gửi email yêu cầu báo giá](ui/png/SCR-05-gui-email-yeu-cau-bao-gia.png)
 
 #### SCR-06 — So sánh báo giá
-Bảng so sánh dòng sản phẩm giữa các RFQ trong nhóm thay thế, đánh dấu giá thấp nhất, chọn theo dòng.
+Bảng so sánh báo giá của các NCC trên cùng 1 RFQ (vật tư theo hàng, NCC theo cột), đánh dấu giá thấp nhất, chọn 1 NCC cho cả phiếu. *(Sửa v0.3)*
 
 ![SCR-06 — So sánh báo giá](ui/png/SCR-06-so-sanh-bao-gia.png)
 
@@ -665,17 +744,17 @@ Danh sách ĐNTT cho Kế toán, lọc mặc định "Chờ kế toán duyệt".
 ![SCR-07 — Danh sách Đề nghị thanh toán](ui/png/SCR-07-danh-sach-de-nghi-thanh-toan.png)
 
 #### SCR-08 — Đề nghị thanh toán
-Form ĐNTT gắn với một đơn mua hàng; Kế toán duyệt và ghi nhận thanh toán.
+Form ĐNTT gắn với một RFQ / đơn mua hàng, tạo trước khi gửi duyệt đơn; Kế toán duyệt và ghi nhận thanh toán. *(Sửa v0.3)*
 
 ![SCR-08 — Đề nghị thanh toán](ui/png/SCR-08-de-nghi-thanh-toan.png)
 
 #### SCR-09 — Phiếu DO - nhập kho
-Phiếu nhập kho tạo tự động khi xác nhận nhận hàng; Thủ kho nhập số lượng thực nhận.
+Phiếu nhập kho tạo tự động khi đơn được duyệt; Thủ kho nhập số lượng thực nhận; hoàn tất thì cập nhật Ngày nhận hàng thực tế của đơn. *(Sửa v0.3)*
 
 ![SCR-09 — Phiếu DO - nhập kho](ui/png/SCR-09-phieu-do-nhap-kho.png)
 
 #### SCR-10 — Cấu hình duyệt mua hàng
-Trang Settings của Purchase, khối cấu hình người duyệt, ngưỡng và mẫu email.
+Trang Settings của Purchase: người duyệt đơn mua hàng (1 cấp), mẫu email, mẫu Excel báo giá, hộp thư nhận báo giá. *(Sửa v0.3 — bỏ ngưỡng)*
 
 ![SCR-10 — Cấu hình duyệt mua hàng](ui/png/SCR-10-cau-hinh-duyet-mua-hang.png)
 
@@ -691,42 +770,27 @@ Báo giá nhà cung cấp gửi công ty; nút "Tạo yêu cầu mua hàng" khi 
 
 ## 7. User flow
 
-### 7.1 Luồng chính end-to-end
+### 7.1 Luồng chính — Activity – Swimlane *(sửa v0.3)*
+
+Quy trình vẽ lại theo yêu cầu khảo sát lần 3 (đặc tả `ui/swimlanes/*.json`, vẽ bằng `render-screens/scripts/swimlane.py`). Sơ đồ 1, 2: vật tư Nhập kho; sơ đồ 3: vật tư Dịch vụ.
+
+![Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng](ui/diagrams/swimlane-01-yeu-cau-mua-hang.png)
+
+![Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho](ui/diagrams/swimlane-02-yeu-cau-bao-gia-po.png)
+
+![Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp](ui/diagrams/swimlane-03-dich-vu.png)
+
+### 7.2 Luồng từ chối *(sửa v0.3)*
 
 ```mermaid
 flowchart TD
-  A[SCR-02 Người đề xuất tạo YCMH] --> B[Gửi duyệt]
-  B --> C0{SCR-02 Trưởng nhóm duyệt cấp 1?}
-  C0 -- Duyệt --> C{SCR-02 MH duyệt cấp 2?}
-  C -- Duyệt --> D{SCR-02 BOD duyệt cấp 3?}
-  D -- Duyệt --> E[Hệ thống tạo RFQ: N NCC ra N RFQ]
-  S[SCR-04 MH tạo RFQ dịch vụ trực tiếp] --> G
-  E --> F[SCR-04 RFQ Nháp]
-  F --> G[SCR-05 Gửi email RFQ - trạng thái RFQ]
-  G --> H[SCR-04 Tạo RFQ thay thế cho vendor khác]
-  H --> I[SCR-06 So sánh và chọn giá]
-  I --> J[SCR-04 Approve - Chờ duyệt]
-  J --> K{Duyệt đơn theo ngưỡng?}
-  K -- Duyệt đủ cấp --> L[SCR-04 Đã duyệt]
-  L --> M[SCR-08 Tạo ĐNTT và gửi kế toán]
-  M --> N[SCR-04 Waiting PO]
-  N --> O[SCR-04 Xác nhận đã nhận hàng - PO]
-  O --> P[SCR-09 Phiếu DO - Thủ kho xác nhận]
-  M --> Q[SCR-07 Kế toán duyệt ĐNTT]
-  Q --> R[SCR-08 Ghi nhận thanh toán]
-```
-
-### 7.2 Luồng từ chối
-
-```mermaid
-flowchart TD
-  A{SCR-02 Người duyệt YCMH} -- Từ chối và nhập lý do --> B[YCMH Từ chối]
-  B --> C[Người đề xuất Về nháp, sửa, gửi lại]
+  A{SCR-02 Người duyệt YCMH} -- Từ chối và nhập lý do --> B[YCMH về Nháp, email cho người tạo]
+  B --> C[Người tạo sửa, gửi lại]
   C --> A
-  D{SCR-04 Người duyệt đơn} -- Từ chối và nhập lý do --> E[Đơn về RFQ]
-  E --> F[MH chọn lại giá, Approve lại]
+  D{SCR-04 Trưởng phòng Mua hàng} -- Từ chối và nhập lý do --> E[Đơn Nhập kho về RFQ, dịch vụ về Nháp]
+  E --> F[MH chọn lại NCC hoặc sửa, Approve lại]
   F --> D
-  G{SCR-08 Kế toán} -- Từ chối và nhập lý do --> H[ĐNTT Từ chối, đơn về Đã duyệt]
+  G{SCR-08 Kế toán} -- Từ chối và nhập lý do --> H[ĐNTT Từ chối, đơn Chờ duyệt về RFQ]
   H --> I[MH tạo ĐNTT mới]
   I --> G
 ```
@@ -775,48 +839,50 @@ flowchart TD
 | FR-03 | Từ chối và gửi lại Yêu cầu mua hàng | US-02, US-05, US-14, US-24 | SCR-02 |
 | FR-04 | Huỷ Yêu cầu mua hàng | US-04 | SCR-02 |
 | FR-05 | Tự động tạo RFQ gộp theo vendor | US-06 | Không có UI |
-| FR-06 | Gửi email RFQ cho vendor | US-07 | SCR-03, SCR-04, SCR-05 |
-| FR-07 | Tạo RFQ thay thế cho vendor khác | US-08 | SCR-04 |
-| FR-08 | Nhập giá, so sánh và chọn giá | US-09 | SCR-04, SCR-06 |
+| FR-06 | Gửi email xin báo giá tới nhiều nhà cung cấp | US-07 | SCR-04, SCR-05 |
+| FR-07 | Tạo RFQ thay thế cho vendor khác [Đã bỏ — v0.3] | US-08 | Không có UI (đã bỏ) |
+| FR-08 | So sánh giá và chọn nhà cung cấp | US-09 | SCR-04, SCR-06 |
 | FR-09 | Gửi duyệt đơn mua hàng | US-10 | SCR-04 |
-| FR-10 | Duyệt hoặc từ chối đơn mua hàng theo ngưỡng | US-15 | SCR-03, SCR-04 |
-| FR-11 | Tạo Đề nghị thanh toán và chuyển Waiting PO | US-11 | SCR-04, SCR-08 |
+| FR-10 | Duyệt hoặc từ chối đơn mua hàng | US-15 | SCR-03, SCR-04 |
+| FR-11 | Tạo Đề nghị thanh toán trước khi gửi duyệt | US-11 | SCR-04, SCR-08 |
 | FR-12 | Kế toán xử lý Đề nghị thanh toán | US-16 | SCR-07, SCR-08 |
-| FR-13 | Xác nhận đã nhận hàng, chuyển PO và tạo phiếu DO | US-12, US-25 | SCR-04 |
+| FR-13 | Duyệt xong chuyển PO và tự tạo phiếu DO | US-12, US-25 | SCR-04, SCR-09 |
 | FR-14 | Nhập kho theo phiếu DO | US-17 | SCR-09 |
 | FR-15 | Huỷ RFQ và đơn mua hàng | US-13 | SCR-04 |
 | FR-16 | Thông báo và activity | US-05, US-14, US-15, US-16, US-24 | Không có UI |
 | FR-17 | Truy vết và tra cứu chứng từ | US-03 | SCR-01, SCR-02, SCR-03, SCR-04, SCR-11, SCR-12 |
-| FR-18 | Cấu hình người duyệt và ngưỡng | US-18 | SCR-10 |
+| FR-18 | Cấu hình người duyệt, mẫu email và mẫu báo giá | US-18 | SCR-10 |
 | FR-19 | Phân loại vật tư Nhập kho / Dịch vụ | US-01, US-25 | SCR-02, SCR-04 |
 | FR-20 | Danh mục Hợp đồng mua hàng | US-22 | SCR-11 |
-| FR-21 | Danh mục Báo giá NCC | US-23 | SCR-12 |
+| FR-21 | Danh mục Báo giá NCC | US-23, US-26 | SCR-12 |
 | FR-22 | Tạo Yêu cầu mua hàng từ Hợp đồng | US-19 | SCR-11, SCR-02 |
 | FR-23 | Tạo Yêu cầu mua hàng từ Báo giá NCC | US-20 | SCR-12, SCR-02 |
 | FR-24 | Tự điền nhà cung cấp và đơn giá (Hợp đồng → Price List) | US-21 | SCR-02 |
-| FR-25 | Mua Dịch vụ bằng RFQ trực tiếp | US-25 | SCR-03, SCR-04 |
+| FR-25 | Mua Dịch vụ bằng PO trực tiếp | US-25 | SCR-03, SCR-04 |
+| FR-26 | Nhận email trả lời và đọc file Excel báo giá | US-26 | SCR-04, SCR-06 |
+| FR-27 | Đánh số RFQ/PO và truy vết Yêu cầu mua hàng gốc | US-27 | SCR-03, SCR-04 |
 
 ## 9. Assumptions & Open Questions
 
 ### 9.1 Giả định
 | Mã | Giả định | Lý do chọn | Liên quan |
 |---|---|---|---|
-| AS-01 | Odoo 17 Enterprise, on-premise hoặc Odoo.sh, cho phép module tuỳ biến | Approvals là module Enterprise; cần code tuỳ biến | Toàn hệ thống, NFR-09 |
+| AS-01 | Odoo 17 Enterprise, on-premise hoặc Odoo.sh, cho phép module tuỳ biến — **xác nhận v0.3** (tra-loi-cau-hoi-mo-lan-1.md; _changes/20261020-084051.md #1) | Approvals là module Enterprise; cần code tuỳ biến | Toàn hệ thống, NFR-09 |
 | AS-02 | KPI *(sửa v0.2)*: 100% đơn mua vật tư Nhập kho có YCMH đã duyệt làm gốc và lịch sử duyệt trên chatter | Input chưa có KPI | Mục 1 |
 | AS-03 | **[Đã thay — v0.2]** ~~YCMH duyệt tuần tự MH → Trưởng phòng~~. Khảo sát lần 2 xác nhận Trưởng nhóm → MH → BOD; chi tiết AS-34 | khao-sat-lan-2-yeu-cau-mua-hang.md | FR-02, SCR-02 |
 | AS-04 | **[Đã thay — v0.2]** ~~Vendor trên dòng → bảng giá NCC; thiếu thì chặn duyệt cấp 1~~. Khảo sát lần 2: Hợp đồng → Price List; chi tiết AS-30, AS-31, AS-32 | khao-sat-lan-2-yeu-cau-mua-hang.md | FR-02, FR-05, FR-24 |
-| AS-05 | Mỗi YCMH sinh RFQ riêng theo vendor, không gộp với YCMH khác | Giữ truy vết 1 YCMH → n RFQ | FR-05 |
-| AS-06 | Hỏi giá nhiều vendor bằng RFQ thay thế (Alternatives) | Tính năng chuẩn Odoo | FR-07, SCR-04 |
-| AS-07 | Chọn giá theo dòng; RFQ không còn dòng được chọn tự huỷ | Linh hoạt chọn vendor theo sản phẩm | FR-08, SCR-06 |
-| AS-08 | Trưởng phòng Mua hàng duyệt mọi đơn; tổng ≥ 50.000.000₫ thêm Giám đốc | Thông lệ phân cấp duyệt | FR-09, FR-10, FR-18 |
-| AS-09 | Từ chối bắt buộc lý do; YCMH về Từ chối để sửa gửi lại; đơn về RFQ | Không mất dữ liệu đã nhập | FR-03, FR-10 |
+| AS-05 | Mỗi YCMH sinh RFQ riêng theo vendor, không gộp với YCMH khác — **xác nhận v0.3** (tra-loi-cau-hoi-mo-lan-1.md) | Giữ truy vết 1 YCMH → n RFQ | FR-05 |
+| AS-06 | **[Đã thay — v0.3]** ~~Hỏi giá nhiều vendor bằng RFQ thay thế (Alternatives)~~. Giữ 1 RFQ, gửi email riêng tới N NCC (khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #8) | Tính năng chuẩn Odoo | FR-07, SCR-04 |
+| AS-07 | **[Đã thay — v0.3]** ~~Chọn giá theo dòng; RFQ không được chọn tự huỷ~~. Chọn 1 NCC cho cả phiếu, RFQ đổi NCC và giá (_changes/20261020-093008.md #8) | Linh hoạt chọn vendor theo sản phẩm | FR-08, SCR-06 |
+| AS-08 | **[Đã thay — v0.3]** ~~Trưởng phòng Mua hàng duyệt mọi đơn; tổng ≥ 50.000.000₫ thêm Giám đốc~~. Không có ngưỡng (tra-loi-cau-hoi-mo-lan-1.md); người duyệt: AS-39 | Thông lệ phân cấp duyệt | FR-09, FR-10, FR-18 |
+| AS-09 | *(Sửa v0.3)* Từ chối bắt buộc lý do. YCMH bị từ chối về Nháp và gửi email cho người tạo (tra-loi-cau-hoi-mo-lan-1.md; _changes/20261020-084051.md #6); đơn mua hàng về RFQ (dịch vụ: Nháp); ĐNTT: AS-41 | Không mất dữ liệu đã nhập | FR-03, FR-10 |
 | AS-10 | ĐNTT là chứng từ mới gắn 1 đơn; là khoản trả trước, thanh toán đủ số tiền đề nghị | Input chỉ nêu tên chứng từ | FR-11, FR-12, SCR-08 |
-| AS-11 | Đơn chuyển Waiting PO khi ĐNTT được gửi kế toán | Theo input | FR-11 |
+| AS-11 | **[Đã thay — v0.3]** ~~Đơn chuyển Waiting PO khi ĐNTT được gửi kế toán~~. Bỏ Waiting PO; ĐNTT tạo trước khi gửi duyệt (khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #3) | Theo input | FR-11 |
 | AS-12 | Phiếu DO = phiếu nhập kho (Receipt), tạo "Sẵn sàng"; Thủ kho xác nhận; nhận thiếu tạo backorder | Thuật ngữ DO chưa rõ; v0.2: khảo sát lần 2 nhắc "phiếu Nhập kho" cho vật tư Nhập kho | FR-13, FR-14, SCR-09 |
 | AS-13 | Vendor phải có email mới gửi được RFQ | Gửi RFQ qua email | FR-06, SCR-05 |
 | AS-14 | Huỷ YCMH trước khi duyệt xong; huỷ đơn trước PO và khi chưa thanh toán | Tránh huỷ chứng từ đã phát sinh kho/tiền | FR-04, FR-15 |
 | AS-15 | Hoá đơn nhà cung cấp dùng chuẩn Odoo, ngoài phạm vi | Input không đề cập | FR-12 |
-| AS-16 | MH nhập giá vendor thủ công vào RFQ | Không có cổng vendor | FR-08 |
+| AS-16 | **[Đã thay — v0.3]** ~~MH nhập giá vendor thủ công vào RFQ~~. Hệ thống đọc Excel từ email NCC reply; nhập tay khi file lỗi (khao-sat-lan-3-yeu-cau-bao-gia.md; AS-45) | Không có cổng vendor | FR-08 |
 | AS-17 | Chỉ dùng VND | Input không đề cập ngoại tệ | NFR-06 |
 | AS-18 | Thông báo qua activity Odoo + email | Kênh chuẩn Odoo | FR-16 |
 | AS-19 | *(Sửa v0.2)* Dòng YCMH bắt buộc vật tư Nhập kho, đơn vị tính, kho nhận, số lượng > 0 (không để trống — khảo sát lần 2 xác nhận); ngày cần hàng không bắt buộc, đã nhập thì ≥ hôm nay | Dữ liệu tối thiểu để tạo RFQ | FR-01 |
@@ -827,7 +893,7 @@ flowchart TD
 | AS-24 | Activity duyệt/xử lý có hạn 1 ngày làm việc | Input chưa có SLA xử lý | FR-01, FR-16 |
 | AS-25 | Lý do từ chối/huỷ tối thiểu 10 ký tự | Tránh lý do rỗng nghĩa | FR-03, FR-10, FR-12, FR-15 |
 | AS-26 | Vật tư "Nhập kho" = sản phẩm loại Lưu kho (storable) của Odoo; vật tư "Dịch vụ" = sản phẩm loại Dịch vụ; không dùng loại Tiêu dùng | Khảo sát lần 2 chỉ nêu 2 loại | FR-19 |
-| AS-27 | Đơn dịch vụ dùng chung nút "Xác nhận đã nhận hàng" để chuyển Waiting PO → PO, không sinh phiếu DO | Giữ một luồng trạng thái cho mọi đơn | FR-13, FR-25 |
+| AS-27 | **[Đã thay — v0.3]** ~~Đơn dịch vụ dùng chung nút "Xác nhận đã nhận hàng"~~. Đơn dịch vụ duyệt xong là PO, không có bước nhận hàng (khao-sat-lan-3-yeu-cau-bao-gia.md) | Giữ một luồng trạng thái cho mọi đơn | FR-13, FR-25 |
 | AS-28 | Số phiếu YCMH = `<Mã BP>_<XXXX>_<DD>_<MM>_<YY>`: Mã BP là mã bộ phận của người tạo; XXXX đếm riêng theo bộ phận, về 0001 đầu mỗi năm; DD_MM_YY là ngày tạo (vd. `HC_0012_20_10_26`) | Mẫu số phiếu chưa nói cách đếm XXXX | FR-01 |
 | AS-29 | Kho nhận (cột "Nhập kho") mặc định là kho chính của công ty, người tạo sửa được theo từng dòng; một đơn mua sinh một phiếu DO cho mỗi kho nhận | Một YCMH có nhiều kho (người làm chốt); Odoo chuẩn nhận mỗi đơn vào một kho | FR-01, FR-05, FR-13 |
 | AS-30 | Hợp đồng = Purchase Agreement loại Hợp đồng khung (Blanket Order); còn hiệu lực khi trạng thái "Đang hiệu lực" và ngày hiện tại nằm trong khoảng hiệu lực; không kiểm tra số lượng còn lại | Tính năng chuẩn Odoo, có NCC, đơn giá, ngày hiệu lực | FR-20, FR-22, FR-24 |
@@ -839,33 +905,42 @@ flowchart TD
 | AS-36 | Tạo YCMH từ Hợp đồng / Báo giá NCC: chép mọi dòng, số lượng để trống cho người tạo nhập, dòng không cần thì xoá; NCC và đơn giá khoá theo chứng từ nguồn; được thêm dòng vật tư khác (tự tra giá) | Input chưa mô tả chi tiết | FR-22, FR-23 |
 | AS-37 | Giữ cả hai lớp duyệt: YCMH (Trưởng nhóm → MH → BOD) và đơn mua hàng sau chọn giá (AS-08) cho tới khi khảo sát phiếu tiếp theo | Khảo sát lần 2 mới đi chi tiết phiếu YCMH | FR-09, FR-10 |
 | AS-38 | Tác vụ chuyển Hợp đồng / Báo giá NCC sang "Hết hiệu lực" chạy hằng ngày lúc 00:05 | Ngoài giờ làm việc, trước khi người dùng tra giá | FR-20, FR-21 |
+| AS-39 | Đơn mua hàng duyệt 1 cấp bởi Trưởng phòng Mua hàng, không phân ngưỡng giá trị | tra-loi-cau-hoi-mo-lan-1.md: không có ngưỡng; người duyệt chưa nói | FR-10, FR-18 |
+| AS-40 | Gửi duyệt đơn yêu cầu ĐNTT đã gửi Kế toán (trạng thái "Chờ kế toán duyệt" trở lên); không cần Kế toán duyệt xong | khao-sat-lan-3-yeu-cau-bao-gia.md chỉ nói "bắt buộc tạo ĐNTT trước" | FR-09, FR-11 |
+| AS-41 | ĐNTT bị Kế toán từ chối: đơn đang Chờ duyệt về RFQ (dịch vụ: Nháp); đơn đã PO giữ PO; MH tạo ĐNTT mới | Input chưa nói | FR-12 |
+| AS-42 | Số RFQ/PO = `<Mã BP>-PO-<XXXX>-<DD>-<MM>-<YYYY>-<NN>`: Mã BP, XXXX, ngày lấy từ YCMH gốc, NN là thứ tự RFQ trong YCMH (vd. `HC-PO-0012-20-10-2026-02`). PO dịch vụ: `<Mã BP người tạo>-PO-<XXXX>-<DD>-<MM>-<YYYY>`, XXXX đếm riêng (vd. `MH-PO-0003-21-10-2026`). Mã YCMH gốc lưu ngầm ở trường ẩn | Mẫu ở khao-sat-lan-3-yeu-cau-bao-gia.md; mục tiêu truy vết RFQ → YCMH (_changes/20261020-093008.md #6) | FR-27 |
+| AS-43 | Ngày dự kiến nhận hàng mặc định = Ngày cần hàng của YCMH (trống thì ngày tạo RFQ + 7 ngày), MH sửa được; Ngày nhận hàng thực tế = ngày hoàn tất phiếu DO cuối cùng của đơn, chỉ đọc | Input chưa nói cách lấy ngày | FR-05, FR-13 |
+| AS-44 | Email xin báo giá có bảng sản phẩm của phiếu trong nội dung, đính kèm PDF RFQ và file Excel mẫu báo giá (Mã vật tư, Tên vật tư, ĐVT, Số lượng, Đơn giá, Ngày giao, Ghi chú) | Muốn tự đọc Excel thì cần mẫu cố định | FR-06, FR-26 |
+| AS-45 | Odoo nhận reply qua incoming mail server và alias của RFQ; NCC xác định theo email người gửi; file sai mẫu thì MH nhập tay báo giá | Cơ chế mail gateway chuẩn của Odoo | FR-26, FR-08 |
+| AS-46 | Kết quả đọc Excel lưu thành Báo giá NCC (FR-21) gắn với RFQ; báo giá mới của cùng NCC thay báo giá cũ ("Đã thay thế") | Tận dụng danh mục Báo giá NCC đã có | FR-21, FR-26 |
+| AS-47 | File báo giá chỉ nhận .xlsx, ≤ 5 MB, ≤ 500 dòng; đọc xong ≤ 60 giây sau khi email tới | Giới hạn an toàn khi xử lý file đính kèm | NFR-10 |
 
 ### 9.2 Câu hỏi mở
 | Mã | Câu hỏi | Người cần trả lời | Ảnh hưởng tới |
 |---|---|---|---|
-| OQ-01 | Phiên bản Odoo, edition và hosting (Odoo Online không cài được module tuỳ biến)? | IT khách hàng | Toàn hệ thống, NFR-09 |
-| OQ-02 | Quy trình hiện tại (AS-IS) và vấn đề đang gặp? | Khách hàng | Mục 1 |
+| OQ-01 | **Đã trả lời (tra-loi-cau-hoi-mo-lan-1.md; _changes/20261020-084051.md #1):** Odoo 17 bản trả phí, Odoo.sh hoặc on-premise, cài được module tuỳ biến | IT khách hàng | Toàn hệ thống, NFR-09 |
+| OQ-02 | **Đã trả lời một phần (tra-loi-cau-hoi-mo-lan-1.md):** quy trình hiện tại làm thủ công, cần cải thiện. Còn mở: các bước hiện tại và chỉ số đo được | Khách hàng | Mục 1 |
 | OQ-03 | KPI, giá trị mục tiêu và mốc go-live? | Khách hàng | Mục 1 |
 | OQ-04 | **Đã trả lời (khao-sat-lan-2-yeu-cau-mua-hang.md):** duyệt tuần tự Trưởng nhóm (theo người tạo) → User MH → BOD | Khách hàng | FR-02, SCR-02 |
 | OQ-05 | **Đã trả lời một phần (khao-sat-lan-2-yeu-cau-mua-hang.md):** Hợp đồng còn hiệu lực → Price List. Còn mở: không có cả hai thì xử lý thế nào → OQ-28 | Phòng Mua hàng | FR-02, FR-05, FR-24 |
-| OQ-06 | Có gộp dòng của nhiều YCMH cùng vendor vào một RFQ không? | Phòng Mua hàng | FR-05 |
-| OQ-07 | Một nhu cầu hỏi giá bao nhiêu vendor? Chọn theo dòng hay cả phiếu? Tiêu chí chọn? | Phòng Mua hàng | FR-07, FR-08, SCR-06 |
-| OQ-08 | Ai duyệt đơn mua hàng? Phân cấp theo giá trị, ngưỡng bao nhiêu? | Ban giám đốc | FR-10, FR-18 |
-| OQ-09 | Khi bị từ chối, phiếu quay về đâu? Có cho gửi lại không? | Khách hàng | FR-03, FR-10 |
+| OQ-06 | **Đã trả lời (tra-loi-cau-hoi-mo-lan-1.md):** không cho phép gộp nhiều YCMH cùng vendor vào một RFQ | Phòng Mua hàng | FR-05 |
+| OQ-07 | **Đã trả lời một phần (khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #8):** 1 RFQ gửi email riêng tới N NCC; chọn 1 NCC cho cả phiếu. Còn mở: số NCC tối thiểu / tối đa (OQ-39) | Phòng Mua hàng | FR-07, FR-08, SCR-06 |
+| OQ-08 | **Đã trả lời một phần (tra-loi-cau-hoi-mo-lan-1.md):** đơn mua hàng không có ngưỡng giá trị. Còn mở: ai duyệt đơn (AS-39) | Ban giám đốc | FR-10, FR-18 |
+| OQ-09 | **Đã trả lời một phần (tra-loi-cau-hoi-mo-lan-1.md; _changes/20261020-084051.md #6):** YCMH bị từ chối về Nháp và gửi email cho người tạo. Còn mở: đơn mua hàng và ĐNTT bị từ chối | Khách hàng | FR-03, FR-10 |
 | OQ-10 | ĐNTT là tạm ứng trước khi nhận hàng hay thanh toán theo hoá đơn? Ai duyệt? Có thanh toán một phần không? | Kế toán | FR-11, FR-12, SCR-08 |
-| OQ-11 | Có phải chờ thanh toán xong mới được nhận hàng không? | Kế toán / Mua hàng | FR-11, FR-13 |
+| OQ-11 | **Đã trả lời (khao-sat-lan-3-yeu-cau-bao-gia.md; _changes/20261020-093008.md #3):** bỏ Waiting PO; ĐNTT tạo trước khi duyệt, duyệt xong là PO + DO, không chờ thanh toán | Kế toán / Mua hàng | FR-11, FR-13 |
 | OQ-12 | "Phiếu DO" là phiếu gì? Tự hoàn tất nhập kho hay Thủ kho xác nhận? | Kho | FR-13, FR-14, SCR-09 |
 | OQ-13 | Hoá đơn nhà cung cấp và đối chiếu có trong dự án không? | Kế toán | FR-12 |
 | OQ-14 | Số người dùng và số YCMH, đơn mua hàng mỗi tháng? | Khách hàng | NFR-01 |
 | OQ-15 | Có mẫu email / mẫu in RFQ, ĐNTT theo mẫu công ty không? | Phòng Mua hàng | FR-06, FR-18, SCR-05 |
-| OQ-16 | Vendor gửi báo giá qua kênh nào? Có cần cổng vendor tự nhập giá không? | Phòng Mua hàng | FR-08 |
+| OQ-16 | **Đã trả lời (khao-sat-lan-3-yeu-cau-bao-gia.md):** NCC reply email kèm file Excel báo giá; không cần cổng vendor | Phòng Mua hàng | FR-08 |
 | OQ-17 | Có mua hàng bằng ngoại tệ không? | Kế toán | NFR-06 |
 | OQ-18 | Ngoài activity và email, có cần kênh thông báo khác (Zalo, SMS) không? | Khách hàng | FR-16 |
 | OQ-19 | Quy tắc đánh mã YCMH, ĐNTT theo mẫu công ty? | Kế toán | FR-01, FR-11 |
 | OQ-20 | Yêu cầu khả dụng, giờ làm việc và trình duyệt chuẩn của công ty? | IT khách hàng | NFR-05, NFR-07 |
 | OQ-21 | Thời hạn xử lý mỗi bước duyệt? Quá hạn có nhắc hoặc chuyển cấp không? Quy định về nội dung lý do từ chối? | Khách hàng | FR-03, FR-16 |
 | OQ-22 | Vật tư "Nhập kho" ứng với loại sản phẩm nào trong Odoo? Có dùng loại Tiêu dùng (consumable) không? | IT khách hàng | FR-19 |
-| OQ-23 | Đơn dịch vụ hoàn tất bằng nút nào? Có cần nghiệm thu / biên bản trước khi chuyển PO không? | Phòng Mua hàng | FR-13, FR-25 |
+| OQ-23 | **Đã trả lời một phần (khao-sat-lan-3-yeu-cau-bao-gia.md):** đơn dịch vụ duyệt xong là PO, không tạo DO, không có bước nhận hàng. Còn mở: có cần nghiệm thu dịch vụ không | Phòng Mua hàng | FR-13, FR-25 |
 | OQ-24 | XXXX trong số phiếu đếm theo bộ phận hay toàn công ty? Về 0001 theo năm, tháng hay ngày? Mã BP lấy ở đâu? | Kế toán / IT | FR-01 |
 | OQ-25 | Kho nhận mặc định của dòng là kho nào? Bộ phận nào được chọn kho nào? | Kho | FR-01, FR-13 |
 | OQ-26 | Hợp đồng có giới hạn số lượng / giá trị không? Có trừ luỹ kế và chặn khi vượt không? | Phòng Mua hàng | FR-20, FR-24 |
@@ -876,3 +951,9 @@ flowchart TD
 | OQ-31 | Có cần "Ngày cần hàng" và "Lý do mua" trên đầu phiếu không? | Khách hàng | FR-01 |
 | OQ-32 | Tạo YCMH từ Hợp đồng / Báo giá: chép mọi dòng hay chọn dòng? Có được thêm vật tư ngoài chứng từ nguồn không? | Phòng Mua hàng | FR-22, FR-23 |
 | OQ-33 | BOD đã duyệt YCMH thì đơn mua hàng sau khi chọn giá còn cần duyệt nữa không? | Ban giám đốc | FR-09, FR-10 |
+| OQ-34 | Gửi duyệt đơn chỉ cần tạo / gửi ĐNTT, hay phải chờ Kế toán duyệt ĐNTT? | Kế toán / Mua hàng | FR-09, FR-11 |
+| OQ-35 | ĐNTT bị Kế toán từ chối thì đơn mua hàng xử lý thế nào? | Kế toán | FR-12 |
+| OQ-36 | Mẫu "Mã phòng ban-PO-XXXX-DD-MM-YYYY": XXXX và ngày lấy từ YCMH hay đếm riêng? 1 YCMH sinh nhiều RFQ thì phân biệt thế nào? PO dịch vụ đánh số ra sao? Mẫu này khác mẫu số YCMH "Mã BP_XXXX_DD_MM_YY" — có thống nhất không? | Kế toán / Mua hàng | FR-27, FR-01 |
+| OQ-37 | Nhận nhiều đợt (backorder) thì "Ngày nhận hàng thực tế" lấy ngày nào? | Kho | FR-13 |
+| OQ-38 | Mẫu file Excel báo giá do ai cung cấp, gồm cột nào? NCC không dùng mẫu thì xử lý ra sao? Hộp thư nhận báo giá là địa chỉ nào? | Phòng Mua hàng / IT | FR-26 |
+| OQ-39 | Một RFQ được hỏi giá tối đa bao nhiêu NCC? Có bắt buộc đủ số báo giá tối thiểu trước khi chọn NCC không? | Phòng Mua hàng | FR-06, FR-08 |
