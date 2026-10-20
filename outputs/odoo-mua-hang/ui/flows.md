@@ -83,7 +83,7 @@ flowchart TD
 | SCR | Slug | Loại | Khung | Trạng thái cần vẽ | FR |
 |---|---|---|---|---|---|
 | SCR-01 | danh-sach-yeu-cau-mua-hang | backend | 1440 | default, empty | FR-01, FR-17 |
-| SCR-02 | yeu-cau-mua-hang | backend | 1440 | default, to-approve, approved, refuse, error | FR-01, FR-02, FR-03, FR-04, FR-17 |
+| SCR-02 | yeu-cau-mua-hang | backend | 1440 | default, to-approve, approved, refuse, refused, error | FR-01, FR-02, FR-03, FR-04, FR-17 |
 | SCR-03 | danh-sach-don-mua-hang | backend | 1440 | default, empty | FR-06, FR-10, FR-17 |
 | SCR-04 | don-mua-hang | backend | 1440 | default, rfq, alternative, error, to-approve, approved, waiting-po, confirm-receipt, po | FR-06, FR-07, FR-08, FR-09, FR-10, FR-11, FR-13, FR-15, FR-17 |
 | SCR-05 | gui-email-yeu-cau-bao-gia | backend | 1440 | default, error | FR-06 |
@@ -121,6 +121,7 @@ flowchart TD
   - to-approve (Chờ duyệt cấp 2): góc nhìn Trưởng phòng; nút "Duyệt" (primary), "Từ chối", "Huỷ" (ghost); khối người duyệt cấp 1 "Đã duyệt", cấp 2 "Chờ duyệt".
   - approved: statusbar Đã duyệt; smart button "2 RFQ/Đơn mua hàng"; `wf-alert--success` "Đã tạo 2 RFQ: P00012, P00013".
   - refuse: `wf-overlay` + `wf-modal` "Từ chối yêu cầu YCMH/2026/0012", textarea Lý do (bắt buộc), nút "Xác nhận" (primary) "Huỷ".
+  - refused (Từ chối — góc nhìn Người đề xuất): `wf-alert--warning` nêu người từ chối và lý do; nút "Về nháp" (primary), "Huỷ" (ghost); statusbar Nháp → Chờ duyệt → Từ chối.
   - error: `wf-alert--error` tóm tắt 2 lỗi; dòng số lượng 0 và ngày cần hàng lỗi `be-field--error`.
 
 ### SCR-03 — Danh sách RFQ và Đơn mua hàng
@@ -142,22 +143,22 @@ flowchart TD
   - approved: "Tạo đề nghị thanh toán" (primary), "Huỷ".
   - waiting-po: "Xác nhận đã nhận hàng" (primary), "Huỷ"; smart button Đề nghị thanh toán 1.
   - confirm-receipt: modal xác nhận "Xác nhận đã nhận hàng cho P00014? Hệ thống tạo phiếu DO."; "Xác nhận" (primary), "Huỷ".
-  - po: không có nút hành động trạng thái; statusbar PO; smart button Phiếu DO 1; `wf-toast` "Đã tạo phiếu WH/IN/00031".
+  - po: không có nút hành động trạng thái (không huỷ được); statusbar PO; smart button Phiếu DO 1; `wf-alert--success` "Đã xác nhận nhận hàng. Phiếu DO WH/IN/00031 (2 dòng) đã gửi Thủ kho."
 - **Ghi chú:** chú thích nút chỉ hiện theo trạng thái (FR-09, FR-13), ngưỡng duyệt (FR-10).
 
 ### SCR-05 — Gửi email yêu cầu báo giá
 - **File:** `ui/screens/SCR-05-gui-email-yeu-cau-bao-gia.html`
 - **Bố cục:** nền form SCR-04 mờ (`wf-overlay`) + `wf-modal--lg`: Người nhận (tag vendor), Tiêu đề, Nội dung (`wf-textarea`), Tệp đính kèm (P00012.pdf), Mẫu email; footer "Gửi" (primary), "Huỷ".
 - **Trạng thái:**
-  - default: người nhận "Công ty Văn phòng phẩm Hồng Hà <baogia@vpphongha.vn>".
-  - error: `wf-alert--error` "Vendor Công ty TNHH Tin học Phong Vũ chưa có email".
+  - default: RFQ P00012, người nhận "Công ty Văn phòng phẩm Hồng Hà <baogia@vpphongha.vn>".
+  - error: RFQ P00019, `wf-alert--error` "Vendor Công ty TNHH An Phát chưa có email".
 
 ### SCR-06 — So sánh báo giá
 - **File:** `ui/screens/SCR-06-so-sanh-bao-gia.html`
 - **Bố cục:** `be-topbar` → `be-controlpanel` (breadcrumb "Yêu cầu báo giá › P00012 › So sánh báo giá"; nút "Hoàn tất chọn giá" primary) → `be-list` > `wf-table` nhóm theo sản phẩm (`be-list__group`): Vendor, RFQ, Số lượng, Đơn giá, Thành tiền, Ngày giao dự kiến, nhãn, nút "Chọn".
 - **Trạng thái:**
   - default: 2 sản phẩm × 3 vendor; nhãn "Giá thấp nhất".
-  - selected: dòng đã chọn badge "Đã chọn", dòng khác số lượng 0; toast "Đã chọn giá Thiên Long cho Bút bi TL-027".
+  - selected: dòng đã chọn badge "Đã chọn" + nút "Bỏ chọn", dòng khác số lượng 0; `wf-alert--warning` báo RFQ sẽ bị huỷ.
   - empty: `wf-empty` "Chưa có báo giá thay thế" + nút "Tạo RFQ thay thế".
 
 ### SCR-07 — Danh sách Đề nghị thanh toán

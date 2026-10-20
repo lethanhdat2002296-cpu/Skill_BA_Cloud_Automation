@@ -172,7 +172,7 @@ flowchart LR
   - BR-06.3: Gửi lại RFQ đã ở trạng thái "RFQ" được phép; trạng thái giữ nguyên.
 - **Acceptance criteria:**
   1. **Given** RFQ Nháp vendor có email **When** bấm "Gửi email RFQ" rồi "Gửi" **Then** email kèm `P00012.pdf` được gửi và RFQ chuyển "RFQ".
-  2. **Given** vendor không có email **When** bấm "Gửi" **Then** hiện lỗi "Vendor Công ty TNHH Tin học Phong Vũ chưa có email" và RFQ giữ "Nháp".
+  2. **Given** vendor không có email **When** bấm "Gửi" **Then** hiện lỗi "Vendor Công ty TNHH An Phát chưa có email" và RFQ giữ "Nháp".
   3. **Given** chọn 3 RFQ Nháp của 3 vendor trên danh sách **When** chọn "Thao tác › Gửi email RFQ" và xác nhận **Then** 3 email riêng được gửi và cả 3 RFQ chuyển "RFQ".
 - **Độ ưu tiên:** Must
 
@@ -445,7 +445,7 @@ flowchart LR
 | SCR | Tên | Vai trò | Trường dữ liệu | Hành động | Trạng thái | FR | Loại |
 |---|---|---|---|---|---|---|---|
 | SCR-01 | Danh sách Yêu cầu mua hàng | Người đề xuất, Nhân viên MH, Trưởng phòng | Mã, Người đề xuất, Phòng ban, Ngày cần hàng, Tổng dự kiến, Trạng thái | Mới, Tìm kiếm, Lọc, Nhóm theo | Mặc định, Rỗng | FR-01, FR-17 | backend |
-| SCR-02 | Yêu cầu mua hàng | Người đề xuất, Nhân viên MH, Trưởng phòng | Mã, Người đề xuất, Phòng ban, Ngày cần hàng, Lý do mua, Dòng sản phẩm (Sản phẩm, Mô tả, Số lượng, Đơn vị tính, Vendor, Đơn giá dự kiến), Tổng dự kiến, Người duyệt và trạng thái duyệt, Tệp đính kèm | Gửi duyệt, Duyệt, Từ chối, Về nháp, Huỷ, RFQ/Đơn mua hàng | Nháp, Chờ duyệt cấp 2, Đã duyệt, Từ chối - nhập lý do, Lỗi validate | FR-01, FR-02, FR-03, FR-04, FR-17 | backend |
+| SCR-02 | Yêu cầu mua hàng | Người đề xuất, Nhân viên MH, Trưởng phòng | Mã, Người đề xuất, Phòng ban, Ngày cần hàng, Lý do mua, Dòng sản phẩm (Sản phẩm, Mô tả, Số lượng, Đơn vị tính, Vendor, Đơn giá dự kiến), Tổng dự kiến, Người duyệt và trạng thái duyệt, Tệp đính kèm | Gửi duyệt, Duyệt, Từ chối, Về nháp, Huỷ, RFQ/Đơn mua hàng | Nháp, Chờ duyệt cấp 2, Đã duyệt, Từ chối - nhập lý do, Từ chối, Lỗi validate | FR-01, FR-02, FR-03, FR-04, FR-17 | backend |
 | SCR-03 | Danh sách RFQ và Đơn mua hàng | Nhân viên MH, Người duyệt đơn mua hàng | Mã, Vendor, Yêu cầu mua hàng, Ngày đặt, Ngày cần hàng, Tổng tiền, Trạng thái | Mới, Gửi email RFQ hàng loạt, Lọc Chờ tôi duyệt, Nhóm theo trạng thái | Mặc định, Rỗng | FR-06, FR-10, FR-17 | backend |
 | SCR-04 | RFQ và Đơn mua hàng | Nhân viên MH, Người duyệt đơn mua hàng | Mã, Vendor, Yêu cầu mua hàng, Ngày đặt, Ngày cần hàng, Dòng (Sản phẩm, Số lượng, Đơn giá, Ngày giao dự kiến, Thành tiền), Tổng tiền, Báo giá thay thế, Cấp duyệt, Lý do | Gửi email RFQ, Tạo RFQ thay thế, So sánh báo giá, Approve, Duyệt, Từ chối, Tạo đề nghị thanh toán, Xác nhận đã nhận hàng, Huỷ, Yêu cầu mua hàng, Đề nghị thanh toán, Phiếu DO | Nháp, RFQ, Tạo RFQ thay thế, Lỗi chưa nhập giá, Chờ duyệt, Đã duyệt, Waiting PO, Xác nhận nhận hàng, PO | FR-06, FR-07, FR-08, FR-09, FR-10, FR-11, FR-13, FR-15, FR-17 | backend |
 | SCR-05 | Gửi email yêu cầu báo giá | Nhân viên MH | Người nhận, Tiêu đề, Nội dung, Tệp đính kèm, Mẫu email | Gửi, Huỷ | Mặc định, Lỗi vendor chưa có email | FR-06 | backend |
