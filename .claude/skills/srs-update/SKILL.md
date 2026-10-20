@@ -27,6 +27,7 @@ Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `p
    ```
    Gom FR theo phân hệ nghiệp vụ (mỗi phân hệ 3–8 FR, tên tiếng Việt ngắn). Script cảnh báo nếu ma trận truy vết viết tay lệch với dòng "Truy vết" của FR → sửa dòng "Truy vết" cho đúng. Commit riêng: `docs(<du-an>): chuyển SRS sang cấu trúc srs/`.
 4. Branch: `docs/<du-an>` (`ba-intake` đã chuyển sẵn; nếu chưa: `git fetch origin && git checkout docs/<du-an> && git pull --ff-only`).
+   **Cloud** (session chỉ được push lên branch được chỉ định, vd. `claude/...`) → ở lại branch hiện tại, không checkout `docs/<du-an>`.
 
 ## Bước 1 — Xác định thay đổi chưa xử lý
 
@@ -55,6 +56,7 @@ Phân loại từng ý thay đổi và ghi bảng **"Kế hoạch cập nhật"*
 | Bỏ FR | Giữ heading, thêm `**[Đã bỏ — v<ver>]**` + lý do; dòng Truy vết → `Màn hình: Không có UI (đã bỏ)`. |
 | Chỉ UI (nhãn, bố cục, thứ tự trường) | Không sửa văn FR. Sửa dòng SCR trong `06-man-hinh.md` nếu danh sách trường/hành động/trạng thái đổi. Thêm vào `ui/_pending.md`. |
 | NFR / tích hợp / mapping | `04-phi-chuc-nang.md` / `05-tich-hop.md`. |
+| Quy trình / luồng nghiệp vụ | `07-user-flow.md` (Mermaid) và/hoặc `ui/swimlanes/<so-do>.json` (sơ đồ Activity – Swimlane). Chỉ sửa đặc tả, không render — `srs-publish` vẽ lại. |
 | Ngoài phạm vi / giai đoạn sau | `01-gioi-thieu.md` mục Phạm vi. |
 | User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. |
 | Mâu thuẫn chưa chốt | `OQ-xx` mới trong `09`. |

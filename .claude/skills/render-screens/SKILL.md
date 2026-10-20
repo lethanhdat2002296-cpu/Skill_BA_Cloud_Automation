@@ -44,6 +44,15 @@ python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
 - Mở xem 1–2 sơ đồ để chắc chắn render đúng. Lỗi cú pháp Mermaid → sửa khối Mermaid trong file nguồn (bỏ ký tự đặc biệt trong label, bọc label bằng `["..."]`), chạy lại.
 - Không có mmdc/npx → script cảnh báo, giữ code Mermaid; ghi vào báo cáo.
 
+## Bước 3b — Sơ đồ Activity – Swimlane (khi SRS cần)
+Mermaid không vẽ được swimlane thẳng lane, nên dùng script riêng:
+```bash
+python .claude/skills/render-screens/scripts/swimlane.py <du-an>
+```
+- Đặc tả mỗi sơ đồ là một file `outputs/<du-an>/ui/swimlanes/<ten>.json` (lane, bước, mũi tên — xem docstring script). Dùng `"orientation": "vertical"` (lane là cột) để vừa trang A4 khi nhúng Word; ≤ 6 lane và ≤ 12 bước mỗi sơ đồ, quy trình dài thì tách nhiều sơ đồ.
+- Ra `ui/diagrams/swimlane-<ten>.png`; SRS tham chiếu bằng dòng ảnh `![…](ui/diagrams/swimlane-<ten>.png)`.
+- Mở xem từng ảnh: nhãn mũi tên không đè nhau, mũi tên không cắt qua bước.
+
 ## Bước 4 — Cập nhật gallery
 `shot.py` tự chạy lại `wireframe/scripts/build_ui.py` để `ui/index.html` có thumbnail. Kiểm tra số ảnh: mỗi SCR trong SRS mục 6.2 phải có `ui/png/SCR-xx-<slug>.png`.
 

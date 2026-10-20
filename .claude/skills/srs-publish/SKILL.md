@@ -12,7 +12,7 @@ Chỉ làm lại phần **đã thay đổi** từ lần phát hành trước. Kh
 Lệnh Python: `python3` nếu có, không thì `python`.
 
 ## Bước 0 — Chuẩn bị
-1. Branch `docs/<du-an>`: `git fetch origin && git checkout docs/<du-an> && git pull --ff-only`.
+1. Branch `docs/<du-an>`: `git fetch origin && git checkout docs/<du-an> && git pull --ff-only`. **Cloud** (session chỉ được push lên branch được chỉ định, vd. `claude/...`) → ở lại branch hiện tại.
 2. Chưa có `outputs/<du-an>/srs/` → chạy Bước 0.3 của `srs-update` (tách SRS) trước.
 3. `python .claude/skills/write-srs/scripts/build_srs.py <du-an>`.
 4. Đọc `outputs/<du-an>/ui/_pending.md` (không có file / bảng rỗng → không có màn nào cần vẽ, nhảy tới Bước 3).
@@ -38,6 +38,7 @@ python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-04 SCR-1
 ## Bước 3 — Sơ đồ, Word, kiểm tra
 ```bash
 python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
+python .claude/skills/render-screens/scripts/swimlane.py <du-an>      # chỉ khi có ui/swimlanes/*.json
 python .claude/skills/write-srs/scripts/to_docx.py <du-an>
 python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final
 ```
@@ -56,7 +57,7 @@ git commit -m "docs(<du-an>): phát hành v0.4"
 git push -u origin HEAD
 gh pr create --base main --title "docs(<du-an>): v0.4" --body-file outputs/<du-an>/.tmp/pr-body.md
 ```
-Không có `gh` → đưa link `https://github.com/<owner>/<repo>/compare/main...docs/<du-an>`. PR đã tồn tại → chỉ push (PR tự cập nhật).
+Không có `gh` → dùng công cụ GitHub sẵn có (MCP) hoặc đưa link `https://github.com/<owner>/<repo>/compare/main...<branch hiện tại>`. PR đã tồn tại → chỉ push (PR tự cập nhật).
 
 PR body = báo cáo dưới đây.
 
