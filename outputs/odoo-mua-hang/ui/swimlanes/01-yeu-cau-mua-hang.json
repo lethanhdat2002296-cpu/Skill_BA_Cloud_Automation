@@ -1,0 +1,25 @@
+{
+  "title": "Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng (v0.3)",
+  "orientation": "vertical",
+  "lanes": ["Người đề xuất", "Trưởng nhóm", "Nhân viên MH", "BOD", "Hệ thống"],
+  "nodes": [
+    {"id": "s", "lane": 0, "col": 0, "type": "start", "label": "Bắt đầu"},
+    {"id": "a1", "lane": 0, "col": 1, "label": "Tạo YCMH: trực tiếp / từ Hợp đồng / từ Báo giá NCC"},
+    {"id": "x0", "lane": 4, "col": 1, "type": "system", "label": "Tự điền NCC, giá: Hợp đồng → Price List"},
+    {"id": "a2", "lane": 0, "col": 2, "label": "Nhập kho nhận, số lượng; Gửi duyệt"},
+    {"id": "b1", "lane": 1, "col": 3, "type": "decision", "label": "Duyệt cấp 1?"},
+    {"id": "c1", "lane": 2, "col": 4, "type": "decision", "label": "Duyệt cấp 2?"},
+    {"id": "r1", "lane": 0, "col": 4, "label": "Về Nháp, nhận email lý do từ chối"},
+    {"id": "d1", "lane": 3, "col": 5, "type": "decision", "label": "Duyệt cấp 3?"},
+    {"id": "x1", "lane": 4, "col": 6, "type": "system", "label": "Tạo N RFQ theo N NCC, gắn mã YCMH"},
+    {"id": "e", "lane": 4, "col": 7, "type": "end", "label": "Sang swimlane 2"}
+  ],
+  "edges": [
+    ["s", "a1"], ["a1", "x0"], ["x0", "a2"], ["a2", "b1"],
+    ["b1", "c1", "Duyệt"], ["b1", "r1", "Từ chối"],
+    ["c1", "d1", "Duyệt"], ["c1", "r1", "Từ chối"],
+    ["d1", "x1", "Duyệt"], ["d1", "r1", "Từ chối"],
+    ["r1", "a2", "Sửa, gửi lại"],
+    ["x1", "e"]
+  ]
+}
