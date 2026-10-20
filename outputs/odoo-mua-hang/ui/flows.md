@@ -152,7 +152,7 @@ flowchart TD
 - **File:** `ui/screens/SCR-04-don-mua-hang.html`
 - **Bố cục:** `be-topbar` → `be-controlpanel` (breadcrumb "Yêu cầu báo giá › P00012") → `be-form-header` (nút theo trạng thái + `be-statusbar` Nháp → RFQ → Chờ duyệt → Đã duyệt → Waiting PO → PO) → `be-sheet`: `be-smart-buttons` (Yêu cầu mua hàng, Đề nghị thanh toán, Phiếu DO); `be-title`; `be-fields`: Vendor, Yêu cầu mua hàng, Ngày đặt, Ngày cần hàng; `be-notebook` tab "Sản phẩm" (Sản phẩm, Số lượng, Đơn vị tính, Nhập kho, Đơn giá, Ngày giao dự kiến, Thành tiền + tổng; v0.2 thêm cột Nhập kho), tab "Báo giá thay thế", tab "Duyệt" (Cấp, Người duyệt, Trạng thái, Thời điểm) → `be-chatter`.
 - **Trạng thái:**
-  - default (Nháp): "Gửi email RFQ" (primary), "Tạo RFQ thay thế", "Huỷ" (ghost); đơn giá lấy từ bảng giá NCC.
+  - default (Nháp): "Gửi email RFQ" (primary), "Tạo RFQ thay thế", "Huỷ" (ghost); đơn giá và kho nhận lấy từ dòng YCMH (v0.2).
   - rfq: "Approve" (primary), "Gửi lại email", "Tạo RFQ thay thế", "So sánh báo giá", "Huỷ"; tab Báo giá thay thế liệt kê 2 RFQ khác.
   - alternative: modal "Tạo RFQ thay thế": Vendor (bắt buộc), checkbox "Sao chép dòng sản phẩm"; nút "Tạo" (primary), "Huỷ".
   - error: `wf-alert--error` "Chưa nhập đơn giá cho sản phẩm Mực in HP 107A"; ô đơn giá lỗi.
