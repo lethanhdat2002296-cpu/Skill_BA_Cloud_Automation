@@ -58,7 +58,8 @@ Phân loại từng ý thay đổi và ghi bảng **"Kế hoạch cập nhật"*
 | NFR / tích hợp / mapping | `04-phi-chuc-nang.md` / `05-tich-hop.md`. |
 | Quy trình / luồng nghiệp vụ | `07-user-flow.md` (Mermaid) và/hoặc `ui/swimlanes/<so-do>.json` (sơ đồ Activity – Swimlane). Chỉ sửa đặc tả, không render — `srs-publish` vẽ lại. |
 | Ngoài phạm vi / giai đoạn sau | `01-gioi-thieu.md` mục Phạm vi. |
-| User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. |
+| User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. Rồi sửa UC liên quan trong `UC.md` và story trong `backlog.md` (story mới: ước lượng; story không đổi: không ước lượng lại). |
+| Đổi kịch bản / ngoại lệ của một tương tác | `UC.md` — nhánh `3a…` của UC liên quan (tra ma trận mục 5 của UC.md). |
 | Mâu thuẫn chưa chốt | `OQ-xx` mới trong `09`. |
 
 ## Bước 3 — Sửa đúng chỗ
@@ -96,6 +97,8 @@ Trong `srs/00-dau-trang.md`:
 ```bash
 python .claude/skills/write-srs/scripts/build_srs.py <du-an>
 python .claude/skills/write-srs/scripts/check_srs.py <du-an>
+python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix   # nếu có UC.md
+python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>         # nếu có backlog.md
 ```
 - `check_srs` không `--final` (ảnh/HTML của màn chờ vẽ được phép thiếu). Mọi `ERROR` khác phải sửa.
 - Commit **một lần** + push **một lần**:

@@ -48,7 +48,9 @@ Với mỗi bước: đọc `.claude/skills/<skill>/SKILL.md` của **repo này*
 |---|---|---|---|
 | 1 | `brainstorm` | `brainstorm.md` | `docs(<du-an>): brainstorm` |
 | 2 | `write-urd` | `URD.md` | `docs(<du-an>): URD` |
+| 2b | `write-usecase` | `UC.md` | `docs(<du-an>): use case` |
 | 3 | `write-srs` | `srs/*.md` (tách phân hệ) → `SRS.md` | `docs(<du-an>): SRS draft` |
+| 3b | `write-user-story` | `backlog.md`, `backlog.csv` | `docs(<du-an>): backlog` |
 | 4 | `ui-spec` | `ui/flows.md` | `docs(<du-an>): UI spec & flows` |
 | 5 | `wireframe` | `ui/screens/*.html`, `ui/index.html` | `docs(<du-an>): wireframes` |
 | 6 | `render-screens` | `ui/png/*.png`, `ui/diagrams/*.png` | `docs(<du-an>): render screens` |
@@ -59,12 +61,16 @@ git add outputs/<du-an>
 git commit -m "docs(<du-an>): <bước>"
 ```
 
+Sau bước 3 chạy lại `python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix` để ma trận UC ↔ US ↔ FR có cột FR.
+
 Nếu một bước phát hiện lỗi ở bước trước (vd. wireframe thấy SCR thiếu trường trong Screen Inventory) → **sửa ngược lại file nguồn** (`srs/*.md`, rồi chạy `build_srs.py`), không để hai tài liệu lệch nhau.
 
 ## Bước 4 — Xuất Word
 
 ```bash
 python .claude/skills/write-srs/scripts/to_docx.py <du-an>
+python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md
+python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src UC.md
 ```
 
 Script tự render Mermaid trong SRS.md, nhúng ảnh `ui/png/*.png`, dùng `templates/reference.docx` nếu có, và in số ảnh đã nhúng. Nếu báo ảnh thiếu → chạy lại `render-screens` cho màn đó, hoặc sửa đường dẫn trong SRS.md. Nếu không có pandoc → ghi rõ vào báo cáo, không dừng các bước còn lại.
@@ -75,6 +81,8 @@ Script tự render Mermaid trong SRS.md, nhúng ảnh `ui/png/*.png`, dùng `tem
    ```bash
    python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final
    python .claude/skills/wireframe/scripts/build_ui.py <du-an>
+   python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix
+   python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>
    ```
    `--final`: thiếu ảnh/HTML/docx tính là `ERROR`. Nếu PNG/docx không tạo được do thiếu công cụ (đã ghi báo cáo) thì các lỗi đó được chấp nhận, mọi lỗi khác phải sửa.
 2. Đọc `.claude/skills/write-srs/checklist.md`, đi từng mục, sửa mọi lỗi tìm thấy (SRS, URD, wireframe).

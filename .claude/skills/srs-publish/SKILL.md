@@ -40,6 +40,7 @@ python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-04 SCR-1
 python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
 python .claude/skills/render-screens/scripts/swimlane.py <du-an>      # chỉ khi có ui/swimlanes/*.json
 python .claude/skills/write-srs/scripts/to_docx.py <du-an>
+python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md   # và --src UC.md nếu có
 python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final
 ```
 Sửa mọi `ERROR` (trong `srs/*.md`, rồi chạy lại). Thiếu công cụ (pandoc/Playwright/mmdc) → ghi báo cáo, không dừng.

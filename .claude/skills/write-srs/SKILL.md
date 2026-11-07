@@ -56,7 +56,8 @@ Viết vào `outputs/<du-an>/srs/`, **không viết tay `SRS.md`** (file đó do
    - 6.2: mỗi SCR một heading `#### SCR-xx — Tên`, mô tả ngắn và **dòng ảnh** `![SCR-xx — Tên](ui/png/SCR-xx-<slug>.png)`. Slug quyết định ở đây và dùng xuyên suốt (HTML, PNG). Ảnh được tạo ở bước render-screens; đường dẫn phải khớp.
 6. **Mục 7 — User flow:** Mermaid `flowchart`. Ít nhất: luồng chính end-to-end + luồng ngoại lệ quan trọng. Node dùng tên màn (SCR-xx) khi có. Dùng cú pháp Mermaid đơn giản (không HTML trong label, không ký tự `"` lồng).
 7. **Mục 8:** không viết — tự sinh.
-8. **Mục 9:** gộp toàn bộ AS/OQ từ brainstorm + URD + phát sinh mới (đánh tiếp số). Cột "Ảnh hưởng tới" ghi FR/SCR liên quan.
+8. **Mục 9:** gộp toàn bộ AS/OQ từ brainstorm + URD + UC.md (nếu có) + phát sinh mới (đánh tiếp số). Cột "Ảnh hưởng tới" ghi FR/SCR liên quan.
+9. Có `UC.md`: viết FR theo kịch bản và nhánh ngoại lệ của UC (mỗi nhánh `3a…` quan trọng phải có BR hoặc AC tương ứng); dòng Truy vết được ghi thêm UC: `- **Truy vết:** US-01 · UC-01 · Màn hình: SCR-01`.
 
 ## Sau khi viết
 ```bash

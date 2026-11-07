@@ -3,6 +3,7 @@
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/to_docx.py <du-an>
+    python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md     # tài liệu khác -> URD.docx (UC.md, backlog.md…)
 
 Việc làm:
   1. Render các khối ```mermaid trong SRS.md -> ui/diagrams/srs-NN.png và thay bằng ảnh
@@ -113,14 +114,20 @@ def variants(project: Path, stem: str) -> list[tuple[str, str]]:
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) < 2:
+    src_name = "SRS.md"
+    if "--src" in argv:
+        i = argv.index("--src")
+        src_name = argv[i + 1] if i + 1 < len(argv) else ""
+        argv = argv[:i] + argv[i + 2:]
+    if len(argv) < 2 or not src_name.endswith(".md"):
         print(__doc__)
         return 2
     du_an = argv[1].strip("/\\")
     project = REPO / "outputs" / du_an
-    if needs_build(project):
+    is_srs = src_name == "SRS.md"
+    if is_srs and needs_build(project):
         build(project)
-    srs = project / "SRS.md"
+    srs = project / src_name
     if not srs.exists():
         print(f"ERROR: không có {srs.relative_to(REPO)}")
         return 1
@@ -133,7 +140,7 @@ def main(argv: list[str]) -> int:
     errors: list[str] = []
 
     # 1. Mermaid -> PNG
-    diagrams = render_markdown(srs, project / "ui" / "diagrams", "srs")
+    diagrams = render_markdown(srs, project / "ui" / "diagrams", Path(src_name).stem.lower())
     for d in reversed(diagrams):
         if d.png:
             rel = d.png.relative_to(project).as_posix()
@@ -147,7 +154,7 @@ def main(argv: list[str]) -> int:
             errors.append(f"ảnh ngoài internet không được phép: {src}")
             return m.group(0)
         if not path.exists():
-            errors.append(f"thiếu ảnh {src} (tham chiếu trong SRS.md)")
+            errors.append(f"thiếu ảnh {src} (tham chiếu trong {src_name})")
             return m.group(0)
         out = f"![{alt}]({src}){attrs or size_attr(path)}"
         sm = SCR_PNG_RE.match(src)
@@ -160,7 +167,7 @@ def main(argv: list[str]) -> int:
     text = IMG_RE.sub(replace_img, text)
 
     # 4. Phụ lục UI flows
-    flows = sorted((project / "ui" / "diagrams").glob("flows-*.png"))
+    flows = sorted((project / "ui" / "diagrams").glob("flows-*.png")) if is_srs else []
     if flows:
         flows_md = project / "ui" / "flows.md"
         heads = {}
@@ -183,12 +190,14 @@ def main(argv: list[str]) -> int:
     # 5. pandoc
     tmp_dir = project / ".tmp"
     tmp_dir.mkdir(exist_ok=True)
-    tmp_md = tmp_dir / "SRS.for-docx.md"
+    # tài liệu không dùng HTML thô: bỏ comment, và đọc "<số phiếu>", "<tên>"… như chữ thường (-raw_html)
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+    tmp_md = tmp_dir / f"{Path(src_name).stem}.for-docx.md"
     tmp_md.write_text(text, encoding="utf-8")
-    out = project / "SRS.docx"
+    out = project / f"{Path(src_name).stem}.docx"
     cmd = [
         pandoc, str(tmp_md),
-        "-f", "markdown+pipe_tables+lists_without_preceding_blankline-tex_math_dollars-raw_tex-yaml_metadata_block",
+        "-f", "markdown+pipe_tables+lists_without_preceding_blankline-tex_math_dollars-raw_tex-raw_html-yaml_metadata_block",
         "-t", "docx", "-o", str(out),
         f"--resource-path={project}",
         "--toc", "--toc-depth=2",

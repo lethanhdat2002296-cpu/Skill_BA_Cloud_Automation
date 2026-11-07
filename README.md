@@ -50,6 +50,9 @@ Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công
     srs-publish/             xuất bản khi gửi khách — vẽ màn đang chờ, docx, 0.3.x → 0.4, PR
     brainstorm/              phỏng vấn BA 7 phần, tự trả lời từ input
     write-urd/               URD + template-urd.md
+    write-usecase/           Use Case fully-dressed (UC-xx) + sơ đồ use case + scripts/check_uc.py (ma trận UC ↔ US ↔ FR)
+    write-user-story/        Product backlog: epic, tách story, story point, release + scripts/backlog_csv.py (CSV import Jira)
+    drive-sync/              đẩy SRS/URD/UC (Google Doc) và backlog (Google Sheet) lên Drive, đọc góp ý, sửa nhanh trên Doc
     write-srs/               SRS tách phân hệ (srs/*.md) + template + checklist + scripts/{build_srs,split_srs,check_srs,to_docx}.py
     ui-spec/                 Screen Inventory → flows.md
     wireframe/               design-kit/ (tokens.css, components-*.html, patterns.md) + scripts/build_ui.py
@@ -92,7 +95,10 @@ Windows cài nhanh bằng winget: `winget install Python.Python.3.12 OpenJS.Node
 | Ghép SRS.md từ srs/ | `python .claude/skills/write-srs/scripts/build_srs.py <du-an>` |
 | Tra mã nằm ở file nào | `python .claude/skills/write-srs/scripts/build_srs.py <du-an> --index` |
 | Chuyển dự án cũ sang srs/ | `python .claude/skills/write-srs/scripts/split_srs.py <du-an> --modules "Phân hệ A=FR-01..FR-05; Phân hệ B=FR-06..FR-09"` |
-| Xuất lại Word | `python .claude/skills/write-srs/scripts/to_docx.py <du-an>` |
+| Xuất lại Word | `python .claude/skills/write-srs/scripts/to_docx.py <du-an>` (thêm `--src URD.md` / `--src UC.md` cho tài liệu khác) |
+| Kiểm tra use case | `python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix` |
+| Xuất backlog CSV (Jira) | `python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>` |
+| Đẩy lên Google Drive | gõ "Đẩy dự án `<du-an>` lên Drive" (cần connector Google Drive) |
 | Kiểm tra SRS | `python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final` |
 | Chụp lại ảnh | `python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-03` |
 

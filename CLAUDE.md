@@ -10,7 +10,10 @@
 - Output luôn ghi vào `outputs/<du-an>/`.
 - Tên file cố định:
   - `outputs/<du-an>/brainstorm.md`
-  - `outputs/<du-an>/URD.md`
+  - `outputs/<du-an>/URD.md`, `outputs/<du-an>/URD.docx`
+  - `outputs/<du-an>/UC.md`, `outputs/<du-an>/UC.docx` — đặc tả use case (sau URD, trước SRS)
+  - `outputs/<du-an>/backlog.md`, `outputs/<du-an>/backlog.csv` — product backlog (sau SRS; CSV sinh bởi `backlog_csv.py`)
+  - `outputs/<du-an>/_drive.json` — ID/link Google Drive của tài liệu (drive-sync ghi)
   - `outputs/<du-an>/srs/*.md` — **nguồn của SRS, tách theo phân hệ** (`00-dau-trang.md`, `01-…`, `03-NN-<phan-he>.md`, … `09-gia-dinh-cau-hoi.md`). Sửa SRS = sửa ở đây.
   - `outputs/<du-an>/SRS.md` — **sinh tự động** bởi `build_srs.py` (không sửa tay); `outputs/<du-an>/SRS.docx`
   - `outputs/<du-an>/ui/_pending.md` — màn hình chờ vẽ lại (srs-update ghi, srs-publish xử lý)
@@ -24,6 +27,9 @@
 | Loại | Mẫu | Ví dụ |
 |---|---|---|
 | User story (URD) | `US-xx` | US-01 |
+| Story tách nhỏ (backlog) | `US-xx.n` | US-07.1 |
+| Epic (backlog) | `EP-xx` | EP-02 |
+| Use case | `UC-xx` | UC-03 |
 | Yêu cầu chức năng | `FR-xx` | FR-07 |
 | Yêu cầu phi chức năng | `NFR-xx` | NFR-02 |
 | Màn hình | `SCR-xx` | SCR-04 |
@@ -39,6 +45,9 @@ Số đánh 2 chữ số, tăng dần, **không tái sử dụng** mã đã xóa
 | "Làm SRS / làm tài liệu cho X" | `srs-pipeline` (tạo mới v0.1) | `srs-update` |
 | "Cập nhật SRS cho X", "cập nhật sau khảo sát/demo" | `srs-pipeline` | `srs-update` (nhanh, không vẽ, không docx) |
 | "Xuất bản / xuất docx / gửi khách / phát hành" | `srs-pipeline` | `srs-publish` (vẽ màn đang chờ, docx, PR) |
+| "Viết use case cho X" | `write-usecase` (cần URD) | `write-usecase` |
+| "Làm backlog / tách story / xuất Jira cho X" | `write-user-story` (cần URD) | `write-user-story` |
+| "Đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc" | `drive-sync` | `drive-sync` — chỉ khi user yêu cầu |
 
 ## Chế độ tự động
 - Chỉ `ba-intake` (khi không chạy trong pipeline) được hỏi user — và chỉ ở bước xử lý khác biệt cũ/mới, gộp trong **một** lần hỏi.
