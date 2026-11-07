@@ -32,10 +32,10 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 | Nhân viên Mua hàng (MH) | Duyệt cấp 2 YCMH; quản lý Hợp đồng, Báo giá NCC; xử lý RFQ, đơn mua hàng | Odoo backend — Approvals, Purchase, Accounting | Hằng ngày |
 | Trưởng nhóm | Duyệt cấp 1 Yêu cầu mua hàng, theo người tạo (AS-34; v0.2 thay "Trưởng phòng") | Odoo backend — Approvals | Hằng ngày |
 | BOD | Ban giám đốc, duyệt cấp 3 Yêu cầu mua hàng (AS-34) | Odoo backend — Approvals | Hằng ngày |
-| Người duyệt đơn mua hàng | Trưởng phòng Mua hàng; Giám đốc với đơn từ ngưỡng (AS-08) | Odoo backend — Purchase | Hằng ngày |
+| Người duyệt đơn mua hàng | Trưởng phòng Mua hàng, duyệt 1 cấp, không ngưỡng (AS-39) | Odoo backend — Purchase | Hằng ngày |
 | Kế toán | Xử lý Đề nghị thanh toán (AS-10) | Odoo backend — Accounting | Hằng ngày |
 | Thủ kho | Nhập kho theo phiếu DO (AS-12) | Odoo backend — Inventory | Hằng ngày |
-| Quản trị hệ thống | Cấu hình người duyệt, ngưỡng, mẫu email | Odoo backend — Settings | Khi thay đổi chính sách |
+| Quản trị hệ thống | Cấu hình người duyệt, mẫu email, mẫu Excel báo giá | Odoo backend — Settings | Khi thay đổi chính sách |
 
 ## 3. User stories theo vai trò
 
@@ -74,7 +74,7 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 - **Ưu tiên:** Should
 - **Nguồn:** AS-14
 - **Acceptance criteria:**
-  1. **Given** phiếu ở trạng thái "Nháp", "Chờ duyệt" hoặc "Từ chối" **When** tôi bấm "Huỷ" **Then** phiếu chuyển "Đã huỷ" và các activity duyệt đang mở bị xoá.
+  1. **Given** phiếu ở trạng thái "Nháp" hoặc "Chờ duyệt" **When** tôi bấm "Huỷ" **Then** phiếu chuyển "Đã huỷ" và các activity duyệt đang mở bị xoá.
   2. **Given** phiếu đã "Đã duyệt" **When** tôi mở phiếu **Then** nút "Huỷ" không hiển thị.
 
 #### US-19 — Tạo Yêu cầu mua hàng từ Hợp đồng
@@ -240,7 +240,7 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 - **Acceptance criteria:**
   1. **Given** phiếu "Chờ duyệt" do thành viên nhóm tôi tạo **When** tôi bấm "Duyệt" **Then** phiếu chuyển sang chờ Nhân viên MH duyệt (cấp 2).
   2. **Given** phiếu do người không thuộc nhóm tôi tạo **When** tôi mở phiếu **Then** nút "Duyệt" không hiển thị với tôi.
-  3. **Given** tôi bấm "Từ chối" và nhập lý do **When** tôi xác nhận **Then** phiếu chuyển "Từ chối" và Người đề xuất nhận thông báo kèm lý do.
+  3. **Given** tôi bấm "Từ chối" và nhập lý do **When** tôi xác nhận **Then** phiếu về "Nháp" và Người đề xuất nhận email kèm lý do (AS-09).
 
 ### 3.4 Người duyệt đơn mua hàng
 
@@ -262,7 +262,7 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 - **Acceptance criteria:**
   1. **Given** Đề nghị thanh toán "Chờ kế toán duyệt" **When** tôi bấm "Duyệt" **Then** phiếu chuyển "Đã duyệt".
   2. **Given** phiếu "Đã duyệt" **When** tôi bấm "Ghi nhận thanh toán", chọn sổ nhật ký và ngày thanh toán, xác nhận **Then** hệ thống tạo bút toán thanh toán cho vendor và phiếu chuyển "Đã thanh toán".
-  3. **Given** tôi bấm "Từ chối" và nhập lý do **When** tôi xác nhận **Then** phiếu chuyển "Từ chối", đơn mua hàng quay về "Đã duyệt" và Nhân viên MH nhận thông báo.
+  3. **Given** tôi bấm "Từ chối" và nhập lý do **When** tôi xác nhận **Then** phiếu chuyển "Từ chối", đơn đang "Chờ duyệt" về "RFQ" (đơn dịch vụ về "Nháp") và Nhân viên MH nhận email kèm lý do (AS-41).
 
 ### 3.6 Thủ kho
 
@@ -294,7 +294,7 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 - **Acceptance criteria:**
   1. **Given** phiếu đã được Nhân viên MH duyệt **When** một thành viên BOD bấm "Duyệt" **Then** phiếu chuyển "Đã duyệt" và hệ thống tạo RFQ theo US-06.
   2. **Given** phiếu chưa được MH duyệt **When** thành viên BOD mở phiếu **Then** nút "Duyệt" không hiển thị.
-  3. **Given** thành viên BOD bấm "Từ chối" và nhập lý do **When** xác nhận **Then** phiếu chuyển "Từ chối" và Người đề xuất nhận thông báo kèm lý do.
+  3. **Given** thành viên BOD bấm "Từ chối" và nhập lý do **When** xác nhận **Then** phiếu về "Nháp" và Người đề xuất nhận email kèm lý do (AS-09).
 
 ## 4. Quy trình nghiệp vụ mong muốn (TO-BE)
 

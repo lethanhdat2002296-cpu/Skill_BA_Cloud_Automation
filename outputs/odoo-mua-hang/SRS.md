@@ -99,7 +99,7 @@ flowchart LR
 | Quản trị hệ thống | Backend — Settings | Cấu hình người duyệt, mẫu email, mẫu Excel báo giá, hộp thư nhận báo giá *(sửa v0.3)* |
 
 ### 2.3 Giả định & phụ thuộc
-- **Giả định:** xem mục 9.1 (AS-01 … AS-47).
+- **Giả định:** xem mục 9.1 (AS-01 … AS-50).
 - **Phụ thuộc:**
   - Odoo 17 Enterprise với các module `purchase`, `purchase_requisition` (Blanket Order), `approvals`, `approval_purchase`, `stock`, `account_accountant` (AS-01).
   - Module tuỳ biến mới `purchase_flow_custom` (tên đề xuất) chứa toàn bộ thay đổi; không sửa mã nguồn lõi.
@@ -914,6 +914,9 @@ flowchart TD
 | AS-45 | Odoo nhận reply qua incoming mail server và alias của RFQ; NCC xác định theo email người gửi; file sai mẫu thì MH nhập tay báo giá | Cơ chế mail gateway chuẩn của Odoo | FR-26, FR-08 |
 | AS-46 | Kết quả đọc Excel lưu thành Báo giá NCC (FR-21) gắn với RFQ; báo giá mới của cùng NCC thay báo giá cũ ("Đã thay thế") | Tận dụng danh mục Báo giá NCC đã có | FR-21, FR-26 |
 | AS-47 | File báo giá chỉ nhận .xlsx, ≤ 5 MB, ≤ 500 dòng; đọc xong ≤ 60 giây sau khi email tới | Giới hạn an toàn khi xử lý file đính kèm | NFR-10 |
+| AS-48 | NCC trả lời sau khi RFQ đã chọn NCC: báo giá vẫn được lưu và hiện trên bảng so sánh, không tự đổi NCC đã chọn | Input chưa nói (phát sinh khi viết UC.md) | FR-08, FR-26 |
+| AS-49 | Release R1 gồm mọi story Must; story Should (US-03, US-04, US-13, US-18) sang R2; trong R1 người duyệt đơn và mẫu email cấu hình sẵn bằng dữ liệu khởi tạo | Phát sinh khi lập backlog.md | FR-18 |
+| AS-50 | Velocity đội phát triển 20 điểm / sprint 2 tuần (chỉ để ước số sprint) | Phát sinh khi lập backlog.md | — |
 
 ### 9.2 Câu hỏi mở
 | Mã | Câu hỏi | Người cần trả lời | Ảnh hưởng tới |
@@ -957,3 +960,5 @@ flowchart TD
 | OQ-37 | Nhận nhiều đợt (backorder) thì "Ngày nhận hàng thực tế" lấy ngày nào? | Kho | FR-13 |
 | OQ-38 | Mẫu file Excel báo giá do ai cung cấp, gồm cột nào? NCC không dùng mẫu thì xử lý ra sao? Hộp thư nhận báo giá là địa chỉ nào? | Phòng Mua hàng / IT | FR-26 |
 | OQ-39 | Một RFQ được hỏi giá tối đa bao nhiêu NCC? Có bắt buộc đủ số báo giá tối thiểu trước khi chọn NCC không? | Phòng Mua hàng | FR-06, FR-08 |
+| OQ-40 | Có hạn trả lời báo giá không? Hệ thống có cần nhắc NCC chưa trả lời, hoặc khoá nhận báo giá sau hạn? | Phòng Mua hàng | FR-06, FR-26 |
+| OQ-41 | Có cần go-live theo release (R1 trước, R2 sau) không, hay chờ đủ cả R1 + R2? Mốc go-live mong muốn? | Khách hàng | — |

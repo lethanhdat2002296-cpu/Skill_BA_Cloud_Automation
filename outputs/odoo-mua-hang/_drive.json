@@ -1,0 +1,57 @@
+{
+  "folders": {
+    "root": "1JRLX56vbPqIoee6k1wKZ9Yim3Hf_UNji",
+    "project": "1IMQ4RtmxmevegCtPuIEa0lBXV4Eh2iFD",
+    "archive": "1Tsd-zeBl2DHKN4bcXpowPsqyBXMIuCjo"
+  },
+  "files": {
+    "srs": {
+      "file_id": "1Wmw6E3oNItRwcL7N-nQh-vFYIdJ9zcOkf5FT7zbb7Aw",
+      "url": "https://docs.google.com/document/d/1Wmw6E3oNItRwcL7N-nQh-vFYIdJ9zcOkf5FT7zbb7Aw/edit",
+      "version": "0.3",
+      "source_sha256": "8cdb28471e90317b53f22afc54c1263a86b86b4cbc9a767b5af9a27fbe6af35e",
+      "synced_at": "2026-11-07 17:22"
+    },
+    "uc": {
+      "file_id": "1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM",
+      "url": "https://docs.google.com/document/d/1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM/edit",
+      "version": "0.3",
+      "source_sha256": "0c03e70ed0917c0d044461421f06abbadf8f0c8dc61e3fb8b9686c370dcb262c",
+      "synced_at": "2026-11-07 17:24"
+    },
+    "backlog": {
+      "file_id": "1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho",
+      "url": "https://docs.google.com/spreadsheets/d/1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho/edit",
+      "version": "",
+      "source_sha256": "5c3881afbdcbef631257376f1c5421f6465135e0b1af4d376d990770e49af0b1",
+      "synced_at": "2026-11-07 17:22"
+    },
+    "urd": {
+      "file_id": "1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ",
+      "url": "https://docs.google.com/document/d/1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ/edit",
+      "version": "0.3",
+      "source_sha256": "16b7b4ba10d9d32d739a969674d2fa680b9bddc969fb7b1979b3d98cfc928d50",
+      "synced_at": "2026-11-07 17:24"
+    }
+  },
+  "archived": [
+    {
+      "file_id": "1kEmXSw-fcDJgrKRRFrXlePiE4dDOsuWdnsK9gKN74dw",
+      "url": "https://docs.google.com/document/d/1kEmXSw-fcDJgrKRRFrXlePiE4dDOsuWdnsK9gKN74dw/edit",
+      "version": "0.3",
+      "source_sha256": "16b7b4ba10d9d32d739a969674d2fa680b9bddc969fb7b1979b3d98cfc928d50",
+      "synced_at": "2026-11-07 17:22",
+      "key": "urd",
+      "archived_at": "2026-11-07 17:24"
+    },
+    {
+      "file_id": "1IGX1oLfZe_CHN1ZYwULlplVDxB7Q-I9gXkdgIvwDfh8",
+      "url": "https://docs.google.com/document/d/1IGX1oLfZe_CHN1ZYwULlplVDxB7Q-I9gXkdgIvwDfh8/edit",
+      "version": "0.3",
+      "source_sha256": "0c03e70ed0917c0d044461421f06abbadf8f0c8dc61e3fb8b9686c370dcb262c",
+      "synced_at": "2026-11-07 17:22",
+      "key": "uc",
+      "archived_at": "2026-11-07 17:24"
+    }
+  ]
+}
