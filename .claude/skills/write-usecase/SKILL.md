@@ -1,6 +1,6 @@
 ---
 name: write-usecase
-description: Viết đặc tả Use Case (UC-xx) dạng fully-dressed theo Cockburn từ URD.md - danh sách tác nhân, sơ đồ use case (Mermaid), kịch bản chính đánh số, luồng thay thế / ngoại lệ (3a, 3b…), tiền điều kiện, đảm bảo khi thành công / tối thiểu, quan hệ include/extend, truy vết US ↔ UC ↔ FR (ma trận tự sinh). Dùng sau write-urd trong srs-pipeline (trước write-srs), hoặc khi user yêu cầu "viết use case", "đặc tả use case", "use case diagram", "kịch bản sử dụng". Keywords - use case, UC, actor, main success scenario, extensions, alternate flow, include, extend, Cockburn, UML use case diagram, BABOK. Output outputs/<du-an>/UC.md theo template-uc.md. Không hỏi user.
+description: Viết Use Case UC-xx dạng fully-dressed (tác nhân, kịch bản chính, nhánh 3a, include/extend) + sơ đồ use case + ma trận US ↔ UC ↔ FR → docs/UC.md. Dùng sau URD hoặc khi user nói "viết use case".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ---
 
@@ -9,9 +9,9 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 Use case mô tả **cách tác nhân đạt một mục tiêu** qua tương tác với hệ thống, gồm cả các nhánh thất bại. User story (URD) nói *cần gì, để làm gì*; use case nói *diễn ra thế nào, sai thì sao*; FR (SRS) nói *hệ thống phải làm gì*. Chuỗi truy vết: US → UC → FR.
 
 ## Input
-- `outputs/<du-an>/URD.md` (bắt buộc — chưa có thì chạy `write-urd` trước): vai trò, user story, AC, mục 4 quy trình TO-BE, AS/OQ.
-- `outputs/<du-an>/brainstorm.md` mục quy trình và ngoại lệ; `ui/swimlanes/*.json` nếu có.
-- `inputs/<du-an>/` chỉ để tra chi tiết.
+- `projects/<du-an>/docs/URD.md` (bắt buộc — chưa có thì chạy `write-urd` trước): vai trò, user story, AC, mục 4 quy trình TO-BE, AS/OQ.
+- `projects/<du-an>/docs/brainstorm.md` mục quy trình và ngoại lệ; `diagrams/swimlanes/*.json` nếu có.
+- `projects/<du-an>/input/` chỉ để tra chi tiết.
 
 ## Cách làm
 1. Đọc `template-uc.md` (khung) và `references.md` (nguyên tắc, ví dụ). Giữ cấu trúc mục, thay hết `{{…}}`.
@@ -46,4 +46,4 @@ python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix
 US đổi / thêm / bỏ → sửa đúng UC liên quan bằng `Edit`; UC bị bỏ giữ heading + `**[Đã bỏ — v<ver>]**` và lý do. Tăng phiên bản trong bảng thuộc tính UC.md cùng phiên bản SRS. Chạy lại `check_uc.py --write-matrix`.
 
 ## Output
-`outputs/<du-an>/UC.md` (+ sơ đồ render vào `ui/diagrams/uc-NN.png` khi xuất docx: `to_docx.py <du-an> --src UC.md`).
+`projects/<du-an>/docs/UC.md` (+ sơ đồ render vào `diagrams/uc-NN.png` khi xuất docx: `to_docx.py <du-an> --src UC.md`).

@@ -1,6 +1,6 @@
 ---
 name: write-user-story
-description: Biến user story trong URD thành Product Backlog sẵn sàng cho đội phát triển - gom Epic (EP-xx), tách story quá lớn theo mẫu splitting (US-07.1, US-07.2), kiểm INVEST, ước lượng story point (Fibonacci), xếp release (R1 MVP…), phụ thuộc, truy vết UC/FR/SCR, Definition of Ready/Done; xuất backlog.md và backlog.csv để import Jira (Issue Id/Parent) hoặc Google Sheet. Dùng sau write-srs trong srs-pipeline, hoặc khi user yêu cầu "viết user story", "làm backlog", "tách story", "ước lượng story point", "xuất Jira". Keywords - user story, product backlog, epic, INVEST, story splitting, story points, Fibonacci, MoSCoW, release plan, definition of ready, definition of done, Jira CSV import, Scrum. Output outputs/<du-an>/backlog.md + backlog.csv. Không hỏi user.
+description: Lập product backlog từ URD: epic, tách story (INVEST), story point, release, DoR/DoD → docs/backlog.md + exports/backlog.csv (import Jira). Dùng sau SRS hoặc khi user nói "làm backlog", "tách story", "xuất Jira".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ---
 
@@ -9,8 +9,8 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 URD viết user story **cho khách hàng duyệt** (đủ phạm vi, theo vai trò). Backlog viết lại các story đó **cho đội phát triển làm**: gom epic, cắt nhỏ vừa sprint, ước lượng, xếp thứ tự, gắn FR/SCR. Mã US giữ nguyên từ URD để truy vết.
 
 ## Input
-- `outputs/<du-an>/URD.md` (bắt buộc), `UC.md` (nếu có), `SRS.md` (nếu có — FR, SCR, BR để ước lượng và viết AC chi tiết).
-- `outputs/<du-an>/ui/flows.md` nếu có (màn hình theo luồng).
+- `projects/<du-an>/docs/URD.md` (bắt buộc), `UC.md` (nếu có), `SRS.md` (nếu có — FR, SCR, BR để ước lượng và viết AC chi tiết).
+- `projects/<du-an>/ui/flows.md` nếu có (màn hình theo luồng).
 
 ## Cách làm
 1. Đọc `template-backlog.md` (khung) và `references.md` (INVEST, mẫu tách story, thang điểm). Giữ cấu trúc, thay hết `{{…}}`.
@@ -39,4 +39,4 @@ python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>
 US thêm / sửa / bỏ trong URD → sửa đúng story trong backlog.md (`Edit`), story bỏ giữ heading + `**[Đã bỏ — v<ver>]**`; chạy lại `backlog_csv.py`. Không ước lượng lại story không đổi.
 
 ## Output
-`outputs/<du-an>/backlog.md`, `outputs/<du-an>/backlog.csv`
+`projects/<du-an>/docs/backlog.md`, `projects/<du-an>/exports/backlog.csv`

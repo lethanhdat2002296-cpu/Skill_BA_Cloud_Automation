@@ -1,7 +1,7 @@
 # UI spec — Quy trình mua hàng trên Odoo
 
 > Nguồn: SRS.md mục 3, 6, 7 (v0.3). Toàn bộ màn hình là backend Odoo, khung 1440px.
-> v0.3: sửa SCR-02 → SCR-10, SCR-12 (trả lời câu hỏi mở lần 1, khảo sát lần 3 — Yêu cầu báo giá); quy trình nghiệp vụ vẽ bằng Activity – Swimlane (`ui/swimlanes/*.json` → `ui/diagrams/swimlane-*.png`, SRS mục 7.1, 7.5).
+> v0.3: sửa SCR-02 → SCR-10, SCR-12 (trả lời câu hỏi mở lần 1, khảo sát lần 3 — Yêu cầu báo giá); quy trình nghiệp vụ vẽ bằng Activity – Swimlane (`diagrams/swimlanes/*.json` → `diagrams/swimlane-*.png`, SRS mục 7.1, 7.5).
 > v0.2: sửa SCR-01, SCR-02, SCR-03, SCR-04 (khảo sát lần 2 — Yêu cầu mua hàng); thêm SCR-11, SCR-12.
 
 ## 1. Sitemap

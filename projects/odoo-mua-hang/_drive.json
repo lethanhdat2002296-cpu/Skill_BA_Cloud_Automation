@@ -1,0 +1,139 @@
+{
+  "folders": {
+    "root": "1JRLX56vbPqIoee6k1wKZ9Yim3Hf_UNji",
+    "project": "1IMQ4RtmxmevegCtPuIEa0lBXV4Eh2iFD",
+    "archive": "1Tsd-zeBl2DHKN4bcXpowPsqyBXMIuCjo",
+    "docs": "1x44VWBsEEZ4SzRifmdZuNmhrh5u1GDO9",
+    "diagrams": "1-aviGuj5i_PgbrtLGhe5IdHDXSZGpSPE",
+    "ui": "1di4vfEt0kYuhbW-AKWvAhexJ3EZzMtIk",
+    "exports": "1O0PK_HbXHORV93WYGRGNiQSfNJZvb98V",
+    "input": "1ll8kW9kPYGiSxjB4ZpLBgn4-ITqL3x6m"
+  },
+  "files": {
+    "srs": {
+      "file_id": "1S25a37GVKYYSSZtl1bKr_IsBpqnW_yFplYplyYy-_kg",
+      "url": "https://docs.google.com/document/d/1S25a37GVKYYSSZtl1bKr_IsBpqnW_yFplYplyYy-_kg/edit",
+      "folder": "docs",
+      "version": "0.3",
+      "source_sha256": "0e598fad402064653a0ef7ce0416c89e96a7bf6ae3ff714d6eeec0e0db3c3c2d",
+      "synced_at": "2026-11-08 00:36"
+    },
+    "uc": {
+      "file_id": "1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM",
+      "url": "https://docs.google.com/document/d/1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM/edit",
+      "folder": "docs",
+      "version": "0.3",
+      "source_sha256": "ab79929723e8bf1116c9bad953cd8b63d6a42d2a5f19adb913bd5e7ec367c906",
+      "synced_at": "2026-11-08 00:36"
+    },
+    "backlog": {
+      "file_id": "1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho",
+      "url": "https://docs.google.com/spreadsheets/d/1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho/edit",
+      "folder": "docs",
+      "version": "",
+      "source_sha256": "5c3881afbdcbef631257376f1c5421f6465135e0b1af4d376d990770e49af0b1",
+      "synced_at": "2026-11-08 00:36"
+    },
+    "urd": {
+      "file_id": "1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ",
+      "url": "https://docs.google.com/document/d/1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ/edit",
+      "folder": "docs",
+      "version": "0.3",
+      "source_sha256": "054b210e74d8b21c6fe23fa1e8a60b439c1ef21179b1d2d2ab67decb5c0ce932",
+      "synced_at": "2026-11-08 00:36"
+    },
+    "diagrams/swimlane-01-yeu-cau-mua-hang.png": {
+      "file_id": "1Zd24FmUpYtKqxpGSCjjViDFMNg2aDnS_",
+      "url": "https://drive.google.com/file/d/1Zd24FmUpYtKqxpGSCjjViDFMNg2aDnS_/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "0a8eb6642d4bd48e951b504e5ed436d8cb8f483cc9d236f1ce57ae3668abdb81",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/swimlane-02-yeu-cau-bao-gia-po.png": {
+      "file_id": "1XwNBAhnNLvM348XXWnLM1sSelisJNMQf",
+      "url": "https://drive.google.com/file/d/1XwNBAhnNLvM348XXWnLM1sSelisJNMQf/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "3b566d592f44976dda6983e24870e7db2a1e153cb8c7ea69c2a4bca3f52ddb43",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/swimlane-03-dich-vu.png": {
+      "file_id": "1EC23PV83uAZnzEE6ufta3eW_ZwTJaKwH",
+      "url": "https://drive.google.com/file/d/1EC23PV83uAZnzEE6ufta3eW_ZwTJaKwH/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "20710d966dd8421de8e430296e5369ccecd583818f5c23e1400272f0d5cca044",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/uc-01.png": {
+      "file_id": "1L17q4pBVK44awShIxkQBu2MXEmpif0sX",
+      "url": "https://drive.google.com/file/d/1L17q4pBVK44awShIxkQBu2MXEmpif0sX/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "ae3fb4d7391324f65efa1b31efe3d03014f2de10eef918f82334b8310d3a110a",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/uc-02.png": {
+      "file_id": "1Rp4oeXb90NDoDH5nSrp5pM8BW8fn1lgE",
+      "url": "https://drive.google.com/file/d/1Rp4oeXb90NDoDH5nSrp5pM8BW8fn1lgE/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "57011225b420091f731abd86f842ac127692e982b15756a3a890380170ad55be",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/uc-03.png": {
+      "file_id": "1-hd1oEGARw81R1jfXJp2uh6KAInf6Xo8",
+      "url": "https://drive.google.com/file/d/1-hd1oEGARw81R1jfXJp2uh6KAInf6Xo8/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "4d5c76183a34ccd3b7c93e225136acab58afc6755e16cc4126059d26e735ad32",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/uc-04.png": {
+      "file_id": "1l3pg5A1Wpa_gu44rxvWxwHWwbl4Mb2UJ",
+      "url": "https://drive.google.com/file/d/1l3pg5A1Wpa_gu44rxvWxwHWwbl4Mb2UJ/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "95f468ad84634929705710800c3ac73c0f755a4e136aaab1049cedf15d9f44bb",
+      "synced_at": "2026-11-08 00:38"
+    },
+    "diagrams/uc-05.png": {
+      "file_id": "1wUauJyugBYGq1uVWi-yHDfHKr6KTdD3A",
+      "url": "https://drive.google.com/file/d/1wUauJyugBYGq1uVWi-yHDfHKr6KTdD3A/view",
+      "folder": "diagrams",
+      "version": "",
+      "source_sha256": "9b4db65e2556ab8b016fe2efca32e8c949f087dab22e243cfbc29694e4fccebf",
+      "synced_at": "2026-11-08 00:38"
+    }
+  },
+  "archived": [
+    {
+      "file_id": "1kEmXSw-fcDJgrKRRFrXlePiE4dDOsuWdnsK9gKN74dw",
+      "url": "https://docs.google.com/document/d/1kEmXSw-fcDJgrKRRFrXlePiE4dDOsuWdnsK9gKN74dw/edit",
+      "version": "0.3",
+      "source_sha256": "16b7b4ba10d9d32d739a969674d2fa680b9bddc969fb7b1979b3d98cfc928d50",
+      "synced_at": "2026-11-07 17:22",
+      "key": "urd",
+      "archived_at": "2026-11-07 17:24"
+    },
+    {
+      "file_id": "1IGX1oLfZe_CHN1ZYwULlplVDxB7Q-I9gXkdgIvwDfh8",
+      "url": "https://docs.google.com/document/d/1IGX1oLfZe_CHN1ZYwULlplVDxB7Q-I9gXkdgIvwDfh8/edit",
+      "version": "0.3",
+      "source_sha256": "0c03e70ed0917c0d044461421f06abbadf8f0c8dc61e3fb8b9686c370dcb262c",
+      "synced_at": "2026-11-07 17:22",
+      "key": "uc",
+      "archived_at": "2026-11-07 17:24"
+    },
+    {
+      "file_id": "1Wmw6E3oNItRwcL7N-nQh-vFYIdJ9zcOkf5FT7zbb7Aw",
+      "url": "https://docs.google.com/document/d/1Wmw6E3oNItRwcL7N-nQh-vFYIdJ9zcOkf5FT7zbb7Aw/edit",
+      "version": "0.3",
+      "source_sha256": "8cdb28471e90317b53f22afc54c1263a86b86b4cbc9a767b5af9a27fbe6af35e",
+      "synced_at": "2026-11-07 17:22",
+      "key": "srs",
+      "archived_at": "2026-11-07 17:25"
+    }
+  ]
+}

@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
-"""Chuẩn bị file để đẩy outputs/<du-an>/ lên Google Drive và ghi lại ID/link vào outputs/<du-an>/_drive.json.
+"""Chuẩn bị file để đẩy projects/<du-an>/ lên Google Drive và ghi ID/link vào projects/<du-an>/_drive.json.
 
 Script KHÔNG gọi Drive (không có API key) — Claude gọi công cụ Google Drive (MCP) theo kế hoạch script in ra.
+Thư mục trên Drive giống hệt git: "BA Projects/<du-an>/{docs,diagrams,ui,exports,input,_luu-tru}".
 
 Cách dùng:
-    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an>                 # in DRIVE_PLAN {json}
-    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --only srs urd  # chỉ một số tài liệu
-    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --force         # coi mọi tài liệu là đã đổi
-    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --folders <root_id> <project_id> <archive_id>
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an>                  # tài liệu (docs) — mặc định
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --diagrams       # + ảnh sơ đồ
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --ui             # + ảnh wireframe (trạng thái mặc định)
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --input          # + tài liệu khảo sát gốc
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --exports        # + file .docx/.csv gốc (≤ 3 MB)
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --only srs urd   # chỉ các key này
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --force          # coi mọi mục là đã đổi
+    python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --folders root=<id> project=<id> docs=<id> …
     python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --record <key> <file_id> <url>
     python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --status
 
-Tài liệu (key):
-    srs      SRS.md     -> SRS.docx      -> Google Doc "SRS — <du-an>"
-    urd      URD.md     -> URD.docx      -> Google Doc "URD — <du-an>"
-    uc       UC.md      -> UC.docx       -> Google Doc "Use Case — <du-an>"
-    backlog  backlog.csv                 -> Google Sheet "Backlog — <du-an>"
-File .docx lớn hơn giới hạn upload (3,0 MB) được nén ảnh (thu nhỏ, giảm màu) vào outputs/<du-an>/.tmp/drive/.
-Trạng thái mỗi tài liệu trong kế hoạch: create (chưa có trên Drive), replace (nguồn đã đổi), skip (không đổi),
-too_big (nén rồi vẫn quá giới hạn), missing (không có file nguồn).
+Tài liệu (thư mục docs/ trên Drive, chuyển thành Google Doc / Sheet):
+    srs  docs/SRS.md -> exports/SRS.docx · urd docs/URD.md -> exports/URD.docx
+    uc   docs/UC.md  -> exports/UC.docx  · backlog exports/backlog.csv -> Google Sheet
+File .docx lớn hơn giới hạn upload (3,0 MB) được nén ảnh vào .tmp/drive/.
+Kế hoạch đầy đủ ghi vào .tmp/drive/plan.json; màn hình chỉ in mục cần đẩy (create/replace) kèm file_ref.
+Trạng thái: create · replace · skip (không đổi) · too_big · missing · error.
 """
 from __future__ import annotations
 
@@ -36,47 +39,50 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import SUBDIRS, Project, resolve  # noqa: E402
+
 TO_DOCX = REPO / ".claude" / "skills" / "write-srs" / "scripts" / "to_docx.py"
 LIMIT = 3_000_000  # giới hạn ~3,1 MB file mỗi lần gọi công cụ Drive, chừa biên
 DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-ARTIFACTS = [
-    # key, nguồn, file upload, tiêu đề, mime upload
-    ("srs", "SRS.md", "SRS.docx", "SRS — {du_an}", DOCX_MIME),
-    ("urd", "URD.md", "URD.docx", "URD — {du_an}", DOCX_MIME),
-    ("uc", "UC.md", "UC.docx", "Use Case — {du_an}", DOCX_MIME),
-    ("backlog", "backlog.csv", "backlog.csv", "Backlog — {du_an}", "text/csv"),
+MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".pdf": "application/pdf",
+        ".docx": DOCX_MIME, ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        ".csv": "text/csv", ".md": "text/markdown", ".txt": "text/plain"}
+DOCS = [  # key, nguồn (so thay đổi), file upload, tiêu đề
+    ("srs", "docs/SRS.md", "exports/SRS.docx", "SRS — {du_an}"),
+    ("urd", "docs/URD.md", "exports/URD.docx", "URD — {du_an}"),
+    ("uc", "docs/UC.md", "exports/UC.docx", "Use Case — {du_an}"),
+    ("backlog", "exports/backlog.csv", "exports/backlog.csv", "Backlog — {du_an}"),
 ]
-# (chiều rộng tối đa, số màu) — thử lần lượt tới khi vừa giới hạn
-COMPACT_STEPS = [(1400, 128), (1200, 64), (1000, 32), (800, 16)]
+COMPACT_STEPS = [(1400, 128), (1200, 64), (1000, 32), (800, 16)]  # (chiều rộng tối đa, số màu)
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def version_of(md: Path) -> str:
-    if md.suffix != ".md":
+def version_of(path: Path) -> str:
+    if path.suffix != ".md":
         return ""
-    m = re.search(r"^\|\s*Phiên bản\s*\|\s*([0-9][0-9.]*)", md.read_text(encoding="utf-8"), re.M)
+    m = re.search(r"^\|\s*Phiên bản\s*\|\s*([0-9][0-9.]*)", path.read_text(encoding="utf-8"), re.M)
     return m.group(1) if m else ""
 
 
-def load_state(project: Path) -> dict:
-    p = project / "_drive.json"
-    if p.exists():
-        return json.loads(p.read_text(encoding="utf-8"))
+def load_state(project: Project) -> dict:
+    if project.drive_json.exists():
+        return json.loads(project.drive_json.read_text(encoding="utf-8"))
     return {"folders": {}, "files": {}, "archived": []}
 
 
-def save_state(project: Path, state: dict) -> None:
-    (project / "_drive.json").write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+def save_state(project: Project, state: dict) -> None:
+    project.drive_json.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def ensure_docx(du_an: str, src: Path, docx: Path) -> str | None:
+def ensure_docx(project: Project, src: Path, docx: Path) -> str | None:
     """Xuất lại .docx khi chưa có hoặc cũ hơn nguồn. Trả về lỗi (nếu có)."""
     if docx.exists() and docx.stat().st_mtime >= src.stat().st_mtime:
         return None
-    cmd = [sys.executable, str(TO_DOCX), du_an] + ([] if src.name == "SRS.md" else ["--src", src.name])
+    cmd = [sys.executable, str(TO_DOCX), project.slug] + ([] if src.name == "SRS.md" else ["--src", src.name])
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode != 0 or not docx.exists():
         return f"to_docx thất bại cho {src.name}: {(r.stdout + r.stderr)[-300:]}"
@@ -113,48 +119,69 @@ def compact_docx(src: Path, dst: Path) -> int:
     return size
 
 
-def plan(du_an: str, project: Path, only: list[str], force: bool) -> dict:
-    state = load_state(project)
+def catalog(project: Project, groups: set[str]) -> list[dict]:
+    """Mọi mục có thể đẩy: key, thư mục Drive, nguồn, file upload, tiêu đề, mime, có chuyển sang Google Doc/Sheet không."""
+    du_an = project.slug
     items = []
-    for key, src_name, up_name, title, mime in ARTIFACTS:
-        if only and key not in only:
+    for key, src, up, title in DOCS:
+        items.append({"key": key, "folder": "docs", "source": project.root / src, "upload": project.root / up,
+                      "title": title.format(du_an=du_an), "convert": True,
+                      "mime": "text/csv" if up.endswith(".csv") else DOCX_MIME})
+
+    def files(folder: str, paths):
+        for p in sorted(paths):
+            if p.suffix.lower() in MIME:
+                items.append({"key": f"{folder}/{p.relative_to(project.root / folder).as_posix()}", "folder": folder,
+                              "source": p, "upload": p, "title": p.name, "mime": MIME[p.suffix.lower()],
+                              "convert": p.suffix.lower() in (".md", ".txt")})
+
+    if "diagrams" in groups:
+        files("diagrams", project.diagrams.glob("*.png"))
+    if "ui" in groups:
+        files("ui", [p for p in project.png.glob("SCR-*.png") if "--" not in p.name])
+    if "input" in groups:
+        files("input", [p for p in project.input.rglob("*") if p.is_file()
+                        and not any(part.startswith("_") for part in p.relative_to(project.input).parts)])
+    if "exports" in groups:
+        files("exports", project.exports.glob("*"))
+    return items
+
+
+def plan(project: Project, groups: set[str], only: list[str], force: bool) -> dict:
+    state = load_state(project)
+    out = []
+    for it in catalog(project, groups):
+        if only and it["key"] not in only:
             continue
-        src = project / src_name
-        item = {"key": key, "title": title.format(du_an=du_an), "source": src_name, "mime": mime,
-                "google_type": "spreadsheet" if mime == "text/csv" else "document"}
+        rec = {k: it[k] for k in ("key", "folder", "title", "mime", "convert")}
+        src, up = it["source"], it["upload"]
         if not src.exists():
-            items.append({**item, "action": "missing"})
+            out.append({**rec, "action": "missing"})
             continue
-        up = project / up_name
-        if up_name.endswith(".docx"):
-            err = ensure_docx(du_an, src, up)
+        if up.suffix == ".docx" and src.suffix == ".md":
+            err = ensure_docx(project, src, up)
             if err:
-                items.append({**item, "action": "error", "error": err})
+                out.append({**rec, "action": "error", "error": err})
                 continue
         upload = up
         if up.stat().st_size > LIMIT:
-            dst = project / ".tmp" / "drive" / up_name
+            if up.suffix != ".docx" or not it["convert"]:
+                out.append({**rec, "action": "too_big", "size": up.stat().st_size,
+                            "error": f"{up.name} {up.stat().st_size:,} byte > {LIMIT:,} (chỉ nén được docx chuyển thành Google Doc)"})
+                continue
+            dst = project.tmp / "drive" / up.name
             size = compact_docx(up, dst)
             if size > LIMIT:
-                items.append({**item, "action": "too_big", "size": size,
-                              "error": f"{up_name} nén rồi vẫn {size:,} byte > {LIMIT:,}"})
+                out.append({**rec, "action": "too_big", "size": size, "error": f"{up.name} nén rồi vẫn {size:,} byte"})
                 continue
             upload = dst
+        cur = state["files"].get(it["key"], {})
         src_sha = sha256(src)
-        cur = state["files"].get(key, {})
-        if not cur.get("file_id"):
-            action = "create"
-        elif force or cur.get("source_sha256") != src_sha:
-            action = "replace"
-        else:
-            action = "skip"
-        up_sha = sha256(upload)
-        items.append({**item, "action": action, "version": version_of(src),
-                      "upload_path": str(upload), "size": upload.stat().st_size,
-                      "compacted": upload != up, "source_sha256": src_sha,
-                      "file_ref": f"sha256:{up_sha}:{upload.resolve().as_posix()}",
-                      "current": cur or None})
-    return {"project": du_an, "folders": state.get("folders", {}), "items": items}
+        action = "create" if not cur.get("file_id") else ("replace" if force or cur.get("source_sha256") != src_sha else "skip")
+        out.append({**rec, "action": action, "version": version_of(src), "size": upload.stat().st_size,
+                    "compacted": upload != up, "parent_id": state.get("folders", {}).get(it["folder"], ""),
+                    "file_ref": f"sha256:{sha256(upload)}:{upload.resolve().as_posix()}", "current": cur or None})
+    return {"project": project.slug, "folders": state.get("folders", {}), "items": out}
 
 
 def main(argv: list[str]) -> int:
@@ -162,58 +189,67 @@ def main(argv: list[str]) -> int:
     if not args or args[0].startswith("--"):
         print(__doc__)
         return 2
-    du_an = args[0].strip("/\\")
-    project = REPO / "outputs" / du_an
-    if not project.is_dir():
-        print(f"ERROR: không có outputs/{du_an}/")
-        return 1
+    project = resolve(args[0])
     state = load_state(project)
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     if "--folders" in args:
-        i = args.index("--folders")
-        root, proj, arch = (args[i + 1:i + 4] + ["", "", ""])[:3]
-        if not (root and proj and arch):
-            print("ERROR: --folders cần 3 ID: <root_id> <project_id> <archive_id>")
+        pairs = [a.split("=", 1) for a in args[args.index("--folders") + 1:] if "=" in a]
+        allowed = {"root", "project", "archive", *SUBDIRS}
+        bad = [k for k, _ in pairs if k not in allowed]
+        if not pairs or bad:
+            print(f"ERROR: --folders key=id … với key thuộc {sorted(allowed)}")
             return 2
-        state["folders"] = {"root": root, "project": proj, "archive": arch}
+        state.setdefault("folders", {}).update(dict(pairs))
         save_state(project, state)
-        print(f"drive_pack: đã lưu thư mục vào outputs/{du_an}/_drive.json")
+        print(f"drive_pack: đã lưu {len(pairs)} thư mục vào {project.rel(project.drive_json)}")
         return 0
 
     if "--record" in args:
         i = args.index("--record")
         key, file_id, url = (args[i + 1:i + 4] + ["", "", ""])[:3]
-        spec = {a[0]: a for a in ARTIFACTS}.get(key)
+        spec = {it["key"]: it for it in catalog(project, {"diagrams", "ui", "input", "exports"})}.get(key)
         if not (spec and file_id and url):
-            print("ERROR: --record <key> <file_id> <url> (key: " + ", ".join(a[0] for a in ARTIFACTS) + ")")
+            print("ERROR: --record <key> <file_id> <url> (key lấy từ kế hoạch, vd. srs, diagrams/uc-01.png)")
             return 2
-        src = project / spec[1]
         old = state["files"].get(key)
         if old and old.get("file_id") and old["file_id"] != file_id:
             state.setdefault("archived", []).append({**old, "key": key, "archived_at": now})
-        state["files"][key] = {"file_id": file_id, "url": url, "version": version_of(src),
+        src = spec["source"]
+        state["files"][key] = {"file_id": file_id, "url": url, "folder": spec["folder"], "version": version_of(src),
                                "source_sha256": sha256(src) if src.exists() else "", "synced_at": now}
         save_state(project, state)
         print(f"drive_pack: {key} -> {url}")
         return 0
 
     if "--status" in args:
-        print(json.dumps(state, ensure_ascii=False, indent=2))
+        files = state.get("files", {})
+        print(f"{project.slug}: {len(files)} mục trên Drive, {len(state.get('archived', []))} bản lưu trữ")
+        for k, v in sorted(files.items()):
+            print(f"  {k:<40} v{v.get('version') or '-':<6} {v['url']}")
         return 0
 
-    only = []
-    if "--only" in args:
-        only = [a for a in args[args.index("--only") + 1:] if not a.startswith("--")]
+    groups = {g for g in ("diagrams", "ui", "input", "exports") if f"--{g}" in args}
+    only = [a for a in args[args.index("--only") + 1:] if not a.startswith("--")] if "--only" in args else []
     try:
-        result = plan(du_an, project, only, "--force" in args)
+        result = plan(project, groups, only, "--force" in args)
     except ImportError:
         print("ERROR: thiếu Pillow để nén ảnh (pip install pillow)")
         return 1
+    project.tmp.joinpath("drive").mkdir(parents=True, exist_ok=True)
+    plan_file = project.tmp / "drive" / "plan.json"
+    plan_file.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    counts: dict[str, int] = {}
     for it in result["items"]:
-        extra = f" · {it['size']:,} byte" + (" (đã nén ảnh)" if it.get("compacted") else "") if "size" in it else ""
-        print(f"{it['action']:<8} {it['key']:<8} {it['title']}{extra}" + (f" · {it['error']}" if it.get("error") else ""))
-    print("DRIVE_PLAN " + json.dumps(result, ensure_ascii=False))
+        counts[it["action"]] = counts.get(it["action"], 0) + 1
+        if it["action"] in ("create", "replace"):
+            print(f"{it['action']:<7} {it['key']} -> {it['folder']}/ ({it['mime']}{', nén ảnh' if it.get('compacted') else ''})"
+                  f" · parent={it['parent_id'] or 'CHƯA CÓ'} · {it['file_ref']}")
+        elif it["action"] in ("error", "too_big"):
+            print(f"{it['action']:<7} {it['key']} · {it['error']}")
+    missing_folders = [f for f in ("root", "project", "archive", *SUBDIRS) if f not in result["folders"]]
+    print(f"drive_pack: {', '.join(f'{k} {v}' for k, v in sorted(counts.items()))} · kế hoạch: {project.rel(plan_file)}"
+          + (f" · thiếu ID thư mục: {', '.join(missing_folders)}" if missing_folders else ""))
     return 1 if any(it["action"] in ("error", "too_big") for it in result["items"]) else 0
 
 

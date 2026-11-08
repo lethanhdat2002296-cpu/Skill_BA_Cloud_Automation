@@ -5,7 +5,7 @@
 | Mã dự án | odoo-mua-hang |
 | Phiên bản | 0.3 |
 | Ngày | 2026-11-07 |
-| Nguồn | outputs/odoo-mua-hang/URD.md v0.3; outputs/odoo-mua-hang/ui/swimlanes/*.json; inputs/odoo-mua-hang/khao-sat-lan-3-yeu-cau-bao-gia.md |
+| Nguồn | docs/URD.md v0.3; diagrams/swimlanes/*.json; input/khao-sat-lan-3-yeu-cau-bao-gia.md |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Tác nhân

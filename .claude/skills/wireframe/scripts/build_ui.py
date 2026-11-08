@@ -5,7 +5,7 @@ Cách dùng:
     python .claude/skills/wireframe/scripts/build_ui.py <du-an>
 
 Việc làm:
-  1. Copy design-kit/tokens.css -> outputs/<du-an>/ui/assets/tokens.css
+  1. Copy design-kit/tokens.css -> projects/<du-an>/ui/assets/tokens.css
   2. Kiểm tra từng ui/screens/SCR-xx-<slug>.html:
      tên file, comment đầu file, meta wf-*, link tokens.css, URL ngoài, <img>, class ngoài kit, state.
   3. So khớp với ảnh dự kiến trong SRS.md (ui/png/SCR-xx-<slug>.png).
@@ -26,6 +26,8 @@ if hasattr(sys.stdout, "reconfigure"):
 
 SKILL_DIR = Path(__file__).resolve().parents[1]
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import Project, resolve  # noqa: E402
 KIT_CSS = SKILL_DIR / "design-kit" / "tokens.css"
 
 FILE_RE = re.compile(r"^(SCR-\d{2,})-([a-z0-9]+(?:-[a-z0-9]+)*)\.html$")
@@ -79,9 +81,9 @@ def kit_classes() -> set[str]:
     return set(re.findall(r"\.([a-zA-Z_][\w-]*)", css))
 
 
-def expected_from_srs(project: Path) -> dict[str, str]:
+def expected_from_srs(project: Project) -> dict[str, str]:
     """SCR-xx -> slug, lấy từ đường dẫn ảnh trong SRS.md."""
-    srs = project / "SRS.md"
+    srs = project.doc("SRS.md")
     if not srs.exists():
         return {}
     found = {}
@@ -148,8 +150,8 @@ def inspect_screen(path: Path, allowed: set[str], errors: list, warns: list) -> 
     return info
 
 
-def build_index(project: Path, screens: list[dict], du_an: str) -> None:
-    ui = project / "ui"
+def build_index(project: Project, screens: list[dict], du_an: str) -> None:
+    ui = project.ui
     png_dir = ui / "png"
 
     def card(s: dict) -> str:
@@ -214,12 +216,13 @@ def main(argv: list[str]) -> int:
         print(__doc__)
         return 2
     du_an = argv[1].strip("/\\")
-    project = REPO / "outputs" / du_an
-    screens_dir = project / "ui" / "screens"
+    project = resolve(du_an)
+    du_an = project.slug
+    screens_dir = project.screens
     errors: list[str] = []
     warns: list[str] = []
 
-    assets = project / "ui" / "assets"
+    assets = project.assets
     assets.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(KIT_CSS, assets / "tokens.css")
 
@@ -257,7 +260,7 @@ def main(argv: list[str]) -> int:
     n_be = sum(1 for s in screens if s["type"] == "backend")
     n_states = sum(len(s["states"]) for s in screens)
     print(f"build_ui: {len(screens)} màn ({n_sf} storefront, {n_be} backend), {n_states} state · "
-          f"{len(errors)} lỗi, {len(warns)} cảnh báo · gallery: outputs/{du_an}/ui/index.html")
+          f"{len(errors)} lỗi, {len(warns)} cảnh báo · gallery: projects/{du_an}/ui/index.html")
     return 1 if errors else 0
 
 

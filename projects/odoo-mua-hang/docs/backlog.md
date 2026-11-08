@@ -5,7 +5,7 @@
 | Mã dự án | odoo-mua-hang |
 | Phiên bản | 0.3 |
 | Ngày | 2026-11-07 |
-| Nguồn | outputs/odoo-mua-hang/URD.md v0.3; UC.md v0.3; SRS.md v0.3 |
+| Nguồn | docs/URD.md v0.3; UC.md v0.3; SRS.md v0.3 |
 | Thang điểm | Fibonacci 1, 2, 3, 5, 8, 13 — story mốc 3 điểm: US-15 — Duyệt hoặc từ chối đơn mua hàng |
 
 ## 1. Quy ước

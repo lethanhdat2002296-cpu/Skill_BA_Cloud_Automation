@@ -1,14 +1,14 @@
 ---
 name: write-urd
-description: Viết URD (User Requirements Document) theo vai trò người dùng, dạng user story + acceptance criteria (Given/When/Then), từ brainstorm.md và input của dự án. Dùng sau bước brainstorm trong srs-pipeline, hoặc khi user yêu cầu "viết URD", "viết user story", "liệt kê yêu cầu người dùng", "user requirements". Keywords - URD, user requirements, user stories, acceptance criteria, Given When Then, personas, roles, MoSCoW priority. Output outputs/<du-an>/URD.md theo template-urd.md. Không hỏi user; thiếu thông tin thì ghi Assumptions & Open Questions.
+description: Viết URD: user story theo vai trò + AC Given/When/Then + MoSCoW → docs/URD.md. Dùng sau brainstorm hoặc khi user nói "viết URD", "user requirements".
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
 # write-urd — User Requirements
 
 ## Input
-- `outputs/<du-an>/brainstorm.md` (bắt buộc — chưa có thì chạy skill `brainstorm` trước).
-- `inputs/<du-an>/` để tra lại chi tiết.
+- `projects/<du-an>/docs/brainstorm.md` (bắt buộc — chưa có thì chạy skill `brainstorm` trước).
+- `projects/<du-an>/input/` để tra lại chi tiết.
 
 ## Cách làm
 
@@ -32,4 +32,4 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - [ ] Mã US không trùng, không nhảy cóc.
 
 ## Output
-`outputs/<du-an>/URD.md`
+`projects/<du-an>/docs/URD.md`

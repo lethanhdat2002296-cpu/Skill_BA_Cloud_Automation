@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra outputs/<du-an>/backlog.md và xuất backlog.csv (import Jira Cloud / Google Sheet).
+"""Kiểm tra projects/<du-an>/docs/backlog.md và xuất exports/backlog.csv (import Jira Cloud / Google Sheet).
 
 Cách dùng:
     python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>
@@ -26,6 +26,8 @@ sys.path.insert(0, str(REPO / ".claude" / "skills" / "write-usecase" / "scripts"
 sys.path.insert(0, str(REPO / ".claude" / "skills" / "write-srs" / "scripts"))
 from build_srs import fr_blocks  # noqa: E402
 from check_uc import urd_stories  # noqa: E402
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import resolve  # noqa: E402
 
 FIB = {1, 2, 3, 5, 8, 13}
 PRIORITY = {"must": "Highest", "should": "High", "could": "Medium", "won't": "Low", "wont": "Low"}
@@ -79,15 +81,15 @@ def main(argv: list[str]) -> int:
         print(__doc__)
         return 2
     du_an = args[0].strip("/\\")
-    project = REPO / "outputs" / du_an
-    path = project / "backlog.md"
+    project = resolve(du_an)
+    path = project.doc("backlog.md")
     if not path.exists():
         print(f"ERROR: không có {path.relative_to(REPO)}")
         return 1
     text = path.read_text(encoding="utf-8")
     epics, stories = parse(text)
-    urd = urd_stories(project / "URD.md")
-    srs = project / "SRS.md"
+    urd = urd_stories(project.doc("URD.md"))
+    srs = project.doc("SRS.md")
     srs_text = srs.read_text(encoding="utf-8") if srs.exists() else ""
     fr_ids = {f["id"] for f in fr_blocks(srs_text)}
     scr_ids = set(re.findall(r"^\|\s*(SCR-\d+)\s*\|", srs_text, re.M))
@@ -151,7 +153,8 @@ def main(argv: list[str]) -> int:
         rows.append([n, epic_issue.get(s["epic"], ""), "Story", f"{s['id']} — {plain(s['title'])}", desc,
                      PRIORITY.get(s["priority"].lower().split()[0] if s["priority"] else "", "Medium"),
                      s["points"], s["id"], plain(s["release"])])
-    out = project / "backlog.csv"
+    project.exports.mkdir(parents=True, exist_ok=True)
+    out = project.export("backlog.csv")
     with out.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Issue Id", "Parent", "Issue Type", "Summary", "Description", "Priority", "Story Points", "Labels", "Release"])

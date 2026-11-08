@@ -1,14 +1,14 @@
 ---
 name: wireframe
-description: Vẽ wireframe HTML low/mid-fidelity tông xám cho từng màn hình SCR-xx từ ui/flows.md và Screen Inventory của SRS, chỉ dùng component trong design kit (storefront kiểu Magento 2, backend kiểu Odoo), vẽ đủ trạng thái (mặc định, rỗng, lỗi, loading, thành công), desktop 1440px và mobile 390px cho storefront, kèm trang gallery ui/index.html. Dùng sau ui-spec trong srs-pipeline, hoặc khi user yêu cầu "vẽ wireframe", "mockup màn hình", "phác thảo UI", "dựng màn hình HTML". Keywords - wireframe, mockup, low-fidelity, HTML prototype, design kit, Magento storefront, Odoo backend, list view, form view, chatter, screen states. Không hỏi user.
+description: Vẽ wireframe HTML (tông xám, chỉ dùng design kit) cho từng SCR-xx, đủ trạng thái, + gallery ui/index.html. Dùng sau ui-spec hoặc khi user nói "vẽ wireframe / mockup".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ---
 
 # wireframe — HTML từ design kit
 
 ## Input
-- `outputs/<du-an>/ui/flows.md` (mục 3: danh sách màn + bố cục) — bắt buộc.
-- `outputs/<du-an>/SRS.md` mục 6 (trường, hành động, trạng thái, FR).
+- `projects/<du-an>/ui/flows.md` (mục 3: danh sách màn + bố cục) — bắt buộc.
+- `projects/<du-an>/docs/SRS.md` mục 6 (trường, hành động, trạng thái, FR).
 - Design kit trong thư mục skill này:
   - `design-kit/tokens.css` — **toàn bộ** CSS (token + component). Không viết CSS mới.
   - `design-kit/components-storefront.html` — markup mẫu storefront.
@@ -18,7 +18,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ## Cách làm
 
 1. Đọc `patterns.md` và file component tương ứng loại màn (đọc một lần, dùng cho mọi màn).
-2. Với mỗi SCR trong `flows.md` mục 3, tạo `outputs/<du-an>/ui/screens/SCR-xx-<slug>.html` theo khung bên dưới:
+2. Với mỗi SCR trong `flows.md` mục 3, tạo `projects/<du-an>/ui/screens/SCR-xx-<slug>.html` theo khung bên dưới:
    - Copy khối markup từ kit, đổi nhãn/dữ liệu cho đúng nghiệp vụ. **Chỉ dùng class có trong `tokens.css`.** `style=""` chỉ cho kích thước (width, min-height, grid-template-columns).
    - Mỗi trạng thái trong cột "Trạng thái" của Screen Inventory là một `<section class="wf-state">` chứa nguyên một `.wf-frame`. State đầu tiên luôn là `default`.
    - Mọi trường và hành động trong Screen Inventory phải xuất hiện trên state `default` (hoặc state phù hợp).
@@ -79,6 +79,6 @@ Quy tắc khung:
 Do `build_ui.py` sinh tự động (nhóm storefront/backend, thumbnail PNG nếu đã render, link tới HTML, FR, các state). Không sửa tay — chạy lại script.
 
 ## Output
-- `outputs/<du-an>/ui/screens/SCR-xx-<slug>.html`
-- `outputs/<du-an>/ui/assets/tokens.css`
-- `outputs/<du-an>/ui/index.html`
+- `projects/<du-an>/ui/screens/SCR-xx-<slug>.html`
+- `projects/<du-an>/ui/assets/tokens.css`
+- `projects/<du-an>/ui/index.html`

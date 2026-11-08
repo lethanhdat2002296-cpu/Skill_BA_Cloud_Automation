@@ -5,7 +5,7 @@
 | Mã dự án | {{du-an}} |
 | Phiên bản | 0.1 (bản nháp tự động) |
 | Ngày | {{YYYY-MM-DD}} |
-| Nguồn | {{danh sách file trong inputs/<du-an>/}} |
+| Nguồn | {{danh sách file trong projects/<du-an>/input/}} |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Giới thiệu

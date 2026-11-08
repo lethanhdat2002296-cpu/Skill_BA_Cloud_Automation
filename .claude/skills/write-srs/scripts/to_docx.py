@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
-"""Xuất outputs/<du-an>/SRS.md -> SRS.docx bằng pandoc, có ảnh wireframe và sơ đồ.
+"""Xuất projects/<du-an>/docs/SRS.md -> exports/SRS.docx bằng pandoc, có ảnh wireframe và sơ đồ.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/to_docx.py <du-an>
     python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md     # tài liệu khác -> URD.docx (UC.md, backlog.md…)
 
 Việc làm:
-  1. Render các khối ```mermaid trong SRS.md -> ui/diagrams/srs-NN.png và thay bằng ảnh
+  1. Render các khối ```mermaid trong SRS.md -> diagrams/srs-NN.png và thay bằng ảnh
      (không có mmdc thì giữ nguyên code block).
   2. Với mỗi ảnh ui/png/SCR-xx-<slug>.png được tham chiếu: chèn thêm ngay sau nó các biến thể
      (--<state>.png, -mobile.png) nếu có, chú thích theo data-label trong HTML.
   3. Gắn kích thước ảnh cho vừa trang A4 (ảnh hẹp như mobile 390px không bị phóng to).
-  4. Thêm Phụ lục "UI flows" với các sơ đồ ui/diagrams/flows-NN.png (nếu có).
+  4. Thêm Phụ lục "UI flows" với các sơ đồ diagrams/flows-NN.png (nếu có).
+Đường dẫn ảnh trong tài liệu tính từ thư mục của tài liệu (docs/ -> ../ui/png/…, ../diagrams/…).
   5. Gọi pandoc (dùng templates/reference.docx nếu có), rồi đếm ảnh nhúng trong docx.
 Exit code 1 nếu thiếu pandoc, thiếu SRS.md, hoặc có ảnh tham chiếu không tồn tại.
 """
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import struct
@@ -34,9 +36,12 @@ sys.path.insert(0, str(REPO / ".claude" / "skills" / "render-screens" / "scripts
 from render_mermaid import render_markdown  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_srs import build, needs_build  # noqa: E402
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import Project, resolve  # noqa: E402
 
 IMG_RE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)(\{[^}]*\})?')
-SCR_PNG_RE = re.compile(r"^ui/png/(SCR-\d{2,}-[a-z0-9-]+)\.png$")
+SCR_PNG_RE = re.compile(r"(?:^|/)ui/png/(SCR-\d{2,}-[a-z0-9-]+)\.png$")
+NOISE = ("has no translation defined", "Could not load translations", "translations/vi.yaml", "Aeson exception", "Invalid Term name")
 
 # Vùng chữ A4 lề 2cm ~ 17cm x 25cm; chừa chỗ cho chú thích
 MAX_W_CM = 16.5
@@ -75,8 +80,8 @@ def size_attr(path: Path) -> str:
     return f"{{width={w_cm:.1f}cm}}"
 
 
-def state_labels(project: Path, stem: str) -> dict[str, str]:
-    html = project / "ui" / "screens" / f"{stem}.html"
+def state_labels(project: Project, stem: str) -> dict[str, str]:
+    html = project.screens / f"{stem}.html"
     if not html.exists():
         return {}
     text = html.read_text(encoding="utf-8")
@@ -89,9 +94,10 @@ def state_labels(project: Path, stem: str) -> dict[str, str]:
     return labels
 
 
-def variants(project: Path, stem: str) -> list[tuple[str, str]]:
-    """[(đường dẫn tương đối, chú thích)] các biến thể ngoài ảnh chính, theo thứ tự state trong HTML."""
-    png_dir = project / "ui" / "png"
+def variants(project: Project, stem: str, base: Path) -> list[tuple[str, str]]:
+    """[(đường dẫn tương đối với base, chú thích)] các biến thể ngoài ảnh chính, theo thứ tự state trong HTML."""
+    png_dir = project.png
+    pre = Path(os.path.relpath(png_dir, base)).as_posix()
     labels = state_labels(project, stem)
     order = list(labels) or sorted({p.name[len(stem) + 2:].removesuffix(".png").removesuffix("-mobile")
                                     for p in png_dir.glob(f"{stem}--*.png")})
@@ -101,15 +107,15 @@ def variants(project: Path, stem: str) -> list[tuple[str, str]]:
             continue
         fn = f"{stem}--{key}.png"
         if (png_dir / fn).exists():
-            out.append((f"ui/png/{fn}", f"Trạng thái: {labels.get(key, key)}"))
+            out.append((f"{pre}/{fn}", f"Trạng thái: {labels.get(key, key)}"))
     if (png_dir / f"{stem}-mobile.png").exists():
-        out.append((f"ui/png/{stem}-mobile.png", "Mobile 390px"))
+        out.append((f"{pre}/{stem}-mobile.png", "Mobile 390px"))
     for key in order:
         if key == "default":
             continue
         fn = f"{stem}--{key}-mobile.png"
         if (png_dir / fn).exists():
-            out.append((f"ui/png/{fn}", f"Mobile 390px — {labels.get(key, key)}"))
+            out.append((f"{pre}/{fn}", f"Mobile 390px — {labels.get(key, key)}"))
     return out
 
 
@@ -122,12 +128,12 @@ def main(argv: list[str]) -> int:
     if len(argv) < 2 or not src_name.endswith(".md"):
         print(__doc__)
         return 2
-    du_an = argv[1].strip("/\\")
-    project = REPO / "outputs" / du_an
+    project = resolve(argv[1])
     is_srs = src_name == "SRS.md"
     if is_srs and needs_build(project):
-        build(project)
-    srs = project / src_name
+        build(project, quiet=True)
+    srs = project.doc(src_name)
+    base = srs.parent
     if not srs.exists():
         print(f"ERROR: không có {srs.relative_to(REPO)}")
         return 1
@@ -140,16 +146,16 @@ def main(argv: list[str]) -> int:
     errors: list[str] = []
 
     # 1. Mermaid -> PNG
-    diagrams = render_markdown(srs, project / "ui" / "diagrams", Path(src_name).stem.lower())
+    diagrams = render_markdown(srs, project.diagrams, Path(src_name).stem.lower(), quiet=True)
     for d in reversed(diagrams):
         if d.png:
-            rel = d.png.relative_to(project).as_posix()
+            rel = Path(os.path.relpath(d.png, base)).as_posix()
             text = text[: d.start] + f"![Sơ đồ {d.index} — {d.heading}]({rel})\n" + text[d.end:]
 
     # 2 + 3. Ảnh: kiểm tra tồn tại, kích thước, chèn biến thể
     def replace_img(m: re.Match) -> str:
         alt, src, attrs = m.group(1), m.group(2), m.group(3)
-        path = (project / src)
+        path = (base / src)
         if src.startswith(("http://", "https://")):
             errors.append(f"ảnh ngoài internet không được phép: {src}")
             return m.group(0)
@@ -157,19 +163,19 @@ def main(argv: list[str]) -> int:
             errors.append(f"thiếu ảnh {src} (tham chiếu trong {src_name})")
             return m.group(0)
         out = f"![{alt}]({src}){attrs or size_attr(path)}"
-        sm = SCR_PNG_RE.match(src)
+        sm = SCR_PNG_RE.search(src)
         if sm:
             scr_id = sm.group(1).split("-")[0] + "-" + sm.group(1).split("-")[1]
-            for vsrc, cap in variants(project, sm.group(1)):
-                out += f"\n\n![{scr_id} — {cap}]({vsrc}){size_attr(project / vsrc)}"
+            for vsrc, cap in variants(project, sm.group(1), base):
+                out += f"\n\n![{scr_id} — {cap}]({vsrc}){size_attr(base / vsrc)}"
         return out
 
     text = IMG_RE.sub(replace_img, text)
 
     # 4. Phụ lục UI flows
-    flows = sorted((project / "ui" / "diagrams").glob("flows-*.png")) if is_srs else []
+    flows = sorted(project.diagrams.glob("flows-*.png")) if is_srs else []
     if flows:
-        flows_md = project / "ui" / "flows.md"
+        flows_md = project.ui / "flows.md"
         heads = {}
         if flows_md.exists():
             from render_mermaid import BLOCK_RE, HEADING_RE
@@ -180,7 +186,7 @@ def main(argv: list[str]) -> int:
         text += "\n\n## Phụ lục A. UI flows\n"
         for p in flows:
             idx = int(re.search(r"(\d+)", p.stem).group(1))
-            rel = p.relative_to(project).as_posix()
+            rel = Path(os.path.relpath(p, base)).as_posix()
             text += f"\n### {heads.get(idx, f'Sơ đồ {idx}')}\n\n![{heads.get(idx, p.stem)}]({rel}){size_attr(p)}\n"
 
     if errors:
@@ -188,31 +194,34 @@ def main(argv: list[str]) -> int:
             print(f"ERROR: {e}")
 
     # 5. pandoc
-    tmp_dir = project / ".tmp"
-    tmp_dir.mkdir(exist_ok=True)
+    tmp_dir = project.tmp
+    tmp_dir.mkdir(parents=True, exist_ok=True)
     # tài liệu không dùng HTML thô: bỏ comment, và đọc "<số phiếu>", "<tên>"… như chữ thường (-raw_html)
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     tmp_md = tmp_dir / f"{Path(src_name).stem}.for-docx.md"
     tmp_md.write_text(text, encoding="utf-8")
-    out = project / f"{Path(src_name).stem}.docx"
+    project.exports.mkdir(parents=True, exist_ok=True)
+    out = project.export(f"{Path(src_name).stem}.docx")
     cmd = [
         pandoc, str(tmp_md),
         "-f", "markdown+pipe_tables+lists_without_preceding_blankline-tex_math_dollars-raw_tex-raw_html-yaml_metadata_block",
         "-t", "docx", "-o", str(out),
-        f"--resource-path={project}",
+        f"--resource-path={base}",
         "--toc", "--toc-depth=2",
         "-M", "lang=vi-VN",
     ]
     if REFERENCE_DOCX.exists():
         cmd.append(f"--reference-doc={REFERENCE_DOCX}")
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
-    if r.stderr.strip():
-        print(r.stderr.strip())
+    noise = [ln for ln in r.stderr.splitlines() if ln.strip() and not any(n in ln for n in NOISE)
+             and not ln.startswith("[WARNING] The term")]
+    if noise:
+        print("\n".join(noise[:20]))
     if r.returncode != 0 or not out.exists():
         print(f"ERROR: pandoc thất bại (exit {r.returncode})")
         return 1
 
-    expected = len(set(m.group(2) for m in IMG_RE.finditer(text) if (project / m.group(2)).exists()))
+    expected = len(set(m.group(2) for m in IMG_RE.finditer(text) if (base / m.group(2)).exists()))
     with zipfile.ZipFile(out) as z:
         media = [n for n in z.namelist() if n.startswith("word/media/")]
     n_mermaid_left = len(re.findall(r"^```mermaid", text, re.M))

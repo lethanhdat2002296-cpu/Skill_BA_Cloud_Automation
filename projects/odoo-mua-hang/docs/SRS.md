@@ -12,9 +12,9 @@
 
 | Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
 |---|---|---|---|---|
-| 0.1 | 2026-10-20 | Bản đầu tiên | inputs/odoo-mua-hang/khao-sat-lan-1.md | Toàn bộ |
-| 0.2 | 2026-10-20 | Khảo sát lần 2 — phiếu Yêu cầu mua hàng: phân loại vật tư Nhập kho / Dịch vụ; 3 cách tạo YCMH (trực tiếp, từ Hợp đồng, từ Báo giá NCC); số phiếu `Mã BP_XXXX_DD_MM_YY`; đầu phiếu và dòng mới (kho nhận theo dòng); duyệt 3 cấp Trưởng nhóm → MH → BOD; tự điền NCC và giá theo Hợp đồng → Price List; chặn trùng vật tư + NCC; mua dịch vụ bằng RFQ trực tiếp | inputs/odoo-mua-hang/khao-sat-lan-2-yeu-cau-mua-hang.md; inputs/odoo-mua-hang/_changes/20261020-074707.md | Sửa FR-01, FR-02, FR-03, FR-05, FR-13, FR-16, FR-17, NFR-02, SCR-01, SCR-02, SCR-03, SCR-04; thêm FR-19 → FR-25, SCR-11, SCR-12, AS-26 → AS-38, OQ-22 → OQ-33; OQ-04 đã trả lời; SCR-05 chỉ cập nhật nền (số phiếu, cột Nhập kho) |
-| 0.3 | 2026-10-20 | Trả lời câu hỏi mở lần 1: Odoo 17 Odoo.sh/on-premise; không gộp YCMH; đơn mua không ngưỡng; YCMH bị từ chối về Nháp + email. Khảo sát lần 3 — Yêu cầu báo giá: Dịch vụ tạo thẳng PO; ĐNTT bắt buộc trước khi duyệt; bỏ Waiting PO, duyệt xong → PO + tự tạo DO; RFQ kế thừa YCMH, thêm ngày dự kiến / thực tế nhận hàng, mã truy vết YCMH; "Send email" gửi riêng từng NCC; tự đọc Excel báo giá từ email reply; so sánh và chọn 1 NCC cho cả phiếu (bỏ RFQ thay thế); quy trình vẽ lại bằng Activity – Swimlane | inputs/odoo-mua-hang/tra-loi-cau-hoi-mo-lan-1.md; inputs/odoo-mua-hang/khao-sat-lan-3-yeu-cau-bao-gia.md; inputs/odoo-mua-hang/_changes/20261020-084051.md; inputs/odoo-mua-hang/_changes/20261020-093008.md | Sửa FR-03, FR-05, FR-06, FR-08 → FR-13, FR-15 → FR-18, FR-21, FR-25, NFR-08, SCR-02 → SCR-10, SCR-12, mục 7; bỏ FR-07; thêm FR-26, FR-27, NFR-10, AS-39 → AS-47, OQ-34 → OQ-39; OQ-01, OQ-06, OQ-11, OQ-16 đã trả lời |
+| 0.1 | 2026-10-20 | Bản đầu tiên | input/khao-sat-lan-1.md | Toàn bộ |
+| 0.2 | 2026-10-20 | Khảo sát lần 2 — phiếu Yêu cầu mua hàng: phân loại vật tư Nhập kho / Dịch vụ; 3 cách tạo YCMH (trực tiếp, từ Hợp đồng, từ Báo giá NCC); số phiếu `Mã BP_XXXX_DD_MM_YY`; đầu phiếu và dòng mới (kho nhận theo dòng); duyệt 3 cấp Trưởng nhóm → MH → BOD; tự điền NCC và giá theo Hợp đồng → Price List; chặn trùng vật tư + NCC; mua dịch vụ bằng RFQ trực tiếp | input/khao-sat-lan-2-yeu-cau-mua-hang.md; input/_changes/20261020-074707.md | Sửa FR-01, FR-02, FR-03, FR-05, FR-13, FR-16, FR-17, NFR-02, SCR-01, SCR-02, SCR-03, SCR-04; thêm FR-19 → FR-25, SCR-11, SCR-12, AS-26 → AS-38, OQ-22 → OQ-33; OQ-04 đã trả lời; SCR-05 chỉ cập nhật nền (số phiếu, cột Nhập kho) |
+| 0.3 | 2026-10-20 | Trả lời câu hỏi mở lần 1: Odoo 17 Odoo.sh/on-premise; không gộp YCMH; đơn mua không ngưỡng; YCMH bị từ chối về Nháp + email. Khảo sát lần 3 — Yêu cầu báo giá: Dịch vụ tạo thẳng PO; ĐNTT bắt buộc trước khi duyệt; bỏ Waiting PO, duyệt xong → PO + tự tạo DO; RFQ kế thừa YCMH, thêm ngày dự kiến / thực tế nhận hàng, mã truy vết YCMH; "Send email" gửi riêng từng NCC; tự đọc Excel báo giá từ email reply; so sánh và chọn 1 NCC cho cả phiếu (bỏ RFQ thay thế); quy trình vẽ lại bằng Activity – Swimlane | input/tra-loi-cau-hoi-mo-lan-1.md; input/khao-sat-lan-3-yeu-cau-bao-gia.md; input/_changes/20261020-084051.md; input/_changes/20261020-093008.md | Sửa FR-03, FR-05, FR-06, FR-08 → FR-13, FR-15 → FR-18, FR-21, FR-25, NFR-08, SCR-02 → SCR-10, SCR-12, mục 7; bỏ FR-07; thêm FR-26, FR-27, NFR-10, AS-39 → AS-47, OQ-34 → OQ-39; OQ-01, OQ-06, OQ-11, OQ-16 đã trả lời |
 
 ## 1. Giới thiệu
 
@@ -711,74 +711,74 @@ flowchart LR
 #### SCR-01 — Danh sách Yêu cầu mua hàng
 Danh sách YCMH nhóm theo trạng thái, bộ lọc mặc định theo vai trò. Điểm vào để tạo phiếu mới.
 
-![SCR-01 — Danh sách Yêu cầu mua hàng](ui/png/SCR-01-danh-sach-yeu-cau-mua-hang.png)
+![SCR-01 — Danh sách Yêu cầu mua hàng](../ui/png/SCR-01-danh-sach-yeu-cau-mua-hang.png)
 
 #### SCR-02 — Yêu cầu mua hàng
 Form YCMH: đầu phiếu theo khảo sát lần 2, dòng vật tư Nhập kho có kho nhận và nguồn giá tự điền, khối người duyệt 3 cấp. Nút hiển thị theo trạng thái và cấp duyệt. *(Sửa v0.2)*
 
-![SCR-02 — Yêu cầu mua hàng](ui/png/SCR-02-yeu-cau-mua-hang.png)
+![SCR-02 — Yêu cầu mua hàng](../ui/png/SCR-02-yeu-cau-mua-hang.png)
 
 #### SCR-03 — Danh sách RFQ và Đơn mua hàng
 Danh sách RFQ và đơn mua hàng: Nháp → RFQ → Chờ duyệt → PO; cột Mã Yêu cầu mua hàng và Loại; tìm theo mã YCMH, lọc "Chờ tôi duyệt". *(Sửa v0.3)*
 
-![SCR-03 — Danh sách RFQ và Đơn mua hàng](ui/png/SCR-03-danh-sach-don-mua-hang.png)
+![SCR-03 — Danh sách RFQ và Đơn mua hàng](../ui/png/SCR-03-danh-sach-don-mua-hang.png)
 
 #### SCR-04 — RFQ và Đơn mua hàng
 Form trung tâm: statusbar Nháp → RFQ → Chờ duyệt → PO (dịch vụ: Nháp → Chờ duyệt → PO); đầu phiếu kế thừa YCMH, có ngày dự kiến / thực tế nhận hàng và mã YCMH gốc; nút đổi theo trạng thái. *(Sửa v0.3)*
 
-![SCR-04 — RFQ và Đơn mua hàng](ui/png/SCR-04-don-mua-hang.png)
+![SCR-04 — RFQ và Đơn mua hàng](../ui/png/SCR-04-don-mua-hang.png)
 
 #### SCR-05 — Gửi email yêu cầu báo giá
 Popup "Send email": chọn nhiều NCC ngăn cách ";", soạn như email thường, hệ thống gửi riêng từng NCC; đính kèm PDF RFQ và Excel mẫu báo giá. *(Sửa v0.3)*
 
-![SCR-05 — Gửi email yêu cầu báo giá](ui/png/SCR-05-gui-email-yeu-cau-bao-gia.png)
+![SCR-05 — Gửi email yêu cầu báo giá](../ui/png/SCR-05-gui-email-yeu-cau-bao-gia.png)
 
 #### SCR-06 — So sánh báo giá
 Bảng so sánh báo giá của các NCC trên cùng 1 RFQ (vật tư theo hàng, NCC theo cột), đánh dấu giá thấp nhất, chọn 1 NCC cho cả phiếu. *(Sửa v0.3)*
 
-![SCR-06 — So sánh báo giá](ui/png/SCR-06-so-sanh-bao-gia.png)
+![SCR-06 — So sánh báo giá](../ui/png/SCR-06-so-sanh-bao-gia.png)
 
 #### SCR-07 — Danh sách Đề nghị thanh toán
 Danh sách ĐNTT cho Kế toán, lọc mặc định "Chờ kế toán duyệt".
 
-![SCR-07 — Danh sách Đề nghị thanh toán](ui/png/SCR-07-danh-sach-de-nghi-thanh-toan.png)
+![SCR-07 — Danh sách Đề nghị thanh toán](../ui/png/SCR-07-danh-sach-de-nghi-thanh-toan.png)
 
 #### SCR-08 — Đề nghị thanh toán
 Form ĐNTT gắn với một RFQ / đơn mua hàng, tạo trước khi gửi duyệt đơn; Kế toán duyệt và ghi nhận thanh toán. *(Sửa v0.3)*
 
-![SCR-08 — Đề nghị thanh toán](ui/png/SCR-08-de-nghi-thanh-toan.png)
+![SCR-08 — Đề nghị thanh toán](../ui/png/SCR-08-de-nghi-thanh-toan.png)
 
 #### SCR-09 — Phiếu DO - nhập kho
 Phiếu nhập kho tạo tự động khi đơn được duyệt; Thủ kho nhập số lượng thực nhận; hoàn tất thì cập nhật Ngày nhận hàng thực tế của đơn. *(Sửa v0.3)*
 
-![SCR-09 — Phiếu DO - nhập kho](ui/png/SCR-09-phieu-do-nhap-kho.png)
+![SCR-09 — Phiếu DO - nhập kho](../ui/png/SCR-09-phieu-do-nhap-kho.png)
 
 #### SCR-10 — Cấu hình duyệt mua hàng
 Trang Settings của Purchase: người duyệt đơn mua hàng (1 cấp), mẫu email, mẫu Excel báo giá, hộp thư nhận báo giá. *(Sửa v0.3 — bỏ ngưỡng)*
 
-![SCR-10 — Cấu hình duyệt mua hàng](ui/png/SCR-10-cau-hinh-duyet-mua-hang.png)
+![SCR-10 — Cấu hình duyệt mua hàng](../ui/png/SCR-10-cau-hinh-duyet-mua-hang.png)
 
 #### SCR-11 — Hợp đồng mua hàng
 Hợp đồng khung với NCC: vật tư, đơn giá, thời hạn hiệu lực; nút "Tạo yêu cầu mua hàng" khi còn hiệu lực. *(Mới v0.2)*
 
-![SCR-11 — Hợp đồng mua hàng](ui/png/SCR-11-hop-dong-mua-hang.png)
+![SCR-11 — Hợp đồng mua hàng](../ui/png/SCR-11-hop-dong-mua-hang.png)
 
 #### SCR-12 — Báo giá NCC
 Báo giá nhà cung cấp gửi công ty; nút "Tạo yêu cầu mua hàng" khi còn hiệu lực. *(Mới v0.2)*
 
-![SCR-12 — Báo giá NCC](ui/png/SCR-12-bao-gia-ncc.png)
+![SCR-12 — Báo giá NCC](../ui/png/SCR-12-bao-gia-ncc.png)
 
 ## 7. User flow
 
 ### 7.1 Luồng chính — Activity – Swimlane *(sửa v0.3)*
 
-Quy trình vẽ lại theo yêu cầu khảo sát lần 3 (đặc tả `ui/swimlanes/*.json`, vẽ bằng `render-screens/scripts/swimlane.py`). Sơ đồ 1, 2: vật tư Nhập kho; sơ đồ 3: vật tư Dịch vụ.
+Quy trình vẽ lại theo yêu cầu khảo sát lần 3 (đặc tả `diagrams/swimlanes/*.json`, vẽ bằng `render-screens/scripts/swimlane.py`). Sơ đồ 1, 2: vật tư Nhập kho; sơ đồ 3: vật tư Dịch vụ.
 
-![Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng](ui/diagrams/swimlane-01-yeu-cau-mua-hang.png)
+![Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng](../diagrams/swimlane-01-yeu-cau-mua-hang.png)
 
-![Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho](ui/diagrams/swimlane-02-yeu-cau-bao-gia-po.png)
+![Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho](../diagrams/swimlane-02-yeu-cau-bao-gia-po.png)
 
-![Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp](ui/diagrams/swimlane-03-dich-vu.png)
+![Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp](../diagrams/swimlane-03-dich-vu.png)
 
 ### 7.2 Luồng từ chối *(sửa v0.3)*
 

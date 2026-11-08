@@ -3,7 +3,7 @@
 Bộ skill cho **Claude Code** tự động đi từ tài liệu khảo sát (biên bản họp, email, ghi chú) tới bộ tài liệu BA hoàn chỉnh, không cần người can thiệp giữa chừng. Thiết kế để chạy trên **Claude Code bản web (cloud session)**; máy local chỉ để dựng và test.
 
 ```
-inputs/<du-an>/ → brainstorm → write-urd → write-srs → ui-spec → wireframe → render-screens → SRS.docx → branch docs/<du-an> + PR
+projects/<du-an>/input/ → brainstorm → write-urd → write-srs → ui-spec → wireframe → render-screens → SRS.docx → branch docs/<du-an> + PR
 ```
 
 ## Cách dùng nhanh
@@ -14,18 +14,18 @@ Không cần tự tạo thư mục hay commit — mọi thứ làm ngay trong đ
 2. **Đưa tài liệu vào chat**: dán text (biên bản họp, email, ghi chú), đính kèm file (`.docx`, `.pdf`, `.xlsx`, ảnh), hoặc gửi link tải. Kèm tên dự án:
    > Thêm tài liệu cho dự án **rma-moc-an**: *(dán nội dung / đính kèm file)*
 3. Claude (skill `ba-intake`) tự:
-   - chuyển text thành Markdown, lưu file vào `inputs/<du-an>/`, ghi nhật ký `_manifest.md`;
+   - chuyển text thành Markdown, lưu file vào `projects/<du-an>/input/`, ghi nhật ký `_manifest.md`;
    - commit + push lên GitHub (branch `docs/<du-an>`);
    - nếu dự án đã có tài liệu: **giữ nguyên bản cũ** (bản mới lưu thành `__v2`, `__v3`…), lập bảng khác biệt cũ/mới trong `_changes/`, rồi **hỏi bạn**: merge thành bản tổng hợp, giữ cả hai, hay bạn tự mô tả khác biệt.
 4. Gõ **"Làm SRS cho dự án `<du-an>`"** (hoặc gộp luôn: "Làm SRS cho dự án X" + dán/đính kèm tài liệu trong cùng tin nhắn).
-5. Đợi Claude chạy xong → xem PR: `outputs/<du-an>/SRS.docx`, `ui/index.html`, danh sách **Open Questions** trong mô tả PR.
+5. Đợi Claude chạy xong → xem PR: `projects/<du-an>/exports/SRS.docx`, `ui/index.html`, danh sách **Open Questions** trong mô tả PR.
 6. **Sau mỗi buổi khảo sát / demo** → lặp lại bước 2. Claude hỏi bạn một lần về khác biệt, chọn **"Merge + cập nhật SRS ngay"** → SRS được sửa đúng chỗ trong vài phút (0.3 → 0.3.1), màn hình cần sửa được đánh dấu chờ vẽ. Không vẽ lại, không xuất docx ở bước này.
 7. **Khi cần gửi khách** → gõ **"Xuất bản tài liệu dự án `<du-an>`"**: chỉ vẽ lại các màn đang chờ, xuất SRS.docx, lên bản 0.4, mở PR.
 8. Cần sửa → comment trực tiếp trên diff của PR, hoặc nhắn tiếp trong session ("Sửa FR-05: …").
 
-Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công như trước.
+Vẫn có thể thả file thẳng vào `projects/<du-an>/input/` và commit thủ công như trước.
 
-## Kết quả sinh ra (`outputs/<du-an>/`)
+## Kết quả sinh ra (`projects/<du-an>/`)
 
 | File | Nội dung |
 |---|---|
@@ -35,7 +35,7 @@ Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công
 | `ui/flows.md` | Sitemap + user flow (Mermaid) + mô tả bố cục từng màn |
 | `ui/screens/SCR-xx-<slug>.html` | Wireframe HTML tự chứa (tông xám, 1 màu nhấn) |
 | `ui/png/*.png` | Ảnh từng màn, từng trạng thái; storefront có thêm bản mobile 390px |
-| `ui/diagrams/*.png` | Sơ đồ Mermaid đã render |
+| `diagrams/*.png` | Sơ đồ Mermaid đã render |
 | `ui/index.html` | Gallery toàn bộ màn hình |
 
 ## Cấu trúc repo
@@ -44,7 +44,7 @@ Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công
 .claude/
   settings.json              quyền chạy sẵn (python, pandoc, mmdc, git, gh pr)
   skills/
-    ba-intake/               nhận text/file/link từ chat → inputs/, giữ phiên bản, diff, push, hỏi merge
+    ba-intake/               nhận text/file/link từ chat → projects/<du-an>/input/, giữ phiên bản, diff, push, hỏi merge
     srs-pipeline/            tạo mới bản 0.1 — chạy cả chuỗi, commit, mở PR, báo cáo
     srs-update/              cập nhật nhanh sau khảo sát/demo — sửa đúng phân hệ, 0.3 → 0.3.1, đánh dấu màn chờ vẽ
     srs-publish/             xuất bản khi gửi khách — vẽ màn đang chờ, docx, 0.3.x → 0.4, PR
@@ -57,12 +57,31 @@ Vẫn có thể thả file thẳng vào `inputs/<du-an>/` và commit thủ công
     ui-spec/                 Screen Inventory → flows.md
     wireframe/               design-kit/ (tokens.css, components-*.html, patterns.md) + scripts/build_ui.py
     render-screens/          scripts/shot.py (Playwright) + scripts/render_mermaid.py (mermaid-cli)
-CLAUDE.md                    luật chung: ngôn ngữ, tên file, mã định danh, git
+CLAUDE.md                    luật chung: phạm vi dự án, thư mục, mã định danh, tiết kiệm token, git
+tools/
+  ba_paths.py                đường dẫn chuẩn của một dự án (mọi script dùng)
+  project.py                 list · find · status · card · new — điểm vào theo dự án
 setup/cloud-setup.sh         setup script cho cloud environment
 templates/                   reference.docx (tuỳ chọn) — style Word công ty
-inputs/_example/             bộ input mẫu: đổi trả hàng Magento 2 + duyệt trên Odoo
-outputs/                     kết quả
+projects/
+  _example/input/            bộ input mẫu: đổi trả hàng Magento 2 + duyệt trên Odoo
+  <du-an>/                   mỗi dự án một thư mục — trên Google Drive: "BA Projects/<du-an>/" cùng cấu trúc
+    PROJECT.md               thẻ dự án: phiên bản, số mã, OQ mở, link Drive, bản đồ file — đọc đầu tiên
+    input/                   tài liệu khảo sát gốc (_manifest, _changes, _extracted, _tong-hop)
+    docs/                    brainstorm, URD, UC, srs/ → SRS.md, backlog
+    diagrams/                ảnh sơ đồ + swimlanes/*.json
+    ui/                      flows.md, screens/*.html, png/*.png, index.html
+    exports/                 SRS.docx, URD.docx, UC.docx, backlog.csv
+    _drive.json              ID/link Google Drive
 ```
+
+## Làm việc theo dự án và tiết kiệm token
+- Mỗi câu lệnh nhắc **tên dự án** (gần đúng cũng được: "odoo" → `odoo-mua-hang`). Claude chỉ làm trong `projects/<du-an>/`, không đọc dự án khác.
+- "Dự án X đang tới đâu?" → Claude chạy `python tools/project.py status X` (khoảng 10 dòng) thay vì mở tài liệu.
+- Mỗi dự án / mỗi việc lớn một phiên chat; xong việc gõ `/clear` (hoặc `/compact` giữa chừng) để lịch sử cũ không bị gửi lại mỗi lượt.
+- Tắt connector không dùng (Figma, Gmail…) trong cài đặt — định nghĩa công cụ của connector cũng chiếm ngữ cảnh.
+- Cập nhật nhỏ dùng `srs-update` (vài phút); chỉ chạy `srs-publish` / `drive-sync` khi cần gửi khách.
+- Xem token đã dùng: `/usage`, `/context`.
 
 ## Thiết lập lần đầu
 
@@ -113,4 +132,4 @@ Windows cài nhanh bằng winget: `winget install Python.Python.3.12 OpenJS.Node
 - Không push thẳng `main` — mọi kết quả đi qua PR trên branch `docs/<du-an>`.
 
 ## Về sau
-Tạo scheduled task trên cloud để tự chạy khi có thư mục mới trong `inputs/` (gõ `/schedule` trong Claude Code).
+Tạo scheduled task trên cloud để tự chạy khi có tài liệu mới trong `projects/<du-an>/input/` (gõ `/schedule` trong Claude Code).

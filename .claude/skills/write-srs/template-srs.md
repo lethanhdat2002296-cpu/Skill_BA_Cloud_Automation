@@ -12,7 +12,7 @@
 
 | Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
 |---|---|---|---|---|
-| 0.1 | {{YYYY-MM-DD}} | Bản đầu tiên | {{các file trong inputs/<du-an>/}} | Toàn bộ |
+| 0.1 | {{YYYY-MM-DD}} | Bản đầu tiên | {{các file trong projects/<du-an>/input/}} | Toàn bộ |
 
 ## 1. Giới thiệu
 
@@ -50,7 +50,7 @@ flowchart LR
 
 ## 3. Yêu cầu chức năng
 
-### 3.1 {{Phân hệ — mỗi phân hệ một file srs/03-NN-<phan-he>.md}}
+### 3.1 {{Phân hệ — mỗi phân hệ một file docs/srs/03-NN-<phan-he>.md}}
 
 #### FR-01 — {{Tên chức năng}}
 - **Mô tả:** {{…}}
@@ -102,7 +102,7 @@ flowchart LR
 #### SCR-01 — {{Tên màn hình}}
 {{Mô tả 1–2 câu: mục đích, điểm chính.}}
 
-![SCR-01 — {{Tên}}](ui/png/SCR-01-{{slug}}.png)
+![SCR-01 — {{Tên}}](../ui/png/SCR-01-{{slug}}.png)
 
 ## 7. User flow
 

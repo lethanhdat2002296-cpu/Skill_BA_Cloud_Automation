@@ -5,7 +5,7 @@
 | Mã dự án | {{du-an}} |
 | Phiên bản | {{0.1 — cùng phiên bản SRS}} |
 | Ngày | {{YYYY-MM-DD}} |
-| Nguồn | {{outputs/<du-an>/URD.md v…; inputs/<du-an>/…}} |
+| Nguồn | {{projects/<du-an>/docs/URD.md v…; projects/<du-an>/input/…}} |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Tác nhân

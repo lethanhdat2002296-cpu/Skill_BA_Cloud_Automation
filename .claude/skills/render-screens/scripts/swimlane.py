@@ -3,7 +3,7 @@
 
 Cách dùng:
     python .claude/skills/render-screens/scripts/swimlane.py <du-an>
-        -> đọc outputs/<du-an>/ui/swimlanes/*.json, ghi outputs/<du-an>/ui/diagrams/swimlane-<ten>.png
+        -> đọc projects/<du-an>/diagrams/swimlanes/*.json, ghi projects/<du-an>/diagrams/swimlane-<ten>.png
     python .../swimlane.py <du-an> --only nhap-kho
 
 Định dạng JSON:
@@ -36,6 +36,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import resolve  # noqa: E402
 
 HEAD_W = 150      # cột tên lane
 COL_W = 176       # bề rộng một cột bước
@@ -253,9 +255,9 @@ def main(argv: list[str]) -> int:
     ap.add_argument("du_an")
     ap.add_argument("--only", nargs="*", default=[])
     args = ap.parse_args(argv[1:])
-    project = REPO / "outputs" / args.du_an.strip("/\\")
-    src = project / "ui" / "swimlanes"
-    out_dir = project / "ui" / "diagrams"
+    project = resolve(args.du_an)
+    src = project.swimlanes
+    out_dir = project.diagrams
     out_dir.mkdir(parents=True, exist_ok=True)
     specs = sorted(src.glob("*.json"))
     if args.only:

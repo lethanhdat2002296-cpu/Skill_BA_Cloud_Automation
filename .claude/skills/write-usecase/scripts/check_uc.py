@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra outputs/<du-an>/UC.md và sinh ma trận truy vết UC ↔ US ↔ FR.
+"""Kiểm tra projects/<du-an>/docs/UC.md và sinh ma trận truy vết UC ↔ US ↔ FR.
 
 Cách dùng:
     python .claude/skills/write-usecase/scripts/check_uc.py <du-an>
@@ -23,6 +23,8 @@ if hasattr(sys.stdout, "reconfigure"):
 REPO = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO / ".claude" / "skills" / "write-srs" / "scripts"))
 from build_srs import fr_blocks  # noqa: E402
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import resolve  # noqa: E402
 
 UC_HEAD_RE = re.compile(r"^#### +(UC-\d+)\s*[—–-]\s*(.*)$", re.M)
 FIELD_RE = re.compile(r"^- \*\*([^*:]+):\*\*\s*(.*)$", re.M)
@@ -81,13 +83,13 @@ def main(argv: list[str]) -> int:
     if not args:
         print(__doc__)
         return 2
-    project = REPO / "outputs" / args[0].strip("/\\")
-    uc_path = project / "UC.md"
+    project = resolve(args[0])
+    uc_path = project.doc("UC.md")
     if not uc_path.exists():
         print(f"ERROR: không có {uc_path.relative_to(REPO)}")
         return 1
     text = uc_path.read_text(encoding="utf-8")
-    stories = urd_stories(project / "URD.md")
+    stories = urd_stories(project.doc("URD.md"))
     ucs = parse_ucs(text)
     errors: list[str] = []
     warns: list[str] = []
@@ -134,7 +136,7 @@ def main(argv: list[str]) -> int:
         if not u["dropped"] and diagrams and u["id"] not in diagrams:
             warns.append(f"{u['id']}: chưa có trên sơ đồ use case")
 
-    block, missing = matrix(ucs, stories, project / "SRS.md")
+    block, missing = matrix(ucs, stories, project.doc("SRS.md"))
     for s in missing:
         if stories[s]["priority"].lower().startswith("must"):
             warns.append(f"{s} (Must) chưa thuộc use case nào")

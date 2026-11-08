@@ -5,7 +5,7 @@
 | Mã dự án | odoo-mua-hang |
 | Phiên bản | 0.3 (cập nhật theo trả lời câu hỏi mở lần 1 và khảo sát lần 3 — Yêu cầu báo giá) |
 | Ngày | 2026-10-20 |
-| Nguồn | inputs/odoo-mua-hang/khao-sat-lan-1.md; inputs/odoo-mua-hang/khao-sat-lan-2-yeu-cau-mua-hang.md; inputs/odoo-mua-hang/_changes/20261020-074707.md; inputs/odoo-mua-hang/tra-loi-cau-hoi-mo-lan-1.md; inputs/odoo-mua-hang/khao-sat-lan-3-yeu-cau-bao-gia.md; inputs/odoo-mua-hang/_changes/20261020-084051.md; inputs/odoo-mua-hang/_changes/20261020-093008.md; outputs/odoo-mua-hang/brainstorm.md |
+| Nguồn | input/khao-sat-lan-1.md; input/khao-sat-lan-2-yeu-cau-mua-hang.md; input/_changes/20261020-074707.md; input/tra-loi-cau-hoi-mo-lan-1.md; input/khao-sat-lan-3-yeu-cau-bao-gia.md; input/_changes/20261020-084051.md; input/_changes/20261020-093008.md; docs/brainstorm.md |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Giới thiệu
@@ -298,13 +298,13 @@ Tài liệu mô tả yêu cầu của người dùng cho quy trình mua hàng tr
 
 ## 4. Quy trình nghiệp vụ mong muốn (TO-BE)
 
-Sơ đồ Activity – Swimlane (v0.3; đặc tả trong `ui/swimlanes/`, ảnh trong `ui/diagrams/`):
+Sơ đồ Activity – Swimlane (v0.3; đặc tả trong `diagrams/swimlanes/`, ảnh trong `diagrams/`):
 
-![Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng](ui/diagrams/swimlane-01-yeu-cau-mua-hang.png)
+![Swimlane 1 — Vật tư Nhập kho: Yêu cầu mua hàng](../diagrams/swimlane-01-yeu-cau-mua-hang.png)
 
-![Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho](ui/diagrams/swimlane-02-yeu-cau-bao-gia-po.png)
+![Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho](../diagrams/swimlane-02-yeu-cau-bao-gia-po.png)
 
-![Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp](ui/diagrams/swimlane-03-dich-vu.png)
+![Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp](../diagrams/swimlane-03-dich-vu.png)
 
 | Bước | Vai trò | Mô tả | User story |
 |---|---|---|---|

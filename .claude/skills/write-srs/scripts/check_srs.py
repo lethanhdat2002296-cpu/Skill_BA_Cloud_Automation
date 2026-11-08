@@ -18,6 +18,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import Project, resolve  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_srs import build, needs_build  # noqa: E402
 
@@ -67,10 +69,10 @@ def main(argv: list[str]) -> int:
         print(__doc__)
         return 2
     du_an = args[0].strip("/\\")
-    project = REPO / "outputs" / du_an
+    project = resolve(du_an)
     if needs_build(project):
-        build(project)
-    srs_path = project / "SRS.md"
+        build(project, quiet=True)
+    srs_path = project.doc("SRS.md")
     if not srs_path.exists():
         print(f"ERROR: không có {srs_path.relative_to(REPO)}")
         return 1
@@ -154,16 +156,16 @@ def main(argv: list[str]) -> int:
             errors.append(f"{scr}: thiếu dòng ảnh ![{scr} — …](ui/png/{scr}-<slug>.png) trong mục 6.2")
             continue
         stem = f"{scr}-{img_refs[scr]}"
-        if not (project / "ui" / "png" / f"{stem}.png").exists():
+        if not (project.png / f"{stem}.png").exists():
             late.append(f"{scr}: chưa có ảnh ui/png/{stem}.png")
-        if not (project / "ui" / "screens" / f"{stem}.html").exists():
+        if not (project.screens / f"{stem}.html").exists():
             late.append(f"{scr}: chưa có wireframe ui/screens/{stem}.html")
     for scr in img_refs:
         if scr not in scr_info:
             errors.append(f"{scr}: có ảnh trong 6.2 nhưng không có trong bảng Screen Inventory")
 
     # C. Truy vết
-    urd_path = project / "URD.md"
+    urd_path = project.doc("URD.md")
     us_ids = set(re.findall(r"^#{2,4} +(US-\d+)\b", urd_path.read_text(encoding="utf-8"), flags=re.M)) if urd_path.exists() else None
     if us_ids is None:
         warns.append("không có URD.md — bỏ qua kiểm tra US")
@@ -208,7 +210,7 @@ def main(argv: list[str]) -> int:
         errors.append(f"{ref} được nhắc tới nhưng không được định nghĩa")
 
     # G. Xuất bản
-    if final and not (project / "SRS.docx").exists():
+    if final and not project.export("SRS.docx").exists():
         errors.append("chưa có SRS.docx")
 
     for w in warns:

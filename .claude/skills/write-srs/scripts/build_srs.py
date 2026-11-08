@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ghép outputs/<du-an>/srs/*.md thành outputs/<du-an>/SRS.md + sinh ma trận truy vết + chỉ mục tra cứu.
+"""Ghép projects/<du-an>/docs/srs/*.md thành projects/<du-an>/docs/SRS.md + sinh ma trận truy vết + chỉ mục tra cứu.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/build_srs.py <du-an>            # ghép SRS.md
@@ -32,20 +32,21 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import Project, resolve  # noqa: E402
 GENERATED_NOTE = "<!-- SRS.md được sinh tự động bởi build_srs.py từ thư mục srs/ — sửa trong srs/, KHÔNG sửa file này -->"
 FR_HEAD_RE = re.compile(r"^#{3,4} +(FR-\d+)\s*[—–-]?\s*(.*)$", re.M)
 NO_UI_RE = re.compile(r"không\s+có\s+ui[^·|\n]*", re.I)
 
 
-def srs_parts(project: Path) -> list[Path]:
-    d = project / "srs"
+def srs_parts(project: Project) -> list[Path]:
+    d = project.srs_dir
     return sorted(p for p in d.glob("*.md") if not p.name.startswith("_")) if d.is_dir() else []
 
 
-def needs_build(project: Path) -> bool:
-    parts = srs_parts(project)
-    out = project / "SRS.md"
-    return bool(parts) and (not out.exists() or max(p.stat().st_mtime for p in parts) > out.stat().st_mtime)
+def needs_build(project: Project) -> bool:
+    """Có srs/ thì luôn ghép lại (rẻ, và mtime sau git clone không đáng tin)."""
+    return bool(srs_parts(project))
 
 
 def fr_blocks(text: str) -> list[dict]:
@@ -86,10 +87,10 @@ def trace_section(frs: list[dict]) -> str:
     return "\n".join(rows) + "\n"
 
 
-def build(project: Path, quiet: bool = False) -> tuple[Path, list[str]]:
+def build(project: Project, quiet: bool = False) -> tuple[Path, list[str]]:
     parts = srs_parts(project)
     if not parts:
-        raise FileNotFoundError(f"không có {project.relative_to(REPO)}/srs/*.md")
+        raise FileNotFoundError(f"không có {project.rel(project.docs)}/srs/*.md")
     warns: list[str] = []
     texts = [(p, p.read_text(encoding="utf-8-sig").strip() + "\n") for p in parts]
     joined = "\n".join(t for _, t in texts)
@@ -107,7 +108,7 @@ def build(project: Path, quiet: bool = False) -> tuple[Path, list[str]]:
         out_chunks.append(t)
     if not inserted:
         out_chunks.append(trace_section(frs))
-    out = project / "SRS.md"
+    out = project.doc("SRS.md")
     out.write_text("\n".join(out_chunks), encoding="utf-8")
     if not quiet:
         for w in warns:
@@ -117,12 +118,12 @@ def build(project: Path, quiet: bool = False) -> tuple[Path, list[str]]:
     return out, warns
 
 
-def index(project: Path) -> dict:
+def index(project: Project) -> dict:
     """Chỉ mục: mã -> file trong srs/ (để sửa đúng chỗ khi cập nhật)."""
     idx: dict = {"FR": {}, "NFR": {}, "SCR": {}, "AS": {}, "OQ": {}, "files": {}}
     for p in srs_parts(project):
         t = p.read_text(encoding="utf-8-sig")
-        rel = f"srs/{p.name}"
+        rel = f"docs/srs/{p.name}"
         idx["files"][rel] = len(t.splitlines())
         for f in fr_blocks(t):
             idx["FR"][f["id"]] = {"file": rel, "title": f["title"], "us": f["us"], "scr": f["scr"] or f["no_ui"]}
@@ -146,7 +147,7 @@ def main(argv: list[str]) -> int:
     if not args:
         print(__doc__)
         return 2
-    project = REPO / "outputs" / args[0].strip("/\\")
+    project = resolve(args[0])
     try:
         build(project)
     except FileNotFoundError as exc:

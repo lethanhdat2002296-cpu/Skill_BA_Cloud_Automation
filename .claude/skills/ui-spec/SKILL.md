@@ -1,13 +1,13 @@
 ---
 name: ui-spec
-description: Chuyển Screen Inventory (mục 6) và user flow của SRS.md thành bản đặc tả UI cho bước vẽ wireframe - sitemap Mermaid, user flow Mermaid, và danh sách màn hình cần vẽ kèm mô tả bố cục từng vùng, component trong design kit, trường, hành động, trạng thái. Dùng sau write-srs trong srs-pipeline, hoặc khi user yêu cầu "lên danh sách màn hình", "sitemap", "user flow", "UI spec", "mô tả bố cục màn hình" trước khi vẽ. Keywords - UI specification, sitemap, user flow, screen list, layout description, information architecture, Mermaid. Output outputs/<du-an>/ui/flows.md. Không hỏi user.
+description: Từ Screen Inventory và user flow của SRS viết ui/flows.md: sitemap, user flow Mermaid, bố cục từng màn. Dùng sau write-srs hoặc khi user nói "lên danh sách màn hình", "UI spec".
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
 # ui-spec — từ Screen Inventory tới bản vẽ chi tiết
 
 ## Input
-- `outputs/<du-an>/SRS.md` mục 3 (FR), 6 (Screen Inventory), 7 (User flow).
+- `projects/<du-an>/docs/SRS.md` mục 3 (FR), 6 (Screen Inventory), 7 (User flow).
 - `.claude/skills/wireframe/design-kit/patterns.md` và tên component trong `components-storefront.html` / `components-backend.html` (để mô tả bố cục bằng đúng component sẽ dùng).
 
 ## Cách làm
@@ -19,7 +19,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 5. Kiểm tra chéo: mọi trường và hành động trong Screen Inventory xuất hiện trong mô tả bố cục; mọi trạng thái được liệt kê. Thiếu trong SRS mà màn cần (vd. nút "Quay lại", phân trang) → thêm vào mô tả, đồng thời **cập nhật lại Screen Inventory trong SRS.md** cho khớp.
 6. Mơ hồ (vd. không rõ có cần bộ lọc theo ngày không) → chọn phương án theo `patterns.md`, ghi `AS-xx`/`OQ-xx` mới vào mục 9 SRS.
 
-## Output: `outputs/<du-an>/ui/flows.md`
+## Output: `projects/<du-an>/ui/flows.md`
 
 ````markdown
 # UI spec — <Tên dự án>
