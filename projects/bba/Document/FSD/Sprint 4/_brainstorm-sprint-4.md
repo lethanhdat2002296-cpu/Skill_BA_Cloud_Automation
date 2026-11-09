@@ -124,3 +124,9 @@
 - **Mâu thuẫn:** lời mời Parents App gửi qua SMS (BR-CHF-019) ↔ Phase 1 không gửi SMS (BR-GEN-014) → OQ-CF-06. Tên vai trò "School Admin", "HQ Enrolment" (C&F) ↔ "Centre Admin" (General §3.2) → OQ-CF-01.
 - **Chưa biết:** người duyệt change record (OQ-CF-02); trường bắt buộc sức khoẻ / người giám hộ / lớp (OQ-CF-03); chuẩn biểu đồ (OQ-CF-04); lịch tiêm chủng (OQ-CF-05); danh mục giấy tờ (OQ-CF-07); cơ chế lên playgroup 18 tháng và đề xuất lớp đích (OQ-CF-08, 09); trẻ chưa sinh khi sinh (OQ-CF-10); điều khoản người đón (OQ-CF-11).
 - **Kết quả:** FRD `3.1_Children_and_Families_VI.md` — 10 US, 66 FR, 60 AC, 12 OQ.
+
+## 3.2 Daily operations — nguồn: SRS SMS Daily Operations v0.1
+
+- **Đã biết:** 5 nhóm (Attendance: trẻ, nhân viên, khách; Daily care: hoạt động, đơn nghỉ; Calendar và diễn tập; Safety: centre log, tổng quan an toàn; Bus services), quy trình P1–P7, BR-OPS-001–051, 13 notification, 13 báo cáo, 20 AC (nguồn: SRS OPS §1–§8). Phạm vi loại trừ rõ ở §1.2 (16 mục).
+- **Chưa rõ:** vai trò "Centre Admin / School Admin" (OQ-OPS-01); Present vs Signed in (OQ-OPS-02); nhiệt kế Bluetooth (OQ-OPS-03); xung đột offline (OQ-OPS-04); e-Form 1 (OQ-OPS-05); người đưa trẻ có cần trong danh sách đón (OQ-OPS-06); khách sốt (OQ-OPS-12); huỷ đơn nghỉ (OQ-OPS-13).
+- **Kết quả:** FRD `3.2_Daily_Operations_VI.md` — 14 US, 69 FR, 74 AC, 14 OQ.
