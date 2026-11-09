@@ -108,3 +108,19 @@
 | OQ-ADM-06 | Vai trò duyệt xoá Slot ở Malaysia; Singapore và Vietnam có cần duyệt không. | OQ |
 | OQ-ADM-07 | Khoảng loại trừ (ngày lễ, sự kiện Centre) được quản lý ở đâu, ai cấu hình. | OQ |
 | OQ-ADM-08 | SRS CRM không có mục 4.6 — có nội dung bị thiếu không? | OQ |
+
+---
+
+## Quy tắc chung SMS (áp cho 3.1, 3.2, 3.6) — nguồn: SRS SMS General Requirements v0.1
+
+- Phase 1 phục vụ Singapore và Malaysia; Vietnam không thuộc Phase 1 (§2.2). Tổ chức Country → Brand → Cluster → Centre (§2.2).
+- SMS bắt đầu khi gia đình đóng booking fee; trước đó thuộc Enquiries (CRM) (§2.3).
+- Quyền 3 lớp: area permission, special permission, protected field; data scope; điều không được làm thì không hiển thị (§3.1). Phê duyệt qua Approvals inbox, tối đa 2 cấp, Approval routes; từ chối bắt buộc lý do (§3.3).
+- Danh sách chuẩn, bản ghi không xoá, History chỉ thêm, dữ liệu có "một nơi quản lý", thiết lập kế thừa theo cấp (§4). Không gửi SMS text / email digest ở Phase 1 (BR-GEN-014).
+
+## 3.1 Children & families — nguồn: SRS SMS Children & Families v0.1
+
+- **Đã biết:** đủ 6 phân hệ (Children, Families & guardians, Health & allergies, Documents, Authorised pickup, Classes), quy trình P1–P7, BR-CHF-001–050, 20 AC (nguồn: SRS C&F §1–§8). Phạm vi Phase 1 và loại trừ rõ ở §1.1, §1.2.
+- **Mâu thuẫn:** lời mời Parents App gửi qua SMS (BR-CHF-019) ↔ Phase 1 không gửi SMS (BR-GEN-014) → OQ-CF-06. Tên vai trò "School Admin", "HQ Enrolment" (C&F) ↔ "Centre Admin" (General §3.2) → OQ-CF-01.
+- **Chưa biết:** người duyệt change record (OQ-CF-02); trường bắt buộc sức khoẻ / người giám hộ / lớp (OQ-CF-03); chuẩn biểu đồ (OQ-CF-04); lịch tiêm chủng (OQ-CF-05); danh mục giấy tờ (OQ-CF-07); cơ chế lên playgroup 18 tháng và đề xuất lớp đích (OQ-CF-08, 09); trẻ chưa sinh khi sinh (OQ-CF-10); điều khoản người đón (OQ-CF-11).
+- **Kết quả:** FRD `3.1_Children_and_Families_VI.md` — 10 US, 66 FR, 60 AC, 12 OQ.
