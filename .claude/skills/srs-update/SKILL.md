@@ -61,6 +61,7 @@ Phân loại từng ý thay đổi và ghi bảng **"Kế hoạch cập nhật"*
 | User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. Rồi sửa UC liên quan trong `UC.md` và story trong `backlog.md` (story mới: ước lượng; story không đổi: không ước lượng lại). |
 | Đổi kịch bản / ngoại lệ của một tương tác | `UC.md` — nhánh `3a…` của UC liên quan (tra ma trận mục 5 của UC.md). |
 | Mâu thuẫn chưa chốt | `OQ-xx` mới trong `09`. |
+| Có `docs/doi-chieu-ma.md` (dự án nhập từ URD/FSD) và diff nhắc mã gốc | Đổi mã gốc → mã mới theo bảng đối chiếu trước khi sửa; mã gốc mới → thêm dòng đối chiếu; chạy `doc-import/scripts/check_import.py`. |
 | Có `docs/test-cases.md` và FR/AC đổi | TC có cột AC trỏ tới AC đó (`grep -n "^| TC-" ` trong mục `### FR-xx`): sửa bước / kết quả; AC mới → TC mới (số tiếp theo); FR bỏ → `[Đã bỏ — v<ver>]` trong Tiêu đề TC. Theo `write-testcase/SKILL.md` mục "Cập nhật". |
 
 ## Bước 3 — Sửa đúng chỗ

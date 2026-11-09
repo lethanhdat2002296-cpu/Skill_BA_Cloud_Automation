@@ -16,7 +16,8 @@ projects/<du-an>/                    Drive: "BA Projects/<du-an>/"
   PROJECT.md   thẻ dự án (sinh tự động + phần ghi chú viết tay)
   input/       tài liệu khảo sát gốc — KHÔNG sửa/xoá/ghi đè; chỉ thêm qua ba-intake (bản mới: __v2, __v3)
                _manifest.md, _changes/, _extracted/, _tong-hop.md (bản hợp nhất — nguồn ưu tiên)
-  docs/        brainstorm.md, URD.md, UC.md, srs/*.md (nguồn SRS, tách phân hệ) → SRS.md (sinh tự động), backlog.md, test-cases.md
+  docs/        brainstorm.md, URD.md, UC.md, srs/*.md (nguồn SRS, tách phân hệ) → SRS.md (sinh tự động), backlog.md, test-cases.md,
+               doi-chieu-ma.md (mã gốc ↔ mã mới, khi nhập URD/FSD có sẵn)
   diagrams/    ảnh sơ đồ (srs-NN, flows-NN, uc-NN, swimlane-*) · swimlanes/*.json (nguồn swimlane)
   ui/          flows.md, index.html, _pending.md, screens/SCR-xx-<slug>.html, png/SCR-xx-<slug>[--<state>][-mobile].png
   exports/     SRS.docx, URD.docx, UC.docx, backlog.csv, test-cases.csv — sinh ra, không sửa tay
@@ -42,6 +43,7 @@ Số đánh 2 chữ số, tăng dần, **không tái sử dụng** mã đã xóa
 |---|---|---|
 | Dán text, đính kèm file/ảnh, gửi link; "thêm/cập nhật thông tin dự án X" | `ba-intake` | `ba-intake` → hỏi user → `srs-update` |
 | "Làm SRS / làm tài liệu cho X" | `srs-pipeline` (bản 0.1) | `srs-update` |
+| Đưa **URD / FSD / SRS có sẵn** ("đây là FSD của dự án X") | `ba-intake` → `srs-pipeline` (bước `doc-import`: giữ nội dung, đối chiếu mã gốc, bỏ qua brainstorm/URD) | `ba-intake` → so khác biệt → `srs-update` |
 | "Cập nhật SRS cho X", "sau khảo sát/demo" | `srs-pipeline` | `srs-update` (nhanh, không vẽ, không Word) |
 | "Xuất bản / xuất docx / gửi khách" | `srs-pipeline` | `srs-publish` |
 | "Viết use case" / "Làm backlog, xuất Jira" | `write-usecase` / `write-user-story` | như bên trái |

@@ -113,6 +113,7 @@ def card(p: Project) -> Path:
             "| FR / NFR / SCR / AS / OQ | `docs/SRS.md` (hoặc `docs/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |",
             "| User story / Use case | `docs/URD.md`, `docs/UC.md` | `grep -n \"^#### US-07\"` rồi Read đoạn đó |",
             "| Backlog | `docs/backlog.md` → `exports/backlog.csv` | |",
+            "| Mã gốc của khách (nếu nhập URD/FSD) | `docs/doi-chieu-ma.md` | `grep -n \"REQ-012\"` → mã mới |",
             "| Test case | `docs/test-cases.md` → `exports/test-cases.csv` | Tra `grep -n \"^### FR-07\"`; ma trận phủ ở mục 6 |",
             "| Màn hình | `ui/flows.md`, `ui/screens/SCR-xx-*.html` | Chỉ mở ảnh `ui/png/` khi cần review |",
             "| Sơ đồ | `diagrams/` (`swimlanes/*.json` là nguồn) | |",

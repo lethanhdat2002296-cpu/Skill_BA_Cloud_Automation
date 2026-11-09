@@ -74,6 +74,8 @@ Push lỗi (chưa đăng nhập, không có remote) → báo user nguyên nhân 
 
 Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SRS cho dự án `<du-an>`"** (skill `srs-pipeline`). Kết thúc.
 
+Tài liệu là **URD / FSD / SRS có sẵn** (user nói rõ, hoặc tiêu đề / nội dung là đặc tả) → `--note "<URD|FSD|SRS> gốc của <ai>, v<x>"` khi nạp; báo cáo ghi "pipeline sẽ nhập tài liệu này (doc-import), không phân tích lại từ đầu". Dự án **đã có SRS** mà nhận URD/FSD mới → vẫn đi Bước 5 (so khác biệt) như mọi tài liệu khác.
+
 ## Bước 5 — Dự án đã có tài liệu (`is_update = true`): mô tả khác biệt
 
 1. Đọc `change_report`, các file mới/phiên bản mới, và `projects/<du-an>/input/_tong-hop.md` (nếu có). **Không đọc cả SRS** — để biết ảnh hưởng FR/SCR dùng:

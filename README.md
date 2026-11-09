@@ -18,6 +18,7 @@ Không cần tự tạo thư mục hay commit — mọi thứ làm ngay trong đ
    - commit + push lên GitHub (branch `docs/<du-an>`);
    - nếu dự án đã có tài liệu: **giữ nguyên bản cũ** (bản mới lưu thành `__v2`, `__v3`…), lập bảng khác biệt cũ/mới trong `_changes/`, rồi **hỏi bạn**: merge thành bản tổng hợp, giữ cả hai, hay bạn tự mô tả khác biệt.
 4. Gõ **"Làm SRS cho dự án `<du-an>`"** (hoặc gộp luôn: "Làm SRS cho dự án X" + dán/đính kèm tài liệu trong cùng tin nhắn).
+   - **Đã có URD / FSD / SRS** (của khách hoặc nhóm khác)? Đính kèm và nói rõ loại: *"Đây là FSD của dự án X, làm SRS"*. Claude nhập tài liệu đó thay vì phân tích lại từ đầu: giữ nguyên ý, đặt mã của repo, lập `docs/doi-chieu-ma.md` (mã gốc ↔ mã mới, script kiểm không sót yêu cầu), chỗ thiếu thành Open Questions, rồi chạy tiếp use case → backlog → wireframe → Word.
 5. Đợi Claude chạy xong → xem PR: `projects/<du-an>/exports/SRS.docx`, `ui/index.html`, danh sách **Open Questions** trong mô tả PR.
 6. **Sau mỗi buổi khảo sát / demo** → lặp lại bước 2. Claude hỏi bạn một lần về khác biệt, chọn **"Merge + cập nhật SRS ngay"** → SRS được sửa đúng chỗ trong vài phút (0.3 → 0.3.1), màn hình cần sửa được đánh dấu chờ vẽ. Không vẽ lại, không xuất docx ở bước này.
 7. **Khi cần gửi khách** → gõ **"Xuất bản tài liệu dự án `<du-an>`"**: chỉ vẽ lại các màn đang chờ, xuất SRS.docx, lên bản 0.4, mở PR.
@@ -48,6 +49,7 @@ Vẫn có thể thả file thẳng vào `projects/<du-an>/input/` và commit th�
     srs-pipeline/            tạo mới bản 0.1 — chạy cả chuỗi, commit, mở PR, báo cáo
     srs-update/              cập nhật nhanh sau khảo sát/demo — sửa đúng phân hệ, 0.3 → 0.3.1, đánh dấu màn chờ vẽ
     srs-publish/             xuất bản khi gửi khách — vẽ màn đang chờ, docx, 0.3.x → 0.4, PR
+    doc-import/              nhập URD / FSD / SRS có sẵn: dàn ý (import_doc.py), giữ nội dung, bảng đối chiếu mã gốc ↔ mới (check_import.py)
     brainstorm/              phỏng vấn BA 7 phần, tự trả lời từ input
     write-urd/               URD + template-urd.md
     write-usecase/           Use Case fully-dressed (UC-xx) + sơ đồ use case + scripts/check_uc.py (ma trận UC ↔ US ↔ FR)
@@ -120,6 +122,7 @@ Windows cài nhanh bằng winget: `winget install Python.Python.3.12 OpenJS.Node
 | Xuất lại Word | `python .claude/skills/write-srs/scripts/to_docx.py <du-an>` (thêm `--src URD.md` / `--src UC.md` cho tài liệu khác) |
 | Kiểm tra use case | `python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix` |
 | Xuất backlog CSV (Jira) | `python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>` |
+| Nhập URD / FSD có sẵn | đính kèm file + "Đây là FSD của dự án `<du-an>`, làm SRS" — xem dàn ý: `python .claude/skills/doc-import/scripts/import_doc.py <du-an> <file>` |
 | Viết test case | gõ "Viết test case cho `<du-an>`" — kiểm tra: `python .claude/skills/write-testcase/scripts/check_tc.py <du-an> --write-matrix` |
 | Đẩy lên Google Drive | gõ "Đẩy dự án `<du-an>` lên Drive" (cần connector Google Drive) |
 | Kiểm tra SRS | `python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final` |

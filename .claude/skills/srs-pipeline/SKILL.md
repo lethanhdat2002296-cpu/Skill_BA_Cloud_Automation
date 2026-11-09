@@ -1,6 +1,6 @@
 ---
 name: srs-pipeline
-description: Tạo mới trọn bộ tài liệu bản 0.1 cho dự án CHƯA có SRS: brainstorm → URD → Use Case → SRS → backlog → UI spec → wireframe → PNG → Word → PR. Dùng khi user nói "làm SRS / làm tài liệu cho dự án X". Dự án đã có SRS → srs-update.
+description: Tạo mới trọn bộ tài liệu bản 0.1 cho dự án CHƯA có SRS: brainstorm (hoặc nhập URD/FSD có sẵn) → URD → Use Case → SRS → backlog → UI spec → wireframe → PNG → Word → PR. Dùng khi user nói "làm SRS / làm tài liệu cho dự án X". Dự án đã có SRS → srs-update.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *), Bash(pandoc *), Bash(npx mmdc *), Bash(mmdc *), Bash(git *), Bash(gh pr *)
 disallowed-tools: AskUserQuestion
 ---
@@ -16,7 +16,8 @@ Bạn là BA lead chạy toàn bộ chuỗi **không có người can thiệp**.
 3. Nếu user không nêu tên và không kèm tài liệu: chọn dự án trong `projects/` (bỏ qua `_example`) có thời điểm sửa mới nhất mà **chưa có** `projects/<du-an>/docs/SRS.md`. Nếu không có thư mục nào khác thì dùng `_example`. Ghi lựa chọn vào báo cáo cuối.
 4. Không tìm thấy `projects/<du-an>/input/` → tìm thư mục gần đúng tên (không phân biệt hoa thường, bỏ dấu). Vẫn không có → báo lỗi ngắn gọn, gợi ý "dán hoặc đính kèm tài liệu vào chat", rồi dừng (đây là trường hợp duy nhất được dừng).
 5. **Dự án đã có `projects/<du-an>/docs/SRS.md`** → KHÔNG chạy lại pipeline. Chuyển sang `.claude/skills/srs-update/SKILL.md` (cập nhật nhanh); nếu user nói thêm "xuất docx / gửi khách / xuất bản" thì sau đó chạy `.claude/skills/srs-publish/SKILL.md`. Kết thúc skill này.
-6. Lệnh Python: dùng `python3` nếu có, không thì `python`. Bên dưới viết `python`.
+6. **Input có URD / FSD / SRS sẵn** (user nói "đây là URD/FSD…", hoặc `_manifest.md` ghi chú loại đó, hoặc `import_doc.py` đoán loại URD/FSD/SRS với tài liệu dạng đặc tả) → làm theo `.claude/skills/doc-import/SKILL.md` trước Bước 3, rồi **bỏ qua các bước** skill đó liệt kê (URD → bỏ `brainstorm`, `write-urd`; FSD/SRS → bỏ thêm phần viết của `write-srs`). Ghi "Nhập từ <file>" trong báo cáo. BRD / biên bản / ghi chú khảo sát vẫn đi đường `brainstorm`.
+7. Lệnh Python: dùng `python3` nếu có, không thì `python`. Bên dưới viết `python`.
 
 ## Bước 1 — Git
 
@@ -46,6 +47,7 @@ Với mỗi bước: đọc `.claude/skills/<skill>/SKILL.md` của **repo này*
 
 | # | Skill | Output chính | Commit message |
 |---|---|---|---|
+| 0 | `doc-import` (chỉ khi có URD/FSD/SRS sẵn) | `URD.md` / `srs/*.md`, `doi-chieu-ma.md` | `docs(<du-an>): nhập <loại> từ <file>` |
 | 1 | `brainstorm` | `brainstorm.md` | `docs(<du-an>): brainstorm` |
 | 2 | `write-urd` | `URD.md` | `docs(<du-an>): URD` |
 | 2b | `write-usecase` | `UC.md` | `docs(<du-an>): use case` |
