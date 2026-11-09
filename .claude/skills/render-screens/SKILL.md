@@ -50,6 +50,7 @@ Mermaid không vẽ được swimlane thẳng lane, nên dùng script riêng:
 python .claude/skills/render-screens/scripts/swimlane.py <du-an>
 ```
 - Đặc tả mỗi sơ đồ là một file `projects/<du-an>/Diagram/Flow/swimlanes/<ten>.json` (lane, bước, mũi tên — xem docstring script). Dùng `"orientation": "vertical"` (lane là cột) để vừa trang A4 khi nhúng Word; ≤ 6 lane và ≤ 12 bước mỗi sơ đồ, quy trình dài thì tách nhiều sơ đồ.
+- Sơ đồ **BPMN**: thêm `"notation": "bpmn"` vào JSON → start event vòng mảnh, end event viền đậm, gateway thoi có ×, `type: "timer"` cho sự kiện hẹn giờ; nhánh gateway sang lane khác đi ra từ cạnh thoi. Đặt bước sao cho đường dọc trong lane đích không cắt qua bước khác.
 - Ra `Diagram/Flow/swimlane-<ten>.png`; SRS tham chiếu bằng dòng ảnh `![…](Diagram/Flow/swimlane-<ten>.png)`.
 - Mở xem từng ảnh: nhãn mũi tên không đè nhau, mũi tên không cắt qua bước.
 

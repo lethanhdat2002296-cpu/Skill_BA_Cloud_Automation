@@ -76,13 +76,13 @@
       "synced_at": "2026-11-09 12:13"
     },
     "FSD/Sprint 4/2.8_CRM_Administration_VI": {
-      "file_id": "1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B",
-      "url": "https://drive.google.com/file/d/1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B/view",
+      "file_id": "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
+      "url": "https://drive.google.com/file/d/1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "9186f80b0cd4d6c5032b1b05facaa57f61bdb8fe2c0f80e587ab9ba469608463",
-      "synced_at": "2026-11-09 12:13"
+      "version": "0.2",
+      "source_sha256": "7b2a44b3885bfa93eabdabd339d40a93a7d3d5e6732877f5d1fee1d0884deabe",
+      "synced_at": "2026-11-09 14:17"
     },
     "FSD/Sprint 4/3.1_Children_and_Families_VI": {
       "file_id": "13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM",
@@ -133,7 +133,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-09 12:13"
+      "last_used": "2026-11-09 14:17"
     }
   },
   "history": [
@@ -148,6 +148,17 @@
         "1nTuKWdEnhbMrUzs_jr4FZFivkxZlct78"
       ],
       "note": "Bản nháp Sprint 4 — user yêu cầu xoá 09/11/2026"
+    },
+    {
+      "file_id": "1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B",
+      "url": "https://drive.google.com/file/d/1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "9186f80b0cd4d6c5032b1b05facaa57f61bdb8fe2c0f80e587ab9ba469608463",
+      "synced_at": "2026-11-09 12:13",
+      "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
+      "replaced_at": "2026-11-09 14:17"
     }
   ]
 }

@@ -19,7 +19,9 @@ Cách dùng:
       ],
       "edges": [["s", "a1"], ["a1", "d1"], ["d1", "x1", "Duyệt"], ["d1", "a1", "Từ chối"], ["x1", "e"]]
     }
-type: task (mặc định) | system (nền đậm hơn) | decision (hình thoi) | start | end.
+type: task (mặc định) | system (nền đậm hơn) | decision (hình thoi) | start | end | timer (sự kiện hẹn giờ).
+"notation": "bpmn" → ký hiệu BPMN 2.0: start = vòng mảnh, end = vòng viền đậm, timer = vòng kép + đồng hồ,
+decision = exclusive gateway (thoi có dấu ×, nhãn đặt phía trên).
 "orientation": "vertical" → lane là cột, "col" là thứ tự bước từ trên xuống (vừa trang A4 dọc khi nhúng Word).
 Mũi tên: tiến (cột đích > cột nguồn) đi ngang–dọc–ngang qua khe giữa hai cột;
 lùi hoặc cùng cột khác lane đi theo rãnh trên cùng của lane đích để không cắt qua các bước.
@@ -62,7 +64,27 @@ def wrap(text: str, width: int = 18) -> list[str]:
     return lines or [""]
 
 
+def event_svg(x: float, y: float, t: str, bpmn: bool) -> str:
+    """Vẽ sự kiện start / end / timer; bpmn=True dùng ký hiệu BPMN 2.0."""
+    if not bpmn:
+        s = f'<circle cx="{x}" cy="{y}" r="13" fill="{"#333" if t == "start" else "#fff"}" stroke="#333" stroke-width="2"/>'
+        return s + (f'<circle cx="{x}" cy="{y}" r="8" fill="#333"/>' if t == "end" else "")
+    if t == "start":
+        return f'<circle cx="{x}" cy="{y}" r="13" fill="#fff" stroke="#333" stroke-width="1.6"/>'
+    if t == "end":
+        return f'<circle cx="{x}" cy="{y}" r="13" fill="#fff" stroke="#333" stroke-width="4"/>'
+    return (f'<circle cx="{x}" cy="{y}" r="14" fill="#fff" stroke="#333" stroke-width="1.4"/>'
+            f'<circle cx="{x}" cy="{y}" r="11" fill="#fff" stroke="#333" stroke-width="1.2"/>'
+            f'<circle cx="{x}" cy="{y}" r="7" fill="#fff" stroke="#333" stroke-width="1"/>'
+            f'<path d="M{x},{y - 5} L{x},{y} L{x + 4},{y}" fill="none" stroke="#333" stroke-width="1.2"/>')
+
+
+def gateway_mark(x: float, y: float) -> str:
+    return f'<path d="M{x - 9},{y - 9} L{x + 9},{y + 9} M{x + 9},{y - 9} L{x - 9},{y + 9}" stroke="#333" stroke-width="3"/>'
+
+
 def render_svg(spec: dict) -> tuple[str, int, int]:
+    bpmn = spec.get("notation") == "bpmn"
     lanes = spec["lanes"]
     nodes = {n["id"]: n for n in spec["nodes"]}
     ncols = max(n["col"] for n in nodes.values()) + 1
@@ -78,8 +100,8 @@ def render_svg(spec: dict) -> tuple[str, int, int]:
     def half(n):
         t = n.get("type", "task")
         if t == "decision":
-            return DEC_W / 2, DEC_H / 2
-        if t in ("start", "end"):
+            return (26, 26) if bpmn else (DEC_W / 2, DEC_H / 2)
+        if t in ("start", "end", "timer"):
             return 14, 14
         return NODE_W / 2, NODE_H / 2
 
@@ -132,16 +154,19 @@ def render_svg(spec: dict) -> tuple[str, int, int]:
     for n in nodes.values():
         x, y, t = cx(n), cy(n), n.get("type", "task")
         label = n.get("label", "")
-        if t in ("start", "end"):
-            out.append(f'<circle cx="{x}" cy="{y}" r="13" fill="{"#333" if t == "start" else "#fff"}" stroke="#333" stroke-width="2"/>')
-            if t == "end":
-                out.append(f'<circle cx="{x}" cy="{y}" r="8" fill="#333"/>')
+        if t in ("start", "end", "timer"):
+            out.append(event_svg(x, y, t, bpmn))
             if label:
                 out.append(f'<text x="{x}" y="{y + 30}" font-size="11" text-anchor="middle" fill="#555">{html.escape(label)}</text>')
             continue
         if t == "decision":
-            w, h = DEC_W / 2, DEC_H / 2
+            w, h = (26, 26) if bpmn else (DEC_W / 2, DEC_H / 2)
             out.append(f'<polygon points="{x},{y - h} {x + w},{y} {x},{y + h} {x - w},{y}" fill="#fff" stroke="#333" stroke-width="1.6"/>')
+            if bpmn:  # BPMN: thoi nhỏ có dấu ×, nhãn phía trên
+                out.append(gateway_mark(x, y))
+                for k, line in enumerate(reversed(wrap(label, 22))):
+                    out.append(f'<text x="{x + w + 4}" y="{y - h + 2 - k * 13}" font-size="11" fill="#1f1f1f">{html.escape(line)}</text>')
+                continue
             lines = wrap(label, 14)
         else:
             fill = "#d9d9d9" if t == "system" else "#fff"
@@ -159,6 +184,7 @@ V_HEAD_H = 40      # hàng tên lane
 
 
 def render_svg_vertical(spec: dict) -> tuple[str, int, int]:
+    bpmn = spec.get("notation") == "bpmn"
     """Swimlane dọc: mỗi lane là một cột, các bước đi từ trên xuống (vừa trang A4 dọc)."""
     lanes = spec["lanes"]
     nodes = {n["id"]: n for n in spec["nodes"]}
@@ -176,8 +202,8 @@ def render_svg_vertical(spec: dict) -> tuple[str, int, int]:
     def half(n):
         t = n.get("type", "task")
         if t == "decision":
-            return DEC_W / 2, DEC_H / 2 - 6
-        if t in ("start", "end"):
+            return (26, 26) if bpmn else (DEC_W / 2, DEC_H / 2 - 6)
+        if t in ("start", "end", "timer"):
             return 14, 14
         return NODE_W / 2, NODE_H / 2
 
@@ -205,6 +231,11 @@ def render_svg_vertical(spec: dict) -> tuple[str, int, int]:
         if b["col"] > a["col"] and a["lane"] == b["lane"]:
             pts = [(ax, ay + ah), (bx, by - bh)]
             lx, ly = ax + 6, ay + ah + 13
+        elif b["col"] > a["col"] and bpmn and a.get("type") == "decision":
+            # BPMN: nhánh sang lane khác ra từ cạnh gateway, rồi đi dọc trong lane đích
+            sx = ax - aw if bx < ax else ax + aw
+            pts = [(sx, ay), (bx, ay), (bx, by - bh)]
+            lx, ly = (sx + bx) / 2 - 16, ay - 5
         elif b["col"] > a["col"]:
             gy = ay + V_ROW_H / 2
             pts = [(ax, ay + ah), (ax, gy), (bx, gy), (bx, by - bh)]
@@ -219,7 +250,7 @@ def render_svg_vertical(spec: dict) -> tuple[str, int, int]:
             ch = b["lane"] * V_LANE_W + 10
             sx = ax - aw if b["lane"] <= a["lane"] else ax + aw
             pts = [(sx, ay), (ch, ay), (ch, by), (bx - bw, by)]
-            lx, ly = ch + 4, (ay + by) / 2
+            lx, ly = ((sx + ch) / 2 - 12, ay - 6) if bpmn else (ch + 4, (ay + by) / 2)
         d = "M" + " L".join(f"{x:.0f},{y:.0f}" for x, y in pts)
         out.append(f'<path d="{d}" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arr)"/>')
         if label:
@@ -228,16 +259,19 @@ def render_svg_vertical(spec: dict) -> tuple[str, int, int]:
     for n in nodes.values():
         x, y, t = cx(n), cy(n), n.get("type", "task")
         label = n.get("label", "")
-        if t in ("start", "end"):
-            out.append(f'<circle cx="{x}" cy="{y}" r="13" fill="{"#333" if t == "start" else "#fff"}" stroke="#333" stroke-width="2"/>')
-            if t == "end":
-                out.append(f'<circle cx="{x}" cy="{y}" r="8" fill="#333"/>')
+        if t in ("start", "end", "timer"):
+            out.append(event_svg(x, y, t, bpmn))
             if label:
                 out.append(f'<text x="{x + 20}" y="{y + 4}" font-size="11" fill="#555">{html.escape(label)}</text>')
             continue
         if t == "decision":
-            w, h = DEC_W / 2, DEC_H / 2 - 6
+            w, h = (26, 26) if bpmn else (DEC_W / 2, DEC_H / 2 - 6)
             out.append(f'<polygon points="{x},{y - h} {x + w},{y} {x},{y + h} {x - w},{y}" fill="#fff" stroke="#333" stroke-width="1.6"/>')
+            if bpmn:  # BPMN: thoi nhỏ có dấu ×, nhãn phía trên
+                out.append(gateway_mark(x, y))
+                for k, line in enumerate(reversed(wrap(label, 22))):
+                    out.append(f'<text x="{x + w + 4}" y="{y - h + 2 - k * 13}" font-size="11" fill="#1f1f1f">{html.escape(line)}</text>')
+                continue
             lines = wrap(label, 14)
         else:
             fill = "#d9d9d9" if t == "system" else "#fff"

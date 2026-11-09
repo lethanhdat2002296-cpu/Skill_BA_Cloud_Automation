@@ -1,0 +1,149 @@
+{
+ "title": "BBA-50 · Uỷ quyền duyệt (extra permission)",
+ "lanes": [
+  "Centre Director",
+  "Hệ thống",
+  "Nhân viên được giao"
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "lane": 0,
+   "col": 0,
+   "type": "start",
+   "label": "Cần giao quyền duyệt"
+  },
+  {
+   "id": "a1",
+   "lane": 0,
+   "col": 1,
+   "label": "Chọn nhân viên Centre và quyền mình đang có"
+  },
+  {
+   "id": "a2",
+   "lane": 0,
+   "col": 2,
+   "label": "Nhập lý do, ngày kết thúc (tuỳ chọn)"
+  },
+  {
+   "id": "g1",
+   "lane": 1,
+   "col": 3,
+   "type": "decision",
+   "label": "Hợp lệ?"
+  },
+  {
+   "id": "x1",
+   "lane": 1,
+   "col": 4,
+   "type": "system",
+   "label": "Ghi quyền Active, gửi thông báo"
+  },
+  {
+   "id": "a3",
+   "lane": 2,
+   "col": 5,
+   "label": "Dùng quyền (vd. duyệt đơn nghỉ)"
+  },
+  {
+   "id": "g2",
+   "lane": 1,
+   "col": 6,
+   "type": "decision",
+   "label": "Kết thúc quyền"
+  },
+  {
+   "id": "a4",
+   "lane": 0,
+   "col": 7,
+   "label": "Thu hồi quyền"
+  },
+  {
+   "id": "t1",
+   "lane": 1,
+   "col": 7,
+   "type": "timer",
+   "label": "Đến ngày kết thúc"
+  },
+  {
+   "id": "x2",
+   "lane": 1,
+   "col": 8,
+   "type": "system",
+   "label": "Quyền Revoked / Expired, ghi lịch sử"
+  },
+  {
+   "id": "a5",
+   "lane": 2,
+   "col": 9,
+   "label": "Nhận thông báo kết thúc quyền"
+  },
+  {
+   "id": "e",
+   "lane": 2,
+   "col": 10,
+   "type": "end",
+   "label": "Kết thúc"
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "a1"
+  ],
+  [
+   "a1",
+   "a2"
+  ],
+  [
+   "a2",
+   "g1"
+  ],
+  [
+   "g1",
+   "a1",
+   "Không"
+  ],
+  [
+   "g1",
+   "x1",
+   "Có"
+  ],
+  [
+   "x1",
+   "a3"
+  ],
+  [
+   "a3",
+   "g2"
+  ],
+  [
+   "g2",
+   "a4",
+   "Thu hồi"
+  ],
+  [
+   "g2",
+   "t1",
+   "Hết hạn"
+  ],
+  [
+   "a4",
+   "x2"
+  ],
+  [
+   "t1",
+   "x2"
+  ],
+  [
+   "x2",
+   "a5"
+  ],
+  [
+   "a5",
+   "e"
+  ]
+ ],
+ "orientation": "vertical",
+ "notation": "bpmn"
+}

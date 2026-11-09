@@ -1,0 +1,417 @@
+<title>BeeHive Approvals Wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · FRD 2.8 Administration — Approvals</span>
+    <h1>Approvals wireframe</h1>
+    <p>Wireframe các màn của BBA-49 đến BBA-53 theo bố cục BeeHive. Chọn màn ở hàng dưới, chọn trạng thái ở bên phải tiêu đề màn. Dữ liệu trong bảng là dữ liệu mẫu.</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div>
+      <h2 id="scrTitle"></h2>
+      <div class="tickets" id="scrTickets"></div>
+    </div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const BPMN = { b52: "{{BPMN_52}}", b4953: "{{BPMN_4953}}", b50: "{{BPMN_50}}", b51: "{{BPMN_51}}" };
+
+const NAV = [
+  ["Notifications", "", 3],
+  ["#Dashboard"], ["MKT - Admission"], ["Finance"], ["Operations"],
+  ["#Enquiry & Enrolment"], ["Enquiry"], ["Lead"], ["Registration & Enrolment"],
+  ["#Children & Family"], ["Children"],
+  ["#Administration"], ["Approvals", "approvals", 4], ["Approval routes", "routes"], ["Extra permissions", "extra"], ["Settings", "settings"], ["Change log"]
+];
+function shell(active, body) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key && key === active ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>Settings</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><div class="search-top">⌕ Search<kbd>⌘ K</kbd></div><span class="ico round"></span><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const sel = (t, cls = "") => `<div class="input select ${cls}" style="width:${cls.includes("w") ? "" : "180px"}">${t}</div>`;
+const filterBar = (search, total, selects) => `
+  <div class="row between"><div class="input" style="width:300px">⌕ ${search}</div><span class="total">Total <b>${total}</b></span><div class="row"><span class="btn">☐ Save as new view</span><span class="btn">⋯</span></div></div>
+  <div class="row">${selects}<span class="btn">≡ Advanced filter</span><span class="btn">⊘ Clear</span></div>`;
+const pager = (txt) => `<div class="pager"><span>${txt}</span><div class="pg"><span>«</span><span>‹</span><span class="on">1</span><span>›</span><span>»</span><span class="input select" style="width:64px;height:28px">20</span></div></div>`;
+
+/* ---------- SCR-01 Approval routes ---------- */
+const ROUTES = [
+  ["Withdrawal – full notice", "All countries", "All brands", "Centre Director", "—", "—"],
+  ["Withdrawal – short notice", "Singapore", "All brands", "District Manager", "—", "—"],
+  ["Withdrawal – short notice", "Malaysia", "All brands", "Operations Manager", "—", "—"],
+  ["Withdrawal – short notice", "All countries", "Odyssey", "Centre Director", "—", "—"],
+  ["Withdrawal – short notice", "All countries", "Brighton", "Head of Brand", "—", "—"],
+  ["Mid-month withdrawal", "Singapore", "All brands", "Centre Director", "District Manager", "—"],
+  ["Temporary withdrawal", "Malaysia", "All brands", "Centre Director", "Operations Manager", "—"],
+  ["Transfer – short notice", "All countries", "All brands", "District Manager (current centre)", "District Manager (new centre)", "—"],
+  ["Discount", "All countries", "All brands", "Centre Director", "HQ Finance", "—"],
+  ["Refund", "All countries", "All brands", "HQ Finance", "—", "No threshold"],
+  ["Leave", "All countries", "All brands", "Centre Director", "—", "—"],
+  ["Photos", "All countries", "All brands", "Centre Director", "—", "—"]
+];
+function routesBody(withModal) {
+  const rows = ROUTES.map((r, i) => `<tr${withModal && i === 8 ? ' class="sel"' : ""}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="${r[4] === "—" ? "dim" : ""}">${r[4]}</td><td class="dim">${r[5]}</td><td class="dim">05 Nov 2026</td><td><span class="btn sm ghost">Edit</span><span class="btn sm ghost">History</span></td></tr>`).join("");
+  return `<div class="ph"><div><h3>Approval routes</h3><p>Who approves each request type · up to 2 levels · optional amount threshold</p></div><div class="row"><span class="btn">⇩ Export</span><span class="btn">↻ Load default routes</span></div></div>
+  <div><div class="tabs"><span class="tab on">☰ Approval matrix</span><span class="tab">By brand</span></div>
+  <div class="card" style="border-top-left-radius:0"><div class="card-body">
+    ${filterBar("Search request type or approver", 18, sel("All request types") + sel("All countries") + sel("All brands") + sel("All approver roles"))}
+    <table class="t"><thead><tr><th class="s">Request type</th><th class="s">Country</th><th class="s">Brand</th><th>Level 1 approver</th><th>Level 2 approver</th><th>Level 2 when amount above</th><th class="s">Last changed</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    ${pager("Showing 1 to 12 of 18 routes")}
+  </div></div></div>`;
+}
+function editModal(err) {
+  return `<div class="overlay"><div class="modal">
+    <header><h4>Edit route · Discount</h4><span class="btn sm ghost">✕</span></header>
+    <div class="body">
+      <dl class="kv"><dt>Request type</dt><dd>Discount</dd><dt>Country</dt><dd>All countries</dd><dt>Brand</dt><dd>All brands</dd></dl>
+      <div class="field"><label>Level 1 approver role <span class="req">· required</span></label><div class="input select filled">Centre Director</div></div>
+      <div class="row"><span class="toggle${err ? "" : " on"}"></span><span>Require level 2 approval</span><span class="anno">2</span></div>
+      <div class="field"><label>Level 2 approver role</label><div class="input select ${err ? "" : "filled"}">${err ? "Select role" : "HQ Finance"}</div></div>
+      <div class="field${err ? " err" : ""}"><label>Level 2 when amount above (SGD) <span class="req">· optional</span></label><div class="input filled">${err ? "500.00" : ""}</div>
+        ${err ? '<span class="msg">Turn on level 2 and pick its approver role before setting a threshold.</span>' : '<span class="hint">Leave empty to send every request to level 2.</span>'}</div>
+      <div class="alert"><span class="anno">3</span><span>The new route applies to requests submitted after you save. Requests already waiting keep their current approvers.</span></div>
+    </div>
+    <footer><span class="btn">Cancel</span><span class="btn primary">Save route</span></footer>
+  </div></div>`;
+}
+
+/* ---------- SCR-03 Approvals inbox ---------- */
+const INBOX = [
+  ["DSC-2026-0142", "Discount", "Ethan Lim · BB Tampines", "SGD 120.00", "Rachel Tan", "05 Nov 2026", "Level 2", "Waiting for you"],
+  ["WDR-2026-0087", "Withdrawal – short notice", "Aisha Rahman · BB Punggol", "—", "Nur Aisyah", "06 Nov 2026", "Level 1", "Waiting for you"],
+  ["LVE-2026-0311", "Leave", "Chloe Ng · BB Tampines", "—", "Parent (app)", "07 Nov 2026", "Level 1", "Waiting for you"],
+  ["RFD-2026-0019", "Refund", "Ryan Koh · Odyssey Orchard", "SGD 2,400.00", "Rachel Tan", "08 Nov 2026", "Level 1", "Waiting for you"]
+];
+function inboxBody(state) {
+  const rows = INBOX.map((r, i) => `<tr${i === 0 ? ' class="sel"' : ""}><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><span class="badge out">${r[6]}</span></td><td><span class="badge${state === "approved" && i === 0 ? " solid" : ""}">${state === "approved" && i === 0 ? "✓ Approved" : r[7]}</span></td></tr>`).join("");
+  const actions = state === "approved" ? `<div class="alert"><b>✓ Approved</b><span>by you · 09 Nov 2026 14:32 · requester notified</span></div>`
+    : `<div class="row"><span class="btn primary">Approve</span><span class="btn">Reject</span><span class="anno">3</span></div>`;
+  const modal = state === "reject" ? `<div class="overlay"><div class="modal">
+    <header><h4>Reject DSC-2026-0142</h4><span class="btn sm ghost">✕</span></header>
+    <div class="body"><div class="field err"><label>Reason <span class="req">· required</span></label><div class="input textarea"></div><span class="msg">Enter a reason. The requester sees it in the notification.</span></div></div>
+    <footer><span class="btn">Cancel</span><span class="btn primary">Reject request</span></footer></div></div>` : "";
+  const toast = state === "approved" ? `<div class="toast">Request approved · Rachel Tan notified</div>` : "";
+  return `<div class="ph"><div><h3>Approvals</h3><p>Every request waiting for your decision · oldest first</p></div></div>
+  <div><div class="tabs"><span class="tab on">Waiting for me <span class="count">4</span></span><span class="tab">All requests</span></div>
+  <div class="card" style="border-top-left-radius:0"><div class="card-body">
+    ${filterBar("Search request no. or child", 4, sel("All types") + sel("All centres") + sel("Pending", "active"))}
+    <div class="split">
+      <table class="t"><thead><tr><th class="s">Request no.</th><th class="s">Type</th><th>Child · Centre</th><th class="s">Amount</th><th>Level</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
+      <aside class="panel">
+        <div class="row between"><h4>DSC-2026-0142</h4><span class="badge out">Discount</span></div>
+        <dl class="kv"><dt>Requested by</dt><dd>Rachel Tan · 05 Nov 2026</dd><dt>Child</dt><dd>Ethan Lim</dd><dt>Centre</dt><dd>Busy Bees Tampines</dd><dt>Amount</dt><dd>SGD 120.00 / month</dd><dt>Reason</dt><dd>Sibling discount 10%</dd><dt>Attachment</dt><dd>sibling-proof.pdf</dd><dt>Source record</dt><dd>Child profile › Billing</dd></dl>
+        <div><div class="row" style="margin-bottom:8px"><b style="font-size:13px">Approval steps</b><span class="anno">1</span></div>
+          <div class="steps"><div class="step done">Level 1 · Centre Director<small>Approved by Tan Mei Ling · 05 Nov 2026 10:14</small></div>
+          <div class="step ${state === "approved" ? "done" : "now"}">Level 2 · HQ Finance<small>${state === "approved" ? "Approved by you · 09 Nov 2026 14:32" : "Waiting for you"}</small></div></div></div>
+        ${actions}
+        <span class="hint" style="font-size:12px;color:var(--muted)">History tab records each decision: who, when, reason. <span class="anno">2</span></span>
+      </aside>
+    </div>
+    ${pager("Showing 1 to 4 of 4 requests")}
+  </div></div></div>${modal}${toast}`;
+}
+
+/* ---------- SCR-04 Extra permissions ---------- */
+const EXTRA = [
+  ["Sarah Goh", "Senior Teacher", "Approve leave", "Tan Mei Ling", "01 Nov 2026", "30 Nov 2026", "Active"],
+  ["Daniel Ong", "Senior Teacher", "Void attendance", "Tan Mei Ling", "15 Oct 2026", "—", "Active"],
+  ["Priya Nair", "Teacher", "Approve photos", "Tan Mei Ling", "01 Sep 2026", "31 Oct 2026", "Expired"],
+  ["Jasmine Lee", "Senior Teacher", "Approve leave", "Tan Mei Ling", "01 Aug 2026", "—", "Revoked"]
+];
+function extraBody(state) {
+  const rows = EXTRA.map(r => `<tr><td><div class="who"><span class="avatar sm"></span>${r[0]}<span class="dim" style="color:var(--muted)">· ${r[1]}</span></div></td><td>${r[2]}</td><td>${r[3]}</td><td class="dim">${r[4]}</td><td class="dim">${r[5]}</td><td><span class="badge${r[6] === "Active" ? "" : r[6] === "Expired" ? " dash" : " out"}">${r[6]}</span></td><td>${r[6] === "Active" ? '<span class="btn sm">Revoke</span>' : ""}</td></tr>`).join("");
+  const err = state === "error";
+  const modal = state === "default" ? "" : `<div class="overlay"><div class="modal">
+    <header><h4>Grant permission</h4><span class="btn sm ghost">✕</span></header>
+    <div class="body">
+      <div class="field"><label>Staff member <span class="req">· staff of Busy Bees Tampines only</span></label><div class="input select filled">Sarah Goh · Senior Teacher</div></div>
+      <div class="field"><label>Permission <span class="anno">2</span></label><div class="input select filled">Approve leave</div><span class="hint">Only permissions you hold yourself: Approve leave, Void attendance, Approve photos.</span></div>
+      <div class="field${err ? " err" : ""}"><label>Reason <span class="req">· required</span></label><div class="input textarea">${err ? "" : '<span style="color:var(--ink)">Covers leave approvals while I am on annual leave.</span>'}</div>${err ? '<span class="msg">Enter a reason for granting this permission.</span>' : ""}</div>
+      <div class="field"><label>End date <span class="req">· optional</span></label><div class="input filled" style="width:200px">30 Nov 2026</div><span class="hint">The permission ends automatically on this date. Sarah is notified when it starts and ends. <span class="anno">3</span></span></div>
+    </div>
+    <footer><span class="btn">Cancel</span><span class="btn primary">Grant permission</span></footer></div></div>`;
+  return `<div class="ph"><div><h3>Extra permissions</h3><p>Permissions granted by Centre Directors to staff of their own centre</p></div><span class="btn primary">＋ Grant permission</span></div>
+  <div><div class="tabs"><span class="tab on">☰ All permissions</span></div>
+  <div class="card" style="border-top-left-radius:0"><div class="card-body">
+    ${filterBar("Search staff name", 4, sel("All permissions") + sel("Busy Bees Tampines", "active") + sel("All statuses"))}
+    <table class="t"><thead><tr><th class="s">Staff member</th><th class="s">Permission</th><th>Granted by</th><th class="s">Start date</th><th class="s">End date</th><th>Status <span class="anno">1</span></th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    ${pager("Showing 1 to 4 of 4 permissions")}
+  </div></div></div>${modal}`;
+}
+
+/* ---------- SCR-05 Settings impact ---------- */
+const CENTRES = [
+  ["Busy Bees Tampines", "2 months", "Centre override", "Tan Mei Ling", "02 Oct 2026"],
+  ["Busy Bees Punggol", "1 month", "Brand", "HQ Admin", "14 Sep 2026"],
+  ["Busy Bees Sengkang", "1 month", "Brand", "HQ Admin", "14 Sep 2026"],
+  ["Busy Bees Jurong West", "1 month", "Brand", "HQ Admin", "14 Sep 2026"],
+  ["Busy Bees Bishan", "1 month", "Brand", "HQ Admin", "14 Sep 2026"]
+];
+function settingsBody(state) {
+  if (state === "blocked") {
+    return `<div class="ph"><div><h3>Settings</h3><p>Feature switches · Photo review</p></div></div>
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:start">
+      <div class="settings-nav"><div>Fees</div><div>Joining &amp; leaving</div><div>Daily operations</div><div>Learning</div><div>Communication</div><div class="on">Feature switches</div><div>Shared lists</div></div>
+      <div class="card"><div class="card-body">
+        <table class="t"><thead><tr><th>Feature</th><th>Centre</th><th>Status</th><th></th></tr></thead><tbody>
+          <tr class="sel"><td>Photo review</td><td>Busy Bees Tampines</td><td><span class="badge solid">On</span></td><td><span class="toggle on"></span></td></tr>
+          <tr><td>School bus</td><td>Busy Bees Tampines</td><td><span class="badge">On</span></td><td><span class="toggle on"></span></td></tr>
+          <tr><td>Temporary withdrawal</td><td>Busy Bees Tampines</td><td><span class="badge out">Off</span></td><td><span class="toggle"></span></td></tr></tbody></table>
+        <div class="alert strong"><b>✕ Cannot turn off</b><span>Busy Bees Tampines has 5 photos waiting for review. Review or reject them first. <a href="#scr-05" style="color:var(--ink);font-weight:600">Open the 5 photos</a> <span class="anno">3</span></span></div>
+      </div></div></div>`;
+  }
+  const impact = state === "impact";
+  const rows = CENTRES.map(r => `<tr><td>${r[0]}</td><td>${impact && r[2] === "Brand" ? '<span style="color:var(--muted);text-decoration:line-through">1 month</span> → <b>2 months</b>' : r[1]}</td><td><span class="badge${r[2] === "Brand" ? "" : " out"}">${r[2]}</span></td><td>${r[3]}</td><td class="dim">${r[4]}</td></tr>`).join("");
+  const panel = impact ? `<aside class="panel">
+      <h4>Change setting</h4>
+      <div class="field"><label>Scope</label><div class="input select filled">Brand · Busy Bees (Singapore)</div></div>
+      <div class="field"><label>New value</label><div class="input select filled">2 months</div></div>
+      <div><div class="row" style="margin-bottom:8px"><b style="font-size:13px">Impact before saving</b><span class="anno">2</span></div>
+        <div class="impact"><div><b>1,286</b><span>children</span></div><div><b>0</b><span>invoices</span></div><div><b>5</b><span>pending requests</span></div></div></div>
+      <div class="alert"><span>14 centres take the new value. Busy Bees Tampines keeps its own override (2 months).</span></div>
+      <div class="row"><span class="btn primary">Save setting</span><span class="btn">Cancel</span></div>
+    </aside>` : `<aside class="panel"><h4>Change setting</h4><p style="margin:0;color:var(--muted);font-size:13px">Choose a scope and a new value. The impact appears before you save.</p><div class="field"><label>Scope</label><div class="input select">Select scope</div></div><div class="field"><label>New value</label><div class="input select">Select value</div></div><span class="btn" style="align-self:flex-start">See impact</span></aside>`;
+  return `<div class="ph"><div><h3>Settings</h3><p>Joining &amp; leaving · Withdrawal notice period</p></div><span class="btn">⇩ Export</span></div>
+  <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:start">
+    <div class="settings-nav"><div>Fees</div><div class="on">Joining &amp; leaving</div><div>Daily operations</div><div>Learning</div><div>Communication</div><div>Feature switches</div><div>Shared lists</div></div>
+    <div class="split" style="grid-template-columns:1fr 330px">
+      <div class="card"><div class="card-body">
+        <div class="row">${sel("Singapore") + sel("Busy Bees", "active") + sel("All clusters")}<span class="btn">Different from default</span></div>
+        <table class="t"><thead><tr><th class="s">Centre</th><th>Value</th><th>Source <span class="anno">1</span></th><th>Set by</th><th class="s">When</th></tr></thead><tbody>${rows}</tbody></table>
+        ${pager("Showing 1 to 5 of 15 centres")}
+      </div></div>
+      ${panel}
+    </div></div>`;
+}
+
+const SCREENS = [
+  { id: "scr-01", code: "SCR-01", name: "Approval routes", tickets: "BBA-49 Approval authority matrix by brand · BBA-53 Approval flows configuration", nav: "routes",
+    states: [["default", "Ma trận route", () => routesBody(false)], ["empty", "Chưa có route", () => `<div class="ph"><div><h3>Approval routes</h3><p>Who approves each request type · up to 2 levels · optional amount threshold</p></div></div><div class="empty"><span class="ico"></span><b>No approval routes yet</b><p>Load the default routes for every request type, then change the approvers that differ for your brands.</p><span class="btn primary">↻ Load default routes</span></div>`]],
+    notes: [["Ma trận xem theo loại yêu cầu, quốc gia, brand: người duyệt cấp 1, cấp 2, ngưỡng tiền. Đây là nơi duy nhất cấu hình người duyệt.", "SRS ADM §4 mục 2.4 · BR-ADM-018"], ["Load default routes tạo sẵn route cho mọi loại yêu cầu theo BR-ADM-020 đến BR-ADM-023; HQ Admin sửa được.", "SRS ADM §4 mục 2.4"], ["Export xuất toàn bộ route; History mở lịch sử thay đổi của route.", "SRS ADM §4 mục 2.4 · §7"]] },
+  { id: "scr-02", code: "SCR-02", name: "Edit route", tickets: "BBA-53 Approval flows configuration · BBA-52 Second approval", nav: "routes",
+    states: [["default", "Sửa route", () => routesBody(true) + editModal(false)], ["error", "Lỗi: ngưỡng khi chưa có cấp 2", () => routesBody(true) + editModal(true)]],
+    notes: [["Chọn vai trò duyệt cho từng cấp, tối đa 2 cấp.", "BR-ADM-019"], ["Ngưỡng tiền tuỳ chọn: vượt ngưỡng thì cần cấp 2; để trống thì mọi yêu cầu đi qua cấp 2.", "BR-ADM-019 · AS-ADM-03"], ["Route mới áp cho yêu cầu gửi sau khi lưu; yêu cầu đang chờ giữ người duyệt cũ (giả định, chờ OQ-ADM-04).", "AS-ADM-02"]] },
+  { id: "scr-03", code: "SCR-03", name: "Approvals inbox", tickets: "BBA-52 Change request with second approval", nav: "approvals",
+    states: [["default", "Chờ duyệt cấp 2", () => inboxBody("default")], ["reject", "Từ chối: thiếu lý do", () => inboxBody("reject")], ["approved", "Đã duyệt", () => inboxBody("approved")]],
+    notes: [["Mỗi bước duyệt hiển thị cấp, vai trò, người quyết định và thời điểm; cấp 2 chỉ mở sau khi cấp 1 duyệt.", "AC-ADM-009 · SRS GEN §3.3"], ["Mọi quyết định ghi vào History của yêu cầu và change log (loại approval step).", "SRS GEN §4.2 · SRS ADM §4 mục 5.1"], ["Từ chối bắt buộc lý do; người yêu cầu nhận thông báo kết quả.", "BR-GEN-007 · SRS GEN §3.3"]] },
+  { id: "scr-04", code: "SCR-04", name: "Extra permissions", tickets: "BBA-50 Approval delegation", nav: "extra",
+    states: [["default", "Danh sách", () => extraBody("default")], ["grant", "Cấp quyền", () => extraBody("grant")], ["error", "Lỗi: thiếu lý do", () => extraBody("error")]],
+    notes: [["Trạng thái quyền: Active, Expired, Revoked; thu hồi có hiệu lực ngay.", "SRS ADM §4 mục 2.3"], ["Centre Director chỉ giao được quyền mình đang có, cho nhân viên Centre mình.", "BR-ADM-016 · AC-ADM-007"], ["Quyền tự hết hạn vào ngày kết thúc; nhân viên được thông báo khi cấp, thu hồi, hết hạn.", "BR-ADM-017 · AC-ADM-008"]] },
+  { id: "scr-05", code: "SCR-05", name: "Setting impact preview", tickets: "BBA-51 Impact preview before a setting change", nav: "settings",
+    states: [["default", "Giá trị theo Centre", () => settingsBody("default")], ["impact", "Xem tác động", () => settingsBody("impact")], ["blocked", "Tắt tính năng bị chặn", () => settingsBody("blocked")]],
+    notes: [["Mỗi Centre hiển thị giá trị, nguồn (default, country, brand, cluster, centre), người đặt, thời điểm.", "SRS ADM §4 mục 4.1"], ["Trước khi lưu, hệ thống kiểm tra giá trị và hiển thị số trẻ, hoá đơn, yêu cầu đang chờ bị ảnh hưởng.", "BR-ADM-037 · SRS GEN §4.4"], ["Tắt tính năng bị chặn khi còn việc đang mở, kèm link tới việc đó.", "BR-ADM-042 · AC-ADM-015"]] },
+  { id: "bpmn", code: "BPMN", name: "BPMN flows", tickets: "Sơ đồ BPMN của FRD 2.8 — BBA-49 đến BBA-53", nav: "",
+    states: [["default", "4 sơ đồ", () => `<div style="padding:18px;width:100%;max-width:1280px;min-width:0"><div class="legend" style="margin-bottom:12px"><span>○ Start event</span><span>◎ End event (viền đậm)</span><span>◇× Exclusive gateway</span><span>◷ Timer event</span><span>▭ xám = bước của hệ thống</span></div><div class="bpmn">
+      <figure><img alt="BPMN BBA-52 duyệt hai cấp" src="${BPMN.b52}"><figcaption>BBA-52 · Yêu cầu có duyệt cấp 2</figcaption></figure>
+      <figure><img alt="BPMN BBA-49 và BBA-53 cấu hình route" src="${BPMN.b4953}"><figcaption>BBA-49 / BBA-53 · Ma trận và cấu hình route</figcaption></figure>
+      <figure><img alt="BPMN BBA-50 uỷ quyền duyệt" src="${BPMN.b50}"><figcaption>BBA-50 · Uỷ quyền duyệt</figcaption></figure>
+      <figure><img alt="BPMN BBA-51 tác động thiết lập" src="${BPMN.b51}"><figcaption>BBA-51 · Tác động trước khi đổi thiết lập</figcaption></figure></div></div>`]],
+    notes: [["Sơ đồ vẽ theo ký hiệu BPMN 2.0, mỗi lane là một vai trò; nhánh từ chối luôn yêu cầu lý do.", "FRD 2.8 mục 6"]] }
+];
+
+let current = { screen: "scr-01", state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = s.id === "bpmn" ? st[2]() : shell(s.nav, st[2]());
+  $("frame").dataset.screen = s.id; $("frame").dataset.state = st[0];
+  $("notes").innerHTML = s.notes.map(n => `<li>${n[0]} <span class="src">${n[1]}</span></li>`).join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : "scr-01", state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code, name: s.name, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>
