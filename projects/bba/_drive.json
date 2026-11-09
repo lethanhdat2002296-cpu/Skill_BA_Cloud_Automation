@@ -1,0 +1,27 @@
+{
+  "folders": {
+    "root": "1JRLX56vbPqIoee6k1wKZ9Yim3Hf_UNji",
+    "project": "14UfuNWREnhmc37BoMfmJLcnd0guar-_8",
+    "archive": "11oKfnLotF90zQWeNh7GtxLidQlMLY0k6",
+    "docs": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+  },
+  "files": {
+    "workflow": {
+      "file_id": "1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk",
+      "url": "https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit",
+      "folder": "docs",
+      "version": "",
+      "source_sha256": "162401eeec6f3d81249d00cca29d9f6123c6ed1c07c0cb80c0fec91e7ac2c428",
+      "synced_at": "2026-11-09 04:57"
+    },
+    "tom-tat-fsd": {
+      "file_id": "1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI",
+      "url": "https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit",
+      "folder": "docs",
+      "version": "",
+      "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
+      "synced_at": "2026-11-09 04:58"
+    }
+  },
+  "archived": []
+}

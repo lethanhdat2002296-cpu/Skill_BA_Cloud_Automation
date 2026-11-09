@@ -8,7 +8,7 @@ allowed-tools: Read, Edit, Glob, Grep, Bash(python *), Bash(python3 *), Bash(pan
 
 Repo (`projects/<du-an>/`) là **nguồn gốc**; Drive là **bản phát hành để đọc / góp ý**. Không sửa nội dung trên Drive mà không sửa trong repo.
 
-Chỉ chạy khi user yêu cầu (không tự chạy sau `srs-update` / `srs-publish`). Không hỏi user, trừ khi công cụ Drive báo lỗi cần người quyết (xem "Lỗi").
+Chỉ chạy khi user yêu cầu (không tự chạy sau `srs-update` / `srs-publish`) — **trừ** dự án có `project.json` › `drive.auto_upload: true` (vd. BBA): chạy ngay sau mỗi lần tạo / sửa tài liệu đầu ra. Không hỏi user, trừ khi công cụ Drive báo lỗi cần người quyết (xem "Lỗi").
 
 ## Bước 0 — Điều kiện
 1. Có công cụ `mcp__Google_Drive__create_file` (connector Google Drive đã kết nối)? Không có → dừng, báo: "Chưa kết nối Google Drive — bật connector Google Drive trong cài đặt claude.ai rồi thử lại." Không tìm cách khác.
@@ -22,6 +22,7 @@ python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --only srs      #
 python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --diagrams      # + ảnh sơ đồ (user nói "đẩy cả sơ đồ")
 python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --ui --input --exports   # + ảnh wireframe / input / file gốc
 ```
+Dự án có `project.json` › `drive.docs` (danh sách `src` Markdown trong `docs/`, cho phép `*`): các tài liệu đó cũng nằm trong kế hoạch, xuất `.docx` theo `docx_style` của dự án rồi đẩy thành Google Doc (định dạng font, giãn dòng, thụt, kẻ bảng được giữ khi chuyển đổi). Mục có `parent: "sprint"` + `convert: false` (FSD của BBA) đi vào thư mục Sprint của khách dưới dạng **.docx nguyên bản** — dòng kế hoạch ghi rõ `GIỮ .docx` và `parent=<id Sprint>`; gọi `create_file` với `disableConversionToGoogleType: true`.
 Mặc định **chỉ đẩy tài liệu**: mỗi file là một lần gọi công cụ và có thể phải bấm duyệt, nên ảnh/input/exports chỉ đẩy khi user yêu cầu.
 Script tự xuất `.docx` khi cũ hơn `.md`, nén ảnh docx nếu > 3,0 MB (giới hạn mỗi lần gọi Drive), so `sha256` nguồn với `_drive.json`. Màn hình chỉ in mục `create` / `replace` (kèm `parent` và `file_ref`) và mục lỗi; kế hoạch đầy đủ ở `.tmp/drive/plan.json` — **không cần mở file đó** trừ khi cần trường `current` của mục `replace`.
 

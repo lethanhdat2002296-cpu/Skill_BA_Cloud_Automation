@@ -9,6 +9,7 @@
 2. Sau đó chỉ đọc / sửa / grep trong `projects/<du-an>/`. **Không** Glob/Grep/Read ở `projects/` gốc hay dự án khác, không so sánh chéo dự án nếu user không yêu cầu.
 3. Đọc `projects/<du-an>/PROJECT.md` (thẻ dự án) **trước** mọi tài liệu lớn. Thẻ sinh bằng `python tools/project.py card <du-an>`.
 4. Mọi script nhận `<du-an>` (tên gần đúng cũng được) và chỉ làm trong dự án đó.
+5. **Quy tắc riêng của dự án:** có `projects/<du-an>/project.json` → đọc nó và file `guide` nó trỏ tới (vd. BBA: `templates/HUONG-DAN-FSD.md`) trước khi làm. Quy tắc riêng **thắng** quy tắc chung (tài liệu chính, ngôn ngữ, định dạng Word, tự đẩy Drive).
 
 ## Thư mục — giống hệt trên git và Google Drive
 ```
@@ -48,7 +49,8 @@ Số đánh 2 chữ số, tăng dần, **không tái sử dụng** mã đã xóa
 | "Xuất bản / xuất docx / gửi khách" | `srs-pipeline` | `srs-publish` |
 | "Viết use case" / "Làm backlog, xuất Jira" | `write-usecase` / `write-user-story` | như bên trái |
 | "Viết test case", "file test cho QA" | — (cần SRS trước) | `write-testcase` — chỉ khi user yêu cầu |
-| "Đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc" | `drive-sync` — chỉ khi user yêu cầu | |
+| "Viết FSD" (dự án có `project.json` `main_doc: fsd`, vd. BBA) | theo `templates/HUONG-DAN-FSD.md` của dự án — không chạy chuỗi SRS | |
+| "Đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc" | `drive-sync` — chỉ khi user yêu cầu (trừ dự án có `drive.auto_upload: true` → đẩy ngay sau khi tạo / sửa đầu ra) | |
 | "Dự án X đang tới đâu?" | `python tools/project.py status <du-an>` — không mở tài liệu | |
 
 ## Chế độ tự động

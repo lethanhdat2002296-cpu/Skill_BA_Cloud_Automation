@@ -207,9 +207,11 @@ def main(argv: list[str]) -> int:
         "-f", "markdown+pipe_tables+lists_without_preceding_blankline-tex_math_dollars-raw_tex-raw_html-yaml_metadata_block",
         "-t", "docx", "-o", str(out),
         f"--resource-path={base}",
-        "--toc", "--toc-depth=2",
-        "-M", "lang=vi-VN",
     ]
+    style = project.config.get("docx_style") or {}
+    fsd_dir = project.config.get("fsd", {}).get("dir", "docs/fsd").split("/", 1)[-1]
+    lang = style.get("lang", "en-GB") if src_name.startswith(fsd_dir + "/") else "vi-VN"
+    cmd += (["--toc", "--toc-depth=2"] if style.get("toc", True) else []) + ["-M", f"lang={lang}"]
     if REFERENCE_DOCX.exists():
         cmd.append(f"--reference-doc={REFERENCE_DOCX}")
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -221,6 +223,12 @@ def main(argv: list[str]) -> int:
         print(f"ERROR: pandoc thất bại (exit {r.returncode})")
         return 1
 
+    if style:  # định dạng riêng của dự án (project.json › docx_style)
+        sys.path.insert(0, str(REPO / "tools"))
+        from docx_style import apply_style
+        st = apply_style(out, style)
+        print(f"docx_style: {style.get('font')} {style.get('size_pt')}pt, giãn dòng {style.get('line_spacing')}, "
+              f"thụt {style.get('first_line_indent_in')}\" · {st['body']} đoạn, {st['list']} dòng list, {st['tables']} bảng kẻ khung")
     expected = len(set(m.group(2) for m in IMG_RE.finditer(text) if (base / m.group(2)).exists()))
     with zipfile.ZipFile(out) as z:
         media = [n for n in z.namelist() if n.startswith("word/media/")]

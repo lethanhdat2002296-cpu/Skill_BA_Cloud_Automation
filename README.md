@@ -65,6 +65,7 @@ tools/
   ba_paths.py                đường dẫn chuẩn của một dự án (mọi script dùng)
   project.py                 list · find · status · card · new — điểm vào theo dự án
   ba_lint.py                 kiểm câu chữ dùng chung: từ mơ hồ, AC ngoại lệ, thông báo nguyên văn
+  docx_style.py              định dạng Word theo project.json của dự án (font, cỡ, giãn dòng, thụt, kẻ bảng, khổ A4)
 setup/cloud-setup.sh         setup script cho cloud environment
 research/                    ghi chú nghiên cứu (vd. so sánh với OpenBA-Kit) — không nạp tự động
 templates/                   reference.docx (tuỳ chọn) — style Word công ty

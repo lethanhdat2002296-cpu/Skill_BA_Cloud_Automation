@@ -8,11 +8,13 @@ projects/<du-an>/
   ui/             flows.md, index.html, _pending.md, screens/*.html, png/*.png, assets/
   exports/        file giao khách: SRS.docx, URD.docx, UC.docx, backlog.csv
   _drive.json     ID/link Google Drive
+  project.json    (tuỳ chọn) quy tắc riêng của dự án: tài liệu chính, định dạng Word, tự đẩy Drive
   .tmp/           file tạm (không commit)
 Trên Google Drive: "BA Projects/<du-an>/" có cùng tên thư mục con (+ _luu-tru/).
 """
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
 from pathlib import Path
@@ -45,6 +47,14 @@ class Project:
         self.tmp = self.root / ".tmp"
         self.drive_json = self.root / "_drive.json"
         self.card = self.root / "PROJECT.md"
+        self.config_file = self.root / "project.json"
+
+    @property
+    def config(self) -> dict:
+        """Quy tắc riêng của dự án (project.json) — {} nếu không có."""
+        if not self.config_file.exists():
+            return {}
+        return json.loads(self.config_file.read_text(encoding="utf-8"))
 
     def doc(self, name: str) -> Path:
         """Tài liệu nguồn trong docs/ (SRS.md, URD.md, UC.md, backlog.md, brainstorm.md)."""

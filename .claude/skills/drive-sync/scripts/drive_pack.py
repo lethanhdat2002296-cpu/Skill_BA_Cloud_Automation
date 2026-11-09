@@ -83,7 +83,8 @@ def ensure_docx(project: Project, src: Path, docx: Path) -> str | None:
     """Xuất lại .docx khi chưa có hoặc cũ hơn nguồn. Trả về lỗi (nếu có)."""
     if docx.exists() and docx.stat().st_mtime >= src.stat().st_mtime:
         return None
-    cmd = [sys.executable, str(TO_DOCX), project.slug] + ([] if src.name == "SRS.md" else ["--src", src.name])
+    rel = src.relative_to(project.docs).as_posix()
+    cmd = [sys.executable, str(TO_DOCX), project.slug] + ([] if rel == "SRS.md" else ["--src", rel])
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode != 0 or not docx.exists():
         return f"to_docx thất bại cho {src.name}: {(r.stdout + r.stderr)[-300:]}"
@@ -128,6 +129,25 @@ def catalog(project: Project, groups: set[str]) -> list[dict]:
         items.append({"key": key, "folder": "docs", "source": project.root / src, "upload": project.root / up,
                       "title": title.format(du_an=du_an), "convert": True,
                       "mime": "text/csv" if up.endswith(".csv") else DOCX_MIME})
+
+    # Tài liệu riêng của dự án (project.json › drive.docs): Markdown trong docs/ → .docx (định dạng dự án)
+    #   convert=true → Google Doc trong thư mục docs/ của dự án;
+    #   parent="sprint" → .docx nguyên bản vào thư mục Sprint của khách (sprint đọc từ dòng "| Sprint | 4 |" trong
+    #   tài liệu, không có thì current_sprint); key bỏ hậu tố _vX.Y để bản mới thay bản cũ.
+    drive_cfg = project.config.get("drive", {})
+    for d in drive_cfg.get("docs", []):
+        for src in sorted(project.root.glob(d["src"])):
+            rel = src.relative_to(project.docs).with_suffix(".docx")
+            stem_nov = re.sub(r"_v\d+(?:\.\d+)*$", "", src.stem)
+            item = {"key": d["key"].replace("*", stem_nov), "folder": "docs", "source": src,
+                    "upload": project.exports / rel.name, "title": d["title"].format(stem=src.stem, du_an=du_an),
+                    "convert": d.get("convert", True), "mime": DOCX_MIME}
+            if d.get("parent") == "sprint":
+                sp = drive_cfg.get("sprint_folders", {})
+                m = re.search(r"^\|\s*Sprint\s*\|\s*(\d+)\s*\|", src.read_text(encoding="utf-8"), re.M)
+                sprint = m.group(1) if m else str(drive_cfg.get("current_sprint", ""))
+                item.update(folder=f"sprint {sprint}", parent_id=sp.get(sprint, ""))
+            items.append(item)
 
     def files(folder: str, paths):
         for p in sorted(paths):
@@ -180,7 +200,8 @@ def plan(project: Project, groups: set[str], only: list[str], force: bool) -> di
         src_sha = sha256(src)
         action = "create" if not cur.get("file_id") else ("replace" if force or cur.get("source_sha256") != src_sha else "skip")
         out.append({**rec, "action": action, "version": version_of(src), "size": upload.stat().st_size,
-                    "compacted": upload != up, "parent_id": state.get("folders", {}).get(it["folder"], ""),
+                    "compacted": upload != up,
+                    "parent_id": it.get("parent_id") or state.get("folders", {}).get(it["folder"], ""),
                     "file_ref": f"sha256:{sha256(upload)}:{upload.resolve().as_posix()}", "current": cur or None})
     return {"project": project.slug, "folders": state.get("folders", {}), "items": out}
 
@@ -244,7 +265,8 @@ def main(argv: list[str]) -> int:
     for it in result["items"]:
         counts[it["action"]] = counts.get(it["action"], 0) + 1
         if it["action"] in ("create", "replace"):
-            print(f"{it['action']:<7} {it['key']} -> {it['folder']}/ ({it['mime']}{', nén ảnh' if it.get('compacted') else ''})"
+            print(f"{it['action']:<7} {it['key']} -> {it['folder']}/ ({it['mime']}{', nén ảnh' if it.get('compacted') else ''}"
+                  f"{', GIỮ .docx: disableConversionToGoogleType=true' if not it['convert'] else ''})"
                   f" · parent={it['parent_id'] or 'CHƯA CÓ'} · {it['file_ref']}")
         elif it["action"] in ("error", "too_big"):
             print(f"{it['action']:<7} {it['key']} · {it['error']}")
