@@ -5,7 +5,7 @@ Cách dùng (CLI):
     python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
         -> render Diagram/Wireframe/flows.md, Document/SRS/SRS.md, Document/URD/URD.md, Document/Use_Case/UC.md (nếu có)
            -> projects/<du-an>/Diagram/Flow/flows-01.png, srs-01.png, urd-01.png, uc-01.png …
-    python .../render_mermaid.py <du-an> --file ui/flows.md --prefix flows   (đường dẫn tính từ projects/<du-an>/)
+    python .../render_mermaid.py <du-an> --file Diagram/Wireframe/flows.md --prefix flows   (đường dẫn tính từ projects/<du-an>/)
     In 1 dòng tổng kết; chỉ in chi tiết khi lỗi (--verbose để in từng sơ đồ).
 
 Dùng như module (to_docx.py import):

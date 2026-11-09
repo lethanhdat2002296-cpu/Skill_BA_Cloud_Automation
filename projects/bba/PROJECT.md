@@ -10,7 +10,7 @@
 - Drive: https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW · 7 file đã đẩy
 - Sprint hiện tại: 4
 - File: Document/FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead_v0.2.md (317 dòng), Document/FSD/Sprint 3/BBA-41-2.1.1.01_Centre_Sharing_v0.1.md (292 dòng), Document/FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection_v0.2.md (424 dòng), Document/FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page_v0.1.md (532 dòng), Document/FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline_v0.1.md (310 dòng), Document/FSD/tom-tat-fsd.md (244 dòng)
-- Commit cuối: 2026-11-09 feat(bba): workflow, quy tắc riêng dự án, định dạng Word, xuất FSD vào thư mục Sprint của khách
+- Commit cuối: 2026-11-09 refactor: nhiều dự án một repo — projects/<du-an>/Document/<loại>/ + Diagram/; Drive luôn Word, hỏi thư mục m
 
 ## Bản đồ file
 
@@ -35,8 +35,8 @@
 - FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection: https://drive.google.com/file/d/11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh/view
 - FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page: https://drive.google.com/file/d/1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh/view
 - FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline: https://drive.google.com/file/d/1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q/view
-- tom-tat-fsd: https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit
-- workflow: https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit
+- FSD/tom-tat-fsd: https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit
+- SRS/workflow: https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit
 
 <!-- card:end -->
 

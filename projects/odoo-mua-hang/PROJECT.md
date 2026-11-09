@@ -10,7 +10,7 @@
 - Màn chờ vẽ lại: không
 - Drive: chưa gắn link thư mục gốc · 12 file đã đẩy
 - File: Document/SRS/SRS.md (964 dòng), Document/URD/URD.md (421 dòng), Document/Use_Case/UC.md (706 dòng), Document/Backlog/backlog.md (382 dòng), Diagram/Wireframe/flows.md (229 dòng) — SRS chưa tách srs/
-- Commit cuối: 2026-11-09 feat(skills): doc-import — nhập URD / FSD / SRS có sẵn khi dự án chưa có SRS
+- Commit cuối: 2026-11-09 refactor: nhiều dự án một repo — projects/<du-an>/Document/<loại>/ + Diagram/; Drive luôn Word, hỏi thư mục m
 
 ## Bản đồ file
 
@@ -29,18 +29,18 @@
 
 ## Google Drive
 
-- backlog: https://docs.google.com/spreadsheets/d/1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho/edit
-- diagrams/swimlane-01-yeu-cau-mua-hang.png: https://drive.google.com/file/d/1Zd24FmUpYtKqxpGSCjjViDFMNg2aDnS_/view
-- diagrams/swimlane-02-yeu-cau-bao-gia-po.png: https://drive.google.com/file/d/1XwNBAhnNLvM348XXWnLM1sSelisJNMQf/view
-- diagrams/swimlane-03-dich-vu.png: https://drive.google.com/file/d/1EC23PV83uAZnzEE6ufta3eW_ZwTJaKwH/view
-- diagrams/uc-01.png: https://drive.google.com/file/d/1L17q4pBVK44awShIxkQBu2MXEmpif0sX/view
-- diagrams/uc-02.png: https://drive.google.com/file/d/1Rp4oeXb90NDoDH5nSrp5pM8BW8fn1lgE/view
-- diagrams/uc-03.png: https://drive.google.com/file/d/1-hd1oEGARw81R1jfXJp2uh6KAInf6Xo8/view
-- diagrams/uc-04.png: https://drive.google.com/file/d/1l3pg5A1Wpa_gu44rxvWxwHWwbl4Mb2UJ/view
-- diagrams/uc-05.png: https://drive.google.com/file/d/1wUauJyugBYGq1uVWi-yHDfHKr6KTdD3A/view
-- srs: https://docs.google.com/document/d/1S25a37GVKYYSSZtl1bKr_IsBpqnW_yFplYplyYy-_kg/edit
-- uc: https://docs.google.com/document/d/1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM/edit
-- urd: https://docs.google.com/document/d/1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ/edit
+- Backlog/backlog: https://docs.google.com/spreadsheets/d/1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho/edit
+- Diagram/Flow/swimlane-01-yeu-cau-mua-hang.png: https://drive.google.com/file/d/1Zd24FmUpYtKqxpGSCjjViDFMNg2aDnS_/view
+- Diagram/Flow/swimlane-02-yeu-cau-bao-gia-po.png: https://drive.google.com/file/d/1XwNBAhnNLvM348XXWnLM1sSelisJNMQf/view
+- Diagram/Flow/swimlane-03-dich-vu.png: https://drive.google.com/file/d/1EC23PV83uAZnzEE6ufta3eW_ZwTJaKwH/view
+- Diagram/Flow/uc-01.png: https://drive.google.com/file/d/1L17q4pBVK44awShIxkQBu2MXEmpif0sX/view
+- Diagram/Flow/uc-02.png: https://drive.google.com/file/d/1Rp4oeXb90NDoDH5nSrp5pM8BW8fn1lgE/view
+- Diagram/Flow/uc-03.png: https://drive.google.com/file/d/1-hd1oEGARw81R1jfXJp2uh6KAInf6Xo8/view
+- Diagram/Flow/uc-04.png: https://drive.google.com/file/d/1l3pg5A1Wpa_gu44rxvWxwHWwbl4Mb2UJ/view
+- Diagram/Flow/uc-05.png: https://drive.google.com/file/d/1wUauJyugBYGq1uVWi-yHDfHKr6KTdD3A/view
+- SRS/SRS: https://docs.google.com/document/d/1S25a37GVKYYSSZtl1bKr_IsBpqnW_yFplYplyYy-_kg/edit
+- URD/URD: https://docs.google.com/document/d/1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ/edit
+- Use_Case/UC: https://docs.google.com/document/d/1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM/edit
 
 <!-- card:end -->
 

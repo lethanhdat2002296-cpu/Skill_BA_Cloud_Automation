@@ -5,7 +5,7 @@ Cách dùng:
     python .claude/skills/doc-import/scripts/import_doc.py <du-an> <file-trong-input> [--type urd|fsd|srs|brd] [--depth 3]
 
 Làm gì:
-- .docx/.odt/.rtf → Markdown bằng pandoc (kèm ảnh) vào input/_extracted/<ten>-<ext>.md và <ten>-<ext>-media/
+- .docx/.odt/.rtf → Markdown bằng pandoc (kèm ảnh) vào Document/Bien_Ban_Khao_Sat/_extracted/<ten>-<ext>.md và <ten>-<ext>-media/
   (dùng lại bản đã trích nếu có); .md/.txt đọc thẳng; .pdf dùng bản pdftotext nếu ba-intake đã trích.
 - Lập dàn ý: mục (số mục gốc, hoặc số theo thứ tự nếu Word đánh số tự động bị mất), dòng bắt đầu, số dòng;
   mã yêu cầu gốc (REQ-012, FR-1.2, UC01, US-003, BR-05…) và mục chứa nó; số bảng, số ảnh.

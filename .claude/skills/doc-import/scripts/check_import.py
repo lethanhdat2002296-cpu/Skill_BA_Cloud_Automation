@@ -4,10 +4,10 @@
 Cách dùng:
     python .claude/skills/doc-import/scripts/check_import.py <du-an>
 
-doi-chieu-ma.md: mỗi tài liệu gốc một mục "## <tên file trong input/> — <loại> …" + bảng
+doi-chieu-ma.md: mỗi tài liệu gốc một mục "## <tên file trong Document/Bien_Ban_Khao_Sat/> — <loại> …" + bảng
     | Mã gốc | Mục gốc | Nội dung (tóm tắt) | Mã mới | Xử lý |
 ERROR: mã gốc có trong tài liệu nhưng không có dòng; "Mã mới" trỏ mã không tồn tại trong URD/UC/SRS/backlog;
-       file gốc không có trong input/; còn "{{".
+       file gốc không có trong Document/Bien_Ban_Khao_Sat/; còn "{{".
 WARN:  dòng "Mã mới" = "—" mà cột Xử lý không ghi Bỏ / Gộp / Ngoài phạm vi / OQ;
        mục lá (không chứa mã gốc) chưa được nhắc trong cột "Mục gốc" (đối chiếu theo số § hoặc tên mục).
 """

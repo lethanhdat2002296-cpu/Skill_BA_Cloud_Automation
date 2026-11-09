@@ -1,27 +1,5 @@
 {
-  "folders": {
-    "root": "1JRLX56vbPqIoee6k1wKZ9Yim3Hf_UNji",
-    "project": "14UfuNWREnhmc37BoMfmJLcnd0guar-_8",
-    "archive": "11oKfnLotF90zQWeNh7GtxLidQlMLY0k6",
-    "docs": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
-  },
   "files": {
-    "workflow": {
-      "file_id": "1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk",
-      "url": "https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit",
-      "folder": "docs",
-      "version": "",
-      "source_sha256": "162401eeec6f3d81249d00cca29d9f6123c6ed1c07c0cb80c0fec91e7ac2c428",
-      "synced_at": "2026-11-09 04:57"
-    },
-    "tom-tat-fsd": {
-      "file_id": "1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI",
-      "url": "https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit",
-      "folder": "docs",
-      "version": "",
-      "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
-      "synced_at": "2026-11-09 04:58"
-    },
     "FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead": {
       "file_id": "12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn",
       "url": "https://drive.google.com/file/d/12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn/view",
@@ -71,9 +49,24 @@
       "source_sha256": "e7b38377e0c7c966aae0d7f6d52296fe3c388503a2ec733d40e316b1ff3ebcaa",
       "synced_at": "2026-11-09 05:03",
       "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "SRS/workflow": {
+      "file_id": "1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk",
+      "url": "https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit",
+      "version": "",
+      "source_sha256": "162401eeec6f3d81249d00cca29d9f6123c6ed1c07c0cb80c0fec91e7ac2c428",
+      "synced_at": "2026-11-09 04:57",
+      "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+    },
+    "FSD/tom-tat-fsd": {
+      "file_id": "1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI",
+      "url": "https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit",
+      "version": "",
+      "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
+      "synced_at": "2026-11-09 04:58",
+      "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
     }
   },
-  "archived": [],
   "folders_used": {
     "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6": {
       "name": "BBA › Sprint 3",
@@ -81,6 +74,14 @@
         "FSD"
       ],
       "last_used": "2026-11-09 05:03"
+    },
+    "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y": {
+      "name": "BA Projects › bba › docs",
+      "kinds": [
+        "SRS",
+        "FSD"
+      ],
+      "last_used": "2026-11-09 04:58"
     }
   }
 }

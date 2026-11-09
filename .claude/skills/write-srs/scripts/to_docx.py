@@ -6,12 +6,12 @@ Cách dùng:
     python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md     # tài liệu khác -> URD.docx (UC.md, backlog.md…)
 
 Việc làm:
-  1. Render các khối ```mermaid trong SRS.md -> diagrams/srs-NN.png và thay bằng ảnh
+  1. Render các khối ```mermaid trong SRS.md -> Diagram/Flow/srs-NN.png và thay bằng ảnh
      (không có mmdc thì giữ nguyên code block).
   2. Với mỗi ảnh Diagram/Wireframe/png/SCR-xx-<slug>.png được tham chiếu: chèn thêm ngay sau nó các biến thể
      (--<state>.png, -mobile.png) nếu có, chú thích theo data-label trong HTML.
   3. Gắn kích thước ảnh cho vừa trang A4 (ảnh hẹp như mobile 390px không bị phóng to).
-  4. Thêm Phụ lục "UI flows" với các sơ đồ diagrams/flows-NN.png (nếu có).
+  4. Thêm Phụ lục "UI flows" với các sơ đồ Diagram/Flow/flows-NN.png (nếu có).
 Đường dẫn ảnh trong tài liệu tính từ thư mục của tài liệu (Document/SRS/ -> ../../Diagram/Wireframe/png/…, ../../Diagram/Flow/…).
   5. Gọi pandoc (dùng templates/reference.docx nếu có), rồi đếm ảnh nhúng trong docx.
 Exit code 1 nếu thiếu pandoc, thiếu SRS.md, hoặc có ảnh tham chiếu không tồn tại.

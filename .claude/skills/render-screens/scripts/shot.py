@@ -131,7 +131,7 @@ def main(argv: list[str]) -> int:
         print(f"ERROR: không có màn hình nào trong {screens_dir.relative_to(REPO)}")
         return 1
 
-    # Bảo đảm tokens.css đã được copy vào ui/assets
+    # Bảo đảm tokens.css đã được copy vào Diagram/Wireframe/assets
     if not (project.assets / "tokens.css").exists():
         subprocess.run([sys.executable, str(BUILD_UI), du_an], check=False)
 

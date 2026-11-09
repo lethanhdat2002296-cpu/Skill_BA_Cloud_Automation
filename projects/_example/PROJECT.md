@@ -8,7 +8,7 @@
 - OQ mở (0): không
 - Màn chờ vẽ lại: không
 - File: 
-- Commit cuối: 2026-11-08 refactor: mỗi dự án một thư mục projects/<du-an>/ (input, docs, diagrams, ui, exports) — khớp Google Drive
+- Commit cuối: 2026-11-09 refactor: nhiều dự án một repo — projects/<du-an>/Document/<loại>/ + Diagram/; Drive luôn Word, hỏi thư mục m
 
 ## Bản đồ file
 
@@ -29,4 +29,4 @@
 
 ## Ghi chú (viết tay — giữ nguyên khi sinh lại thẻ)
 
-- 
+-
