@@ -5,7 +5,8 @@ Quy tắc riêng của BBA, **thắng** quy tắc chung của repo khi khác nha
 ## 1. Tài liệu chính
 - **FSD (FRS) là tài liệu khách xác nhận.** SRS của BBA chỉ là Scope & Flow (đầu vào), không viết lại SRS theo chuỗi `srs-pipeline`.
 - Không chạy `brainstorm` / `write-urd` / `write-srs` / `srs-pipeline` cho BBA trừ khi user yêu cầu rõ.
-- Ngôn ngữ FSD: **tiếng Anh** (giống các FRS đã có). Tài liệu nội bộ (tóm tắt, workflow, phân tích): tiếng Việt.
+- Ngôn ngữ FSD: **tiếng Anh** (giống các FRS đã có) — đây là bản chuẩn. Tài liệu nội bộ (tóm tắt, workflow, phân tích): tiếng Việt.
+- **Mỗi FSD Sprint 4 kèm bản tiếng Việt** (user yêu cầu 09/11/2026): `<Module_Name>_VI.md` cùng thư mục, H1 = `<Module> (Tiếng Việt)`, giữ nguyên cấu trúc và **mọi mã** (FR/BR/VAL/DATA/AC/OQ), thuật ngữ hệ thống giữ tiếng Anh, tiêu đề mục song ngữ `Acceptance Criteria (Tiêu chí nghiệm thu)`. Dòng ghi chú đầu: khác nhau thì bản tiếng Anh thắng. Sửa bản Anh → sửa bản Việt cùng lúc. Word của file `_VI` tự đặt ngôn ngữ vi-VN; Drive: `[FSD] <Module> (Tiếng Việt) - Sprint 4.docx`, cùng thư mục với bản Anh.
 
 ## 2. Nguồn để viết FSD (bắt buộc theo thứ tự)
 1. `Document/SRS/workflow.md` — chọn quy trình `WF-…` và dòng WBS ở bảng 2.1 (CRM) hoặc mục 3 (SMS).
@@ -23,7 +24,7 @@ Quy tắc riêng của BBA, **thắng** quy tắc chung của repo khi khác nha
 
 ## 4. Xuất bản và Google Drive
 ```bash
-python tools/check_fsd.py bba "FSD/Sprint 4/<file>.md"                              # ERROR phải sửa hết trước khi xuất
+python tools/check_fsd.py bba "FSD/Sprint 4/<file>.md"                              # ERROR phải sửa hết trước khi xuất (chạy cả bản _VI; số mã hai bản phải bằng nhau)
 python .claude/skills/write-srs/scripts/to_docx.py bba --src "FSD/Sprint 4/<file>.md"   # Word theo docx_style của project.json
 python .claude/skills/drive-sync/scripts/drive_pack.py bba                              # kế hoạch đẩy + gợi ý thư mục
 ```

@@ -76,7 +76,7 @@ def check(path: Path) -> tuple[list[str], list[str], str]:
     for s in stories:
         title = s.splitlines()[0][:60]
         for sec in REQUIRED:
-            if not re.search(rf"^#{{3,4}} +{sec}\s*$", s, re.M):
+            if not re.search(rf"^#{{3,4}} +{sec}(?:\s*\([^)]*\))?\s*$", s, re.M):   # cho phép chú thích song ngữ
                 errors.append(f"US '{title}': thiếu mục {sec.rstrip('?')}")
     summary = (f"{len(stories)} US · " + " · ".join(f"{sum(1 for d in defined if d.startswith(k + '-'))} {k}" for k in KINDS))
     return errors, warns, summary

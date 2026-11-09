@@ -21,7 +21,7 @@ Phần còn lại của các mục trên (vd. 3.2 Assign owner, Update status, L
 
 | # | FSD | Nguồn SRS | Mục SRS chính | Trạng thái |
 |---|---|---|---|---|
-| 1 | [FSD] Lead and Contact Management - Sprint 4 | CRM | 4.2 (2.1, 2.2, 2.4), BR-CRM-001–011, 046–050 | **Xong v0.1** — đã lên Drive Sprint 4 |
+| 1 | [FSD] Lead and Contact Management - Sprint 4 | CRM | 4.2 (2.1, 2.2, 2.4), BR-CRM-001–011, 046–050 | **Xong v0.1** (EN + bản tiếng Việt) — đã lên Drive Sprint 4 |
 | 2 | [FSD] Enquiry and Customer Journey - Sprint 4 | CRM | 4.3 (3.1–3.4), BR-CRM-012–022 | Tiếp theo |
 | 3 | [FSD] Visits and Events - Sprint 4 | CRM | 4.4 (4.1–4.8), BR-CRM-023–036 | Chưa |
 | 4 | [FSD] Waitlist, Registration and Child Record Preparation - Sprint 4 | CRM | 4.5 (5.1–5.6), BR-CRM-037–053 | Chưa |
@@ -42,6 +42,6 @@ Phần còn lại của các mục trên (vd. 3.2 Assign owner, Update status, L
 | 19 | [FSD] Centre Director App - Sprint 4 | SMS (Phase 2 theo SRS) | Toàn bộ | Chưa |
 
 ## 3. Quy ước chung khi viết
-- Tiếng Anh, khung `templates/template-fsd.md`; mỗi sub-module SRS → một hoặc vài User Story.
+- Tiếng Anh (bản chuẩn) + bản tiếng Việt `<Module_Name>_VI.md`, khung `templates/template-fsd.md`; mỗi sub-module SRS → một hoặc vài User Story.
 - Chỉ đặc tả điều SRS nói; chi tiết SRS chưa có (trường dữ liệu chi tiết, thông báo, link Figma) → Open Questions, không tự đặt số liệu.
 - Ghi WBS Phase của từng tính năng; tham chiếu chéo FRS Sprint 3 (BBA-40…44) thay vì đặc tả lại.

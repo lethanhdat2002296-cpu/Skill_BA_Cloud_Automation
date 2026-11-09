@@ -210,7 +210,7 @@ def main(argv: list[str]) -> int:
     ]
     style = project.config.get("docx_style") or {}
     fsd_dir = project.config.get("fsd", {}).get("dir", "Document/FSD").split("/", 1)[-1]
-    lang = style.get("lang", "en-GB") if src_name.startswith(fsd_dir + "/") else "vi-VN"
+    lang = style.get("lang", "en-GB") if src_name.startswith(fsd_dir + "/") and not Path(src_name).stem.upper().endswith("_VI") else "vi-VN"  # bản dịch *_VI → tiếng Việt
     cmd += (["--toc", "--toc-depth=2"] if style.get("toc", True) else []) + ["-M", f"lang={lang}"]
     if REFERENCE_DOCX.exists():
         cmd.append(f"--reference-doc={REFERENCE_DOCX}")
