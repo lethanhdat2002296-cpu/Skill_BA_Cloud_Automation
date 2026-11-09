@@ -14,6 +14,7 @@ Quy tắc:
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -77,19 +78,57 @@ def _table_borders(tbl, size_eighths: int, color: str) -> None:
     tblPr.append(w)
 
 
+ID_TOKEN = re.compile(r"^\W*[A-Z]{2,6}(?:-[A-Z]{2,6})*-\d+[\w./-]*\W*$")
+
+
+def _longest_token(text: str) -> int:
+    """Độ dài đoạn chữ không được ngắt: mã định danh giữ nguyên (VAL-001, BR-CRM-008); từ thường được ngắt sau
+    dấu '-' hoặc '/'; tối đa 14 ký tự (từ dài hơn Word tự xuống dòng)."""
+    best = 0
+    for tok in text.split():
+        parts = [tok] if ID_TOKEN.match(tok) else re.split(r"(?<=[-/])", tok)
+        best = max(best, *(len(p) for p in parts))
+    return min(best, 14)
+
+
+ID_LIST = re.compile(r"^\s*[A-Z]{2,6}(?:-[A-Z]{2,6})*-\d+[\w./]*(?:\s*[;,]\s*[A-Z]{2,6}(?:-[A-Z]{2,6})*-\d+[\w./]*)+\s*[;,]?\s*$")
+
+
+def _one_id_per_line(p) -> bool:
+    """Ô chỉ chứa danh sách mã ("FR-001; BR-002; VAL-001") → mỗi mã một dòng, để Word không ngắt giữa mã."""
+    text = p.text
+    if not ID_LIST.match(text):
+        return False
+    ids = [x.strip() for x in re.split(r"\s*[;,]\s*", text.strip()) if x.strip()]
+    for r in list(p.runs)[1:]:
+        r._r.getparent().remove(r._r)
+    run = p.runs[0]
+    run.text = ""
+    for i, x in enumerate(ids):
+        run.add_text(x + (";" if i < len(ids) - 1 else ""))
+        if i < len(ids) - 1:
+            run.add_break()
+    return True
+
+
 def _fit_columns(tbl, total_twips: int) -> None:
     """Độ rộng cột theo độ dài chữ (cột ngắn như '#', 'Mã' không chiếm ngang cột mô tả)."""
     rows = tbl.rows
     if not rows:
         return
     n = max(len(r.cells) for r in rows)
-    need = [4] * n
+    need, word = [4] * n, [4] * n
     for r in rows:
         for i, c in enumerate(r.cells[:n]):
-            longest_word = max((len(w) for w in c.text.split()), default=0)
-            need[i] = max(need[i], min(len(c.text), 70), longest_word + 2)
-    weights = [max(4.0, x ** 0.85) for x in need]
-    widths = [int(total_twips * w / sum(weights)) for w in weights]
+            word[i] = max(word[i], _longest_token(c.text))
+            need[i] = max(need[i], min(len(c.text), 70))
+    # tối thiểu: đủ cho từ dài nhất (chữ hoa, số Arial 10pt ≈ 135 twips / ký tự + lề ô); phần còn lại chia theo độ dài chữ
+    mins = [w * 135 + 300 for w in word]  # chữ hoa / số Arial 10pt ≈ 135 twips; lề ô ≈ 300
+    if sum(mins) > total_twips:
+        mins = [int(m * total_twips / sum(mins)) for m in mins]
+    spare = total_twips - sum(mins)
+    weights = [max(1.0, x ** 0.85) for x in need]
+    widths = [m + int(spare * w / sum(weights)) for m, w in zip(mins, weights)]
     grid = tbl._tbl.tblGrid
     for gc, w in zip(grid.findall(qn("w:gridCol")), widths):
         gc.set(qn("w:w"), str(w))
@@ -163,6 +202,11 @@ def apply_style(path: Path, cfg: dict) -> dict:
     text_width = int((sec.page_width - sec.left_margin - sec.right_margin) / 635)  # EMU -> twips
     in_table = set()
     for tbl in doc.tables:
+        for row in tbl.rows[1:]:
+            for cell in row.cells:
+                for p in cell.paragraphs:
+                    if p.runs:
+                        _one_id_per_line(p)
         _fit_columns(tbl, text_width)
         _table_borders(tbl, max(2, round(float(t.get("border_pt", 0.5)) * 8)), t.get("border_color", "000000"))
         for r_i, row in enumerate(tbl.rows):

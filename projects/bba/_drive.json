@@ -65,6 +65,15 @@
       "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
       "synced_at": "2026-11-09 04:58",
       "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+    },
+    "FSD/Sprint 4/Lead_and_Contact_Management": {
+      "file_id": "1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ",
+      "url": "https://drive.google.com/file/d/1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FSD] Lead and Contact Management - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "b2725420a391f226294e1c787bdd62e1ec5a6aec354f70936abe610711e7ef3f",
+      "synced_at": "2026-11-09 07:34"
     }
   },
   "folders_used": {
@@ -82,6 +91,13 @@
         "FSD"
       ],
       "last_used": "2026-11-09 04:58"
+    },
+    "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV": {
+      "name": "BBA › Sprint 4",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-09 07:34"
     }
   }
 }

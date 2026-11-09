@@ -18,11 +18,12 @@ Quy tắc riêng của BBA, **thắng** quy tắc chung của repo khi khác nha
 - Mã trong một FSD: `FR-001`, `BR-001`, `VAL-001`, `DATA-001`, `AC-001`, đánh tiếp liên tục qua các User Story của cùng FSD, không nhảy số. Validation luôn là `VAL-` (không dùng `VR-`).
 - Mỗi FR có trong luồng hoặc AC; mỗi BR / VAL có ít nhất một AC ở cột Linked Rule; thông báo hệ thống ghi nguyên văn trong ngoặc kép.
 - Thuật ngữ trạng thái theo bảng đã chốt; chưa chốt → dùng đúng chữ của FSD gần nhất và ghi OQ.
-- Tên file: `Document/FSD/Sprint <n>/BBA-<ticket>-<WBS>_<Feature_Name>_v<x.y>.md` (vd. `BBA-45-2.3.1.01_Action_Framework_v0.1.md`) → `.output/<cùng tên>.docx` → Drive `[FRS] <cùng tên>.docx`.
+- Tên file Sprint 4 (tạm, user chốt 09/11/2026): mỗi **module** một FSD — `Document/FSD/Sprint 4/<Module_Name>.md`, H1 = tên module → Drive `[FSD] <Module> - Sprint 4.docx`. Khi có ticket chính thức sẽ đổi tên. Danh mục và trạng thái: `Document/FSD/Sprint 4/_pham-vi-sprint-4.md`.
 - Bảng thuộc tính đầu tài liệu có dòng `| Sprint | 4 |` (trùng thư mục `Sprint <n>` chứa file).
 
 ## 4. Xuất bản và Google Drive
 ```bash
+python tools/check_fsd.py bba "FSD/Sprint 4/<file>.md"                              # ERROR phải sửa hết trước khi xuất
 python .claude/skills/write-srs/scripts/to_docx.py bba --src "FSD/Sprint 4/<file>.md"   # Word theo docx_style của project.json
 python .claude/skills/drive-sync/scripts/drive_pack.py bba                              # kế hoạch đẩy + gợi ý thư mục
 ```

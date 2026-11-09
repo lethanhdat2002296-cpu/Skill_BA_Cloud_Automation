@@ -126,7 +126,9 @@ def doc_key(project: Project, src: Path) -> str:
 def doc_title(project: Project, src: Path, key: str) -> str:
     for prefix, pattern in project.config.get("drive", {}).get("titles", {}).items():
         if key.startswith(prefix):
-            return pattern.format(stem=src.stem, du_an=project.slug)
+            h1 = re.search(r"^# +(.+)$", src.read_text(encoding="utf-8"), re.M) if src.exists() else None
+            return pattern.format(stem=src.stem, du_an=project.slug, h1=h1.group(1).strip() if h1 else src.stem,
+                                  sprint=(re.search(r"Sprint (\d+)", key) or [None, ""])[1])
     if src.name in MAIN_DOCS:
         v = version_of(src)
         return f"{MAIN_DOCS[src.name]} — {project.slug}{' v' + v if v else ''}.docx"

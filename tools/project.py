@@ -62,7 +62,7 @@ def facts(p: Project) -> dict:
     log = subprocess.run(["git", "log", "-1", "--format=%cs %s", "--", p.rel(p.root)], cwd=REPO,
                          capture_output=True, text=True, encoding="utf-8").stdout.strip()
     return {
-        "title": title.group(1).strip() if title else p.slug,
+        "title": title.group(1).strip() if title else p.config.get("name", p.slug),
         "versions": {k: version(t) for k, t in (("SRS", srs), ("URD", urd), ("UC", uc), ("backlog", bl), ("TC", tc)) if t},
         "counts": {"US": len(ids(urd, "US", True)), "UC": len(ids(uc, "UC", True)), "FR": len(ids(srs, "FR", True)),
                    "NFR": len(ids(srs, "NFR", True)), "SCR": len(ids(srs, "SCR")), "AS": len(ids(main, "AS")),

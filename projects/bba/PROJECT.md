@@ -1,4 +1,4 @@
-# bba (`bba`)
+# BBA — Busy Bees Asia CRM + SMS (Edtech) (`bba`)
 
 <!-- card:start -->
 > Sinh bởi `python tools/project.py card bba` — không sửa tay đoạn này. Đọc thẻ này TRƯỚC khi mở tài liệu lớn.
@@ -7,10 +7,10 @@
 - Mã: 0 US · 0 UC · 0 FR · 0 NFR · 0 SCR · 0 AS · 0 OQ
 - OQ mở (0): không
 - Màn chờ vẽ lại: không
-- Drive: https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW · 7 file đã đẩy
+- Drive: https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW · 8 file đã đẩy
 - Sprint hiện tại: 4
-- File: Document/FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead_v0.2.md (317 dòng), Document/FSD/Sprint 3/BBA-41-2.1.1.01_Centre_Sharing_v0.1.md (292 dòng), Document/FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection_v0.2.md (424 dòng), Document/FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page_v0.1.md (532 dòng), Document/FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline_v0.1.md (310 dòng), Document/FSD/tom-tat-fsd.md (244 dòng)
-- Commit cuối: 2026-11-09 refactor: nhiều dự án một repo — projects/<du-an>/Document/<loại>/ + Diagram/; Drive luôn Word, hỏi thư mục m
+- File: Document/FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead_v0.2.md (317 dòng), Document/FSD/Sprint 3/BBA-41-2.1.1.01_Centre_Sharing_v0.1.md (292 dòng), Document/FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection_v0.2.md (424 dòng), Document/FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page_v0.1.md (532 dòng), Document/FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline_v0.1.md (310 dòng), Document/FSD/Sprint 4/Lead_and_Contact_Management.md (745 dòng), Document/FSD/Sprint 4/_pham-vi-sprint-4.md (47 dòng), Document/FSD/tom-tat-fsd.md (244 dòng)
+- Commit cuối: 2026-11-09 chore: dọn dẹp sau khi đổi cấu trúc — docstring đường dẫn cũ, _drive.json theo schema mới, thư mục rỗng
 
 ## Bản đồ file
 
@@ -35,6 +35,7 @@
 - FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection: https://drive.google.com/file/d/11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh/view
 - FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page: https://drive.google.com/file/d/1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh/view
 - FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline: https://drive.google.com/file/d/1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q/view
+- FSD/Sprint 4/Lead_and_Contact_Management: https://drive.google.com/file/d/1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ/view
 - FSD/tom-tat-fsd: https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit
 - SRS/workflow: https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit
 
