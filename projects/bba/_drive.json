@@ -65,6 +65,51 @@
       "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
       "synced_at": "2026-11-09 04:58",
       "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+    },
+    "FSD/Sprint 4/2.3_Enquiry_Actions_VI": {
+      "file_id": "1HbIb1V3loJ1sMTGpK5qXI6pjkUykmBD5",
+      "url": "https://drive.google.com/file/d/1HbIb1V3loJ1sMTGpK5qXI6pjkUykmBD5/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.3 Enquiry Actions (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d929f5e645b03a84ed1e4adeef4f7fd28b8359becfe422335211de4768a7a93b",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/2.8_CRM_Administration_VI": {
+      "file_id": "1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B",
+      "url": "https://drive.google.com/file/d/1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "9186f80b0cd4d6c5032b1b05facaa57f61bdb8fe2c0f80e587ab9ba469608463",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.1_Children_and_Families_VI": {
+      "file_id": "13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM",
+      "url": "https://drive.google.com/file/d/13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Children and Families (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "cc3e3092bf24bc2108f861e94f64df8c9edeac9cfdb1b09f1d6b8183746c8cf4",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.2_Daily_Operations_VI": {
+      "file_id": "10X3PWnEHYAkrEj4tktCiHo-zSSN8Yb--",
+      "url": "https://drive.google.com/file/d/10X3PWnEHYAkrEj4tktCiHo-zSSN8Yb--/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.2 Daily Operations (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "01fe003449e9b6724bedd6a86e4febcb35d24a028368ffbc8eb09bdf4458c942",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.6_Finance_VI": {
+      "file_id": "1L3RvZDxc-0eQMeNC-lJ5A7ZapdNq6ASs",
+      "url": "https://drive.google.com/file/d/1L3RvZDxc-0eQMeNC-lJ5A7ZapdNq6ASs/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.6 Finance (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "0eef66b572e392919f36ca6ef45db2d13617f7b7abba5515ffb46e40a96f63ea",
+      "synced_at": "2026-11-09 12:13"
     }
   },
   "folders_used": {
@@ -88,7 +133,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-09 07:47"
+      "last_used": "2026-11-09 12:13"
     }
   },
   "history": [

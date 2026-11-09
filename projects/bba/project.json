@@ -3,7 +3,7 @@
   "_note": "Quy tắc riêng của dự án BBA — thắng quy tắc chung. Đọc kèm templates/HUONG-DAN-FSD.md.",
   "main_doc": "fsd",
   "fsd": {
-    "language": "en",
+    "language": "vi-first",
     "template": "templates/template-fsd.md",
     "guide": "templates/HUONG-DAN-FSD.md",
     "sources": [
@@ -12,7 +12,8 @@
       "Document/FSD/Sprint 3/ (5 FRS đã có)"
     ],
     "dir": "Document/FSD",
-    "file_name": "Document/FSD/Sprint <n>/<Module_Name>.md (H1 = tên module) → Drive: [FSD] <Module> - Sprint <n>.docx (tạm, đổi theo ticket khi có scope)"
+    "file_name": "Document/FSD/Sprint <n>/<WBS>_<Feature_Name>[_VI].md (H1 = '<WBS> <Feature>') → Drive: [FRD] <H1> - Sprint <n>.docx (đổi theo ticket khi có)",
+    "_language_note": "Viết bản tiếng Việt (<file>_VI.md) trước → user duyệt → mới dịch tiếng Anh (<file>.md, bản chuẩn gửi khách)."
   },
   "docx_style": {
     "font": "Arial",
@@ -46,7 +47,7 @@
     },
     "titles": {
       "FSD/Sprint 3": "[FRS] {stem}.docx",
-      "FSD/Sprint": "[FSD] {h1} - Sprint {sprint}.docx"
+      "FSD/Sprint": "[FRD] {h1} - Sprint {sprint}.docx"
     },
     "docs": [
       {

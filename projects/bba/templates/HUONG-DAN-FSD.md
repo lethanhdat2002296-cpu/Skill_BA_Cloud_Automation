@@ -5,8 +5,9 @@ Quy tắc riêng của BBA, **thắng** quy tắc chung của repo khi khác nha
 ## 1. Tài liệu chính
 - **FSD (FRS) là tài liệu khách xác nhận.** SRS của BBA chỉ là Scope & Flow (đầu vào), không viết lại SRS theo chuỗi `srs-pipeline`.
 - Không chạy `brainstorm` / `write-urd` / `write-srs` / `srs-pipeline` cho BBA trừ khi user yêu cầu rõ.
-- Ngôn ngữ FSD: **tiếng Anh** (giống các FRS đã có) — đây là bản chuẩn. Tài liệu nội bộ (tóm tắt, workflow, phân tích): tiếng Việt.
-- **Mỗi FSD Sprint 4 kèm bản tiếng Việt** (user yêu cầu 09/11/2026): `<Module_Name>_VI.md` cùng thư mục, H1 = `<Module> (Tiếng Việt)`, giữ nguyên cấu trúc và **mọi mã** (FR/BR/VAL/DATA/AC/OQ), thuật ngữ hệ thống giữ tiếng Anh, tiêu đề mục song ngữ `Acceptance Criteria (Tiêu chí nghiệm thu)`. Dòng ghi chú đầu: khác nhau thì bản tiếng Anh thắng. Sửa bản Anh → sửa bản Việt cùng lúc. Word của file `_VI` tự đặt ngôn ngữ vi-VN; Drive: `[FSD] <Module> (Tiếng Việt) - Sprint 4.docx`, cùng thư mục với bản Anh.
+- Ngôn ngữ FSD (user chốt 09/11/2026): **viết bản tiếng Việt trước** (`<file>_VI.md`), xuất Word và đẩy Drive cho user duyệt; **chỉ khi user OK mới dịch sang tiếng Anh** (`<file>.md`, bản gửi khách — khác nhau thì bản Anh thắng). Tài liệu nội bộ (tóm tắt, workflow, brainstorm): tiếng Việt.
+- Bản tiếng Việt: H1 = `<Feature> (Tiếng Việt)`; mã (FR/BR/VAL/DATA/AC/OQ) và thuật ngữ hệ thống giữ tiếng Anh; tiêu đề mục song ngữ `Acceptance Criteria (Tiêu chí nghiệm thu)` (check_fsd chấp nhận). Bản Anh dịch giữ nguyên mọi mã, số lượng mã hai bản bằng nhau. Word của file `_VI` tự đặt ngôn ngữ vi-VN.
+- Chỉ dùng dữ kiện trong SRS / FRS Sprint 3; mỗi FR, BR ghi nguồn (`BR-CHF-017`, `SRS OPS §4 mục 1.1`). Quy tắc BA tự thêm → bảng **Giả định của BA** (`AS-<mã>-xx`) ở mục 7; thiếu thông tin → `OQ-<mã>-xx`. Phân tích trước khi viết: `Document/FSD/Sprint <n>/_brainstorm-sprint-<n>.md`.
 
 ## 2. Nguồn để viết FSD (bắt buộc theo thứ tự)
 1. `Document/SRS/workflow.md` — chọn quy trình `WF-…` và dòng WBS ở bảng 2.1 (CRM) hoặc mục 3 (SMS).
@@ -19,7 +20,7 @@ Quy tắc riêng của BBA, **thắng** quy tắc chung của repo khi khác nha
 - Mã trong một FSD: `FR-001`, `BR-001`, `VAL-001`, `DATA-001`, `AC-001`, đánh tiếp liên tục qua các User Story của cùng FSD, không nhảy số. Validation luôn là `VAL-` (không dùng `VR-`).
 - Mỗi FR có trong luồng hoặc AC; mỗi BR / VAL có ít nhất một AC ở cột Linked Rule; thông báo hệ thống ghi nguyên văn trong ngoặc kép.
 - Thuật ngữ trạng thái theo bảng đã chốt; chưa chốt → dùng đúng chữ của FSD gần nhất và ghi OQ.
-- Tên file Sprint 4 (tạm, user chốt 09/11/2026): mỗi **module** một FSD — `Document/FSD/Sprint 4/<Module_Name>.md`, H1 = tên module → Drive `[FSD] <Module> - Sprint 4.docx`. Khi có ticket chính thức sẽ đổi tên. Danh mục và trạng thái: `Document/FSD/Sprint 4/_pham-vi-sprint-4.md`.
+- Sprint 4 chính thức (user chốt 09/11/2026, theo ảnh WBS): 5 FRD — 2.3 Enquiry actions, 2.8 CRM Administration (CRM SRS); 3.1 Children & families, 3.2 Daily operations, 3.6 Finance (SMS SRS). Mỗi feature WBS một FRD: `Document/FSD/Sprint 4/<WBS>_<Feature_Name>[_VI].md`, H1 = `<WBS> <Feature>` → Drive `[FRD] <H1> - Sprint 4.docx`. Đổi tên theo mã ticket khi user cung cấp.
 - Bảng thuộc tính đầu tài liệu có dòng `| Sprint | 4 |` (trùng thư mục `Sprint <n>` chứa file).
 
 ## 4. Xuất bản và Google Drive
@@ -28,7 +29,7 @@ python tools/check_fsd.py bba "FSD/Sprint 4/<file>.md"                          
 python .claude/skills/write-srs/scripts/to_docx.py bba --src "FSD/Sprint 4/<file>.md"   # Word theo docx_style của project.json
 python .claude/skills/drive-sync/scripts/drive_pack.py bba                              # kế hoạch đẩy + gợi ý thư mục
 ```
-- FSD lưu trong Git: `Document/FSD/Sprint <n>/BBA-xx-<WBS>_<Feature_Name>_v<x.y>.md` (sprint hiện tại: `project.json` › `sprint.current`).
+- FSD lưu trong Git: Sprint 3 `Document/FSD/Sprint 3/BBA-xx-<WBS>_<Feature_Name>_v<x.y>.md`; Sprint 4 theo quy tắc tên ở mục 3 (sprint hiện tại: `project.json` › `sprint.current`).
 - **FSD hoàn thành → đẩy Word**, theo `drive-sync`: **hỏi user thư mục đích** mỗi lần. Gợi ý mặc định: thư mục `Sprint <n>` của khách trong https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW (`project.json` › `drive.folder_hints`). Tên trên Drive: `[FRS] BBA-xx-<WBS>_<Feature_Name>_v<x.y>.docx` — giống Sprint 3.
 - Drive của BBA giữ nguyên cấu trúc khách đang dùng (`Sprint 3`, `Sprint 4` nằm ngay dưới thư mục gốc); Claude không tạo / di chuyển thư mục.
 - FSD lên phiên bản mới → đẩy bản mới vào thư mục user chọn; bản cũ trên Drive để nguyên (user tự dọn).

@@ -130,3 +130,19 @@
 - **Đã biết:** 5 nhóm (Attendance: trẻ, nhân viên, khách; Daily care: hoạt động, đơn nghỉ; Calendar và diễn tập; Safety: centre log, tổng quan an toàn; Bus services), quy trình P1–P7, BR-OPS-001–051, 13 notification, 13 báo cáo, 20 AC (nguồn: SRS OPS §1–§8). Phạm vi loại trừ rõ ở §1.2 (16 mục).
 - **Chưa rõ:** vai trò "Centre Admin / School Admin" (OQ-OPS-01); Present vs Signed in (OQ-OPS-02); nhiệt kế Bluetooth (OQ-OPS-03); xung đột offline (OQ-OPS-04); e-Form 1 (OQ-OPS-05); người đưa trẻ có cần trong danh sách đón (OQ-OPS-06); khách sốt (OQ-OPS-12); huỷ đơn nghỉ (OQ-OPS-13).
 - **Kết quả:** FRD `3.2_Daily_Operations_VI.md` — 14 US, 69 FR, 74 AC, 14 OQ.
+
+## 3.6 Finance — nguồn: SRS SMS Fees & Payments v0.1
+
+- **Đã biết:** SRS ghi mục tiêu "bill, collect, refund and close each month without Taidii" (§1) — khớp tên "Finance (rebuilt to Tai[dii])". 8 nhóm (Overview, Fee set-up, Billing, Payments & receipts, Deposits & refunds, GSII, Approvals, Reports & month-end), quy trình P1–P7, BR-FEE-001–053, 12 notification, 11 báo cáo, 20 AC (nguồn: SRS FEE §1–§8).
+- **Mâu thuẫn / chưa rõ:** thời điểm tạo hoá đơn đầu tiên — "registration submitted" (BR-FEE-020) ↔ "enrolment confirmed" (P1) → OQ-FIN-02; Malaysia billing để sprint planning → OQ-FIN-01; định dạng file ngân hàng, cách nhận tiền PayNow, nguồn dòng trợ cấp → OQ-FIN-03, 04, 06.
+- **Kết quả:** FRD `3.6_Finance_VI.md` — 22 US, 97 FR, 107 AC, 15 OQ.
+
+## Tổng kết 5 FRD (bản tiếng Việt v0.1)
+
+| FRD | US | FR | AC | OQ | AS |
+|---|---|---|---|---|---|
+| 2.3 Enquiry Actions | 10 | 32 | 40 | 10 | 4 |
+| 2.8 CRM Administration | 7 | 32 | 39 | 10 | 3 |
+| 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
+| 3.2 Daily Operations | 14 | 69 | 74 | 14 | 7 |
+| 3.6 Finance | 22 | 97 | 107 | 15 | 6 |
