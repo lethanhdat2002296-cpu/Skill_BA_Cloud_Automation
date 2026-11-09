@@ -44,11 +44,34 @@ flowchart LR
 |---|---|---|
 | {{…}} | {{Storefront / Backend}} | {{…}} |
 
-### 2.3 Giả định & phụ thuộc
+**Ma trận phân quyền** (đối tượng × vai trò; ô ghi quyền: Tạo / Xem / Sửa / Duyệt / Xoá; `Của mình` / `Nhóm mình` khi giới hạn theo người / nhóm; `—` không có quyền). Nguồn cho nhóm quyền và record rule.
+
+| Đối tượng / thao tác | {{Vai trò 1}} | {{Vai trò 2}} | {{Quản trị}} |
+|---|---|---|---|
+| {{Yêu cầu mua hàng}} | {{Tạo, Xem/Sửa của mình}} | {{Xem nhóm mình, Duyệt}} | {{Xem tất cả}} |
+
+### 2.3 Giả định, phụ thuộc & ràng buộc
 - **Giả định:** xem mục 9 (AS-xx).
 - **Phụ thuộc:** {{module/version/dịch vụ bên ngoài}}
+- **Ràng buộc:** {{phiên bản & edition nền tảng (vd. Odoo 17 Enterprise), hosting, trình duyệt, quy định pháp lý / chuẩn kế toán bắt buộc}}
 
 ## 3. Yêu cầu chức năng
+
+### 3.0 Mô hình trạng thái
+{{Mỗi chứng từ chính có ≥ 3 trạng thái (phiếu yêu cầu, đơn hàng, đề nghị thanh toán…): 1 sơ đồ + 1 bảng chuyển trạng thái. Không có chứng từ nhiều trạng thái → bỏ mục này.}}
+
+```mermaid
+stateDiagram-v2
+  [*] --> Nhap: Tạo
+  Nhap --> ChoDuyet: Gửi duyệt
+  ChoDuyet --> DaDuyet: Duyệt
+  ChoDuyet --> Nhap: Từ chối
+  DaDuyet --> [*]
+```
+
+| Trạng thái nguồn | Sự kiện | Điều kiện (guard) | Trạng thái đích | Ai thực hiện | Tác động kèm theo | FR |
+|---|---|---|---|---|---|---|
+| {{Nháp}} | {{Gửi duyệt}} | {{Có ≥ 1 dòng}} | {{Chờ duyệt}} | {{Người đề xuất}} | {{Tạo activity cho Trưởng nhóm}} | {{FR-01}} |
 
 ### 3.1 {{Phân hệ — mỗi phân hệ một file docs/srs/03-NN-<phan-he>.md}}
 
@@ -59,9 +82,12 @@ flowchart LR
 - **Input:** {{trường + kiểu + bắt buộc}}
 - **Output:** {{kết quả / dữ liệu sinh ra / thông báo}}
 - **Business rules:**
-  - BR-01.1: {{…}}
+  - BR-01.1: {{Quy tắc luôn đúng — câu khẳng định, có số / điều kiện cụ thể}}
+  - BR-01.2: KHI {{điều kiện}} THÌ {{hệ thống làm / chặn gì}}{{ TRỪ KHI <ngoại lệ>}}.
 - **Acceptance criteria:**
-  1. **Given** {{…}} **When** {{…}} **Then** {{…}}.
+  1. **Given** {{…}} **When** {{…}} **Then** {{… — tình huống thành công}}.
+  2. **Given** {{dữ liệu vi phạm BR-01.1}} **When** {{…}} **Then** hiện lỗi "{{thông báo nguyên văn}}" và {{trạng thái giữ nguyên}}.
+  3. **Given** {{giá trị biên: đúng ngưỡng / vượt ngưỡng 1 đơn vị}} **When** {{…}} **Then** {{…}}.
 - **Độ ưu tiên:** {{Must | Should | Could}}
 
 #### FR-02 — {{…}}
@@ -90,6 +116,13 @@ flowchart LR
 |---|---|---|---|
 | {{order.increment_id}} | {{sale.order.name}} | {{string}} | {{…}} |
 
+### 5.4 Từ điển dữ liệu (model / trường mới)
+{{Chỉ liệt kê model và trường THÊM MỚI hoặc ĐỔI so với chuẩn. Không có → ghi "Dùng model chuẩn, không thêm trường".}}
+
+| Model | Trường (nhãn) | Tên kỹ thuật | Kiểu | Bắt buộc | Mặc định / ràng buộc | Ý nghĩa | FR |
+|---|---|---|---|---|---|---|---|
+| {{purchase.request}} | {{Ngày cần hàng}} | {{date_required}} | {{Date}} | {{Không}} | {{≥ hôm nay}} | {{…}} | {{FR-01}} |
+
 ## 6. Screen Inventory
 
 ### 6.1 Danh sách màn hình
@@ -117,7 +150,7 @@ flowchart TD
 
 ## 8. Ma trận truy vết
 
-> Không viết tay — `build_srs.py` sinh từ dòng "Truy vết" của từng FR.
+> Không viết tay — `build_srs.py` sinh: 8.1 FR ↔ US ↔ SCR (từ dòng "Truy vết"), 8.2 Danh mục thông báo (từ các `hiện lỗi "…"` trong AC).
 
 ## 9. Assumptions & Open Questions
 

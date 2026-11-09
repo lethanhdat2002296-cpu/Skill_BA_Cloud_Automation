@@ -28,6 +28,7 @@ from build_srs import fr_blocks  # noqa: E402
 from check_uc import urd_stories  # noqa: E402
 sys.path.insert(0, str(REPO / "tools"))
 from ba_paths import resolve  # noqa: E402
+from ba_lint import vague_hits  # noqa: E402
 
 FIB = {1, 2, 3, 5, 8, 13}
 PRIORITY = {"must": "Highest", "should": "High", "could": "Medium", "won't": "Low", "wont": "Low"}
@@ -119,6 +120,9 @@ def main(argv: list[str]) -> int:
             continue
         if not s["ac"]:
             errors.append(f"{s['id']}: thiếu Acceptance criteria")
+        for i, item in enumerate(s["ac"], 1):
+            if vague_hits(item):
+                warns.append(f"{s['id']} AC{i}: từ mơ hồ {', '.join(vague_hits(item))}")
         if not s["points"].isdigit() or int(s["points"]) not in FIB:
             errors.append(f"{s['id']}: story point '{s['points']}' không thuộc 1, 2, 3, 5, 8, 13")
         elif int(s["points"]) == 13:

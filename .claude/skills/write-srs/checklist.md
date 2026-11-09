@@ -12,10 +12,15 @@
 
 ## B. Yêu cầu chức năng
 - [ ] ⚙ Mỗi FR có mục **Acceptance criteria** với ít nhất 1 tiêu chí.
-- [ ] Acceptance criteria dạng Given/When/Then, kiểm thử được, không có từ mơ hồ ("nhanh", "thân thiện", "phù hợp", "v.v.").
+- [ ] Acceptance criteria dạng Given/When/Then, kiểm thử được, có dữ liệu mẫu cụ thể.
+- [ ] ⚙ Không có từ mơ hồ trong AC / BR / NFR ("nhanh", "thân thiện", "phù hợp", "có thể", "v.v." — `tools/ba_lint.py`).
+- [ ] ⚙ FR `Must` có AC lỗi / ngoại lệ; có ngưỡng thì có AC biên.
+- [ ] ⚙ Thông báo hệ thống viết nguyên văn `hiện lỗi "…"` (gom vào 8.2 Danh mục thông báo).
 - [ ] Mỗi FR có Input, Output, Business rules, Độ ưu tiên.
 - [ ] Luồng ngoại lệ (từ chối, huỷ, quá hạn, lỗi tích hợp) có FR hoặc AC tương ứng.
 - [ ] Mọi user story `Must` trong URD được phủ bởi ít nhất 1 FR.
+- [ ] Rà lỗ hổng (gap): huỷ giữa chừng, quá hạn/timeout, lỗi tích hợp (mất kết nối, dữ liệu trả về thiếu), sai quyền, dữ liệu biên (0, âm, rỗng, trùng), hai người thao tác cùng lúc (cùng duyệt, cùng sửa).
+- [ ] Chứng từ có ≥ 3 trạng thái có sơ đồ + bảng chuyển trạng thái (3.0); mỗi chuyển trạng thái có FR.
 
 ## C. Truy vết
 - [ ] ⚙ Mỗi FR có ít nhất một SCR hoặc ghi rõ `Không có UI` trong ma trận truy vết.
@@ -25,7 +30,8 @@
 
 ## D. Phi chức năng & tích hợp
 - [ ] NFR có ngưỡng đo được (giây, %, số người dùng, thời gian lưu trữ).
-- [ ] Có NFR về bảo mật/phân quyền và audit log.
+- [ ] Có NFR về bảo mật/phân quyền và audit log; mục 2.2 có ma trận phân quyền (đối tượng × vai trò).
+- [ ] Có model / trường mới → mục 5.4 Từ điển dữ liệu đủ tên kỹ thuật, kiểu, bắt buộc.
 - [ ] Mỗi tích hợp ghi rõ chiều, tần suất, xử lý lỗi, source of truth.
 - [ ] Bảng mapping trường có kiểu dữ liệu.
 

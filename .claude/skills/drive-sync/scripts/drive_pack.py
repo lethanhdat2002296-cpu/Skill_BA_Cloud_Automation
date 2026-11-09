@@ -18,7 +18,7 @@ Cách dùng:
 
 Tài liệu (thư mục docs/ trên Drive, chuyển thành Google Doc / Sheet):
     srs  docs/SRS.md -> exports/SRS.docx · urd docs/URD.md -> exports/URD.docx
-    uc   docs/UC.md  -> exports/UC.docx  · backlog exports/backlog.csv -> Google Sheet
+    uc   docs/UC.md  -> exports/UC.docx  · backlog exports/backlog.csv, tc exports/test-cases.csv -> Google Sheet
 File .docx lớn hơn giới hạn upload (3,0 MB) được nén ảnh vào .tmp/drive/.
 Kế hoạch đầy đủ ghi vào .tmp/drive/plan.json; màn hình chỉ in mục cần đẩy (create/replace) kèm file_ref.
 Trạng thái: create · replace · skip (không đổi) · too_big · missing · error.
@@ -53,6 +53,7 @@ DOCS = [  # key, nguồn (so thay đổi), file upload, tiêu đề
     ("urd", "docs/URD.md", "exports/URD.docx", "URD — {du_an}"),
     ("uc", "docs/UC.md", "exports/UC.docx", "Use Case — {du_an}"),
     ("backlog", "exports/backlog.csv", "exports/backlog.csv", "Backlog — {du_an}"),
+    ("tc", "exports/test-cases.csv", "exports/test-cases.csv", "Test case — {du_an}"),
 ]
 COMPACT_STEPS = [(1400, 128), (1200, 64), (1000, 32), (800, 16)]  # (chiều rộng tối đa, số màu)
 

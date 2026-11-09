@@ -42,6 +42,7 @@ python .claude/skills/render-screens/scripts/swimlane.py <du-an>      # chỉ kh
 python .claude/skills/write-srs/scripts/to_docx.py <du-an>
 python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md   # và --src UC.md nếu có
 python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final
+python .claude/skills/write-testcase/scripts/check_tc.py <du-an> --write-matrix   # nếu có test-cases.md
 ```
 Sửa mọi `ERROR` (trong `docs/srs/*.md`, rồi chạy lại). Thiếu công cụ (pandoc/Playwright/mmdc) → ghi báo cáo, không dừng.
 

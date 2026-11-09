@@ -16,10 +16,10 @@ projects/<du-an>/                    Drive: "BA Projects/<du-an>/"
   PROJECT.md   thẻ dự án (sinh tự động + phần ghi chú viết tay)
   input/       tài liệu khảo sát gốc — KHÔNG sửa/xoá/ghi đè; chỉ thêm qua ba-intake (bản mới: __v2, __v3)
                _manifest.md, _changes/, _extracted/, _tong-hop.md (bản hợp nhất — nguồn ưu tiên)
-  docs/        brainstorm.md, URD.md, UC.md, srs/*.md (nguồn SRS, tách phân hệ) → SRS.md (sinh tự động), backlog.md
+  docs/        brainstorm.md, URD.md, UC.md, srs/*.md (nguồn SRS, tách phân hệ) → SRS.md (sinh tự động), backlog.md, test-cases.md
   diagrams/    ảnh sơ đồ (srs-NN, flows-NN, uc-NN, swimlane-*) · swimlanes/*.json (nguồn swimlane)
   ui/          flows.md, index.html, _pending.md, screens/SCR-xx-<slug>.html, png/SCR-xx-<slug>[--<state>][-mobile].png
-  exports/     SRS.docx, URD.docx, UC.docx, backlog.csv — sinh ra, không sửa tay
+  exports/     SRS.docx, URD.docx, UC.docx, backlog.csv, test-cases.csv — sinh ra, không sửa tay
   _drive.json  ID/link Drive (drive-sync ghi)
 ```
 - Đường dẫn ảnh trong `docs/*.md` tính từ `docs/`: `../ui/png/…`, `../diagrams/…`.
@@ -33,6 +33,7 @@ projects/<du-an>/                    Drive: "BA Projects/<du-an>/"
 | Epic | `EP-xx` | Use case | `UC-xx` |
 | Yêu cầu chức năng | `FR-xx` | Phi chức năng | `NFR-xx` |
 | Màn hình | `SCR-xx` | Giả định / Câu hỏi mở | `AS-xx` / `OQ-xx` |
+| Quy tắc nghiệp vụ | `BR-<số FR>.n` (trong FR) | Test case | `TC-xxx` (3 chữ số) |
 
 Số đánh 2 chữ số, tăng dần, **không tái sử dụng** mã đã xóa.
 
@@ -44,6 +45,7 @@ Số đánh 2 chữ số, tăng dần, **không tái sử dụng** mã đã xóa
 | "Cập nhật SRS cho X", "sau khảo sát/demo" | `srs-pipeline` | `srs-update` (nhanh, không vẽ, không Word) |
 | "Xuất bản / xuất docx / gửi khách" | `srs-pipeline` | `srs-publish` |
 | "Viết use case" / "Làm backlog, xuất Jira" | `write-usecase` / `write-user-story` | như bên trái |
+| "Viết test case", "file test cho QA" | — (cần SRS trước) | `write-testcase` — chỉ khi user yêu cầu |
 | "Đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc" | `drive-sync` — chỉ khi user yêu cầu | |
 | "Dự án X đang tới đâu?" | `python tools/project.py status <du-an>` — không mở tài liệu | |
 

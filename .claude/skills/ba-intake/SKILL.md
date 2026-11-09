@@ -90,8 +90,20 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
    | 1 | Hạn đổi trả khách VIP | 15 ngày (email-bo-sung-cskh.md) | 30 ngày (email-bo-sung-cskh__v2.md) | Sửa | FR-01, SCR-01 |
 
    Loại: **Thêm** (thông tin chưa từng có) · **Sửa** (giá trị khác) · **Bỏ** (bản mới không còn nhắc / nói rõ huỷ) · **Mâu thuẫn** (hai nguồn còn hiệu lực nói khác nhau, chưa rõ cái nào đúng). Ảnh hưởng: FR/NFR/SCR/AS/OQ trong SRS, hoặc "—" nếu chưa có SRS.
+
+   Dự án **đã có SRS** → thêm bảng **"Tác động"** ngay dưới (4 góc, mỗi góc 1 dòng; tra bằng `grep -n` theo mã ở cột Ảnh hưởng, không đọc cả file):
+
+   | Góc | Bị ảnh hưởng | Mức |
+   |---|---|---|
+   | Tài liệu | US-…, UC-…, FR-…, SCR-… phải vẽ lại | Cao / Trung bình / Thấp |
+   | Kỹ thuật | model / trường mới (SRS 5.4), quyền (2.2), trạng thái (3.0), tích hợp (5) | … |
+   | Kiểm thử | TC-… trong `docs/test-cases.md` có cột AC trỏ tới FR bị sửa (nếu đã có test case) | … |
+   | Kế hoạch | story US-… (điểm hiện tại, release) trong `docs/backlog.md`; ước điểm tăng/giảm | … |
+
+   Mức: **Cao** = thêm/đổi luồng, model hoặc quyền; **Trung bình** = đổi quy tắc / AC trong FR có sẵn; **Thấp** = câu chữ, nhãn, giá trị mặc định.
+   Tài liệu mới là **biên bản họp** → thêm 2 mục vào change report: "Quyết định đã chốt" và "Việc cần làm" (`| Việc | Người | Hạn |`); việc của phía khách chưa xong → `OQ-xx` khi cập nhật SRS.
 4. Commit + push **một lần** (gồm cả file vừa nạp): `git add projects/<du-an>/input && git commit -m "input(<du-an>): mô tả khác biệt <thoi-diem>" && git push -u origin HEAD`.
-5. Trình bày bảng khác biệt trong chat (ngắn gọn, đủ ý), rồi **hỏi người làm** bằng **một** lần gọi AskUserQuestion (gộp tất cả câu hỏi vào cùng một lần gọi, tối đa 4 câu):
+5. Trình bày bảng khác biệt + bảng Tác động trong chat (ngắn gọn, đủ ý), rồi **hỏi người làm** bằng **một** lần gọi AskUserQuestion (gộp tất cả câu hỏi vào cùng một lần gọi, tối đa 4 câu):
    - Câu 1: "Xử lý khác biệt giữa thông tin cũ và mới thế nào?"
      - Dự án **đã có SRS**:
        - `Merge + cập nhật SRS ngay (Recommended)` — gộp vào `_tong-hop.md`, rồi chạy `srs-update` luôn trong lượt này.
@@ -131,7 +143,7 @@ Báo cáo ngắn (file đã lưu, branch, commit, push) và gợi ý: **"Làm SR
 - Branch: <branch> · Commit: <sha> · Push: <OK / lỗi + cách xử lý>
 - File mới: … · Phiên bản mới: … (bản cũ giữ nguyên) · Trùng (bỏ qua): …
 - Khác biệt: <n> thêm, <n> sửa, <n> bỏ, <n> mâu thuẫn → <quyết định>
-- Ảnh hưởng tới SRS: FR-…, SCR-… (nếu đã có SRS)
+- Ảnh hưởng tới SRS: FR-…, SCR-… · Tác động: tài liệu <mức>, kỹ thuật <mức>, kiểm thử <n TC>, kế hoạch <±điểm> (nếu đã có SRS)
 
 Bước tiếp: "Cập nhật SRS cho dự án <du-an>" (srs-update, vài phút) — hoặc "Xuất bản tài liệu dự án <du-an>" khi cần gửi khách.
 ```

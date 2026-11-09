@@ -129,6 +129,7 @@ Danh sách Open Questions lấy nguyên từ `docs/srs/09-gia-dinh-cau-hoi.md`. 
 Mọi thông tin mới (khảo sát, demo, khách trả lời câu hỏi) đi theo 2 nhịp, **không chạy lại pipeline này**:
 - **Cập nhật nhanh** (`srs-update`, vài phút): sửa đúng file phân hệ bị ảnh hưởng, 0.1 → 0.1.1, đánh dấu màn cần vẽ lại.
 - **Xuất bản** (`srs-publish`, khi gửi khách): vẽ lại màn đang chờ, xuất docx, 0.1.x → 0.2, PR.
+- **Test case** (`write-testcase`, khi user yêu cầu — thường sau khi khách duyệt SRS): mỗi AC ≥ 1 test case + file CSV cho QA. Không chạy trong pipeline.
 
 `brainstorm.md` chỉ viết một lần ở đây; các lần sau không cập nhật (kiến thức hiện hành nằm ở `projects/<du-an>/input/_tong-hop.md` và `docs/srs/`).
 

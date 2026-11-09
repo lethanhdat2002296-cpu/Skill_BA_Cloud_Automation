@@ -52,7 +52,8 @@ Vẫn có thể thả file thẳng vào `projects/<du-an>/input/` và commit th�
     write-urd/               URD + template-urd.md
     write-usecase/           Use Case fully-dressed (UC-xx) + sơ đồ use case + scripts/check_uc.py (ma trận UC ↔ US ↔ FR)
     write-user-story/        Product backlog: epic, tách story, story point, release + scripts/backlog_csv.py (CSV import Jira)
-    drive-sync/              đẩy SRS/URD/UC (Google Doc) và backlog (Google Sheet) lên Drive, đọc góp ý, sửa nhanh trên Doc
+    write-testcase/          Test case từ AC của SRS (ngoại lệ, biên, trạng thái, phân quyền, NFR) + scripts/check_tc.py (ma trận phủ AC, CSV cho QA)
+    drive-sync/              đẩy SRS/URD/UC (Google Doc), backlog và test case (Google Sheet) lên Drive, đọc góp ý, sửa nhanh trên Doc
     write-srs/               SRS tách phân hệ (srs/*.md) + template + checklist + scripts/{build_srs,split_srs,check_srs,to_docx}.py
     ui-spec/                 Screen Inventory → flows.md
     wireframe/               design-kit/ (tokens.css, components-*.html, patterns.md) + scripts/build_ui.py
@@ -61,17 +62,19 @@ CLAUDE.md                    luật chung: phạm vi dự án, thư mục, mã �
 tools/
   ba_paths.py                đường dẫn chuẩn của một dự án (mọi script dùng)
   project.py                 list · find · status · card · new — điểm vào theo dự án
+  ba_lint.py                 kiểm câu chữ dùng chung: từ mơ hồ, AC ngoại lệ, thông báo nguyên văn
 setup/cloud-setup.sh         setup script cho cloud environment
+research/                    ghi chú nghiên cứu (vd. so sánh với OpenBA-Kit) — không nạp tự động
 templates/                   reference.docx (tuỳ chọn) — style Word công ty
 projects/
   _example/input/            bộ input mẫu: đổi trả hàng Magento 2 + duyệt trên Odoo
   <du-an>/                   mỗi dự án một thư mục — trên Google Drive: "BA Projects/<du-an>/" cùng cấu trúc
     PROJECT.md               thẻ dự án: phiên bản, số mã, OQ mở, link Drive, bản đồ file — đọc đầu tiên
     input/                   tài liệu khảo sát gốc (_manifest, _changes, _extracted, _tong-hop)
-    docs/                    brainstorm, URD, UC, srs/ → SRS.md, backlog
+    docs/                    brainstorm, URD, UC, srs/ → SRS.md, backlog, test-cases
     diagrams/                ảnh sơ đồ + swimlanes/*.json
     ui/                      flows.md, screens/*.html, png/*.png, index.html
-    exports/                 SRS.docx, URD.docx, UC.docx, backlog.csv
+    exports/                 SRS.docx, URD.docx, UC.docx, backlog.csv, test-cases.csv
     _drive.json              ID/link Google Drive
 ```
 
@@ -117,6 +120,7 @@ Windows cài nhanh bằng winget: `winget install Python.Python.3.12 OpenJS.Node
 | Xuất lại Word | `python .claude/skills/write-srs/scripts/to_docx.py <du-an>` (thêm `--src URD.md` / `--src UC.md` cho tài liệu khác) |
 | Kiểm tra use case | `python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix` |
 | Xuất backlog CSV (Jira) | `python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>` |
+| Viết test case | gõ "Viết test case cho `<du-an>`" — kiểm tra: `python .claude/skills/write-testcase/scripts/check_tc.py <du-an> --write-matrix` |
 | Đẩy lên Google Drive | gõ "Đẩy dự án `<du-an>` lên Drive" (cần connector Google Drive) |
 | Kiểm tra SRS | `python .claude/skills/write-srs/scripts/check_srs.py <du-an> --final` |
 | Chụp lại ảnh | `python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-03` |

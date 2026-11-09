@@ -61,6 +61,7 @@ Phân loại từng ý thay đổi và ghi bảng **"Kế hoạch cập nhật"*
 | User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. Rồi sửa UC liên quan trong `UC.md` và story trong `backlog.md` (story mới: ước lượng; story không đổi: không ước lượng lại). |
 | Đổi kịch bản / ngoại lệ của một tương tác | `UC.md` — nhánh `3a…` của UC liên quan (tra ma trận mục 5 của UC.md). |
 | Mâu thuẫn chưa chốt | `OQ-xx` mới trong `09`. |
+| Có `docs/test-cases.md` và FR/AC đổi | TC có cột AC trỏ tới AC đó (`grep -n "^| TC-" ` trong mục `### FR-xx`): sửa bước / kết quả; AC mới → TC mới (số tiếp theo); FR bỏ → `[Đã bỏ — v<ver>]` trong Tiêu đề TC. Theo `write-testcase/SKILL.md` mục "Cập nhật". |
 
 ## Bước 3 — Sửa đúng chỗ
 
@@ -99,8 +100,9 @@ python .claude/skills/write-srs/scripts/build_srs.py <du-an>
 python .claude/skills/write-srs/scripts/check_srs.py <du-an>
 python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix   # nếu có UC.md
 python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>         # nếu có backlog.md
+python .claude/skills/write-testcase/scripts/check_tc.py <du-an> --write-matrix  # nếu có test-cases.md
 ```
-- `check_srs` không `--final` (ảnh/HTML của màn chờ vẽ được phép thiếu). Mọi `ERROR` khác phải sửa.
+- `check_srs` không `--final` (ảnh/HTML của màn chờ vẽ được phép thiếu). Mọi `ERROR` khác phải sửa. `WARN` câu chữ (từ mơ hồ, FR Must thiếu AC ngoại lệ) chỉ sửa ở FR vừa đụng tới.
 - Commit **một lần** + push **một lần**:
   ```bash
   python tools/project.py card <du-an>   # cập nhật thẻ dự án
@@ -117,5 +119,6 @@ python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>         # 
 |---|---|---|---|
 - OQ đã trả lời: OQ-33, … · OQ mới: … · FR mới: … · FR bỏ: …
 - Màn hình chờ vẽ lại: SCR-04, SCR-12 (tổng <n> trong ui/_pending.md)
+- Test case đã sửa / thêm: TC-… (nếu có test-cases.md; phủ AC x/y)
 - SRS.docx và ảnh wireframe **chưa** cập nhật → gõ "Xuất bản tài liệu dự án <du-an>" khi cần gửi khách.
 ```

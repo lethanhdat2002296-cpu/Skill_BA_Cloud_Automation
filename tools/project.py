@@ -52,7 +52,7 @@ def open_oq(text: str) -> tuple[list[str], list[str]]:
 
 
 def facts(p: Project) -> dict:
-    srs, urd, uc, bl = (read(p.doc(n)) for n in ("SRS.md", "URD.md", "UC.md", "backlog.md"))
+    srs, urd, uc, bl, tc = (read(p.doc(n)) for n in ("SRS.md", "URD.md", "UC.md", "backlog.md", "test-cases.md"))
     main = srs or urd
     hist = re.findall(r"^\|\s*(\d+\.\d+(?:\.\d+)?)\s*\|\s*(\d{4}-\d{2}-\d{2})\s*\|\s*([^|]*)\|", srs, re.M)
     pending = [r for r in re.findall(r"^\|\s*(SCR-\d+)\s*\|", read(p.ui / "_pending.md").split("## Đã xử lý")[0], re.M)]
@@ -63,14 +63,14 @@ def facts(p: Project) -> dict:
                          capture_output=True, text=True, encoding="utf-8").stdout.strip()
     return {
         "title": title.group(1).strip() if title else p.slug,
-        "versions": {k: version(t) for k, t in (("SRS", srs), ("URD", urd), ("UC", uc), ("backlog", bl)) if t},
+        "versions": {k: version(t) for k, t in (("SRS", srs), ("URD", urd), ("UC", uc), ("backlog", bl), ("TC", tc)) if t},
         "counts": {"US": len(ids(urd, "US", True)), "UC": len(ids(uc, "UC", True)), "FR": len(ids(srs, "FR", True)),
                    "NFR": len(ids(srs, "NFR", True)), "SCR": len(ids(srs, "SCR")), "AS": len(ids(main, "AS")),
-                   "OQ": len(ids(main, "OQ"))},
+                   "OQ": len(ids(main, "OQ")), "TC": len(ids(tc, "TC"))},
         "oq_open": o, "oq_partial": part, "history": hist[-1] if hist else None, "pending": pending,
         "drive": drive, "last_commit": log,
         "files": {f: len(read(p.root / f).splitlines()) for f in
-                  ("docs/SRS.md", "docs/URD.md", "docs/UC.md", "docs/backlog.md", "ui/flows.md") if (p.root / f).exists()},
+                  ("docs/SRS.md", "docs/URD.md", "docs/UC.md", "docs/backlog.md", "docs/test-cases.md", "ui/flows.md") if (p.root / f).exists()},
         "srs_split": p.srs_dir.is_dir(),
     }
 
@@ -79,7 +79,7 @@ def status_lines(p: Project, f: dict) -> list[str]:
     c = f["counts"]
     out = [f"{p.slug} — {f['title']}",
            "Phiên bản: " + (" · ".join(f"{k} {v}" for k, v in f["versions"].items()) or "chưa có tài liệu"),
-           f"Mã: {c['US']} US · {c['UC']} UC · {c['FR']} FR · {c['NFR']} NFR · {c['SCR']} SCR · {c['AS']} AS · {c['OQ']} OQ",
+           f"Mã: {c['US']} US · {c['UC']} UC · {c['FR']} FR · {c['NFR']} NFR · {c['SCR']} SCR · {c['AS']} AS · {c['OQ']} OQ" + (f" · {c['TC']} TC" if c["TC"] else ""),
            f"OQ mở ({len(f['oq_open'])}): {', '.join(f['oq_open']) or 'không'}"
            + (f" · trả lời một phần: {', '.join(f['oq_partial'])}" if f["oq_partial"] else "")]
     if f["history"]:
@@ -113,6 +113,7 @@ def card(p: Project) -> Path:
             "| FR / NFR / SCR / AS / OQ | `docs/SRS.md` (hoặc `docs/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |",
             "| User story / Use case | `docs/URD.md`, `docs/UC.md` | `grep -n \"^#### US-07\"` rồi Read đoạn đó |",
             "| Backlog | `docs/backlog.md` → `exports/backlog.csv` | |",
+            "| Test case | `docs/test-cases.md` → `exports/test-cases.csv` | Tra `grep -n \"^### FR-07\"`; ma trận phủ ở mục 6 |",
             "| Màn hình | `ui/flows.md`, `ui/screens/SCR-xx-*.html` | Chỉ mở ảnh `ui/png/` khi cần review |",
             "| Sơ đồ | `diagrams/` (`swimlanes/*.json` là nguồn) | |",
             "| File giao khách | `exports/` | Sinh ra — không sửa tay |", ""]

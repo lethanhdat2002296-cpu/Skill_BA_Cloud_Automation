@@ -22,6 +22,7 @@ sys.path.insert(0, str(REPO / "tools"))
 from ba_paths import Project, resolve  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_srs import build, needs_build  # noqa: E402
+from ba_lint import MSG_NOQUOTE_RE, fr_sections, is_negative, then_part, vague_hits  # noqa: E402
 
 SECTION_TITLES = {
     1: "Giới thiệu", 2: "Mô tả tổng quan", 3: "Yêu cầu chức năng", 4: "Yêu cầu phi chức năng",
@@ -109,6 +110,28 @@ def main(argv: list[str]) -> int:
         idx = block.lower().find("acceptance criteria")
         if idx < 0 or not re.search(r"^\s*(?:\d+\.|[-*])\s+\S", block[idx:], flags=re.M):
             errors.append(f"{fr}: thiếu Acceptance criteria (ít nhất 1 tiêu chí)")
+    # B2. Chất lượng câu chữ (chỉ cảnh báo): từ mơ hồ, AC ngoại lệ, thông báo nguyên văn
+    lint = 0
+    for f in fr_sections(text):
+        if f["dropped"]:
+            continue
+        for line in f["body"].splitlines():
+            s = line.strip()
+            if re.match(r"(?:\d+\.|- BR-|- \*\*(?:Output|Business rules))", s):
+                hits = vague_hits(s)
+                if hits:
+                    lint += 1
+                    warns.append(f"{f['id']}: từ mơ hồ {', '.join(hits)} — thay bằng số / điều kiện đo được: {s[:80]}")
+        if f["priority"].lower() == "must" and f["ac"] and not any(is_negative(then_part(a)) for a in f["ac"]):
+            warns.append(f"{f['id']} (Must): chưa có AC tình huống lỗi / ngoại lệ / bị chặn")
+        for i, a in enumerate(f["ac"], 1):
+            if MSG_NOQUOTE_RE.search(a):
+                warns.append(f"{f['id']} AC{i}: 'hiện lỗi/cảnh báo' chưa có nội dung nguyên văn trong \"…\"")
+    for m in re.finditer(r"^#{3,4} +NFR-\d+.*?(?=^#{2,4} |\Z)", secs.get(4, ""), flags=re.M | re.S):
+        nid = m.group(0).split()[1]
+        for line in m.group(0).splitlines():
+            if "Yêu cầu" in line and vague_hits(line):
+                warns.append(f"{nid}: từ mơ hồ {', '.join(vague_hits(line))} — NFR phải có ngưỡng đo được")
     if not fr_ids:
         errors.append("không có FR nào (heading phải dạng '#### FR-01 — Tên' trong srs/03-*.md)")
 
@@ -167,6 +190,13 @@ def main(argv: list[str]) -> int:
     # C. Truy vết
     urd_path = project.doc("URD.md")
     us_ids = set(re.findall(r"^#{2,4} +(US-\d+)\b", urd_path.read_text(encoding="utf-8"), flags=re.M)) if urd_path.exists() else None
+    if urd_path.exists():  # câu chữ AC của URD (chỉ cảnh báo)
+        cur = ""
+        for line in urd_path.read_text(encoding="utf-8").splitlines():
+            h = re.match(r"^#{2,4} +(US-\d+)\b", line)
+            cur = h.group(1) if h else cur
+            if cur and re.match(r"\s*\d+\.\s+\*\*Given", line) and vague_hits(line):
+                warns.append(f"URD {cur}: từ mơ hồ {', '.join(vague_hits(line))} trong AC")
     if us_ids is None:
         warns.append("không có URD.md — bỏ qua kiểm tra US")
     trace_rows = [r for r in table_rows(secs.get(8, "")) if r and re.fullmatch(r"FR-\d+", r[0])]

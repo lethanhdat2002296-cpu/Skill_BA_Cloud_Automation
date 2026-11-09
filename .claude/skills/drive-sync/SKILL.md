@@ -1,6 +1,6 @@
 ---
 name: drive-sync
-description: Đẩy tài liệu dự án lên Google Drive (SRS/URD/UC → Google Doc, backlog → Sheet; tuỳ chọn sơ đồ, ảnh, input) vào "BA Projects/<du-an>/" cùng cấu trúc thư mục với git, chỉ giữ bản mới nhất; đọc comment của khách; sửa nhanh trên Doc. CHỈ chạy khi user yêu cầu ("đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc").
+description: Đẩy tài liệu dự án lên Google Drive (SRS/URD/UC → Google Doc, backlog/test case → Sheet; tuỳ chọn sơ đồ, ảnh, input) vào "BA Projects/<du-an>/" cùng cấu trúc thư mục với git, chỉ giữ bản mới nhất; đọc comment của khách; sửa nhanh trên Doc. CHỈ chạy khi user yêu cầu ("đẩy X lên Drive", "lấy góp ý trên Drive", "sửa trên Doc").
 allowed-tools: Read, Edit, Glob, Grep, Bash(python *), Bash(python3 *), Bash(pandoc *), Bash(git *), mcp__Google_Drive__search_files, mcp__Google_Drive__create_file, mcp__Google_Drive__update_file, mcp__Google_Drive__get_file_metadata, mcp__Google_Drive__read_file_content, mcp__Google_Docs__read_doc, mcp__Google_Docs__update_doc
 ---
 
@@ -17,7 +17,7 @@ Chỉ chạy khi user yêu cầu (không tự chạy sau `srs-update` / `srs-pub
 
 ## Bước 1 — Kế hoạch
 ```bash
-python .claude/skills/drive-sync/scripts/drive_pack.py <du-an>                 # mặc định: tài liệu (srs, urd, uc, backlog)
+python .claude/skills/drive-sync/scripts/drive_pack.py <du-an>                 # mặc định: tài liệu (srs, urd, uc, backlog, tc)
 python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --only srs      # user chỉ nói "đẩy SRS"
 python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --diagrams      # + ảnh sơ đồ (user nói "đẩy cả sơ đồ")
 python .claude/skills/drive-sync/scripts/drive_pack.py <du-an> --ui --input --exports   # + ảnh wireframe / input / file gốc
@@ -37,7 +37,7 @@ Script tự xuất `.docx` khi cũ hơn `.md`, nén ảnh docx nếu > 3,0 MB (g
 ```
 My Drive/BA Projects/              (root)       ⇔ projects/
   <du-an>/                         (project)    ⇔ projects/<du-an>/   — link gửi khách: thư mục này
-    docs/      SRS, URD, Use Case (Google Doc), Backlog (Google Sheet)
+    docs/      SRS, URD, Use Case (Google Doc), Backlog, Test case (Google Sheet — QA ghi kết quả chạy test ngay trên Sheet)
     diagrams/  ảnh sơ đồ (khi --diagrams)
     ui/        ảnh wireframe trạng thái mặc định (khi --ui)
     exports/   file .docx/.csv gốc ≤ 3 MB (khi --exports)

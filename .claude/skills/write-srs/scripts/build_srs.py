@@ -16,7 +16,9 @@ Cấu trúc srs/ (ghép theo thứ tự tên file; file bắt đầu bằng "_" 
     06-man-hinh.md           ## 6. Screen Inventory (6.1 bảng + 6.2 ảnh wireframe)
     07-user-flow.md          ## 7. User flow
     09-gia-dinh-cau-hoi.md   ## 9. Assumptions & Open Questions
-Mục 8 (Ma trận truy vết) được SINH TỰ ĐỘNG từ dòng "Truy vết:" của từng FR — không viết tay.
+Mục 8 được SINH TỰ ĐỘNG — không viết tay:
+    8.1 Ma trận truy vết  <- dòng "Truy vết:" của từng FR
+    8.2 Danh mục thông báo <- mọi 'hiện lỗi / cảnh báo / thông báo "…"' trong Acceptance criteria
 Chỉ khi có file 08-*.md thì dùng file đó thay vì tự sinh.
 
 SRS.md là file sinh ra: sửa trong srs/, không sửa SRS.md.
@@ -34,6 +36,7 @@ if hasattr(sys.stdout, "reconfigure"):
 REPO = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO / "tools"))
 from ba_paths import Project, resolve  # noqa: E402
+from ba_lint import fr_sections, messages  # noqa: E402
 GENERATED_NOTE = "<!-- SRS.md được sinh tự động bởi build_srs.py từ thư mục srs/ — sửa trong srs/, KHÔNG sửa file này -->"
 FR_HEAD_RE = re.compile(r"^#{3,4} +(FR-\d+)\s*[—–-]?\s*(.*)$", re.M)
 NO_UI_RE = re.compile(r"không\s+có\s+ui[^·|\n]*", re.I)
@@ -76,14 +79,35 @@ def fr_blocks(text: str) -> list[dict]:
     return blocks
 
 
-def trace_section(frs: list[dict]) -> str:
+def message_rows(text: str) -> list[tuple[str, str, str, str]]:
+    """[(nội dung, loại, FR, 'AC1, AC3')] — gộp cùng nội dung + loại."""
+    seen: dict[tuple[str, str], list[str]] = {}
+    for f in fr_sections(text):
+        if f["dropped"]:
+            continue
+        for i, ac in enumerate(f["ac"], 1):
+            for kind, msg in messages(ac):
+                seen.setdefault((msg, kind), []).append(f"{f['id']} AC{i}")
+    return [(m, k, ", ".join(refs)) for (m, k), refs in seen.items()]
+
+
+def trace_section(frs: list[dict], text: str = "") -> str:
     rows = ["## 8. Ma trận truy vết", "",
-            "> Sinh tự động từ dòng \"Truy vết\" của từng FR (build_srs.py).", "",
+            "> Sinh tự động bởi build_srs.py — không sửa tay. 8.1 từ dòng \"Truy vết\" của từng FR; "
+            "8.2 từ các thông báo nguyên văn trong Acceptance criteria.", "",
+            "### 8.1 FR ↔ User story ↔ Màn hình", "",
             "| FR | Tên | URD (US) | Màn hình (SCR) |", "|---|---|---|---|"]
     for f in frs:
         scr = ", ".join(f["scr"]) or f["no_ui"] or "Không có UI"
         title = f["title"].replace("|", "/")
         rows.append(f"| {f['id']} | {title} | {', '.join(f['us']) or '—'} | {scr} |")
+    msgs = message_rows(text)
+    if msgs:
+        rows += ["", "### 8.2 Danh mục thông báo", "",
+                 "> Dev dùng nguyên văn; QA đối chiếu khi test. Muốn đổi câu chữ → sửa AC của FR.", "",
+                 "| # | Loại | Nội dung hiển thị | Nguồn |", "|---|---|---|---|"]
+        for n, (m, k, refs) in enumerate(sorted(msgs, key=lambda x: (x[1], x[2])), 1):
+            rows.append(f"| {n} | {k} | {m.replace('|', '/')} | {refs} |")
     return "\n".join(rows) + "\n"
 
 
@@ -103,11 +127,11 @@ def build(project: Project, quiet: bool = False) -> tuple[Path, list[str]]:
     inserted = has_manual_8
     for p, t in texts:
         if not inserted and p.name[:2] > "08":
-            out_chunks.append(trace_section(frs))
+            out_chunks.append(trace_section(frs, joined))
             inserted = True
         out_chunks.append(t)
     if not inserted:
-        out_chunks.append(trace_section(frs))
+        out_chunks.append(trace_section(frs, joined))
     out = project.doc("SRS.md")
     out.write_text("\n".join(out_chunks), encoding="utf-8")
     if not quiet:
