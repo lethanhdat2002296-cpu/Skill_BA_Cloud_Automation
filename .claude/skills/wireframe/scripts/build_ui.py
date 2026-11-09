@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Đồng bộ design kit, kiểm tra wireframe và sinh gallery ui/index.html.
+"""Đồng bộ design kit, kiểm tra wireframe và sinh gallery Diagram/Wireframe/index.html.
 
 Cách dùng:
     python .claude/skills/wireframe/scripts/build_ui.py <du-an>
 
 Việc làm:
-  1. Copy design-kit/tokens.css -> projects/<du-an>/ui/assets/tokens.css
-  2. Kiểm tra từng ui/screens/SCR-xx-<slug>.html:
+  1. Copy design-kit/tokens.css -> projects/<du-an>/Diagram/Wireframe/assets/tokens.css
+  2. Kiểm tra từng Diagram/Wireframe/screens/SCR-xx-<slug>.html:
      tên file, comment đầu file, meta wf-*, link tokens.css, URL ngoài, <img>, class ngoài kit, state.
-  3. So khớp với ảnh dự kiến trong SRS.md (ui/png/SCR-xx-<slug>.png).
-  4. Sinh ui/index.html (gallery).
+  3. So khớp với ảnh dự kiến trong SRS.md (Diagram/Wireframe/png/SCR-xx-<slug>.png).
+  4. Sinh Diagram/Wireframe/index.html (gallery).
 Exit code 1 nếu có ERROR.
 """
 from __future__ import annotations
@@ -87,7 +87,7 @@ def expected_from_srs(project: Project) -> dict[str, str]:
     if not srs.exists():
         return {}
     found = {}
-    for scr, slug in re.findall(r"ui/png/(SCR-\d{2,})-([a-z0-9-]+?)\.png", srs.read_text(encoding="utf-8")):
+    for scr, slug in re.findall(r"Wireframe/png/(SCR-\d{2,})-([a-z0-9-]+?)\.png", srs.read_text(encoding="utf-8")):
         found.setdefault(scr, slug)
     return found
 
@@ -243,7 +243,7 @@ def main(argv: list[str]) -> int:
     for scr, slug in expected.items():
         want = f"{scr}-{slug}.html"
         if not (screens_dir / want).exists():
-            errors.append(f"SRS.md tham chiếu {scr} (ảnh ui/png/{scr}-{slug}.png) nhưng thiếu ui/screens/{want}")
+            errors.append(f"SRS.md tham chiếu {scr} (ảnh Wireframe/png/{scr}-{slug}.png) nhưng thiếu Diagram/Wireframe/screens/{want}")
     for s in screens:
         if expected and s["scr"] and s["scr"] not in expected:
             warns.append(f"{s['file']}: {s['scr']} không có trong SRS mục 6.2")
@@ -260,7 +260,7 @@ def main(argv: list[str]) -> int:
     n_be = sum(1 for s in screens if s["type"] == "backend")
     n_states = sum(len(s["states"]) for s in screens)
     print(f"build_ui: {len(screens)} màn ({n_sf} storefront, {n_be} backend), {n_states} state · "
-          f"{len(errors)} lỗi, {len(warns)} cảnh báo · gallery: projects/{du_an}/ui/index.html")
+          f"{len(errors)} lỗi, {len(warns)} cảnh báo · gallery: projects/{du_an}/Diagram/Wireframe/index.html")
     return 1 if errors else 0
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra projects/<du-an>/docs/backlog.md và xuất exports/backlog.csv (import Jira Cloud / Google Sheet).
+"""Kiểm tra projects/<du-an>/Document/Backlog/backlog.md và xuất .output/backlog.csv (import Jira Cloud / Google Sheet).
 
 Cách dùng:
     python .claude/skills/write-user-story/scripts/backlog_csv.py <du-an>

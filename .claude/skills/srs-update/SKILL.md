@@ -8,10 +8,10 @@ disallowed-tools: AskUserQuestion
 # srs-update — cập nhật nhanh sau khảo sát / demo
 
 Nguyên tắc tốc độ: **thời gian phải tỉ lệ với lượng thay đổi, không tỉ lệ với độ dài tài liệu.**
-- Không đọc lại toàn bộ `input/` hay toàn bộ SRS. Chỉ đọc tài liệu mới + phần SRS bị ảnh hưởng.
+- Không đọc lại toàn bộ `Document/Bien_Ban_Khao_Sat/` hay toàn bộ SRS. Chỉ đọc tài liệu mới + phần SRS bị ảnh hưởng.
 - Không viết lại file. Chỉ `Edit` đúng đoạn.
 - Không đụng `brainstorm.md` (chỉ dùng cho lần đầu). `URD.md` chỉ sửa khi user story thêm mới / đổi mục tiêu.
-- Không vẽ wireframe, không chụp PNG, không render Mermaid, không xuất docx → ghi vào `ui/_pending.md` cho `srs-publish`.
+- Không vẽ wireframe, không chụp PNG, không render Mermaid, không xuất docx → ghi vào `Diagram/Wireframe/_pending.md` cho `srs-publish`.
 - Không hỏi user (câu hỏi về khác biệt đã được `ba-intake` hỏi trước đó).
 
 Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `python`.
@@ -19,10 +19,10 @@ Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `p
 ## Bước 0 — Điều kiện
 
 1. Tin nhắn có kèm tài liệu mới → chạy `ba-intake` trước (skill đó hỏi user cách xử lý khác biệt, rồi quay lại đây).
-2. Chưa có `projects/<du-an>/docs/SRS.md` → đây là dự án mới, dùng `srs-pipeline`.
-3. Có `SRS.md` nhưng **chưa có thư mục `docs/srs/`** (dự án tạo bằng phiên bản cũ) → chuyển đổi **một lần**:
+2. Chưa có `projects/<du-an>/Document/SRS/SRS.md` → đây là dự án mới, dùng `srs-pipeline`.
+3. Có `SRS.md` nhưng **chưa có thư mục `Document/SRS/srs/`** (dự án tạo bằng phiên bản cũ) → chuyển đổi **một lần**:
    ```bash
-   grep -nE '^#{3,4} +FR-' projects/<du-an>/docs/SRS.md
+   grep -nE '^#{3,4} +FR-' projects/<du-an>/Document/SRS/SRS.md
    python .claude/skills/write-srs/scripts/split_srs.py <du-an> --modules "<Phân hệ A>=FR-01..FR-04,FR-22; <Phân hệ B>=FR-05..FR-08; ..."
    ```
    Gom FR theo phân hệ nghiệp vụ (mỗi phân hệ 3–8 FR, tên tiếng Việt ngắn). Script cảnh báo nếu ma trận truy vết viết tay lệch với dòng "Truy vết" của FR → sửa dòng "Truy vết" cho đúng. Commit riêng: `docs(<du-an>): chuyển SRS sang cấu trúc srs/`.
@@ -31,7 +31,7 @@ Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `p
 
 ## Bước 1 — Xác định thay đổi chưa xử lý
 
-- Thay đổi chưa xử lý = các `projects/<du-an>/input/_changes/<thoi-diem>.md` **chưa xuất hiện** trong cột "Nguồn" của bảng "Lịch sử phiên bản" (`projects/<du-an>/docs/srs/00-dau-trang.md`).
+- Thay đổi chưa xử lý = các `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_changes/<thoi-diem>.md` **chưa xuất hiện** trong cột "Nguồn" của bảng "Lịch sử phiên bản" (`projects/<du-an>/Document/SRS/srs/00-dau-trang.md`).
 - Với mỗi change report: đọc mục **"Nhận định của BA"** và **"Quyết định"**, cùng file tài liệu mới được nhắc tới. Không đọc tài liệu cũ trừ khi cần tra một chi tiết cụ thể.
 - Không có change report nào chưa xử lý nhưng user nói "cập nhật" kèm nội dung → coi nội dung trong chat là thay đổi (đã qua `ba-intake`).
 
@@ -40,39 +40,39 @@ Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `p
 ```bash
 python .claude/skills/write-srs/scripts/build_srs.py <du-an> --index
 ```
-Dòng `INDEX {json}` cho biết mỗi FR/NFR/SCR/AS/OQ nằm ở file nào trong `docs/srs/`, FR nào gắn SCR nào.
+Dòng `INDEX {json}` cho biết mỗi FR/NFR/SCR/AS/OQ nằm ở file nào trong `Document/SRS/srs/`, FR nào gắn SCR nào.
 
 Phân loại từng ý thay đổi và ghi bảng **"Kế hoạch cập nhật"** vào cuối change report:
 
 | # | Ý thay đổi | Loại | Sửa ở đâu | Màn hình |
 |---|---|---|---|---|
-| 1 | Bỏ trạng thái Waiting PO | Sửa FR | docs/srs/03-03-don-mua-hang.md (FR-09) | SCR-04 → pending |
+| 1 | Bỏ trạng thái Waiting PO | Sửa FR | Document/SRS/srs/03-03-don-mua-hang.md (FR-09) | SCR-04 → pending |
 
 | Loại | Sửa ở đâu |
 |---|---|
 | Trả lời OQ / xác nhận AS | `09-gia-dinh-cau-hoi.md`: OQ → "**Đã trả lời (nguồn):** …"; AS được xác nhận → "Đã xác nhận"; AS bị bác → sửa FR liên quan. Không xoá dòng. |
-| Sửa FR (quy tắc, AC, input/output) | File phân hệ chứa FR (theo index). Sửa BR/AC đúng chỗ, ghi nguồn mới. |
+| Sửa FR (quy tắc, AC, Document/Bien_Ban_Khao_Sat/output) | File phân hệ chứa FR (theo index). Sửa BR/AC đúng chỗ, ghi nguồn mới. |
 | FR mới | Cuối file phân hệ phù hợp (hoặc file phân hệ mới `03-NN-<slug>.md`), mã tiếp theo, đủ trường + dòng "Truy vết". |
 | Bỏ FR | Giữ heading, thêm `**[Đã bỏ — v<ver>]**` + lý do; dòng Truy vết → `Màn hình: Không có UI (đã bỏ)`. |
-| Chỉ UI (nhãn, bố cục, thứ tự trường) | Không sửa văn FR. Sửa dòng SCR trong `06-man-hinh.md` nếu danh sách trường/hành động/trạng thái đổi. Thêm vào `ui/_pending.md`. |
+| Chỉ UI (nhãn, bố cục, thứ tự trường) | Không sửa văn FR. Sửa dòng SCR trong `06-man-hinh.md` nếu danh sách trường/hành động/trạng thái đổi. Thêm vào `Diagram/Wireframe/_pending.md`. |
 | NFR / tích hợp / mapping | `04-phi-chuc-nang.md` / `05-tich-hop.md`. |
-| Quy trình / luồng nghiệp vụ | `07-user-flow.md` (Mermaid) và/hoặc `diagrams/swimlanes/<so-do>.json` (sơ đồ Activity – Swimlane). Chỉ sửa đặc tả, không render — `srs-publish` vẽ lại. |
+| Quy trình / luồng nghiệp vụ | `07-user-flow.md` (Mermaid) và/hoặc `Diagram/Flow/swimlanes/<so-do>.json` (sơ đồ Activity – Swimlane). Chỉ sửa đặc tả, không render — `srs-publish` vẽ lại. |
 | Ngoài phạm vi / giai đoạn sau | `01-gioi-thieu.md` mục Phạm vi. |
 | User story mới / đổi mục tiêu | `URD.md` — chỉ US đó, mã tiếp theo; tăng phiên bản URD. Rồi sửa UC liên quan trong `UC.md` và story trong `backlog.md` (story mới: ước lượng; story không đổi: không ước lượng lại). |
 | Đổi kịch bản / ngoại lệ của một tương tác | `UC.md` — nhánh `3a…` của UC liên quan (tra ma trận mục 5 của UC.md). |
 | Mâu thuẫn chưa chốt | `OQ-xx` mới trong `09`. |
-| Có `docs/doi-chieu-ma.md` (dự án nhập từ URD/FSD) và diff nhắc mã gốc | Đổi mã gốc → mã mới theo bảng đối chiếu trước khi sửa; mã gốc mới → thêm dòng đối chiếu; chạy `doc-import/scripts/check_import.py`. |
-| Có `docs/test-cases.md` và FR/AC đổi | TC có cột AC trỏ tới AC đó (`grep -n "^| TC-" ` trong mục `### FR-xx`): sửa bước / kết quả; AC mới → TC mới (số tiếp theo); FR bỏ → `[Đã bỏ — v<ver>]` trong Tiêu đề TC. Theo `write-testcase/SKILL.md` mục "Cập nhật". |
+| Có `Document/doi-chieu-ma.md` (dự án nhập từ URD/FSD) và diff nhắc mã gốc | Đổi mã gốc → mã mới theo bảng đối chiếu trước khi sửa; mã gốc mới → thêm dòng đối chiếu; chạy `doc-import/scripts/check_import.py`. |
+| Có `Document/Test_Case/test-cases.md` và FR/AC đổi | TC có cột AC trỏ tới AC đó (`grep -n "^| TC-" ` trong mục `### FR-xx`): sửa bước / kết quả; AC mới → TC mới (số tiếp theo); FR bỏ → `[Đã bỏ — v<ver>]` trong Tiêu đề TC. Theo `write-testcase/SKILL.md` mục "Cập nhật". |
 
 ## Bước 3 — Sửa đúng chỗ
 
-- Tìm vị trí: `grep -n "FR-09" projects/<du-an>/docs/srs/03-03-don-mua-hang.md`, rồi `Read` với `offset/limit` quanh đó. Không Read cả thư mục.
+- Tìm vị trí: `grep -n "FR-09" projects/<du-an>/Document/SRS/srs/03-03-don-mua-hang.md`, rồi `Read` với `offset/limit` quanh đó. Không Read cả thư mục.
 - Sửa bằng `Edit` từng đoạn. Không `Write` lại file (trừ file phân hệ mới).
 - Mã không đổi, không đánh lại số. Mã mới = mã lớn nhất + 1 (xem index).
-- Đổi trường / hành động / trạng thái của màn hình → sửa dòng SCR trong `06-man-hinh.md` và ghi `ui/_pending.md`.
-- Màn hình mới → thêm dòng trong bảng 6.1, thêm mục `#### SCR-xx — Tên` + dòng ảnh `![...](../ui/png/SCR-xx-<slug>.png)` trong 6.2, ghi `ui/_pending.md` với việc "Vẽ mới".
+- Đổi trường / hành động / trạng thái của màn hình → sửa dòng SCR trong `06-man-hinh.md` và ghi `Diagram/Wireframe/_pending.md`.
+- Màn hình mới → thêm dòng trong bảng 6.1, thêm mục `#### SCR-xx — Tên` + dòng ảnh `![...](../../Diagram/Wireframe/png/SCR-xx-<slug>.png)` trong 6.2, ghi `Diagram/Wireframe/_pending.md` với việc "Vẽ mới".
 
-### `projects/<du-an>/ui/_pending.md`
+### `projects/<du-an>/Diagram/Wireframe/_pending.md`
 
 ```markdown
 # Màn hình cần vẽ lại
@@ -89,7 +89,7 @@ Một SCR đã có dòng chờ → gộp việc vào dòng đó, không thêm d�
 
 ## Bước 4 — Phiên bản
 
-Trong `docs/srs/00-dau-trang.md`:
+Trong `Document/SRS/srs/00-dau-trang.md`:
 - Tăng **patch**: 0.3 → 0.3.1 → 0.3.2 (bản phát hành 0.4 do `srs-publish` đặt).
 - Thêm dòng **Lịch sử phiên bản**: `| 0.3.1 | <YYYY-MM-DD> | <tóm tắt 1 câu> | _changes/<thoi-diem>.md | FR-09, FR-27, OQ-33; SCR-04 (chờ vẽ) |`.
 - Ghi "Kế hoạch cập nhật" xong → đánh dấu change report đã xử lý: thêm dòng `> Đã cập nhật vào SRS v0.3.1` dưới mục "Quyết định".
@@ -119,7 +119,7 @@ python .claude/skills/write-testcase/scripts/check_tc.py <du-an> --write-matrix 
 | # | Thay đổi | Mã bị ảnh hưởng | File |
 |---|---|---|---|
 - OQ đã trả lời: OQ-33, … · OQ mới: … · FR mới: … · FR bỏ: …
-- Màn hình chờ vẽ lại: SCR-04, SCR-12 (tổng <n> trong ui/_pending.md)
+- Màn hình chờ vẽ lại: SCR-04, SCR-12 (tổng <n> trong Diagram/Wireframe/_pending.md)
 - Test case đã sửa / thêm: TC-… (nếu có test-cases.md; phủ AC x/y)
 - SRS.docx và ảnh wireframe **chưa** cập nhật → gõ "Xuất bản tài liệu dự án <du-an>" khi cần gửi khách.
 ```

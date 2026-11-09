@@ -5,14 +5,14 @@
 | Mã dự án | {{du-an}} |
 | Phiên bản | 0.1 (bản nháp tự động) |
 | Ngày | {{YYYY-MM-DD}} |
-| Tài liệu liên quan | URD.md, brainstorm.md, ui/flows.md |
+| Tài liệu liên quan | URD.md, brainstorm.md, Diagram/Wireframe/flows.md |
 | Trạng thái | Chờ review |
 
 **Lịch sử phiên bản**
 
 | Phiên bản | Ngày | Thay đổi | Nguồn | Ảnh hưởng |
 |---|---|---|---|---|
-| 0.1 | {{YYYY-MM-DD}} | Bản đầu tiên | {{các file trong projects/<du-an>/input/}} | Toàn bộ |
+| 0.1 | {{YYYY-MM-DD}} | Bản đầu tiên | {{các file trong projects/<du-an>/Document/Bien_Ban_Khao_Sat/}} | Toàn bộ |
 
 ## 1. Giới thiệu
 
@@ -73,7 +73,7 @@ stateDiagram-v2
 |---|---|---|---|---|---|---|
 | {{Nháp}} | {{Gửi duyệt}} | {{Có ≥ 1 dòng}} | {{Chờ duyệt}} | {{Người đề xuất}} | {{Tạo activity cho Trưởng nhóm}} | {{FR-01}} |
 
-### 3.1 {{Phân hệ — mỗi phân hệ một file docs/srs/03-NN-<phan-he>.md}}
+### 3.1 {{Phân hệ — mỗi phân hệ một file Document/SRS/srs/03-NN-<phan-he>.md}}
 
 #### FR-01 — {{Tên chức năng}}
 - **Mô tả:** {{…}}
@@ -135,7 +135,7 @@ stateDiagram-v2
 #### SCR-01 — {{Tên màn hình}}
 {{Mô tả 1–2 câu: mục đích, điểm chính.}}
 
-![SCR-01 — {{Tên}}](../ui/png/SCR-01-{{slug}}.png)
+![SCR-01 — {{Tên}}](../../Diagram/Wireframe/png/SCR-01-{{slug}}.png)
 
 ## 7. User flow
 

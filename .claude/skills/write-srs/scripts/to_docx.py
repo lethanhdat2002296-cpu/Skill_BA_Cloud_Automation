@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Xuất projects/<du-an>/docs/SRS.md -> exports/SRS.docx bằng pandoc, có ảnh wireframe và sơ đồ.
+"""Xuất projects/<du-an>/Document/SRS/SRS.md -> .output/SRS.docx bằng pandoc, có ảnh wireframe và sơ đồ.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/to_docx.py <du-an>
@@ -8,11 +8,11 @@ Cách dùng:
 Việc làm:
   1. Render các khối ```mermaid trong SRS.md -> diagrams/srs-NN.png và thay bằng ảnh
      (không có mmdc thì giữ nguyên code block).
-  2. Với mỗi ảnh ui/png/SCR-xx-<slug>.png được tham chiếu: chèn thêm ngay sau nó các biến thể
+  2. Với mỗi ảnh Diagram/Wireframe/png/SCR-xx-<slug>.png được tham chiếu: chèn thêm ngay sau nó các biến thể
      (--<state>.png, -mobile.png) nếu có, chú thích theo data-label trong HTML.
   3. Gắn kích thước ảnh cho vừa trang A4 (ảnh hẹp như mobile 390px không bị phóng to).
   4. Thêm Phụ lục "UI flows" với các sơ đồ diagrams/flows-NN.png (nếu có).
-Đường dẫn ảnh trong tài liệu tính từ thư mục của tài liệu (docs/ -> ../ui/png/…, ../diagrams/…).
+Đường dẫn ảnh trong tài liệu tính từ thư mục của tài liệu (Document/SRS/ -> ../../Diagram/Wireframe/png/…, ../../Diagram/Flow/…).
   5. Gọi pandoc (dùng templates/reference.docx nếu có), rồi đếm ảnh nhúng trong docx.
 Exit code 1 nếu thiếu pandoc, thiếu SRS.md, hoặc có ảnh tham chiếu không tồn tại.
 """
@@ -40,7 +40,7 @@ sys.path.insert(0, str(REPO / "tools"))
 from ba_paths import Project, resolve  # noqa: E402
 
 IMG_RE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)(\{[^}]*\})?')
-SCR_PNG_RE = re.compile(r"(?:^|/)ui/png/(SCR-\d{2,}-[a-z0-9-]+)\.png$")
+SCR_PNG_RE = re.compile(r"(?:^|/)Wireframe/png/(SCR-\d{2,}-[a-z0-9-]+)\.png$")
 NOISE = ("has no translation defined", "Could not load translations", "translations/vi.yaml", "Aeson exception", "Invalid Term name")
 
 # Vùng chữ A4 lề 2cm ~ 17cm x 25cm; chừa chỗ cho chú thích
@@ -209,7 +209,7 @@ def main(argv: list[str]) -> int:
         f"--resource-path={base}",
     ]
     style = project.config.get("docx_style") or {}
-    fsd_dir = project.config.get("fsd", {}).get("dir", "docs/fsd").split("/", 1)[-1]
+    fsd_dir = project.config.get("fsd", {}).get("dir", "Document/FSD").split("/", 1)[-1]
     lang = style.get("lang", "en-GB") if src_name.startswith(fsd_dir + "/") else "vi-VN"
     cmd += (["--toc", "--toc-depth=2"] if style.get("toc", True) else []) + ["-M", f"lang={lang}"]
     if REFERENCE_DOCX.exists():

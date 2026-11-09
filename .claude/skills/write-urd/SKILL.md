@@ -1,14 +1,14 @@
 ---
 name: write-urd
-description: Viết URD: user story theo vai trò + AC Given/When/Then + MoSCoW → docs/URD.md. Dùng sau brainstorm hoặc khi user nói "viết URD", "user requirements".
+description: Viết URD: user story theo vai trò + AC Given/When/Then + MoSCoW → Document/URD/URD.md. Dùng sau brainstorm hoặc khi user nói "viết URD", "user requirements".
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
 # write-urd — User Requirements
 
 ## Input
-- `projects/<du-an>/docs/brainstorm.md` (bắt buộc — chưa có thì chạy skill `brainstorm` trước).
-- `projects/<du-an>/input/` để tra lại chi tiết.
+- `projects/<du-an>/Document/URD/brainstorm.md` (bắt buộc — chưa có thì chạy skill `brainstorm` trước).
+- `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` để tra lại chi tiết.
 
 ## Cách làm
 
@@ -32,4 +32,4 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - [ ] Mã US không trùng, không nhảy cóc.
 
 ## Output
-`projects/<du-an>/docs/URD.md`
+`projects/<du-an>/Document/URD/URD.md`

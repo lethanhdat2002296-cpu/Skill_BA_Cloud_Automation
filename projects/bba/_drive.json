@@ -21,7 +21,66 @@
       "version": "",
       "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
       "synced_at": "2026-11-09 04:58"
+    },
+    "FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead": {
+      "file_id": "12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn",
+      "url": "https://drive.google.com/file/d/12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-40-2.1.1.00_Inactive_Lead_v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "d73cb489c3ba53eb11302e21984b5286fade0f03599393574c3a82f40243075b",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-41-2.1.1.01_Centre_Sharing": {
+      "file_id": "1ssSGdteYhaQnNBmNeAyz9FpLf9qt_7wu",
+      "url": "https://drive.google.com/file/d/1ssSGdteYhaQnNBmNeAyz9FpLf9qt_7wu/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-41-2.1.1.01_Centre_Sharing_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "b8505218757be59881240d455671d107d67903ef76d5ef0ba582eceb3ff48a96",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection": {
+      "file_id": "11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh",
+      "url": "https://drive.google.com/file/d/11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-42-2.1.1.02_Duplicate_Detection_v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "43a15ea1089a2dd78d934c056623edd55038d0639125be245b090d92357d9d79",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page": {
+      "file_id": "1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh",
+      "url": "https://drive.google.com/file/d/1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-43-2.1.2.01_Enquiry_Detail_Page_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "d066b28dac8cdb0c7e0525c05d85e12e60fe30dd57497366b37b14ca00df7468",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline": {
+      "file_id": "1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q",
+      "url": "https://drive.google.com/file/d/1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-44-2.1.2.03_View_Timeline_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "e7b38377e0c7c966aae0d7f6d52296fe3c388503a2ec733d40e316b1ff3ebcaa",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
     }
   },
-  "archived": []
+  "archived": [],
+  "folders_used": {
+    "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6": {
+      "name": "BBA › Sprint 3",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-09 05:03"
+    }
+  }
 }

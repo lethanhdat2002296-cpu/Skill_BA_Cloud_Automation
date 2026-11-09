@@ -6,11 +6,12 @@
     "template": "templates/template-fsd.md",
     "guide": "templates/HUONG-DAN-FSD.md",
     "sources": [
-      "docs/workflow.md",
-      "input/_extracted"
+      "Document/SRS/workflow.md",
+      "Document/SRS/*.md (13 SRS v0.1 dạng Markdown)",
+      "Document/FSD/Sprint 3/ (5 FRS đã có)"
     ],
-    "dir": "docs/fsd",
-    "file_name": "BBA-<ticket>-<WBS>_<Feature_Name>_v<x.y>.md  (Drive: [FRS] <cùng tên>.docx)"
+    "dir": "Document/FSD",
+    "file_name": "Document/FSD/Sprint <n>/BBA-<ticket>-<WBS>_<Feature_Name>_v<x.y>.md  (Drive: [FRS] <cùng tên>.docx)"
   },
   "docx_style": {
     "font": "Arial",
@@ -36,32 +37,24 @@
     "lang": "en-GB"
   },
   "drive": {
-    "auto_upload": true,
-    "fsd_root": "https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW",
-    "current_sprint": 4,
-    "sprint_folders": {
-      "3": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
-      "4": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV"
+    "root_url": "https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW",
+    "_note": "Thư mục do user tạo. Mỗi lần đẩy HỎI user thư mục đích; folder_hints chỉ là gợi ý. Luôn đẩy Word (.docx).",
+    "folder_hints": {
+      "FSD/Sprint 3": "https://drive.google.com/drive/folders/1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "FSD/Sprint 4": "https://drive.google.com/drive/folders/1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV"
     },
-    "_sprint_note": "Sprint mới: tạo thư mục 'Sprint N' trong fsd_root (search trước, chưa có mới create) rồi thêm id vào sprint_folders và đổi current_sprint.",
+    "titles": {
+      "FSD/Sprint": "[FRS] {stem}.docx"
+    },
     "docs": [
       {
-        "key": "fsd/*",
-        "src": "docs/fsd/*.md",
-        "title": "[FRS] {stem}.docx",
-        "parent": "sprint",
-        "convert": false
-      },
-      {
-        "key": "workflow",
-        "src": "docs/workflow.md",
-        "title": "Workflow — BBA"
-      },
-      {
-        "key": "tom-tat-fsd",
-        "src": "docs/tom-tat-fsd.md",
-        "title": "Tóm tắt FSD — BBA"
+        "src": "Document/SRS/workflow.md"
       }
     ]
+  },
+  "sprint": {
+    "enabled": true,
+    "current": 4,
+    "_note": "FSD / Test_Case lưu trong Document/<loại>/Sprint <n>/"
   }
 }

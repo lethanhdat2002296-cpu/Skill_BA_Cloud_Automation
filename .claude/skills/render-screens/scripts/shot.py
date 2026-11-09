@@ -6,7 +6,7 @@ Cách dùng:
     python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-03 SCR-05
     python .claude/skills/render-screens/scripts/shot.py <du-an> --no-mobile
 
-Quy ước tên ảnh (projects/<du-an>/ui/png/):
+Quy ước tên ảnh (projects/<du-an>/Diagram/Wireframe/png/):
     SCR-xx-<slug>.png               state đầu tiên (default), desktop 1440
     SCR-xx-<slug>--<state>.png      các state khác, desktop 1440
     SCR-xx-<slug>-mobile.png        state default, mobile 390 (chỉ storefront)

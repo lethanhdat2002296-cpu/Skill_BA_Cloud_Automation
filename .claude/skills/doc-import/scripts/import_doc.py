@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Đọc dàn ý một tài liệu có sẵn (URD / FSD / SRS / BRD) trong projects/<du-an>/input/ để nhập vào chuẩn của repo.
+"""Đọc dàn ý một tài liệu có sẵn (URD / FSD / SRS / BRD) trong projects/<du-an>/Document/Bien_Ban_Khao_Sat/ để nhập vào chuẩn của repo.
 
 Cách dùng:
     python .claude/skills/doc-import/scripts/import_doc.py <du-an> <file-trong-input> [--type urd|fsd|srs|brd] [--depth 3]

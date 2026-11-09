@@ -5,7 +5,7 @@
 | Mã dự án | {{du-an}} |
 | Phiên bản | {{0.1 — cùng phiên bản SRS}} |
 | Ngày | {{YYYY-MM-DD}} |
-| Nguồn | {{projects/<du-an>/docs/URD.md v…; projects/<du-an>/input/…}} |
+| Nguồn | {{projects/<du-an>/Document/URD/URD.md v…; projects/<du-an>/Document/Bien_Ban_Khao_Sat/…}} |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Tác nhân

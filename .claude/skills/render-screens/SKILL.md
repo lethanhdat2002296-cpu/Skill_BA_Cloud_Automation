@@ -1,15 +1,15 @@
 ---
 name: render-screens
-description: Chụp wireframe HTML ra PNG (Playwright), kiểm tra layout, render sơ đồ Mermaid và swimlane vào diagrams/. Dùng sau wireframe hoặc khi user nói "chụp màn hình", "render sơ đồ".
+description: Chụp wireframe HTML ra PNG (Playwright), kiểm tra layout, render sơ đồ Mermaid và swimlane vào Diagram/Flow/. Dùng sau wireframe hoặc khi user nói "chụp màn hình", "render sơ đồ".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *), Bash(npx mmdc *), Bash(mmdc *)
 ---
 
 # render-screens — HTML → PNG + review bằng mắt
 
 ## Input
-- `projects/<du-an>/ui/screens/*.html` (từ skill `wireframe`).
-- `projects/<du-an>/docs/SRS.md` mục 6 (để đối chiếu trường/hành động).
-- `projects/<du-an>/ui/flows.md` (Mermaid).
+- `projects/<du-an>/Diagram/Wireframe/screens/*.html` (từ skill `wireframe`).
+- `projects/<du-an>/Document/SRS/SRS.md` mục 6 (để đối chiếu trường/hành động).
+- `projects/<du-an>/Diagram/Wireframe/flows.md` (Mermaid).
 
 ## Bước 1 — Chụp
 ```bash
@@ -40,7 +40,7 @@ Lặp tới khi ảnh sạch (tối đa 3 vòng mỗi màn; còn lỗi thì ghi 
 ```bash
 python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
 ```
-- Ra `diagrams/flows-NN.png` (từ `ui/flows.md`) và `diagrams/srs-NN.png` (từ `SRS.md`).
+- Ra `Diagram/Flow/flows-NN.png` (từ `Diagram/Wireframe/flows.md`) và `Diagram/Flow/srs-NN.png` (từ `SRS.md`).
 - Mở xem 1–2 sơ đồ để chắc chắn render đúng. Lỗi cú pháp Mermaid → sửa khối Mermaid trong file nguồn (bỏ ký tự đặc biệt trong label, bọc label bằng `["..."]`), chạy lại.
 - Không có mmdc/npx → script cảnh báo, giữ code Mermaid; ghi vào báo cáo.
 
@@ -49,14 +49,14 @@ Mermaid không vẽ được swimlane thẳng lane, nên dùng script riêng:
 ```bash
 python .claude/skills/render-screens/scripts/swimlane.py <du-an>
 ```
-- Đặc tả mỗi sơ đồ là một file `projects/<du-an>/diagrams/swimlanes/<ten>.json` (lane, bước, mũi tên — xem docstring script). Dùng `"orientation": "vertical"` (lane là cột) để vừa trang A4 khi nhúng Word; ≤ 6 lane và ≤ 12 bước mỗi sơ đồ, quy trình dài thì tách nhiều sơ đồ.
-- Ra `diagrams/swimlane-<ten>.png`; SRS tham chiếu bằng dòng ảnh `![…](diagrams/swimlane-<ten>.png)`.
+- Đặc tả mỗi sơ đồ là một file `projects/<du-an>/Diagram/Flow/swimlanes/<ten>.json` (lane, bước, mũi tên — xem docstring script). Dùng `"orientation": "vertical"` (lane là cột) để vừa trang A4 khi nhúng Word; ≤ 6 lane và ≤ 12 bước mỗi sơ đồ, quy trình dài thì tách nhiều sơ đồ.
+- Ra `Diagram/Flow/swimlane-<ten>.png`; SRS tham chiếu bằng dòng ảnh `![…](Diagram/Flow/swimlane-<ten>.png)`.
 - Mở xem từng ảnh: nhãn mũi tên không đè nhau, mũi tên không cắt qua bước.
 
 ## Bước 4 — Cập nhật gallery
-`shot.py` tự chạy lại `wireframe/scripts/build_ui.py` để `ui/index.html` có thumbnail. Kiểm tra số ảnh: mỗi SCR trong SRS mục 6.2 phải có `ui/png/SCR-xx-<slug>.png`.
+`shot.py` tự chạy lại `wireframe/scripts/build_ui.py` để `Diagram/Wireframe/index.html` có thumbnail. Kiểm tra số ảnh: mỗi SCR trong SRS mục 6.2 phải có `Diagram/Wireframe/png/SCR-xx-<slug>.png`.
 
 ## Output
-- `projects/<du-an>/ui/png/*.png`
-- `projects/<du-an>/diagrams/*.png`
-- `projects/<du-an>/ui/index.html` (cập nhật thumbnail)
+- `projects/<du-an>/Diagram/Wireframe/png/*.png`
+- `projects/<du-an>/Diagram/Flow/*.png`
+- `projects/<du-an>/Diagram/Wireframe/index.html` (cập nhật thumbnail)

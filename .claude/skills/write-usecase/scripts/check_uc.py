@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra projects/<du-an>/docs/UC.md và sinh ma trận truy vết UC ↔ US ↔ FR.
+"""Kiểm tra projects/<du-an>/Document/Use_Case/UC.md và sinh ma trận truy vết UC ↔ US ↔ FR.
 
 Cách dùng:
     python .claude/skills/write-usecase/scripts/check_uc.py <du-an>

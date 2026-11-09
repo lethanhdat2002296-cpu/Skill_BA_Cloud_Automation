@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ghép projects/<du-an>/docs/srs/*.md thành projects/<du-an>/docs/SRS.md + sinh ma trận truy vết + chỉ mục tra cứu.
+"""Ghép projects/<du-an>/Document/SRS/srs/*.md thành projects/<du-an>/Document/SRS/SRS.md + sinh ma trận truy vết + chỉ mục tra cứu.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/build_srs.py <du-an>            # ghép SRS.md
@@ -147,7 +147,7 @@ def index(project: Project) -> dict:
     idx: dict = {"FR": {}, "NFR": {}, "SCR": {}, "AS": {}, "OQ": {}, "files": {}}
     for p in srs_parts(project):
         t = p.read_text(encoding="utf-8-sig")
-        rel = f"docs/srs/{p.name}"
+        rel = f"Document/SRS/srs/{p.name}"
         idx["files"][rel] = len(t.splitlines())
         for f in fr_blocks(t):
             idx["FR"][f["id"]] = {"file": rel, "title": f["title"], "us": f["us"], "scr": f["scr"] or f["no_ui"]}
@@ -155,7 +155,7 @@ def index(project: Project) -> dict:
             idx["NFR"][m.group(1)] = {"file": rel, "title": m.group(2).strip()}
         for m in re.finditer(r"^\|\s*(SCR-\d+)\s*\|\s*([^|]+)\|", t, re.M):
             idx["SCR"].setdefault(m.group(1), {"file": rel, "title": m.group(2).strip()})
-        for m in re.finditer(r"ui/png/(SCR-\d+)-([a-z0-9-]+?)\.png", t):
+        for m in re.finditer(r"Wireframe/png/(SCR-\d+)-([a-z0-9-]+?)\.png", t):
             idx["SCR"].setdefault(m.group(1), {"file": rel})["slug"] = m.group(2)
         for kind in ("AS", "OQ"):
             for m in re.finditer(rf"^\|\s*({kind}-\d+)\s*\|\s*([^|]+)\|", t, re.M):

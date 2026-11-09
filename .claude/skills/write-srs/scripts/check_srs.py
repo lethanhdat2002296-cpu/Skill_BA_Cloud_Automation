@@ -172,17 +172,17 @@ def main(argv: list[str]) -> int:
         warns.append("Screen Inventory không có SCR nào (hệ thống không có UI?)")
 
     img_refs = dict()
-    for scr, slug in re.findall(r"ui/png/(SCR-\d+)-([a-z0-9-]+?)\.png", raw):
+    for scr, slug in re.findall(r"Wireframe/png/(SCR-\d+)-([a-z0-9-]+?)\.png", raw):
         img_refs.setdefault(scr, slug)
     for scr in scr_info:
         if scr not in img_refs:
-            errors.append(f"{scr}: thiếu dòng ảnh ![{scr} — …](ui/png/{scr}-<slug>.png) trong mục 6.2")
+            errors.append(f"{scr}: thiếu dòng ảnh ![{scr} — …](../../Diagram/Wireframe/png/{scr}-<slug>.png) trong mục 6.2")
             continue
         stem = f"{scr}-{img_refs[scr]}"
         if not (project.png / f"{stem}.png").exists():
-            late.append(f"{scr}: chưa có ảnh ui/png/{stem}.png")
+            late.append(f"{scr}: chưa có ảnh Diagram/Wireframe/png/{stem}.png")
         if not (project.screens / f"{stem}.html").exists():
-            late.append(f"{scr}: chưa có wireframe ui/screens/{stem}.html")
+            late.append(f"{scr}: chưa có wireframe Diagram/Wireframe/screens/{stem}.html")
     for scr in img_refs:
         if scr not in scr_info:
             errors.append(f"{scr}: có ảnh trong 6.2 nhưng không có trong bảng Screen Inventory")

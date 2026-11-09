@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nạp tài liệu đầu vào cho một dự án vào projects/<du-an>/input/, giữ phiên bản cũ, tạo diff, commit + push.
+"""Nạp tài liệu đầu vào cho một dự án vào projects/<du-an>/Document/Bien_Ban_Khao_Sat/, giữ phiên bản cũ, tạo diff, commit + push.
 
 Cách dùng:
     python .claude/skills/ba-intake/scripts/intake.py <du-an> \
@@ -17,8 +17,8 @@ Cách dùng:
 Quy tắc giữ thông tin cũ:
   - Không bao giờ ghi đè. Trùng tên + khác nội dung -> lưu thành <ten>__v2.<ext>, __v3...
   - Trùng nội dung (SHA-256) với file đã có -> bỏ qua, báo "trùng".
-  - Mỗi lần nạp ghi thêm dòng vào projects/<du-an>/input/_manifest.md.
-  - Lần nạp vào dự án đã có tài liệu -> tạo projects/<du-an>/input/_changes/<thoi-diem>.md (diff + chỗ để BA mô tả khác biệt).
+  - Mỗi lần nạp ghi thêm dòng vào projects/<du-an>/Document/Bien_Ban_Khao_Sat/_manifest.md.
+  - Lần nạp vào dự án đã có tài liệu -> tạo projects/<du-an>/Document/Bien_Ban_Khao_Sat/_changes/<thoi-diem>.md (diff + chỗ để BA mô tả khác biệt).
 
 Cuối cùng in một dòng JSON (bắt đầu bằng "INTAKE_RESULT ") để Claude đọc.
 """
@@ -48,7 +48,7 @@ INTAKE_DIR = REPO / ".intake"
 TEXT_EXT = {".md", ".txt", ".csv", ".json", ".eml", ".html", ".htm", ".xml", ".yaml", ".yml"}
 PANDOC_EXT = {".docx", ".odt", ".rtf", ".epub"}
 MAX_DOWNLOAD = 50 * 1024 * 1024
-META_PREFIX = "_"  # file/thư mục hệ thống trong projects/<du-an>/input/
+META_PREFIX = "_"  # file/thư mục hệ thống trong projects/<du-an>/Document/Bien_Ban_Khao_Sat/
 DIFF_MAX_LINES = 400
 
 

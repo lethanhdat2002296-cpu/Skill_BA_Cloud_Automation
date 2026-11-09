@@ -1,12 +1,12 @@
 ---
 name: ba-intake
-description: Nạp tài liệu khảo sát từ chat (text, file, ảnh, link) vào projects/<du-an>/input/, giữ phiên bản cũ, so khác biệt cũ/mới, hỏi user merge hay giữ cả hai. Dùng khi user dán/đính kèm tài liệu hoặc nói "thêm/cập nhật thông tin dự án X".
+description: Nạp tài liệu khảo sát từ chat (text, file, ảnh, link) vào projects/<du-an>/Document/Bien_Ban_Khao_Sat/, giữ phiên bản cũ, so khác biệt cũ/mới, hỏi user merge hay giữ cả hai. Dùng khi user dán/đính kèm tài liệu hoặc nói "thêm/cập nhật thông tin dự án X".
 allowed-tools: Read, Write, Edit, Glob, Grep, AskUserQuestion, Bash(python *), Bash(python3 *), Bash(pandoc *), Bash(git *)
 ---
 
 # ba-intake — nạp tài liệu từ chat lên GitHub
 
-Mục tiêu: người làm **không phải tự tạo thư mục hay commit**. Mọi thứ đưa vào chat → nằm trong `projects/<du-an>/input/` trên GitHub, không mất thông tin cũ, và khác biệt được nói rõ.
+Mục tiêu: người làm **không phải tự tạo thư mục hay commit**. Mọi thứ đưa vào chat → nằm trong `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` trên GitHub, không mất thông tin cũ, và khác biệt được nói rõ.
 
 Lệnh Python: `python3` nếu có, không thì `python`. Bên dưới viết `python`.
 
@@ -57,14 +57,14 @@ Quy tắc: **không thêm thông tin không có trong text**, không bỏ sót s
 ```bash
 python .claude/skills/ba-intake/scripts/intake.py <du-an> --file .intake/<chu-de>.md --file "<duong-dan-file-dinh-kem>" --url "<link>" --note "<mô tả 1 dòng>"
 ```
-Dự án **đã có** `projects/<du-an>/input/` → thêm `--no-push`: push một lần duy nhất ở Bước 5 sau khi đã điền nhận định (bớt một vòng push).
+Dự án **đã có** `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` → thêm `--no-push`: push một lần duy nhất ở Bước 5 sau khi đã điền nhận định (bớt một vòng push).
 
 Script tự làm:
 - Chuyển sang branch `docs/<du-an>` (tạo từ `main` nếu chưa có; cloud không cho đổi branch → ở lại branch hiện tại).
-- Copy/chuyển file vào `projects/<du-an>/input/` (tên không dấu). **Không ghi đè**: trùng tên khác nội dung → `<ten>__v2.<ext>`; trùng nội dung → bỏ qua.
-- `.docx/.odt/.rtf` → trích text vào `projects/<du-an>/input/_extracted/` (pandoc) để đọc và so sánh.
-- Ghi `projects/<du-an>/input/_manifest.md` (nhật ký mọi lần nạp).
-- Dự án đã có tài liệu → tạo `projects/<du-an>/input/_changes/<thoi-diem>.md` (diff tự động của các file có phiên bản mới).
+- Copy/chuyển file vào `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` (tên không dấu). **Không ghi đè**: trùng tên khác nội dung → `<ten>__v2.<ext>`; trùng nội dung → bỏ qua.
+- `.docx/.odt/.rtf` → trích text vào `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_extracted/` (pandoc) để đọc và so sánh.
+- Ghi `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_manifest.md` (nhật ký mọi lần nạp).
+- Dự án đã có tài liệu → tạo `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_changes/<thoi-diem>.md` (diff tự động của các file có phiên bản mới).
 - `git commit` + `git push -u origin HEAD`.
 - In dòng `INTAKE_RESULT {json}`: `is_update`, `added`, `versions`, `duplicates`, `change_report`, `pushed`, `warnings`.
 
@@ -78,10 +78,10 @@ Tài liệu là **URD / FSD / SRS có sẵn** (user nói rõ, hoặc tiêu đề
 
 ## Bước 5 — Dự án đã có tài liệu (`is_update = true`): mô tả khác biệt
 
-1. Đọc `change_report`, các file mới/phiên bản mới, và `projects/<du-an>/input/_tong-hop.md` (nếu có). **Không đọc cả SRS** — để biết ảnh hưởng FR/SCR dùng:
+1. Đọc `change_report`, các file mới/phiên bản mới, và `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_tong-hop.md` (nếu có). **Không đọc cả SRS** — để biết ảnh hưởng FR/SCR dùng:
    ```bash
    python .claude/skills/write-srs/scripts/build_srs.py <du-an> --index    # mã -> file, FR -> SCR
-   grep -rn "<từ khoá>" projects/<du-an>/docs/srs/ projects/<du-an>/input/*.md          # tìm thông tin cũ liên quan
+   grep -rn "<từ khoá>" projects/<du-an>/Document/SRS/srs/ projects/<du-an>/Document/Bien_Ban_Khao_Sat/*.md          # tìm thông tin cũ liên quan
    ```
    Chỉ mở (Read có offset/limit) đúng đoạn cần so.
 2. So sánh **theo nghĩa**, không chỉ theo dòng: file mới hoàn toàn (không phải `__v2`) cũng phải so với thông tin cũ trong các file khác.
@@ -99,8 +99,8 @@ Tài liệu là **URD / FSD / SRS có sẵn** (user nói rõ, hoặc tiêu đề
    |---|---|---|
    | Tài liệu | US-…, UC-…, FR-…, SCR-… phải vẽ lại | Cao / Trung bình / Thấp |
    | Kỹ thuật | model / trường mới (SRS 5.4), quyền (2.2), trạng thái (3.0), tích hợp (5) | … |
-   | Kiểm thử | TC-… trong `docs/test-cases.md` có cột AC trỏ tới FR bị sửa (nếu đã có test case) | … |
-   | Kế hoạch | story US-… (điểm hiện tại, release) trong `docs/backlog.md`; ước điểm tăng/giảm | … |
+   | Kiểm thử | TC-… trong `Document/Test_Case/test-cases.md` có cột AC trỏ tới FR bị sửa (nếu đã có test case) | … |
+   | Kế hoạch | story US-… (điểm hiện tại, release) trong `Document/Backlog/backlog.md`; ước điểm tăng/giảm | … |
 
    Mức: **Cao** = thêm/đổi luồng, model hoặc quyền; **Trung bình** = đổi quy tắc / AC trong FR có sẵn; **Thấp** = câu chữ, nhãn, giá trị mặc định.
    Tài liệu mới là **biên bản họp** → thêm 2 mục vào change report: "Quyết định đã chốt" và "Việc cần làm" (`| Việc | Người | Hạn |`); việc của phía khách chưa xong → `OQ-xx` khi cập nhật SRS.
@@ -119,7 +119,7 @@ Tài liệu là **URD / FSD / SRS có sẵn** (user nói rõ, hoặc tiêu đề
 
 ## Bước 6 — Thực hiện quyết định
 
-- **Merge:** tạo/cập nhật `projects/<du-an>/input/_tong-hop.md` — bản yêu cầu hợp nhất, là nguồn ưu tiên cho các bước sau:
+- **Merge:** tạo/cập nhật `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_tong-hop.md` — bản yêu cầu hợp nhất, là nguồn ưu tiên cho các bước sau:
   ```markdown
   # Tổng hợp yêu cầu — <du-an>
   > Cập nhật lần cuối: <YYYY-MM-DD HH:mm> · Nguồn: xem _manifest.md
@@ -133,7 +133,7 @@ Tài liệu là **URD / FSD / SRS có sẵn** (user nói rõ, hoặc tiêu đề
   ## Lịch sử thay đổi
   | Ngày | Mục | Cũ | Mới | Nguồn | Quyết định |
   ```
-  Thông tin bị thay thế **không xoá** — chuyển xuống "Lịch sử thay đổi". File gốc cũ/mới trong `input/` giữ nguyên.
+  Thông tin bị thay thế **không xoá** — chuyển xuống "Lịch sử thay đổi". File gốc cũ/mới trong `Document/Bien_Ban_Khao_Sat/` giữ nguyên.
 - **Giữ cả hai:** chỉ ghi quyết định vào change report.
 - Ghi mục **"Quyết định"** trong change report, commit: `input(<du-an>): quyết định <thoi-diem>`.
 - **Merge + cập nhật SRS ngay** → không push ở đây; làm tiếp theo `.claude/skills/srs-update/SKILL.md` ngay trong lượt này (skill đó commit + push một lần ở cuối). Các lựa chọn khác → `git push` rồi báo cáo.
@@ -152,6 +152,7 @@ Bước tiếp: "Cập nhật SRS cho dự án <du-an>" (srs-update, vài phút)
 Nếu đã chạy `srs-update` trong lượt này → gộp báo cáo của hai skill thành một.
 
 ## Nguyên tắc
-- Không bao giờ ghi đè hay xoá file trong `projects/<du-an>/input/` — mọi thay đổi là file mới hoặc phiên bản mới; git giữ lịch sử.
-- File/thư mục bắt đầu bằng `_` trong `projects/<du-an>/input/` là của hệ thống (`_manifest.md`, `_changes/`, `_extracted/`, `_tong-hop.md`).
+- Không bao giờ ghi đè hay xoá file trong `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` — mọi thay đổi là file mới hoặc phiên bản mới; git giữ lịch sử.
+- Git chỉ lưu Markdown: file gốc nhị phân (.docx, .pdf, ảnh, .xlsx…) nằm cạnh bản trích `_extracted/*.md` nhưng bị `.gitignore` — bản gốc ở Drive của user. Nội dung cần đọc / so sánh luôn lấy từ bản Markdown.
+- File/thư mục bắt đầu bằng `_` trong `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` là của hệ thống (`_manifest.md`, `_changes/`, `_extracted/`, `_tong-hop.md`).
 - Không đưa mật khẩu, token, số tài khoản thật của khách vào Markdown; nếu text chứa thông tin nhạy cảm, che bớt (`******6789`) và báo user.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra bảng đối chiếu projects/<du-an>/docs/doi-chieu-ma.md sau khi nhập tài liệu có sẵn — không sót yêu cầu nào.
+"""Kiểm tra bảng đối chiếu projects/<du-an>/Document/doi-chieu-ma.md sau khi nhập tài liệu có sẵn — không sót yêu cầu nào.
 
 Cách dùng:
     python .claude/skills/doc-import/scripts/check_import.py <du-an>

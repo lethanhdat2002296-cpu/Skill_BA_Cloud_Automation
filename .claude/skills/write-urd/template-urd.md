@@ -5,7 +5,7 @@
 | Mã dự án | {{du-an}} |
 | Phiên bản | 0.1 (bản nháp tự động) |
 | Ngày | {{YYYY-MM-DD}} |
-| Nguồn | {{danh sách file trong projects/<du-an>/input/}} |
+| Nguồn | {{danh sách file trong projects/<du-an>/Document/Bien_Ban_Khao_Sat/}} |
 | Trạng thái | Chờ khách hàng review |
 
 ## 1. Giới thiệu

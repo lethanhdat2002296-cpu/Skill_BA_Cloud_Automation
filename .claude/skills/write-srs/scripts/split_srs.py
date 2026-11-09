@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chuyển SRS.md một file (dự án cũ) sang cấu trúc tách phân hệ projects/<du-an>/docs/srs/*.md. Chạy MỘT lần / dự án.
+"""Chuyển SRS.md một file (dự án cũ) sang cấu trúc tách phân hệ projects/<du-an>/Document/SRS/srs/*.md. Chạy MỘT lần / dự án.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/split_srs.py <du-an>

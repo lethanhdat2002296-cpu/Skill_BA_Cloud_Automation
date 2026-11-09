@@ -11,8 +11,8 @@ Khác `brainstorm` (phân tích tài liệu khảo sát thô): tài liệu ở �
 Không hỏi user. Lệnh Python: `python3` nếu có, không thì `python`.
 
 ## Bước 0 — Điều kiện
-1. Tài liệu đã nằm trong `projects/<du-an>/input/` (chưa có → `ba-intake` trước, `--note "<URD|FSD|SRS> gốc của <ai>, v<x>"`).
-2. Dự án **chưa có** `docs/SRS.md`. Đã có SRS → không nhập; tài liệu mới là thay đổi → `ba-intake` (so khác biệt) → `srs-update`.
+1. Tài liệu đã nằm trong `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` (chưa có → `ba-intake` trước, `--note "<URD|FSD|SRS> gốc của <ai>, v<x>"`).
+2. Dự án **chưa có** `Document/SRS/SRS.md`. Đã có SRS → không nhập; tài liệu mới là thay đổi → `ba-intake` (so khác biệt) → `srs-update`.
 3. BRD / tài liệu nghiệp vụ chung (mục tiêu, AS-IS/TO-BE, không có yêu cầu chi tiết) → **không** dùng skill này; để `srs-pipeline` chạy từ `brainstorm` như input thường.
 
 ## Bước 1 — Dàn ý (không đọc cả file một lần)
@@ -20,15 +20,15 @@ Không hỏi user. Lệnh Python: `python3` nếu có, không thì `python`.
 python .claude/skills/doc-import/scripts/import_doc.py <du-an> <file> [--type urd|fsd|srs]
 ```
 - In cây mục `§số Tên [dòng bắt đầu, số dòng, số mã gốc]` + 1 dòng tổng kết (loại đoán được, hệ mã gốc, số bảng/ảnh). User đã nói loại ("đây là FSD") → truyền `--type`.
-- File Word được chuyển sang `input/_extracted/<ten>-docx.md` (ảnh trong `<ten>-docx-media/`). Đọc **từng mục** bằng `Read` với `offset` = dòng bắt đầu, `limit` = số dòng.
+- File Word được chuyển sang `Document/Bien_Ban_Khao_Sat/_extracted/<ten>-docx.md` (ảnh trong `<ten>-docx-media/`). Đọc **từng mục** bằng `Read` với `offset` = dòng bắt đầu, `limit` = số dòng.
 - Tài liệu > 1.500 dòng: xử lý theo từng chương, viết xong chương này mới đọc chương sau.
 
 ## Bước 2 — Chuyển theo loại
 
 | Loại | Viết ra | Bỏ qua trong pipeline |
 |---|---|---|
-| **URD** (user story, yêu cầu người dùng theo vai trò) | `docs/URD.md` theo `write-urd/template-urd.md` | `brainstorm`, `write-urd` |
-| **FSD / SRS** (chức năng, màn hình, trường, validation, quy tắc) | `docs/srs/*.md` theo `write-srs/template-srs.md` + `docs/URD.md` suy ngược | `brainstorm`, `write-urd`, phần viết của `write-srs` |
+| **URD** (user story, yêu cầu người dùng theo vai trò) | `Document/URD/URD.md` theo `write-urd/template-urd.md` | `brainstorm`, `write-urd` |
+| **FSD / SRS** (chức năng, màn hình, trường, validation, quy tắc) | `Document/SRS/srs/*.md` theo `write-srs/template-srs.md` + `Document/URD/URD.md` suy ngược | `brainstorm`, `write-urd`, phần viết của `write-srs` |
 
 ### URD
 - Mỗi yêu cầu / user story gốc → `US-xx` (đánh lại liên tục theo vai trò của repo). Câu chưa theo mẫu "Là … tôi muốn … để …" → viết lại đúng mẫu, giữ ý; thiếu "để …" → suy từ ngữ cảnh nếu rõ, không thì `AS-xx`.
@@ -45,7 +45,7 @@ python .claude/skills/doc-import/scripts/import_doc.py <du-an> <file> [--type ur
 - Phiên bản: `0.1`, Lịch sử phiên bản: `| 0.1 | <ngày> | Nhập từ <file> (bản gốc v<x> của <ai>) | <file> | Toàn bộ |`.
 
 ## Bước 3 — Bảng đối chiếu (bắt buộc)
-Tạo `docs/doi-chieu-ma.md` theo `template-doi-chieu.md`: mỗi tài liệu gốc một mục `## <tên file trong input/> — <loại> v<x>`, mỗi **mã gốc** (hoặc mỗi **mục lá** nếu bản gốc không đánh mã) một dòng: Mã gốc, Mục gốc (`§số Tên`), tóm tắt, Mã mới, Xử lý (Giữ / Viết lại / Tách / Gộp vào … / Bỏ: lý do / Mâu thuẫn → OQ-xx).
+Tạo `Document/doi-chieu-ma.md` theo `template-doi-chieu.md`: mỗi tài liệu gốc một mục `## <tên file trong Document/Bien_Ban_Khao_Sat/> — <loại> v<x>`, mỗi **mã gốc** (hoặc mỗi **mục lá** nếu bản gốc không đánh mã) một dòng: Mã gốc, Mục gốc (`§số Tên`), tóm tắt, Mã mới, Xử lý (Giữ / Viết lại / Tách / Gộp vào … / Bỏ: lý do / Mâu thuẫn → OQ-xx).
 
 ```bash
 python .claude/skills/doc-import/scripts/check_import.py <du-an>
@@ -66,4 +66,4 @@ python .claude/skills/doc-import/scripts/check_import.py <du-an>
 ```
 
 ## Cập nhật sau này
-Khách gửi bản mới của chính tài liệu đó → `ba-intake` lưu `__v2` + diff → `srs-update` dùng `docs/doi-chieu-ma.md` để đổi mã gốc trong diff sang mã mới (REQ-012 → FR-02), đổi tiêu đề mục `## <file>` sang file `__v2`, thêm dòng cho mã gốc mới, chạy lại `check_import.py`.
+Khách gửi bản mới của chính tài liệu đó → `ba-intake` lưu `__v2` + diff → `srs-update` dùng `Document/doi-chieu-ma.md` để đổi mã gốc trong diff sang mã mới (REQ-012 → FR-02), đổi tiêu đề mục `## <file>` sang file `__v2`, thêm dòng cho mã gốc mới, chạy lại `check_import.py`.

@@ -8,29 +8,36 @@
 - OQ mở (29): OQ-03, OQ-10, OQ-12, OQ-13, OQ-14, OQ-15, OQ-17, OQ-18, OQ-19, OQ-20, OQ-21, OQ-22, OQ-24, OQ-25, OQ-26, OQ-27, OQ-28, OQ-29, OQ-30, OQ-31, OQ-32, OQ-34, OQ-35, OQ-36, OQ-37, OQ-38, OQ-39, OQ-40, OQ-41 · trả lời một phần: OQ-02, OQ-05, OQ-07, OQ-08, OQ-09, OQ-23
 - Lần cập nhật cuối: 0.3 (2026-10-20) — Trả lời câu hỏi mở lần 1: Odoo 17 Odoo.sh/on-premise; không gộp YCMH; đơn mua không ngưỡng; YCMH bị từ chối về Nháp + email. Khảo sát lần 3 — Yêu cầu báo giá: D
 - Màn chờ vẽ lại: không
-- Drive: https://drive.google.com/drive/folders/1IMQ4RtmxmevegCtPuIEa0lBXV4Eh2iFD (12 mục)
-- File: docs/SRS.md (964 dòng), docs/URD.md (421 dòng), docs/UC.md (706 dòng), docs/backlog.md (382 dòng), ui/flows.md (229 dòng) — SRS chưa tách srs/
-- Commit cuối: 2026-11-09 feat(skills): học từ OpenBA-Kit — kiểm câu chữ, danh mục thông báo, skill test case
+- Drive: chưa gắn link thư mục gốc · 12 file đã đẩy
+- File: Document/SRS/SRS.md (964 dòng), Document/URD/URD.md (421 dòng), Document/Use_Case/UC.md (706 dòng), Document/Backlog/backlog.md (382 dòng), Diagram/Wireframe/flows.md (229 dòng) — SRS chưa tách srs/
+- Commit cuối: 2026-11-09 feat(skills): doc-import — nhập URD / FSD / SRS có sẵn khi dự án chưa có SRS
 
 ## Bản đồ file
 
 | Cần | Mở | Ghi chú |
 |---|---|---|
-| Yêu cầu hợp nhất mới nhất | `input/_tong-hop.md` | Nguồn ưu tiên khi có |
-| Lịch sử nạp / khác biệt | `input/_manifest.md`, `input/_changes/` | Đọc change report mới nhất, không đọc hết |
-| FR / NFR / SCR / AS / OQ | `docs/SRS.md` (hoặc `docs/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |
-| User story / Use case | `docs/URD.md`, `docs/UC.md` | `grep -n "^#### US-07"` rồi Read đoạn đó |
-| Backlog | `docs/backlog.md` → `exports/backlog.csv` | |
-| Mã gốc của khách (nếu nhập URD/FSD) | `docs/doi-chieu-ma.md` | `grep -n "REQ-012"` → mã mới |
-| Test case | `docs/test-cases.md` → `exports/test-cases.csv` | Tra `grep -n "^### FR-07"`; ma trận phủ ở mục 6 |
-| Màn hình | `ui/flows.md`, `ui/screens/SCR-xx-*.html` | Chỉ mở ảnh `ui/png/` khi cần review |
-| Sơ đồ | `diagrams/` (`swimlanes/*.json` là nguồn) | |
-| File giao khách | `exports/` | Sinh ra — không sửa tay |
+| Biên bản / tài liệu khảo sát | `Document/Bien_Ban_Khao_Sat/` (`_tong-hop.md` là bản hợp nhất — nguồn ưu tiên) | Lịch sử nạp: `_manifest.md`, `_changes/` — đọc change report mới nhất |
+| URD (+ brainstorm) | `Document/URD/` | `grep -n "^#### US-07"` rồi Read đoạn đó |
+| SRS | `Document/SRS/SRS.md` (nguồn `Document/SRS/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |
+| FSD | `Document/FSD/` (theo sprint: `FSD/Sprint <n>/`) | `grep -n "^#### "` để xem mục |
+| Use case / Backlog | `Document/Use_Case/UC.md`, `Document/Backlog/backlog.md` | |
+| Test case | `Document/Test_Case/` (theo sprint: `Test_Case/Sprint <n>/`) | Ma trận phủ ở mục 6 |
+| Mã gốc của khách (nếu nhập URD/FSD) | `Document/doi-chieu-ma.md` | `grep -n "REQ-012"` → mã mới |
+| Sơ đồ | `Diagram/Flow/` (`swimlanes/*.json` là nguồn) | |
+| Màn hình | `Diagram/Wireframe/flows.md`, `screens/SCR-xx-*.html` | Chỉ mở ảnh `png/` khi cần review |
+| File Word / CSV xuất ra | `.output/` (không commit) | Đẩy lên Drive: hỏi link thư mục mỗi lần |
 
 ## Google Drive
 
-- Thư mục: https://drive.google.com/drive/folders/1IMQ4RtmxmevegCtPuIEa0lBXV4Eh2iFD
 - backlog: https://docs.google.com/spreadsheets/d/1adOzG2a-ytG_RZHqpYfsegqXU2HtSkSJI7hVE0m9_Ho/edit
+- diagrams/swimlane-01-yeu-cau-mua-hang.png: https://drive.google.com/file/d/1Zd24FmUpYtKqxpGSCjjViDFMNg2aDnS_/view
+- diagrams/swimlane-02-yeu-cau-bao-gia-po.png: https://drive.google.com/file/d/1XwNBAhnNLvM348XXWnLM1sSelisJNMQf/view
+- diagrams/swimlane-03-dich-vu.png: https://drive.google.com/file/d/1EC23PV83uAZnzEE6ufta3eW_ZwTJaKwH/view
+- diagrams/uc-01.png: https://drive.google.com/file/d/1L17q4pBVK44awShIxkQBu2MXEmpif0sX/view
+- diagrams/uc-02.png: https://drive.google.com/file/d/1Rp4oeXb90NDoDH5nSrp5pM8BW8fn1lgE/view
+- diagrams/uc-03.png: https://drive.google.com/file/d/1-hd1oEGARw81R1jfXJp2uh6KAInf6Xo8/view
+- diagrams/uc-04.png: https://drive.google.com/file/d/1l3pg5A1Wpa_gu44rxvWxwHWwbl4Mb2UJ/view
+- diagrams/uc-05.png: https://drive.google.com/file/d/1wUauJyugBYGq1uVWi-yHDfHKr6KTdD3A/view
 - srs: https://docs.google.com/document/d/1S25a37GVKYYSSZtl1bKr_IsBpqnW_yFplYplyYy-_kg/edit
 - uc: https://docs.google.com/document/d/1CpzMgFVcUjgtdQ6kjVUQYajHib7f8EDTY76fQTUwlbM/edit
 - urd: https://docs.google.com/document/d/1MZNt5WJV8ojA-_PdewIwQBTxsxWAuURA0C_SeJvaJOQ/edit

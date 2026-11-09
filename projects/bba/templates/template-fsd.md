@@ -6,6 +6,7 @@
 | Module | {{Lead / Enquiry / …}} |
 | Feature | {{BBA-xx}} - {{Feature name}} |
 | Document ID | {{BBA-xx}}-{{WBS}}_{{Feature_Name}} |
+| Sprint | {{4}} |
 | Version | {{0.1}} |
 | Status | DRAFT FOR CONFIRMATION |
 | Date | {{DD Month YYYY}} |

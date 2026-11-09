@@ -13,9 +13,9 @@ Bạn là BA lead chạy toàn bộ chuỗi **không có người can thiệp**.
 
 1. Lấy `<du-an>` từ câu lệnh của user (vd. "Làm SRS cho dự án rma-magento" → `rma-magento`).
 2. **Tin nhắn có kèm tài liệu** (text dán vào, file đính kèm, ảnh, link) → làm theo `.claude/skills/ba-intake/SKILL.md` ở **chế độ tự động** (không hỏi; khác biệt được tự merge, mâu thuẫn thành OQ) trước khi đi tiếp. Script của skill đó đã chuyển sang branch `docs/<du-an>` và push.
-3. Nếu user không nêu tên và không kèm tài liệu: chọn dự án trong `projects/` (bỏ qua `_example`) có thời điểm sửa mới nhất mà **chưa có** `projects/<du-an>/docs/SRS.md`. Nếu không có thư mục nào khác thì dùng `_example`. Ghi lựa chọn vào báo cáo cuối.
-4. Không tìm thấy `projects/<du-an>/input/` → tìm thư mục gần đúng tên (không phân biệt hoa thường, bỏ dấu). Vẫn không có → báo lỗi ngắn gọn, gợi ý "dán hoặc đính kèm tài liệu vào chat", rồi dừng (đây là trường hợp duy nhất được dừng).
-5. **Dự án đã có `projects/<du-an>/docs/SRS.md`** → KHÔNG chạy lại pipeline. Chuyển sang `.claude/skills/srs-update/SKILL.md` (cập nhật nhanh); nếu user nói thêm "xuất docx / gửi khách / xuất bản" thì sau đó chạy `.claude/skills/srs-publish/SKILL.md`. Kết thúc skill này.
+3. Nếu user không nêu tên và không kèm tài liệu: chọn dự án trong `projects/` (bỏ qua `_example`) có thời điểm sửa mới nhất mà **chưa có** `projects/<du-an>/Document/SRS/SRS.md`. Nếu không có thư mục nào khác thì dùng `_example`. Ghi lựa chọn vào báo cáo cuối.
+4. Không tìm thấy `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` → tìm thư mục gần đúng tên (không phân biệt hoa thường, bỏ dấu). Vẫn không có → báo lỗi ngắn gọn, gợi ý "dán hoặc đính kèm tài liệu vào chat", rồi dừng (đây là trường hợp duy nhất được dừng).
+5. **Dự án đã có `projects/<du-an>/Document/SRS/SRS.md`** → KHÔNG chạy lại pipeline. Chuyển sang `.claude/skills/srs-update/SKILL.md` (cập nhật nhanh); nếu user nói thêm "xuất docx / gửi khách / xuất bản" thì sau đó chạy `.claude/skills/srs-publish/SKILL.md`. Kết thúc skill này.
 6. **Input có URD / FSD / SRS sẵn** (user nói "đây là URD/FSD…", hoặc `_manifest.md` ghi chú loại đó, hoặc `import_doc.py` đoán loại URD/FSD/SRS với tài liệu dạng đặc tả) → làm theo `.claude/skills/doc-import/SKILL.md` trước Bước 3, rồi **bỏ qua các bước** skill đó liệt kê (URD → bỏ `brainstorm`, `write-urd`; FSD/SRS → bỏ thêm phần viết của `write-srs`). Ghi "Nhập từ <file>" trong báo cáo. BRD / biên bản / ghi chú khảo sát vẫn đi đường `brainstorm`.
 7. Lệnh Python: dùng `python3` nếu có, không thì `python`. Bên dưới viết `python`.
 
@@ -33,7 +33,7 @@ git checkout -b docs/<du-an> origin/main            # chưa có
 
 ## Bước 2 — Đọc toàn bộ input
 
-Thứ tự ưu tiên khi đọc `projects/<du-an>/input/`:
+Thứ tự ưu tiên khi đọc `projects/<du-an>/Document/Bien_Ban_Khao_Sat/`:
 1. `_tong-hop.md` (nếu có) — bản yêu cầu đã hợp nhất, là **nguồn sự thật hiện hành**.
 2. `_manifest.md` — biết thứ tự thời gian các tài liệu; tài liệu nạp sau và bản `__vN` lớn nhất được ưu tiên khi mâu thuẫn.
 3. `_changes/*.md` — các khác biệt và quyết định đã chốt.
@@ -51,11 +51,11 @@ Với mỗi bước: đọc `.claude/skills/<skill>/SKILL.md` của **repo này*
 | 1 | `brainstorm` | `brainstorm.md` | `docs(<du-an>): brainstorm` |
 | 2 | `write-urd` | `URD.md` | `docs(<du-an>): URD` |
 | 2b | `write-usecase` | `UC.md` | `docs(<du-an>): use case` |
-| 3 | `write-srs` | `docs/srs/*.md` (tách phân hệ) → `SRS.md` | `docs(<du-an>): SRS draft` |
+| 3 | `write-srs` | `Document/SRS/srs/*.md` (tách phân hệ) → `SRS.md` | `docs(<du-an>): SRS draft` |
 | 3b | `write-user-story` | `backlog.md`, `backlog.csv` | `docs(<du-an>): backlog` |
-| 4 | `ui-spec` | `ui/flows.md` | `docs(<du-an>): UI spec & flows` |
-| 5 | `wireframe` | `ui/screens/*.html`, `ui/index.html` | `docs(<du-an>): wireframes` |
-| 6 | `render-screens` | `ui/png/*.png`, `diagrams/*.png` | `docs(<du-an>): render screens` |
+| 4 | `ui-spec` | `Diagram/Wireframe/flows.md` | `docs(<du-an>): UI spec & flows` |
+| 5 | `wireframe` | `Diagram/Wireframe/screens/*.html`, `Diagram/Wireframe/index.html` | `docs(<du-an>): wireframes` |
+| 6 | `render-screens` | `Diagram/Wireframe/png/*.png`, `Diagram/Flow/*.png` | `docs(<du-an>): render screens` |
 
 Commit:
 ```bash
@@ -66,7 +66,7 @@ git commit -m "docs(<du-an>): <bước>"
 
 Sau bước 3 chạy lại `python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix` để ma trận UC ↔ US ↔ FR có cột FR.
 
-Nếu một bước phát hiện lỗi ở bước trước (vd. wireframe thấy SCR thiếu trường trong Screen Inventory) → **sửa ngược lại file nguồn** (`docs/srs/*.md`, rồi chạy `build_srs.py`), không để hai tài liệu lệch nhau.
+Nếu một bước phát hiện lỗi ở bước trước (vd. wireframe thấy SCR thiếu trường trong Screen Inventory) → **sửa ngược lại file nguồn** (`Document/SRS/srs/*.md`, rồi chạy `build_srs.py`), không để hai tài liệu lệch nhau.
 
 ## Bước 4 — Xuất Word
 
@@ -76,7 +76,7 @@ python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src URD.md
 python .claude/skills/write-srs/scripts/to_docx.py <du-an> --src UC.md
 ```
 
-Script tự render Mermaid trong SRS.md, nhúng ảnh `ui/png/*.png`, dùng `templates/reference.docx` nếu có, và in số ảnh đã nhúng. Nếu báo ảnh thiếu → chạy lại `render-screens` cho màn đó, hoặc sửa đường dẫn trong SRS.md. Nếu không có pandoc → ghi rõ vào báo cáo, không dừng các bước còn lại.
+Script tự render Mermaid trong SRS.md, nhúng ảnh `Diagram/Wireframe/png/*.png`, dùng `templates/reference.docx` nếu có, và in số ảnh đã nhúng. Nếu báo ảnh thiếu → chạy lại `render-screens` cho màn đó, hoặc sửa đường dẫn trong SRS.md. Nếu không có pandoc → ghi rõ vào báo cáo, không dừng các bước còn lại.
 
 ## Bước 5 — Tự review
 
@@ -90,7 +90,7 @@ Script tự render Mermaid trong SRS.md, nhúng ảnh `ui/png/*.png`, dùng `tem
    `--final`: thiếu ảnh/HTML/docx tính là `ERROR`. Nếu PNG/docx không tạo được do thiếu công cụ (đã ghi báo cáo) thì các lỗi đó được chấp nhận, mọi lỗi khác phải sửa.
 2. Đọc `.claude/skills/write-srs/checklist.md`, đi từng mục, sửa mọi lỗi tìm thấy (SRS, URD, wireframe).
 3. Lặp lại bước 1–2 tới khi `check_srs.py` không còn `ERROR` (tối đa 3 vòng; còn lỗi thì ghi vào báo cáo).
-4. Nếu đã sửa `docs/srs/*.md` hoặc HTML → chạy lại `render-screens` (chỉ màn bị sửa) và `to_docx.py`.
+4. Nếu đã sửa `Document/SRS/srs/*.md` hoặc HTML → chạy lại `render-screens` (chỉ màn bị sửa) và `to_docx.py`.
 5. Commit: `docs(<du-an>): self-review fixes` + `docs(<du-an>): export SRS.docx`.
 
 ## Bước 6 — Push + PR
@@ -102,6 +102,8 @@ gh pr create --base main --title "docs(<du-an>): URD + SRS + wireframe" --body-f
 
 - Nội dung PR body = báo cáo tóm tắt ở Bước 7 (ghi tạm vào `projects/<du-an>/.tmp/pr-body.md`, thư mục `.tmp` đã được `.gitignore`).
 - Không có `gh` hoặc `gh` chưa đăng nhập → chỉ push branch, ghi vào báo cáo: "Mở PR từ giao diện (nút Create PR)". Không có remote → bỏ qua push, ghi vào báo cáo.
+
+Sau khi push: có file Word mới trong `.output/` → làm theo `.claude/skills/drive-sync/SKILL.md` — **hỏi user thư mục Drive đích** (một lần hỏi cho các file), đẩy Word; user chọn "Không đẩy lần này" thì ghi vào báo cáo.
 
 ## Bước 7 — Báo cáo tóm tắt (tin nhắn cuối cho user)
 
@@ -124,7 +126,7 @@ gh pr create --base main --title "docs(<du-an>): URD + SRS + wireframe" --body-f
 - … (công cụ thiếu, bước bị bỏ qua, lỗi còn tồn tại)
 ```
 
-Danh sách Open Questions lấy nguyên từ `docs/srs/09-gia-dinh-cau-hoi.md`. Không bỏ sót mục nào.
+Danh sách Open Questions lấy nguyên từ `Document/SRS/srs/09-gia-dinh-cau-hoi.md`. Không bỏ sót mục nào.
 
 ## Sau phiên bản 0.1
 
@@ -133,7 +135,7 @@ Mọi thông tin mới (khảo sát, demo, khách trả lời câu hỏi) đi th
 - **Xuất bản** (`srs-publish`, khi gửi khách): vẽ lại màn đang chờ, xuất docx, 0.1.x → 0.2, PR.
 - **Test case** (`write-testcase`, khi user yêu cầu — thường sau khi khách duyệt SRS): mỗi AC ≥ 1 test case + file CSV cho QA. Không chạy trong pipeline.
 
-`brainstorm.md` chỉ viết một lần ở đây; các lần sau không cập nhật (kiến thức hiện hành nằm ở `projects/<du-an>/input/_tong-hop.md` và `docs/srs/`).
+`brainstorm.md` chỉ viết một lần ở đây; các lần sau không cập nhật (kiến thức hiện hành nằm ở `projects/<du-an>/Document/Bien_Ban_Khao_Sat/_tong-hop.md` và `Document/SRS/srs/`).
 
 ## Nguyên tắc xuyên suốt
 - Không hỏi user. Không chờ xác nhận giữa các bước.

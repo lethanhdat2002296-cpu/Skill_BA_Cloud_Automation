@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Phân tích input khảo sát theo khung BA 7 phần, tự trả lời từ input (không hỏi user), thiếu thì ghi OQ → docs/brainstorm.md. Bước đầu của srs-pipeline; chỉ viết ở bản 0.1.
+description: Phân tích input khảo sát theo khung BA 7 phần, tự trả lời từ input (không hỏi user), thiếu thì ghi OQ → Document/URD/brainstorm.md. Bước đầu của srs-pipeline; chỉ viết ở bản 0.1.
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -9,7 +9,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 Mục tiêu: biến tài liệu khảo sát rời rạc thành một bức tranh có cấu trúc, **chỉ ra rõ cái gì đã biết, cái gì đang giả định, cái gì chưa biết**. Không hỏi user.
 
 ## Input
-- Toàn bộ file trong `projects/<du-an>/input/` (đã đọc ở bước trước của pipeline; nếu chạy riêng thì đọc hết).
+- Toàn bộ file trong `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` (đã đọc ở bước trước của pipeline; nếu chạy riêng thì đọc hết).
 
 ## Cách làm
 
@@ -30,7 +30,7 @@ Mục tiêu: biến tài liệu khảo sát rời rạc thành một bức tranh
 6. **Tích hợp & dữ liệu** — Hệ thống nào tham gia (Magento 2, Odoo, cổng thanh toán, đơn vị vận chuyển, email/SMS)? Chiều đồng bộ, tần suất, realtime hay batch? Đối tượng dữ liệu chính và trường quan trọng? Nguồn sự thật (source of truth) của từng đối tượng?
 7. **Ràng buộc & rủi ro** — Pháp lý (chính sách đổi trả, hoá đơn, dữ liệu cá nhân), kỹ thuật (version, hosting, module có sẵn), ngân sách, thời gian, hiệu năng, bảo mật. Rủi ro và cách giảm thiểu.
 
-## Output: `projects/<du-an>/docs/brainstorm.md`
+## Output: `projects/<du-an>/Document/URD/brainstorm.md`
 
 ```markdown
 # Brainstorm — <Tên dự án>

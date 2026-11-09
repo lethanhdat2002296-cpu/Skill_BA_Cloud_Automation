@@ -3,7 +3,7 @@
 
 Cách dùng:
     python .claude/skills/render-screens/scripts/swimlane.py <du-an>
-        -> đọc projects/<du-an>/diagrams/swimlanes/*.json, ghi projects/<du-an>/diagrams/swimlane-<ten>.png
+        -> đọc projects/<du-an>/Diagram/Flow/swimlanes/*.json, ghi projects/<du-an>/Diagram/Flow/swimlane-<ten>.png
     python .../swimlane.py <du-an> --only nhap-kho
 
 Định dạng JSON:

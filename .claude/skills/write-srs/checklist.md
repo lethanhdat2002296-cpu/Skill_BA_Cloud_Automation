@@ -37,8 +37,8 @@
 
 ## E. Màn hình & wireframe
 - [ ] Mỗi SCR có cột Trạng thái và cột Loại (`storefront` / `backend`).
-- [ ] ⚙ Mỗi SCR có dòng ảnh `ui/png/SCR-xx-<slug>.png` trong mục 6.2 và file ảnh tồn tại (sau render).
-- [ ] ⚙ Mỗi SCR có file `ui/screens/SCR-xx-<slug>.html` (sau wireframe).
+- [ ] ⚙ Mỗi SCR có dòng ảnh `Diagram/Wireframe/png/SCR-xx-<slug>.png` trong mục 6.2 và file ảnh tồn tại (sau render).
+- [ ] ⚙ Mỗi SCR có file `Diagram/Wireframe/screens/SCR-xx-<slug>.html` (sau wireframe).
 - [ ] Wireframe hiển thị đủ trường dữ liệu và hành động liệt kê trong Screen Inventory.
 - [ ] Nhãn trên wireframe khớp thuật ngữ trong SRS.
 

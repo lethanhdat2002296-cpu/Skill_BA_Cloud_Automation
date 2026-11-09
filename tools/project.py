@@ -69,8 +69,9 @@ def facts(p: Project) -> dict:
                    "OQ": len(ids(main, "OQ")), "TC": len(ids(tc, "TC"))},
         "oq_open": o, "oq_partial": part, "history": hist[-1] if hist else None, "pending": pending,
         "drive": drive, "last_commit": log,
-        "files": {f: len(read(p.root / f).splitlines()) for f in
-                  ("docs/SRS.md", "docs/URD.md", "docs/UC.md", "docs/backlog.md", "docs/test-cases.md", "ui/flows.md") if (p.root / f).exists()},
+        "files": {p.rel(f).split(p.slug + "/", 1)[1]: len(read(f).splitlines()) for f in
+                  [p.doc(n) for n in ("SRS.md", "URD.md", "UC.md", "backlog.md", "test-cases.md")]
+                  + sorted(p.doc_dir("fsd").rglob("*.md")) + [p.ui / "flows.md"] if f.exists()},
         "srs_split": p.srs_dir.is_dir(),
     }
 
@@ -86,11 +87,13 @@ def status_lines(p: Project, f: dict) -> list[str]:
         v, d, summary = f["history"]
         out.append(f"Lần cập nhật cuối: {v} ({d}) — {summary.strip()[:160]}")
     out.append(f"Màn chờ vẽ lại: {', '.join(f['pending']) or 'không'}")
-    folders = f["drive"].get("folders", {})
-    if folders.get("project"):
-        out.append(f"Drive: https://drive.google.com/drive/folders/{folders['project']} ({len(f['drive'].get('files', {}))} mục)")
+    root_url = p.config.get("drive", {}).get("root_url")
+    if root_url or f["drive"].get("files"):
+        out.append(f"Drive: {root_url or 'chưa gắn link thư mục gốc'} · {len(f['drive'].get('files', {}))} file đã đẩy")
+    if p.sprint:
+        out.append(f"Sprint hiện tại: {p.sprint}")
     out.append("File: " + ", ".join(f"{k} ({n} dòng)" for k, n in f["files"].items())
-               + ("" if f["srs_split"] or not f["files"].get("docs/SRS.md") else " — SRS chưa tách srs/"))
+               + ("" if f["srs_split"] or not f["files"].get("Document/SRS/SRS.md") else " — SRS chưa tách srs/"))
     if f["last_commit"]:
         out.append(f"Commit cuối: {f['last_commit'][:120]}")
     return out
@@ -101,23 +104,23 @@ def card(p: Project) -> Path:
     old = read(p.card)
     notes = old.split(END, 1)[1].strip() if END in old else "## Ghi chú (viết tay — giữ nguyên khi sinh lại thẻ)\n\n- "
     drive = f["drive"]
-    links = [f"- Thư mục: https://drive.google.com/drive/folders/{drive['folders']['project']}"] if drive.get("folders", {}).get("project") else []
-    links += [f"- {k}: {v['url']}" for k, v in sorted(drive.get("files", {}).items()) if "/" not in k]
+    links = [f"- Thư mục gốc của dự án (user tạo): {u}" for u in [p.config.get("drive", {}).get("root_url")] if u]
+    links += [f"- {k}: {v['url']}" for k, v in sorted(drive.get("files", {}).items())]
     body = [f"# {f['title']} (`{p.slug}`)", "", START,
             "> Sinh bởi `python tools/project.py card " + p.slug + "` — không sửa tay đoạn này. Đọc thẻ này TRƯỚC khi mở tài liệu lớn.", "",
             *[f"- {ln}" for ln in status_lines(p, f)[1:]], "",
             "## Bản đồ file", "",
             "| Cần | Mở | Ghi chú |", "|---|---|---|",
-            "| Yêu cầu hợp nhất mới nhất | `input/_tong-hop.md` | Nguồn ưu tiên khi có |",
-            "| Lịch sử nạp / khác biệt | `input/_manifest.md`, `input/_changes/` | Đọc change report mới nhất, không đọc hết |",
-            "| FR / NFR / SCR / AS / OQ | `docs/SRS.md` (hoặc `docs/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |",
-            "| User story / Use case | `docs/URD.md`, `docs/UC.md` | `grep -n \"^#### US-07\"` rồi Read đoạn đó |",
-            "| Backlog | `docs/backlog.md` → `exports/backlog.csv` | |",
-            "| Mã gốc của khách (nếu nhập URD/FSD) | `docs/doi-chieu-ma.md` | `grep -n \"REQ-012\"` → mã mới |",
-            "| Test case | `docs/test-cases.md` → `exports/test-cases.csv` | Tra `grep -n \"^### FR-07\"`; ma trận phủ ở mục 6 |",
-            "| Màn hình | `ui/flows.md`, `ui/screens/SCR-xx-*.html` | Chỉ mở ảnh `ui/png/` khi cần review |",
-            "| Sơ đồ | `diagrams/` (`swimlanes/*.json` là nguồn) | |",
-            "| File giao khách | `exports/` | Sinh ra — không sửa tay |", ""]
+            "| Biên bản / tài liệu khảo sát | `Document/Bien_Ban_Khao_Sat/` (`_tong-hop.md` là bản hợp nhất — nguồn ưu tiên) | Lịch sử nạp: `_manifest.md`, `_changes/` — đọc change report mới nhất |",
+            "| URD (+ brainstorm) | `Document/URD/` | `grep -n \"^#### US-07\"` rồi Read đoạn đó |",
+            "| SRS | `Document/SRS/SRS.md` (nguồn `Document/SRS/srs/*.md`) | Tra mã → file: `build_srs.py <du-an> --index`; Read theo offset |",
+            "| FSD | `Document/FSD/` (theo sprint: `FSD/Sprint <n>/`) | `grep -n \"^#### \"` để xem mục |",
+            "| Use case / Backlog | `Document/Use_Case/UC.md`, `Document/Backlog/backlog.md` | |",
+            "| Test case | `Document/Test_Case/` (theo sprint: `Test_Case/Sprint <n>/`) | Ma trận phủ ở mục 6 |",
+            "| Mã gốc của khách (nếu nhập URD/FSD) | `Document/doi-chieu-ma.md` | `grep -n \"REQ-012\"` → mã mới |",
+            "| Sơ đồ | `Diagram/Flow/` (`swimlanes/*.json` là nguồn) | |",
+            "| Màn hình | `Diagram/Wireframe/flows.md`, `screens/SCR-xx-*.html` | Chỉ mở ảnh `png/` khi cần review |",
+            "| File Word / CSV xuất ra | `.output/` (không commit) | Đẩy lên Drive: hỏi link thư mục mỗi lần |", ""]
     if links:
         body += ["## Google Drive", "", *links, ""]
     body += [END, "", notes, ""]

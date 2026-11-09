@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kiểm tra projects/<du-an>/docs/test-cases.md, sinh ma trận phủ (RTM) và xuất exports/test-cases.csv.
+"""Kiểm tra projects/<du-an>/Document/Test_Case/test-cases.md, sinh ma trận phủ (RTM) và xuất .output/test-cases.csv.
 
 Cách dùng:
     python .claude/skills/write-testcase/scripts/check_tc.py <du-an>

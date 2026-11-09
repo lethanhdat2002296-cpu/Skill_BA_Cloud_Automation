@@ -1,6 +1,6 @@
 ---
 name: write-usecase
-description: Viết Use Case UC-xx dạng fully-dressed (tác nhân, kịch bản chính, nhánh 3a, include/extend) + sơ đồ use case + ma trận US ↔ UC ↔ FR → docs/UC.md. Dùng sau URD hoặc khi user nói "viết use case".
+description: Viết Use Case UC-xx dạng fully-dressed (tác nhân, kịch bản chính, nhánh 3a, include/extend) + sơ đồ use case + ma trận US ↔ UC ↔ FR → Document/Use_Case/UC.md. Dùng sau URD hoặc khi user nói "viết use case".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ---
 
@@ -9,9 +9,9 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 Use case mô tả **cách tác nhân đạt một mục tiêu** qua tương tác với hệ thống, gồm cả các nhánh thất bại. User story (URD) nói *cần gì, để làm gì*; use case nói *diễn ra thế nào, sai thì sao*; FR (SRS) nói *hệ thống phải làm gì*. Chuỗi truy vết: US → UC → FR.
 
 ## Input
-- `projects/<du-an>/docs/URD.md` (bắt buộc — chưa có thì chạy `write-urd` trước): vai trò, user story, AC, mục 4 quy trình TO-BE, AS/OQ.
-- `projects/<du-an>/docs/brainstorm.md` mục quy trình và ngoại lệ; `diagrams/swimlanes/*.json` nếu có.
-- `projects/<du-an>/input/` chỉ để tra chi tiết.
+- `projects/<du-an>/Document/URD/URD.md` (bắt buộc — chưa có thì chạy `write-urd` trước): vai trò, user story, AC, mục 4 quy trình TO-BE, AS/OQ.
+- `projects/<du-an>/Document/URD/brainstorm.md` mục quy trình và ngoại lệ; `Diagram/Flow/swimlanes/*.json` nếu có.
+- `projects/<du-an>/Document/Bien_Ban_Khao_Sat/` chỉ để tra chi tiết.
 
 ## Cách làm
 1. Đọc `template-uc.md` (khung) và `references.md` (nguyên tắc, ví dụ). Giữ cấu trúc mục, thay hết `{{…}}`.
@@ -46,4 +46,4 @@ python .claude/skills/write-usecase/scripts/check_uc.py <du-an> --write-matrix
 US đổi / thêm / bỏ → sửa đúng UC liên quan bằng `Edit`; UC bị bỏ giữ heading + `**[Đã bỏ — v<ver>]**` và lý do. Tăng phiên bản trong bảng thuộc tính UC.md cùng phiên bản SRS. Chạy lại `check_uc.py --write-matrix`.
 
 ## Output
-`projects/<du-an>/docs/UC.md` (+ sơ đồ render vào `diagrams/uc-NN.png` khi xuất docx: `to_docx.py <du-an> --src UC.md`).
+`projects/<du-an>/Document/Use_Case/UC.md` (+ sơ đồ render vào `Diagram/Flow/uc-NN.png` khi xuất docx: `to_docx.py <du-an> --src UC.md`).
