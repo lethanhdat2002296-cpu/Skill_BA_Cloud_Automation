@@ -65,24 +65,6 @@
       "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
       "synced_at": "2026-11-09 04:58",
       "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
-    },
-    "FSD/Sprint 4/Lead_and_Contact_Management": {
-      "file_id": "1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ",
-      "url": "https://drive.google.com/file/d/1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FSD] Lead and Contact Management - Sprint 4.docx",
-      "version": "",
-      "source_sha256": "b2725420a391f226294e1c787bdd62e1ec5a6aec354f70936abe610711e7ef3f",
-      "synced_at": "2026-11-09 07:34"
-    },
-    "FSD/Sprint 4/Lead_and_Contact_Management_VI": {
-      "file_id": "1nTuKWdEnhbMrUzs_jr4FZFivkxZlct78",
-      "url": "https://drive.google.com/file/d/1nTuKWdEnhbMrUzs_jr4FZFivkxZlct78/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FSD] Lead and Contact Management (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "424235bf0584eb159c747f415c5a45f20981db13526ad97f5601df48c60e2b22",
-      "synced_at": "2026-11-09 07:47"
     }
   },
   "folders_used": {
@@ -108,5 +90,19 @@
       ],
       "last_used": "2026-11-09 07:47"
     }
-  }
+  },
+  "history": [
+    {
+      "action": "trash",
+      "keys": [
+        "FSD/Sprint 4/Lead_and_Contact_Management",
+        "FSD/Sprint 4/Lead_and_Contact_Management_VI"
+      ],
+      "ids": [
+        "1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ",
+        "1nTuKWdEnhbMrUzs_jr4FZFivkxZlct78"
+      ],
+      "note": "Bản nháp Sprint 4 — user yêu cầu xoá 09/11/2026"
+    }
+  ]
 }
