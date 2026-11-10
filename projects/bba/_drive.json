@@ -389,6 +389,87 @@
       "version": "0.1",
       "source_sha256": "4e322fc56568af839bbf99a312f57814916b13f60a22558592d904786d7ef61b",
       "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-89_GIRO_Accounts_List_VI": {
+      "file_id": "1YZr77f7RA_QqXVgmrRbr68LQPNC0WEAx",
+      "url": "https://drive.google.com/file/d/1YZr77f7RA_QqXVgmrRbr68LQPNC0WEAx/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-89 GIRO accounts – list (Non-CDA / CDA / Refund) & filters (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "6804d09c33d469989f99aad55380ab6cfe62ba66c1f40569f74e7087ca2bbd2d",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-90_GIRO_Mandate_Setup_VI": {
+      "file_id": "1DHJQGHqmE-zo9QoRVBxq1YwVANZwiXUp",
+      "url": "https://drive.google.com/file/d/1DHJQGHqmE-zo9QoRVBxq1YwVANZwiXUp/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-90 GIRO mandate – set up for a child (eGIRO / manual) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5f65237501cb7323514dac0e885cd9588859cf5fff86a43b143743daf949cc10",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-91_GIRO_Mandate_Status_Tracking_VI": {
+      "file_id": "1OpLP8m9y9BAHfBSURrJv3WsVrvl7egoC",
+      "url": "https://drive.google.com/file/d/1OpLP8m9y9BAHfBSURrJv3WsVrvl7egoC/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-91 GIRO mandate status tracking (Not set up/Pending/Rejected/Terminated) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "bac3afb7e6a86bfc2ca172da6e8662e4eff1978d01d61efba761bef4d194f485",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-92_Resend_Mandate_Request_VI": {
+      "file_id": "1dx07-8EN_rr6KkZTEKuxyZOKlHosZL3r",
+      "url": "https://drive.google.com/file/d/1dx07-8EN_rr6KkZTEKuxyZOKlHosZL3r/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-92 Resend mandate request to parent (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "74aa171b050f23686f33ab36e611c860ba310bfb5398e83163f4fcf98f99a3b0",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-93_Recreate_Mandate_VI": {
+      "file_id": "12OzdUzJL0UZ6vTjnbztojpPQiqA8vG8r",
+      "url": "https://drive.google.com/file/d/12OzdUzJL0UZ6vTjnbztojpPQiqA8vG8r/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-93 Recreate mandate (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "a2f5235e63453e0003d61db4db2a4b468c7a8bc7d28343d54220692035e4f71d",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-94_Import_GIRO_Mandates_VI": {
+      "file_id": "1wh_u_0CaApWjB0P3VhqkvL0lMS0ttU3C",
+      "url": "https://drive.google.com/file/d/1wh_u_0CaApWjB0P3VhqkvL0lMS0ttU3C/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-94 Import GIRO mandates (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "619f7887d6409cbfe52b97d9ed87f4a42e7df7023ab6cd652765cda798f6950b",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-95_Subsidy_Per_Child_List_VI": {
+      "file_id": "1-uWEgjbSnlNBnKYCJoDrJekuYI4uX_yB",
+      "url": "https://drive.google.com/file/d/1-uWEgjbSnlNBnKYCJoDrJekuYI4uX_yB/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-95 Subsidy per child – list & inline edit (SCFA type, subsidy, additional, FA, expiry, renewal) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ffe4634fb8f4ddf9cffe3cabc938f11a56582ef896eecb17adb37f288a0fe5fc",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-96_Subsidy_Download_Template_VI": {
+      "file_id": "1SWN9E2jqR3VfHWpIYzMrsn2fexbjbwnC",
+      "url": "https://drive.google.com/file/d/1SWN9E2jqR3VfHWpIYzMrsn2fexbjbwnC/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-96 Subsidy – download template (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ea022fe1bc1063f70bfe5d9eb5f13111ec388333bcf79feaf4ae0760323e1367",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-97_Subsidy_Upload_Bulk_Import_VI": {
+      "file_id": "1CPvhMZp7wU9mT4DaTZBS1kKoddaq8_vQ",
+      "url": "https://drive.google.com/file/d/1CPvhMZp7wU9mT4DaTZBS1kKoddaq8_vQ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-97 Subsidy – upload file (bulk import) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "27b459aaecc173c2903ed2f47a9393a15b55c32de3e92267557986b0435677ba",
+      "synced_at": "2026-11-10 10:47"
     }
   },
   "folders_used": {
@@ -412,7 +493,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 10:40"
+      "last_used": "2026-11-10 10:47"
     }
   },
   "history": [
