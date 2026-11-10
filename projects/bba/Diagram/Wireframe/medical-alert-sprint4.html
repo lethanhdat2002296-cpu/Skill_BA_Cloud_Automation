@@ -1,0 +1,437 @@
+<title>Medical Alert Banner</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { flex: 1; padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+/* child record */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 84px; }
+.kpi small, .lbl { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.kpi.em { border: 2px solid var(--accent); }
+.kpi.warn { border: 2px solid var(--ink); background: var(--fill); }
+.kpi.warn .txt { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.kpis { align-items: start; }
+.ident { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; font-size: 13.5px; }
+.ident .help { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.pill-tabs { display: flex; flex-wrap: wrap; gap: 2px; background: var(--fill); border-radius: 10px; padding: 4px; align-self: flex-start; }
+.pill-tabs span { padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); }
+.pill-tabs span.on { background: var(--paper); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.menu { position: absolute; right: 26px; top: 64px; width: 240px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: 6px; z-index: 4; font-size: 13px; }
+.menu div { padding: 8px 10px; border-radius: 6px; }
+.menu div:hover { background: var(--fill); }
+.big-av { width: 44px; height: 44px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; color: var(--muted); flex: none; }
+/* medical alert — the one non-grey colour, used only for the feature itself */
+:root { --alert: #b42318; --alert-soft: #fdecea; --alert-line: #f3b4ae; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --alert: #ff8f84; --alert-soft: #3a1f1d; --alert-line: #6b302b; } }
+:root[data-theme="dark"] { --alert: #ff8f84; --alert-soft: #3a1f1d; --alert-line: #6b302b; }
+.mbanner { border: 1px solid var(--alert-line); border-left: 6px solid var(--alert); background: var(--alert-soft); border-radius: 10px; padding: 10px 14px; display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 4px 12px; align-items: start; font-size: 13.5px; }
+.mbanner .ic { color: var(--alert); font-size: 18px; line-height: 1.2; grid-row: span 3; }
+.mbanner b.t { color: var(--alert); }
+.mbanner .also { color: var(--ink); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.mbanner .meta { font-size: 12px; color: var(--muted); grid-column: 2; }
+.mbanner .act { grid-column: 3; grid-row: 1 / span 3; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; font-size: 12.5px; font-weight: 600; }
+.mbanner .act u { color: var(--alert); }
+.mbanner .ns { grid-column: 2; font-size: 12.5px; font-weight: 600; color: var(--alert); }
+.mflag { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-size: 12px; font-weight: 700; }
+.mflag.sev { background: var(--alert); color: #fff; }
+.mflag.med { border: 1.5px solid var(--alert); color: var(--alert); background: transparent; }
+.mchip { display: inline-flex; gap: 4px; align-items: center; font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.mchip.sev { background: var(--alert); color: #fff; }
+.mchip.med { border: 1px solid var(--alert); color: var(--alert); }
+tr.sevrow td:first-child { box-shadow: inset 4px 0 0 var(--alert); }
+.tip { position: absolute; z-index: 4; width: 340px; background: var(--ink); color: var(--paper); border-radius: 8px; padding: 9px 11px; font-size: 12.5px; box-shadow: 0 10px 28px rgba(0,0,0,.2); }
+.pop { position: absolute; z-index: 4; width: 380px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.18); font-size: 13px; display: grid; grid-template-columns: 116px minmax(0,1fr); gap: 8px 12px; }
+.pop dt { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.pop dd { margin: 0; }
+.pop .foot { grid-column: 1 / -1; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; display: flex; justify-content: space-between; }
+.sumline { border: 1px solid var(--alert-line); background: var(--alert-soft); border-radius: 8px; padding: 8px 12px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+.sumline b { color: var(--alert); }
+.app.phone-host { grid-template-columns: 1fr; place-items: center; background: var(--fill); padding: 24px 0; min-height: 760px; }
+.phone { width: 390px; min-height: 720px; background: var(--paper); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,.1); }
+.phone .bar { padding: 14px 18px 10px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+.phone .bar b { font-size: 17px; }
+.phone .body { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.phone .li { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.phone .li small { display: block; color: var(--muted); font-size: 12px; }
+.phone .tabbar { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4,1fr); text-align: center; font-size: 11.5px; color: var(--muted); padding: 8px 0 12px; }
+.phone .sec { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.phone .mbanner { grid-template-columns: auto minmax(0,1fr); }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · FRD 3.1 Medical Alert Banner</span>
+    <h1>Medical alert banner — wireframe</h1>
+    <p>Red banner cho dị ứng mức Severe và Medical flag trên hồ sơ trẻ, danh sách trẻ, danh sách lớp, điểm danh và Teacher App. Khung BeeHive theo prototype bba-sms-crm và bba-teacher. Màu đỏ chỉ dùng cho cảnh báo y tế. Dữ liệu là dữ liệu mẫu; mức độ (Severe / Mild…) là giả định để minh hoạ.</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div>
+      <h2 id="scrTitle"></h2>
+      <div class="tickets" id="scrTickets"></div>
+    </div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const NAV = [
+  ["Home"], ["My approvals", "", 26],
+  ["#Children & families"], ["Children", "children"], ["Families"], ["Health & allergies"], ["Documents"], ["Authorised pickup"], ["Classes", "classes"],
+  ["#Operations"], ["Daily operations", "ops"], ["Learning"], ["Fees & payments"], ["Joining & leaving"], ["Communication"],
+  ["#Administration"], ["Users & permissions"], ["Settings"], ["History"]
+];
+function shell(active, body, who) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key && key === active ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>${who}</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><div class="search-top">⌕ Find a record<kbd>⌘ K</kbd></div><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const WHO = { hq: "Daniel Yeo · HQ Admin", cd: "Grace Tan · Centre Director", teacher: "Aisyah Rahman · Teacher", finance: "Alvin Goh · HQ Finance" };
+
+/* Sample children (names, classes and health text from the prototype; level = sample) */
+const K = {
+  ethan: { name: "Ethan Lim", id: "S1", init: "EL", age: "4y (4y 8m)", centre: "Small Wonder Tampines", cls: "Sunbeams", level: "N2", owner: "Serena Lim", lvl: "sev",
+    severe: ["Allergic to shellfish and nuts, including peanuts. EpiPen on file."],
+    other: ["Mild asthma, usually triggered by long periods of running or dusty rooms.", "Eczema behind both knees and inside both elbows; flares in humid weather."],
+    staff: "Reacted to a biscuit containing traces of nut on 3 Sep; mother informed the same afternoon. We now check packaging at snack time.", upd: "2026-09-18" },
+  caleb: { name: "Caleb Ho", id: "S7", init: "CH", age: "2y (2y 8m)", centre: "Small Wonder Tampines", cls: "Bumblebees", level: "Playgroup", owner: "Mrs Ho", lvl: "sev", notSet: 1,
+    severe: ["Egg allergy. Please do not serve food containing egg."], other: [], upd: "2026-09-10" },
+  rayyan: { name: "Rayyan Idris", id: "S5", init: "RI", age: "5y (5y 7m)", centre: "Small Wonder Tampines", cls: "Honeycombs", level: "K1", owner: "Mrs Idris", lvl: "med",
+    severe: [], other: ["Asthma; coughing can start after outdoor play on very hot afternoons."], upd: "2026-07-21" },
+  noah: { name: "Noah Tan", id: "S3", init: "NT", age: "4y (4y 9m)", centre: "Small Wonder Tampines", cls: "Sunbeams", level: "N2", lvl: "med",
+    severe: [], other: ["Receives speech therapy through the Early Intervention programme."], upd: "2026-09-03" }
+};
+const alertText = (c) => [...c.severe, ...c.other].join(" · ");
+const flag = (lvl) => lvl === "sev" ? '<span class="mflag sev" title="Severe">⚠</span>' : lvl === "med" ? '<span class="mflag med" title="Medical">⚠</span>' : '<span style="color:var(--muted)">—</span>';
+
+function banner(c, o = {}) {
+  if (c.lvl !== "sev") return "";
+  return `<div class="mbanner"><span class="ic">⚠</span>
+    <div><b class="t">Severe allergy:</b> ${c.severe.join(" · ")} <span class="anno">1</span></div>
+    <div class="act"><u>Open Health</u>${o.more || c.other.length ? "<u>Show more</u>" : ""}</div>
+    ${c.notSet ? '<div class="ns">Severity not set — treated as severe until the family chooses a severity. <span class="anno">3</span></div>' : ""}
+    ${c.other.length ? `<div class="also"><b>Also:</b> ${c.other.join(" · ")}</div>` : ""}
+    <div class="meta">Updated by the family on ${c.upd} · cannot be dismissed <span class="anno">2</span></div></div>`;
+}
+const TABS = ["Overview", "Enrolment", "Enrichment", "Guardians", "Attendance", "Finance", "Health", "Communication", "Documents", "History"];
+function childRecord(o) {
+  const c = K[o.child || "ethan"]; const role = o.role || "hq"; const medOk = role !== "finance"; const tab = o.tab || "Overview";
+  const nameIcon = c.lvl !== "none" ? (medOk ? flag(c.lvl) : '<span class="mflag sev" title="Medical alert on file">⚠</span> <span style="font-size:12px;color:var(--muted);font-weight:400">Medical alert on file</span> <span class="anno">4</span>') : "";
+  const head = `<div style="font-size:12.5px;color:var(--muted)">← Children</div>
+    <div class="ph"><div class="row" style="align-items:flex-start;gap:12px"><span class="big-av">${c.init}</span><div>
+      <h3>${c.name} <span style="font-size:13px;color:var(--muted);font-weight:400">${c.id}</span> ${nameIcon}</h3>
+      <div class="row" style="gap:8px;margin-top:4px;font-size:13px"><span class="badge solid">Enrolled</span><span>${c.centre} · ${c.cls}</span><span style="color:var(--muted)">·</span><span>Owner · <u>${c.owner}</u></span></div></div></div>
+      <span class="btn">Actions ⋯</span></div>`;
+  const ban = medOk ? banner(c, o) : "";
+  const kp = `<div class="kpis${medOk ? "" : " three"}"><div class="kpi"><small>Date of birth</small>2022-02-14 · 4y 8m</div><div class="kpi"><small>Citizenship</small>Singapore Citizen</div><div class="kpi"><small>Payment method</small>GIRO</div>${medOk ? `<div class="kpi warn"><small>Medical alert</small><span class="txt">${alertText(c)}</span></div>` : ""}</div>`;
+  const tabs = `<div class="pill-tabs">${TABS.map(t => `<span${t === tab ? ' class="on"' : ""}>${t}</span>`).join("")}</div>`;
+  const body = tab === "Attendance"
+    ? `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:15px">Attendance · September 2026</b><span class="input select filled" style="width:220px">2026-09-01 – 2026-09-30</span></div>
+       <table class="t"><thead><tr><th>Date</th><th>Status</th><th>In</th><th>Out</th></tr></thead><tbody>
+       <tr><td>2026-09-17</td><td>Present</td><td>08:12</td><td>—</td></tr><tr><td>2026-09-16</td><td>Present</td><td>08:05</td><td>18:10</td></tr><tr><td>2026-09-15</td><td>Present</td><td>08:20</td><td>18:02</td></tr></tbody></table></div></div>`
+    : `<div class="card"><div class="card-body"><b style="font-size:15px">Identity</b><div class="ident"><div><span class="lbl">Name used day to day</span>${c.name}</div><div><span class="lbl">Date of birth</span>2022-02-14 · 4 years (4y 8m)</div><div><span class="lbl">Citizenship</span>Singapore Citizen</div></div></div></div>`;
+  return head + ban + kp + tabs + body;
+}
+
+const LIST = [
+  ["Adam Faris", "AF", "4y (4y 7m)", "The Schoolhouse Bangsar", "Angsana", "N2", "none"],
+  ["Caleb Ho", "CH", "2y (2y 8m)", "Small Wonder Tampines", "Bumblebees", "Playgroup", "sev", "caleb"],
+  ["Chloe Sim", "CS", "6y (6y 7m)", "Small Wonder Bukit Timah", "Blossom", "K2", "none"],
+  ["Ethan Lim", "EL", "4y (4y 8m)", "Small Wonder Tampines", "Sunbeams", "N2", "sev", "ethan"],
+  ["Hana Yusof", "HY", "2y (2y 9m)", "Small Wonder Mountbatten", "Acorns", "Playgroup", "none"],
+  ["Noah Tan", "NT", "4y (4y 9m)", "Small Wonder Tampines", "Sunbeams", "N2", "med", "noah"],
+  ["Rayyan Idris", "RI", "5y (5y 7m)", "Small Wonder Tampines", "Honeycombs", "K1", "med", "rayyan"],
+  ["Zara Aziz", "ZA", "3y (3y 9m)", "Small Wonder Damansara", "Rimba", "N1", "none"]
+];
+function childrenList(o) {
+  const role = o.role || "hq"; const medOk = role !== "finance";
+  let rows = LIST; if (o.filter === "severe") rows = rows.filter(r => r[6] === "sev");
+  const filters = `<div class="row">${["Search", "Centre: All centres", "Brand: Any brand", "Level: Any level", "Class: Any class", "Status: Enrolled"].map(f => `<span class="input${f === "Search" ? "" : " select"}" style="min-width:${f === "Search" ? 160 : 120}px">${f}</span>`).join("")}
+    ${medOk ? `<span class="input select${o.filter ? " active" : ""}" style="min-width:190px">Medical alert: ${o.filter === "severe" ? "Severe allergy" : "Any"}</span><span class="anno">2</span>` : ""}<span class="btn" style="margin-left:auto">⇩ Export (${rows.length}) <span class="anno">4</span></span></div>`;
+  const tr = rows.map(r => `<tr><td><span class="big-av" style="width:30px;height:30px;font-size:11px">${r[1]}</span></td><td><b>${r[0]}</b></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>Enrolled</td><td style="text-align:center;position:relative">${flag(r[6])}</td><td><u>Open record</u></td></tr>`).join("");
+  const tipTarget = LIST.findIndex(r => r[0] === "Ethan Lim");
+  const tip = o.tip ? `<div class="tip" style="right:120px;top:${48 + ((o.filter ? 1 : tipTarget) + 1) * 52}px">${medOk ? "Medical alert: " + alertText(K.ethan) : "Medical alert on file"}</div>` : "";
+  return `<div class="ph"><div><h3>Children</h3><p>Every child in your centres.</p></div><span class="btn primary">New child</span></div>${filters}
+    <div style="position:relative"><table class="t"><thead><tr><th>Photo</th><th class="s">Name</th><th>Age</th><th>Centre</th><th>Class</th><th>Level</th><th>Status</th><th style="text-align:center">Medical <span class="anno">1</span></th><th></th></tr></thead><tbody>${tr}</tbody></table>${tip}</div>
+    <div class="legend"><span>${flag("sev")} Severe allergy</span><span>${flag("med")} Medical</span><span>— None</span>${o.tip ? '<span class="anno">3</span> Rê chuột: nội dung (vai trò được phép) hoặc “Medical alert on file”' : ""}</div>
+    <div class="pager"><span>1–${rows.length} of ${rows.length}</span><span class="pg"><span class="input select" style="height:26px">20 rows</span></span></div>`;
+}
+
+function classChildren() {
+  const kids = [["Ethan Lim", "EL", "sev"], ["Noah Tan", "NT", "med"]];
+  return `<div style="font-size:12.5px;color:var(--muted)">← Classes</div>
+    <div class="ph"><div><h3>N2 · Sunbeams <span style="font-size:13px;color:var(--muted);font-weight:400">Room 1</span></h3><p>Small Wonder Tampines · Owner · Aisyah Rahman</p></div><span class="btn">Actions ⋯</span></div>
+    <div class="kpis three"><div class="kpi"><small>Children enrolled</small>2 of 20<br><span style="color:var(--muted);font-size:12px">18 places left</span></div><div class="kpi"><small>Level</small>N2</div><div class="kpi"><small>Nap window</small>13:00–14:30</div></div>
+    <div class="pill-tabs"><span>Overview</span><span class="on">Children</span><span>History</span></div>
+    <div class="sumline"><span style="color:var(--alert)">⚠</span><span><b>2 children with a medical alert · 1 severe</b></span><u style="margin-left:auto;font-weight:600">Allergy list for this class</u><span class="anno">1</span></div>
+    <div class="card"><div class="card-body"><b style="font-size:15px">Children placed here</b>
+      <table class="t"><thead><tr><th>Child</th><th>Medical</th><th>Level</th><th>Start date</th><th></th></tr></thead><tbody>
+      ${kids.map(k => `<tr class="${k[2] === "sev" ? "sevrow" : ""}"><td><div class="who"><span class="big-av" style="width:30px;height:30px;font-size:11px">${k[1]}</span><b>${k[0]}</b></div></td><td>${k[2] === "sev" ? '<span class="mchip sev">⚠ Severe</span>' : '<span class="mchip med">⚠ Medical</span>'} <span class="anno">2</span></td><td>N2</td><td>2026-01-05</td><td><u>Open record</u></td></tr>`).join("")}
+      </tbody></table></div></div>`;
+}
+
+function attendance(o) {
+  const rows = [["ethan", "08:12"], ["noah", "09:34"]];
+  const tr = rows.map(([k, t]) => { const c = K[k]; return `<tr class="${c.lvl === "sev" ? "sevrow" : ""}"><td><b>${c.name}</b><div style="margin:3px 0">${c.lvl === "sev" ? '<span class="mchip sev">⚠ Severe</span>' : '<span class="mchip med">⚠ Medical</span>'}</div><small style="color:var(--muted)">${c.age.split(" (")[1].replace(")", "")}</small></td><td>Main</td>
+     <td><div class="row" style="gap:4px"><span class="badge solid">Present</span><span class="badge out">Absent</span><span class="badge out">On leave</span><span class="badge out">Request void</span></div></td><td>${t}</td><td>—</td><td><span class="btn sm">Sign out</span></td><td class="dim">36.6°C · On arrival · ${t}</td></tr>`; }).join("");
+  const c = K.ethan;
+  const pop = o.detail ? `<dl class="pop" style="left:150px;top:96px">
+     <dt>Allergies</dt><dd><span class="mchip sev">Severe</span> ${c.severe[0]}</dd>
+     <dt>Respiratory</dt><dd>${c.other[0]}</dd><dt>Skin</dt><dd>${c.other[1]}</dd><dt>Medical history</dt><dd>—</dd><dt>Diet</dt><dd>—</dd>
+     <dt>Note from staff</dt><dd>${c.staff}</dd>
+     <div class="foot"><span>Written by the family in the Parent app · last updated 18 Sep 2026</span><u style="color:var(--alert);font-weight:600">Open Health</u></div></dl>` : "";
+  return `<div class="ph"><div><h3>Daily Operations — attendance, sign-in and sign-out</h3><p>Today 2026-09-17 · Sunbeams · Small Wonder Tampines</p></div></div>
+    <div class="row"><span class="input select filled" style="min-width:180px">Centre: All my centres</span><span class="input select filled" style="min-width:300px">Class: Sunbeams · N2 · Small Wonder Tampines</span></div>
+    <div class="tabs">${["Class attendance", "Three streams", "School bus", "Late arrival & pickup", "Attendance over time", "Attendance report"].map((t, i) => `<span class="tab${i === 0 ? " on" : ""}">${t}</span>`).join("")}</div>
+    <div class="sumline"><span style="color:var(--alert)">⚠</span><span><b>2 children with a medical alert in Sunbeams · 1 severe</b> — select to show only these children</span><span class="anno">3</span></div>
+    <div style="position:relative"><table class="t"><thead><tr><th>Child <span class="anno">1</span></th><th>Stream</th><th>Attendance</th><th>Arrival</th><th>Departure</th><th>Sign in / sign out</th><th>Screening</th></tr></thead><tbody>${tr}</tbody></table>${pop}</div>
+    <div style="font-size:12.5px;color:var(--muted)">2 children on temporary withdrawal are not shown. ${o.detail ? '<span class="anno">2</span> Chọn chip mở chi tiết' : ""}</div>`;
+}
+
+function phone(title, body) {
+  return `<div class="app phone-host"><div class="phone"><div class="bar"><span>‹</span><b>${title}</b></div><div class="body">${body}</div><div class="tabbar"><span>Home</span><span>Updates</span><span>Messages</span><span>More</span></div></div></div>`;
+}
+const TA = [["Aiden Tan Wei Jie", "AT", "1 January 2022", ""], ["Nurul Batrisyia binti Haziq", "NB", "8 June 2022", ""], ["Chloe Lim Xin Yi", "CL", "15 November 2022", "sev"], ["Dhanya Krishnan", "DK", "22 April 2022", ""], ["Ezra Goh Kai Le", "EG", "2 September 2022", "sev"], ["Farah Amani binti Rizal", "FA", "9 February 2022", ""], ["Gabriel Ong Jun Hao", "GO", "16 July 2022", ""], ["Hana Nakamura Lee", "HN", "23 December 2022", "med"], ["Isaac Muthu Kumar", "IM", "3 May 2022", ""]];
+function teacherStudents() {
+  return phone("Student list", `<span class="sec">Nursery 2</span>${TA.map(s => `<div class="li"><span class="big-av" style="width:34px;height:34px;font-size:11px">${s[1]}</span><div style="flex:1">${s[0]}<small>Born ${s[2]}</small>${s[3] === "sev" ? '<span class="mchip sev" style="margin-top:3px">⚠ Severe allergy</span>' : s[3] === "med" ? '<span class="mchip med" style="margin-top:3px">Medical</span>' : ""}</div>${s[3] ? '<span class="anno">1</span>' : ""}</div>`).join("")}`);
+}
+function teacherChild() {
+  return phone("Chloe Lim Xin Yi", `
+    <div class="mbanner"><span class="ic">⚠</span><div><b class="t">Severe allergy:</b> Allergic to peanuts and all tree nuts. Her lips swell and she gets wheezy within minutes. EpiPen on file with the centre nurse. <span class="anno">1</span></div>
+      <div class="also"><b>Also:</b> Mild asthma, worse in cold or air-conditioned rooms.</div><div class="meta">Updated by the family on 18 Sep · cannot be dismissed</div></div>
+    <div class="row" style="gap:12px;flex-wrap:nowrap"><span class="big-av">CL</span><div><b>Chloe Lim Xin Yi</b><div style="font-size:12.5px;color:var(--muted)">Nursery 2 · Room 3, Level 2 · Born 15 November 2022</div></div></div>
+    <span class="sec">Health record <span class="anno">2</span></span>
+    <div style="font-size:13px"><span class="lbl">Allergies</span>Allergic to peanuts and all tree nuts. Her lips swell and she gets wheezy within minutes. EpiPen on file with the centre nurse.</div>
+    <div style="font-size:13px"><span class="lbl">Respiratory conditions</span>Mild asthma, worse in cold or air-conditioned rooms.</div>
+    <div style="font-size:12px;color:var(--muted)">Last updated by Serene Lim (mother), 18 Sep</div>
+    <span class="sec">Height &amp; weight</span><div style="font-size:13px">95 cm · 14.7 kg · Measured 2 Sep · Term 3</div>
+    <span class="sec">Parents</span><div style="font-size:13px">Mrs Serene Lim · Mother</div>`);
+}
+
+const SCREENS = [
+  { id: "scr-01", code: "SCR-01", name: "Child record — red banner", slug: "child-banner", tickets: "US-001, US-002 — banner dưới header, hiện trên mọi tab",
+    states: [
+      ["default", "HQ Admin · Severe", () => shell("children", childRecord({}), WHO.hq)],
+      ["tab", "Teacher · tab Attendance", () => shell("children", childRecord({ role: "teacher", tab: "Attendance" }), WHO.teacher)],
+      ["not-set", "Severity not set", () => shell("children", childRecord({ child: "caleb", role: "cd" }), WHO.cd)],
+      ["medical", "Mức Medical (không banner)", () => shell("children", childRecord({ child: "rayyan", role: "cd" }), WHO.cd)],
+      ["finance", "HQ Finance (chỉ icon)", () => shell("children", childRecord({ role: "finance" }), WHO.finance)]],
+    notes: [["Red banner: Severe allergy (nguyên văn phụ huynh), Also: các mục khác, Open Health; tối đa 2 dòng rồi Show more.", "FR-008 · FR-009 · FR-010"], ["Không có nút đóng; hiện trên mọi tab và cả khi trẻ đã Withdrawn.", "FR-011 · FR-014 · BR-005"], ["Dị ứng chưa chọn mức độ tính như Severe.", "FR-002 · VAL-001 · OQ-MAB-02"], ["Vai trò không được xem chi tiết y tế: chỉ biểu tượng ⚠ “Medical alert on file”.", "FR-012 · VAL-002 · OQ-MAB-04"]] },
+  { id: "scr-02", code: "SCR-02", name: "Children list — cột Medical", slug: "children-list", tickets: "US-003 — cột Medical, bộ lọc Medical alert, xuất",
+    states: [
+      ["default", "HQ Admin", () => shell("children", childrenList({}), WHO.hq)],
+      ["tooltip", "Rê chuột lên ⚠", () => shell("children", childrenList({ tip: 1 }), WHO.hq)],
+      ["severe", "Lọc Severe allergy", () => shell("children", childrenList({ filter: "severe" }), WHO.cd)],
+      ["finance", "HQ Finance", () => shell("children", childrenList({ role: "finance", tip: 1 }), WHO.finance)]],
+    notes: [["Cột Medical: ⚠ đỏ đặc = Severe, ⚠ viền = Medical, — = None.", "FR-015 · BR-007"], ["Bộ lọc Medical alert: Any · Has a medical alert · Severe allergy · No medical alert; ẩn với vai trò không được xem chi tiết.", "FR-017 · AS-MAB-05"], ["Chú thích: nội dung cảnh báo hoặc “Medical alert on file”.", "FR-016"], ["Xuất: cột Medical chỉ Severe / Yes / No, ghi log.", "FR-018 · BR-008"]] },
+  { id: "scr-03", code: "SCR-03", name: "Class — tab Children", slug: "class-children", tickets: "US-003 — flag và tóm tắt theo lớp",
+    states: [["default", "Teacher", () => shell("classes", classChildren(), WHO.teacher)]],
+    notes: [["Dòng tóm tắt và liên kết Allergy list for this class.", "FR-019"], ["Chip Severe / Medical cạnh tên; hàng Severe có vạch đỏ.", "FR-019 · FR-020"]] },
+  { id: "scr-04", code: "SCR-04", name: "Class attendance", slug: "class-attendance", tickets: "US-004 — chip, cửa sổ chi tiết, tóm tắt lớp",
+    states: [["default", "Teacher", () => shell("ops", attendance({}), WHO.teacher)], ["detail", "Cửa sổ chi tiết", () => shell("ops", attendance({ detail: 1 }), WHO.teacher)]],
+    notes: [["Chip ⚠ Severe / ⚠ Medical cạnh tên; hàng Severe có vạch đỏ.", "FR-021 · FR-024"], ["Chọn chip: Allergies (mức độ), Respiratory, Skin, Medical history, Diet, Note from staff, Open Health.", "FR-022"], ["Dòng tóm tắt lọc bảng chỉ còn trẻ có cảnh báo.", "FR-023 · VAL-004"]] },
+  { id: "scr-05", code: "SCR-05", name: "Teacher App — Student list", slug: "teacher-students", tickets: "US-005 — tag Severe allergy / Medical",
+    states: [["default", "Nursery 2", () => teacherStudents()]],
+    notes: [["Tag dưới tên: ⚠ Severe allergy (đỏ), Medical (viền); trẻ None không có tag.", "FR-026 · FR-028"]] },
+  { id: "scr-06", code: "SCR-06", name: "Teacher App — Child profile", slug: "teacher-child", tickets: "US-005 — red banner trên cùng hồ sơ trẻ",
+    states: [["default", "Chloe Lim Xin Yi", () => teacherChild()]],
+    notes: [["Red banner trên cùng, không đóng được.", "FR-027 · BR-010"], ["Health record chỉ đọc trong Teacher App.", "BR-TCH-011"]] }
+];
+
+let current = { screen: "scr-01", state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = st[2]();
+  $("notes").innerHTML = s.notes.map(n => `<li>${n[0]} <span class="src">${n[1]}</span></li>`).join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : "scr-01", state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code, name: s.name, slug: s.slug, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>

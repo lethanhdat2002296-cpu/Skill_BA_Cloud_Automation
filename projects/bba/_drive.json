@@ -200,6 +200,15 @@
       "version": "",
       "source_sha256": "f15137ece5c30f1b6f483a9bcfd56fcf207983506a344f9c033418ae7bd19f15",
       "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI": {
+      "file_id": "1h2e39At9-KwjEQMU5qTL_o3QIWMz0Qum",
+      "url": "https://drive.google.com/file/d/1h2e39At9-KwjEQMU5qTL_o3QIWMz0Qum/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Medical Alert Banner (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5116f5569fc0f7ff3c8970f57aad9f378254e99b02576c3622e44d83d46ee7f4",
+      "synced_at": "2026-11-10 09:26"
     }
   },
   "folders_used": {
@@ -223,7 +232,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 09:15"
+      "last_used": "2026-11-10 09:26"
     }
   },
   "history": [
