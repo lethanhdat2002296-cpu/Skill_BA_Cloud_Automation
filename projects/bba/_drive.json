@@ -245,6 +245,69 @@
       "version": "0.1",
       "source_sha256": "a6daa5bd0fb85c4049e77762b62bd39ba803c244f95836b077efb3f35efecc82",
       "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
+      "file_id": "11Az5gJ0qAwfhX1PpUWO_RuxCtOzoBhm2",
+      "url": "https://drive.google.com/file/d/11Az5gJ0qAwfhX1PpUWO_RuxCtOzoBhm2/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-73 Handover recording (dropped off by / picked up by) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "374807edb0f5df42253ef6d787cd8302b3c69d7b2a0f51f6e38454e2812cdad6",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
+      "file_id": "124ociU6IvNv1rWwgD5JRzF3juA46bFVN",
+      "url": "https://drive.google.com/file/d/124ociU6IvNv1rWwgD5JRzF3juA46bFVN/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-74 Temperature readings (≥3/day) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "23f32bc3c4cb2930aa18f4dda1ca897729a4aec15a8256ac19231c0bda570407",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
+      "file_id": "1rOqmH6pDjyzSpQ8bCpUZSndhqCLxa6AO",
+      "url": "https://drive.google.com/file/d/1rOqmH6pDjyzSpQ8bCpUZSndhqCLxa6AO/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-75 Late flag (internal only) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2934996fd6ed985ab40e8fd528ed5e894170baa1b6d151b5b69bf6ae983609d4",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-76_Centre_Brand_Overview_Today_VI": {
+      "file_id": "1H-pYD5Bnm-i3lnHRcKWiAXxCNEmmUG8V",
+      "url": "https://drive.google.com/file/d/1H-pYD5Bnm-i3lnHRcKWiAXxCNEmmUG8V/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-76 Centre/brand overview today (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5e4861f149ce9da3ed40752f9015b7eaf58db61bed68c59da6d2a745b8c2817c",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-77_Attendance_Correction_VI": {
+      "file_id": "1fjTzT6lt6m2F7ZoiaFH9YhbEeoHaNm0F",
+      "url": "https://drive.google.com/file/d/1fjTzT6lt6m2F7ZoiaFH9YhbEeoHaNm0F/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-77 Attendance correction with reason (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "151a2236c992623ed95b499442baf04cea7537611762f5707f50be3b33faa8e8",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-78_Daily_Routines_Web_VI": {
+      "file_id": "1gSTY-AtrvneVfJmcHZSylUPsRsnVsUKy",
+      "url": "https://drive.google.com/file/d/1gSTY-AtrvneVfJmcHZSylUPsRsnVsUKy/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-78 Daily routines – view & edit (web) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "8530a05710daa931c5ccc55f2708f95fff7609a5acb775bc6a100de7331af49d",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-79_Staff_Clock_In_Out_VI": {
+      "file_id": "14rBik8NH6wK7NAZb4CL_SgkhGnWSIGWD",
+      "url": "https://drive.google.com/file/d/14rBik8NH6wK7NAZb4CL_SgkhGnWSIGWD/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-79 Staff clock-in / out (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "e51873b33f5df19c3306630236ba8e904c81faca341ffb23dbffa0f924d44ec2",
+      "synced_at": "2026-11-10 10:33"
     }
   },
   "folders_used": {
@@ -268,7 +331,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 10:27"
+      "last_used": "2026-11-10 10:33"
     }
   },
   "history": [
