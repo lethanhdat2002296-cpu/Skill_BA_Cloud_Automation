@@ -121,13 +121,13 @@
       "synced_at": "2026-11-10 04:23"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
-      "file_id": "1VbAmVxRTRA-iYH0Ov4Eoo-7dL6Eg-C4a",
-      "url": "https://drive.google.com/file/d/1VbAmVxRTRA-iYH0Ov4Eoo-7dL6Eg-C4a/view",
+      "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
+      "url": "https://drive.google.com/file/d/1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "7370d60445e8062a9fb994cf0b0f09da4f5a2b23dcb26122c28530475743d715",
-      "synced_at": "2026-11-10 05:05"
+      "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4 - v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "327bbc772ad6aa19f54c7f7ae4837e9143d06f09050baeed3d38b59557a5b180",
+      "synced_at": "2026-11-10 07:39"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
       "file_id": "1y1OlZnPl6oJX6h3pxRMy5qxtkS87Fpry",
@@ -247,6 +247,15 @@
         "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
         "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC"
       ]
+    },
+    {
+      "at": "2026-11-10 07:39",
+      "action": "upload new version, keep previous",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "kept": {
+        "file_id": "1VbAmVxRTRA-iYH0Ov4Eoo-7dL6Eg-C4a",
+        "version": "0.1"
+      }
     }
   ]
 }

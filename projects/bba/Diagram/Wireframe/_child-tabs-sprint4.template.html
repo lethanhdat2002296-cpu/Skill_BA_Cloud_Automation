@@ -268,33 +268,42 @@ function enrolment(state) {
 /* ---------- SCR-02 Enrichment ---------- */
 function enrichment(state) {
   if (state === "empty") return header("Enrichment", { name: "Adam Faris", id: "S17", init: "AF", centre: "The Schoolhouse Bangsar · Angsana", owner: "Mrs Faris" }) + seg(["Current", "Past"], "Current") + `<div class="empty"><span class="ico"></span><b>No enrichment programme for this child.</b><p>Enrichment classes are set up in Learning › Enrichment.</p><span class="btn">Open in Learning ↗</span></div>`;
-  const rows = [["Mandarin Explorers", "Enrichment", "Small Wonder Tampines", "Tuesday 15:30–16:15", "Li Wen", "2026-07-01", "—", "4 of 4"], ["Speech & Drama", "Enrichment", "Small Wonder Tampines", "Thursday 15:30–16:30", "Rachel Ong", "2026-07-01", "—", "3 of 4"]]
-    .map(r => `<tr><td><u style="font-weight:600">${r[0]}</u><br><span style="font-size:12px;color:var(--muted)">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td class="dim">${r[6]}</td><td>${r[7]}</td></tr>`).join("");
-  return header("Enrichment") + `<div class="row between">${seg(["Current (2)", "Past (1)"], "Current")}<span class="anno">1</span></div>` + card("Enrichment programmes",
-    `<table class="t"><thead><tr><th>Programme <span class="anno">2</span></th><th>Centre</th><th>Day and time</th><th>Trainer</th><th class="s">Start date</th><th>End date</th><th>Sessions this month</th></tr></thead><tbody>${rows}</tbody></table>`, "Open in Learning");
+  const past = state === "past";
+  const head = `<tr><th>Programme <span class="anno">2</span></th><th>Centre</th><th>Day and time</th><th>Trainer</th><th class="s">Start date</th><th>End date</th><th>${past ? "Ended how · reason <span class=\"anno\">3</span>" : "Sessions this month"}</th></tr>`;
+  const rows = (past
+    ? [["Piano", "Enrichment", "Small Wonder Tampines", "Monday 15:30–16:15", "Mei Tan", "2026-01-12", "2026-08-31", "<b>Switched to Dance</b> · notice given 2026-08-01"], ["Little Chefs", "Enrichment", "Small Wonder Tampines", "Friday 15:30–16:30", "Rachel Ong", "2026-01-09", "2026-06-30", "<b>Withdrawn in the Parents App</b> · Schedule clash · No refund"]]
+    : [["Mandarin Explorers", "Enrichment", "Small Wonder Tampines", "Tuesday 15:30–16:15", "Li Wen", "2026-07-01", "—", "4 of 4"], ["Speech & Drama", "Enrichment", "Small Wonder Tampines", "Thursday 15:30–16:30", "Rachel Ong", "2026-07-01", "—", "3 of 4"], ["Dance <span style=\"font-size:12px;color:var(--muted);font-weight:400\">· switched from Piano</span>", "Enrichment", "Small Wonder Tampines", "Monday 15:30–16:15", "Joanne Lee", "2026-09-01", "—", "3 of 4"]])
+    .map(r => `<tr><td><u style="font-weight:600">${r[0]}</u><br><span style="font-size:12px;color:var(--muted)">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td${r[6] === "—" ? ' class="dim"' : ""}>${r[6]}</td><td>${r[7]}</td></tr>`).join("");
+  return header("Enrichment") + `<div class="row between">${seg(["Current (3)", "Past (2)"], past ? "Past" : "Current")}<span style="font-size:12.5px;color:var(--muted)">End date is set only when the child stops or is withdrawn. <span class="anno">1</span></span></div>` + card("Enrichment programmes",
+    `<table class="t"><thead>${head}</thead><tbody>${rows}</tbody></table>`, "Open in Learning");
 }
 
 /* ---------- SCR-03 Attendance ---------- */
 function attendance(state) {
   if (state === "error") return header("Attendance") + `<div class="alert strong"><b>✕ We couldn't load Attendance.</b><span>The header and the other tabs still work. <span class="btn sm">Try again</span> <span class="anno">1</span></span></div>`;
-  const voided = state === "voided";
-  const c = voided ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" } : null;
+  const voided = state === "voided", none = state === "no-attendance";
+  const c = voided ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" }
+    : none ? { name: "Ava Koh", id: "S21", init: "AK", centre: "Small Wonder Tampines · Sunbeams", owner: "Mrs Koh" } : null;
+  const range = none ? "2026-10-01 → 2026-10-31" : "2026-09-01 → 2026-09-30";
   const days = voided
     ? [["2026-09-12", "Blossom", "Present", "08:05", "17:40"], ["2026-09-11", "Blossom", "Voided", "08:20", "—"], ["2026-09-10", "Blossom", "On leave", "—", "—"]]
-    : [["2026-09-17", "Sunbeams", "Present", "08:12", "—"], ["2026-09-16", "Sunbeams", "Present", "08:01", "17:32"], ["2026-09-15", "Sunbeams", "Present", "08:30 · late", "17:05"], ["2026-09-12", "Sunbeams", "Absent", "—", "—"]];
-  const rows = days.map((d, i) => `<tr${i === (voided ? 1 : 0) ? ' class="sel"' : ""}><td>${d[0]}</td><td>${d[1]}</td><td>${d[2] === "Voided" ? '<span class="badge dash">Voided</span>' : `<span class="badge${d[2] === "Present" ? "" : " out"}">${d[2]}</span>`}</td><td${d[2] === "Voided" ? ' style="text-decoration:line-through;color:var(--muted)"' : ""}>${d[3]}</td><td>${d[4]}</td></tr>`).join("");
-  const rec = voided
+    : none ? [] : [["2026-09-17", "Sunbeams", "Present", "08:12", "—"], ["2026-09-16", "Sunbeams", "Present", "08:01", "17:32"], ["2026-09-15", "Sunbeams", "Present", "08:30 · late", "17:05"], ["2026-09-12", "Sunbeams", "Absent", "—", "—"]];
+  const rows = days.length ? days.map((d, i) => `<tr${i === (voided ? 1 : 0) ? ' class="sel"' : ""}><td>${d[0]}</td><td>${d[1]}</td><td>${d[2] === "Voided" ? '<span class="badge dash">Voided</span>' : `<span class="badge${d[2] === "Present" ? "" : " out"}">${d[2]}</span>`}</td><td${d[2] === "Voided" ? ' style="text-decoration:line-through;color:var(--muted)"' : ""}>${d[3]}</td><td>${d[4]}</td></tr>`).join("")
+    : `<tr><td colspan="5" class="dim">No attendance recorded between 2026-10-01 and 2026-10-19.</td></tr>`;
+  const rec = none ? `<div style="font-size:13px;color:var(--muted)">Choose a day to see its record.</div>` : voided
     ? `<div style="font-size:13.5px"><b>2026-09-11 · Blossom · Main</b></div><div style="text-decoration:line-through;color:var(--muted);font-size:13px">Signed in 08:20 by Marcus Ng</div>
        <div class="alert"><b>Voided</b><span>Requested by Siti Aminah · Teacher · approved by Grace Tan · Centre Director · 2026-09-11 10:02<br>Reason: Checked in by mistake <span class="anno">3</span></span></div>`
     : `<div style="font-size:13.5px"><b>2026-09-17 · Sunbeams · Main · Present</b></div>
        <dl class="kv"><dt>In</dt><dd>08:12 · brought by Serena Lim (mother)</dd><dt>Out</dt><dd>— not signed out yet</dd></dl>
        <b style="font-size:13px">Every temperature (3) <span class="anno">4</span></b>
        <div style="font-size:13px;display:grid;gap:4px"><div>08:12 · On arrival · 36.6 °C · Bluetooth thermometer</div><div>10:00 · Mid-morning · <b>37.8 °C ⚠</b> · Bluetooth thermometer</div><div>12:40 · Before nap · 36.8 °C · Bluetooth thermometer</div></div>`;
-  return header("Attendance", c) + `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${stat(voided ? 9 : 10, "Days this month")}${stat(voided ? 24 : 25, "Days this term")}${stat(voided ? 0 : 1, "Absences")}${stat(voided ? 1 : 0, "Leave days")}${stat(voided ? 0 : 1, "Late arrivals")}</div>
-    <div class="row between"><div class="row"><span style="font-size:13px">Bus service: <b>No bus</b></span><span class="anno">5</span></div><div class="row"><div class="input select" style="width:160px">September 2026</div><span style="font-size:13px;font-weight:600"><u>Open in Daily operations</u> ↗</span></div></div>
+  const warn = none ? `<div class="alert strong"><b>⚠ No attendance this month</b><span>Singapore citizen · checked on 18 October · 0 days attended in October. The subsidy for the month needs at least one attendance day. Same list as "No attendance this month" in the Centre Director app. <span class="anno">6</span></span></div>` : "";
+  const k = none ? [0, 0, 0, 0, 0] : voided ? [9, 24, 0, 1, 0] : [10, 25, 1, 0, 1];
+  return header("Attendance", c) + warn + `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${stat(k[0], "Days in range")}${stat(k[1], "Days this term")}${stat(k[2], "Absences")}${stat(k[3], "Leave days")}${stat(k[4], "Late arrivals")}</div>
+    <div class="row between"><div class="row"><span style="font-size:13px">Bus service: <b>No bus</b></span><span class="anno">5</span></div><div class="row"><div class="input select" style="width:240px">📅 ${range}</div><span class="anno">7</span><span style="font-size:13px;font-weight:600"><u>Open in Daily operations</u> ↗</span></div></div>
     <div class="split" style="grid-template-columns:minmax(0,1fr) 420px">
       ${card("Recent attendance", `<table class="t"><thead><tr><th class="s">Date</th><th>Class</th><th>Status</th><th>In</th><th>Out</th></tr></thead><tbody>${rows}</tbody></table>`, "", 2)}
-      ${card("Day record", rec, "Open the day")}
+      ${card("Day record", rec, none ? "" : "Open the day")}
     </div>`;
 }
 
@@ -303,17 +312,18 @@ function finance(state) {
   const my = state === "malaysia";
   const c = my ? { name: "Iman Hakim", id: "S15", init: "IH", centre: "Small Wonder Damansara · Cempaka", owner: "Mrs Hakim" } : null;
   const cur = my ? "MYR" : "SGD";
-  const pays = `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${[["Payment method", my ? "DuitNow" : "GIRO"], ["Citizenship the fee reads", my ? "Foreigner" : "Singapore Citizen"], ["Bill to", "Parent"], ["Deposit held", my ? "MYR 900" : "SGD 1,180"], ["Outstanding", my ? "MYR 0.00" : "<b>SGD 992.98</b>"]].map(([l, v]) => `<div class="kpi"><small>${l}</small>${v}</div>`).join("")}</div>`;
+  const pays = `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${[["Payment method (on the child)", my ? "⚠ To confirm" : "GIRO CDA + GIRO"], ["Citizenship the fee reads", my ? "Foreigner" : "Singapore Citizen"], ["Bill to", "Parent"], ["Deposit held", my ? "MYR 900" : "SGD 1,180"], ["Outstanding", my ? "MYR 0.00" : "<b>SGD 992.98</b>"]].map(([l, v]) => `<div class="kpi"><small>${l}</small>${v}</div>`).join("")}</div>`;
   const todo = my ? card("What needs doing", muted("Nothing needs doing."), "", 2)
-    : card("What needs doing", `<div style="font-size:13.5px;display:grid;gap:6px">${[["SW-TAM-2026-10-0041", 34, "137.58"], ["SW-TAM-ENR-2026-10-0012", 34, "327.00"], ["INV-SW-TAM-202611-0001", 5, "528.40"]].map(([n, d, a]) => `<div class="row between"><span>Invoice <u>${n}</u> is ${d} days overdue — SGD ${a}</span><span style="font-size:12.5px;font-weight:600"><u>Open in Receivables</u> ↗</span></div>`).join("")}</div>`, "", 2);
-  const inv = (my ? [["School fees · 1", [["INV-SW-DAM-202611-0007", "Nov 2026", "2026-11-05", "DuitNow", "Paid", "1,150.00", "0.00"]]]]
-    : [["School fees · 2", [["INV-SW-TAM-202611-0001", "Nov 2026", "2026-11-05", "GIRO", "Billed", "528.40", "528.40"], ["SW-TAM-2026-10-0041", "Oct 2026", "2026-10-07", "GIRO", "Partially paid", "637.58", "137.58"]]], ["Enrichment · 1", [["SW-TAM-ENR-2026-10-0012", "Oct 2026", "2026-10-07", "GIRO", "Billed", "327.00", "327.00"]]]])
-    .map(([g, rs]) => `<tr><td colspan="7" style="background:var(--fill);font-weight:600">${g}</td></tr>` + rs.map(r => `<tr><td><u>${r[0]}</u></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><span class="badge${r[4] === "Paid" ? " solid" : ""}">${r[4]}</span></td><td style="text-align:right">${r[5]}</td><td style="text-align:right">${r[6]}</td></tr>`).join("")).join("");
-  const invoices = card("Invoices", `<table class="t"><thead><tr><th>Number</th><th>Month</th><th>Due</th><th>Method</th><th>Status</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th></tr></thead><tbody>${inv}</tbody></table>`, "Open in Invoices", 3);
+    : card("What needs doing", `<div style="font-size:13.5px;display:grid;gap:6px">${[["SW-TAM-2026-10-0041", 34, "137.58"], ["SW-TAM-ENR-2026-10-0012", 34, "327.00"], ["INV-SW-TAM-202611-0001", 5, "300.00"], ["INV-SW-TAM-202611-0002", 5, "228.40"]].map(([n, d, a]) => `<div class="row between"><span>Invoice <u>${n}</u> is ${d} days overdue — SGD ${a}</span><span style="font-size:12.5px;font-weight:600"><u>Open in Receivables</u> ↗</span></div>`).join("")}</div>`, "", 2);
+  const inv = (my ? [["School fees · 1", [["INV-SW-DAM-202611-0007", "Nov 2026", "2026-11-05", "—", "—", "Paid", "1,150.00", "0.00"]]]]
+    : [["School fees · 3", [["INV-SW-TAM-202611-0001", "Nov 2026", "2026-11-05", "GIRO CDA", "CDA", "Billed", "300.00", "300.00"], ["INV-SW-TAM-202611-0002", "Nov 2026", "2026-11-05", "GIRO", "non-CDA", "Billed", "228.40", "228.40"], ["SW-TAM-2026-10-0041", "Oct 2026", "2026-10-07", "GIRO", "non-CDA", "Partially paid", "637.58", "137.58"]]], ["Enrichment · 1", [["SW-TAM-ENR-2026-10-0012", "Oct 2026", "2026-10-07", "GIRO", "non-CDA", "Billed", "327.00", "327.00"]]]])
+    .map(([g, rs]) => `<tr><td colspan="8" style="background:var(--fill);font-weight:600">${g}</td></tr>` + rs.map(r => `<tr><td><u>${r[0]}</u></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><span class="badge${r[5] === "Paid" ? " solid" : ""}">${r[5]}</span></td><td style="text-align:right">${r[6]}</td><td style="text-align:right">${r[7]}</td></tr>`).join("")).join("");
+  const invoices = card("Invoices", `<table class="t"><thead><tr><th>Number</th><th>Month</th><th>Due</th><th>Method</th><th>Account <span class="anno">5</span></th><th>Status</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th></tr></thead><tbody>${inv}</tbody></table>`, "Open in Invoices", 3);
   const out = my ? "" : card("Outstanding", `<div style="font-size:13.5px"><b>SGD 992.98</b> · 1–30 days SGD 528.40 · 31–60 days SGD 464.58</div><div style="font-size:12.5px;color:var(--muted)">Reminders sent · 2026-09-25 and 2026-09-15 to Serena Lim</div>`, "Open in Receivables");
-  const giro = my ? "" : card("GIRO and CDA accounts", `<table class="t"><thead><tr><th>Type</th><th>Bank · account</th><th>DDA reference</th><th>Applied by</th><th>Status</th><th>Pays by GIRO</th></tr></thead><tbody>
-      <tr><td>GIRO</td><td>DBS · ••••4021</td><td>DDA-DBS-118204</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr>
-      <tr><td>CDA</td><td>OCBC (CDA) · ••••7730</td><td>DDA-CDA-551277</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr></tbody></table>`, "Open in GIRO accounts", 4);
+  const giro = my ? "" : card("GIRO and CDA accounts · 2 of 2", `<table class="t"><thead><tr><th>Type</th><th>Bank · account</th><th>DDA reference</th><th>Applied by</th><th>Status</th><th>Pays by GIRO</th></tr></thead><tbody>
+      <tr><td>GIRO (non-CDA)</td><td>DBS · ••••4021</td><td>DDA-DBS-118204</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr>
+      <tr><td>GIRO CDA</td><td>OCBC (CDA) · ••••7730</td><td>DDA-CDA-551277</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">A child has at most one CDA and one non-CDA GIRO account; each is invoiced separately.</div>`, "Open in GIRO accounts", 4);
   const sub = my ? "" : card("Subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div>Basic subsidy · S$300 / month · expires 2026-12-31 · ECDA Form SUB-1 · 2026/004182</div><div>Additional subsidy · S$150 / month · expires 2026-10-31 · ECDA Form SUB-2 · 2026/004182-A <span class="badge dash">Expires soon</span></div></div>`, "", "");
   const disc = card("Discounts", `<div style="font-size:13.5px;display:grid;gap:4px"><div><b>Staff child discount — 50%</b> · per month · 2026-01-01 → open · added by Daniel Yeo · <span class="badge solid">Applied</span></div><div>Second child — 5% · per month · 2026-01-01 → open · added by Priya Raman · <span class="badge out">Not applied</span> ${muted("only one discount applies to an invoice; the staff child discount is worth more")}</div></div>`, "Open in Discounts");
   const dep = card("Deposit and payment schedule", `<div style="font-size:13.5px">${my ? "2025-12-02 · Received · DEP-SW-0102 · MYR 900 · remaining MYR 900" : "2025-11-14 · Received · DEP-SW-0088 · SGD 1,180 · remaining SGD 1,180"}</div><div style="font-size:13px;color:var(--muted)">Jan–Jun 2026 · Fee 1,520 · Discount 760 · <b style="color:var(--ink)">SGD 760</b> per month</div>`, "Open schedule");
@@ -322,27 +332,48 @@ function finance(state) {
 
 /* ---------- SCR-05 Communication ---------- */
 function communication(state) {
-  const which = state === "announcements" ? "Announcements" : state === "requests" ? "Requests" : "Messages";
-  const segs = seg(["Announcements (3)", "Messages (5)", "Requests (1)"], which);
+  const map = { announcements: "Announcements", inquiries: "Inquiries", surveys: "Surveys", notifications: "Notifications" };
+  const which = map[state] || "Messages";
+  const segs = seg(["Announcements (3)", "Messages (5)", "Inquiries (1)", "Surveys & consents (4)", "Notifications"], which);
   let body;
   if (which === "Messages") {
-    body = [["Sunbeams (N2) · class thread", "Class", "Serena Lim · Marcus Ng · Auntie Rosnah · Aisyah Rahman · Chloe Ng · Grace Tan", "Serena Lim · Parent · 2026-09-19 07:42 — Thank you. Could we also know how much water…", "Waiting on a reply · 51 days"],
-      ["Bumblebees (Playgroup) · class thread", "Class · Previous class", "Serena Lim · Daniel Ng · Marissa Tay · Grace Tan", "Nurul Aini · Staff · 2025-12-19 15:50 — Last day in Bumblebees…", ""],
-      ["Ethan Lim · both parents", "Group", "Serena Lim · Daniel Ng · Grace Tan · Aisyah Rahman", "Daniel Ng · Parent · 2026-09-11 21:05 — Mornings work better for us…", "Waiting on a reply · 59 days"],
-      ["Serena Lim", "One-to-one", "Nadia Rahman · Serena Lim", "Nadia Rahman · Staff · 2026-09-16 08:31 — Auntie Rosnah is on the approved pickup list…", ""],
-      ["Term 4 fee statement", "Private fan-out", "Serena Lim · Daniel Ng · Grace Tan", "Grace Tan · Staff · 2026-09-17 10:00 — Your Term 4 statement is ready…", ""]]
-      .map(r => `<div class="card"><div class="card-body" style="gap:4px"><div class="row between"><b style="font-size:14px"><u>${r[0]}</u></b><div class="row"><span class="badge out">${r[1]}</span>${r[4] ? `<span class="badge solid">${r[4]}</span>` : ""}</div></div><div style="font-size:12.5px;color:var(--muted)">${r[2]}</div><div style="font-size:13px">${r[3]}</div></div></div>`).join("");
+    const grp = (t, rows) => `<b style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">${t}</b>` + rows.map(r => `<div class="card"><div class="card-body" style="gap:4px"><div class="row between"><b style="font-size:14px"><u>${r[0]}</u></b><div class="row"><span class="badge out">${r[1]}</span>${r[4] ? `<span class="badge solid">${r[4]}</span>` : ""}</div></div><div style="font-size:12.5px;color:var(--muted)">${r[2]}</div><div style="font-size:13px">${r[3]}</div></div></div>`).join("");
+    body = grp("Class threads <span class=\"anno\">1</span>", [["Sunbeams (N2)", "Class thread", "Serena Lim · Daniel Ng (parents) · Aisyah Rahman · Chloe Ng (teachers) · Grace Tan (CD)", "Serena Lim · Parent · 2026-09-19 07:42 — Thank you. Could we also know how much water…", "Waiting on a reply · 51 days"],
+        ["Bumblebees (Playgroup)", "Previous class · read only", "Serena Lim · Daniel Ng · Marissa Tay · Grace Tan", "Nurul Aini · Staff · 2025-12-19 15:50 — Last day in Bumblebees…", ""]])
+      + grp("Group chats", [["Sports day volunteers", "Group · event", "Serena Lim · 6 other parents · Aisyah Rahman · Grace Tan", "Aisyah Rahman · Staff · 2026-09-12 09:30 — Thank you all for signing up…", ""],
+        ["Ethan Lim · both parents", "Group", "Serena Lim · Daniel Ng · Grace Tan · Aisyah Rahman", "Daniel Ng · Parent · 2026-09-11 21:05 — Mornings work better for us…", "Waiting on a reply · 59 days"]])
+      + grp("Private · Centre Director and parent <span class=\"anno\">2</span>", [["Serena Lim", "Private · teachers can't see", "Grace Tan · Serena Lim", "Grace Tan · CD · 2026-09-16 08:31 — About Ethan's pickup arrangement… · <b>Sent to Serena Lim only</b>", ""]]);
   } else if (which === "Announcements") {
-    body = card("Announcements to this family", `<table class="t"><thead><tr><th>Title</th><th>Category</th><th>Posted by</th><th class="s">Sent</th><th>Status</th><th>Read by parent</th></tr></thead><tbody>
-      <tr><td><u>Term 4 fee statement</u></td><td>Fees</td><td>Grace Tan</td><td>2026-09-17</td><td><span class="badge">Sent</span></td><td>Read · Serena Lim</td></tr>
-      <tr><td><u>Mid-autumn lantern walk</u></td><td>Events</td><td>Grace Tan</td><td>2026-09-10</td><td><span class="badge">Sent</span></td><td>Not read</td></tr>
-      <tr><td><u>Sports day</u></td><td>Events</td><td>HQ Marketing</td><td>2026-08-20</td><td><span class="badge dash">Recalled</span> <span class="anno">2</span></td><td class="dim">—</td></tr></tbody></table>`, "Open in Communication");
+    body = card("Announcements to this family", `<table class="t"><thead><tr><th>Title</th><th>Sent to</th><th>Sent by</th><th class="s">Posted</th><th>Status</th><th></th><th>Read by parent</th></tr></thead><tbody>
+      <tr><td><u>Field trip to the zoo</u></td><td>Every K1 parent in every centre</td><td>HQ</td><td>2026-09-20</td><td><span class="badge">Sent</span></td><td>📎 · ✉ Also sent by email</td><td>Read · Serena Lim</td></tr>
+      <tr><td><u>Mid-autumn lantern walk</u></td><td>Sunbeams (N2)</td><td>Grace Tan · CD</td><td>2026-10-02 09:00</td><td><span class="badge out">Scheduled</span></td><td>🖼</td><td class="dim">—</td></tr>
+      <tr><td><u>Sports day</u></td><td>Small Wonder Tampines</td><td>Grace Tan · CD</td><td>2026-08-20</td><td><span class="badge dash">Recalled</span></td><td></td><td class="dim">—</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">One-way: no replies or comments. Parents ask through chat or an inquiry. <span class="anno">1</span></div>`, "Open in Communication");
+  } else if (which === "Inquiries") {
+    body = card("Inquiries from this family", `<table class="t"><thead><tr><th>Subject</th><th>Type</th><th>Routed to</th><th>Handled by</th><th>Status</th><th class="s">Waiting</th></tr></thead><tbody>
+      <tr><td><u>Birthday celebration on 14 Feb</u></td><td>Birthday form</td><td>Homeroom teacher</td><td>Aisyah Rahman</td><td><span class="badge">In progress</span></td><td>3 days</td></tr>
+      <tr><td><u>Why is November higher?</u></td><td>Fees</td><td>School Admin or CD</td><td>Nadia Salleh · School Admin</td><td><span class="badge solid">Closed</span></td><td class="dim">—</td></tr>
+      <tr><td><u>Can Ethan bring his own snack?</u></td><td>General</td><td>CD and School Admin</td><td>Aisyah Rahman · passed on by Grace Tan</td><td><span class="badge out">Open</span></td><td>1 day</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">Parents don't pick who answers — routing follows the type. CD and School Admin always see every inquiry. <span class="anno">1</span></div>`, "Open in Inquiries");
+  } else if (which === "Surveys") {
+    body = card("Surveys & consents", `<table class="t"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>This child's answer</th><th class="s">Answered</th><th>Announcement</th></tr></thead><tbody>
+      <tr><td><u>Zoo trip — is your child going?</u> 📎</td><td>Survey</td><td><span class="badge">Answered</span></td><td>Going</td><td>2026-09-21</td><td><u>Field trip to the zoo</u></td></tr>
+      <tr><td><u>PDPA data sharing v3.1</u></td><td>Consent</td><td><span class="badge solid">Agreed</span></td><td>—</td><td>2026-01-06</td><td class="dim">—</td></tr>
+      <tr><td><u>Outings and excursions v1.4</u></td><td>Consent</td><td><span class="badge out">Sent, awaiting parent</span></td><td>—</td><td class="dim">—</td><td class="dim">—</td></tr>
+      <tr><td><u>Medical authorisation v2.2</u></td><td>Consent</td><td><span class="badge dash">Not sent</span></td><td>—</td><td class="dim">—</td><td class="dim">—</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">A survey comes with an announcement that links to it. <span class="anno">1</span></div>`, "Open in Surveys & consents");
   } else {
-    body = card("Requests from this family", `<table class="t"><thead><tr><th>Subject</th><th>Category</th><th>Channel</th><th>Status</th><th>Assignee</th><th class="s">Waiting</th></tr></thead><tbody>
-      <tr><td><u>Birthday celebration on 14 Feb</u></td><td>Birthday</td><td>Parents App</td><td><span class="badge">In progress</span></td><td>Aisyah Rahman</td><td>3 days</td></tr></tbody></table>
-      <div style="font-size:12.5px;color:var(--muted)">Open → In progress → Closed; the parent is notified of each reply and status change. <span class="anno">3</span></div>`, "Open in Inquiries");
+    body = `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:16px">What one guardian sees <span class="anno">1</span></b><div class="row"><span style="font-size:13px">Viewing as guardian</span><div class="input select filled" style="width:240px">Serena Lim · mother</div></div></div>
+      <span style="font-size:12.5px;color:var(--muted)">Auntie Rosnah has not activated the Parents App.</span>
+      <div class="card" style="border:2px solid var(--ink)"><div class="card-body"><b>Needs you · 2</b>
+        <div class="row between" style="font-size:13.5px"><span>Pay invoice INV-SW-TAM-202611-0001 · SGD 300.00 · due 2026-11-05</span><span style="font-weight:600;font-size:12.5px"><u>Open in Invoices</u> ↗</span></div>
+        <div class="row between" style="font-size:13.5px"><span>Sign consent "Outings and excursions" · read on 2026-09-22, not signed</span><span style="font-weight:600;font-size:12.5px"><u>Open in Consents</u> ↗</span></div>
+        <span style="font-size:12px;color:var(--muted)">A task leaves this list only when it is done, not when it is read.</span></div></div>
+      <b style="font-size:13px">Recent</b>
+      <div style="font-size:13.5px;display:grid;gap:6px"><div>📣 Field trip to the zoo · HQ · 2026-09-20 · read</div><div>💬 Sunbeams (N2) · Aisyah Rahman: Ethan had a settled morning… · 2026-09-18</div><div>🎂 Birthday celebration on 14 Feb · In progress · 2026-11-07</div></div>
+    </div></div>`;
   }
-  return header("Communication") + `<div class="row between">${segs}<span style="font-size:13px;font-weight:600"><u>Open in Communication</u> ↗</span></div>` + body + `<div style="font-size:12.5px;color:var(--muted)">No reply box here — answer in Communication. <span class="anno">4</span></div>`;
+  return header("Communication") + `<div class="row between">${segs}<span style="font-size:13px;font-weight:600"><u>Open in Communication</u> ↗</span></div>` + body + `<div style="font-size:12.5px;color:var(--muted)">Read only — reply, send or answer in Communication.</div>`;
 }
 
 const WHO = "Grace Tan · Centre Director";
@@ -351,17 +382,17 @@ const SCREENS = [
     states: [["default", "Có case đang mở", () => enrolment("default")], ["history", "Đã chuyển Centre, không có case", () => enrolment("history")]],
     notes: [["Cờ SUG / Staff / KA child chỉ đọc, kèm tác động lên học phí.", "FR-006 · OQ-RT-04"], ["Cases: case đang mở hoặc liên kết bắt đầu case theo quyền.", "FR-004 · FR-005 · VAL-001"], ["Mỗi lần ghi danh: Centre, lớp, programme, ngày, legal entity và dòng thời gian trạng thái.", "FR-001 đến FR-003"]] },
   { id: "scr-02", code: "SCR-02", name: "Tab Enrichment", slug: "tab-enrichment", tickets: "US-002 — chương trình enrichment",
-    states: [["default", "Có chương trình", () => enrichment("default")], ["empty", "Chưa có chương trình", () => enrichment("empty")]],
-    notes: [["Current / Past theo End date.", "FR-009 · AS-RT-03"], ["Tên chương trình mở lớp enrichment trong Learning.", "FR-008 · FR-010"]] },
-  { id: "scr-03", code: "SCR-03", name: "Tab Attendance", slug: "tab-attendance", tickets: "US-003 — tóm tắt, danh sách ngày, Day record · US-006 lỗi tải",
-    states: [["default", "Tóm tắt + Day record", () => attendance("default")], ["voided", "Ngày có bản ghi void", () => attendance("voided")], ["error", "Lỗi tải", () => attendance("error")]],
-    notes: [["Lỗi tải chỉ trong tab, header và tab khác vẫn dùng được.", "FR-038 · VAL-007"], ["Danh sách ngày: status, giờ vào ra, cờ đến muộn; lọc theo tháng.", "FR-013"], ["Bản ghi void gạch ngang, không tính có mặt, ghi người yêu cầu, người duyệt, lý do.", "FR-015 · BR-OPS-020 · BR-OPS-024"], ["Mọi lần đo nhiệt độ; từ 37,5 °C có cảnh báo.", "FR-014 · FR-016 · AS-RT-04"], ["Bus service chỉ đọc.", "FR-017"]] },
-  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance", tickets: "US-004 — hoá đơn, công nợ, GIRO / CDA, trợ cấp, giảm giá, cọc",
-    states: [["default", "Singapore · có nợ", () => finance("default")], ["malaysia", "Malaysia · không có việc", () => finance("malaysia")]],
-    notes: [["How this family pays: phương thức, citizenship tính phí, bill to, cọc, tổng nợ.", "FR-019"], ["What needs doing: hoá đơn quá hạn, GIRO bị từ chối, hoàn tiền lỗi — mở màn Fees & Payments.", "FR-020"], ["Invoices nhóm theo loại, chọn số mở chi tiết hoá đơn.", "FR-021"], ["Số tài khoản chỉ hiện 4 số cuối; Centre Malaysia không có GIRO / CDA, ECDA.", "BR-007 · VAL-004 · BR-ADM-038"]] },
-  { id: "scr-05", code: "SCR-05", name: "Tab Communication", slug: "tab-communication", tickets: "US-005 — thông báo, hội thoại, yêu cầu",
-    states: [["default", "Messages", () => communication("default")], ["announcements", "Announcements", () => communication("announcements")], ["requests", "Requests", () => communication("requests")]],
-    notes: [["Hội thoại có phụ huynh tham gia; nhãn Waiting on a reply, Previous class.", "FR-030"], ["Thông báo thu hồi giữ nhãn Recalled, chi tiết chỉ đọc.", "VAL-006 · BR-009"], ["Yêu cầu Open → In progress → Closed, người phụ trách, thời gian chờ.", "FR-031 · BR-010"], ["Không có ô trả lời; mở Communication để trả lời.", "FR-032 · FR-036"]] }
+    states: [["default", "Current", () => enrichment("default")], ["past", "Past: rút qua app, đổi chương trình", () => enrichment("past")], ["empty", "Chưa có chương trình", () => enrichment("empty")]],
+    notes: [["Đang học thì End date để trống; End date chỉ có khi dừng hoặc rút.", "FR-008 · FR-009"], ["Tên chương trình mở lớp enrichment trong Learning; đổi chương trình hiện \"switched from\".", "FR-010 · FR-044"], ["Past: cách kết thúc và lý do — rút qua app (không hoàn tiền), đổi chương trình (báo trước 1 tháng), rời trường (ngưng hoá đơn enrichment).", "FR-044 · FR-045 · BR-018 đến BR-020"]] },
+  { id: "scr-03", code: "SCR-03", name: "Tab Attendance", slug: "tab-attendance", tickets: "US-003 — tóm tắt, danh sách ngày, Day record, kiểm tra ngày 18 · US-006 lỗi tải",
+    states: [["default", "Tóm tắt + Day record", () => attendance("default")], ["voided", "Ngày có bản ghi void", () => attendance("voided")], ["no-attendance", "Ngày 18: chưa có buổi nào", () => attendance("no-attendance")], ["error", "Lỗi tải", () => attendance("error")]],
+    notes: [["Lỗi tải chỉ trong tab, header và tab khác vẫn dùng được.", "FR-038 · VAL-007"], ["Danh sách ngày: status, giờ vào ra, cờ đến muộn.", "FR-013"], ["Bản ghi void gạch ngang, không tính có mặt, ghi người yêu cầu, người duyệt, lý do.", "FR-015 · BR-004 · BR-005"], ["Mọi lần đo nhiệt độ; từ 37,5 °C có cảnh báo.", "FR-014 · FR-016 · AS-RT-04"], ["Bus service chỉ đọc.", "FR-017"], ["Công dân Singapore, qua ngày 18, 0 buổi trong tháng: cảnh báo No attendance this month (giữ trợ cấp).", "FR-043 · BR-021"], ["Mặc định tháng hiện tại của enrolment đang hiệu lực; chọn khoảng ngày.", "FR-012"]] },
+  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance", tickets: "US-004 — hoá đơn, công nợ, GIRO CDA / non-CDA, trợ cấp, giảm giá, cọc",
+    states: [["default", "Singapore · CDA + non-CDA · có nợ", () => finance("default")], ["malaysia", "Malaysia · không có việc", () => finance("malaysia")]],
+    notes: [["Payment method thuộc hồ sơ trẻ: GIRO, GIRO CDA hoặc PayNow.", "FR-019 · BR-022"], ["What needs doing: hoá đơn quá hạn, GIRO bị từ chối, hoàn tiền lỗi — mở màn Fees & Payments.", "FR-020"], ["Invoices nhóm theo loại; mỗi hoá đơn mang phương thức để Finance lọc hàng loạt.", "FR-021 · BR-022"], ["Tối đa 2 tài khoản GIRO (CDA và non-CDA); số tài khoản chỉ hiện 4 số cuối; Centre Malaysia không có GIRO / CDA, ECDA.", "FR-023 · BR-007 · BR-023 · VAL-004"], ["CDA và non-CDA xuất hoá đơn riêng.", "BR-023"]] },
+  { id: "scr-05", code: "SCR-05", name: "Tab Communication", slug: "tab-communication", tickets: "US-005 — Announcements, Messages, Inquiries, Surveys & consents, Notifications",
+    states: [["default", "Messages", () => communication("default")], ["announcements", "Announcements", () => communication("announcements")], ["inquiries", "Inquiries", () => communication("inquiries")], ["surveys", "Surveys & consents", () => communication("surveys")], ["notifications", "Notifications", () => communication("notifications")]],
+    notes: [["Mỗi phần có quy tắc riêng: class thread có sẵn (lớp cũ chỉ đọc); announcement một chiều, hẹn giờ, tệp, gửi kèm email; inquiry chia theo loại; survey đi kèm announcement; Notifications mô phỏng phụ huynh thấy gì.", "FR-029 đến FR-031 · FR-039 · FR-040 · BR-009 · BR-012 · BR-015 · BR-016"], ["Private chat Centre Director – phụ huynh: giáo viên không thấy; tin gửi theo trẻ ghi người nhận thực tế.", "BR-013 · FR-033 · FR-042"]] }
 ];
 
 let current = { screen: "scr-01", state: "default" };

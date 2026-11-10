@@ -156,7 +156,7 @@
 | 2.8 Change Request with Second Approval (BBA-52) | 1 | 10 | 10 | 2 | 2 |
 | 2.8 Approval Flows Configuration (BBA-53) | 1 | 5 | 7 | 7 | 3 |
 | 3.1 Child Record Overview (v0.1, thêm 10/11/2026) | 6 | 35 | 38 | 13 | 9 |
-| 3.1 Child Record Tabs – Read Views (v0.1, thêm 10/11/2026) | 6 | 38 | 44 | 9 | 7 |
+| 3.1 Child Record Tabs – Read Views (v0.2, 10/11/2026) | 6 | 45 | 55 | 11 | 7 |
 | 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
 | 3.2 Daily Operations | 14 | 69 | 74 | 14 | 7 |
 | 3.6 Finance | 22 | 97 | 107 | 15 | 6 |
