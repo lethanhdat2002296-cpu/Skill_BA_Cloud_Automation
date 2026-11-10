@@ -151,6 +151,83 @@
 |---|---|---|---|---|---|
 | 2.3 Enquiry Actions | 10 | 32 | 40 | 10 | 4 |
 | 2.8 CRM Administration (v0.3 — Approvals) | 5 | 41 | 45 | 17 | 9 |
+| 3.1 Child Record Overview (v0.1, thêm 10/11/2026) | 6 | 35 | 38 | 13 | 9 |
 | 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
 | 3.2 Daily Operations | 14 | 69 | 74 | 14 | 7 |
 | 3.6 Finance | 22 | 97 | 107 | 15 | 6 |
+
+---
+
+## 3.1 Child record — Overview (header + tab Overview), đối chiếu prototype
+
+> Yêu cầu khách (10/11/2026): "Header and Overview tab of the child record: status, centre/class/owner, day-to-day name vs IC-registered name (used on invoices), DOB/age, gender, nationality (passport) vs citizenship (decides fee & subsidy), race, payment method (GIRO/PayNow…), masked ID, photo, class card with homeroom teacher, medical alert summary, Actions menu". Khách muốn làm rõ thông tin các tab và hỏi có cần thêm trường nào.
+> Nguồn: SRS SMS Children & Families v0.1 (§1, §2, §3 P1, §4 mục 1.1, BR-CHF-001 đến 013, 017, 024, 025); SRS General (§3.1 quyền 3 lớp, §4 Personal data); SRS Administration (protected fields, BR-ADM-038); SRS Fees & Payments (BR-FEE-013, 037, 038; §4.1 GIRO accounts); SRS Joining & Leaving §1.2. Prototype `/records/child/<id>` khảo sát 10/11/2026 với vai trò HQ Admin, School Admin, Teacher (dữ liệu demo).
+> Phạm vi FRD: **chỉ header và tab Overview**. Các tab khác chỉ lập danh mục để làm rõ, chi tiết thuộc FRD 3.1 Children & Families và FRD module sở hữu.
+
+**1. Bối cảnh** — Mỗi trẻ có một hồ sơ chính xác thay Taidii và giấy tờ (SRS C&F §1). Hồ sơ mở từ danh sách Children (SRS §4 mục 1.1 View child profile). Prototype đặt phần "Identity" ở tab Overview với ghi chú giải thích: tên trên IC dùng cho hoá đơn, biên lai; citizenship quyết định học phí và trợ cấp, nationality là quốc gia trên hộ chiếu và không quyết định.
+
+**2. Mục tiêu** — SRS không nêu KPI → OQ-OVW-01.
+
+**3. Người dùng**
+
+| Vai trò | Trên Overview | Nguồn |
+|---|---|---|
+| HQ Admin | Xem mọi Centre, sửa Identity; NRIC hiện đầy đủ (prototype). | BR-CHF-011; Prototype |
+| HQ Enrolment | Xem, sửa hồ sơ trẻ mọi Centre. | SRS C&F §2 |
+| Centre Director, School Admin | Xem, sửa hồ sơ trẻ của Centre; School Admin thấy NRIC dạng "••••••" (prototype). | SRS C&F §2; BR-CHF-012; Prototype |
+| Teacher | Xem trẻ lớp mình; dòng NRIC bị ẩn (prototype). | BR-CHF-013; Prototype |
+| HQ Finance | Xem trẻ, dùng billing contact. | SRS C&F §2 |
+
+**4. Đối chiếu yêu cầu khách ↔ SRS ↔ prototype**
+
+| Thông tin khách nêu | SRS C&F | Prototype | Ghi chú / OQ |
+|---|---|---|---|
+| Status | Enrolled / Temporary withdrawal / Withdrawn / Graduated; chỉ đổi qua Joining & leaving (BR-CHF-006). | Badge "Active"; dải "Enrolment: Active · latest change: Withdrawal submitted 2026-09-30 · Open the case". | Nhãn "Active" ≠ "Enrolled" → OQ-OVW-02. |
+| Centre / class / owner | Centre, class, level (list). Không có "owner". | "Small Wonder Tampines · Sunbeams · Owner · Serena Lim" (owner là một guardian). | Owner = primary contact? → AS-OVW-01, OQ-OVW-03. |
+| Day-to-day name vs IC-registered name | "name on IC" chỉ ở Search; Create cần "full name". | "Name used day to day" và "IC-registered name — The name used on invoices and receipts." | IC name dùng cho hoá đơn: prototype → OQ-OVW-04 (bắt buộc khi nào). |
+| DOB / age | DOB bắt buộc khi tạo (BR-CHF-001); trẻ chưa sinh dùng expected birth date (BR-CHF-002). | "2022-02-14 · 4 years (4y 8m)". | Hiển thị trẻ chưa sinh → AS-OVW-02. |
+| Gender | Bắt buộc khi tạo (BR-CHF-001). | Female / Male. | — |
+| Nationality vs citizenship | Không có trong C&F. Fees: giá theo citizenship (BR-FEE-013). J&L: "nationality changes" không thuộc Phase 1. | Nationality text tự do; Citizenship: Singapore Citizen / Singapore PR / Foreigner. Trẻ Malaysia ở Centre Malaysia đang là "Foreigner". | Giá trị citizenship cho Malaysia → OQ-OVW-05; đổi nationality trong Phase 1 → OQ-OVW-06. |
+| Race | Không có. | Hiển thị; không có trong form Edit identity. | Danh mục và nơi sửa → OQ-OVW-07. |
+| Payment method | Fees: GIRO / CDA account ("Pays by GIRO"), PayNow, manual (bank transfer, AXS, cheque); GIRO, CDA chỉ Singapore, DuitNow chỉ Malaysia (BR-ADM-038, BR-FEE-037, 038). | "GIRO" / "CDA" — "Carried on every invoice for this child."; không có trong form Edit; tab Finance có "How this family pays". Trẻ Centre Malaysia đang có CDA, GIRO. | Nguồn giá trị và danh mục theo quốc gia → AS-OVW-03, OQ-OVW-08. |
+| Masked ID | NRIC ẩn với vai trò không được xem (BR-CHF-009); protected field Hidden / Masked / Read / Edit; truy cập được ghi log (GEN). | HQ Admin: full; School Admin: "••••••", History ghi "Masked → Full number shown once"; Teacher: ẩn dòng. Nhãn "NRIC / identity document number". | Loại giấy tờ (NRIC / FIN / passport / birth cert) → OQ-OVW-09. |
+| Photo | "Upload child photo — a new photo replaces the old one." | "PHOTO · Not uploaded"; header dùng avatar chữ cái. | Không thấy nút upload ở prototype → FR theo SRS. |
+| Class card + homeroom teacher | Assign / change class có effective date; class có teachers. | "N2 · Sunbeams · 2 of 20 enrolled · Homeroom · Aisyah Rahman"; ghi chú "Change class applies to infants only. A whole class moves up a level from the class itself." | SRS cho Change class mọi trẻ ↔ prototype chỉ infant → OQ-OVW-10. |
+| Medical alert summary | Icon cảnh báo khi có dị ứng / bệnh (BR-CHF-024); chi tiết chỉ cho vai trò được phép, mặc định CD, Teacher, School Admin, HQ Admin (BR-CHF-025). | Ô đỏ ở header nối mọi tình trạng; thẻ Overview "Allergies: …" + "The full record is under Health."; trẻ không có thì không có ô. | Vai trò khác chỉ thấy icon (BR-CHF-025). |
+| Actions menu | Profile có: Send message to parents, Assign / Change class, Upload photo (SRS §4 mục 1.1). | "Link a guardian", "Open the family". "Start a case" (withdrawal, temporary withdrawal, transfer) nằm ở tab Enrolment. | Danh sách cuối → OQ-OVW-11. |
+
+**5. Danh mục tab: SRS ↔ prototype** (để khách làm rõ)
+
+| SRS (View child profile) | Prototype | Ghi chú |
+|---|---|---|
+| Overview | Overview | FRD này. |
+| Family | Guardians | Guardian, primary / emergency / billing contact, authorised to collect, siblings. |
+| Pickup | (trong Guardians) | Authorised pickup nằm trong tab Guardians. |
+| Health | Health | Thông tin từ gia đình, note của staff, tệp, tiêm chủng, nhiệt độ. |
+| Documents | Documents | Giấy tờ + consents. |
+| Consents (read-only) | (trong Documents) | — |
+| Billing (read-only) | Finance | Việc cần làm, flags, trợ cấp, Bill to, GIRO / CDA, payment method. |
+| Class history | — | Không có tab riêng → OQ-OVW-12. |
+| — | Enrolment | Flags (SUG, Staff, KA child), start a case, enrolment hiện tại. |
+| — | Enrichment | Chương trình enrichment. |
+| — | Attendance | Xe buýt, số ngày đi học, nhiệt độ. |
+| — | Communication | Hội thoại như phụ huynh thấy. |
+| — | History | Change record và log xem dữ liệu được che. |
+
+**6. Dữ liệu** — Child: student ID, name, IC-registered name, DOB / expected birth date, gender, nationality, citizenship, race, identity document number (protected), photo, status (từ J&L), centre, level, class, start date; primary contact (owner), billing contact; payment method (từ Finance); medical alert (từ Health). Edit identity tạo change record: effective date, approved by, attachment (BR-CHF-005; prototype).
+
+**7. Rủi ro** — Citizenship sai làm sai giá học phí và trợ cấp (BR-FEE-013) → đổi citizenship phải có effective date và lưu vết; prototype dùng danh mục citizenship của Singapore cho trẻ Malaysia → OQ mức Cao. Payment method CDA ở Centre Malaysia trái BR-ADM-038 → kiểm tra theo quốc gia.
+
+**Đề xuất của BA — trường có thể bổ sung (chưa phải yêu cầu, chờ khách chọn)**
+- Start date và Programme (Full day / Half day) trên Overview: giá học phí theo programme + citizenship (BR-FEE-013); start date là trường bắt buộc khi tạo (BR-CHF-001).
+- Loại giấy tờ định danh (NRIC / FIN / Passport / Birth certificate) đi kèm số.
+- Billing contact cạnh Payment method (BR-CHF-017).
+- Expected birth date + nhãn "Unborn" cho trẻ chưa sinh (BR-CHF-002).
+- Ngày hiệu lực của citizenship hiện tại (đọc từ change record).
+
+| Mã | Nội dung | Loại | Liên quan |
+|---|---|---|---|
+| AS-OVW-01 | "Owner" là primary contact của trẻ (BR-CHF-017). | AS → OQ-OVW-03 | US-001 |
+| AS-OVW-02 | Trẻ chưa sinh hiện "Expected birth date" thay DOB, tuổi để trống. | AS → OQ-OVW-13 | US-002 |
+| AS-OVW-03 | Payment method chỉ đọc trên Overview, lấy từ Finance: GIRO / CDA khi có tài khoản Active và "Pays by GIRO = Yes"; còn lại PayNow (Singapore) hoặc theo phương thức Malaysia. | AS → OQ-OVW-08 | US-002 |
+| OQ-OVW-01 → 13 | Xem FRD 3.1 Child Record Overview mục 7. | OQ | — |

@@ -1,0 +1,357 @@
+<title>Child Record Overview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { flex: 1; padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+/* child record */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 84px; }
+.kpi small, .lbl { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.kpi.em { border: 2px solid var(--accent); }
+.kpi.warn { border: 2px solid var(--ink); background: var(--fill); }
+.kpi.warn .txt { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.kpis { align-items: start; }
+.ident { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; font-size: 13.5px; }
+.ident .help { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.pill-tabs { display: flex; flex-wrap: wrap; gap: 2px; background: var(--fill); border-radius: 10px; padding: 4px; align-self: flex-start; }
+.pill-tabs span { padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); }
+.pill-tabs span.on { background: var(--paper); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.menu { position: absolute; right: 26px; top: 64px; width: 240px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: 6px; z-index: 4; font-size: 13px; }
+.menu div { padding: 8px 10px; border-radius: 6px; }
+.menu div:hover { background: var(--fill); }
+.big-av { width: 44px; height: 44px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; color: var(--muted); flex: none; }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · FRD 3.1 Child Record Overview</span>
+    <h1>Child record — Overview wireframe</h1>
+    <p>Header và tab Overview của hồ sơ trẻ theo bố cục prototype bba-sms-crm (/records/child), khung BeeHive. Chọn màn ở hàng dưới, chọn trạng thái (vai trò, quốc gia, menu) bên phải tiêu đề màn. Dữ liệu là dữ liệu mẫu.</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div>
+      <h2 id="scrTitle"></h2>
+      <div class="tickets" id="scrTickets"></div>
+    </div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const NAV = [
+  ["Home"], ["My approvals", "", 26],
+  ["#Children & families"], ["Children", "children"], ["Families"], ["Health & allergies"], ["Documents"], ["Authorised pickup"], ["Classes"],
+  ["#Operations"], ["Daily operations"], ["Learning"], ["Fees & payments"], ["Joining & leaving"], ["Communication"],
+  ["#Administration"], ["Users & permissions"], ["Settings"], ["History"]
+];
+function shell(active, body, who) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key && key === active ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>${who}</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><div class="search-top">⌕ Find a record<kbd>⌘ K</kbd></div><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const overlay = (title, body, foot, w) => `<div class="overlay"><div class="modal"${w ? ` style="width:${w}px"` : ""}><header><h4>${title}</h4><span class="btn sm ghost">✕ Close</span></header><div class="body">${body}</div><footer>${foot}</footer></div></div>`;
+
+const CHILD = {
+  sg: { name: "Ethan Lim", id: "S1", ic: "Lim Zhi En Ethan", init: "EL", status: "Enrolled", centre: "Small Wonder Tampines", cls: "Sunbeams", level: "N2", owner: "Serena Lim",
+        dob: "2022-02-14", age: "4y 8m", ageLong: "4 years (4y 8m)", gender: "Male", nat: "Singaporean", cit: "Singapore Citizen", race: "Chinese", pay: "GIRO", nric: "T2600011B",
+        alert: ["Allergic to shellfish and nuts, including peanuts. EpiPen on file.", "Eczema behind both knees and inside both elbows; flares in humid weather.", "Mild asthma, usually triggered by long periods of running or dusty rooms."],
+        enrol: 'Enrolment: Enrolled · <span style="color:var(--muted)">latest change: Withdrawal submitted 2026-09-30</span>', enrolLink: "Open the case", count: "2 of 20 enrolled", homeroom: "Aisyah Rahman" },
+  my: { name: "Adam Faris", id: "S17", ic: "Adam Bin Faris", init: "AF", status: "Enrolled", centre: "The Schoolhouse Bangsar", cls: "Angsana", level: "N2", owner: "Mrs Faris",
+        dob: "2022-03-21", age: "4y 7m", ageLong: "4 years (4y 7m)", gender: "Male", nat: "Malaysian", cit: "Foreigner", race: "Malay", pay: "CDA", nric: "T2600178D",
+        alert: [], enrol: "Enrolment: Enrolled", enrolLink: "Joining & leaving", count: "1 of 18 enrolled", homeroom: "Bryan Chua" }
+};
+
+function overview(o) {
+  const c = CHILD[o.child || "sg"];
+  const role = o.role || "hq";
+  const medOk = role !== "finance";
+  const hasAlert = c.alert.length > 0;
+  const payBad = (o.child === "my");
+  const payTxt = payBad ? `<b>⚠ Not valid for Malaysia</b> <span class="anno">3</span><span class="help">CDA is for Singapore centres only. <a href="#scr-01" style="color:var(--ink)">Fix in Finance</a></span>` : `${c.pay}<span class="help">Carried on every invoice for this child.</span>`;
+  const nric = role === "hq" ? `<span class="mono" style="font-family:var(--mono)">${c.nric}</span>`
+    : role === "sa" ? `<span style="font-family:var(--mono)">•••••${c.nric.slice(-4)}</span> <span class="btn sm">Show</span> <span class="anno">4</span>` : "";
+  const kpiAlert = hasAlert ? `<div class="kpi warn"><small>Medical alert</small><span class="txt">${medOk ? c.alert.join(" · ") : "⚠ Medical alert on file"}</span></div>` : "";
+  const header = `
+    <div style="font-size:12.5px;color:var(--muted)">← Children</div>
+    <div class="ph"><div class="row" style="align-items:flex-start;gap:12px"><span class="big-av">${c.init}</span><div>
+      <h3>${c.name} <span style="font-size:13px;color:var(--muted);font-weight:400">${c.id}</span> ${hasAlert ? '<span class="badge solid">⚠</span>' : ""}</h3>
+      <div class="row" style="gap:8px;margin-top:4px;font-size:13px"><span class="badge solid">${c.status}</span><span>${c.centre} · ${c.cls}</span><span style="color:var(--muted)">·</span><span>Owner · <u>${c.owner}</u></span><span class="anno">1</span></div></div></div>
+      <span class="btn">Actions ⋯ <span class="anno">8</span></span></div>
+    <div class="kpis${hasAlert ? "" : " three"}">
+      <div class="kpi"><small>Date of birth</small>${c.dob} · ${c.age}</div>
+      <div class="kpi em"><small>Citizenship <span class="anno">2</span></small>${c.cit}</div>
+      <div class="kpi"><small>Payment method</small>${payBad ? "⚠ Not valid" : c.pay}</div>
+      ${kpiAlert}
+    </div>
+    <div class="pill-tabs">${["Overview", "Enrolment", "Enrichment", "Guardians", "Attendance", "Finance", "Health", "Communication", "Documents", "History"].map((t, i) => `<span${i === 0 ? ' class="on"' : ""}>${t}</span>`).join("")}</div>`;
+  const f = (l, v, help) => `<div><span class="lbl">${l}</span>${v}${help ? `<span class="help">${help}</span>` : ""}</div>`;
+  const ident = `<div class="card"><div class="card-body">
+      <div class="row between"><b style="font-size:15px">Identity</b>${role === "teacher" || role === "finance" ? "" : '<span class="btn sm">Edit <span class="anno">5</span></span>'}</div>
+      <div class="ident">
+        ${f("Name used day to day", c.name)}
+        ${f("IC-registered name", c.ic, "The name used on invoices and receipts.")}
+        ${f("Date of birth", `${c.dob} · ${c.ageLong}`)}
+        ${f("Gender", c.gender)}
+        ${f("Nationality", c.nat, "Country on the passport.")}
+        ${f("Citizenship", c.cit, "Citizenship decides the fee and subsidy eligibility. Nationality is the country on the passport and does not.")}
+        ${f("Race", c.race)}
+        <div><span class="lbl">Payment method</span>${payTxt}</div>
+        ${nric ? f("NRIC / identity document number", nric) : ""}
+        ${f("Photo", "Not uploaded")}
+      </div></div></div>`;
+  const enrol = `<div class="card"><div class="card-body"><div class="row between"><span style="font-size:13.5px">${c.enrol}</span><span style="font-weight:600;font-size:13px"><u>${c.enrolLink}</u> <span class="anno">6</span></span></div></div></div>`;
+  const cls = `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:15px">Class</b>${role === "teacher" || role === "finance" ? "" : '<span class="btn sm">Change class</span>'}</div>
+      <div class="row" style="font-size:13.5px"><u style="font-weight:600">${c.level} · ${c.cls}</u><span class="badge out">${c.count}</span><span>Homeroom · ${c.homeroom}</span><span class="anno">7</span></div></div></div>`;
+  const med = hasAlert ? `<div class="card" style="border:2px solid var(--ink)"><div class="card-body"><b style="font-size:15px">Medical alert</b>
+      <div style="font-size:13.5px">${medOk ? `Allergies: ${c.alert[0]}<br>Other: ${c.alert.slice(1).join(" · ")}` : "⚠ Medical alert on file"}</div>
+      <span style="font-size:12.5px;color:var(--muted)">The full record is under <u>Health</u>.</span></div></div>` : "";
+  const menu = o.menu ? `<div class="menu">${(role === "teacher" ? ["Open the family", "Send message to parents"] : ["Link a guardian", "Open the family", "Send message to parents", "Upload photo"]).map(x => `<div>${x}</div>`).join("")}</div>` : "";
+  return header + ident + enrol + cls + med + menu;
+}
+
+function editIdentity(mode) {
+  const err = mode === "error", cit = mode === "citizenship";
+  const fl = (l, v, opt) => `<div class="field${opt && opt.err ? " err" : ""}"><label>${l}${opt && opt.req ? ' <span class="req">· required</span>' : ""}</label><div class="input ${opt && opt.sel ? "select " : ""}filled">${v}</div>${opt && opt.err ? `<span class="msg">${opt.err}</span>` : ""}${opt && opt.hint ? `<span class="hint">${opt.hint}</span>` : ""}</div>`;
+  const body = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      ${fl("Name", "Ethan Lim", { req: 1 })}
+      ${fl("Name on IC", "Lim Zhi En Ethan", { hint: "Printed on invoices and receipts." })}
+      ${fl("Date of birth", "2022-02-14", { req: 1 })}
+      ${fl("Gender", "Male", { sel: 1, req: 1 })}
+      ${fl("Nationality", "Singaporean")}
+      ${fl("Citizenship", cit ? "Singapore Citizen" : "Singapore PR", { sel: 1, req: 1, hint: "Singapore Citizen · Singapore PR · Foreigner" })}
+    </div>
+    ${cit ? '<div class="alert strong"><b>⚠ Fee and subsidy</b><span>Citizenship decides the fee and subsidy. Invoices from the effective date use the new citizenship. <span class="anno">2</span></span></div>' : ""}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      ${err ? fl("Effective date", cit ? "2025-12-01" : "", { req: 1, err: cit ? "The effective date cannot be before the child's start date." : "Enter Effective date." }) : fl("Effective date", "2026-11-10", { req: 1 })}
+      ${fl("Approved by (optional)", cit ? "Grace Tan · Centre Director" : "")}
+    </div>
+    <div class="field"><label>Attachment (optional)</label><div class="input">⇪ Choose file ${cit ? '<span style="color:var(--ink);margin-left:8px">citizenship-certificate.pdf</span>' : ""}</div></div>
+    <div class="alert"><span class="anno">3</span><span>Saving creates a change record: old and new value, updated by, approved by, effective date, attachment.</span></div>`;
+  return overlay("Edit identity", body, `<span class="btn">Cancel</span><span class="btn primary">Save changes</span>`, 640);
+}
+function uploadPhoto() {
+  return overlay("Upload photo", `
+    <div class="row" style="gap:16px;align-items:flex-start"><span class="big-av" style="width:96px;height:96px;font-size:24px">EL</span>
+      <div class="field" style="flex:1"><label>Photo</label><div class="input">⇪ Choose a JPG or PNG photo up to 5 MB</div><span class="hint">The new photo replaces the old one and shows in the header and on Identity. <span class="anno">1</span></span></div></div>`,
+    `<span class="btn">Cancel</span><span class="btn primary">Save photo</span>`, 520);
+}
+
+const WHO = { hq: "Daniel Yeo · HQ Admin", sa: "Nadia Salleh · School Admin", teacher: "Aisyah Rahman · Teacher", finance: "Priya Nair · HQ Finance" };
+const SCREENS = [
+  { id: "scr-01", code: "SCR-01", name: "Child record — Overview", slug: "child-overview", tickets: "Header · 4 thẻ tóm tắt · Identity · Enrolment · Class · Medical alert · Actions — US-001, US-002, US-003, US-005, US-006",
+    states: [
+      ["default", "HQ Admin · Singapore", () => shell("children", overview({}), WHO.hq)],
+      ["school-admin", "School Admin (số che)", () => shell("children", overview({ role: "sa" }), WHO.sa)],
+      ["teacher", "Teacher (số ẩn)", () => shell("children", overview({ role: "teacher" }), WHO.teacher)],
+      ["cards", "HQ Finance (y tế chỉ icon)", () => shell("children", overview({ role: "finance" }), WHO.finance)],
+      ["malaysia", "Centre Malaysia · không có alert", () => shell("children", overview({ child: "my" }), WHO.hq)],
+      ["actions", "Menu Actions", () => shell("children", overview({ menu: 1, role: "sa" }), WHO.sa)]],
+    notes: [["Status chỉ đọc, lấy từ Joining & leaving; Owner là primary contact, mở tab Guardians.", "BR-CHF-006 · FR-002 · FR-003 · AS-OVW-01"], ["Citizenship quyết định học phí và trợ cấp; Nationality là quốc gia trên hộ chiếu.", "BR-FEE-013 · FR-005 · FR-011"], ["Payment method chỉ đọc, lấy từ Fees & Payments; sai quốc gia (CDA ở Malaysia) thì cảnh báo.", "BR-ADM-038 · FR-013 · FR-014 · VAL-002"], ["Số giấy tờ: HQ Admin đầy đủ · School Admin che + Show (ghi History) · Teacher ẩn.", "BR-CHF-009 · FR-017 đến FR-020"], ["Edit mở SCR-02; Teacher không có Edit.", "FR-022 · FR-023"], ["Thẻ Enrolment: status và thay đổi gần nhất, Open the case.", "FR-027"], ["Thẻ Class: level · lớp, sĩ số, homeroom teacher, Change class.", "FR-028 · FR-029 · OQ-OVW-10"], ["Actions: Link a guardian, Open the family (prototype); Send message to parents, Upload photo (SRS).", "FR-032 · OQ-OVW-11"]] },
+  { id: "scr-02", code: "SCR-02", name: "Edit identity", slug: "edit-identity", tickets: "Sửa Identity có change record — US-004",
+    states: [["default", "Sửa", () => shell("children", overview({ role: "sa" }) + editIdentity("default"), WHO.sa)], ["citizenship", "Đổi citizenship", () => shell("children", overview({ role: "sa" }) + editIdentity("citizenship"), WHO.sa)], ["error", "Lỗi effective date", () => shell("children", overview({ role: "sa" }) + editIdentity("error"), WHO.sa)]],
+    notes: [["Trường theo prototype: Name, Name on IC, Date of birth, Gender, Nationality, Citizenship, Effective date, Approved by, Attachment.", "FR-022 · BR-CHF-005"], ["Đổi citizenship hiện cảnh báo về học phí và trợ cấp.", "FR-025 · AS-OVW-06"], ["Lưu tạo change record, xem ở tab History.", "FR-024 · DATA-004"]] },
+  { id: "scr-03", code: "SCR-03", name: "Upload photo", slug: "upload-photo", tickets: "Tải ảnh trẻ — US-006",
+    states: [["default", "Chọn ảnh", () => shell("children", overview({ role: "sa" }) + uploadPhoto(), WHO.sa)]],
+    notes: [["Ảnh mới thay ảnh cũ; JPG / PNG tối đa 5 MB (giả định); tạo change record.", "SRS C&F §4 mục 1.1 · FR-034 · VAL-007 · AS-OVW-08"]] }
+];
+
+let current = { screen: "scr-01", state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = st[2]();
+  $("notes").innerHTML = s.notes.map(n => `<li>${n[0]} <span class="src">${n[1]}</span></li>`).join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : "scr-01", state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code, name: s.name, slug: s.slug, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>
