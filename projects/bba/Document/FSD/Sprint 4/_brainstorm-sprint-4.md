@@ -150,7 +150,11 @@
 | FRD | US | FR | AC | OQ | AS |
 |---|---|---|---|---|---|
 | 2.3 Enquiry Actions | 10 | 32 | 40 | 10 | 4 |
-| 2.8 CRM Administration (v0.3 — Approvals) | 5 | 41 | 45 | 17 | 9 |
+| 2.8 CRM Administration (v0.4 — chỉ BBA-49) | 1 | 8 | 9 | 5 | 2 |
+| 2.8 Approval Delegation (BBA-50, tách 10/11/2026) | 1 | 8 | 9 | 2 | 3 |
+| 2.8 Impact Preview Before Change (BBA-51) | 1 | 10 | 10 | 2 | 0 |
+| 2.8 Change Request with Second Approval (BBA-52) | 1 | 10 | 10 | 2 | 2 |
+| 2.8 Approval Flows Configuration (BBA-53) | 1 | 5 | 7 | 7 | 3 |
 | 3.1 Child Record Overview (v0.1, thêm 10/11/2026) | 6 | 35 | 38 | 13 | 9 |
 | 3.1 Child Record Tabs – Read Views (v0.1, thêm 10/11/2026) | 6 | 38 | 44 | 9 | 7 |
 | 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
