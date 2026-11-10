@@ -232,7 +232,7 @@ tr.sevrow td:first-child { box-shadow: inset 4px 0 0 var(--alert); }
   <div class="page-head">
     <span class="eyebrow">BBA · Sprint 4 · FRD 3.1 Medical Alert Banner</span>
     <h1>Medical alert banner — wireframe</h1>
-    <p>Red banner cho dị ứng mức Severe và Medical flag trên hồ sơ trẻ, danh sách trẻ, danh sách lớp, điểm danh và Teacher App. Khung BeeHive theo prototype bba-sms-crm và bba-teacher. Màu đỏ chỉ dùng cho cảnh báo y tế. Dữ liệu là dữ liệu mẫu; mức độ (Severe / Mild…) là giả định để minh hoạ.</p>
+    <p>Red banner cho dị ứng mức Severe và biểu tượng cảnh báo (⚠) trên hồ sơ trẻ, danh sách trẻ, danh sách lớp, điểm danh và Teacher App. Khung BeeHive theo prototype bba-sms-crm và bba-teacher. Màu đỏ chỉ dùng cho cảnh báo y tế. Dữ liệu là dữ liệu mẫu; mức độ (Severe / Mild…) là giả định để minh hoạ.</p>
   </div>
   <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
   <div class="screen-meta">
@@ -363,7 +363,7 @@ function attendance(o) {
     <div class="tabs">${["Class attendance", "Three streams", "School bus", "Late arrival & pickup", "Attendance over time", "Attendance report"].map((t, i) => `<span class="tab${i === 0 ? " on" : ""}">${t}</span>`).join("")}</div>
     <div class="sumline"><span style="color:var(--alert)">⚠</span><span><b>2 children with a medical alert in Sunbeams · 1 severe</b> — select to show only these children</span><span class="anno">3</span></div>
     <div style="position:relative"><table class="t"><thead><tr><th>Child <span class="anno">1</span></th><th>Stream</th><th>Attendance</th><th>Arrival</th><th>Departure</th><th>Sign in / sign out</th><th>Screening</th></tr></thead><tbody>${tr}</tbody></table>${pop}</div>
-    <div style="font-size:12.5px;color:var(--muted)">2 children on temporary withdrawal are not shown. ${o.detail ? '<span class="anno">2</span> Chọn chip mở chi tiết' : ""}</div>`;
+    <div style="font-size:12.5px;color:var(--muted)">2 children on temporary withdrawal are not shown. ${o.detail ? '<span class="anno">2</span> Bấm vào nhãn để mở chi tiết' : ""}</div>`;
 }
 
 function phone(title, body) {
@@ -401,16 +401,16 @@ const SCREENS = [
       ["tooltip", "Rê chuột lên ⚠", () => shell("children", childrenList({ tip: 1 }), WHO.hq)],
       ["severe", "Lọc Severe allergy", () => shell("children", childrenList({ filter: "severe" }), WHO.cd)],
       ["finance", "HQ Finance", () => shell("children", childrenList({ role: "finance", tip: 1 }), WHO.finance)]],
-    notes: [["Cột Medical: ⚠ đỏ đặc = Severe, ⚠ viền = Medical, — = None.", "FR-015 · BR-007"], ["Bộ lọc Medical alert: Any · Has a medical alert · Severe allergy · No medical alert; ẩn với vai trò không được xem chi tiết.", "FR-017 · AS-MAB-05"], ["Chú thích: nội dung cảnh báo hoặc “Medical alert on file”.", "FR-016"], ["Xuất: cột Medical chỉ Severe / Yes / No, ghi log.", "FR-018 · BR-008"]] },
-  { id: "scr-03", code: "SCR-03", name: "Class — tab Children", slug: "class-children", tickets: "US-003 — flag và tóm tắt theo lớp",
+    notes: [["Cột Medical: ⚠ tô đỏ kín = mức Severe, ⚠ viền đỏ = mức Medical, dấu gạch (—) = không có thông tin y tế.", "FR-015 · BR-007"], ["Bộ lọc Medical alert: Any · Has a medical alert · Severe allergy · No medical alert; ẩn với vai trò không được xem chi tiết.", "FR-017"], ["Chú thích: nội dung cảnh báo hoặc “Medical alert on file”.", "FR-016"], ["Xuất: cột Medical chỉ Severe / Yes / No, ghi log.", "FR-018 · BR-008"]] },
+  { id: "scr-03", code: "SCR-03", name: "Class — tab Children", slug: "class-children", tickets: "US-003 — biểu tượng cảnh báo và dòng tóm tắt theo lớp",
     states: [["default", "Teacher", () => shell("classes", classChildren(), WHO.teacher)]],
-    notes: [["Dòng tóm tắt và liên kết Allergy list for this class.", "FR-019"], ["Chip Severe / Medical cạnh tên; hàng Severe có vạch đỏ.", "FR-019 · FR-020"]] },
-  { id: "scr-04", code: "SCR-04", name: "Class attendance", slug: "class-attendance", tickets: "US-004 — chip, cửa sổ chi tiết, tóm tắt lớp",
+    notes: [["Dòng tóm tắt và liên kết Allergy list for this class.", "FR-019"], ["Nhãn Severe / Medical cạnh tên; hàng của trẻ mức Severe có vạch đỏ ở mép trái.", "FR-019 · FR-020"]] },
+  { id: "scr-04", code: "SCR-04", name: "Class attendance", slug: "class-attendance", tickets: "US-004 — nhãn cạnh tên, cửa sổ chi tiết, dòng tóm tắt lớp",
     states: [["default", "Teacher", () => shell("ops", attendance({}), WHO.teacher)], ["detail", "Cửa sổ chi tiết", () => shell("ops", attendance({ detail: 1 }), WHO.teacher)]],
-    notes: [["Chip ⚠ Severe / ⚠ Medical cạnh tên; hàng Severe có vạch đỏ.", "FR-021 · FR-024"], ["Chọn chip: Allergies (mức độ), Respiratory, Skin, Medical history, Diet, Note from staff, Open Health.", "FR-022"], ["Dòng tóm tắt lọc bảng chỉ còn trẻ có cảnh báo.", "FR-023 · VAL-004"]] },
-  { id: "scr-05", code: "SCR-05", name: "Teacher App — Student list", slug: "teacher-students", tickets: "US-005 — tag Severe allergy / Medical",
+    notes: [["Nhãn ⚠ Severe / ⚠ Medical cạnh tên; hàng của trẻ mức Severe có vạch đỏ ở mép trái.", "FR-021 · FR-024"], ["Bấm vào nhãn: cửa sổ chi tiết liệt kê Allergies (mức độ), Respiratory, Skin, Medical history, Diet, Note from staff, Open Health.", "FR-022"], ["Dòng tóm tắt lọc bảng chỉ còn trẻ có cảnh báo.", "FR-023 · VAL-004"]] },
+  { id: "scr-05", code: "SCR-05", name: "Teacher App — Student list", slug: "teacher-students", tickets: "US-005 — nhãn Severe allergy / Medical",
     states: [["default", "Nursery 2", () => teacherStudents()]],
-    notes: [["Tag dưới tên: ⚠ Severe allergy (đỏ), Medical (viền); trẻ None không có tag.", "FR-026 · FR-028"]] },
+    notes: [["Nhãn dưới tên: ⚠ Severe allergy (nền đỏ), Medical (viền đỏ); trẻ không có thông tin y tế thì không có nhãn.", "FR-026 · FR-028"]] },
   { id: "scr-06", code: "SCR-06", name: "Teacher App — Child profile", slug: "teacher-child", tickets: "US-005 — red banner trên cùng hồ sơ trẻ",
     states: [["default", "Chloe Lim Xin Yi", () => teacherChild()]],
     notes: [["Red banner trên cùng, không đóng được.", "FR-027 · BR-010"], ["Health record chỉ đọc trong Teacher App.", "BR-TCH-011"]] }
