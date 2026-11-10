@@ -209,6 +209,42 @@
       "version": "0.2",
       "source_sha256": "10ff978a12894ebeb3c807fdaf1bbe243cb8f8dc5724655930ed065a8267efb5",
       "synced_at": "2026-11-10 10:00"
+    },
+    "FSD/Sprint 4/BBA-69_Allergies_List_VI": {
+      "file_id": "1-EsnDjHz_fg0CJMC1HlzuZEApLSdpmwA",
+      "url": "https://drive.google.com/file/d/1-EsnDjHz_fg0CJMC1HlzuZEApLSdpmwA/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-69 Allergies list (most severe first) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "04fde8bca0951286c315083e17175f7e70da28d798ad6829bcf64e904b865d91",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI": {
+      "file_id": "1NfLhNMpWkt767hCrNpyMWrQ8wg8AA-pj",
+      "url": "https://drive.google.com/file/d/1NfLhNMpWkt767hCrNpyMWrQ8wg8AA-pj/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-70 Growth – termly height & weight entry by class (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "73eef0a5064f5f196766584de572bd03b4ff20bdee3c59d971ea8d2ad2d1389f",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
+      "file_id": "1JMjIDDPVB1fbhZh7k_s9WtvDZrOQQNiG",
+      "url": "https://drive.google.com/file/d/1JMjIDDPVB1fbhZh7k_s9WtvDZrOQQNiG/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-71 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "80208a5368fa07c3a2efcec01475de79572aa2906ac96ce183731a2cd6892d92",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
+      "file_id": "1z6UKwfpjzj3lnkWX_fiz32rv3fgentAY",
+      "url": "https://drive.google.com/file/d/1z6UKwfpjzj3lnkWX_fiz32rv3fgentAY/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-72 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "a6daa5bd0fb85c4049e77762b62bd39ba803c244f95836b077efb3f35efecc82",
+      "synced_at": "2026-11-10 10:27"
     }
   },
   "folders_used": {
@@ -232,7 +268,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 10:00"
+      "last_used": "2026-11-10 10:27"
     }
   },
   "history": [
