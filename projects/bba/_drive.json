@@ -117,8 +117,8 @@
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] 3.1 Child Record Overview (Tiếng Việt) - Sprint 4.docx",
       "version": "0.1",
-      "source_sha256": "1a2ea48c42c26f122b34d541c47ec92d7ff5ee141e592d86dd48982445f7d2f5",
-      "synced_at": "2026-11-10 04:23"
+      "source_sha256": "9ed22eb251aac96e2d27ad04971b5e17a2b3a8d6d19d475d26bd6425714d6d7a",
+      "synced_at": "2026-11-10 08:15 (từ Drive về Git)"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
       "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
@@ -126,8 +126,8 @@
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4 - v0.2.docx",
       "version": "0.2",
-      "source_sha256": "327bbc772ad6aa19f54c7f7ae4837e9143d06f09050baeed3d38b59557a5b180",
-      "synced_at": "2026-11-10 07:39"
+      "source_sha256": "3bed358dbe0dd9fb8350fb07d40450a59b1463253c17befe8e211075b04c88b4",
+      "synced_at": "2026-11-10 08:15 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
       "file_id": "1y1OlZnPl6oJX6h3pxRMy5qxtkS87Fpry",
@@ -256,6 +256,15 @@
         "file_id": "1VbAmVxRTRA-iYH0Ov4Eoo-7dL6Eg-C4a",
         "version": "0.1"
       }
+    },
+    {
+      "at": "2026-11-10 08:15",
+      "action": "pull user edits from Drive to Git",
+      "files": [
+        "3.1_Child_Record_Overview_VI",
+        "3.1_Child_Record_Read_Tabs_VI"
+      ],
+      "note": "User đã tự bỏ vào thùng rác trên Drive: 2.3 Enquiry Actions, 3.1 Children and Families, 3.2 Daily Operations, 3.6 Finance, 2.8 CRM Administration v0.4, Read Tabs v0.1"
     }
   ]
 }
