@@ -76,13 +76,13 @@
       "synced_at": "2026-11-09 12:13"
     },
     "FSD/Sprint 4/2.8_CRM_Administration_VI": {
-      "file_id": "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
-      "url": "https://drive.google.com/file/d/1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL/view",
+      "file_id": "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC",
+      "url": "https://drive.google.com/file/d/1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "7b2a44b3885bfa93eabdabd339d40a93a7d3d5e6732877f5d1fee1d0884deabe",
-      "synced_at": "2026-11-09 14:17"
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4 - v0.3.docx",
+      "version": "0.3",
+      "source_sha256": "705a397b38a0cdb77f2ea983f69c19d11aa3a7f373574f8fd60755b5aabd2edc",
+      "synced_at": "2026-11-10 02:30"
     },
     "FSD/Sprint 4/3.1_Children_and_Families_VI": {
       "file_id": "13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM",
@@ -159,6 +159,21 @@
       "synced_at": "2026-11-09 12:13",
       "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
       "replaced_at": "2026-11-09 14:17"
+    },
+    {
+      "at": "2026-11-10 02:30",
+      "action": "upload new version, keep previous",
+      "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
+      "new": {
+        "file_id": "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC",
+        "version": "0.3"
+      },
+      "kept": {
+        "file_id": "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
+        "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
+        "version": "0.2",
+        "url": "https://drive.google.com/file/d/1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL/view"
+      }
     }
   ]
 }
