@@ -1,6 +1,6 @@
 """Đóng gói wireframe Child Record Overview (FRD 3.1 Sprint 4) và chụp PNG từng màn / trạng thái.
 
-Chạy:  python projects/bba/Diagram/Wireframe/_build_child.py
+Chạy:  python projects/bba/Diagram/Wireframe/_build_child.py [child-overview | child-tabs]
 - Template → child-overview-sprint4.html (trang publish làm Artifact / mở trực tiếp bằng trình duyệt).
 - Chụp từng màn và trạng thái → png/SCR-xx-<slug>[--<state>].png (nhúng vào FRD Word).
 """
@@ -11,8 +11,12 @@ from pathlib import Path
 from _build import shrink
 
 HERE = Path(__file__).resolve().parent
-SRC = HERE / "_child-overview-sprint4.template.html"
-OUT = HERE / "child-overview-sprint4.html"
+import sys
+
+# Mặc định: Child Record Overview. Truyền tên khác (vd. "child-tabs") để build wireframe khác cùng khung.
+NAME = sys.argv[1] if len(sys.argv) > 1 else "child-overview"
+SRC = HERE / f"_{NAME}-sprint4.template.html"
+OUT = HERE / f"{NAME}-sprint4.html"
 PNG = HERE / "png"
 
 

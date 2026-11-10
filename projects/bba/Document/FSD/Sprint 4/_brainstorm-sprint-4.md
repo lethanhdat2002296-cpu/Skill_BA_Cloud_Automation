@@ -152,6 +152,7 @@
 | 2.3 Enquiry Actions | 10 | 32 | 40 | 10 | 4 |
 | 2.8 CRM Administration (v0.3 — Approvals) | 5 | 41 | 45 | 17 | 9 |
 | 3.1 Child Record Overview (v0.1, thêm 10/11/2026) | 6 | 35 | 38 | 13 | 9 |
+| 3.1 Child Record Tabs – Read Views (v0.1, thêm 10/11/2026) | 6 | 38 | 44 | 9 | 7 |
 | 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
 | 3.2 Daily Operations | 14 | 69 | 74 | 14 | 7 |
 | 3.6 Finance | 22 | 97 | 107 | 15 | 6 |
