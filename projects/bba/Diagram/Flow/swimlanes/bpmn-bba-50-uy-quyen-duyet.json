@@ -23,7 +23,7 @@
    "id": "a2",
    "lane": 0,
    "col": 2,
-   "label": "Nhập lý do, ngày kết thúc (tuỳ chọn)"
+   "label": "Nhập Reason, Until (tuỳ chọn), tick xác nhận"
   },
   {
    "id": "g1",
@@ -43,7 +43,7 @@
    "id": "a3",
    "lane": 2,
    "col": 5,
-   "label": "Dùng quyền (vd. duyệt đơn nghỉ)"
+   "label": "Dùng quyền (vd. duyệt đơn nghỉ trong My approvals)"
   },
   {
    "id": "g2",
@@ -56,7 +56,7 @@
    "id": "a4",
    "lane": 0,
    "col": 7,
-   "label": "Thu hồi quyền"
+   "label": "Revoke và xác nhận"
   },
   {
    "id": "t1",

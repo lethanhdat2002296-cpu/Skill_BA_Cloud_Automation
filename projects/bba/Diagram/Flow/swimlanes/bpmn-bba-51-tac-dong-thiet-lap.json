@@ -22,7 +22,7 @@
    "id": "a2",
    "lane": 0,
    "col": 2,
-   "label": "Chọn phạm vi và giá trị mới"
+   "label": "Change: chọn Applies to và Value"
   },
   {
    "id": "g1",
@@ -36,7 +36,7 @@
    "lane": 1,
    "col": 4,
    "type": "system",
-   "label": "Tính tác động: trẻ, hoá đơn, yêu cầu đang chờ"
+   "label": "See the impact: Centre cũ → mới; trẻ, hoá đơn, yêu cầu chờ"
   },
   {
    "id": "a3",
@@ -49,7 +49,7 @@
    "lane": 0,
    "col": 6,
    "type": "decision",
-   "label": "Xác nhận?"
+   "label": "Confirm?"
   },
   {
    "id": "e2",

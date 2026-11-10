@@ -55,7 +55,7 @@ def main() -> None:
                 continue
             for st in s["states"]:
                 page.evaluate("([a, b]) => window.showWireframe(a, b)", [s["id"], st])
-                name = f'{s["code"]}-{slug(s["name"])}' + ("" if st == "default" else f"--{st}") + ".png"
+                name = f'{s["code"]}-{s.get("slug") or slug(s["name"])}' + ("" if st == "default" else f"--{st}") + ".png"
                 page.locator("#frame .app").screenshot(path=str(PNG / name))
                 shrink(PNG / name)
                 n += 1

@@ -11,7 +11,7 @@
 | Feature (ảnh) | Nguồn SRS | Mục / mã WBS dùng | Đã có ở Sprint 3 (chỉ dẫn chiếu) |
 |---|---|---|---|
 | 2.3 Enquiry actions | `BBA_CRM_SRS_v0.1.md` | §1.1 (WBS 2.3.1.01–05, 2.3.1.09; 2.3.2.03, .05, .07, .08), §1.2, §3 P2 bước 7, P4, P6 bước 15, §4 mục 3.2–3.3, §5 BR-CRM-012, 019–022, 037–038, §6.1, §8 AC-CRM-004, 012 | BBA-43 (hiển thị Actions & SLA, Enquiry Status Catalogue §7.1), BBA-44 (Timeline) |
-| 2.8 CRM Administration | `BBA_CRM_SRS_v0.1.md` | §1.1 (WBS 2.8.1.01–04, 2.8.2.01–03), §1.2 (2.8.2.04–07 Phase 2), §3 P4, P5, P7, §4 mục 3.3, 4.4, 4.5, §5 BR-CRM-019–020, 023–032, §6.1, §8 AC-CRM-004, 006, 008–010 | BBA-43 (hiển thị Journey runtime) |
+| 2.8 CRM Administration → Approvals | `BBA-SMS-SRS-Administration-v0.1.md` + `…-00-General-Requirements` + prototype `/organisation/approvals` | §3 P4, P5; §4 mục 2.3, 2.4, 4.1, 4.2; BR-ADM-016–023, 036, 037, 042; GEN §3.3, §4.4 | — |
 | 3.1 Children & families | `BBA-SMS-SRS-Children-and-Families-v0.1.md` (+ `…-00-General-Requirements`) | xem mục 3.1 bên dưới | — |
 | 3.2 Daily operations | `BBA-SMS-SRS-Daily-Operations-v0.1.md` (+ General) | xem mục 3.2 bên dưới | — |
 | 3.6 Finance | `BBA-SMS-SRS-Fees-and-Payments-v0.1.md` (+ General) — SRS ghi "close each month without Taidii" (§1) khớp tên "rebuilt to Tai[dii]" | xem mục 3.6 bên dưới | — |
@@ -71,43 +71,51 @@
 
 ---
 
-## 2.8 CRM Administration
+## 2.8 CRM Administration — Approvals (BBA-49 đến BBA-53), đối chiếu prototype
 
-**1. Bối cảnh** — Quản trị viên duy trì Journey, Slot Schedule và khoảng loại trừ trong phạm vi được duyệt (nguồn: CRM SRS P7 bước 18).
+> Phạm vi 2.8 do user chốt lại ngày 09/11/2026: **Approvals (Administration)**, 5 ticket BBA-49 đến BBA-53 (nội dung Journey Settings / Visit Slot Schedule của bản 0.1 đã bỏ).
+> Nguồn: SRS SMS Administration v0.1 (§3 P4, P5; §4 mục 2.3, 2.4, 4.1, 4.2; BR-ADM-016 đến 023, 036, 037, 042), SRS SMS General Requirements v0.1 (§3.1, §3.3, §4.4) và **prototype** mà SRS ADM §1 dẫn chiếu ("Read it together with the prototype").
+> Prototype khảo sát ngày 10/11/2026, đăng nhập demo HQ Admin "Daniel Yeo": `/organisation/approvals`, `/organisation/delegations`, `/approvals`, `/approvals/<id>`, `/organisation/features`, `/organisation` (Roles), `/history`. Dữ liệu là dữ liệu demo; prototype chỉ thể hiện ý đồ màn hình, quy tắc vẫn lấy SRS làm chuẩn. Prototype khác SRS → ghi OQ, không tự chọn.
 
-**2. Mục tiêu** — SRS không nêu KPI. → OQ-ADM-01.
+**1. Bối cảnh** — Mọi yêu cầu cần duyệt đi qua một hộp duyệt; người duyệt chỉ đặt trong Approval routes (SRS GEN §3.3; BR-ADM-018). Prototype: menu chính có **My approvals** (badge số yêu cầu chờ, demo 26) tách khỏi Administration; Approval routes, Extra permissions nằm trong **Users & permissions** (tab Users, Roles, Extra permissions, Approval routes, Sign-in & security); Settings là menu riêng.
 
-**3. Người dùng** — HQ Admin (cấu hình CRM, quyền, Country/Brand/Centre), Centre Director (host, capacity, phê duyệt theo quốc gia), System (sinh Slot, áp audit) (nguồn: CRM SRS §2).
+**2. Mục tiêu** — SRS không nêu KPI → giữ OQ-ADM-13 (mới).
 
-**4. Phạm vi**
+**3. Người dùng** — HQ Admin (mọi quyền, BR-ADM-001; prototype: HQ Admin giao được extra permission cho bất kỳ ai trong 53 nhân viên và quyết định thay vai trò khác), Centre Director (giao extra permission, duyệt yêu cầu Centre), Finance, District Manager, Operations Manager, Head of Brand (người duyệt route). Danh sách vai trò duyệt trong form route: Centre Director, District Manager, Operations Manager, Head of Brand, Finance, HQ Admin (prototype). Roles demo ghi "Sample roles · ⚠ final list to confirm with BBA".
 
-| In scope (Phase 1) | Ngoài phạm vi | Sprint 3 / FRD khác |
-|---|---|---|
-| 2.8.1.01 Journey template versioning · 2.8.1.02 Visual Journey builder · 2.8.1.03 Journey preview · 2.8.1.04 Activity Template runtime rules (§4 mục 3.3) · 2.8.2.01 Visit Slot Schedule CRUD (§4 mục 4.4) · 2.8.2.02 Sinh và rà Slot theo ngày (§4 mục 4.5) · 2.8.2.03 Huỷ một Slot đã sinh, gồm phê duyệt xoá Slot ở Malaysia (§4 mục 4.5, BR-CRM-029–031) | 2.8.2.04–07: gửi duyệt thay đổi Schedule, duyệt/từ chối, quy tắc tác động lên booking, thời lượng theo loại Visit (Phase 2, §1.2); View Lead score (Not identified in the WBS) | Chạy Journey trên Enquiry (FRD 2.3); đặt Visit, Calendar (nhóm 2.4); hiển thị Journey runtime (BBA-43) |
+**4. Đối chiếu prototype ↔ FRD 2.8 v0.2**
 
-**5. Quy trình (TO-BE theo SRS)**
-1. Admin tạo Journey Template có phạm vi; cấu hình Stage (thứ tự State, phase, base score, tier không chồng lấn), Activity (Task / sub-task, thứ tự, manual/automatic, owner, progress points, score points), sự kiện hoàn tất (nguồn: §4 mục 3.3).
-2. Sửa Template không làm đổi Enquiry đang chạy (nguồn: §4 mục 3.3 "without changing existing Enquiry runs", "without silently changing saved Enquiry runs").
-3. Preview Template không đổi runtime (nguồn: §4 mục 3.3, Phase 1).
-4. Admin tạo Visit Slot Schedule (Visit type, giờ, host, hiệu lực, loại trừ) → lưu thẳng, chỉ Active/Inactive, không duyệt (nguồn: BR-CRM-027, 028, AC-CRM-008).
-5. Hệ thống sinh Slot tương lai; Slot chỉ hiển thị khi active, hợp lệ, không bị loại trừ, còn chỗ (nguồn: §4 mục 4.1, 4.5, BR-CRM-026, AC-CRM-006).
-6. Xoá một Slot: Malaysia cần phê duyệt cấu hình; đang chờ → ngừng nhận booking; xoá có hiệu lực → Visit đã đặt thành Cancelled lý do "Centre cancelled" (nguồn: BR-CRM-029–031, AC-CRM-009, 010).
-- **Chưa biết:** quy tắc phiên bản Journey (OQ-ADM-02); thao tác của builder trực quan (OQ-ADM-03); "Activity Template runtime rules" cụ thể (OQ-ADM-04); khoảng thời gian sinh Slot trước (OQ-ADM-05); vai trò duyệt xoá Slot (OQ-ADM-06); cấu hình khoảng loại trừ (OQ-ADM-07).
+| US / ticket | Prototype thể hiện | FRD v0.2 đang viết | Kết luận |
+|---|---|---|---|
+| US-001 BBA-49 Ma trận | Bảng 21 route: Request type, Country, Brand, Level 1 approver, Level 2 approver, Amount threshold, Edit. Lọc Request type / Country / Brand, Search, Export (21). Dấu "⚠ To confirm with BBA" trên route chưa chốt; nhãn "· can be delegated" ở cấp 1 của Attendance void, Child leave, Authorised pickup, Photos, Progress report. **History chung cuối trang**: "thời điểm · người · loại: cấp 1 → cấp 2 cũ → cấp 1 → cấp 2 mới". Nút **Add route**. | Cột "Last changed"; History từng dòng; không có dấu To confirm, không có nhãn can be delegated; không có Add route. | Sửa: bỏ cột Last changed, History chung theo màn (vẫn lọc theo route được); thêm dấu To confirm, nhãn can be delegated. Add route chuyển sang US-005. |
+| US-005 BBA-53 Cấu hình | Dialog Add / Edit route: Request type, Country (All / Singapore / Malaysia), Brand (All brands + 7 brand) **đều sửa được**; Level 1 approver; Level 2 approver có lựa chọn "None — one level"; trường **"Level 2 only above this amount"** chỉ hiện khi đã chọn cấp 2, để trống = "Always both levels". Lưu là có hiệu lực ngay, ghi History; không duyệt lần hai. Prototype cho lưu cấp 1 = cấp 2 cùng vai trò (Discount CD → CD) không báo lỗi. 17 loại yêu cầu (có Portfolio). | Loại / quốc gia / brand chỉ đọc; toggle "Cần duyệt cấp 2"; VAL-009 báo lỗi ngưỡng khi chưa bật cấp 2; có Load default routes. | Sửa field spec theo dialog; ngưỡng ẩn khi cấp 2 = None (VAL-009 chỉ còn "số dương"); thêm Add route + kiểm tra trùng tổ hợp (AS); giữ Load default routes (SRS §4 mục 2.4). Cấp 1 = cấp 2 cùng vai trò → OQ (Transfer DM → DM là hợp lệ vì hai Centre). |
+| US-005 route mặc định | Khác SRS ở 6 dòng: "Withdrawal · not at month end" chỉ DM 1 cấp (SRS: CD rồi DM/OM); Retention fee waiver MY: CD → OM **2 cấp** (SRS: 3 cấp); Credit note, Refund: Finance → HQ Admin, ngưỡng 1.000 (SRS: Finance, không ngưỡng); Notice period waiver ⚠; Temporary withdrawal SG ⚠. | Phụ lục A theo SRS. | Phụ lục A thêm cột "Prototype" và "Khác biệt"; OQ-ADM-01 cập nhật; thêm OQ-ADM-14. |
+| US-002 BBA-50 Uỷ quyền | Màn "Extra permissions — Permissions given to one person on top of their role": Person, Permission, Granted by, From, Until ("No end date"), Status (Active / Revoked), Revoke; lọc Permission, Status; Export. Dialog **Grant**: Person, Permission, Reason, Until (optional), checkbox **"I confirm this person should hold it"**. Danh mục 6 quyền: Approve leave requests, Review class update photos, Void or delete attendance records, Assign teachers to a class, Move a class's children up, Manage users of their own centre. Revoke có hộp xác nhận "… loses it now and is told in the app". History: "Granted via Centre Director app", lý do "Covers leave approvals on the Centre Director's off days". | Có đủ grant / revoke / expire; thiếu checkbox xác nhận, hộp xác nhận Revoke, danh mục quyền, liên kết với route "can be delegated", HQ Admin cũng giao được. | Sửa: thêm danh mục quyền, checkbox, hộp xác nhận, liên kết route can be delegated ↔ quyền duyệt; HQ Admin giao mọi Centre (BR-ADM-001). Authorised pickup và Progress report được đánh "can be delegated" nhưng không có quyền tương ứng → OQ-ADM-15. OQ-ADM-03 thu hẹp: uỷ quyền = extra permission, không có uỷ quyền cả hộp duyệt trong prototype. |
+| US-003 BBA-51 Tác động | Settings: danh sách thiết lập theo nhóm FEES, JOINING & LEAVING, DAILY OPERATIONS, LEARNING, COMMUNICATION; "⚠" + bộ lọc "Not yet confirmed"; mỗi thiết lập có đơn vị, "Set at: Group · default 5" (các cấp được đặt), "Mark as confirmed by BBA", Change. Bảng "Value at every centre": Centre, Value, Comes from, Set by, Override. Lọc Country / Brand / Cluster / Differs from default. Dialog **Change**: Applies to (cấp), Value, **See the impact** → "15 centres affected" + danh sách "Centre: 5 → 10 … and 7 more", Confirm. Tab **Feature switches**: mỗi tính năng bật / tắt theo brand ("Whole brand", "3 of 4 on") và từng Centre, mô tả "Off hides: …". | Tác động = số trẻ, hoá đơn, yêu cầu chờ (theo SRS); không có danh sách Centre đổi giá trị; phạm vi chưa có cấp "Group"; chưa có "Set at", "Off hides". | Sửa: tác động gồm **danh sách Centre đổi giá trị (cũ → mới)** (prototype) **và** số trẻ, hoá đơn, yêu cầu chờ (SRS BR-ADM-037) → OQ-ADM-07 cập nhật; thêm "Set at", cấp Group, "Off hides", bật theo brand / Centre. |
+| US-004 BBA-52 Duyệt 2 cấp | **My approvals**: tab Waiting / Done; lọc Centre, Type, Requested by, Submitted (Done thêm Status); cột Request (loại + số), Record (đối tượng + Centre), **What happens next** (câu hậu quả "Once you approve, …"), Requested by, Submitted, Status, Decide. Trang chi tiết: badge **"Level 1 of 2"**, Request, **What approving changes**, **Rule warnings**, Supporting documents (Verified / Pending review), Approval history, Your decision (Comment, Reason required to reject, Approve, Reject). Duyệt cấp 1 → "Level 2 of 2"; history ghi "Approved · Level 1 of 2 · Centre Director · Daniel Yeo · HQ Admin" + "This decision belongs to the Centre Director · group. Approval routes · Discount." Sau khi Daniel Yeo duyệt cấp 1, trang **không còn Your decision** cho cấp 2 của chính người đó. Change log ghi "Workflow step · Pending · level 1 of 2 → Pending · level 2 of 2". Done: Approved / **Declined**, "Outcome", "Reason given". Ghi chú: hồ sơ chiều cao cân nặng, routine, cập nhật hồ sơ không cần duyệt; class update của Teacher chờ duyệt, của CD / HQ Admin đi thẳng. Duyệt tại cửa (pickup, leave, refused collections) ở màn riêng `/operations/approvals`. Ví dụ "change request": **Discount "Open house September — 15%"** (định nghĩa giảm giá cấp group do Finance gửi) đi 2 cấp. | Inbox nằm trong Administration; panel chi tiết bên phải; tab Waiting for me / All requests; cột Amount, Level; chưa có What happens next, What approving changes, Rule warnings, Comment; chưa có quy tắc một người không duyệt hai cấp; chưa có HQ Admin quyết thay. | Sửa: theo màn My approvals + trang chi tiết; thêm quy tắc người đã duyệt cấp 1 không duyệt cấp 2 (theo prototype → xác nhận OQ-ADM-09); HQ Admin quyết thay vai trò, history ghi vai trò sở hữu và route; trạng thái Declined; duyệt tại cửa ngoài phạm vi. OQ-ADM-05 bổ sung ví dụ thay đổi định nghĩa giảm giá. |
 
-**6. Dữ liệu** — Journey Template, Stage, Activity, Scoring tier; Visit Slot Schedule, Slot, Deletion request (nguồn: §4 mục 3.3, 4.4, 4.5). Notification "Scheduled-Slot deletion approval" → người duyệt (nguồn: §6.1).
+**5. Quy trình TO-BE (đã chỉnh theo prototype)**
+1. HQ Admin xem ma trận route, lọc, xuất; route chưa chốt có dấu ⚠ (US-001).
+2. HQ Admin thêm / sửa route trong dialog; lưu có hiệu lực ngay cho yêu cầu mới, ghi History (US-005).
+3. Centre Director (hoặc HQ Admin) giao extra permission có lý do, xác nhận, hạn tuỳ chọn; người nhận dùng quyền ngay, thấy yêu cầu tương ứng trong My approvals (US-002).
+4. Người dùng đổi thiết lập: chọn cấp áp dụng, giá trị → See the impact → Confirm (US-003).
+5. Người yêu cầu gửi → My approvals của người duyệt cấp 1 → (cấp 2 khi route có cấp 2 và vượt ngưỡng) → Approved / Declined; mỗi bước ghi Approval history và change log (US-004).
 
-**7. Rủi ro** — SRS mục 4 nhảy từ 4.5 sang 4.7 (thiếu 4.6) → có thể thiếu nội dung (OQ-ADM-08).
+**6. Dữ liệu** — Route (loại, quốc gia, brand, cấp 1, cấp 2, ngưỡng, trạng thái xác nhận, cho phép uỷ quyền); Extra permission (người, quyền, người giao, lý do, từ, đến, trạng thái, kênh giao: CRM / Centre Director app); Setting value (thiết lập, cấp, giá trị, nguồn, người đặt, thời điểm, đã xác nhận); Approval request + step (cấp x / y, vai trò sở hữu, người quyết, comment, lý do, route áp dụng).
 
-| Mã | Nội dung | Loại |
-|---|---|---|
-| OQ-ADM-01 | Chỉ số thành công cho cấu hình CRM ở Sprint 4? | OQ |
-| OQ-ADM-02 | Versioning: khi nào tạo phiên bản mới (mỗi lần lưu hay khi publish), có trạng thái Draft/Published không, Enquiry mới nhận phiên bản nào. | OQ |
-| OQ-ADM-03 | Visual Journey builder: thao tác cần có (kéo thả, sắp thứ tự, nhân bản…) — theo prototype "Journey Settings". | OQ |
-| OQ-ADM-04 | Activity Template runtime rules: tính hạn Task, thứ tự bắt đầu, danh mục event key được duyệt. | OQ |
-| OQ-ADM-05 | Hệ thống sinh Slot trước bao nhiêu ngày/tuần; xử lý Slot đã sinh khi sửa Schedule. | OQ |
-| OQ-ADM-06 | Vai trò duyệt xoá Slot ở Malaysia; Singapore và Vietnam có cần duyệt không. | OQ |
-| OQ-ADM-07 | Khoảng loại trừ (ngày lễ, sự kiện Centre) được quản lý ở đâu, ai cấu hình. | OQ |
-| OQ-ADM-08 | SRS CRM không có mục 4.6 — có nội dung bị thiếu không? | OQ |
+**7. Rủi ro** — Prototype và SRS khác nhau ở route mặc định (6 dòng) và nội dung tác động → nếu không chốt, đội dev làm theo prototype sai SRS. Giảm thiểu: Phụ lục A ghi cả hai, OQ-ADM-01, OQ-ADM-07, OQ-ADM-14 mức Cao.
+
+**Đề xuất của BA (chưa phải yêu cầu)** — Chặn lưu route có cấp 1 = cấp 2 cùng vai trò trừ loại yêu cầu liên quan hai Centre (Transfer); hiển thị trên dòng route số yêu cầu đang chờ khi sửa.
+
+| Mã | Nội dung | Loại | Liên quan |
+|---|---|---|---|
+| AS-ADM-08 | Không lưu hai route trùng tổ hợp loại yêu cầu + quốc gia + brand; Add route với tổ hợp đã có báo lỗi. (Prototype không báo lỗi rõ.) | AS → OQ-ADM-16 | US-005 |
+| AS-ADM-09 | Route "can be delegated" là route có quyền duyệt tương ứng trong danh mục extra permission (Approve leave requests ↔ Child leave, Review class update photos ↔ Photos, Void or delete attendance records ↔ Attendance void). | AS → OQ-ADM-15 | US-001, US-002 |
+| OQ-ADM-13 | Chỉ số thành công cho Approvals ở Sprint 4? | OQ | chung |
+| OQ-ADM-14 | Route mặc định theo SRS hay theo prototype ở 6 dòng khác nhau (Phụ lục A)? | OQ | US-005 |
+| OQ-ADM-15 | Authorised pickup, Progress report có nhãn "can be delegated" nhưng không có quyền tương ứng trong danh mục extra permission: thêm quyền hay bỏ nhãn? | OQ | US-001, US-002 |
+| OQ-ADM-16 | Add route trùng tổ hợp đã có: báo lỗi hay ghi đè route cũ? | OQ | US-005 |
+| OQ-ADM-17 | Cho phép route có cấp 1 và cấp 2 cùng vai trò không (ngoài Transfer)? | OQ | US-005 |
 
 ---
 
@@ -142,7 +150,7 @@
 | FRD | US | FR | AC | OQ | AS |
 |---|---|---|---|---|---|
 | 2.3 Enquiry Actions | 10 | 32 | 40 | 10 | 4 |
-| 2.8 CRM Administration | 7 | 32 | 39 | 10 | 3 |
+| 2.8 CRM Administration (v0.3 — Approvals) | 5 | 41 | 45 | 17 | 9 |
 | 3.1 Children and Families | 10 | 66 | 60 | 12 | 2 |
 | 3.2 Daily Operations | 14 | 69 | 74 | 14 | 7 |
 | 3.6 Finance | 22 | 97 | 107 | 15 | 6 |

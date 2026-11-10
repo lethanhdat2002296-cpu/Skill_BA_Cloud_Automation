@@ -16,7 +16,7 @@
    "id": "a1",
    "lane": 0,
    "col": 1,
-   "label": "Mở Administration › Approval routes"
+   "label": "Mở Users & permissions › Approval routes"
   },
   {
    "id": "x1",
@@ -43,21 +43,21 @@
    "id": "a3",
    "lane": 0,
    "col": 5,
-   "label": "Sửa route: người duyệt cấp 1, cấp 2, ngưỡng"
+   "label": "Add / Edit route: cấp 1, cấp 2 (hoặc None), ngưỡng"
   },
   {
    "id": "g1",
    "lane": 1,
    "col": 6,
    "type": "decision",
-   "label": "Hợp lệ?"
+   "label": "Hợp lệ, không trùng?"
   },
   {
    "id": "x4",
    "lane": 1,
    "col": 7,
    "type": "system",
-   "label": "Lưu route, ghi lịch sử"
+   "label": "Save route, ghi History"
   },
   {
    "id": "x5",

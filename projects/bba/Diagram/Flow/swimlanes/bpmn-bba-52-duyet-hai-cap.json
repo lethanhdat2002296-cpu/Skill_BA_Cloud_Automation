@@ -3,8 +3,8 @@
  "lanes": [
   "Người yêu cầu",
   "Hệ thống",
-  "Người duyệt cấp 1",
-  "Người duyệt cấp 2"
+  "Người duyệt cấp 1 (hoặc HQ Admin)",
+  "Người duyệt cấp 2 (khác người cấp 1)"
  ],
  "nodes": [
   {
@@ -31,7 +31,7 @@
    "id": "a2",
    "lane": 2,
    "col": 3,
-   "label": "Mở yêu cầu trong Approvals inbox"
+   "label": "Mở My approvals, chọn Decide (Level 1 of 2)"
   },
   {
    "id": "g1",
@@ -51,13 +51,13 @@
    "id": "r1",
    "lane": 2,
    "col": 6,
-   "label": "Từ chối, nhập lý do (bắt buộc)"
+   "label": "Reject, nhập Reason (bắt buộc)"
   },
   {
    "id": "a3",
    "lane": 3,
    "col": 6,
-   "label": "Mở yêu cầu trong Approvals inbox"
+   "label": "Mở My approvals, chọn Decide (Level 2 of 2)"
   },
   {
    "id": "g2",
@@ -71,19 +71,19 @@
    "lane": 1,
    "col": 8,
    "type": "system",
-   "label": "Ghi Approved, chạy hành động nguồn"
+   "label": "Ghi Approved, Approval history, chạy hành động nguồn"
   },
   {
    "id": "r2",
    "lane": 3,
    "col": 8,
-   "label": "Từ chối, nhập lý do (bắt buộc)"
+   "label": "Reject, nhập Reason (bắt buộc)"
   },
   {
    "id": "n",
    "lane": 0,
    "col": 9,
-   "label": "Nhận thông báo kết quả"
+   "label": "Nhận thông báo Approved / Declined"
   },
   {
    "id": "e",
