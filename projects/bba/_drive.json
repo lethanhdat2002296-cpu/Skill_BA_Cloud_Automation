@@ -164,6 +164,42 @@
       "version": "0.1",
       "source_sha256": "d32c481fa83b3527593e8cc63c584c352e35c4ea3facf1ac1b603723671b9038",
       "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+    },
+    "FSD/Sprint 4/2.8_Approval_Delegation": {
+      "file_id": "1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB",
+      "url": "https://drive.google.com/file/d/1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "7b81edb4f75367b28cc8594804d786bf5d079f09387faf19fde548b463e1f79a",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/2.8_Impact_Preview_Before_Change": {
+      "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
+      "url": "https://drive.google.com/file/d/1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Impact Preview Before Change - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "e3b97833d50fbd63b7892f0ceecc59705e1cf21478e8aacfc67dfa6b31419798",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/2.8_Change_Request_Second_Approval": {
+      "file_id": "1OwPQgKux_XT1uqAokcOnpar59OT6Rags",
+      "url": "https://drive.google.com/file/d/1OwPQgKux_XT1uqAokcOnpar59OT6Rags/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Change Request with Second Approval - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "281406333eb9f965ec0907b5df4576a6c48e19751433ce67c323d368072802cb",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/2.8_Approval_Flows_Configuration": {
+      "file_id": "1UgmLG7Nea3MAZqTmCsqQ5r-giE0lj5c7",
+      "url": "https://drive.google.com/file/d/1UgmLG7Nea3MAZqTmCsqQ5r-giE0lj5c7/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Flows Configuration - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "f15137ece5c30f1b6f483a9bcfd56fcf207983506a344f9c033418ae7bd19f15",
+      "synced_at": "2026-11-10 09:15"
     }
   },
   "folders_used": {
@@ -187,7 +223,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 07:13"
+      "last_used": "2026-11-10 09:15"
     }
   },
   "history": [
