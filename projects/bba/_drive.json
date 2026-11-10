@@ -308,6 +308,87 @@
       "version": "0.1",
       "source_sha256": "e51873b33f5df19c3306630236ba8e904c81faca341ffb23dbffa0f924d44ec2",
       "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-80_Payment_Schedule_Per_Child_VI": {
+      "file_id": "1c-J4733wX19p7GP_PLQ2-sfaffkvdqXv",
+      "url": "https://drive.google.com/file/d/1c-J4733wX19p7GP_PLQ2-sfaffkvdqXv/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-80 Payment schedule – edit per child (program type, amounts, effective period) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "e8c8e4432db17fb055829cd24c3ee891f3d3b0692d2cd319e069054f381cda30",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-81_Apply_Payment_Schedule_Template_VI": {
+      "file_id": "1u4yh_6_kGmDc7N_Vba9xKkmPPZro3xmG",
+      "url": "https://drive.google.com/file/d/1u4yh_6_kGmDc7N_Vba9xKkmPPZro3xmG/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-81 Apply payment schedule template (bulk) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "cb3e3a85cda7e5ef938ac01adb40fc2579423dcecd9c9f0942b1d89f2ac8e906",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-82_Batch_Update_Schedules_VI": {
+      "file_id": "1xMgEaXfHj6-y4Reqa5z_Up8FvIbYFswM",
+      "url": "https://drive.google.com/file/d/1xMgEaXfHj6-y4Reqa5z_Up8FvIbYFswM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-82 Batch update schedules (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "1407367fc818a56c12cebeda8cc04fbc4bfdd1c26ad9af45bc158a7b92883b4e",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-83_Billing_Company_Assignment_VI": {
+      "file_id": "1tSr7h275nk-EqGkyZ7UXw_zP2nwvdd4R",
+      "url": "https://drive.google.com/file/d/1tSr7h275nk-EqGkyZ7UXw_zP2nwvdd4R/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-83 Billing company assignment (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "89b16d4d8d34adb77d03b26f824f5111d51c3906d161c99762bd30e4fc842311",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-84_Payment_Item_Create_Edit_VI": {
+      "file_id": "1yp9e9Qme_kURvjZrzTEx4SiEhS-iubac",
+      "url": "https://drive.google.com/file/d/1yp9e9Qme_kURvjZrzTEx4SiEhS-iubac/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-84 Payment item – create / edit (unit price, tax rate, criteria, effective period) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "044f6174f3eab17d754d330f153edc2e25d762cc37d4f60a835fab86cbe7f762",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-85_Payment_Item_Approval_VI": {
+      "file_id": "1CBvw7g4byUNuyXqthFs3NgX2URPqMGkH",
+      "url": "https://drive.google.com/file/d/1CBvw7g4byUNuyXqthFs3NgX2URPqMGkH/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-85 Payment item – approve / reject (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ed5850d11c6fad243da53efd89edfcb367f5b3593a45fcbc2acef02550979a7b",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-86_Discount_Approval_Notification_VI": {
+      "file_id": "1r4fomN75iEC3Cf-pxPAnx4TAAP-lTp1K",
+      "url": "https://drive.google.com/file/d/1r4fomN75iEC3Cf-pxPAnx4TAAP-lTp1K/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-86 Rebate & discount – approve / reject + in-app result notification (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "17d71e57dafa32636936e9111547db34f2b7cbc96664a21191d71c3756acc3f0",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-87_Calculation_Order_Settings_VI": {
+      "file_id": "1asNGfTfhm5q1lYkLNl7VHsppxLMIQT4w",
+      "url": "https://drive.google.com/file/d/1asNGfTfhm5q1lYkLNl7VHsppxLMIQT4w/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-87 General settings – calculation order toggles (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "42b056f2ead8d8a5d21ad593249eeab444ba564a54bbb9e3804c9a8545011667",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-88_Invoice_Generation_Due_Days_VI": {
+      "file_id": "164kJ0mE_IIHQlb155f20MLCazh6giqfY",
+      "url": "https://drive.google.com/file/d/164kJ0mE_IIHQlb155f20MLCazh6giqfY/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-88 General settings – invoice generation & due days (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "4e322fc56568af839bbf99a312f57814916b13f60a22558592d904786d7ef61b",
+      "synced_at": "2026-11-10 10:40"
     }
   },
   "folders_used": {
@@ -331,7 +412,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 10:33"
+      "last_used": "2026-11-10 10:40"
     }
   },
   "history": [
