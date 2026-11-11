@@ -368,3 +368,10 @@
 - Chuyển đánh dấu SUG / Staff / KA child sang tab Finance.
 
 Bản nháp US-001: `FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI.md`.
+
+### Bổ sung 11/11/2026 — Enrolment hiểu theo SRS (theo góp ý của BA phụ trách)
+- Ghi danh được xác nhận → trẻ là Enrolled, kể cả chưa tới ngày bắt đầu học (AC-CHF-001, tr.11).
+- Đăng ký (Registration) trước, ghi danh (Enrolment) là bước xác nhận sau cùng: hồ sơ tạo từ dữ liệu đăng ký, phiếu đăng ký đã ký là giấy tờ của trẻ (§3 P1, tr.4; §4 mục 1.4, tr.7; BR-CHF-030, tr.9).
+- Ghi danh được cho trẻ chưa sinh bằng ngày dự sinh (§4 mục 1.1, tr.5; BR-CHF-002, tr.8).
+- Mọi thay đổi sau ghi danh thuộc Joining & leaving (BR-CHF-006, tr.8).
+- Kết luận: tab Enrolment chỉ mô tả thông tin ghi danh và các thay đổi sau ghi danh; không đi sâu lịch sử lớp, case, đổi programme. Bản nháp US-001 nâng lên 0.2.
