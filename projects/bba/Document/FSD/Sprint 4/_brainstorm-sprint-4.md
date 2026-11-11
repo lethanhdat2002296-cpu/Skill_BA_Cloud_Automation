@@ -285,3 +285,86 @@
 - BBA-69: ghi "In lúc <giờ>" trên bản in cho bếp.
 - BBA-73: chặn trả trẻ cho người ngoài danh sách thay vì chỉ cảnh báo.
 - BBA-87: thay đổi thứ tự tính chỉ áp dụng từ kỳ hoá đơn sau, có xem trước số tiền thay đổi.
+
+## BBA-67 US-001 — Tab Enrolment: brainstorm lại (11/11/2026)
+
+> Nguồn đã đọc: FRD BBA-67 3.1.1.02 Child Record Tabs – Read Views v0.2 (bản trên Drive, sửa 11/11), BBA-SMS-SRS-Children-and-Families-v0.1 (số trang theo bản Word gốc xuất PDF A4), ticket Plane BBA-67. Không dùng prototype.
+
+### 1. Bối cảnh & vấn đề
+**Đã biết**
+- Hồ sơ trẻ để Centre và HQ giữ một bản ghi chính xác của từng trẻ, thay Taidii và giấy tờ (nguồn: SRS C&F §1, tr.3).
+- BBA-67 yêu cầu tab chỉ đọc "enrolment history (centre, class, programme, dates, status changes)", có liên kết sang màn của module (nguồn: Plane BBA-67).
+- SRS liệt kê các tab của hồ sơ trẻ: Overview, Family, Health, Documents, Pickup, **Class history**, Consents, Billing — không có tab "Enrolment" (nguồn: SRS C&F §4 mục 1.1 View child profile, tr.6).
+- Trạng thái của trẻ do Joining & leaving đặt (tạm nghỉ, thôi học, tốt nghiệp), không sửa tay trên hồ sơ (nguồn: SRS C&F §4 mục 1.1 View status, tr.6; BR-CHF-006, tr.8; AC-CHF-005, tr.11).
+**Chưa biết**
+- OQ-RT-16: Tab Enrolment có thay cho tab "Class history" của SRS không?
+
+### 2. Mục tiêu
+**Chưa biết** — SRS và ticket không nêu chỉ số đo được cho tab này. Mục tiêu nghiệp vụ suy ra từ user story: nhân viên trả lời phụ huynh về ngày bắt đầu học, lớp, chương trình, tiến độ thôi học mà không phải mở Joining & Leaving.
+
+### 3. Người dùng & vai trò
+| Vai trò | Việc chính với tab Enrolment | Nguồn |
+|---|---|---|
+| School Admin | Trả lời phụ huynh về ngày học, lớp, chương trình; xếp lớp cho trẻ. | SRS C&F §2, tr.3; §3 P1 bước 3, tr.4 |
+| Centre Director | Quản lý trẻ và lớp của Centre; theo dõi việc thôi học, chuyển Centre. | SRS C&F §2, tr.3 |
+| HQ Enrolment | Hồ sơ trẻ sinh ra từ việc ghi danh; xem và sửa hồ sơ mọi Centre. | SRS C&F §2, tr.3 |
+| Teacher | Xem trẻ lớp mình. | SRS C&F §2, tr.3–4; AC-CHF-006, tr.11 |
+| HQ Finance | Xem trẻ và gia đình. | SRS C&F §2, tr.4 |
+
+### 4. Phạm vi
+| Trong phạm vi | Ngoài phạm vi | Chờ chốt |
+|---|---|---|
+| Các lần ghi danh (Centre, level, lớp, programme, các ngày, trạng thái); dòng thời gian thay đổi trạng thái; lịch sử lớp (xếp lớp, đổi lớp, lên lớp); việc thay đổi trạng thái đang chờ (case); liên kết sang Joining & Leaving và Classes. | Đổi trạng thái bằng tay (SRS C&F §1.2, tr.3). Bắt đầu case (thuộc Joining & Leaving). Sửa programme (làm ở Edit child profile, có change record). | Đánh dấu SUG / Staff / KA child (OQ-RT-04); liên kết bắt đầu case (OQ-RT-17); pháp nhân, loại chương trình, năm học (OQ-RT-13). |
+
+### 5. Quy trình nghiệp vụ
+**5.1 Hiện tại:** Centre dùng Taidii và giấy tờ (nguồn: SRS C&F §1, tr.3). Chưa có mô tả chi tiết cách tra lịch sử ghi danh hôm nay.
+**5.2 Mong muốn** — các sự kiện tab phải hiển thị:
+1. Ghi danh được xác nhận ở Enrolment → hồ sơ trẻ được tạo với trạng thái Enrolled (SRS C&F §3 P1, tr.4; AC-CHF-001, tr.11).
+2. School Admin xếp lớp có ngày hiệu lực (P1 bước 3, tr.4; mục 1.1 Assign class, tr.6).
+3. Đổi lớp có ngày hiệu lực; trẻ rời nhóm chat lớp cũ, vào nhóm chat lớp mới (mục 1.1 Change class, tr.6; BR-CHF-046, tr.10).
+4. Trẻ sơ sinh chuyển lên playgroup lúc 18 tháng (BR-CHF-047, tr.10).
+5. Lên lớp đầu năm học: trẻ chuyển lên level kế tiếp, ngày hiệu lực là đầu năm học mới; trẻ ở lại lớp thì không đổi (§3 P6, tr.5; BR-CHF-048, tr.10).
+6. Đổi programme (nửa ngày ↔ cả ngày) qua sửa hồ sơ, có change record ghi người sửa, người duyệt, ngày hiệu lực (AC-CHF-004, tr.11; BR-CHF-005, tr.8).
+7. Joining & leaving đặt trạng thái tạm nghỉ, thôi học, tốt nghiệp (mục 1.1 View status, tr.6).
+**5.3 Ngoại lệ & nhánh rẽ**
+- Trẻ đã thôi học, tốt nghiệp: vẫn tìm được, hồ sơ không bị xoá (BR-CHF-007, tr.8; BR-CHF-008, tr.9) → lịch sử ghi danh vẫn xem được.
+- Lớp đã đóng: không xoá, giữ lịch sử (BR-CHF-049, tr.10) → lịch sử lớp vẫn hiện tên lớp cũ.
+- Hồ sơ tạo tay (không qua Enrolment) cần Centre, level, start date (BR-CHF-001, tr.8) → có tạo lần ghi danh không? (OQ-RT-14)
+- Trẻ chưa sinh có start date trong tương lai (BR-CHF-002, BR-CHF-003, tr.8).
+- Chuyển Centre: SRS chỉ có 4 trạng thái Enrolled / Temporary withdrawal / Withdrawn / Graduated → lần ghi danh cũ mang trạng thái nào? (OQ-RT-12)
+- Phạm vi xem: nhân viên Centre chỉ thấy trẻ Centre mình (mục 1.1 Apply access scope, tr.6) → nhân viên Centre mới có thấy lần ghi danh ở Centre cũ không? (OQ-RT-15)
+
+### 6. Dữ liệu
+| Nguồn | Dữ liệu tab đọc | Chiều |
+|---|---|---|
+| Joining & Leaving | Lần ghi danh, trạng thái, các lần đổi trạng thái, case đang mở | Chỉ đọc |
+| Children & Families › Classes | Lớp, level, ngày hiệu lực xếp lớp / đổi lớp / lên lớp, người thực hiện | Chỉ đọc |
+| Children & Families › change record | Đổi programme: giá trị cũ → mới, người sửa, người duyệt, ngày hiệu lực | Chỉ đọc |
+| Organisation | Centre, brand | Chỉ đọc |
+
+### 7. Rủi ro
+| Loại | Nội dung | Mức độ | Giảm thiểu |
+|---|---|---|---|
+| Dữ liệu cá nhân | Đánh dấu Staff child kèm mức giảm học phí hiện cho Teacher, trong khi Teacher không xem tab Finance (AS-RT-01). | Cao | Chuyển đánh dấu sang tab Finance hoặc ẩn với Teacher (OQ-RT-04). |
+| Mâu thuẫn trạng thái | Trạng thái "Transferred" không có trong danh sách của SRS. | Trung bình | OQ-RT-12. |
+| Phạm vi | Liên kết "Start a withdrawal…" là thao tác tạo, trái với tab chỉ đọc (mục 3 FRD). | Trung bình | Bỏ khỏi tab, chờ OQ-RT-17. |
+| Chuyển dữ liệu | Lịch sử ghi danh cũ trên Taidii có được chuyển sang không — chưa rõ. | Trung bình | OQ-RT-18. |
+
+### Rà soát US-001 hiện tại (bản Drive v0.2)
+| Mục | Nhận xét | Đề xuất |
+|---|---|---|
+| FR-001, FR-002, FR-007, BR-001, BR-002 | Khớp ticket BBA-67 và SRS (BR-CHF-006, 007, 008). | Giữ; ghi rõ trạng thái theo BR-CHF-006. |
+| FR-002: brand, pháp nhân, loại chương trình, năm học | Ticket và SRS C&F không nêu. | Giữ, đánh dấu chờ OQ-RT-13. |
+| FR-003: "đổi lớp" trong dòng thời gian, nguồn Joining & Leaving | Đổi lớp là việc của Classes (BR-CHF-046), không phải Joining & Leaving; SRS có tab "Class history" riêng. | Tách thành phần "Lịch sử lớp học". |
+| Đổi programme | SRS ghi đổi programme qua change record (AC-CHF-004) — FRD chưa có. | Thêm vào dòng thời gian. |
+| FR-004 Cases | Không có trong SRS C&F; là việc đổi trạng thái đang chờ, phù hợp "status changes" của ticket. | Giữ, chỉ đọc, ghi giả định. |
+| FR-005 liên kết bắt đầu case | Là thao tác tạo; trái phạm vi "chỉ đọc". | Bỏ khỏi bản nháp, chờ OQ-RT-17. |
+| FR-006 Flags | Không có trong ticket và SRS C&F; là thông tin học phí; Teacher thấy được trong khi không xem Finance. | Bỏ khỏi tab Enrolment, đề xuất chuyển sang tab Finance (OQ-RT-04). |
+| AC-003 trạng thái "Transferred" | Không có trong 4 trạng thái của SRS. | OQ-RT-12. |
+| Thiếu | Trường hợp hồ sơ tạo tay, trẻ chưa sinh, lớp đã đóng, Teacher xem trẻ đã rời lớp. | Thêm luồng thay thế và AC. |
+
+### Đề xuất của BA (chưa phải yêu cầu)
+- Tab Enrolment gom luôn nội dung "Class history" của SRS để người dùng xem một chỗ (AS-RT-11).
+- Chuyển đánh dấu SUG / Staff / KA child sang tab Finance.
+
+Bản nháp US-001: `FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI.md`.

@@ -470,6 +470,15 @@
       "version": "0.1",
       "source_sha256": "27b459aaecc173c2903ed2f47a9393a15b55c32de3e92267557986b0435677ba",
       "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI": {
+      "file_id": "1NmQOmfZgPqkyquOP7jk7SNO_mzRMdCaM",
+      "url": "https://drive.google.com/file/d/1NmQOmfZgPqkyquOP7jk7SNO_mzRMdCaM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-001 Tab Enrolment – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "52b17fd747ca7962808a9ab7cf1ea3422c05b5b4415dc1665b39e4e54da76a2a",
+      "synced_at": "2026-11-11 04:16"
     }
   },
   "folders_used": {
@@ -493,7 +502,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 03:45"
+      "last_used": "2026-11-11 04:16"
     }
   },
   "history": [
