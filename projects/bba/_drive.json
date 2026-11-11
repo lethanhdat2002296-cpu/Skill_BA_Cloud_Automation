@@ -121,13 +121,13 @@
       "synced_at": "2026-11-11 03:45"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
-      "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
-      "url": "https://drive.google.com/file/d/1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ/view",
+      "file_id": "1yON2uJfRhtg76vswYTri_dpdvGPQvteE",
+      "url": "https://drive.google.com/file/d/1yON2uJfRhtg76vswYTri_dpdvGPQvteE/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4 - v0.2.docx",
-      "version": "0.2",
-      "source_sha256": "eded84bcf310abb28443b9de0fca03e0b475743ba268d524f2ad9b51a3a31138",
-      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "1042093ddd1f056326cb92f8e37ef79eaeb36e0a1f353a5c446616e2c747e856",
+      "synced_at": "2026-11-11 05:05"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
       "file_id": "1y1OlZnPl6oJX6h3pxRMy5qxtkS87Fpry",
@@ -502,7 +502,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 04:59"
+      "last_used": "2026-11-11 05:05"
     }
   },
   "history": [
@@ -635,6 +635,17 @@
       "synced_at": "2026-11-11 04:16",
       "key": "FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI",
       "replaced_at": "2026-11-11 04:59"
+    },
+    {
+      "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
+      "url": "https://drive.google.com/file/d/1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4 - v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "eded84bcf310abb28443b9de0fca03e0b475743ba268d524f2ad9b51a3a31138",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 05:05"
     }
   ]
 }
