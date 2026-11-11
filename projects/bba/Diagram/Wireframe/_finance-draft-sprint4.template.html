@@ -1,0 +1,352 @@
+<title>Tab Finance Draft</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { flex: 1; padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.t tr.exp td { background: var(--paper); border-left: 3px solid var(--ink); padding: 12px 14px; }
+.lines { width: 100%; border-collapse: collapse; font-size: 13px; }
+.lines td { padding: 3px 6px; border-bottom: 1px dashed var(--line); }
+.lines td.r { text-align: right; white-space: nowrap; }
+.small { font-size: 12.5px; color: var(--muted); }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+/* child record */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 84px; }
+.kpi small, .lbl { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.kpi.em { border: 2px solid var(--accent); }
+.kpi.alert { border: 2px solid var(--ink); background: var(--fill); }
+.ident { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; font-size: 13.5px; }
+.ident .help { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.pill-tabs { display: flex; flex-wrap: wrap; gap: 2px; background: var(--fill); border-radius: 10px; padding: 4px; align-self: flex-start; }
+.pill-tabs span { padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); }
+.pill-tabs span.on { background: var(--paper); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.menu { position: absolute; right: 26px; top: 64px; width: 240px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: 6px; z-index: 4; font-size: 13px; }
+.menu div { padding: 8px 10px; border-radius: 6px; }
+.menu div:hover { background: var(--fill); }
+.big-av { width: 44px; height: 44px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; color: var(--muted); flex: none; }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · FRD 3.1 Child Record Tabs – Read Views</span>
+    <h1>Child record — read-only tabs</h1>
+    <p>5 tab chỉ đọc của hồ sơ trẻ: Enrolment, Enrichment, Attendance, Finance, Communication. Mỗi khối có liên kết "Open in &lt;module&gt;" sang màn của module. Chọn tab ở hàng dưới, chọn trạng thái bên phải tiêu đề. Dữ liệu là dữ liệu mẫu.</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div>
+      <h2 id="scrTitle"></h2>
+      <div class="tickets" id="scrTickets"></div>
+    </div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const NAV = [
+  ["Home"], ["My approvals", "", 26],
+  ["#Children & families"], ["Children", "children"], ["Families"], ["Health & allergies"], ["Documents"], ["Authorised pickup"], ["Classes"],
+  ["#Operations"], ["Daily operations"], ["Learning"], ["Fees & payments"], ["Joining & leaving"], ["Communication"],
+  ["#Administration"], ["Users & permissions"], ["Settings"], ["History"]
+];
+function shell(body, who) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key === "children" ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>${who}</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><div class="search-top">⌕ Find a record<kbd>⌘ K</kbd></div><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const TABS = ["Overview", "Enrolment", "Enrichment", "Guardians", "Attendance", "Finance", "Health", "Communication", "Documents", "History"];
+function header(tab, c) {
+  c = c || { name: "Ethan Lim", id: "S1", init: "EL", centre: "Small Wonder Tampines · Sunbeams", owner: "Serena Lim", alert: true };
+  return `<div style="font-size:12.5px;color:var(--muted)">← Children</div>
+    <div class="ph"><div class="row" style="align-items:flex-start;gap:12px"><span class="big-av">${c.init}</span><div>
+      <h3>${c.name} <span style="font-size:13px;color:var(--muted);font-weight:400">${c.id}</span> ${c.alert ? '<span class="badge solid">⚠</span>' : ""}</h3>
+      <div class="row" style="gap:8px;margin-top:4px;font-size:13px"><span class="badge solid">Enrolled</span><span>${c.centre}</span><span style="color:var(--muted)">·</span><span>Owner · <u>${c.owner}</u></span></div></div></div>
+      <span class="btn">Actions ⋯</span></div>
+    <div class="pill-tabs">${TABS.map(t => `<span${t === tab ? ' class="on"' : ""}>${t}</span>`).join("")}</div>
+    <div style="font-size:12px;color:var(--muted)">Read-only · data from the module that owns it</div>`;
+}
+const card = (title, inner, link, a) => `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:15px">${title}${a ? ` <span class="anno">${a}</span>` : ""}</b>${link ? `<span style="font-size:13px;font-weight:600"><u>${link}</u> ↗</span>` : ""}</div>${inner}</div></div>`;
+const stat = (n, l) => `<div class="kpi"><small>${l}</small><b style="font-size:20px">${n}</b></div>`;
+const seg = (items, on) => `<div class="pill-tabs" style="background:var(--fill)">${items.map(x => `<span${x.startsWith(on) ? ' class="on"' : ""}>${x}</span>`).join("")}</div>`;
+const muted = (t) => `<span style="color:var(--muted)">${t}</span>`;
+
+/* ---------- SCR-04 Finance (bản nháp US-004) ---------- */
+const WHO = "Grace Tan · Centre Director";
+const money = (cur, v) => `${cur} ${v}`;
+function finDraft(state) {
+  const my = state === "malaysia", tr = state === "transfer", cda = state === "cda-refund", gf = state === "giro-failed";
+  const c = my ? { name: "Iman Hakim", id: "S15", init: "IH", centre: "Small Wonder Damansara · Cempaka", owner: "Mrs Hakim" }
+    : tr ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" }
+    : cda ? { name: "Mia Wong", id: "S7", init: "MW", centre: "Small Wonder Tampines · Sunbeams", owner: "Mrs Wong" } : null;
+  const cur = my ? "MYR" : "SGD";
+  const summary = `<div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+      <div class="kpi"><small>Outstanding <span class="anno">1</span></small><b style="font-size:20px">${my ? "MYR 0.00" : tr ? "SGD 0.00" : cda ? "SGD 0.00" : "SGD 627.58"}</b><span class="small">Billed invoices not fully paid</span></div>
+      <div class="kpi"><small>Credit remaining</small><b style="font-size:20px">${my ? "MYR 0.00" : (tr || cda) ? "SGD 0.00" : "SGD 30.00"}</b><span class="small">${(my || tr || cda) ? "—" : "of which CDA SGD 30.00"}</span></div>
+      <div class="kpi"><small>Deposit held</small><b style="font-size:20px">${my ? "MYR 900.00" : cda ? "SGD 0.00" : "SGD 1,180.00"}</b><span class="small">${my ? "—" : cda ? "refund in progress" : "of which CDA SGD 0.00"}</span></div></div>`;
+  const pm = cda ? card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd><b>PayNow</b> · on the child's record · read only</dd><dt>Bill to</dt><dd>Parent</dd></dl><div style="font-size:13px">${muted("No GIRO or CDA account.")}</div>`, "Open in GIRO accounts", 2)
+    : my ? card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd>⚠ To confirm for Malaysia <span class="small">(no GIRO / CDA, no ECDA subsidy)</span></dd><dt>Bill to</dt><dd>Parent</dd></dl>`, "Open in Billing", 2)
+    : card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd><b>GIRO</b> · on the child's record · read only</dd><dt>Bill to</dt><dd>Parent</dd></dl>
+      <table class="t"><thead><tr><th>Type</th><th>Bank · account</th><th>DDA reference</th><th>Status</th><th>Applied by</th><th>Pays by GIRO</th></tr></thead><tbody>
+      <tr><td>GIRO</td><td>DBS · ••••4021</td><td>DDA-DBS-118204</td><td><span class="badge">Active</span></td><td>Paper form</td><td>Yes</td></tr>
+      <tr><td>CDA</td><td>OCBC · ••••7730</td><td>DDA-CDA-551277</td><td><span class="badge">Active</span></td><td>e-GIRO</td><td>Yes</td></tr></tbody></table>
+      <div class="small">At most one GIRO and one CDA account; CDA and non-CDA are invoiced separately. Account numbers show the last 4 digits only.</div>`, "Open in GIRO accounts", 2);
+  const inv = my ? [["INV-SW-DAM-202611-0007", "Nov 2026", "School fees", "1,150.00", "0.00", "2026-11-05", "Paid", "Parent", "Bank transfer", "—", "", ""]]
+    : tr ? [["INV-SW-BTM-202611-0003", "Nov 2026", "School fees", "690.00", "0.00", "2026-11-05", "Paid", "Parent", "GIRO", "non-CDA", "Small Wonder Bukit Timah", ""],
+            ["INV-SW-TAM-202605-0028", "May 2026", "School fees", "690.00", "0.00", "2026-05-05", "Paid", "Parent", "GIRO", "non-CDA", "Small Wonder Tampines", "closed"]]
+    : cda ? [["INV-SW-TAM-202610-0051", "Oct 2026", "School fees", "345.00", "0.00", "2026-10-05", "Paid", "Parent", "PayNow", "non-CDA", "", "pro"]]
+    : [["INV-SW-TAM-202612-0001", "Dec 2026", "School fees", "460.00", "460.00", "2026-12-05", "Draft", "Parent", "GIRO", "non-CDA", "", ""],
+       ["INV-SW-TAM-202611-0001", "Nov 2026", "School fees", "300.00", "300.00", "2026-11-05", "Billed", "Parent", "GIRO CDA", "CDA", "", "Being collected by GIRO"],
+       ["INV-SW-TAM-202611-0002", "Nov 2026", "School fees", "228.40", "0.00", "2026-11-05", "Paid", "Parent", "GIRO", "non-CDA", "", "Paid by credit note CN-SW-TAM-202611-0003"],
+       ["INV-SW-TAM-ENR-202610-0012", "Oct 2026", "Enrichment", "270.00", "270.00", "2026-10-05", "Overdue · 34 days", "Parent", "GIRO", "non-CDA", "", "GIRO deduction failed · 12 Oct · Insufficient funds"],
+       ["INV-SW-TAM-202610-0041", "Oct 2026", "School fees", "460.00", "57.58", "2026-10-05", "Overdue · 34 days", "Parent", "GIRO", "non-CDA", "", ""],
+       ["INV-SW-TAM-202609-0039", "Sep 2026", "School fees", "310.00", "0.00", "2026-09-05", "Paid", "Parent", "GIRO", "non-CDA", "", "closed"]];
+  const openNo = gf ? "INV-SW-TAM-ENR-202610-0012" : my ? "" : tr ? "" : cda ? "INV-SW-TAM-202610-0051" : "INV-SW-TAM-202610-0041";
+  const detail = (no) => {
+    if (no === "INV-SW-TAM-ENR-202610-0012") return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
+      <table class="lines"><tr><td>Mandarin Explorers · 4 sessions × SGD 30</td><td class="r">120.00</td></tr><tr><td>Speech &amp; Drama · 5 sessions × SGD 30</td><td class="r">150.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>270.00</b></td></tr></table>
+      <div class="alert" style="margin-top:8px"><b>GIRO deduction failed</b><span>2ND DD · 12 Oct · bank reason: Insufficient funds · parent notified · PayNow now offered in the Parents App <span class="anno">5</span></span></div>
+      <div class="small" style="margin-top:6px">Reminders sent: 15 Oct, 25 Oct (in-app)</div>`;
+    if (no === "INV-SW-TAM-202610-0051") return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
+      <table class="lines"><tr><td>Tuition · Full day · N2 · Singapore Citizen · pro-rated 1–15 Oct (last month)</td><td class="r">760.00</td></tr><tr><td>Basic subsidy</td><td class="r">−300.00</td></tr><tr><td>Additional subsidy</td><td class="r">−115.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>345.00</b></td></tr></table>`;
+    return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
+      <div class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+      <div><table class="lines"><tr><td>Tuition · Full day · N2 · Singapore Citizen</td><td class="r">1,520.00</td></tr><tr><td>Staff child discount 50%</td><td class="r">−760.00</td></tr><tr><td>Basic subsidy</td><td class="r">−300.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>460.00</b></td></tr></table>
+      <div class="small" style="margin-top:6px">Payments: 2026-10-04 · PayNow · 322.42 · RC-SW-TAM-202610-0310<br>Credit: 2026-11-06 · CN-SW-TAM-202611-0003 · 80.00 · balance 57.58</div></div>
+      <div><b style="font-size:13px">What changed from last month <span class="anno">6</span></b><div style="font-size:13px;display:grid;gap:4px;margin-top:4px"><div>• Additional subsidy ended 30 Sep (−150.00 no longer applied)</div><div class="small">Source: October billing run change report</div></div></div></div>`;
+  };
+  const rows = inv.map(r => {
+    const sel = r[0] === openNo, st = r[6];
+    const badge = st.startsWith("Overdue") ? `<span class="badge solid">${st}</span>` : st === "Draft" ? '<span class="badge dash">Draft</span>' : st === "Paid" ? '<span class="badge out">Paid</span>' : `<span class="badge">${st}</span>`;
+    const giro = r[11] && r[11] !== "closed" && r[11] !== "pro" ? `<div class="small">${r[11].startsWith("GIRO deduction failed") ? "<b>⚠ " + r[11] + "</b>" : r[11]}</div>` : "";
+    const tags = (r[11] === "closed" ? ' <span class="badge dash">Closed month</span>' : "") + (r[10] ? `<div class="small">${r[10]} · Small Wonder Preschools Pte Ltd</div>` : "");
+    return `<tr${sel ? ' class="sel"' : ""}><td>${sel ? "▾" : "▸"} <u>${r[0]}</u>${tags}</td><td>${r[1]}</td><td>${r[2]}</td><td style="text-align:right">${r[3]}</td><td style="text-align:right">${r[4]}</td><td>${r[5]}</td><td>${badge}${giro}</td><td>${r[8]}<div class="small">${r[9]}</div></td></tr>`
+      + (sel ? `<tr class="exp"><td colspan="8">${detail(r[0])}</td></tr>` : "");
+  }).join("");
+  const invoices = card(`Invoices`, `<table class="t"><thead><tr><th>Invoice</th><th>Month</th><th>Type</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th><th>Due</th><th>Status · GIRO <span class="anno">3</span></th><th>Method · account</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="small">Newest first · choose an invoice to expand it here · Draft is not counted in Outstanding · Bill to: Parent</div>`, "Open in Invoices", "");
+  const receipts = card("Receipts", `<table class="t"><thead><tr><th>Receipt</th><th>Date</th><th>Method</th><th style="text-align:right">Amount</th><th>Invoices paid</th><th>Issued by</th></tr></thead><tbody>${cda ? `<tr><td>RC-SW-TAM-202610-0355</td><td>2026-10-03</td><td>PayNow</td><td style="text-align:right">345.00</td><td>INV-SW-TAM-202610-0051</td><td>System</td></tr>` : tr ? `<tr><td>RC-SW-BTM-202611-0040</td><td>2026-11-05</td><td>GIRO</td><td style="text-align:right">690.00</td><td>INV-SW-BTM-202611-0003</td><td>System</td></tr>` : my
+      ? `<tr><td>RC-SW-DAM-202611-0021</td><td>2026-11-03</td><td>Bank transfer</td><td style="text-align:right">1,150.00</td><td>INV-SW-DAM-202611-0007</td><td>Finance · Lim Wei</td></tr>`
+      : `<tr><td>RC-SW-TAM-202610-0310</td><td>2026-10-04</td><td>PayNow</td><td style="text-align:right">322.42</td><td>INV-SW-TAM-202610-0041</td><td>System</td></tr><tr><td>RC-SW-TAM-202609-0288</td><td>2026-09-05</td><td>GIRO</td><td style="text-align:right">310.00</td><td>INV-SW-TAM-202609-0039</td><td>System</td></tr>`}</tbody></table>`, "Open in Receipts", "");
+  const credits = my ? "" : (cda || tr) ? card("Credit notes", muted("No credit note for this child."), "", "") : card("Credit notes", `<table class="t"><thead><tr><th>Credit note</th><th>Invoice</th><th>Scope</th><th style="text-align:right">Amount</th><th>Approval</th><th>Applied to <span class="anno">7</span></th></tr></thead><tbody>
+      <tr><td>CN-SW-TAM-202611-0003</td><td>INV-SW-TAM-202611-0002</td><td>Half month</td><td style="text-align:right">308.40</td><td><span class="badge">Approved</span></td><td>228.40 on INV-SW-TAM-202611-0002<br>80.00 on INV-SW-TAM-202610-0041 (oldest open)</td></tr></tbody></table>
+      <div class="small">One credit note per invoice · never also taken off next month's invoice</div>`, "Open in Credit notes", "");
+  const deposit = card("Deposit", `<dl class="kv"><dt>Held</dt><dd>${my ? "MYR 900.00" : cda ? "SGD 0.00" : "SGD 1,180.00"} · source ${cda ? "CDA" : "non-CDA"}</dd><dt>Months</dt><dd>${cda ? "2 + 1 month, not on GIRO" : "2"}</dd><dt>Booking fee</dt><dd>${my ? "MYR 200.00" : "SGD 200.00"} deducted on the first invoice ${my ? "INV-SW-DAM-202512-0002" : cda ? "INV-SW-TAM-202512-0004" : "INV-SW-TAM-202511-0016"}</dd></dl>
+      <table class="t"><thead><tr><th>Date</th><th>Movement</th><th style="text-align:right">Amount</th><th>Linked</th></tr></thead><tbody>${tr
+        ? `<tr><td>2026-06-01</td><td>Transferred to Small Wonder Bukit Timah</td><td style="text-align:right">1,180.00</td><td>from Small Wonder Tampines</td></tr><tr><td>2025-11-14</td><td>Received</td><td style="text-align:right">1,180.00</td><td>INV-SW-TAM-202511-0016</td></tr>`
+        : cda ? `<tr><td>2026-10-20</td><td>Refund requested</td><td style="text-align:right">−500.00</td><td>RF-SW-TAM-2610-0007</td></tr><tr><td>2025-12-02</td><td>Received (CDA)</td><td style="text-align:right">500.00</td><td>INV-SW-TAM-202512-0004</td></tr>`
+        : `<tr><td>${my ? "2025-12-02" : "2025-11-14"}</td><td>Received</td><td style="text-align:right">${my ? "900.00" : "1,180.00"}</td><td>first invoice</td></tr>`}</tbody></table>`, "Open in Deposit ledger", "");
+  const refunds = (cda || tr) ? card("Refunds", `<table class="t"><thead><tr><th>Refund</th><th style="text-align:right">Amount</th><th>Status</th><th>Source → destination</th><th>Account confirmed</th><th>Reason</th></tr></thead><tbody>${cda
+      ? `<tr><td>RF-SW-TAM-2610-0007</td><td style="text-align:right">500.00</td><td><span class="badge">Pending approval</span></td><td>CDA → <b>CDA</b> <span class="anno">8</span></td><td>Not needed for CDA</td><td>—</td></tr>`
+      : `<tr><td>RF-SW-TAM-2605-0011</td><td style="text-align:right">45.00</td><td><span class="badge dash">Void</span> <span class="small">after Unsuccessful</span></td><td>non-CDA → PayNow ••••5512</td><td>Yes</td><td>Invalid account · waiting for the parent to update</td></tr>`}</tbody></table>`, "Open in Refunds", "")
+    : card("Refunds", muted("No refund for this child."), "", "");
+  const disc = (cda || tr) ? card("Discounts & subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div>${muted("No discount.")}</div><div>Basic subsidy · SGD 300.00 / month</div></div><div class="small">Singapore: at least one attendance day a month keeps the subsidy; checked on the 18th.</div>`, "Open in GSII", "")
+    : my ? card("Discounts", `<div style="font-size:13.5px">${muted("No discount.")}</div>`, "", "")
+    : card("Discounts & subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div><b>Staff child discount</b> · 50% · 2026-01-01 → —</div><div>Basic subsidy · SGD 300.00 / month · from 2026-01-01</div><div class="small">Additional subsidy ended 2026-09-30</div></div>
+      ${state === "default" ? "" : ""}<div class="small">Singapore: at least one attendance day a month keeps the subsidy; checked on the 18th. <span class="anno">9</span></div>
+      <div style="font-size:13px">GSII · Sep 2026 · subsidy amount differs · <b>Keep profile</b> · reason: ECDA approval letter dated 2026-08-20</div>`, "Open in GSII", "");
+  return header("Finance", c) + summary + pm + invoices + receipts + credits + deposit + refunds + disc;
+}
+
+const SCREENS = [
+  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance-draft", tickets: "US-004 (bản nháp) — tổng hợp tài chính của một trẻ, chỉ đọc",
+    states: [["default", "Singapore · còn nợ · chi tiết hoá đơn", () => finDraft("default")], ["giro-failed", "GIRO trừ thất bại", () => finDraft("giro-failed")], ["cda-refund", "Hoàn cọc CDA", () => finDraft("cda-refund")], ["transfer", "Chuyển Centre · hoàn tiền thất bại", () => finDraft("transfer")], ["malaysia", "Malaysia", () => finDraft("malaysia")]],
+    notes: [["Tóm tắt: Outstanding (Billed chưa trả hết, không tính Draft), Credit remaining và Deposit held tách phần CDA.", "FR-023 · BR-FIN-TAB-002"], ["Payment method thuộc hồ sơ trẻ, chỉ đọc; tối đa 2 tài khoản GIRO và CDA; số tài khoản che.", "FR-024 · BR-FIN-TAB-004 đến 006"], ["Trạng thái hoá đơn kèm GIRO: scheduled, being collected, failed + lý do; Overdue kèm số ngày.", "FR-025 · BR-FIN-TAB-003 · 007"], ["Chọn hoá đơn: mở rộng ngay trong dòng, chỉ đọc.", "FR-026"], ["GIRO thất bại: lý do ngân hàng, nhắc nợ 15 và 25.", "BR-FIN-TAB-007 · 008"], ["Lý do thay đổi so với tháng trước lấy từ change report.", "FR-026 · BR-FIN-TAB-016"], ["Credit note: trừ hoá đơn gốc trước, phần dư vào hoá đơn còn mở cũ nhất.", "FR-028 · BR-FIN-TAB-011"], ["Tiền CDA chỉ hoàn về CDA; không hỏi tài khoản cho phần CDA.", "FR-030 · BR-FIN-TAB-014"], ["Trợ cấp Singapore cần ít nhất 1 ngày đi học trong tháng; chênh lệch GSII không tự áp.", "FR-031 · BR-FIN-TAB-017 · 018"]] }
+];
+
+let current = { screen: "scr-04", state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = shell(st[2](), WHO);
+  $("notes").innerHTML = s.notes.map(n => `<li>${n[0]} <span class="src">${n[1]}</span></li>`).join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : "scr-04", state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code, name: s.name, slug: s.slug, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>
