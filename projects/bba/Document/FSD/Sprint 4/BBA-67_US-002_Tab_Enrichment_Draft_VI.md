@@ -71,7 +71,7 @@ Là School Admin, tôi muốn xem trẻ đang học thêm những lớp enrichme
 
 1. Người dùng chọn tab Enrichment; hệ thống hiển thị các lớp đang học (FR-006, FR-007, FR-008).
 2. Người dùng xem lịch học, trainer, phí mỗi buổi để trả lời phụ huynh (FR-007).
-3. Người dùng chọn tên lớp để mở lớp trong Learning › Enrichment khi cần thay đổi (FR-011).
+3. Người dùng chọn tên lớp(FR-011).
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
@@ -157,10 +157,10 @@ Số trang tính theo bản Word gốc của SRS khi xuất PDF khổ A4.
 |---|---|---|---|---|
 | 1 | Plane — dự án BBA Phase 1, ticket BBA-67 (WBS 3.1.1.02) | Description: enrichment programmes, each linking to the module screen | — | Phạm vi US-002. |
 | 2 | BBA-SMS-SRS-Learning-v0.1 | §1.2 Not in Phase 1 (Enrichment) | 3 | OQ-RT-17. |
-| 3 | BBA-SMS-SRS-Learning-v0.1 | §2 Who uses it (HQ Enrichment team, Enrichment trainer) | 4 | BR-004, BR-005. |
+| 3 | BBA-SMS-SRS-Learning-v0.1 | §2 Who uses it (HQ Enrichment team, Enrichment trainer) | 4 | BR-004; BR-005. |
 | 4 | BBA-SMS-SRS-Learning-v0.1 | §3 P5 Enrichment class and students; P6 Enrichment monthly charges | 5 | Mục 2; BR-010. |
 | 5 | BBA-SMS-SRS-Learning-v0.1 | §7.1 Enrichment classes (View class list, Create class) | 8 | FR-007. |
-| 6 | BBA-SMS-SRS-Learning-v0.1 | §7.1 Enrichment classes (Close class, Restrict trainer view) | 9 | BR-004, BR-009. |
-| 7 | BBA-SMS-SRS-Learning-v0.1 | §7.2 Enrichment students (View students in class, Show on child profile, Remove student, Auto-end on centre withdrawal) | 9 | FR-007, FR-010, BR-007, BR-008. |
+| 6 | BBA-SMS-SRS-Learning-v0.1 | §7.1 Enrichment classes (Close class, Restrict trainer view) | 9 | BR-004; BR-009. |
+| 7 | BBA-SMS-SRS-Learning-v0.1 | §7.2 Enrichment students (View students in class, Show on child profile, Remove student, Auto-end on centre withdrawal) | 9 | FR-007; FR-010; BR-007; BR-008. |
 | 8 | BBA-SMS-SRS-Learning-v0.1 | §7.3 Enrichment attendance | 9 | OQ-RT-03. |
 | 9 | BBA-SMS-SRS-Learning-v0.1 | §5 Enrichment classes and students (BR-LRN-033, 035, 036, 037, 039); Enrichment charges (BR-LRN-040, 042, 044) | 11 | BR-004 đến BR-010. |
