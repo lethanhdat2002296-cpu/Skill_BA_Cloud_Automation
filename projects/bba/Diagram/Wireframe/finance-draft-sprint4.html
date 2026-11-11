@@ -287,13 +287,13 @@ function finDraft(state) {
       (cda ? line("Refund SGD 500.00 · to <b>CDA</b> <span class=\"anno\">6</span>", '<span class="badge">Pending approval</span>') : ""), "Open in Deposit ledger", "");
   const disc = my ? card("Discounts", muted("No discount."), "", "")
     : card("Discounts & subsidies", (ok || cda ? line(muted("No discount"), "") : line("Staff child discount · 50%", "until —")) + line("Basic subsidy", `${cur} 300.00 / month`), "Open in Billing", "");
-  return header("Finance", c) + summary + att + `<div class="split" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:start"><div style="display:grid;gap:16px">${invoices}</div><div style="display:grid;gap:16px">${pay}${dep}${disc}</div></div>`;
+  return header("Finance", c) + `<div class="split" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:start"><div style="display:grid;gap:16px">${invoices}</div><div style="display:grid;gap:16px">${pay}${dep}${disc}</div></div>`;
 }
 
 const SCREENS = [
   { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance-draft", tickets: "US-004 (bản nháp 0.2) — tổng quan tài chính của một trẻ, chỉ đọc",
-    states: [["default", "Có việc cần chú ý", () => finDraft("default")], ["all-good", "Không có việc cần chú ý", () => finDraft("all-good")], ["cda-refund", "Hoàn cọc CDA", () => finDraft("cda-refund")], ["malaysia", "Malaysia", () => finDraft("malaysia")]],
-    notes: [["3 số tóm tắt: còn nợ (không tính Draft), credit còn lại và cọc đang giữ tách phần CDA.", "FR-023 · BR-FIN-TAB-002"], ["Cần chú ý: chỉ hiện khi có việc; mỗi việc một dòng kèm liên kết sang Billing.", "FR-024"], ["Payment method: một dòng mỗi tài khoản, chỉ 4 số cuối; không có DDA hay nút sửa.", "FR-025 · BR-FIN-TAB-004 đến 006"], ["Tối đa 6 hoá đơn: chưa trả trước, rồi mới nhất; trạng thái kèm GIRO; không mở chi tiết từng dòng.", "FR-026 · BR-FIN-TAB-007"], ["Một dòng giải thích vì sao hoá đơn tháng này khác tháng trước.", "FR-027 · BR-FIN-TAB-012"], ["Hoàn tiền chỉ hiện khi đang xử lý hoặc thất bại; tiền CDA hoàn về CDA.", "FR-028 · BR-FIN-TAB-011"]] }
+    states: [["default", "Singapore · còn nợ, GIRO thất bại", () => finDraft("default")], ["all-good", "Singapore · đã trả hết", () => finDraft("all-good")], ["cda-refund", "Hoàn cọc CDA", () => finDraft("cda-refund")], ["malaysia", "Malaysia", () => finDraft("malaysia")]],
+    notes: [["(Tóm tắt — backlog BL-FIN-01)", "—"], ["(Cần chú ý — backlog BL-FIN-02)", "—"], ["Payment method: một dòng mỗi tài khoản, chỉ 4 số cuối; không có DDA hay nút sửa.", "FR-025 · BR-FIN-TAB-004 đến 006"], ["Tối đa 6 hoá đơn: chưa trả trước, rồi mới nhất; trạng thái kèm GIRO; không mở chi tiết từng dòng.", "FR-026 · BR-FIN-TAB-007"], ["Một dòng giải thích vì sao hoá đơn tháng này khác tháng trước.", "FR-027 · BR-FIN-TAB-012"], ["Hoàn tiền chỉ hiện khi đang xử lý hoặc thất bại; tiền CDA hoàn về CDA.", "FR-028 · BR-FIN-TAB-011"]] }
 ];
 
 let current = { screen: "scr-04", state: "default" };
