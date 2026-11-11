@@ -9,7 +9,7 @@
 | Mã WBS | 3.1.1.02 |
 | Mã tài liệu | FRD-3.1_Child_Record_Read_Tabs — bản nháp US-003 |
 | Sprint | 4 |
-| Phiên bản | 0.2 (nháp) |
+| Phiên bản | 0.3 (nháp) |
 | Trạng thái | BẢN NHÁP ĐỂ RÀ SOÁT |
 | Ngày | 11/11/2026 |
 | Người soạn | Business Analysis |
@@ -21,9 +21,10 @@
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
 | 0.1 (nháp) | 11/11/2026 | Business Analysis | Bản nháp riêng cho US-003 theo SRS Daily Operations v0.1, SRS Attendance App v0.1 và SRS Learning v0.1. Mã FR, BR, VAL, AC đánh tiếp theo FRD v0.5. | HaiNguyen |
-| 0.2 (nháp) | 11/11/2026 | Business Analysis | Bỏ bộ chọn tháng: tab chỉ hiện tổng quan, tóm tắt luôn là tháng hiện tại. Chi tiết một ngày mở ngay trong tab, không chuyển màn hình. Ghi rõ liên kết duy nhất mở sang màn Daily Operations › Child attendance. Ghi rõ nguồn của FR-020. | HaiNguyen |
+| 0.2 (nháp) | 11/11/2026 | Business Analysis | Bỏ bộ chọn tháng: tab chỉ hiện tổng quan, tóm tắt luôn là tháng hiện tại. Chi tiết một ngày mở ngay trong tab, không chuyển màn hình. Ghi rõ liên kết duy nhất mở sang màn Daily Operations › Child attendance. Ghi rõ nguồn của FR-019. | HaiNguyen |
+| 0.3 (nháp) | 11/11/2026 | Business Analysis | Bỏ khối tóm tắt (tab chỉ hiện lịch sử theo ngày). Thêm wireframe cho chi tiết ngày mở rộng trong dòng. Đánh số lại FR, AC. | HaiNguyen |
 
-**Mức sẵn sàng:** Đã mô tả tóm tắt điểm danh của tháng hiện tại, danh sách ngày, chi tiết một ngày (check-in, check-out, nhiệt độ, đi muộn, nghỉ phép, void, giờ đã sửa), cảnh báo trợ cấp ngày 18 và hai lưu ý khi đọc tab. 1 câu hỏi mở ở mục 5 cần BBA chốt.
+**Mức sẵn sàng:** Đã mô tả danh sách ngày, chi tiết một ngày (check-in, check-out, nhiệt độ, đi muộn, nghỉ phép, void, giờ đã sửa), cảnh báo trợ cấp ngày 18 và hai lưu ý khi đọc tab. 1 câu hỏi mở ở mục 5 cần BBA chốt.
 
 ## 2. Tab Attendance hiểu theo SRS
 
@@ -43,7 +44,7 @@
 
 | Nội dung | US-003 hiện tại | Bản nháp này | Lý do |
 |---|---|---|---|
-| Tóm tắt | Ngày có mặt, ngày có mặt trong kỳ, vắng, nghỉ phép, đi muộn; có bộ chọn khoảng ngày. | Tháng hiện tại: số ngày đi học, vắng, nghỉ phép, đi muộn; không có bộ chọn. | Tab chỉ hiện tổng quan; "trong kỳ" không có trong SRS. |
+| Tóm tắt | Ngày có mặt, ngày có mặt trong kỳ, vắng, nghỉ phép, đi muộn; có bộ chọn khoảng ngày. | Bỏ khối tóm tắt và bộ chọn. | Tab chỉ hiện lịch sử theo ngày. |
 | Danh sách ngày | Có buổi "Main / enrichment", trạng thái Signed in / Signed out. | Chỉ điểm danh tại Centre; trạng thái ngày Present / Absent / On leave. | BR-LRN-039: enrichment không tính vào chuyên cần. |
 | Ảnh check-in, check-out | Chưa có. | Có. | BR-OPS-005. |
 | Giờ đã sửa | Chưa có. | Hiện giờ cũ → giờ mới, người sửa, thời điểm, lý do. | §4 mục 1.1 View history. |
@@ -67,27 +68,26 @@ Là Centre Director, tôi muốn xem lịch sử đi học của một trẻ the
 | FR ID | Yêu cầu chức năng |
 |---|---|
 | FR-013 | Tab Attendance là lịch sử đi học của một trẻ, chỉ hiển thị; không có thao tác sửa giờ hay void. Ở chi tiết một ngày có liên kết "Open in Child attendance": mở màn Daily Operations › Child attendance (màn điểm danh theo lớp và ngày), chọn sẵn lớp của trẻ và ngày đang xem; việc sửa giờ và void làm ở màn đó. |
-| FR-014 | Khối tóm tắt của tháng hiện tại: số ngày đi học, số ngày vắng, số ngày nghỉ phép, số lần đi muộn. Không có bộ chọn tháng hay khoảng ngày. |
-| FR-015 | Danh sách các ngày đã có bản ghi điểm danh, mới nhất trước, phân trang 20 / 50 / 100; mỗi dòng: ngày, trạng thái (Present, Absent, On leave), giờ check-in, giờ check-out, dấu đi muộn, dấu sốt (nếu trong ngày có lần đo sốt), nhãn "Voided" hoặc "Corrected" (nếu có). |
-| FR-016 | Chọn một ngày thì dòng đó mở rộng ngay trong tab (không chuyển sang màn hình khác) để hiện chi tiết ngày: check-in (giờ, người đưa, ảnh); check-out (giờ, người đón, ảnh); các lần đo nhiệt độ (giờ, nhiệt độ), lần đo từ ngưỡng sốt trở lên được đánh dấu; ngày nghỉ phép ghi loại nghỉ (Personal / Medical). |
-| FR-017 | Bản ghi đã void hiển thị gạch ngang, nhãn "Voided", người yêu cầu, người duyệt, thời điểm, lý do; không tính là ngày đi học. |
-| FR-018 | Giờ đã sửa hiển thị giờ cũ → giờ mới, người sửa, thời điểm, lý do. |
-| FR-019 | Ngày nghỉ phép chỉ hiển thị như một trạng thái điểm danh (On leave, loại nghỉ). Tab không hiển thị số tiền, khoản giảm hay bất kỳ thông tin học phí nào cạnh ngày nghỉ phép hoặc trong khối tóm tắt. |
-| FR-020 | Tab chỉ hiển thị điểm danh tại Centre; điểm danh lớp enrichment không có trong tab và không tính vào tóm tắt (BR-LRN-039; SRS Learning §7.3 Keep separate from main attendance). |
-| FR-021 | Trẻ công dân Singapore: từ ngày chạy kiểm tra (mặc định ngày 18) của tháng hiện tại, nếu trẻ chưa có ngày đi học nào trong tháng thì tab hiện cảnh báo "No attendance this month" — cùng danh sách Centre Director thấy ở mục "No attendance this month". |
-| FR-022 | Trẻ chưa có bản ghi điểm danh nào (ví dụ chưa tới ngày bắt đầu học): hiển thị "No attendance recorded yet."; khối tóm tắt hiện 0. |
+| FR-014 | Danh sách các ngày đã có bản ghi điểm danh, mới nhất trước, phân trang 20 / 50 / 100; mỗi dòng: ngày, trạng thái (Present, Absent, On leave), giờ check-in, giờ check-out, dấu đi muộn, dấu sốt (nếu trong ngày có lần đo sốt), nhãn "Voided" hoặc "Corrected" (nếu có). |
+| FR-015 | Chọn một ngày thì dòng đó mở rộng ngay trong tab (không chuyển sang màn hình khác) để hiện chi tiết ngày: check-in (giờ, người đưa, ảnh); check-out (giờ, người đón, ảnh); các lần đo nhiệt độ (giờ, nhiệt độ), lần đo từ ngưỡng sốt trở lên được đánh dấu; ngày nghỉ phép ghi loại nghỉ (Personal / Medical). |
+| FR-016 | Bản ghi đã void hiển thị gạch ngang, nhãn "Voided", người yêu cầu, người duyệt, thời điểm, lý do; không tính là ngày đi học. |
+| FR-017 | Giờ đã sửa hiển thị giờ cũ → giờ mới, người sửa, thời điểm, lý do. |
+| FR-018 | Ngày nghỉ phép chỉ hiển thị như một trạng thái điểm danh (On leave, loại nghỉ). Tab không hiển thị số tiền, khoản giảm hay bất kỳ thông tin học phí nào cạnh ngày nghỉ phép. |
+| FR-019 | Tab chỉ hiển thị điểm danh tại Centre; điểm danh lớp enrichment không có trong tab và không tính vào chuyên cần (BR-LRN-039; SRS Learning §7.3 Keep separate from main attendance). |
+| FR-020 | Trẻ công dân Singapore: từ ngày chạy kiểm tra (mặc định ngày 18) của tháng hiện tại, nếu trẻ chưa có ngày đi học nào trong tháng thì tab hiện cảnh báo "No attendance this month" — cùng danh sách Centre Director thấy ở mục "No attendance this month". |
+| FR-021 | Trẻ chưa có bản ghi điểm danh nào (ví dụ chưa tới ngày bắt đầu học): hiển thị "No attendance recorded yet." |
 
 #### Functional Flow - Main (Luồng chính)
 
-1. Người dùng chọn tab Attendance; hệ thống hiển thị tóm tắt của tháng hiện tại và danh sách ngày (FR-014, FR-015).
-2. Người dùng chọn một ngày; dòng đó mở rộng để hiện chi tiết ngày (FR-016).
+1. Người dùng chọn tab Attendance; hệ thống hiển thị danh sách ngày, mới nhất trước (FR-014).
+2. Người dùng chọn một ngày; dòng đó mở rộng để hiện chi tiết ngày (FR-015).
 3. Cần sửa giờ hoặc void: người dùng chọn "Open in Child attendance" ở chi tiết ngày để sang màn Daily Operations › Child attendance (FR-013).
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Người dùng chuyển trang để xem các ngày cũ hơn (FR-015).
-2. Ngày có bản ghi đã void hoặc giờ đã sửa: chi tiết ngày hiển thị thông tin void hoặc giờ cũ → giờ mới (FR-017, FR-018).
-3. Trẻ công dân Singapore chưa có ngày đi học nào trong tháng, đã qua ngày 18: tab hiện cảnh báo "No attendance this month" (FR-021).
+1. Người dùng chuyển trang để xem các ngày cũ hơn (FR-014).
+2. Ngày có bản ghi đã void hoặc giờ đã sửa: chi tiết ngày hiển thị thông tin void hoặc giờ cũ → giờ mới (FR-016, FR-017).
+3. Trẻ công dân Singapore chưa có ngày đi học nào trong tháng, đã qua ngày 18: tab hiện cảnh báo "No attendance this month" (FR-020).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
@@ -111,22 +111,34 @@ Là Centre Director, tôi muốn xem lịch sử đi học của một trẻ the
 
 | VAL ID | Điều kiện | Phản hồi của hệ thống |
 |---|---|---|
-| VAL-002 | Trẻ chưa có bản ghi điểm danh nào. | Hiển thị "No attendance recorded yet." (FR-022). |
+| VAL-002 | Trẻ chưa có bản ghi điểm danh nào. | Hiển thị "No attendance recorded yet." (FR-021). |
 
 #### UI Reference (Tham chiếu giao diện)
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-03 - Tab Attendance | Chưa có wireframe cho bản nháp này. |
+| SCR-03 - Tab Attendance | Wireframe: Diagram/Wireframe/attendance-draft-sprint4.html |
+
+![SCR-03 Tab Attendance — chi tiết ngày mở rộng trong dòng](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft.png)
+
+![SCR-03 Tab Attendance — ngày có giờ đã sửa](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft--corrected.png)
+
+![SCR-03 Tab Attendance — ngày có bản ghi void](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft--voided.png)
+
+![SCR-03 Tab Attendance — ngày nghỉ phép](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft--leave.png)
+
+![SCR-03 Tab Attendance — ngày 18: chưa có ngày đi học](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft--no-attendance.png)
+
+![SCR-03 Tab Attendance — chưa có điểm danh](../../../Diagram/Wireframe/png/SCR-03-tab-attendance-draft--empty.png)
+
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Tóm tắt tháng hiện tại | Ô số liệu | Có | — | — | Ngày đi học, vắng, nghỉ phép, đi muộn (FR-014; FR-019). |
-| No attendance this month | Cảnh báo | Khi đủ điều kiện FR-021 | Ẩn | — | FR-021. |
-| Danh sách ngày | Danh sách | Có | Mới nhất trước; 20 dòng mỗi trang | VAL-002. | FR-015; chọn ngày để mở rộng dòng. |
-| Chi tiết ngày | Dòng mở rộng | Khi chọn ngày | — | — | FR-016; FR-017; FR-018. |
+| No attendance this month | Cảnh báo | Khi đủ điều kiện FR-020 | Ẩn | — | FR-020. |
+| Danh sách ngày | Danh sách | Có | Mới nhất trước; 20 dòng mỗi trang | VAL-002. | FR-014; chọn ngày để mở rộng dòng. |
+| Chi tiết ngày | Dòng mở rộng | Khi chọn ngày | — | — | FR-015; FR-016; FR-017. |
 | Open in Child attendance | Liên kết | Trong chi tiết ngày | — | — | Mở Daily Operations › Child attendance, đúng lớp và ngày (FR-013). |
 
 #### Data and Audit (Dữ liệu và audit)
@@ -139,17 +151,16 @@ Là Centre Director, tôi muốn xem lịch sử đi học của một trẻ the
 
 | AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
-| AC-017 | hôm nay 2026-10-30; tháng 10 Mia đi học 18 ngày, vắng 1 ngày, nghỉ phép 2 ngày, đi muộn 1 lần | Centre Director mở tab Attendance | khối tóm tắt hiện 18 ngày đi học, 1 ngày vắng, 2 ngày nghỉ phép, 1 lần đi muộn; không có bộ chọn tháng | FR-014; BR-011 |
-| AC-018 | Mia được check-in lúc 8:10 với bố là người đưa, có ảnh; check-out lúc 17:30 với bà là người đón, có ảnh | Centre Director chọn ngày đó | dòng của ngày mở rộng ngay trong tab, hiện giờ, người đưa, ảnh check-in; giờ, người đón, ảnh check-out | FR-015; FR-016; BR-012; DATA-003 |
-| AC-019 | Mia đo 36,6 °C lúc đến và 37,8 °C lúc ngủ trưa; ngưỡng sốt 37,5 °C | Centre Director chọn ngày đó | chi tiết ngày có 2 lần đo; lần 37,8 °C được đánh dấu sốt; dòng của ngày trong danh sách có dấu sốt | FR-015; FR-016; BR-013 |
-| AC-020 | giờ chốt đi muộn của Centre là 9:15; Noah check-in lúc 9:20 | Centre Director mở tab Attendance của Noah | ngày đó có dấu đi muộn | FR-015; BR-014 |
-| AC-021 | Mia nghỉ phép Medical ngày 20 và 21/10/2026, đơn đã duyệt | Centre Director mở tab Attendance | hai ngày hiện On leave, loại Medical; không có số tiền hay thông tin học phí cạnh hai ngày này hoặc trong tóm tắt | FR-016; FR-019; BR-015 |
-| AC-022 | Liam bị check-in nhầm, Centre Admin void với lý do "Wrong child" | Centre Director chọn ngày đó | bản ghi gạch ngang, nhãn "Voided", người yêu cầu, người duyệt, thời điểm, lý do "Wrong child"; ngày đó không tính vào số ngày đi học | FR-017; BR-016 |
-| AC-023 | giờ check-in của Mia được sửa từ 8:40 thành 8:10, lý do "Time entered late at the gate" | Centre Director chọn ngày đó | chi tiết ngày hiện "8:40 → 8:10", người sửa, thời điểm, lý do; dòng của ngày có nhãn "Corrected" | FR-015; FR-018; BR-017 |
-| AC-024 | Centre Director đang xem tab Attendance | Centre Director mở chi tiết ngày 2026-10-14 của Mia (lớp N2 · Sunbeams) và chọn "Open in Child attendance" | tab không có thao tác sửa hay void; màn Daily Operations › Child attendance mở với lớp N2 · Sunbeams, ngày 2026-10-14 | FR-013; BR-017 |
-| AC-025 | Mia học lớp enrichment Art Explorers và được điểm danh có mặt ở lớp đó ngày 14/10/2026 | Centre Director mở tab Attendance | không có buổi Art Explorers trong danh sách; tóm tắt không tính buổi đó | FR-020; BR-018 |
-| AC-026 | ngày 19/10/2026, Ava là công dân Singapore và Ben là trẻ nước ngoài, cả hai chưa có ngày đi học nào trong tháng 10 | Centre Director mở tab Attendance của Ava, rồi của Ben | tab của Ava hiện cảnh báo "No attendance this month"; tab của Ben không có cảnh báo | FR-021; BR-019 |
-| AC-027 | Chloe đã ghi danh, ngày bắt đầu học 2027-01-04, chưa có bản ghi điểm danh | Centre Director mở tab Attendance của Chloe | hiện "No attendance recorded yet."; tóm tắt hiện 0 | FR-022; VAL-002 |
+| AC-017 | Mia được check-in lúc 8:10 với bố là người đưa, có ảnh; check-out lúc 17:30 với bà là người đón, có ảnh | Centre Director chọn ngày đó | dòng của ngày mở rộng ngay trong tab, hiện giờ, người đưa, ảnh check-in; giờ, người đón, ảnh check-out | FR-014; FR-015; BR-012; DATA-003 |
+| AC-018 | Mia đo 36,6 °C lúc đến và 37,8 °C lúc ngủ trưa; ngưỡng sốt 37,5 °C | Centre Director chọn ngày đó | chi tiết ngày có 2 lần đo; lần 37,8 °C được đánh dấu sốt; dòng của ngày trong danh sách có dấu sốt | FR-014; FR-015; BR-013 |
+| AC-019 | giờ chốt đi muộn của Centre là 9:15; Noah check-in lúc 9:20 | Centre Director mở tab Attendance của Noah | ngày đó có dấu đi muộn | FR-014; BR-014 |
+| AC-020 | Mia nghỉ phép Medical ngày 20 và 21/10/2026, đơn đã duyệt | Centre Director mở tab Attendance | hai ngày hiện On leave, loại Medical; không có số tiền hay thông tin học phí cạnh hai ngày này | FR-015; FR-018; BR-015 |
+| AC-021 | Liam bị check-in nhầm, Centre Admin void với lý do "Wrong child" | Centre Director chọn ngày đó | bản ghi gạch ngang, nhãn "Voided", người yêu cầu, người duyệt, thời điểm, lý do "Wrong child"; ngày đó không tính vào số ngày đi học | FR-016; BR-011; BR-016 |
+| AC-022 | giờ check-in của Mia được sửa từ 8:40 thành 8:10, lý do "Time entered late at the gate" | Centre Director chọn ngày đó | chi tiết ngày hiện "8:40 → 8:10", người sửa, thời điểm, lý do; dòng của ngày có nhãn "Corrected" | FR-014; FR-017; BR-017 |
+| AC-023 | Centre Director đang xem tab Attendance | Centre Director mở chi tiết ngày 2026-10-14 của Mia (lớp N2 · Sunbeams) và chọn "Open in Child attendance" | tab không có thao tác sửa hay void; màn Daily Operations › Child attendance mở với lớp N2 · Sunbeams, ngày 2026-10-14 | FR-013; BR-017 |
+| AC-024 | Mia học lớp enrichment Art Explorers và được điểm danh có mặt ở lớp đó ngày 14/10/2026 | Centre Director mở tab Attendance | không có buổi Art Explorers trong danh sách | FR-019; BR-018 |
+| AC-025 | ngày 19/10/2026, Ava là công dân Singapore và Ben là trẻ nước ngoài, cả hai chưa có ngày đi học nào trong tháng 10 | Centre Director mở tab Attendance của Ava, rồi của Ben | tab của Ava hiện cảnh báo "No attendance this month"; tab của Ben không có cảnh báo | FR-020; BR-019 |
+| AC-026 | Chloe đã ghi danh, ngày bắt đầu học 2027-01-04, chưa có bản ghi điểm danh | Centre Director mở tab Attendance của Chloe | hiện "No attendance recorded yet." | FR-021; VAL-002 |
 
 #### Dependencies (Phụ thuộc)
 
@@ -172,12 +183,12 @@ Số trang tính theo bản Word gốc của SRS khi xuất PDF khổ A4.
 | 1 | Plane — dự án BBA Phase 1, ticket BBA-67 (WBS 3.1.1.02) | Description: attendance summary and day records, each linking to the module screen | — | Phạm vi US-003. |
 | 2 | BBA-SMS-SRS-Daily-Operations-v0.1 | §2 Who uses it | 4 | Vai trò duyệt void. |
 | 3 | BBA-SMS-SRS-Daily-Operations-v0.1 | §3 Process overview (check in, check out, void, leave, day-18) | 4–5 | Mục 2. |
-| 4 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4 mục 1.1 Child attendance (View class attendance, Check in, Check out, Record temperature, Flag fever, Flag late arrival, Hide late flag from parents, void, Send day-18 alert, View history) | 5–6 | FR-013 đến FR-018, FR-021. |
-| 5 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4 mục 2.2 Child leave requests | 7 | FR-016, FR-019. |
+| 4 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4 mục 1.1 Child attendance (View class attendance, Check in, Check out, Record temperature, Flag fever, Flag late arrival, Hide late flag from parents, void, Send day-18 alert, View history) | 5–6 | FR-013 đến FR-017, FR-020. |
+| 5 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4 mục 2.2 Child leave requests | 7 | FR-015, FR-018. |
 | 6 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4 mục 5.1 Bus services (Assign child to a bus service) | 9 | OQ-RT-18. |
 | 7 | BBA-SMS-SRS-Daily-Operations-v0.1 | §5 Check in and check out (BR-OPS-001 đến 005) | 9 | BR-011, BR-012, BR-017. |
 | 8 | BBA-SMS-SRS-Daily-Operations-v0.1 | §5 Temperature; Absence, late arrival and leave; Attendance void; Subsidy and ECDA (BR-OPS-010, 012, 014, 015, 016, 019, 020 đến 025) | 10 | BR-013 đến BR-016, BR-019. |
 | 9 | BBA-SMS-SRS-Daily-Operations-v0.1 | §8 Acceptance criteria (AC-OPS-001, 004, 005, 007, 008, 010, 012) | 13–14 | Dữ liệu ví dụ cho AC. |
 | 10 | BBA-SMS-SRS-Attendance-App-v0.1 | §1 Purpose & scope (sửa, void, duyệt làm trên SMS web) | 2 | BR-017. |
-| 11 | BBA-SMS-SRS-Learning-v0.1 | §7.3 Enrichment attendance (Keep separate from main attendance) | 9 | FR-020. |
+| 11 | BBA-SMS-SRS-Learning-v0.1 | §7.3 Enrichment attendance (Keep separate from main attendance) | 9 | FR-019. |
 | 12 | BBA-SMS-SRS-Learning-v0.1 | §5 Enrichment classes and students (BR-LRN-039) | 11 | BR-018. |
