@@ -375,3 +375,15 @@ Bản nháp US-001: `FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI.md`.
 - Ghi danh được cho trẻ chưa sinh bằng ngày dự sinh (§4 mục 1.1, tr.5; BR-CHF-002, tr.8).
 - Mọi thay đổi sau ghi danh thuộc Joining & leaving (BR-CHF-006, tr.8).
 - Kết luận: tab Enrolment chỉ mô tả thông tin ghi danh và các thay đổi sau ghi danh; không đi sâu lịch sử lớp, case, đổi programme. Bản nháp US-001 nâng lên 0.2.
+
+## BBA-67 US-002 — Tab Enrichment: brainstorm (11/11/2026)
+
+> Nguồn: BBA-SMS-SRS-Learning-v0.1 (số trang theo bản Word gốc xuất PDF A4); FRD BBA-67 Read Views v0.4; định hướng của BA phụ trách (tab là cửa sổ nhìn sang Learning, không phải nơi quản lý).
+
+- Thông tin hiển thị lấy đúng SRS Learning: lớp (tên, chương trình, thứ và giờ, trainer, phí mỗi buổi — §7.1, tr.8) và trẻ trong lớp (ngày bắt đầu, ngày kết thúc, Active / Left — §7.2, tr.9). Lớp hiện trên hồ sơ trẻ (§7.2 Show on child profile; BR-LRN-036).
+- Cách một lớp kết thúc theo SRS: Enrichment team gỡ trẻ (bắt buộc ngày kết thúc), lớp bị đóng (ngày kết thúc = ngày đóng), trẻ thôi học ở Centre (ngày học cuối) — §7.1, §7.2, BR-LRN-035, 037.
+- Mâu thuẫn: FRD v0.4 có "rút qua Parents App, không hoàn tiền" và "đổi chương trình báo trước 1 tháng"; SRS Learning §1.2 (tr.3) ghi đăng ký và rút qua Parents App không thuộc Phase 1, không nhắc đổi chương trình → OQ-RT-17.
+- Số buổi tham dự không thuộc §7.1, §7.2; điểm danh enrichment chỉ để theo dõi (BR-LRN-039) → để OQ-RT-03.
+- Phí tháng = số buổi theo lịch × phí mỗi buổi, ngày lễ vẫn tính, vắng không trừ (BR-LRN-040, 042) → đủ để người xem hồ sơ giải thích hoá đơn enrichment.
+
+Bản nháp: `FSD/Sprint 4/BBA-67_US-002_Tab_Enrichment_Draft_VI.md`.

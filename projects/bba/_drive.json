@@ -479,6 +479,15 @@
       "version": "0.2",
       "source_sha256": "2ed8bb888836ec1697ffc42350b68f3f6ea945f05139cb75f786aeaad26bbaea",
       "synced_at": "2026-11-11 04:59"
+    },
+    "FSD/Sprint 4/BBA-67_US-002_Tab_Enrichment_Draft_VI": {
+      "file_id": "1Ro40tizbpllzokPW3lNe1wNTxm0VUvMu",
+      "url": "https://drive.google.com/file/d/1Ro40tizbpllzokPW3lNe1wNTxm0VUvMu/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-002 Tab Enrichment – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2234b4866de79a7c18de9d1148908e02aee55d70dd2cfbd102d430b19efe3868",
+      "synced_at": "2026-11-11 07:12"
     }
   },
   "folders_used": {
@@ -502,7 +511,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 07:10"
+      "last_used": "2026-11-11 07:12"
     }
   },
   "history": [
