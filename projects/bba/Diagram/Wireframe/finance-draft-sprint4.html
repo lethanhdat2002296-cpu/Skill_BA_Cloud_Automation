@@ -248,87 +248,52 @@ const stat = (n, l) => `<div class="kpi"><small>${l}</small><b style="font-size:
 const seg = (items, on) => `<div class="pill-tabs" style="background:var(--fill)">${items.map(x => `<span${x.startsWith(on) ? ' class="on"' : ""}>${x}</span>`).join("")}</div>`;
 const muted = (t) => `<span style="color:var(--muted)">${t}</span>`;
 
-/* ---------- SCR-04 Finance (bản nháp US-004) ---------- */
+/* ---------- SCR-04 Finance (bản nháp US-004 v0.2 — tổng quan) ---------- */
 const WHO = "Grace Tan · Centre Director";
-const money = (cur, v) => `${cur} ${v}`;
+const line = (l, r, sub) => `<div class="row between" style="font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--line)"><span>${l}${sub ? `<div class="small">${sub}</div>` : ""}</span><span style="text-align:right">${r}</span></div>`;
 function finDraft(state) {
-  const my = state === "malaysia", tr = state === "transfer", cda = state === "cda-refund", gf = state === "giro-failed";
+  const my = state === "malaysia", ok = state === "all-good", cda = state === "cda-refund";
   const c = my ? { name: "Iman Hakim", id: "S15", init: "IH", centre: "Small Wonder Damansara · Cempaka", owner: "Mrs Hakim" }
-    : tr ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" }
+    : ok ? { name: "Noah Lee", id: "S9", init: "NL", centre: "Small Wonder Tampines · Honeycombs", owner: "Mrs Lee" }
     : cda ? { name: "Mia Wong", id: "S7", init: "MW", centre: "Small Wonder Tampines · Sunbeams", owner: "Mrs Wong" } : null;
   const cur = my ? "MYR" : "SGD";
+  const k = my ? ["MYR 0.00", "MYR 0.00", "—", "MYR 900.00", "—"] : ok ? ["SGD 0.00", "SGD 0.00", "—", "SGD 1,180.00", "of which CDA SGD 0.00"]
+    : cda ? ["SGD 0.00", "SGD 0.00", "—", "SGD 500.00", "of which CDA SGD 500.00"] : ["SGD 627.58", "SGD 30.00", "of which CDA SGD 30.00", "SGD 1,180.00", "of which CDA SGD 0.00"];
   const summary = `<div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-      <div class="kpi"><small>Outstanding <span class="anno">1</span></small><b style="font-size:20px">${my ? "MYR 0.00" : tr ? "SGD 0.00" : cda ? "SGD 0.00" : "SGD 627.58"}</b><span class="small">Billed invoices not fully paid</span></div>
-      <div class="kpi"><small>Credit remaining</small><b style="font-size:20px">${my ? "MYR 0.00" : (tr || cda) ? "SGD 0.00" : "SGD 30.00"}</b><span class="small">${(my || tr || cda) ? "—" : "of which CDA SGD 30.00"}</span></div>
-      <div class="kpi"><small>Deposit held</small><b style="font-size:20px">${my ? "MYR 900.00" : cda ? "SGD 0.00" : "SGD 1,180.00"}</b><span class="small">${my ? "—" : cda ? "refund in progress" : "of which CDA SGD 0.00"}</span></div></div>`;
-  const pm = cda ? card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd><b>PayNow</b> · on the child's record · read only</dd><dt>Bill to</dt><dd>Parent</dd></dl><div style="font-size:13px">${muted("No GIRO or CDA account.")}</div>`, "Open in GIRO accounts", 2)
-    : my ? card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd>⚠ To confirm for Malaysia <span class="small">(no GIRO / CDA, no ECDA subsidy)</span></dd><dt>Bill to</dt><dd>Parent</dd></dl>`, "Open in Billing", 2)
-    : card("Payment method", `<dl class="kv"><dt>Payment method</dt><dd><b>GIRO</b> · on the child's record · read only</dd><dt>Bill to</dt><dd>Parent</dd></dl>
-      <table class="t"><thead><tr><th>Type</th><th>Bank · account</th><th>DDA reference</th><th>Status</th><th>Applied by</th><th>Pays by GIRO</th></tr></thead><tbody>
-      <tr><td>GIRO</td><td>DBS · ••••4021</td><td>DDA-DBS-118204</td><td><span class="badge">Active</span></td><td>Paper form</td><td>Yes</td></tr>
-      <tr><td>CDA</td><td>OCBC · ••••7730</td><td>DDA-CDA-551277</td><td><span class="badge">Active</span></td><td>e-GIRO</td><td>Yes</td></tr></tbody></table>
-      <div class="small">At most one GIRO and one CDA account; CDA and non-CDA are invoiced separately. Account numbers show the last 4 digits only.</div>`, "Open in GIRO accounts", 2);
-  const inv = my ? [["INV-SW-DAM-202611-0007", "Nov 2026", "School fees", "1,150.00", "0.00", "2026-11-05", "Paid", "Parent", "Bank transfer", "—", "", ""]]
-    : tr ? [["INV-SW-BTM-202611-0003", "Nov 2026", "School fees", "690.00", "0.00", "2026-11-05", "Paid", "Parent", "GIRO", "non-CDA", "Small Wonder Bukit Timah", ""],
-            ["INV-SW-TAM-202605-0028", "May 2026", "School fees", "690.00", "0.00", "2026-05-05", "Paid", "Parent", "GIRO", "non-CDA", "Small Wonder Tampines", "closed"]]
-    : cda ? [["INV-SW-TAM-202610-0051", "Oct 2026", "School fees", "345.00", "0.00", "2026-10-05", "Paid", "Parent", "PayNow", "non-CDA", "", "pro"]]
-    : [["INV-SW-TAM-202612-0001", "Dec 2026", "School fees", "460.00", "460.00", "2026-12-05", "Draft", "Parent", "GIRO", "non-CDA", "", ""],
-       ["INV-SW-TAM-202611-0001", "Nov 2026", "School fees", "300.00", "300.00", "2026-11-05", "Billed", "Parent", "GIRO CDA", "CDA", "", "Being collected by GIRO"],
-       ["INV-SW-TAM-202611-0002", "Nov 2026", "School fees", "228.40", "0.00", "2026-11-05", "Paid", "Parent", "GIRO", "non-CDA", "", "Paid by credit note CN-SW-TAM-202611-0003"],
-       ["INV-SW-TAM-ENR-202610-0012", "Oct 2026", "Enrichment", "270.00", "270.00", "2026-10-05", "Overdue · 34 days", "Parent", "GIRO", "non-CDA", "", "GIRO deduction failed · 12 Oct · Insufficient funds"],
-       ["INV-SW-TAM-202610-0041", "Oct 2026", "School fees", "460.00", "57.58", "2026-10-05", "Overdue · 34 days", "Parent", "GIRO", "non-CDA", "", ""],
-       ["INV-SW-TAM-202609-0039", "Sep 2026", "School fees", "310.00", "0.00", "2026-09-05", "Paid", "Parent", "GIRO", "non-CDA", "", "closed"]];
-  const openNo = gf ? "INV-SW-TAM-ENR-202610-0012" : my ? "" : tr ? "" : cda ? "INV-SW-TAM-202610-0051" : "INV-SW-TAM-202610-0041";
-  const detail = (no) => {
-    if (no === "INV-SW-TAM-ENR-202610-0012") return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
-      <table class="lines"><tr><td>Mandarin Explorers · 4 sessions × SGD 30</td><td class="r">120.00</td></tr><tr><td>Speech &amp; Drama · 5 sessions × SGD 30</td><td class="r">150.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>270.00</b></td></tr></table>
-      <div class="alert" style="margin-top:8px"><b>GIRO deduction failed</b><span>2ND DD · 12 Oct · bank reason: Insufficient funds · parent notified · PayNow now offered in the Parents App <span class="anno">5</span></span></div>
-      <div class="small" style="margin-top:6px">Reminders sent: 15 Oct, 25 Oct (in-app)</div>`;
-    if (no === "INV-SW-TAM-202610-0051") return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
-      <table class="lines"><tr><td>Tuition · Full day · N2 · Singapore Citizen · pro-rated 1–15 Oct (last month)</td><td class="r">760.00</td></tr><tr><td>Basic subsidy</td><td class="r">−300.00</td></tr><tr><td>Additional subsidy</td><td class="r">−115.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>345.00</b></td></tr></table>`;
-    return `<div class="small">Invoice detail · read only <span class="anno">4</span></div>
-      <div class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
-      <div><table class="lines"><tr><td>Tuition · Full day · N2 · Singapore Citizen</td><td class="r">1,520.00</td></tr><tr><td>Staff child discount 50%</td><td class="r">−760.00</td></tr><tr><td>Basic subsidy</td><td class="r">−300.00</td></tr><tr><td><b>Total</b></td><td class="r"><b>460.00</b></td></tr></table>
-      <div class="small" style="margin-top:6px">Payments: 2026-10-04 · PayNow · 322.42 · RC-SW-TAM-202610-0310<br>Credit: 2026-11-06 · CN-SW-TAM-202611-0003 · 80.00 · balance 57.58</div></div>
-      <div><b style="font-size:13px">What changed from last month <span class="anno">6</span></b><div style="font-size:13px;display:grid;gap:4px;margin-top:4px"><div>• Additional subsidy ended 30 Sep (−150.00 no longer applied)</div><div class="small">Source: October billing run change report</div></div></div></div>`;
-  };
-  const rows = inv.map(r => {
-    const sel = r[0] === openNo, st = r[6];
-    const badge = st.startsWith("Overdue") ? `<span class="badge solid">${st}</span>` : st === "Draft" ? '<span class="badge dash">Draft</span>' : st === "Paid" ? '<span class="badge out">Paid</span>' : `<span class="badge">${st}</span>`;
-    const giro = r[11] && r[11] !== "closed" && r[11] !== "pro" ? `<div class="small">${r[11].startsWith("GIRO deduction failed") ? "<b>⚠ " + r[11] + "</b>" : r[11]}</div>` : "";
-    const tags = (r[11] === "closed" ? ' <span class="badge dash">Closed month</span>' : "") + (r[10] ? `<div class="small">${r[10]} · Small Wonder Preschools Pte Ltd</div>` : "");
-    return `<tr${sel ? ' class="sel"' : ""}><td>${sel ? "▾" : "▸"} <u>${r[0]}</u>${tags}</td><td>${r[1]}</td><td>${r[2]}</td><td style="text-align:right">${r[3]}</td><td style="text-align:right">${r[4]}</td><td>${r[5]}</td><td>${badge}${giro}</td><td>${r[8]}<div class="small">${r[9]}</div></td></tr>`
-      + (sel ? `<tr class="exp"><td colspan="8">${detail(r[0])}</td></tr>` : "");
-  }).join("");
-  const invoices = card(`Invoices`, `<table class="t"><thead><tr><th>Invoice</th><th>Month</th><th>Type</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th><th>Due</th><th>Status · GIRO <span class="anno">3</span></th><th>Method · account</th></tr></thead><tbody>${rows}</tbody></table>
-      <div class="small">Newest first · choose an invoice to expand it here · Draft is not counted in Outstanding · Bill to: Parent</div>`, "Open in Invoices", "");
-  const receipts = card("Receipts", `<table class="t"><thead><tr><th>Receipt</th><th>Date</th><th>Method</th><th style="text-align:right">Amount</th><th>Invoices paid</th><th>Issued by</th></tr></thead><tbody>${cda ? `<tr><td>RC-SW-TAM-202610-0355</td><td>2026-10-03</td><td>PayNow</td><td style="text-align:right">345.00</td><td>INV-SW-TAM-202610-0051</td><td>System</td></tr>` : tr ? `<tr><td>RC-SW-BTM-202611-0040</td><td>2026-11-05</td><td>GIRO</td><td style="text-align:right">690.00</td><td>INV-SW-BTM-202611-0003</td><td>System</td></tr>` : my
-      ? `<tr><td>RC-SW-DAM-202611-0021</td><td>2026-11-03</td><td>Bank transfer</td><td style="text-align:right">1,150.00</td><td>INV-SW-DAM-202611-0007</td><td>Finance · Lim Wei</td></tr>`
-      : `<tr><td>RC-SW-TAM-202610-0310</td><td>2026-10-04</td><td>PayNow</td><td style="text-align:right">322.42</td><td>INV-SW-TAM-202610-0041</td><td>System</td></tr><tr><td>RC-SW-TAM-202609-0288</td><td>2026-09-05</td><td>GIRO</td><td style="text-align:right">310.00</td><td>INV-SW-TAM-202609-0039</td><td>System</td></tr>`}</tbody></table>`, "Open in Receipts", "");
-  const credits = my ? "" : (cda || tr) ? card("Credit notes", muted("No credit note for this child."), "", "") : card("Credit notes", `<table class="t"><thead><tr><th>Credit note</th><th>Invoice</th><th>Scope</th><th style="text-align:right">Amount</th><th>Approval</th><th>Applied to <span class="anno">7</span></th></tr></thead><tbody>
-      <tr><td>CN-SW-TAM-202611-0003</td><td>INV-SW-TAM-202611-0002</td><td>Half month</td><td style="text-align:right">308.40</td><td><span class="badge">Approved</span></td><td>228.40 on INV-SW-TAM-202611-0002<br>80.00 on INV-SW-TAM-202610-0041 (oldest open)</td></tr></tbody></table>
-      <div class="small">One credit note per invoice · never also taken off next month's invoice</div>`, "Open in Credit notes", "");
-  const deposit = card("Deposit", `<dl class="kv"><dt>Held</dt><dd>${my ? "MYR 900.00" : cda ? "SGD 0.00" : "SGD 1,180.00"} · source ${cda ? "CDA" : "non-CDA"}</dd><dt>Months</dt><dd>${cda ? "2 + 1 month, not on GIRO" : "2"}</dd><dt>Booking fee</dt><dd>${my ? "MYR 200.00" : "SGD 200.00"} deducted on the first invoice ${my ? "INV-SW-DAM-202512-0002" : cda ? "INV-SW-TAM-202512-0004" : "INV-SW-TAM-202511-0016"}</dd></dl>
-      <table class="t"><thead><tr><th>Date</th><th>Movement</th><th style="text-align:right">Amount</th><th>Linked</th></tr></thead><tbody>${tr
-        ? `<tr><td>2026-06-01</td><td>Transferred to Small Wonder Bukit Timah</td><td style="text-align:right">1,180.00</td><td>from Small Wonder Tampines</td></tr><tr><td>2025-11-14</td><td>Received</td><td style="text-align:right">1,180.00</td><td>INV-SW-TAM-202511-0016</td></tr>`
-        : cda ? `<tr><td>2026-10-20</td><td>Refund requested</td><td style="text-align:right">−500.00</td><td>RF-SW-TAM-2610-0007</td></tr><tr><td>2025-12-02</td><td>Received (CDA)</td><td style="text-align:right">500.00</td><td>INV-SW-TAM-202512-0004</td></tr>`
-        : `<tr><td>${my ? "2025-12-02" : "2025-11-14"}</td><td>Received</td><td style="text-align:right">${my ? "900.00" : "1,180.00"}</td><td>first invoice</td></tr>`}</tbody></table>`, "Open in Deposit ledger", "");
-  const refunds = (cda || tr) ? card("Refunds", `<table class="t"><thead><tr><th>Refund</th><th style="text-align:right">Amount</th><th>Status</th><th>Source → destination</th><th>Account confirmed</th><th>Reason</th></tr></thead><tbody>${cda
-      ? `<tr><td>RF-SW-TAM-2610-0007</td><td style="text-align:right">500.00</td><td><span class="badge">Pending approval</span></td><td>CDA → <b>CDA</b> <span class="anno">8</span></td><td>Not needed for CDA</td><td>—</td></tr>`
-      : `<tr><td>RF-SW-TAM-2605-0011</td><td style="text-align:right">45.00</td><td><span class="badge dash">Void</span> <span class="small">after Unsuccessful</span></td><td>non-CDA → PayNow ••••5512</td><td>Yes</td><td>Invalid account · waiting for the parent to update</td></tr>`}</tbody></table>`, "Open in Refunds", "")
-    : card("Refunds", muted("No refund for this child."), "", "");
-  const disc = (cda || tr) ? card("Discounts & subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div>${muted("No discount.")}</div><div>Basic subsidy · SGD 300.00 / month</div></div><div class="small">Singapore: at least one attendance day a month keeps the subsidy; checked on the 18th.</div>`, "Open in GSII", "")
-    : my ? card("Discounts", `<div style="font-size:13.5px">${muted("No discount.")}</div>`, "", "")
-    : card("Discounts & subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div><b>Staff child discount</b> · 50% · 2026-01-01 → —</div><div>Basic subsidy · SGD 300.00 / month · from 2026-01-01</div><div class="small">Additional subsidy ended 2026-09-30</div></div>
-      ${state === "default" ? "" : ""}<div class="small">Singapore: at least one attendance day a month keeps the subsidy; checked on the 18th. <span class="anno">9</span></div>
-      <div style="font-size:13px">GSII · Sep 2026 · subsidy amount differs · <b>Keep profile</b> · reason: ECDA approval letter dated 2026-08-20</div>`, "Open in GSII", "");
-  return header("Finance", c) + summary + pm + invoices + receipts + credits + deposit + refunds + disc;
+      <div class="kpi${k[0] !== "SGD 0.00" && k[0] !== "MYR 0.00" ? " alert" : ""}"><small>Outstanding <span class="anno">1</span></small><b style="font-size:22px">${k[0]}</b></div>
+      <div class="kpi"><small>Credit remaining</small><b style="font-size:22px">${k[1]}</b><span class="small">${k[2]}</span></div>
+      <div class="kpi"><small>Deposit held</small><b style="font-size:22px">${k[3]}</b><span class="small">${k[4]}</span></div></div>`;
+  const att = (my || ok || cda) ? "" : `<div class="alert strong" style="display:block"><b>Needs attention · 3 <span class="anno">2</span></b>
+      <div style="display:grid;gap:4px;margin-top:6px;font-size:13.5px">
+        <div>⚠ Oct school fees · 34 days overdue · SGD 57.58 · reminded 15 Oct, 25 Oct <u>Open</u> ↗</div>
+        <div>⚠ Oct enrichment · GIRO deduction failed · 12 Oct · Insufficient funds <u>Open</u> ↗</div>
+        <div>⚠ GSII Sep 2026 · subsidy amount differs · not decided yet <u>Open in GSII</u> ↗</div></div></div>`;
+  const pay = my ? card("Payment method", line("Bank transfer", "Bill to: Parent") + `<div class="small">No GIRO / CDA in Malaysia</div>`, "Open in Billing", 3)
+    : cda ? card("Payment method", line("<b>PayNow</b>", "Bill to: Parent") + `<div class="small">No GIRO account</div>`, "Open in GIRO accounts", 3)
+    : card("Payment method", line("<b>GIRO</b>", "Bill to: Parent") + line("GIRO · DBS · ••••4021", '<span class="badge">Active</span>') + line("CDA · OCBC · ••••7730", '<span class="badge">Active</span>'), "Open in GIRO accounts", 3);
+  const invRows = my ? [["Nov 2026", "School fees", "1,150.00", "0.00", '<span class="badge out">Paid</span>', ""]]
+    : ok ? [["Nov 2026", "School fees", "690.00", "0.00", '<span class="badge out">Paid</span>', "Paid by GIRO · 5 Nov"], ["Oct 2026", "Enrichment", "120.00", "0.00", '<span class="badge out">Paid</span>', ""], ["Oct 2026", "School fees", "690.00", "0.00", '<span class="badge out">Paid</span>', ""]]
+    : cda ? [["Oct 2026", "School fees", "345.00", "0.00", '<span class="badge out">Paid</span>', "Last month · pro-rated to 15 Oct"]]
+    : [["Dec 2026", "School fees", "460.00", "460.00", '<span class="badge dash">Draft</span>', "Not counted in Outstanding"],
+       ["Nov 2026", "School fees <span class=\"badge dash\">CDA</span>", "300.00", "300.00", '<span class="badge">Due 5 Nov</span>', "Being collected by GIRO"],
+       ["Oct 2026", "Enrichment", "270.00", "270.00", '<span class="badge solid">Overdue · 34 days</span>', "<b>GIRO deduction failed</b>"],
+       ["Oct 2026", "School fees", "460.00", "57.58", '<span class="badge solid">Overdue · 34 days</span>', ""],
+       ["Nov 2026", "School fees", "228.40", "0.00", '<span class="badge out">Paid</span>', "Paid by credit note"],
+       ["Sep 2026", "School fees", "310.00", "0.00", '<span class="badge out">Paid</span>', ""]];
+  const changed = (my || ok || cda) ? "" : `<div style="font-size:13px;margin-top:6px"><b>What changed from last month</b> · Oct school fees: Additional subsidy ended 30 Sep <span class="anno">5</span></div>`;
+  const invoices = card("Invoices", `<table class="t"><thead><tr><th>Month</th><th>Type</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th><th>Status <span class="anno">4</span></th></tr></thead><tbody>${invRows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td style="text-align:right">${r[2]}</td><td style="text-align:right">${r[3]}</td><td>${r[4]}${r[5] ? `<div class="small">${r[5]}</div>` : ""}</td></tr>`).join("")}</tbody></table>${changed}
+      <div class="small">Unpaid first, then the latest · up to 6</div>`, "View all invoices", "");
+  const dep = card("Deposit & refunds", line(my ? "MYR 900.00 · non-CDA · 2 months" : cda ? "SGD 500.00 · <b>CDA</b> · 2 months" : "SGD 1,180.00 · non-CDA · 2 months", "") +
+      (cda ? line("Refund SGD 500.00 · to <b>CDA</b> <span class=\"anno\">6</span>", '<span class="badge">Pending approval</span>') : ""), "Open in Deposit ledger", "");
+  const disc = my ? card("Discounts", muted("No discount."), "", "")
+    : card("Discounts & subsidies", (ok || cda ? line(muted("No discount"), "") : line("Staff child discount · 50%", "until —")) + line("Basic subsidy", `${cur} 300.00 / month`), "Open in Billing", "");
+  return header("Finance", c) + summary + att + `<div class="split" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:start"><div style="display:grid;gap:16px">${invoices}</div><div style="display:grid;gap:16px">${pay}${dep}${disc}</div></div>`;
 }
 
 const SCREENS = [
-  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance-draft", tickets: "US-004 (bản nháp) — tổng hợp tài chính của một trẻ, chỉ đọc",
-    states: [["default", "Singapore · còn nợ · chi tiết hoá đơn", () => finDraft("default")], ["giro-failed", "GIRO trừ thất bại", () => finDraft("giro-failed")], ["cda-refund", "Hoàn cọc CDA", () => finDraft("cda-refund")], ["transfer", "Chuyển Centre · hoàn tiền thất bại", () => finDraft("transfer")], ["malaysia", "Malaysia", () => finDraft("malaysia")]],
-    notes: [["Tóm tắt: Outstanding (Billed chưa trả hết, không tính Draft), Credit remaining và Deposit held tách phần CDA.", "FR-023 · BR-FIN-TAB-002"], ["Payment method thuộc hồ sơ trẻ, chỉ đọc; tối đa 2 tài khoản GIRO và CDA; số tài khoản che.", "FR-024 · BR-FIN-TAB-004 đến 006"], ["Trạng thái hoá đơn kèm GIRO: scheduled, being collected, failed + lý do; Overdue kèm số ngày.", "FR-025 · BR-FIN-TAB-003 · 007"], ["Chọn hoá đơn: mở rộng ngay trong dòng, chỉ đọc.", "FR-026"], ["GIRO thất bại: lý do ngân hàng, nhắc nợ 15 và 25.", "BR-FIN-TAB-007 · 008"], ["Lý do thay đổi so với tháng trước lấy từ change report.", "FR-026 · BR-FIN-TAB-016"], ["Credit note: trừ hoá đơn gốc trước, phần dư vào hoá đơn còn mở cũ nhất.", "FR-028 · BR-FIN-TAB-011"], ["Tiền CDA chỉ hoàn về CDA; không hỏi tài khoản cho phần CDA.", "FR-030 · BR-FIN-TAB-014"], ["Trợ cấp Singapore cần ít nhất 1 ngày đi học trong tháng; chênh lệch GSII không tự áp.", "FR-031 · BR-FIN-TAB-017 · 018"]] }
+  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance-draft", tickets: "US-004 (bản nháp 0.2) — tổng quan tài chính của một trẻ, chỉ đọc",
+    states: [["default", "Có việc cần chú ý", () => finDraft("default")], ["all-good", "Không có việc cần chú ý", () => finDraft("all-good")], ["cda-refund", "Hoàn cọc CDA", () => finDraft("cda-refund")], ["malaysia", "Malaysia", () => finDraft("malaysia")]],
+    notes: [["3 số tóm tắt: còn nợ (không tính Draft), credit còn lại và cọc đang giữ tách phần CDA.", "FR-023 · BR-FIN-TAB-002"], ["Cần chú ý: chỉ hiện khi có việc; mỗi việc một dòng kèm liên kết sang Billing.", "FR-024"], ["Payment method: một dòng mỗi tài khoản, chỉ 4 số cuối; không có DDA hay nút sửa.", "FR-025 · BR-FIN-TAB-004 đến 006"], ["Tối đa 6 hoá đơn: chưa trả trước, rồi mới nhất; trạng thái kèm GIRO; không mở chi tiết từng dòng.", "FR-026 · BR-FIN-TAB-007"], ["Một dòng giải thích vì sao hoá đơn tháng này khác tháng trước.", "FR-027 · BR-FIN-TAB-012"], ["Hoàn tiền chỉ hiện khi đang xử lý hoặc thất bại; tiền CDA hoàn về CDA.", "FR-028 · BR-FIN-TAB-011"]] }
 ];
 
 let current = { screen: "scr-04", state: "default" };
