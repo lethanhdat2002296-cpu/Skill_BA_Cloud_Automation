@@ -112,13 +112,13 @@
       "synced_at": "2026-11-09 12:13"
     },
     "FSD/Sprint 4/3.1_Child_Record_Overview_VI": {
-      "file_id": "12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45",
-      "url": "https://drive.google.com/file/d/12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45/view",
+      "file_id": "1llMjqARF-MbmCjYkwAm5Olp4ocoxxLFA",
+      "url": "https://drive.google.com/file/d/1llMjqARF-MbmCjYkwAm5Olp4ocoxxLFA/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] Child Record Overview - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "d128f79b5d7c6db9fa4493967ec34f2a4dae42247d787d1766bd5e321472c3cd",
-      "synced_at": "2026-11-11 02:23"
+      "version": "0.3",
+      "source_sha256": "8625f81b34b777e6498394ddb2d4b74185da07eee99514d8c27ee8499a248dcf",
+      "synced_at": "2026-11-11 03:45"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
       "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
@@ -493,7 +493,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 02:23"
+      "last_used": "2026-11-11 03:45"
     }
   },
   "history": [
@@ -604,6 +604,17 @@
       "synced_at": "2026-11-10 08:15 (từ Drive về Git)",
       "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
       "replaced_at": "2026-11-11 02:23"
+    },
+    {
+      "file_id": "12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45",
+      "url": "https://drive.google.com/file/d/12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "d128f79b5d7c6db9fa4493967ec34f2a4dae42247d787d1766bd5e321472c3cd",
+      "synced_at": "2026-11-11 02:23",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-11 03:45"
     }
   ]
 }
