@@ -112,13 +112,13 @@
       "synced_at": "2026-11-09 12:13"
     },
     "FSD/Sprint 4/3.1_Child_Record_Overview_VI": {
-      "file_id": "1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM",
-      "url": "https://drive.google.com/file/d/1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM/view",
+      "file_id": "12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45",
+      "url": "https://drive.google.com/file/d/12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 3.1 Child Record Overview (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "9ed22eb251aac96e2d27ad04971b5e17a2b3a8d6d19d475d26bd6425714d6d7a",
-      "synced_at": "2026-11-10 08:15 (từ Drive về Git)"
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "d128f79b5d7c6db9fa4493967ec34f2a4dae42247d787d1766bd5e321472c3cd",
+      "synced_at": "2026-11-11 02:23"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
       "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
@@ -493,7 +493,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-10 10:47"
+      "last_used": "2026-11-11 02:23"
     }
   },
   "history": [
@@ -593,6 +593,17 @@
       "synced_at": "2026-11-10 09:26",
       "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
       "replaced_at": "2026-11-10 10:00"
+    },
+    {
+      "file_id": "1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM",
+      "url": "https://drive.google.com/file/d/1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Child Record Overview (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "9ed22eb251aac96e2d27ad04971b5e17a2b3a8d6d19d475d26bd6425714d6d7a",
+      "synced_at": "2026-11-10 08:15 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-11 02:23"
     }
   ]
 }
