@@ -488,6 +488,15 @@
       "version": "0.1",
       "source_sha256": "2234b4866de79a7c18de9d1148908e02aee55d70dd2cfbd102d430b19efe3868",
       "synced_at": "2026-11-11 07:12"
+    },
+    "FSD/Sprint 4/BBA-67_US-003_Tab_Attendance_Draft_VI": {
+      "file_id": "18oK9uiiQckvojin3OafGL5aPFYMDO1DC",
+      "url": "https://drive.google.com/file/d/18oK9uiiQckvojin3OafGL5aPFYMDO1DC/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-003 Tab Attendance – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d957217a3ee373e6f004e59d9220c945129476b65aed9227f8ef5432827bd849",
+      "synced_at": "2026-11-11 07:40"
     }
   },
   "folders_used": {
@@ -511,7 +520,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 07:25"
+      "last_used": "2026-11-11 07:40"
     }
   },
   "history": [

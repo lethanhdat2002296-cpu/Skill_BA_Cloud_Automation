@@ -387,3 +387,16 @@ Bản nháp US-001: `FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI.md`.
 - Phí tháng = số buổi theo lịch × phí mỗi buổi, ngày lễ vẫn tính, vắng không trừ (BR-LRN-040, 042) → đủ để người xem hồ sơ giải thích hoá đơn enrichment.
 
 Bản nháp: `FSD/Sprint 4/BBA-67_US-002_Tab_Enrichment_Draft_VI.md`.
+
+## BBA-67 US-003 — Tab Attendance: brainstorm (11/11/2026)
+
+> Nguồn: SRS Daily Operations v0.1, SRS Attendance App v0.1, SRS Learning v0.1 (số trang theo bản Word gốc xuất PDF A4); FRD BBA-67 v0.5; định hướng của BA phụ trách (lịch sử đi học của một trẻ, khác màn Child attendance).
+
+- Thông tin theo ngày lấy từ SRS: check-in (giờ, người đưa, ảnh), check-out (giờ, người đón trong danh sách đã duyệt, ảnh) — §4 mục 1.1, BR-OPS-003, 004, 005; nhiệt độ nhiều lần, dấu sốt theo ngưỡng cài theo quốc gia, mặc định 37,5 °C — BR-OPS-010, 012; đi muộn chỉ nhân viên thấy — BR-OPS-014, 015; On leave từ đơn đã duyệt — BR-OPS-016; void giữ lịch sử — BR-OPS-020, 024; mọi thay đổi có ai, khi nào, lý do — §4 mục 1.1 View history.
+- Sửa và void làm trên SMS web (BR-OPS-002; SRS Attendance App §1). SRS bắt buộc lý do cho cả hai; riêng void có bước duyệt hoặc do người có quyền duyệt thực hiện (BR-OPS-021 đến 023). SRS không nêu bước duyệt riêng cho sửa giờ.
+- Nghỉ phép không giảm học phí (BR-OPS-019) → tab không hiển thị thông tin tiền nào cạnh ngày nghỉ phép.
+- Điểm danh enrichment tách riêng, không tính chuyên cần (BR-LRN-039) → bỏ cột "buổi Main / enrichment" của v0.5.
+- Ngưỡng sốt đã có trong SRS → OQ-RT-05, AS-RT-03 không cần nữa khi gộp.
+- Khối Bus service không thuộc danh sách thông tin theo ngày → OQ-RT-18.
+
+Bản nháp: `FSD/Sprint 4/BBA-67_US-003_Tab_Attendance_Draft_VI.md`.
