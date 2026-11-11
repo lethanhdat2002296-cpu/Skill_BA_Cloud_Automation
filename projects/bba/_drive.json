@@ -121,13 +121,13 @@
       "synced_at": "2026-11-11 03:45"
     },
     "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
-      "file_id": "1yON2uJfRhtg76vswYTri_dpdvGPQvteE",
-      "url": "https://drive.google.com/file/d/1yON2uJfRhtg76vswYTri_dpdvGPQvteE/view",
+      "file_id": "1ujheShbtZlnXVF977At-iFnbumnovUU4",
+      "url": "https://drive.google.com/file/d/1ujheShbtZlnXVF977At-iFnbumnovUU4/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
-      "version": "0.3",
-      "source_sha256": "1042093ddd1f056326cb92f8e37ef79eaeb36e0a1f353a5c446616e2c747e856",
-      "synced_at": "2026-11-11 05:05"
+      "version": "0.4",
+      "source_sha256": "a62dccb0ca637f788871db8f172a96247d60bb6afa720ef06e9070d12c9ec1f0",
+      "synced_at": "2026-11-11 07:10"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
       "file_id": "1y1OlZnPl6oJX6h3pxRMy5qxtkS87Fpry",
@@ -502,7 +502,7 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-11 05:05"
+      "last_used": "2026-11-11 07:10"
     }
   },
   "history": [
@@ -646,6 +646,17 @@
       "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
       "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
       "replaced_at": "2026-11-11 05:05"
+    },
+    {
+      "file_id": "1yON2uJfRhtg76vswYTri_dpdvGPQvteE",
+      "url": "https://drive.google.com/file/d/1yON2uJfRhtg76vswYTri_dpdvGPQvteE/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "1042093ddd1f056326cb92f8e37ef79eaeb36e0a1f353a5c446616e2c747e856",
+      "synced_at": "2026-11-11 05:05",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 07:10"
     }
   ]
 }
