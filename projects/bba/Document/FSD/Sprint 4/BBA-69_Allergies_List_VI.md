@@ -21,7 +21,7 @@
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
 | 0.1 | 10/11/2026 | Business Analysis | Bản đầu cho ticket BBA-69: quy tắc nghiệp vụ, trường hợp đặc biệt và tiêu chí nghiệm thu để chốt với vận hành Centre (Centre Director) và HQ Ops. | HaiNguyen |
-| 0.2 | 13/11/2026 | Business Analysis | Cập nhật theo câu trả lời của BBA (Plane BBA-1058, file câu hỏi phản hồi Sprint 4) và form Medical Care Assessment Checklist / Review (đính kèm BBA-1058): cột theo các trường của form (loại, triệu chứng, điều kiện dung nạp, vết trứng / hạt, kế hoạch xử trí, thuốc); Teacher được in / xuất, không lưu nhật ký in / xuất; chỉ hiện trẻ có phụ huynh đồng ý hiện tên và ảnh; theo dõi hạn đánh giá lại 6 tháng; giữ thông tin đã xác nhận khi phụ huynh sửa; nhóm "Health information not provided". Sửa FR-001 đến FR-004, FR-007, FR-008, BR-001, BR-003, BR-004, DATA-001; thêm FR-011 đến FR-014, BR-005, BR-006, DATA-003, AC-012 đến AC-017, OQ-05 đến OQ-09, AS-04; bỏ yêu cầu ô "Chưa có thông tin" màu đỏ và nhật ký in / xuất cùng AC tương ứng (mã cũ không dùng lại); thêm wireframe SCR-01, SCR-02. | HaiNguyen |
+| 0.2 | 13/11/2026 | Business Analysis | Cập nhật theo câu trả lời của BBA (Plane BBA-1058, file câu hỏi phản hồi Sprint 4) và form Medical Care Assessment Checklist / Review (đính kèm BBA-1058): cột theo các trường của form (loại, triệu chứng, điều kiện dung nạp, vết trứng / hạt, kế hoạch xử trí, thuốc); Teacher được in / xuất, không lưu nhật ký in / xuất; chỉ hiện trẻ có phụ huynh đồng ý hiện tên và ảnh; theo dõi hạn đánh giá lại 6 tháng; giữ thông tin đã xác nhận khi phụ huynh sửa; nhóm "Health information not provided". Sửa FR-001 đến FR-004, FR-007, FR-008, BR-001, BR-003, BR-004, DATA-001; thêm FR-011 đến FR-014, BR-005, BR-006, DATA-003, AC-012 đến AC-017, OQ-05 đến OQ-09, AS-04; bỏ yêu cầu ô "Chưa có thông tin" màu đỏ và nhật ký in / xuất cùng AC tương ứng (mã cũ không dùng lại); thêm wireframe SCR-01, SCR-02; thêm mục 9 Tài liệu tham khảo. | HaiNguyen |
 
 **Mức sẵn sàng:** Đã đặc tả danh sách dị ứng theo Centre / lớp theo các trường của form Medical Care Assessment, thứ tự theo mức độ, hạn đánh giá lại, lọc, in cho bếp, xuất file và quyền xem; có wireframe. 8 câu hỏi mở ở mục 7 cần BBA chốt.
 
@@ -210,3 +210,23 @@ Medical Care Assessment (phụ huynh khai trong Parents App, Centre Director / A
 | Can tolerate | Điều kiện trẻ vẫn dùng được chất gây dị ứng (ví dụ ăn được bánh nướng có trứng nhưng không ăn trứng luộc). |
 | EpiPen | Bút tiêm adrenaline dùng khi trẻ bị sốc phản vệ. |
 | Ghi chú của nhân viên | Ghi chú do nhân viên Centre thêm ở tab Health, tách khỏi thông tin phụ huynh khai. |
+
+## 9. Tài liệu tham khảo
+
+Số trang của SRS tính theo bản Word gốc khi xuất PDF. Form của BBA tính theo trang của file PDF đính kèm trên Plane.
+
+| STT | Tài liệu | Mục | Trang | Dùng cho |
+|---|---|---|---|---|
+| 1 | BBA-SMS-SRS-Children-and-Families-v0.1 | §2 Who uses it | 3 | Mục 4 — vai trò và quyền. |
+| 2 | BBA-SMS-SRS-Children-and-Families-v0.1 | §3 P2 Health information and allergy alerts (bước 5: in hoặc xuất danh sách dị ứng theo lớp cho bếp) | 4 | Mục 2; FR-007. |
+| 3 | BBA-SMS-SRS-Children-and-Families-v0.1 | §4 mục 1.3 Health & allergies (Show allergy alert, Print allergy list, Export allergy list) | 6–7 | FR-007, FR-008. |
+| 4 | BBA-SMS-SRS-Children-and-Families-v0.1 | §5 Business rules › Health and allergies (BR-CHF-021 đến BR-CHF-025) | 9 | FR-002, BR-001, BR-002, BR-004, VAL-002 — thang mức độ, chỉ phụ huynh sửa thông tin đã khai, vai trò được xem chi tiết y tế. |
+| 5 | BBA-SMS-SRS-Children-and-Families-v0.1 | §7 Reports & exports (Allergy list by class) | 11 | FR-007, FR-008; Mục 4 — bếp. |
+| 6 | BBA-SMS-SRS-Teacher-App-v0.1 | §2.3 Allergy view | 7 | FR-001, FR-003, FR-004 — cột, tìm kiếm, lọc, trẻ có bệnh không kèm dị ứng. |
+| 7 | BBA-SMS-SRS-Teacher-App-v0.1 | §5 Business rules (BR-TCH-015) | 12 | FR-003 — nhóm riêng cho trẻ có bệnh không kèm dị ứng. |
+| 8 | BBA — Appendix 1 Medical Care Assessment Checklist (đính kèm Plane BBA-1058) | Child's details; Medical conditions & history; Allergies & food tolerances; Daily care requirements for allergies; Emergency action plan | 1–2 | FR-001, FR-003, FR-004, FR-007, DATA-001 — các cột của danh sách và bản in. |
+| 9 | BBA — Appendix 1 Medical Care Assessment Checklist (đính kèm Plane BBA-1058) | Parent's acknowledgement; For Centre's use; Note for Centre | 3 | FR-011, BR-001 — đồng ý hiện tên và ảnh, Centre Director / Senior Staff xác nhận, tên "Medical Health Alert List". |
+| 10 | BBA — Appendix 3 Medical Care Assessment Review Record 2025 (SOP14, đính kèm Plane BBA-1058) | Review sheet (Date of Review, Date of Next Review) | 1 | FR-013, BR-006, DATA-003 — đánh giá lại 6 tháng. |
+| 11 | Plane — BBA-1058 "BBA input: Health changes in the system, 6-monthly review, printing the allergy list" | Q1 (áp dụng sau đánh giá, nhắc trước 1 tháng); Q2 (vai trò in / xuất, không lưu nhật ký, trẻ chưa đồng ý không hiện) | — | FR-008, FR-011, FR-013, FR-014, BR-004. |
+| 12 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Đã chốt: Q-70-02, Q-70-03, Q-70-09, Q-70-10 · DOTB quyết định: Q-70-01, Q-70-04, Q-70-11 · Chưa phản hồi: Q-70-05, Q-70-06, Q-70-07, Q-70-12 | — | BR-005, FR-002, FR-012, BR-001; AS-02, AS-04, FR-008; OQ-01, OQ-02, OQ-03, OQ-07. |
+| 13 | Plane — dự án BBA Phase 1, ticket BBA-69 (WBS 3.1.3.02) | Allergies list (most severe first) | — | Phạm vi tính năng. |
