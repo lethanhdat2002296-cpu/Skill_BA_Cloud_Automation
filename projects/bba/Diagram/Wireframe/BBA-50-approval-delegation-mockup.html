@@ -114,14 +114,9 @@ textarea{width:100%;min-height:64px;border:1px solid var(--line);border-radius:1
 .presets button:hover{border-color:var(--ink-2);color:var(--ink)}
 .preview{margin-top:10px;border-radius:10px;padding:8px 11px;font-size:13px;display:none}
 .preview.show{display:block}.preview.act{background:var(--green-soft);color:var(--green)}.preview.sch{background:var(--blue-soft);color:var(--blue)}
-.perm-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pgrp{grid-column:1/-1}
-@media(max-width:640px){.perm-list{grid-template-columns:1fr}}
-.pgrp{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin:6px 0 2px}
-.pcard{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:8px 11px;cursor:pointer}
-.pcard:hover{border-color:#cfcac4}.pcard.on{border-color:var(--red);background:var(--red-soft)}
-.pcard input{margin-top:3px;accent-color:var(--red)}
-.pcard small{display:block;color:var(--ink-2)}
-.f.bad .perm-list{outline:2px solid var(--red-soft);border-radius:10px}
+.pop .opt.col{display:block}.pop .opt.col small{display:block;color:var(--ink-3);font-size:12px}
+.pop mark{background:#fff1bd;color:inherit;padding:0}
+#permDesc{margin-top:6px}
 .chk{display:flex;gap:10px;align-items:center;cursor:pointer;user-select:none;font-weight:600}
 .chk input{width:18px;height:18px;accent-color:var(--red)}
 .f.bad .chk{color:var(--red-d)}.f.bad .chk input{outline:3px solid var(--red-soft)}
@@ -217,7 +212,10 @@ dl.kv dt{color:var(--ink-3)}dl.kv dd{margin:0}
       <div class="f" id="fPerson"><label>Person</label>
         <div class="combo" id="personCombo"><button type="button" class="combo-btn"><span class="ph">Choose a person</span></button>
           <div class="pop"><input placeholder="Search a person"><div class="list"></div></div></div></div>
-      <div class="f" id="fPermission"><div class="lab">Permission</div><div class="perm-list" id="permList"></div></div>
+      <div class="f" id="fPermission"><label>Permission</label>
+        <div class="combo" id="permCombo"><button type="button" class="combo-btn"><span class="ph">Choose a permission</span></button>
+          <div class="pop"><input placeholder="Search a permission"><div class="list"></div></div></div>
+        <div class="hint" id="permDesc"></div></div>
       <div class="f" id="fPeriod"><div class="lab">Period <span class="hint">— valid from the start of From to the end of Until</span></div>
         <div class="period">
           <div class="f" id="fFrom"><label for="from" class="hint">From</label><input type="date" class="in" id="from"><div class="err" id="eFrom"></div></div>
@@ -363,17 +361,29 @@ const personCombo=(()=>{const el=$('#personCombo'),btn=el.querySelector('.combo-
       if(S.role==='HQ'&&s.c!==g){g=s.c;h+=`<div class="grp">${esc(g)}</div>`;}
       h+=`<div class="opt ${G.person===s.n?'sel':''}" data-v="${esc(s.n)}"><span>${esc(s.n)}</span><span class="muted">${esc(s.r)}</span></div>`;});
     list.innerHTML=h||'<div class="opt muted">No match.</div>';};
-  btn.onclick=e=>{e.stopPropagation();el.classList.toggle('open');inp.value='';draw();inp.focus();};
+  btn.onclick=e=>{e.stopPropagation();$$('.combo.open').forEach(c=>c!==el&&c.classList.remove('open'));el.classList.toggle('open');inp.value='';draw();inp.focus();};
   inp.oninput=draw;el.querySelector('.pop').onclick=e=>e.stopPropagation();
   list.onclick=e=>{const o=e.target.closest('[data-v]');if(!o)return;set(o.dataset.v);el.classList.remove('open');};
   const set=v=>{G.person=v;const s=STAFF.find(x=>x.n===v);btn.innerHTML=s?`${esc(s.n)} <span class="muted">· ${esc(s.r)}${S.role==='HQ'?' · '+esc(s.c):''}</span>`:'<span class="ph">Choose a person</span>';$('#fPerson').classList.remove('bad');upd();};
   return{set,open:()=>{el.classList.add('open');draw();},close:()=>el.classList.remove('open')};})();
 document.addEventListener('click',()=>$$('.combo.open').forEach(c=>c.classList.remove('open')));
-function drawPerms(){const av=PERMS.filter(x=>x.g==='b'||x.route!=='Attendance void'||S.voidOk);
-  let h='';['a','b'].forEach(g=>{h+=`<div class="pgrp">${g==='a'?'Approval permissions':'Action permissions'}</div>`;
-    av.filter(x=>x.g===g).forEach(x=>{h+=`<label class="pcard ${G.perm===x.p?'on':''}"><input type="radio" name="perm" value="${esc(x.p)}" ${G.perm===x.p?'checked':''}><span>${esc(x.p)}<small>${esc(x.d)}</small></span></label>`;});});
-  $('#permList').innerHTML=h;}
-$('#permList').addEventListener('change',e=>{G.perm=e.target.value;$('#fPermission').classList.remove('bad');drawPerms();upd();});
+const availPerms=()=>PERMS.filter(x=>x.g==='b'||x.route!=='Attendance void'||S.voidOk);
+const hl=(t,q)=>{if(!q)return esc(t);const k=t.toLowerCase().indexOf(q);return k<0?esc(t):esc(t.slice(0,k))+'<mark>'+esc(t.slice(k,k+q.length))+'</mark>'+esc(t.slice(k+q.length));};
+const permCombo=(()=>{const el=$('#permCombo'),btn=el.querySelector('.combo-btn'),inp=el.querySelector('input'),list=el.querySelector('.list');
+  const draw=()=>{const q=inp.value.trim().toLowerCase();let h='';
+    ['a','b'].forEach(g=>{const its=availPerms().filter(x=>x.g===g&&(!q||(x.p+' '+x.d).toLowerCase().includes(q)));
+      if(!its.length)return;h+=`<div class="grp">${g==='a'?'Approval permissions':'Action permissions'}</div>`;
+      its.forEach(x=>{h+=`<div class="opt col ${G.perm===x.p?'sel':''}" data-v="${esc(x.p)}">${hl(x.p,q)}<small>${esc(x.d)}</small></div>`;});});
+    list.innerHTML=h||'<div class="opt muted">No permission matches.</div>';};
+  btn.onclick=e=>{e.stopPropagation();$$('.combo.open').forEach(c=>c!==el&&c.classList.remove('open'));el.classList.toggle('open');inp.value='';draw();inp.focus();};
+  inp.oninput=draw;el.querySelector('.pop').onclick=e=>e.stopPropagation();
+  inp.onkeydown=e=>{if(e.key==='Enter'){const o=list.querySelector('[data-v]');if(o){set(o.dataset.v);el.classList.remove('open');}}if(e.key==='Escape')el.classList.remove('open');};
+  list.onclick=e=>{const o=e.target.closest('[data-v]');if(!o)return;set(o.dataset.v);el.classList.remove('open');};
+  const set=v=>{G.perm=v&&availPerms().some(x=>x.p===v)?v:null;const P=PERMS.find(x=>x.p===G.perm);
+    btn.innerHTML=P?`${esc(P.p)} <span class="ptag ${P.g}" style="margin-left:6px">${P.g==='a'?'Approval':'Action'}</span>`:'<span class="ph">Choose a permission</span>';
+    $('#permDesc').textContent=P?P.d:'';$('#fPermission').classList.remove('bad');upd();};
+  return{set,draw,open:()=>{el.classList.add('open');inp.value='';draw();},close:()=>el.classList.remove('open')};})();
+function drawPerms(){permCombo.set(G.perm);permCombo.draw();}
 function setErr(id,msg){const f=$(id);f.classList.toggle('bad',!!msg);const e=f.querySelector('.err');if(e&&msg!==undefined)e.textContent=msg||'';}
 function upd(){ // live preview + summary
   const fr=$('#from').value,un=$('#until').value,pv=$('#preview');
@@ -471,7 +481,7 @@ const STEPS={
  a2(){S.role='HQ';render();openGrant();setTimeout(()=>personCombo.open(),20);note('HQ Admin: people of every centre, grouped by centre (AC-009). The list shows the Centre filter and centre under each name.');},
  a3(){goTo('2026-11-17');S.status='Expired';renderRows();note('Serene Tan’s permission had Until 16/11 → on 17/11 it is <b>Expired</b> and she is notified (AC-002, BR-002).');},
  a4(){goTo('2026-11-18');S.status='';renderRows();note('Farah Idris’s permission had From 18/11 → today it moved from Scheduled to <b>Active</b> (FR-009) — see the event log.');},
- e1(){S.voidOk=false;render();log('HQ Admin: route “Attendance void” Can be delegated → not ticked (FR-007).');openGrant();note('“Void or delete attendance records” is not offered; “approve refunds” is never offered (AC-001). Turn the switch in the top bar back on to see it again.');},
+ e1(){S.voidOk=false;render();log('HQ Admin: route “Attendance void” Can be delegated → not ticked (FR-007).');openGrant();setTimeout(()=>permCombo.open(),20);note('“Void or delete attendance records” is not offered; “approve refunds” is never offered (AC-001). Turn the switch in the top bar back on to see it again.');},
  e2(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'2026-11-27',why:'',ok:true});tryGrant();note('Reason empty → not saved (VAL-002, AC-004).');},
  e3(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'2026-11-27',why:'Covers photo review during school holidays.',ok:false});tryGrant();note('Not ticked → Grant does nothing; the box is marked (VAL-003, AC-007).');},
  e4(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'',why:'Covers photo review during school holidays.',ok:true});tryGrant();note('Until empty → “Choose an end date.” (VAL-004, BR-003, AC-011).');},
