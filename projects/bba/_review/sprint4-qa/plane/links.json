@@ -1,0 +1,322 @@
+[
+ {
+  "parent": "66",
+  "kind": "BA",
+  "seq": "591",
+  "issue": "335bba3b-a5bb-4615-8c10-393d2208d7cf",
+  "link": "653feb32-7bd8-475f-9f49-ac25f019f42c",
+  "url": "https://drive.google.com/file/d/1P0IpDANtWAdMq05yx8y6X3UMLmN2Tp-n/view",
+  "title": "[FRD] BBA-66-3.1.1.01-Child Record Overview (Tiếng Việt)",
+  "fid": "1P0IpDANtWAdMq05yx8y6X3UMLmN2Tp-n"
+ },
+ {
+  "parent": "67",
+  "kind": "BA",
+  "seq": "593",
+  "issue": "8c8dc93a-0137-472a-8915-acc62a19ec0b",
+  "link": "f4677c2e-0f19-44b6-a586-7275fc4b6569",
+  "url": "https://drive.google.com/file/d/1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID/view",
+  "title": "[FRD] BBA-67-3.1.1.02-Child Record Tabs – Read Views (Tiếng Việt)",
+  "fid": "1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID"
+ },
+ {
+  "parent": "68",
+  "kind": "BA",
+  "seq": "595",
+  "issue": "bfdadd83-5545-4cfc-940c-00f1641e9ce7",
+  "link": "656aaec8-3d0c-4400-96b0-87cfca1a8df6",
+  "url": "https://drive.google.com/file/d/1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme/view",
+  "title": "[FRD] 3.1 Medical Alert Banner (Tiếng Việt) v0.2 - Sprint 4",
+  "fid": "1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme"
+ },
+ {
+  "parent": "69",
+  "kind": "BA",
+  "seq": "597",
+  "issue": "230fddd0-f975-4a02-b93d-a0826d77a6c4",
+  "link": "2d16d866-9340-4679-876b-2f196ed417ec",
+  "url": "https://drive.google.com/file/d/1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv/view",
+  "title": "[FRD] BBA-69-3.1.3.02 Allergies list (most severe first) (Tiếng Việt) - Sprint 4",
+  "fid": "1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv"
+ },
+ {
+  "parent": "70",
+  "kind": "BA",
+  "seq": "599",
+  "issue": "6ae1fe9e-8053-424f-93df-e569620c5e05",
+  "link": "86d4a7e4-c512-4eb2-896c-f2ff1ac6d84d",
+  "url": "https://drive.google.com/file/d/1ztmuemedHDDErQeR9TYKJaiTdh-be50n/view",
+  "title": "[FRD] BBA-70-3.1.3.03 Growth – termly height & weight entry by class (Tiếng Việt) - Sprint 4",
+  "fid": "1ztmuemedHDDErQeR9TYKJaiTdh-be50n"
+ },
+ {
+  "parent": "71",
+  "kind": "BA",
+  "seq": "601",
+  "issue": "08eb79b1-51a5-4dc5-a6c6-73f23f3fe54b",
+  "link": "ec5676b2-2b19-40a3-934b-fc977e7683fb",
+  "url": "https://drive.google.com/file/d/1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO/view",
+  "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4",
+  "fid": "1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO"
+ },
+ {
+  "parent": "72",
+  "kind": "BA",
+  "seq": "603",
+  "issue": "6ccd2e1a-d046-4456-9cb1-687cc97a4c01",
+  "link": "cf37c19d-9a77-467b-8c2d-26ace006937c",
+  "url": "https://drive.google.com/file/d/17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ/view",
+  "title": "[FRD] BBA-72-3.1.5.01 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4",
+  "fid": "17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ"
+ },
+ {
+  "parent": "73",
+  "kind": "BA",
+  "seq": "605",
+  "issue": "ea6cc809-b1f9-4b49-965d-c314a0379d68",
+  "link": "458f4231-1802-49a4-a733-6d5304746e82",
+  "url": "https://drive.google.com/file/d/1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0/view",
+  "title": "[FRD] BBA-73-3.2.1.01 Handover recording (dropped off by - picked up by) (Tiếng Việt) - Sprint 4",
+  "fid": "1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0"
+ },
+ {
+  "parent": "74",
+  "kind": "BA",
+  "seq": "607",
+  "issue": "eb99c1fd-b0f5-479a-9d4e-1426311489ae",
+  "link": "3b79dd74-f0bb-4410-8a04-d93b7853acbb",
+  "url": "https://drive.google.com/file/d/1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0/view",
+  "title": "[FRD] BBA-74-3.2.1.02 Temperature readings (3 or more per day) (Tiếng Việt) - Sprint 4",
+  "fid": "1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0"
+ },
+ {
+  "parent": "75",
+  "kind": "BA",
+  "seq": "609",
+  "issue": "b77ba1e9-30e0-46f1-8a2d-61e8f736b455",
+  "link": "2f622101-e0a1-42ee-8f89-757c71ab89f8",
+  "url": "https://drive.google.com/file/d/15_DitKliX6XuS-t9KairbiOPDr8Fnmfh/view",
+  "title": "[FRD] BBA-75-3.2.1.03 Late flag (internal only) (Tiếng Việt) - Sprint 4",
+  "fid": "15_DitKliX6XuS-t9KairbiOPDr8Fnmfh"
+ },
+ {
+  "parent": "76",
+  "kind": "BA",
+  "seq": "611",
+  "issue": "ee68a8ee-5c4a-4f52-8d37-1b1f4e1be1e9",
+  "link": "c0049651-d70c-48d2-9b62-10772363f697",
+  "url": "https://drive.google.com/file/d/1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw/view",
+  "title": "[FRD] BBA-76-3.2.1.06 Centre-brand overview today (Tiếng Việt) - Sprint 4",
+  "fid": "1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw"
+ },
+ {
+  "parent": "77",
+  "kind": "BA",
+  "seq": "613",
+  "issue": "d4141613-9a9d-403f-9c4f-f6d871b659a4",
+  "link": "9a0444c4-193e-4c19-8619-3f6446ce4cbc",
+  "url": "https://drive.google.com/file/d/1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl/view",
+  "title": "[FRD] BBA-77-3.2.1.07 Attendance correction with reason (Tiếng Việt) - Sprint 4",
+  "fid": "1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl"
+ },
+ {
+  "parent": "78",
+  "kind": "BA",
+  "seq": "615",
+  "issue": "2275f84c-aa66-4258-9063-ca8d670880e2",
+  "link": "992c68cc-f11b-4185-9892-a616684dfaff",
+  "url": "https://drive.google.com/file/d/1eaWFc-IjCtbyxxmLlk9fcYynEoPStURi/view",
+  "title": "[FRD] BBA-78-3.2.3.01 Daily routines – view & edit (web) (Tiếng Việt) - Sprint 4",
+  "fid": "1eaWFc-IjCtbyxxmLlk9fcYynEoPStURi"
+ },
+ {
+  "parent": "79",
+  "kind": "BA",
+  "seq": "617",
+  "issue": "51b88d06-5304-4170-a788-d5d512caee30",
+  "link": "f4731895-1d86-4cb4-8956-a1a35d2f9256",
+  "url": "https://drive.google.com/file/d/1cGxj6sFG4inqDGAgS6JDeyPJyAYgX5Qr/view",
+  "title": "[FRD] BBA-79-3.2.5.01 Staff clock-in - out (Tiếng Việt) - Sprint 4",
+  "fid": "1cGxj6sFG4inqDGAgS6JDeyPJyAYgX5Qr"
+ },
+ {
+  "parent": "80",
+  "kind": "BA",
+  "seq": "619",
+  "issue": "bf7f3b92-29b6-4595-8665-029a911fc2bb",
+  "link": "ea9aa89a-fcaf-43da-aadb-473b12bab300",
+  "url": "https://drive.google.com/file/d/1To5PEfcnUiFfTKjm_SU6EoyaS25WaQYa/view",
+  "title": "[FRD] BBA-80-3.6.7.01 Payment schedule – edit per child (Tiếng Việt) - Sprint 4",
+  "fid": "1To5PEfcnUiFfTKjm_SU6EoyaS25WaQYa"
+ },
+ {
+  "parent": "81",
+  "kind": "BA",
+  "seq": "621",
+  "issue": "51ae4811-6383-4152-aa18-5a01705aa81f",
+  "link": "637daa88-1b8c-4c47-93be-7c035c151f59",
+  "url": "https://drive.google.com/file/d/145pBOD54Sy6S1jCBXLlP6T1xz9tiWHKH/view",
+  "title": "[FRD] BBA-81-3.6.7.02 Apply payment schedule template (bulk) (Tiếng Việt) - Sprint 4",
+  "fid": "145pBOD54Sy6S1jCBXLlP6T1xz9tiWHKH"
+ },
+ {
+  "parent": "82",
+  "kind": "BA",
+  "seq": "623",
+  "issue": "f3706635-1460-41cf-bf30-e4ca6217cf67",
+  "link": "78ea738c-0cf5-4652-80ed-ad11cabc8fef",
+  "url": "https://drive.google.com/file/d/199Z3YRbWJ_tUAECWnrd1SEUDWOrLxZ7g/view",
+  "title": "[FRD] BBA-82-3.6.7.03 Batch update schedules (Tiếng Việt) - Sprint 4",
+  "fid": "199Z3YRbWJ_tUAECWnrd1SEUDWOrLxZ7g"
+ },
+ {
+  "parent": "83",
+  "kind": "BA",
+  "seq": "625",
+  "issue": "b1dc4b00-b413-4975-ad26-f3c369d70bbf",
+  "link": "6d40d67f-6c3b-4705-bfed-c417fac4c61a",
+  "url": "https://drive.google.com/file/d/1gU9UfyAuIPPTs3yAZps6cN-qyUWQYJ0w/view",
+  "title": "[FRD] BBA-83-3.6.7.04 Billing company assignment (Tiếng Việt) - Sprint 4",
+  "fid": "1gU9UfyAuIPPTs3yAZps6cN-qyUWQYJ0w"
+ },
+ {
+  "parent": "84",
+  "kind": "BA",
+  "seq": "627",
+  "issue": "e494bc77-cdc2-42f1-89f1-22d16c183060",
+  "link": "7c46ebea-0f21-4650-8747-947013aaf15a",
+  "url": "https://drive.google.com/file/d/1nyqi6zQOw3xWvKZAA80CnWWkpTM7q2-L/view",
+  "title": "[FRD] BBA-84-3.6.8.01 Payment item – create - edit (Tiếng Việt) - Sprint 4",
+  "fid": "1nyqi6zQOw3xWvKZAA80CnWWkpTM7q2-L"
+ },
+ {
+  "parent": "85",
+  "kind": "BA",
+  "seq": "629",
+  "issue": "8a7b3f59-09fd-496e-b1af-2e77a912c8f5",
+  "link": "69cbaf43-290b-4c11-b21d-487c2d9f82f9",
+  "url": "https://drive.google.com/file/d/1jrrTzgRDk3FPTn3f1H4GSAcyRChsYnLd/view",
+  "title": "[FRD] BBA-85-3.6.8.02 Payment item – approve - reject (Tiếng Việt) - Sprint 4",
+  "fid": "1jrrTzgRDk3FPTn3f1H4GSAcyRChsYnLd"
+ },
+ {
+  "parent": "86",
+  "kind": "BA",
+  "seq": "631",
+  "issue": "602bc2aa-de22-4a51-aa39-579a939900ed",
+  "link": "46e63082-4170-4fda-acbc-71cecb6a5ee8",
+  "url": "https://drive.google.com/file/d/1QeGcamMUCHYC_cbWnJXtP0cqDC5qYDFl/view",
+  "title": "[FRD] BBA-86-3.6.8.03 Rebate & discount – approve - reject + in-app result notification (Tiếng Việt) - Sprint 4",
+  "fid": "1QeGcamMUCHYC_cbWnJXtP0cqDC5qYDFl"
+ },
+ {
+  "parent": "87",
+  "kind": "BA",
+  "seq": "633",
+  "issue": "e718b7a8-23c8-4e66-b2b4-67e02654c140",
+  "link": "adca3450-eb55-4a8b-b0b6-7c5b6f36037d",
+  "url": "https://drive.google.com/file/d/1eCTwOg9R4N4s0eXTDiwB9Jv4rEOtMWgI/view",
+  "title": "[FRD] BBA-87-3.6.8.04 General settings – calculation order toggles (Tiếng Việt) - Sprint 4",
+  "fid": "1eCTwOg9R4N4s0eXTDiwB9Jv4rEOtMWgI"
+ },
+ {
+  "parent": "88",
+  "kind": "BA",
+  "seq": "635",
+  "issue": "e9281198-7afc-401a-8fdb-6c398f8f0175",
+  "link": "50c56cd9-bbfd-4667-80ae-de6a97e37e41",
+  "url": "https://drive.google.com/file/d/1t9XBhzaYrZ-YxPaqxoNTxxSiJOx-oY8T/view",
+  "title": "[FRD] BBA-88-3.6.8.05 General settings – invoice generation & due days (Tiếng Việt) - Sprint 4",
+  "fid": "1t9XBhzaYrZ-YxPaqxoNTxxSiJOx-oY8T"
+ },
+ {
+  "parent": "89",
+  "kind": "BA",
+  "seq": "637",
+  "issue": "2b40c61d-bc73-4655-aed7-955584048df1",
+  "link": "52a5014e-e175-471f-a002-36823475d54f",
+  "url": "https://drive.google.com/file/d/1o1J7McuwEZ-In3Zctdy2_OZES1wVmO1J/view",
+  "title": "[FRD] BBA-89-3.6.9.01 GIRO accounts – list (Non-CDA - CDA - Refund) & filters (Tiếng Việt) - Sprint 4",
+  "fid": "1o1J7McuwEZ-In3Zctdy2_OZES1wVmO1J"
+ },
+ {
+  "parent": "90",
+  "kind": "BA",
+  "seq": "639",
+  "issue": "c7e0458e-2adc-41cd-8f6a-21648f81101a",
+  "link": "03118883-e43a-4d7b-97e8-5a8c5922ade0",
+  "url": "https://drive.google.com/file/d/1_z05GXFc5vq7ZSWAsFSgQhfnTgjSSFE6/view",
+  "title": "[FRD] BBA-90-3.6.9.02 GIRO mandate – set up for a child (eGIRO - manual) (Tiếng Việt) - Sprint 4",
+  "fid": "1_z05GXFc5vq7ZSWAsFSgQhfnTgjSSFE6"
+ },
+ {
+  "parent": "91",
+  "kind": "BA",
+  "seq": "641",
+  "issue": "9b56fe42-00da-43cf-ba07-990919cf69da",
+  "link": "d70887be-3a5c-4741-8964-9ec8dd3d95a2",
+  "url": "https://drive.google.com/file/d/1XwkiIy17iEa0EknOYCa-Va_1-MKWWpxk/view",
+  "title": "[FRD] BBA-91-3.6.9.03 GIRO mandate status tracking (Tiếng Việt) - Sprint 4",
+  "fid": "1XwkiIy17iEa0EknOYCa-Va_1-MKWWpxk"
+ },
+ {
+  "parent": "92",
+  "kind": "BA",
+  "seq": "643",
+  "issue": "fb2b7d45-a9b4-4fc0-9638-641966ee2bbb",
+  "link": "d57372e7-756b-4152-86c4-390c97d1dd01",
+  "url": "https://drive.google.com/file/d/1Gq31SEwU045eu23H0IzuD-IJdWW5hIai/view",
+  "title": "[FRD] BBA-92-3.6.9.04 Resend mandate request to parent (Tiếng Việt) - Sprint 4",
+  "fid": "1Gq31SEwU045eu23H0IzuD-IJdWW5hIai"
+ },
+ {
+  "parent": "93",
+  "kind": "BA",
+  "seq": "645",
+  "issue": "dd216af4-903f-4265-9309-d4f1460e1b19",
+  "link": "77315a1d-405d-43c5-b643-5c628857924b",
+  "url": "https://drive.google.com/file/d/1DxIrMEaofTXYjHE0uQGJf-FSRX55rwtU/view",
+  "title": "[FRD] BBA-93-3.6.9.05 Recreate mandate (Tiếng Việt) - Sprint 4",
+  "fid": "1DxIrMEaofTXYjHE0uQGJf-FSRX55rwtU"
+ },
+ {
+  "parent": "94",
+  "kind": "BA",
+  "seq": "647",
+  "issue": "dc8c227d-e2cf-46bd-8bba-dfa5c9cde14c",
+  "link": "3585516f-cceb-40a7-b5d3-b97105c77cc9",
+  "url": "https://drive.google.com/file/d/1wAQ189u9M6UAk16DmY9494ukdPciHPom/view",
+  "title": "[FRD] BBA-94-3.6.9.06 Import GIRO mandates (Tiếng Việt) - Sprint 4",
+  "fid": "1wAQ189u9M6UAk16DmY9494ukdPciHPom"
+ },
+ {
+  "parent": "95",
+  "kind": "BA",
+  "seq": "649",
+  "issue": "17a8b6b4-5949-44df-a93e-17831e1f2a40",
+  "link": "1a7e67e0-6033-44c2-a855-20d884d871a9",
+  "url": "https://drive.google.com/file/d/1H435VGYo1sGrS2mSGSxpy4uLjnsOUw1r/view",
+  "title": "[FRD] BBA-95-3.6.9.07 Subsidy per child – list & inline edit (Tiếng Việt) - Sprint 4",
+  "fid": "1H435VGYo1sGrS2mSGSxpy4uLjnsOUw1r"
+ },
+ {
+  "parent": "96",
+  "kind": "BA",
+  "seq": "651",
+  "issue": "d00532be-49cd-4809-b477-2d416b952520",
+  "link": "8b41da9f-1348-4177-832e-18b72300082a",
+  "url": "https://drive.google.com/file/d/1Ovz-QOYb0D448M9MOr7zxXCNwHKT3Q0V/view",
+  "title": "[FRD] BBA-96-3.6.9.08 Subsidy – download template (Tiếng Việt) - Sprint 4",
+  "fid": "1Ovz-QOYb0D448M9MOr7zxXCNwHKT3Q0V"
+ },
+ {
+  "parent": "97",
+  "kind": "BA",
+  "seq": "653",
+  "issue": "3cfa948b-88b8-4187-b330-0fdf9f1bc7de",
+  "link": "1fd5c8a3-3817-4f4d-8765-7aca179e1a95",
+  "url": "https://drive.google.com/file/d/1Yb1wN1j0vKZqSPJKO1feLgo2AlBKulyN/view",
+  "title": "[FRD] BBA-97-3.6.9.09 Subsidy – upload file (bulk import) (Tiếng Việt) - Sprint 4",
+  "fid": "1Yb1wN1j0vKZqSPJKO1feLgo2AlBKulyN"
+ }
+]

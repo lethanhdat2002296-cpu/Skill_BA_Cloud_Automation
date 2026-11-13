@@ -1,0 +1,751 @@
+<title>BBA-70 wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { flex: 1; padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+/* child record */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 84px; }
+.kpi small, .lbl { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.kpi.em { border: 2px solid var(--accent); }
+.kpi.warn { border: 2px solid var(--ink); background: var(--fill); }
+.kpi.warn .txt { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.kpis { align-items: start; }
+.ident { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; font-size: 13.5px; }
+.ident .help { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.pill-tabs { display: flex; flex-wrap: wrap; gap: 2px; background: var(--fill); border-radius: 10px; padding: 4px; align-self: flex-start; }
+.pill-tabs span { padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); }
+.pill-tabs span.on { background: var(--paper); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.menu { position: absolute; right: 26px; top: 64px; width: 240px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: 6px; z-index: 4; font-size: 13px; }
+.menu div { padding: 8px 10px; border-radius: 6px; }
+.menu div:hover { background: var(--fill); }
+.big-av { width: 44px; height: 44px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; color: var(--muted); flex: none; }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* ---------- v0.3: EMS-style child page (underline tabs, sections, 4-col field grid) ---------- */
+.crumb { font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+.crumb b { color: var(--ink); font-weight: 600; }
+.utabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); padding: 0 16px; font-size: 13px; }
+.utabs span { padding: 10px 12px; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.utabs span.on { color: var(--ink); font-weight: 700; border-color: var(--accent); }
+.utabs span em { font-style: normal; font-size: 11px; color: var(--muted); margin-left: 4px; }
+.hrow { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.hname { display: flex; gap: 12px; align-items: center; }
+.hname h3 { font-size: 21px; }
+.hname .sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.sec { border: 1px solid var(--line); border-radius: 10px; padding: 4px 18px 16px; }
+.sec + .sec { margin-top: 0; }
+.sec h4 { margin: 12px 0 12px; font-size: 15px; display: flex; gap: 8px; align-items: center; }
+.sec h4::before { content: "⌄"; color: var(--muted); font-weight: 400; }
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 22px; font-size: 13.5px; }
+.grid4 .l { display: block; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+.grid4 .help { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.grid4 .miss { color: var(--muted); }
+.grid4 .wide { grid-column: span 2; }
+.src-tag { display: inline-block; font-size: 10.5px; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; color: var(--muted); margin-left: 6px; vertical-align: 1px; }
+.lnk { text-decoration: underline; text-underline-offset: 3px; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.compare .side-h { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+.dlg-miss { border: 2px solid var(--ink); border-radius: 8px; padding: 10px 12px; font-size: 13px; background: var(--paper); display: flex; gap: 10px; }
+.field.missing .input { border-style: dashed; border-color: var(--ink); }
+.field.missing label::after { content: " · missing"; color: var(--muted); font-weight: 400; }
+/* ---------- BBA-68..79: EMS-style list pages ---------- */
+.ph2 { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph2 h3 { font-size: 20px; }
+.ph2 p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+.tb { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.tb .srch { width: 280px; }
+.tb .tot { font-size: 13px; color: var(--muted); }
+.tb .tot b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+.tb .sp { flex: 1; }
+.flt { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.t td small, .t td .sub2 { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.t th { font-size: 12.5px; }
+.t td.act { text-align: right; white-space: nowrap; color: var(--muted); }
+.t tr.grp td { background: var(--fill); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding: 7px 10px; }
+.t tr.sev td:first-child { box-shadow: inset 3px 0 0 var(--ink); }
+.t tr.muted td { color: var(--muted); }
+.rb { border: 2px solid var(--ink); border-radius: 10px; padding: 10px 14px; display: flex; gap: 12px; align-items: flex-start; background: var(--fill); font-size: 13.5px; }
+.rb b.t1 { white-space: nowrap; }
+.rb .more { margin-left: auto; font-size: 12.5px; text-decoration: underline; white-space: nowrap; }
+.pend { border: 1px dashed var(--ink); border-radius: 10px; padding: 9px 14px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+.tag { display: inline-block; font-size: 11px; border: 1px solid var(--line); border-radius: 5px; padding: 0 6px; color: var(--muted); white-space: nowrap; }
+.tag.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; }
+.tag.dash { border-style: dashed; color: var(--ink); }
+.read { display: inline-block; font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin: 2px 4px 2px 0; white-space: nowrap; }
+.read.hot { border: 2px solid var(--ink); font-weight: 700; }
+.cnt { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.cnt div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; color: var(--muted); }
+.cnt b { display: block; font-size: 20px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.print { border: 1px solid var(--line); border-radius: 6px; padding: 18px 22px; background: #fff; color: #111; font-size: 12.5px; }
+.print h4 { margin: 0 0 4px; font-size: 15px; }
+.ipad { width: 1024px; margin: 0 auto; border: 10px solid var(--fill-2); border-radius: 26px; overflow: hidden; background: var(--paper); }
+.ipad .bar { display: flex; justify-content: space-between; padding: 10px 18px; border-bottom: 1px solid var(--line); font-size: 13px; }
+.ipad .body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.cam { height: 150px; border-radius: 10px; background: repeating-linear-gradient(45deg, var(--fill) 0 8px, var(--fill-2) 8px 9px); display: grid; place-items: center; color: var(--muted); font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; }
+.chips span.on { border-color: var(--ink); font-weight: 700; }
+.radio { display: flex; flex-direction: column; gap: 6px; }
+.radio div { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; display: flex; gap: 10px; align-items: center; font-size: 13px; }
+.radio div.on { border: 2px solid var(--ink); }
+.radio div.off { color: var(--muted); border-style: dashed; }
+.radio i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--muted); flex: none; }
+.radio div.on i { border: 4px solid var(--ink); }
+.mini-av { width: 26px; height: 26px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 700; color: var(--muted); vertical-align: middle; margin-right: 8px; flex: none; }
+.cellwho { display: flex; align-items: center; }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · BBA-68 đến BBA-79 · bản nháp để review</span>
+    <h1>Wireframe — BBA-70 Growth — height & weight</h1>
+    <p>Bố cục theo prototype BeeHive (emsv3-prototype): menu trái, đường dẫn trên cùng, tiêu đề kèm nút chính bên phải, tab, ô tìm kiếm + Total, hàng bộ lọc, bảng. Nội dung theo SRS, prototype trong thư mục WorkFlow và câu trả lời của BBA trên Plane (xem file brainstorm). Chỗ chưa chốt ghi mã OQ ở phần ghi chú. Dữ liệu mẫu; ngày theo DD/MM/YYYY (BBA-472).</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div><h2 id="scrTitle"></h2><div class="tickets" id="scrTickets"></div></div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const NAV = [
+  ["Home"], ["My approvals", "", 26],
+  ["#Children & families"], ["Children", "children"], ["Families"], ["Health & allergies", "health"], ["Authorised pickup"], ["Classes", "classes"],
+  ["#Daily operations"], ["Attendance", "attendance"], ["Staff attendance", "staff"], ["Daily routines", "routines"], ["Safety overview", "safety"],
+  ["#Communication"], ["Surveys & consents", "consents"],
+  ["#Administration"], ["Settings", "settings"]
+];
+function shell(active, crumbs, body, who, tabs) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key && key === active ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>${who}</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><span class="crumb">${crumbs}</span><div class="search-top">⌕ Search<kbd>Ctrl K</kbd></div><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      ${tabs || ""}
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const A = (n) => ` <span class="anno">${n}</span>`;
+const overlay = (title, body, foot, w) => `<div class="overlay"><div class="modal"${w ? ` style="width:${w}px"` : ""}><header><h4>${title}</h4><span class="btn sm ghost">✕</span></header><div class="body">${body}</div><footer>${foot}</footer></div></div>`;
+const head = (t, sub, actions) => `<div class="ph2"><div><h3>${t}</h3>${sub ? `<p>${sub}</p>` : ""}</div><div class="row">${actions || ""}</div></div>`;
+const utabs = (list, on) => `<div class="utabs">${list.map(([t, c], i) => `<span${i === (on || 0) ? ' class="on"' : ""}>${t}${c !== undefined ? `<em>${c}</em>` : ""}</span>`).join("")}</div>`;
+const sel = (v, active) => `<div class="input select${active ? " active" : ""}">${v}</div>`;
+const tb = (ph, total, right) => `<div class="tb"><div class="input srch">⌕ ${ph}</div><span class="tot">Total<b>${total}</b></span><span class="sp"></span>${right || ""}</div>`;
+const flt = (...xs) => `<div class="flt">${xs.map(x => typeof x === "string" ? sel(x) : sel(x[0], 1)).join("")}</div>`;
+const table = (cols, rows) => `<div class="card" style="overflow:hidden"><table class="t"><thead><tr>${cols.map(c => `<th${c.startsWith("!") ? "" : ' class="s"'}>${c.replace(/^!/, "")}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+const tr = (cells, cls) => `<tr${cls ? ` class="${cls}"` : ""}>${cells.map(c => `<td>${c}</td>`).join("")}</tr>`;
+const who = (init, name, sub) => `<span class="cellwho"><span class="mini-av">${init}</span><span>${name}${sub ? `<small>${sub}</small>` : ""}</span></span>`;
+const pager = (n) => `<div class="pager"><span>1–${n} of ${n}</span><span class="pg"><span class="input select" style="height:28px">20 rows</span><span>‹</span><span class="on">1</span><span>›</span></span></div>`;
+const fl = (l, v, o) => { o = o || {}; return `<div class="field${o.err ? " err" : ""}"><label>${l}${o.req ? ' <span class="req">*</span>' : ""}</label><div class="input ${o.sel ? "select " : ""}${v ? "filled" : ""}${o.ta ? " textarea" : ""}">${v || o.ph || ""}</div>${o.err ? `<span class="msg">${o.err}</span>` : ""}${o.hint ? `<span class="hint">${o.hint}</span>` : ""}</div>`; };
+const grid2 = (...xs) => `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">${xs.join("")}</div>`;
+
+const W = { cd: "Grace Tan · Centre Director", sa: "Nadia Salleh · School Admin", t: "Aisyah Rahman · Teacher", hq: "Daniel Yeo · HQ Admin", ch: "Marcus Lee · Cluster Head" };
+
+/* ===================== BBA-68 Medical alert banner ===================== */
+function childHeader(o) {
+  o = o || {};
+  const banner = o.hidden ? "" : o.level === "severe"
+    ? `<div class="rb"><b class="t1">⚠ Severe allergy${A(1)}</b><span>Allergic to shellfish and nuts, including peanuts. EpiPen on file.<br><span style="color:var(--muted)">Also: Eczema behind both knees and inside both elbows · Mild asthma, triggered by long periods of running</span></span><span class="more">Show more</span></div>` : "";
+  const pending = o.pending ? `<div class="pend"><b>⏳ Update from the family waiting for assessment${A(2)}</b><span>Mei Lin Lim added "Egg" on 23/11/2026 18:42. The alert above shows the last assessed record.</span><span class="btn sm" style="margin-left:auto">Open assessment</span></div>` : "";
+  const icon = o.hidden ? `<span class="badge solid" title="Medical alert on file">⚠</span>${A(3)}` : o.level === "medical" ? '<span class="badge out">⚠ Medical</span>' : '<span class="badge solid">⚠</span>';
+  return `
+    <div class="hrow"><div class="hname"><span class="big-av">EL</span><div>
+      <h3>Ethan Lim <span style="font-size:13px;color:var(--muted);font-weight:400">S1</span> <span class="badge solid">Enrolled</span> ${icon}</h3>
+      <div class="sub"><span>Small Wonder Tampines · N2 · Sunbeams</span><span>·</span><span>Owner · <span class="lnk">Serena Lim</span></span></div></div></div>
+      <div class="row"><span class="btn">✎ Edit</span><span class="btn">Actions ⋯</span></div></div>
+    ${banner}${pending}
+    <div class="kpis"><div class="kpi"><small>Date of birth</small>14/02/2022 · 4y 9m</div><div class="kpi em"><small>Citizenship</small>Singapore Citizen</div><div class="kpi"><small>Payment method</small>GIRO</div>
+      <div class="kpi warn"><small>Medical alert</small><span class="txt">${o.hidden ? "⚠ Medical alert on file" : o.level === "medical" ? "Mild asthma, triggered by long periods of running" : "Allergic to shellfish and nuts, including peanuts · Eczema · Mild asthma"}</span></div></div>`;
+}
+const childTabs = (on) => utabs([["Overview"], ["Enrolment"], ["Enrichment"], ["Guardians", 2], ["Attendance"], ["Finance"], ["Health"], ["Communication"], ["Documents", 4], ["History"]], on || 0);
+function childList() {
+  const rows = [
+    ["EL", "Ethan Lim", "S1", "N2 · Sunbeams", "14/02/2022", '<span class="badge solid">⚠ Severe</span>', "sev"],
+    ["SC", "Sophia Chen", "S4", "K1 · Honeycombs", "09/02/2021", '<span class="badge solid">⚠ Severe</span>', "sev"],
+    ["RI", "Rayyan Idris", "S5", "K1 · Honeycombs", "11/03/2021", '<span class="badge out">⚠ Medical</span>', ""],
+    ["MW", "Mia Wong", "S6", "Playgroup · Bumblebees", "30/01/2023", '<span class="badge out">⚠ Medical</span>', ""],
+    ["NT", "Noah Tan", "S3", "N2 · Sunbeams", "20/01/2022", "—", ""]];
+  return head("Children", "Every child in your centres. A warning icon shows next to children with an allergy or condition.", '<span class="btn">Export</span><span class="btn primary">+ New child</span>')
+    + utabs([["All children"], ["Enrolled", 82], ["Temporary withdrawal", 2], ["Withdrawn"], ["Graduated"]], 0)
+    + tb("Search child name, ID or parent", 5, '<span class="btn sm">Save as new view</span>')
+    + flt("All centres", "All brands", "All levels / classes", "Enrolled", ["Medical alert: Has a medical alert" + A(1)])
+    + table(["Child ID", "Child", "Level / class", "DOB", "!Medical" + A(2), "!"], rows.map(r => tr([r[2], who(r[0], r[1]), r[3], r[4], r[5], '<span class="act">⋯</span>'], r[6])))
+    + pager(5);
+}
+
+/* ===================== BBA-69 Allergies list ===================== */
+const ALG = [
+  // initials, name, class, type, [[allergen, severity]], symptoms, can tolerate, traces eggs/nuts, action plan, medication, next review, review tag, staff note, severe, awaiting
+  ["EL", "Ethan Lim", "N2 · Sunbeams", "Food", [["Shellfish and nuts, including peanuts", "Severe"]], "Lip swelling, hives, difficulty breathing", "Can eat fish but not shellfish", "Eggs: Yes · Nuts: No", "Give the EpiPen, call 995, then call the mother.", "EpiPen Jr 0.15 mg · medication form ✓", "18/03/2027", "", "Reacted to a biscuit with traces of nut on 03/09.", 1, 1],
+  ["SC", "Sophia Chen", "K1 · Honeycombs", "Food", [["Dairy", "Severe"]], "Vomiting, hives", "Butter or baked dairy (cookies, bread); no milk, cheese or yogurt", "Eggs: Yes · Nuts: Yes", "Give the auto-injector, call 995, then call the father.", "Adrenaline auto-injector · medication form ✓", "16/12/2026", "due", "", 1, 0],
+  ["LK", "Lucas Koh", "K1 · Honeycombs", "Insect", [["Bee and wasp stings", "Moderate"]], "Swelling at the sting site", "—", "—", "Remove the sting, cold pack, antihistamine; call the mother.", "Antihistamine syrup 5 ml · medication form ✓", "02/11/2026", "over", "", 0, 0],
+  ["CL", "Chloe Lim Xin Yi", "N2 · Sunbeams", "Medication", [["Penicillin", "Moderate"]], "Rash", "—", "—", "Tell the parent before any medicine is given.", "Not applicable", "05/04/2027", "", "", 0, 0]];
+const OTHER = [
+  ["RI", "Rayyan Idris", "K1 · Honeycombs", "Medical condition", "Asthma; coughing can start after outdoor play on very hot afternoons.", "Inhaler, 2 puffs; call the mother.", "21/01/2027"],
+  ["NT", "Noah Tan", "N2 · Sunbeams", "Medical history", "Receives speech therapy through the Early Intervention programme.", "—", "03/03/2027"]];
+const reviewCell = (d, t) => d + (t === "due" ? ` <span class="tag dash">Due in 3 weeks</span>${A(5)}` : t === "over" ? ' <span class="tag solid">Overdue</span>' : "");
+function allergyList(o) {
+  o = o || {};
+  const kids = o.cls ? ALG.filter(a => a[2] === "N2 · Sunbeams") : ALG;
+  const others = o.cls ? OTHER.filter(a => a[2] === "N2 · Sunbeams") : OTHER;
+  const g = (t) => tr([t, "", "", "", "", ""], "grp");
+  const rows = [g('<b>Allergies</b> · most severe first' + A(1))]
+    .concat(kids.map(a => tr([who(a[0], a[1] + (a[14] ? `` : ""), a[2]) + (a[14] ? `<small><span class="tag dash">Awaiting assessment</span>${A(4)}</small>` : "") + (a[12] ? `<small>📝 ${a[12]}</small>` : ""),
+      `<small style="margin:0">${a[3]}</small>` + a[4].map(x => `${x[0]} <span class="tag${x[1] === "Severe" ? " solid" : ""}">${x[1]}</span>`).join("<br>"),
+      a[5], a[6] + (a[7] !== "—" ? `<small>Traces · ${a[7]}</small>` : ""), `${a[8]}<small>${a[9]}</small>`, reviewCell(a[10], a[11])], a[13] ? "sev" : "")))
+    .concat([g('<b>Other conditions and diet</b>' + A(2))])
+    .concat(others.map(a => tr([who(a[0], a[1], a[2]), `<small style="margin:0">${a[3]}</small>${a[4]}`, "—", "—", a[5], a[6]])));
+  if (!o.cls) rows.push(g('<b>Health information not provided</b>' + A(6)), tr([who("MW", "Mia Wong", "Playgroup · Bumblebees"), '<span style="color:var(--muted)">The family has not filled in the Medical Care Assessment yet.</span><small><span class="lnk">Contact the family</span></small>', "", "", "", "—"]));
+  const n = kids.length + others.length;
+  return head("Allergies & conditions", "Medical Health Alert List · from each child's Medical Care Assessment, as confirmed by the Centre.", `<span class="btn">⤓ Export (${n})${A(3)}</span><span class="btn primary">🖨 Print for the kitchen${A(3)}</span>`)
+    + utabs([["Allergies & conditions", n], ["Growth"]], 0)
+    + tb("Search child or allergen", n)
+    + flt("Small Wonder Tampines", o.cls ? ["N2 · Sunbeams"] : "All classes", "All severities", "Type: all", "Review: any")
+    + table(["Child", "!Type · allergen · severity", "!Symptoms", "!Can tolerate", "!Emergency action plan · medication", "!Next review"], rows) + pager(n);
+}
+function kitchenPrint() {
+  const k = ALG.filter(a => a[2] === "N2 · Sunbeams");
+  return `<div class="print"><div class="row between"><div><h4>Medical Health Alert List — Small Wonder Tampines · N2 · Sunbeams</h4><span>Printed 24/11/2026 08:15 · ${k.length + 1} children${A(1)}</span></div><span>Page 1 of 1</span></div>
+    <table class="t" style="margin-top:10px"><thead><tr><th>Photo</th><th>Child</th><th>Type · allergen · severity</th><th>Can tolerate</th><th>Traces of eggs / nuts</th><th>Emergency action plan</th></tr></thead><tbody>
+    ${k.map(a => tr([`<span class="mini-av">${a[0]}</span>`, `<b>${a[1]}</b>`, `${a[3]} · ${a[4].map(x => `${x[0]} — <b>${x[1]}</b>`).join("<br>")}`, a[6], a[7], a[8]])).join("")}
+    ${tr(['<span class="mini-av">NT</span>', "<b>Noah Tan</b>", "Medical history · speech therapy (Early Intervention)", "—", "—", "—"])}
+    </tbody></table><p style="margin:10px 0 0;color:#555">Most severe first. Only children whose families agreed to show the name and photo on the Medical Health Alert List are printed.${A(2)}</p></div>`;
+}
+
+/* ===================== BBA-70 Growth ===================== */
+const GR = [["Ethan Lim", "4y 9m", "107 cm · 17.6 kg", "14/08/2026", "108.5", "18.1"], ["Aiden Tan Wei Jie", "4y 10m", "93 cm · 13.5 kg", "14/08/2026", "", ""], ["Chloe Lim Xin Yi", "4y", "95 cm · 14.7 kg", "14/08/2026", "96.5", "15.0"], ["Noah Tan", "4y 10m", "—", "—", "", ""]];
+function growthEntry(o) {
+  o = o || {};
+  const inp = (v) => `<div class="input${v ? " filled" : ""}" style="width:110px">${v || ""}</div>`;
+  const rows = [tr(["<b>Present today</b> · 4", "", "", "", "", ""], "grp")]
+    .concat(GR.map(g => tr([g[0], g[1], g[2] + (g[3] !== "—" ? `<small>Term 3 · ${g[3]}</small>` : ""), inp(o.saved ? g[4] : g[4]), inp(o.saved ? g[5] : g[5]), o.saved && g[4] ? '<span class="tag">Saved</span> <span class="btn sm ghost">Delete</span>' : ""])))
+    .concat([tr([`<b>Absent today · Temporary withdrawal</b> · 2${A(2)}`, "", "", "", "", ""], "grp")])
+    .concat([tr(["Olivia Wong Mei Ling<small>Absent today</small>", "3y 11m", "98 cm · 14.1 kg", inp(""), inp(""), ""], "muted"), tr(["Sofia D'Cruz<small>Temporary withdrawal</small>", "4y 9m", "101 cm · 15.2 kg", inp(""), inp(""), ""], "muted")]);
+  return head("Height & weight", "Term 1 to Term 4 of the brand term calendar (Brighton measures by semester). Every age, no approval. Entries appear immediately for the family.", `<span class="btn primary">Save the whole class${A(1)}</span>`)
+    + utabs([["Allergies & conditions", 5], ["Growth"]], 1)
+    + '<div class="chips" style="margin-bottom:10px"><span class="on">Enter this term</span><span>Year view</span></div>'
+    + `<div class="flt" style="grid-template-columns:repeat(4,minmax(0,1fr))">${sel("Small Wonder Tampines")}${sel("N2 · Sunbeams", 1)}${sel("Term 4 · 2026", 1)}${fl("Date measured", "24/11/2026").replace('class="field"', 'class="field" style="flex-direction:row;align-items:center;gap:8px"')}</div>`
+    + `<div class="alert"><b>Term 4 · 2026</b><span>${o.saved ? "4 of 6 recorded" : "2 of 6 recorded"} · reminder sent to the centre on 15/12/2026${A(3)}</span></div>`
+    + table(["Child", "Age", "!Last measurement", "!Height (cm)", "!Weight (kg)", "!"], rows)
+    + (o.saved ? `<div class="toast">Saved 2 measurements · the family can see them now</div>` : "");
+}
+function growthDelete() {
+  return overlay("Delete this measurement?", `<p style="margin:0">Ethan Lim · Term 4 · 2026 · 108.5 cm · 18.1 kg, measured 24/11/2026.</p><p style="margin:0;color:var(--muted)">The family stops seeing it. The deletion is kept in History.${A(4)}</p>`, '<span class="btn">Cancel</span><span class="btn primary">Delete</span>', 460);
+}
+const YR = [["Ethan Lim", "14/02/2022", "••••482K", "N2 full day", ["104.0", "16.9"], ["105.5", "17.2"], ["107.0", "17.6"], ["108.5", "18.1"]],
+  ["Aiden Tan Wei Jie", "20/01/2022", "••••115J", "N2 full day", ["91.0", "13.0"], ["92.0", "13.2"], ["93.0", "13.5"], ["", ""]],
+  ["Chloe Lim Xin Yi", "02/11/2022", "••••907C", "N2 half day AM", ["93.0", "14.1"], ["94.0", "14.4"], ["95.0", "14.7"], ["96.5", "15.0"]],
+  ["Noah Tan", "18/01/2022", "••••330F", "N2 full day", ["", ""], ["", ""], ["", ""], ["", ""]],
+  ["Olivia Wong Mei Ling", "05/12/2022", "••••761H", "N2 full day", ["94.5", "13.6"], ["96.0", "13.9"], ["98.0", "14.1"], ["", ""]],
+  ["Sofia D'Cruz", "21/02/2022", "••••204B", "N2 full day", ["99.0", "14.8"], ["100.0", "15.0"], ["101.0", "15.2"], ["", ""]]];
+function growthYear() {
+  const c = (v) => v ? v : '<span style="color:var(--muted)">—</span>';
+  const th = `<tr><th rowspan="2">No.</th><th rowspan="2">Child</th><th rowspan="2">Birthdate</th><th rowspan="2">IC / BC No.${A(2)}</th><th rowspan="2">Programme</th>${[1, 2, 3, 4].map(t => `<th colspan="2" style="text-align:center">Term ${t}</th>`).join("")}</tr><tr>${[1, 2, 3, 4].map(() => "<th>Height cm</th><th>Weight kg</th>").join("")}</tr>`;
+  const rows = YR.map((r, i) => `<tr><td>${i + 1}</td><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td>${[4, 5, 6, 7].map(k => `<td>${c(r[k][0])}</td><td>${c(r[k][1])}</td>`).join("")}</tr>`).join("");
+  return head("Height & weight", "Year view · one row per child, Term 1 to Term 4 — the same layout as the Quarterly Heights & Weight Report kept today.", `<span class="btn">⤓ Export (Excel)${A(1)}</span>`)
+    + utabs([["Allergies & conditions", 5], ["Growth"]], 1)
+    + '<div class="chips" style="margin-bottom:10px"><span>Enter this term</span><span class="on">Year view</span></div>'
+    + `<div class="flt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${sel("Small Wonder Tampines")}${sel("N2 · Sunbeams", 1)}${sel("Year 2026", 1)}</div>`
+    + `<style>.yr th,.yr td{padding:8px 6px;font-size:12px}.yr td:nth-child(2){white-space:nowrap}</style><div class="card" style="overflow:auto"><table class="t yr"><thead>${th}</thead><tbody>${rows}</tbody></table></div>`
+    + `<div class="alert"><span>Every brand, Brighton included, has Term 1 to Term 4. Brighton measures by semester, so two of its four terms stay empty.${A(3)}</span></div>`;
+}
+function growthChart() {
+  const X = (m) => 40 + (m - 24) * 7.5, Y = (cm) => 230 - (cm - 80) * 4;   // 24–72 months, 80–130 cm
+  const line = (pts) => pts.map((q, i) => `${i ? "L" : "M"}${X(q[0]).toFixed(1)} ${Y(q[1]).toFixed(1)}`).join(" ");
+  const p3 = [[24, 81], [36, 89], [48, 96], [60, 102], [72, 108]], p50 = [[24, 87], [36, 95], [48, 103], [60, 110], [72, 116]], p97 = [[24, 93], [36, 102], [48, 110], [60, 118], [72, 124]];
+  const kid = [[48, 104.0], [51, 105.5], [54, 107.0], [57, 108.5]];
+  const lab = (pts, t) => `<text x="${X(72) + 6}" y="${Y(pts[4][1]) + 4}" font-size="11" fill="currentColor">${t}</text>`;
+  return `<svg viewBox="0 0 470 260" width="100%" style="max-width:520px;color:var(--muted)" role="img" aria-label="Height for age">
+    ${[80, 90, 100, 110, 120, 130].map(v => `<line x1="40" x2="400" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-dasharray="3 3"/><text x="8" y="${Y(v) + 4}" font-size="11" fill="currentColor">${v}</text>`).join("")}
+    ${[24, 36, 48, 60, 72].map(m => `<text x="${X(m) - 10}" y="250" font-size="11" fill="currentColor">${m / 12}y</text>`).join("")}
+    <path d="${line(p97)} ${line(p3.slice().reverse()).replace("M", "L")} Z" fill="var(--fill)"/>
+    <path d="${line(p3)}" fill="none" stroke="var(--muted)"/><path d="${line(p50)}" fill="none" stroke="var(--muted)" stroke-dasharray="5 3"/><path d="${line(p97)}" fill="none" stroke="var(--muted)"/>
+    ${lab(p97, "97th")}${lab(p50, "50th")}${lab(p3, "3rd")}
+    <path d="${line(kid)}" fill="none" stroke="var(--ink)" stroke-width="2"/>${kid.map(q => `<circle cx="${X(q[0])}" cy="${Y(q[1])}" r="4" fill="var(--ink)"/>`).join("")}
+  </svg>`;
+}
+function growthChild() {
+  const h = [["Term 4 · 2026", "24/11/2026", "108.5", "18.1", "+1.5 cm · +0.5 kg", "Aisyah Rahman · Teacher · class entry"], ["Term 3 · 2026", "14/08/2026", "107.0", "17.6", "+1.5 cm · +0.4 kg", "Aisyah Rahman · Teacher · class entry"], ["Term 2 · 2026", "12/05/2026", "105.5", "17.2", "+1.5 cm · +0.3 kg", "Grace Tan · Centre Director · child record"], ["Term 1 · 2026", "10/02/2026", "104.0", "16.9", "—", "Aisyah Rahman · Teacher · class entry"]];
+  return childHeader({ level: "severe" })
+    + '<div class="chips" style="margin:4px 0 10px"><span>Allergies & conditions</span><span class="on">Growth</span></div>'
+    + `<div class="ph2"><div><b style="font-size:15px">Growth</b><p>Shown to the family in the Parents App as soon as it is saved.${A(1)}</p></div><div class="row"><span class="btn primary">+ Add measurement${A(2)}</span></div></div>`
+    + `<div class="card" style="padding:14px 16px;margin-bottom:12px"><div class="row between"><b>Height for age</b><div class="chips"><span class="on">Height</span><span>Weight</span></div></div>${growthChart()}
+       <div style="font-size:12px;color:var(--muted)">Plotted against the Singapore reference (National Healthcare Group Polyclinics anthropometric study). Malaysia centres use the Child Health Record Book. No BMI.${A(3)}</div></div>`
+    + table(["Term", "Date measured", "!Height (cm)", "!Weight (kg)", "!Change since last term" + A(4), "!Recorded by", "!"], h.map(x => tr([x[0], x[1], x[2], x[3], x[4], x[5], '<span class="lnk">Edit</span> · <span class="lnk">Delete</span>'])))
+    + `<div class="total">Measurement history · 4 measurements${A(5)}</div>`;
+}
+function growthReport() {
+  const r = [["Small Wonder Tampines", "N2 · Sunbeams", "18", "12", "67%"], ["Small Wonder Tampines", "K1 · Honeycombs", "16", "16", "100%"], ["Small Wonder Bukit Timah", "N1 · Meadow", "14", "3", "21%"], ["Brighton Montessori Holland V", "Casa · Willow", "20", "20", "100%"]];
+  return head("Height & weight completion", "Children measured this term, by centre and class. Completion status only, no growth statistics.", '<span class="btn">⤓ Export (4)</span>')
+    + tb("Search centre or class", 4) + flt("All centres", ["Term 4 · 2026"])
+    + table(["Centre", "Class", "Children", "Measured", "Completed"], r.map(x => tr(x))) + pager(4);
+}
+
+/* ===================== BBA-71 Consents ===================== */
+const CONS = [["Media release", "—", "v2 · 01/09/2026", '<span class="tag solid">Agreed</span>', "Serena Lim · registration form · 05/01/2026", "—"],
+  ["Field trip / learning journey", "Singapore Zoo", "v1 · 18/11/2026", '<span class="tag dash">Waiting on the parent</span>', "Sent 18/11/2026 · reminded 1 time", "28/11/2026"],
+  ["Field trip / learning journey", "Science Centre", "v1 · 20/11/2026", '<span class="tag dash">Waiting on the parent</span>', "Sent 20/11/2026", "05/12/2026"],
+  ["Medical authorisation", "—", "v1 · 01/01/2026", '<span class="tag solid">Agreed</span>', "Serena Lim · registration form · 05/01/2026", "—"],
+  ["Privacy policy", "—", "v3 · 15/11/2026", '<span class="tag">Not sent</span>', "New version — agree again", "—"]];
+function consentTab(o) {
+  o = o || {};
+  const body = childHeader({ level: "severe" })
+    + `<div class="ph2"><div><b style="font-size:15px">Consents</b><p>Answers from the family. Consents are created in Communication › Surveys & consents.${A(1)}</p></div><div class="row"><span class="btn">Open Surveys & consents</span></div></div>`
+    + table(["Consent", "Event" + A(3), "!Version", "!Status" + A(2), "!Answer / last action", "!Closing date", "!"], CONS.map(c => tr([c[0], c[1], c[2], c[3], c[4], c[5], c[3].includes("Waiting") ? '<span class="btn sm">Remind</span>' : c[3].includes("Declined") || c[3].includes("Expired") ? '<span class="btn sm">Send again</span>' : '<span class="lnk">History</span>'])));
+  return body;
+}
+function consentNewVersion() {
+  return overlay("Publish new version — Privacy policy", `${fl("Summary of changes", "Added the Data Protection Officer contact: DPO@busybeesasia.com", { req: 1, ta: 1 })}
+    <div class="radio"><div class="on"><i></i><span><b>Ask families to agree again</b><br><span style="color:var(--muted)">Every child goes back to "Not sent" for v3.</span></span></div>
+    <div><i></i><span><b>Keep current answers</b><br><span style="color:var(--muted)">Small wording fix. Answers to v2 still count.</span></span></div></div>
+    <div class="alert"><span class="anno">1</span><span>The choice is made per update, as BBA asked (BBA-488). Old answers stay in History.</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Publish</span>', 560);
+}
+function consentNew() {
+  return overlay("New consent", `${grid2(fl("Type", "Field trip / learning journey", { sel: 1, req: 1, hint: "Crossroad only for Singapore centres without an outdoor area" }), fl("Event", "Singapore Zoo", { req: 1 }))}
+    ${fl("Content", "Learning journey to Singapore Zoo on 28/11/2026, 09:00–12:00. Transport by school bus.", { req: 1, ta: 1 })}
+    ${grid2(fl("Closing date", "28/11/2026", { req: 1 }), `<div class="field"><label>Audience <span class="req">*</span></label><div class="radio"><div class="on"><i></i>Classes${A(1)}</div><div><i></i>Whole centre</div></div></div>`)}
+    <div class="field"><label>Classes <span class="req">*</span></label><div class="chips"><span class="on">☑ N2 · Sunbeams</span><span class="on">☑ K1 · Honeycombs</span><span>☐ N1 · Acorns</span></div></div>
+    <div class="row" style="gap:10px"><span class="toggle"></span><span>Also send by email${A(2)}</span></div>
+    <div class="alert"><span>Sending posts an Announcement with a link to this consent. Each child in the audience starts at "Waiting on the parent".</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Send</span>', 620);
+}
+function surveysList(o) {
+  o = o || {};
+  const f = [["Singapore Zoo", "Field trip / learning journey", "N2 · Sunbeams, K1 · Honeycombs", "28/11/2026", "28 of 34"], ["Science Centre", "Field trip / learning journey", "N2 · Sunbeams", "05/12/2026", "9 of 17"], ["Crossroad 2027", "Crossroad", "Whole centre", "15/01/2027", "0 of 72"]];
+  const cards = `<div class="cnt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${f.map((x, i) => `<div${o.unanswered && i === 0 ? ' style="border-color:var(--ink)"' : ""}><b>${x[4]}</b>families answered · ${x[0]}${i === 0 ? A(1) : ""}</div>`).join("")}</div>`;
+  const top = head("Surveys & consents", "Consents sent to families. Answers show on each child's record.", '<span class="btn primary">+ New consent</span>')
+    + utabs([["Surveys"], ["Consents", 3]], 1) + cards;
+  if (o.unanswered) {
+    const k = [["Noah Tan", "N2 · Sunbeams", "Sent 18/11/2026 · reminded 1 time"], ["Chloe Lim Xin Yi", "N2 · Sunbeams", "Sent 18/11/2026"], ["Lucas Koh", "K1 · Honeycombs", "Sent 18/11/2026"]];
+    return top + `<div class="crumb">Singapore Zoo › <b>Not answered (6)</b></div>` + tb("Search child", 6) + flt("All classes", "Not answered")
+      + table(["Child", "Class", "!Last action", "!"], k.map(x => tr([`<span class="lnk">${x[0]}</span>`, x[1], x[2], '<span class="btn sm">Remind</span>']))) + pager(6);
+  }
+  return top + tb("Search consent", 3) + flt("Small Wonder Tampines", "All types", "All classes", "Any status", "Any closing date")
+    + table(["Consent", "Type", "Audience", "!Closing date", "!Answered"], f.map(x => tr([x[0], x[1], x[2], x[3], x[4]]))) + pager(3);
+}
+function consentCompliance() {
+  const r = [["Ethan Lim", "N2 · Sunbeams", "—", "Singapore Zoo, Science Centre", "—"], ["Noah Tan", "N2 · Sunbeams", "—", "Singapore Zoo", "Media release"], ["Mia Wong", "Playgroup · Bumblebees", "Privacy policy", "—", "—"], ["Caleb Ho", "Playgroup · Bumblebees", "Privacy policy", "—", "—"]];
+  return head("Consent compliance", "Children with a consent outstanding. Read from each child's consents.", '<span class="btn">⤓ Export (4)</span>')
+    + utabs([["Today by centre"], ["Drills"], ["Consent compliance", 4]], 2) + tb("Search child", 4) + flt("Small Wonder Tampines", "All classes", "All consents", "Enrolled", "Any status")
+    + table(["Child", "Class", "!Not sent", "!Waiting on the parent", "!Declined or withdrawn" + A(1)], r.map(x => tr([`<span class="lnk">${x[0]}</span>`, x[1], x[2], x[3], x[4]]))) + pager(4);
+}
+
+/* ===================== BBA-72 Move class up ===================== */
+function promotion(o) {
+  o = o || {};
+  const kids = [["Ethan Lim", "N2 · Sunbeams", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Noah Tan", "N2 · Sunbeams", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Aiden Tan Wei Jie", "N2 · Sunbeams", "— stays in N2", "N2 full day", "—", 0], ["Chloe Lim Xin Yi", "N2 · Sunbeams", "K1 · Blossom", "N2 half day AM", "K1 half day AM", 1]];
+  const body = head("Move class up — N2 · Sunbeams", "Small Wonder Tampines · moves the selected children to the next level from the effective date.", "")
+    + `<div class="flt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${fl("Target level", "K1", { sel: 1, req: 1 })}${fl("Target class", "K1 · Honeycombs", { sel: 1, req: 1, hint: "18 of 20 after the move" + A(1) })}${fl("Effective date", "04/01/2027", { req: 1, hint: "Start of Term 1, 2027 (brand term calendar)" + A(2) })}</div>`
+    + table(["!☑", "Child", "Current class", "!Target class", "!Fee schedule now", "!Fee schedule from 04/01/2027"], kids.map(k => tr([k[5] ? "☑" : "☐", k[0], k[1], k[2], k[3], k[4]], k[5] ? "" : "muted")))
+    + `<div class="row between"><span style="color:var(--muted);font-size:13px">3 of 4 children selected · untick a child who repeats the level, withdraws or extends${A(3)}<br>Moved children join the K1 · Honeycombs class thread; the N2 · Sunbeams thread becomes read-only.${A(4)}</span><span class="row"><span class="btn">Cancel</span><span class="btn primary">Confirm move</span></span></div>`;
+  return body;
+}
+
+/* ===================== BBA-73/74/75/77 Class attendance ===================== */
+const ATT = [
+  ["EL", "Ethan Lim", "N2 · 4y 9m", "sev", "Present", "08:12", "—", "Serena Lim · Mother", "—", ["36.6 · On arrival · 08:12", "36.8 · After nap · 14:40"], ""],
+  ["NT", "Noah Tan", "N2 · 4y 10m", "", "Present", "09:34", "—", "Someone else: Ahmad · Family driver", "—", ["36.6 · On arrival · 09:34"], "late"],
+  ["AT", "Aiden Tan Wei Jie", "N2 · 4y 10m", "", "Present", "07:58", "16:05", "Mr Tan · Father", "Mdm Lim · Grandmother", ["36.5 · On arrival", "36.7 · After nap", "37.9 · Before pickup"], "fever"],
+  ["CL", "Chloe Lim Xin Yi", "N2 · 4y", "", "Absent", "—", "—", "—", "—", [], ""]];
+function attendance(o) {
+  o = o || {};
+  const rows = ATT.map(a => {
+    const temps = a[9].length ? a[9].map(t => `<span class="read${t.startsWith("37.9") ? " hot" : ""}">${t.startsWith("37.9") ? "⚠ " : ""}${t} °C</span>`).join("") + ` <span class="tag">${a[9].length} of 3</span>${a[0] === "AT" ? A(3) : ""}` : '<span style="color:var(--muted)">—</span>';
+    return tr([who(a[0], a[1] + (a[3] ? ' <span class="badge solid">⚠ Severe</span>' : ""), a[2]),
+      `<span class="tag${a[4] === "Present" ? " solid" : ""}">${a[4]}</span>`,
+      `${a[5]}${a[10] === "late" ? ` <span class="tag dash">Late (staff only)</span>${A(2)}` : ""}<small>out ${a[6]}</small>`,
+      `<small style="margin:0">Dropped off by</small>${a[7]}${a[0] === "NT" ? A(1) : ""}<small>Picked up by</small>${a[8]}`,
+      temps + ' <span class="lnk" style="font-size:12px">Add reading</span>',
+      '<span class="btn sm">Sign out</span> <span class="act">⋯</span>'], a[3]);
+  });
+  if (o.bus) return head("Class attendance", "Bus 2 · Tampines North — children on this bus. Each child is signed in on their own, with a photo.", '<span class="btn">⤓ Export</span>')
+    + utabs([["Class attendance"], ["Overview by centre"], ["Late arrival", 1], ["Void log"]], 0)
+    + tb("Search child", 2) + flt("Small Wonder Tampines", "All classes", "Today · 24/11/2026", ["Bus 2 · Tampines North"], "Any status")
+    + table(["Child", "!Class", "!Status", "!Handover", "!"], [tr([who("CL", "Chloe Lim Xin Yi", "N2 · 4y"), "N2 · Sunbeams", '<span class="tag">Not signed in</span>', '<small style="margin:0">Dropped off by</small>Bus driver · Bus 2' + A(1), '<span class="btn sm">Sign in</span>']),
+      tr([who("LK", "Lucas Koh", "K1 · 5y 6m"), "K1 · Honeycombs", '<span class="tag solid">Present</span>', '<small style="margin:0">Dropped off by</small>Bus driver · Bus 2<small>📷 Photo · 08:05</small>', '<span class="act">⋯</span>'])]);
+  return head("Class attendance", "The gate records arrival and departure; staff correct and void here.", '<span class="btn">⤓ Export</span>')
+    + utabs([["Class attendance"], ["Overview by centre"], ["Late arrival", 1], ["Void log"]], 0)
+    + `<div class="cnt"><div><b>3 of 4</b>signed in of expected</div><div><b>1</b>signed out</div><div><b>2</b>still in</div><div><b>1</b>absent</div><div><b>1</b>high temperature today</div></div>`
+    + tb("Search child", 4, `<span class="tot">1 child with a severe allergy</span>`) + flt("Small Wonder Tampines", ["N2 · Sunbeams"], "Today · 24/11/2026", "All bus routes", "Any temperature")
+    + table(["Child", "!Status", "!In / out", "!Handover", "!Temperatures (°C)", "!"], rows);
+}
+function checkIn(o) {
+  o = o || {};
+  if (o.bus) return overlay("Sign in — Chloe Lim Xin Yi", `${fl("Time", "08:07", { req: 1, hint: "Defaults to now" })}
+    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1. A Bluetooth thermometer fills it in; staff can change it.${A(2)}</span></div>
+    <div class="field"><label>Brought by <span class="req">*</span></label><div class="radio"><div><i></i>Mr Lim · Father</div><div><i></i>Mrs Lim · Mother</div><div class="on"><i></i>Bus driver · Bus 2 · Tampines North${A(1)}</div><div><i></i>Someone else</div></div></div>
+    <div class="cam"><span>📷 Photo of the child with the bus driver — required${A(3)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Sign in</span>', 580);
+  return overlay("Sign in — Noah Tan", `${fl("Time", "09:34", { req: 1, hint: "Defaults to now" })}
+    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1. A Bluetooth thermometer fills it in; staff can change it.${A(2)}</span></div>
+    <div class="field"><label>Brought by <span class="req">*</span></label><div class="radio">
+      <div><i></i>Mr Tan · Father</div><div><i></i>Mrs Tan · Mother</div><div><i></i>Mdm Lee · Grandmother (authorised pickup)</div><div class="on"><i></i>Someone else${A(1)}</div></div></div>
+    ${grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "Family driver", { req: 1 }))}
+    <div class="cam"><span>📷 Photo of the child with the person — required${A(3)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Sign in</span>', 580);
+}
+function checkOut(block) {
+  return overlay("Sign out — Aiden Tan Wei Jie", `${fl("Time", "16:05", { req: 1 })}
+    <div class="field"><label>Collected by <span class="req">*</span></label><div class="radio">
+      <div class="${block ? "" : "on"}"><i></i><span class="mini-av">ML</span>Mdm Lim · Grandmother · ••••567D</div><div><i></i><span class="mini-av">MT</span>Mr Tan · Father · ••••482K</div>
+      <div class="off"><i></i><span class="mini-av">JT</span>Jason Tan · Uncle · Pending approval${A(1)}</div>
+      <div class="${block ? "on" : ""}"><i></i>Not on the list</div></div></div>
+    ${block ? `<div class="alert strong"><b>⚠ Do not release the child.</b><span>Call the parent to add this person in the Parents App. The person can collect the child once approved.${A(2)}</span></div>` : `<div class="cam"><span>📷 Photo of the child with the person collecting — required${A(3)}</span></div>`}`,
+    block ? '<span class="btn">Close</span><span class="btn primary" style="opacity:.35">Sign out</span>' : '<span class="btn">Cancel</span><span class="btn primary">Sign out</span>', 560);
+}
+function addReading() {
+  return overlay("Add a temperature reading — Aiden Tan Wei Jie", `${grid2(fl("Temperature", "37.9 °C", { req: 1, hint: "Entered manually · at or above 37.5 °C is a fever" + A(1) }), fl("Time", "15:40", { req: 1 }))}
+    <div class="field"><label>When <span class="req">*</span></label><div class="chips"><span>On arrival</span><span>After nap</span><span class="on">Before pickup</span><span>Extra</span></div></div>
+    <div class="alert strong"><b>⚠ Fever</b><span>Saving notifies the class teacher and the Centre Director.</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Save reading</span>', 540);
+}
+function voidRec() {
+  return overlay("Void attendance record — Noah Tan", `<div class="alert"><b>Record</b><span>Signed in 24/11/2026 09:34 · brought by Ahmad (Family driver) · 36.6 °C</span></div>
+    ${fl("Reason", "Signed in against the wrong child at the gate; Noah arrived at 09:12.", { req: 1, ta: 1 })}
+    <div class="alert"><span class="anno">1</span><span>The voided record no longer counts; staff then sign the child in again as usual. Voided records stay in the Void log with who, when and why. Direct edit vs void is still open (OQ-17).</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Void record</span>', 580);
+}
+function lateSetting() {
+  return head("Centre settings — Small Wonder Tampines", "One value per setting, set by country, brand, cluster or centre.", "")
+    + table(["Setting", "Value", "Set at", "!"], [tr(["Late arrival cut-off — morning" + A(1), "<b>09:15</b>", "Centre · default", '<span class="btn sm">Change</span>']), tr(["Late arrival cut-off — afternoon", "<b>12:15</b>", "Centre", '<span class="btn sm">Change</span>']), tr(["Fever threshold" + A(2), "<b>37.5 °C</b>", "Country · Singapore", '<span class="btn sm">Change</span>']), tr(["Required routines", "Infant, Playgroup", "Group · default", '<span class="btn sm">Change</span>'])]);
+}
+
+/* ===================== BBA-76 Overview today ===================== */
+function overview(o) {
+  o = o || {};
+  const c = [["Agape Punggol", "Agape", "0 of 0", "0", "0"], ["Brighton Montessori Holland V", "Brighton Montessori", "41 of 44", "3", "38"], ["Learning Vision Orchard", "Learning Vision", "52 of 60", "6", "46"], ["Small Wonder Bukit Timah", "Small Wonder", "63 of 70", "4", "59"], ["Small Wonder Tampines", "Small Wonder", "68 of 72", "7", "61"]];
+  const cls = [["Infant Care", "9 of 10", "2", "7"], ["Playgroup · Bumblebees", "13 of 14", "1", "12"], ["N1 · Acorns", "15 of 15", "2", "13"], ["N2 · Sunbeams", "16 of 17", "1", "15"], ["K1 · Honeycombs", "15 of 16", "1", "14"]];
+  if (o.drill) return head("Small Wonder Tampines — today", "Updated 24/11/2026 10:05 · Refresh", '<span class="btn">↻ Refresh</span>')
+    + `<div class="crumb">All centres › <b>Small Wonder Tampines</b></div>`
+    + table(["Class", "Signed in of expected", "Signed out", "Still in"], cls.map(x => tr([`<span class="lnk">${x[0]}</span>`, x[1], x[2], x[3]]))) + `<div class="total">5 classes · 68 children signed in of 72 expected</div>`;
+  return head("Overview today", `Updated 24/11/2026 10:05${A(1)}`, '<span class="btn">↻ Refresh</span>')
+    + tb("Search centre", 5) + flt("All brands", "All centres")
+    + table(["Centre", "Brand", "Signed in of expected" + A(2), "Signed out", "Still in"], c.map(x => tr([`<span class="lnk">${x[0]}</span>`, x[1], x[2], x[3], x[4]])))
+    + `<div class="total">5 of 5 centres · 224 children signed in of 246 expected · 20 signed out · 204 still in</div>`;
+}
+
+/* ===================== BBA-78 Daily routines ===================== */
+function routines(o) {
+  o = o || {};
+  const r = [["Mia Wong", "Lunch · All<small>Chicken rice, broccoli · 11:50 · Aisyah Rahman · Teacher app</small>", "—", "13:00–14:30 · 1h 30m<small>Slept well</small>", "Diaper · Wet<small>10:15</small>", "Note from home"],
+    ["Caleb Ho", `<span class="tag dash">Missing: Lunch</span>${A(2)}`, "150 ml made · 120 ml drunk<small>10:00</small>", "13:10–14:20 · 1h 10m", "Diaper · Dry<small>10:20</small>", ""]];
+  const body = head("Daily routines", "Playgroup · Bumblebees · Small Wonder Tampines · Today", `<span class="btn">Parent view</span><span class="btn">⤓ Export (2)</span><span class="btn primary">Record for the whole class${A(1)}</span>`)
+    + tb("Search child", 2, '<span class="tot">Required every day for <b>Infant</b> <b>Playgroup</b></span>') + flt("Small Wonder Tampines", ["Playgroup · Bumblebees"], "Today · 24/11/2026", "All children", "Recorded in: all apps")
+    + table(["Child", "!Food" + A(3), "!Bottle", "!Nap", "!Potty", "!"], r.map(x => tr([x[0] + (x[5] ? `<small>📝 ${x[5]}</small>` : ""), x[1], x[2], x[3], x[4], '<span class="lnk">Change time</span>'])));
+  if (!o.dialog) return body;
+  return body + overlay("Record for the whole class — Food", `<div class="field"><label>Type <span class="req">*</span></label><div class="chips"><span class="on">Food</span><span>Bottle</span><span>Nap</span><span>Potty</span></div></div>
+    ${grid2(fl("Meal", "Lunch", { sel: 1, req: 1 }), fl("Time", "11:50", { req: 1 }))}
+    ${fl("Menu", "Chicken rice, steamed broccoli, orange slices")}
+    <div class="field"><label>Amount eaten</label><div class="chips"><span class="on">All</span><span>Most</span><span>Some</span><span>None</span></div></div>
+    <div class="field"><label>Children (checked in today)</label><div class="chips"><span class="on">☑ Mia Wong</span><span>☐ Caleb Ho</span></div><span class="hint">Untick a child to leave them out; change one child afterwards on the class view.${A(1)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Save for 1 child</span>', 600);
+}
+
+/* ===================== BBA-79 Staff clock ===================== */
+function staffWeb(o) {
+  o = o || {};
+  const s = [["GT", "Grace Tan", "Centre Director", "07:10", "—", '<span class="read hot">⚠ 37.9</span>', "Attendance app", "On site"],
+    ["AR", "Aisyah Rahman", "Teacher", "07:42", "—", "36.5", "Attendance app", "On site"],
+    ["CN", "Chloe Ng", "Senior Teacher", "07:35", "—", "36.8", "CD app" + A(2), "On site"],
+    ["NS", "Nadia Salleh", "School Admin", "08:01", "17:32", "36.4", "Attendance app", "Clocked out"],
+    ["RD", "Rina Devi", "Teacher", "—", "—", "—", "—", "Not clocked in"]];
+  const body = head("Staff attendance", "Staff clock in and out on the gate iPad with a photo; the Centre Director can also use the CD app.", '<span class="btn">⤓ Export (5)</span>')
+    + utabs([["Today"], ["Report"]], 0)
+    + `<div class="cnt" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div><b>3</b>on site now</div><div><b>1</b>clocked out</div><div><b>1</b>not clocked in${A(4)}</div></div>`
+    + tb("Search staff", 5) + flt("Small Wonder Tampines", "Today · 24/11/2026", "All roles", "Any status", "Any source")
+    + table(["!Photo" + A(1), "Staff", "Clock in", "Clock out", "!Temp (°C)", "!Source", "!Status", "!"], s.map(x => tr(['<span class="mini-av">' + x[0] + "</span>", `${x[1]}<small>${x[2]}</small>`, x[3], x[4], x[5], x[6], `<span class="tag${x[7] === "On site" ? " solid" : ""}">${x[7]}</span>`, x[7] === "On site" ? '<span class="btn sm">Correct</span>' : '<span class="act">⋯</span>'])));
+  if (!o.correct) return body;
+  return body + overlay("Correct clock out — Aisyah Rahman", `<div class="alert"><b>24/11/2026</b><span>Clocked in 07:42 on the Attendance app · no clock out recorded</span></div>
+    ${grid2(fl("Clock in", "07:42"), fl("Clock out", "18:05", { req: 1 }))}${fl("Reason", "Forgot to clock out; left after the last pickup at 18:05.", { req: 1, ta: 1 })}
+    <div class="alert"><span class="anno">3</span><span>Only the Centre Director corrects (BBA-528). Old value, new value, reason, who and when are kept.</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Save correction</span>', 560);
+}
+function staffIpad(o) {
+  o = o || {};
+  return `<div style="padding:22px;background:var(--fill)"><div class="ipad"><div class="bar"><b>Busy Bees @ Tampines</b><span>Children · Staff · Visitors · Sync queue</span><span>● Online</span></div><div class="body">
+    <div class="row between"><b style="font-size:18px">Staff clock in</b><span class="tag">24/11/2026 · 07:42</span></div>
+    ${grid2(`<div class="field"><label>Who are you? <span class="req">*</span></label><div class="input select filled">Aisyah Rahman · Teacher</div><span class="hint">Staff of this centre only</span></div>`, fl("Temperature", o.fever ? "37.9 °C" : "36.5 °C", { sel: 1, req: 1, hint: "Same picker and fever threshold as children" }))}
+    <div class="cam">📷 Take a photo${A(1)} — required to clock in</div>
+    ${o.fever ? '<div class="alert strong"><b>⚠ Raised temperature</b><span>The Centre Director is notified.</span></div>' : ""}
+    <div class="row between"><span style="color:var(--muted);font-size:13px">Already clocked in? You will see Clock out instead.${A(2)}</span><span class="btn primary">Clock in</span></div>
+    <div class="alert"><span>HQ staff and visitors: use <b>Visitors</b> to sign in with the purpose of the visit.${A(3)}</span></div></div></div></div>`;
+}
+
+/* ===================== Screens ===================== */
+const S = (id, code, name, tickets, states, notes) => ({ id, code, name, slug: name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""), tickets, states, notes });
+let SCREENS = [
+  S("b68-1", "BBA-68 · 1", "Child record — medical alert", "Red banner, icon, pending assessment — FRD Medical Alert Banner · BBA-1058",
+    [["default", "Severe · banner", () => shell("children", "All children › <b>Ethan Lim</b>", childHeader({ level: "severe", pending: 1 }), W.sa, childTabs())],
+     ["medical", "Medical · chỉ icon", () => shell("children", "All children › <b>Ethan Lim</b>", childHeader({ level: "medical" }), W.sa, childTabs())],
+     ["hidden", "Vai trò ẩn chi tiết y tế", () => shell("children", "All children › <b>Ethan Lim</b>", childHeader({ level: "severe", hidden: 1 }), "Priya Nair · HQ Finance", childTabs())]],
+    { default: [["Red banner chỉ cho mức Severe, không đóng được; nội dung nguyên văn chữ phụ huynh ghi.", "FR-001 · FR-008 · FR-011"], ["Thay đổi của phụ huynh chỉ có hiệu lực sau khi CD / Admin hoàn tất đánh giá; banner giữ nội dung đã xác nhận gần nhất.", "Plane BBA-1058 · AS-01 · OQ-03 · OQ-05"]],
+      medical: [],
+      hidden: [[], [], ["Vai trò bị cấu hình ẩn chỉ thấy biểu tượng và \"Medical alert on file\".", "FR-012 · BR-CHF-025"]] }),
+  S("b68-2", "BBA-68 · 2", "Children list — Medical column", "Cột Medical, bộ lọc Medical alert",
+    [["default", "Danh sách", () => shell("children", "<b>Children</b>", childList(), W.sa)]],
+    { default: [["Bộ lọc Medical alert: Any · Has a medical alert · Severe allergy · No medical alert.", "FR-017"], ["⚠ Severe (đặc) · ⚠ Medical (viền) · —; trẻ Severe có vạch ở mép trái.", "FR-015 · BR-CHF-024"]] }),
+  S("b69", "BBA-69", "Allergies & conditions", "Medical Health Alert List; in cho bếp — BBA-1058 + Appendix 1, Appendix 3",
+    [["default", "Toàn Centre", () => shell("health", "Health & allergies › <b>Allergies & conditions</b>", allergyList(), W.t)],
+     ["class", "Lọc 1 lớp", () => shell("health", "Health & allergies › <b>Allergies & conditions</b>", allergyList({ cls: 1 }), W.t)],
+     ["print", "Bản in cho bếp", () => shell("health", "Health & allergies › <b>Print</b>", kitchenPrint(), W.t)]],
+    { default: [["Cột theo form Medical Care Assessment Checklist: loại (Food, Environmental, Medication, Insect, Medical condition), chất gây dị ứng, mức độ, triệu chứng, điều kiện dung nạp, ăn được vết trứng / hạt, kế hoạch xử trí, thuốc dùng ngay. Severe → Moderate → Mild; chưa chọn mức coi như Severe.", "Appendix 1 tr. 1–2 · FR-001 · FR-002"], ["Bệnh / tiền sử không kèm dị ứng ở nhóm riêng.", "Appendix 1 tr. 1 · FR-003 · OQ-07"], ["CD, Admin, Teacher được in / xuất; không lưu nhật ký in / xuất.", "Plane BBA-1058 Q2 · FR-008"], ["Phụ huynh sửa trong app → danh sách giữ thông tin đã xác nhận, gắn nhãn chờ đánh giá cho tới khi CD / Admin hoàn tất.", "Plane BBA-1058 Q1 · FR-014"], ["Đánh giá lại mỗi 6 tháng; nhắc trước 1 tháng (gửi form cho phụ huynh); quá ngày hiện Overdue.", "Appendix 3 · Plane BBA-1058 Q1 · FR-013"], ["Trẻ chưa khai Health record ở nhóm riêng cuối danh sách.", "Q-70-09 · FR-012"]],
+      class: [], print: [["Bản in ghi ngày giờ in và số trẻ.", "FR-007 · BR-003"], ["Chỉ in trẻ có phụ huynh đồng ý hiện tên và ảnh trên Medical Health Alert List.", "Appendix 1 tr. 3 · Plane BBA-1058 Q2 · FR-011"]] }),
+  S("b70-1", "BBA-70 · 1", "Height & weight — class entry", "Nhập cả lớp theo kỳ — BBA-529, BBA-1059",
+    [["default", "Nhập", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry(), W.t)],
+     ["saved", "Đã lưu", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry({ saved: 1 }), W.t)],
+     ["delete", "Xoá số đo", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry({ saved: 1 }) + growthDelete(), W.t)],
+     ["year", "Xem cả năm · Export", () => shell("health", "Health & allergies › <b>Growth</b>", growthYear(), W.t)]],
+    { default: [["Lưu một lần cả lớp; lưu lại trong cùng kỳ thì ghi đè, số cũ giữ trong lịch sử; phụ huynh thấy ngay. Không có BMI.", "BR-CHF-026 · Plane BBA-1059 Q4"], ["Trẻ vắng và tạm nghỉ vẫn có trong danh sách, tách nhóm riêng.", "Plane BBA-1059 Q2"], ["Term 1–4 theo lịch term của brand do HQ đặt, mọi brand kể cả Brighton (Brighton đo theo học kỳ); nhắc giữa tháng cuối mỗi term cho mọi brand.", "Q-71-03 · Plane BBA-489 Centre Terms Setup · BBA-529 · FR-001 · FR-011 · OQ-08"]],
+      saved: [], delete: [[], [], [], ["Một quyền chung thêm / sửa / xoá; hiện giao CD, Admin, mọi Teacher (Taidii: \"Update Height and Weight\" cho CD/ACD/Admin và Teachers).", "Plane BBA-1059 Q3 · Taidii Center Staff Role permissions, dòng 14"]],
+      year: [["Bảng cả năm và file Excel theo đúng bố cục \"Quarterly Heights & Weight Report\" của Taidii: No., Name, Birthdate, IC/BC No., Program Type, Term 1–4 mỗi kỳ Height cm / Weight kg; đầu file ghi Centre, Class, Year, Generated on.", "Plane BBA-529 — file mẫu Student_quarterly_height_weight_2026-sample.xlsx · FR-013"], ["Số giấy tờ che theo vai trò như hồ sơ trẻ.", "BBA-66"], ["Brighton cũng có Term 1–4 (Centre Terms Setup, file export Taidii); Brighton đo ở term nào → OQ-08.", "Plane BBA-489 · BBA-529 · OQ-08"]] }),
+  S("b70-3", "BBA-70 · 3", "Child record — Growth", "Biểu đồ và Measurement history trên hồ sơ trẻ — BBA-1059 Q1, Q4",
+    [["default", "Tab Health · Growth", () => shell("children", "All children › <b>Ethan Lim</b>", growthChild(), W.cd, childTabs(6))]],
+    { default: [["Phụ huynh thấy ngay khi lưu.", "Plane BBA-1059 Q4 · FR-008"], ["Nhập riêng một trẻ từ hồ sơ.", "FR-007"], ["Biểu đồ theo tuổi: Singapore theo nghiên cứu nhân trắc của NHG Polyclinics, Malaysia theo Child Health Record Book; Taidii hiện vẽ theo WHO với 3 đường 3rd / 50th / 97th. Đường cong trên wireframe chỉ minh hoạ. Có hiện đường percentile hay không còn chờ OQ-07 (Q-71-02 bỏ percentile).", "Plane BBA-1059 Q1 · ảnh Taidii Parents App · OQ-07"], ["Thay đổi so với kỳ trước.", "Q-71-11 · FR-012"], ["Mọi lần đo theo ngày đo, người nhập.", "Q-71-07 · Q-71-08 · FR-012"]] }),
+  S("b70-2", "BBA-70 · 2", "Height & weight completion (HQ)", "Báo cáo hoàn thành — BBA-1059 Q5",
+    [["default", "Báo cáo", () => shell("health", "Reports › <b>Height & weight completion</b>", growthReport(), W.ch)]],
+    { default: [["Chỉ trạng thái hoàn thành theo Centre, lớp, kỳ; người dùng ban đầu: CD, Admin, Cluster Head.", "Plane BBA-1059 Q5 · FR-009"]] }),
+  S("b71-1", "BBA-71 · 1", "Child record — Consents", "Trạng thái consent theo trẻ, gửi / nhắc",
+    [["default", "Tab Consents", () => shell("children", "All children › <b>Ethan Lim</b>", consentTab(), W.cd, childTabs(8))],
+     ["list", "Danh sách consent", () => shell("consents", "Communication › <b>Surveys & consents</b>", surveysList(), W.cd)],
+     ["unanswered", "Chưa trả lời", () => shell("consents", "Communication › <b>Surveys & consents</b>", surveysList({ unanswered: 1 }), W.cd)],
+     ["new", "Tạo consent", () => shell("consents", "Communication › <b>Surveys & consents</b>", surveysList() + consentNew(), W.cd)],
+     ["version", "Phiên bản mới", () => shell("consents", "Surveys & consents › <b>Privacy policy</b>", surveysList() + consentNewVersion(), W.hq)]],
+    { default: [["Consent nằm ở tab Documents của hồ sơ trẻ (SRS liệt kê tab Consents riêng — chờ xác nhận); hồ sơ trẻ chỉ xem, nhắc, gửi lại; consent tạo ở Surveys & consents.", "FR-001 · BR-CHF-010 · AS-05"], ["Trạng thái: Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired.", "FR-002"], ["Nhiều consent cùng loại đang mở, mỗi cái gắn một sự kiện.", "Q-73-14 · FR-001"]],
+      list: [["Thẻ \"x of y families answered\" mỗi consent; chọn thẻ → chỉ trẻ chưa trả lời.", "Q-73-10 · FR-012"]],
+      unanswered: [["Danh sách trẻ chưa trả lời, Remind từng trẻ.", "Q-73-10 · FR-004 · FR-012"]],
+      new: [["Đối tượng theo lớp hoặc cả Centre, có ngày đóng.", "Q-73-04 · FR-003"], ["Email chỉ gửi khi bật; luôn tạo Announcement kèm link.", "Q-73-08 · FR-003"]],
+      version: [["Khi sửa nội dung, người sửa chọn có yêu cầu đồng ý lại hay không.", "Plane BBA-488 · FR-006"]] }),
+  S("b71-2", "BBA-71 · 2", "Consent compliance", "Trẻ còn thiếu consent",
+    [["default", "Danh sách", () => shell("safety", "Safety overview › <b>Consent compliance</b>", consentCompliance(), W.cd)]],
+    { default: [["Đọc từ consent của từng trẻ, không lưu riêng; lọc Centre, lớp, loại consent; xuất Excel. Nội dung các loại consent theo file Consent Types của BBA.", "FR-011 · SRS Daily Operations §4.2 · Plane BBA-488 · OQ-10"]] }),
+  S("b72", "BBA-72", "Move class up", "Lên lớp hàng loạt — BR-CHF-048",
+    [["default", "Xem trước", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion(), W.cd)]],
+    { default: [["Vượt sĩ số chỉ cảnh báo.", "FR-004 · BR-003"], ["Ngày hiệu lực mặc định: ngày bắt đầu Term 1 năm sau theo lịch brand — chờ BBA chốt.", "Q-71-03 · AS-01 · OQ-02"], ["Bỏ chọn trẻ học lại, rút, gia hạn; trẻ bỏ chọn giữ lớp hoặc chuyển lớp khác cùng level.", "Q-74-03 · FR-003"], ["Lớp mới có thread mới; thread lớp cũ chỉ đọc.", "Q-74-10 · FR-005"]] }),
+  S("b73", "BBA-73 · 74 · 75 · 77", "Class attendance", "Người đưa / đón, nhiệt độ, cờ muộn, huỷ điểm danh",
+    [["default", "Bảng điểm danh", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance(), W.sa)],
+     ["checkin", "Nhận trẻ · Someone else", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkIn(), W.sa)],
+     ["bus", "Lọc theo xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }), W.sa)],
+     ["busin", "Nhận trẻ từ xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }) + checkIn({ bus: 1 }), W.sa)],
+     ["checkout", "Trả trẻ", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkOut(0), W.sa)],
+     ["blocked", "Người đón ngoài danh sách", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkOut(1), W.sa)],
+     ["reading", "Thêm lần đo · sốt", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + addReading(), W.sa)],
+     ["void", "Huỷ lượt sai (BBA-77)", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + voidRec(), W.cd)]],
+    { default: [["Người đưa: phụ huynh, người đón đã duyệt hoặc \"Someone else\" kèm tên và quan hệ.", "BBA-73 · SRS ATT §2.2"], ["Cờ \"Late (staff only)\" sau giờ chốt của Centre; không bao giờ hiện cho phụ huynh.", "BBA-75 · BR-OPS-014 · BR-OPS-015"], ["Lần đo ≥ 37.5 °C in đậm; \"x of 3\" = On arrival, After nap, Before pickup — chỉ một số Centre đo 3 lần.", "BBA-74 · Q-81-02 · AS-04 · OQ-06"]],
+      checkin: [["\"Someone else\" chỉ dùng khi nhận trẻ; bắt buộc tên và quan hệ.", "SRS ATT · BBA-73 FR-001"], ["Nút nhanh 36.3–36.7, mặc định 36.5, \"Enter manually\"; số từ nhiệt kế Bluetooth sửa được.", "Q-76-05 · Q-76-06 · BBA-74 FR-001 · FR-003"], ["Chụp ảnh trẻ cùng người giao; phụ huynh thấy ảnh trong app.", "Q-75-10 · Q-81-02 · BBA-73 FR-010"]],
+      bus: [["Bộ lọc theo xe chỉ để gom; nhận / trả từng trẻ, mỗi trẻ một bản ghi và ảnh.", "Q-75-10 · BBA-73 FR-008"]],
+      busin: [["Xe đến: người giao là tài xế; xe về: người nhận là phụ xe của công ty xe.", "Q-75-10 · BBA-73 FR-008"], [], ["Ảnh riêng từng trẻ.", "BBA-73 FR-010"]],
+      checkout: [["Chỉ chọn được người trong danh sách đã duyệt; người chờ duyệt không chọn được.", "BR-OPS-004 · BR-CDP-024"], [], ["Chụp ảnh trẻ cùng người đón.", "BBA-73 FR-010"]],
+      blocked: [["Người chờ duyệt không chọn được.", "BR-CDP-024"], ["Không override: gọi phụ huynh thêm người này trong Parents App; được duyệt mới đón.", "Q-75-02 · Q-75-04 · BBA-73 FR-004"]],
+      reading: [["Ngưỡng sốt theo quốc gia (mặc định 37.5 °C); nơi đặt ngưỡng còn chờ chốt.", "BR-OPS-012 · OQ-14"]],
+      void: [["Huỷ trực tiếp: Centre Admin, CD, Senior Teacher được giao; giáo viên gửi yêu cầu. Sửa trực tiếp hay chỉ huỷ + ghi lại còn chờ chốt.", "BR-OPS-022 · BR-OPS-023 · OQ-17 · OQ-18"]] }),
+  S("b75", "BBA-75 · 74", "Centre settings", "Giờ chốt đến muộn, ngưỡng sốt",
+    [["default", "Cài đặt", () => shell("settings", "Settings › <b>Centre settings</b>", lateSetting(), W.hq)]],
+    { default: [["Giờ chốt theo Centre: sáng 09:15, chiều 12:15; so với giờ ghi nhận ở cổng; đổi chỉ áp từ ngày đổi.", "Q-77-03 · BBA-75 FR-001 · FR-002 · FR-007"], ["Ngưỡng sốt theo quốc gia (SRS) — prototype iPad cho chỉnh trên máy.", "OQ-14"]] }),
+  S("b76", "BBA-76", "Overview today", "Tổng quan theo Centre / brand — Cluster Head",
+    [["default", "Theo Centre", () => shell("attendance", "Daily operations › <b>Overview today</b>", overview(), W.ch)],
+     ["drill", "Mở 1 Centre", () => shell("attendance", "Daily operations › <b>Overview today</b>", overview({ drill: 1 }), W.ch)]],
+    { default: [["Số liệu lấy khi mở màn và khi bấm Refresh.", "FRD AS-02"], ["Expected = trẻ đang học có lịch hôm nay, trừ nghỉ phép đã duyệt và tạm nghỉ; lượt bị huỷ không tính.", "FRD FR-002 · FR-003 · OQ-16"]], drill: [] }),
+  S("b78", "BBA-78", "Daily routines", "Routines theo lớp và ngày trên web",
+    [["default", "Theo lớp", () => shell("routines", "Daily operations › <b>Daily routines</b>", routines(), W.t)],
+     ["class", "Ghi cho cả lớp", () => shell("routines", "Daily operations › <b>Daily routines</b>", routines({ dialog: 1 }), W.t)]],
+    { default: [["Ghi một lần cho cả lớp rồi chỉnh từng trẻ.", "BR-OPS-028"], ["Mục bắt buộc theo level (mặc định Infant, Playgroup); thiếu thì hiện \"Missing\".", "BR-OPS-029"], ["4 loại theo Taidii: Food, Bottle, Nap, Potty — bỏ Mood.", "Q-86-01 · FR-001"]], class: [["Bỏ chọn trẻ ngoại lệ trước khi lưu; chỉnh từng trẻ sau khi lưu.", "Q-86-04 · FR-003"]] }),
+  S("b79-1", "BBA-79 · 1", "Staff attendance (SMS web)", "Theo dõi và sửa chấm công — BBA-528",
+    [["default", "Hôm nay", () => shell("staff", "Daily operations › <b>Staff attendance</b>", staffWeb(), W.cd)],
+     ["correct", "Sửa giờ ra", () => shell("staff", "Daily operations › <b>Staff attendance</b>", staffWeb({ correct: 1 }), W.cd)]],
+    { default: [["Ảnh chụp lúc chấm công.", "Plane BBA-528"], ["Nguồn: Attendance app hoặc CD app; SMS web chỉ xem và sửa, không chấm công.", "Plane BBA-528"], [], ["Thông báo vắng cho CD lúc giờ cấu hình (vd. 10:00) — chưa chốt.", "OQ-21"]],
+      correct: [[], [], ["Chỉ CD sửa; giữ giá trị cũ, mới, lý do.", "Plane BBA-528 · OQ-22"]] }),
+  S("b79-2", "BBA-79 · 2", "Staff clock in (gate iPad)", "Chấm công ở iPad cổng, có ảnh và nhiệt độ",
+    [["default", "Chấm công vào", () => staffIpad()], ["fever", "Nhiệt độ cao", () => staffIpad({ fever: 1 })]],
+    { default: [["Chụp ảnh bắt buộc khi chấm công.", "Plane BBA-528"], ["Đã chấm vào thì thấy Clock out.", "SRS ATT"], ["HQ staff và khách chấm như khách, ghi mục đích.", "Plane BBA-528 · AS-06 · OQ-20"]], fever: [] })
+];
+
+const ONLY = {"b70-1": null, "b70-2": null, "b70-3": null};
+SCREENS = SCREENS.filter(s => s.id in ONLY).map(s => ONLY[s.id] ? Object.assign({}, s, { states: s.states.filter(x => ONLY[s.id].includes(x[0])) }) : s);
+let current = { screen: SCREENS[0].id, state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = st[2]();
+  const n = (s.notes[st[0]] && s.notes[st[0]].length ? s.notes[st[0]] : s.notes.default) || [];
+  $("notes").innerHTML = n.map((x, i) => x.length ? `<li value="${i + 1}">${x[0]} <span class="src">${x[1]}</span></li>` : "").join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : SCREENS[0].id, state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code.replace(/[^A-Za-z0-9]+/g, "-"), name: s.name, slug: s.slug, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>
