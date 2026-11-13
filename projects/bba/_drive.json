@@ -166,13 +166,13 @@
       "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation": {
-      "file_id": "1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB",
-      "url": "https://drive.google.com/file/d/1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "file_id": "1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ",
+      "url": "https://drive.google.com/file/d/1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
       "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
       "version": "",
-      "source_sha256": "7b81edb4f75367b28cc8594804d786bf5d079f09387faf19fde548b463e1f79a",
-      "synced_at": "2026-11-10 09:15"
+      "source_sha256": "829944b1de9fecd62d28662e39edf7326aeb830a69929b262175e222789337c2",
+      "synced_at": "2026-11-13 04:27"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change": {
       "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
@@ -521,6 +521,13 @@
         "FSD"
       ],
       "last_used": "2026-11-13 01:59"
+    },
+    "1KqkgghHymUu7T9_xco51AIjnoSufVg7_": {
+      "name": "BBA › Sprint 4 › TA",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-13 04:27"
     }
   },
   "history": [
@@ -741,6 +748,17 @@
       "synced_at": "2026-11-11 03:45",
       "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
       "replaced_at": "2026-11-13 01:59"
+    },
+    {
+      "file_id": "1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB",
+      "url": "https://drive.google.com/file/d/1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "7b81edb4f75367b28cc8594804d786bf5d079f09387faf19fde548b463e1f79a",
+      "synced_at": "2026-11-10 09:15",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation",
+      "replaced_at": "2026-11-13 04:27"
     }
   ]
 }
