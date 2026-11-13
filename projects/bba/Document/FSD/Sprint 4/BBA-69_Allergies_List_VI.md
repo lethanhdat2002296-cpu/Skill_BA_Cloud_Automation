@@ -1,4 +1,4 @@
-# BBA-69 Allergies list (most severe first) (Tiếng Việt)
+# Allergies list (most severe first) (Tiếng Việt)
 
 | Thuộc tính | Giá trị |
 |---|---|
@@ -20,10 +20,9 @@
 
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
-| 0.1 | 10/11/2026 | Business Analysis | Bản đầu cho ticket BBA-69: quy tắc nghiệp vụ, trường hợp đặc biệt và tiêu chí nghiệm thu để chốt với vận hành Centre (Centre Director) và HQ Ops. | HaiNguyen |
-| 0.2 | 13/11/2026 | Business Analysis | Cập nhật theo câu trả lời của BBA (Plane BBA-1058, file câu hỏi phản hồi Sprint 4) và form Medical Care Assessment Checklist / Review (đính kèm BBA-1058): cột theo các trường của form (loại, triệu chứng, điều kiện dung nạp, vết trứng / hạt, kế hoạch xử trí, thuốc); Teacher được in / xuất, không lưu nhật ký in / xuất; chỉ hiện trẻ có phụ huynh đồng ý hiện tên và ảnh; theo dõi hạn đánh giá lại 6 tháng; giữ thông tin đã xác nhận khi phụ huynh sửa; nhóm "Health information not provided". Sửa FR-001 đến FR-004, FR-007, FR-008, BR-001, BR-003, BR-004, DATA-001; thêm FR-011 đến FR-014, BR-005, BR-006, DATA-003, AC-012 đến AC-017, OQ-05 đến OQ-09, AS-04; bỏ yêu cầu ô "Chưa có thông tin" màu đỏ và nhật ký in / xuất cùng AC tương ứng (mã cũ không dùng lại); thêm wireframe SCR-01, SCR-02; thêm mục 9 Tài liệu tham khảo. | HaiNguyen |
+| 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
 
-**Mức sẵn sàng:** Đã đặc tả danh sách dị ứng theo Centre / lớp theo các trường của form Medical Care Assessment, thứ tự theo mức độ, hạn đánh giá lại, lọc, in cho bếp, xuất file và quyền xem; có wireframe. 8 câu hỏi mở ở mục 7 cần BBA chốt.
+**Mức sẵn sàng:** Đã đặc tả danh sách dị ứng theo Centre / lớp theo các trường của form Medical Care Assessment, thứ tự theo mức độ, hạn đánh giá lại, lọc, in cho bếp, xuất file và quyền xem; có wireframe.
 
 ## 2. Mục tiêu và bối cảnh
 
@@ -122,12 +121,10 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Allergies & conditions (Medical Health Alert List) | Wireframe: `Diagram/Wireframe/allergies-list-sprint4.html` |
-| SCR-02 - Print for the kitchen | Wireframe: `Diagram/Wireframe/allergies-list-sprint4.html` (trạng thái "Bản in cho bếp") |
+| SCR-01 - Allergies & conditions (Medical Health Alert List) |  |
+| SCR-02 - Print for the kitchen |  |
 
-![SCR-01 Allergies & conditions — toàn Centre](../../../Diagram/Wireframe/png/SCR-01-allergies-list.png)
 
-![SCR-02 Print for the kitchen](../../../Diagram/Wireframe/png/SCR-02-kitchen-print.png)
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
@@ -187,15 +184,6 @@ Medical Care Assessment (phụ huynh khai trong Parents App, Centre Director / A
 | OQ-07 | Medical condition, medical history nằm chung danh sách dị ứng hay nhóm riêng? Form vừa có "Medical Condition" trong Type of Allergies, vừa có mục "Medical Conditions & History" riêng. FRD đang để nhóm riêng. | Centre Director / HQ Ops | Trung bình |  |
 | OQ-08 | Can tolerate, traces of eggs / nuts, menu modifications do phụ huynh khai trong Parents App hay Centre ghi khi đánh giá ("Menu reviewed with parents")? | Centre Director / HQ Ops | Trung bình |  |
 | OQ-09 | Tên màn hình dùng "Allergies & conditions" hay theo form "Medical Health Alert List"? | HQ Ops | Thấp |  |
-
-### Giả định của BA (cần xác nhận cùng mục 7)
-
-| Mã | Giả định | Dùng ở |
-|---|---|---|
-| AS-01 | Bếp nhận bản in do Centre đưa; nhân viên bếp không có tài khoản. | Mục 4 — chờ OQ-03 |
-| AS-02 | Mỗi trẻ một dòng; trẻ có nhiều dị ứng thì liệt kê các chất trong cùng dòng. | FR-001 |
-| AS-03 | Trẻ đang tạm nghỉ không có trong danh sách vì không đến trường. | FR-010 |
-| AS-04 | Bản in chỉ ghi ngày giờ in, không ghi tên người in. | FR-007; BR-003 |
 
 ## 8. Phụ lục
 

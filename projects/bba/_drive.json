@@ -215,9 +215,10 @@
       "url": "https://drive.google.com/file/d/1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] BBA-69 Allergies list (most severe first) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "04fde8bca0951286c315083e17175f7e70da28d798ad6829bcf64e904b865d91",
-      "synced_at": "2026-11-10 10:27"
+      "version": "0.2",
+      "source_sha256": "d550b8d9ddf209e448831e597aea7eee962875f29f0334a0c68462cec8a57f6b",
+      "synced_at": "2026-11-13 15:22",
+      "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
     },
     "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI": {
       "file_id": "1ztmuemedHDDErQeR9TYKJaiTdh-be50n",
