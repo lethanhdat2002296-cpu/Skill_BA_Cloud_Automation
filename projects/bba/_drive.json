@@ -130,13 +130,13 @@
       "synced_at": "2026-11-12 01:29"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
-      "file_id": "1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP",
-      "url": "https://drive.google.com/file/d/1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP/view",
+      "file_id": "1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ",
+      "url": "https://drive.google.com/file/d/1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-50-1.1.2.07 Approval delegation (Tiếng Việt).docx",
-      "version": "0.1",
-      "source_sha256": "057327bcd2caa3df8bcb576e85947803b72e6165ef9b9846babe436e6c9a24d9",
-      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+      "title": "[FRD] 2.8 Approval Delegation (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "3f2e2294fcbafd921cc1bf4af1196618699e3c371a05a9becdbe7ad9f8443b86",
+      "synced_at": "2026-11-13 04:35"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
       "file_id": "1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja",
@@ -166,13 +166,13 @@
       "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation": {
-      "file_id": "1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ",
-      "url": "https://drive.google.com/file/d/1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ/view",
+      "file_id": "12GGYhBzZ9ZKHcWWyIWTfxrVYVNGMMcUw",
+      "url": "https://drive.google.com/file/d/12GGYhBzZ9ZKHcWWyIWTfxrVYVNGMMcUw/view",
       "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
       "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
       "version": "",
-      "source_sha256": "829944b1de9fecd62d28662e39edf7326aeb830a69929b262175e222789337c2",
-      "synced_at": "2026-11-13 04:27"
+      "source_sha256": "41ea93da2a8fce3f276e7a6770ef7744d9e463db8eddd93c012e7332cfa0d924",
+      "synced_at": "2026-11-13 04:35"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change": {
       "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
@@ -520,14 +520,14 @@
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-13 01:59"
+      "last_used": "2026-11-13 04:35"
     },
     "1KqkgghHymUu7T9_xco51AIjnoSufVg7_": {
       "name": "BBA › Sprint 4 › TA",
       "kinds": [
         "FSD"
       ],
-      "last_used": "2026-11-13 04:27"
+      "last_used": "2026-11-13 04:35"
     }
   },
   "history": [
@@ -759,6 +759,28 @@
       "synced_at": "2026-11-10 09:15",
       "key": "FSD/Sprint 4/2.8_Approval_Delegation",
       "replaced_at": "2026-11-13 04:27"
+    },
+    {
+      "file_id": "1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP",
+      "url": "https://drive.google.com/file/d/1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-50-1.1.2.07 Approval delegation (Tiếng Việt).docx",
+      "version": "0.1",
+      "source_sha256": "057327bcd2caa3df8bcb576e85947803b72e6165ef9b9846babe436e6c9a24d9",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation_VI",
+      "replaced_at": "2026-11-13 04:35"
+    },
+    {
+      "file_id": "1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ",
+      "url": "https://drive.google.com/file/d/1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "829944b1de9fecd62d28662e39edf7326aeb830a69929b262175e222789337c2",
+      "synced_at": "2026-11-13 04:27",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation",
+      "replaced_at": "2026-11-13 04:35"
     }
   ]
 }
