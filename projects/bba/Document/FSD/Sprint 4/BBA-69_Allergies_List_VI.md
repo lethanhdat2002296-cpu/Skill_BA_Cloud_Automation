@@ -127,8 +127,6 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 
 ![SCR-01 Allergies & conditions — toàn Centre](../../../Diagram/Wireframe/png/SCR-01-allergies-list.png)
 
-![SCR-01 Allergies & conditions — lọc một lớp](../../../Diagram/Wireframe/png/SCR-01-allergies-list--class.png)
-
 ![SCR-02 Print for the kitchen](../../../Diagram/Wireframe/png/SCR-02-kitchen-print.png)
 
 #### UI Components / Field Specification (Thành phần giao diện)
