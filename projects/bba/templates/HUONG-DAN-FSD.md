@@ -33,7 +33,10 @@ python .claude/skills/drive-sync/scripts/drive_pack.py bba                      
 - FSD lưu trong Git: Sprint 3 `Document/FSD/Sprint 3/BBA-xx-<WBS>_<Feature_Name>_v<x.y>.md`; Sprint 4 theo quy tắc tên ở mục 3 (sprint hiện tại: `project.json` › `sprint.current`).
 - **FSD hoàn thành → đẩy Word**, theo `drive-sync`: **hỏi user thư mục đích** mỗi lần. Gợi ý mặc định: thư mục `Sprint <n>` của khách trong https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW (`project.json` › `drive.folder_hints`). Tên trên Drive: `[FRS] BBA-xx-<WBS>_<Feature_Name>_v<x.y>.docx` — giống Sprint 3.
 - Drive của BBA giữ nguyên cấu trúc khách đang dùng (`Sprint 3`, `Sprint 4` nằm ngay dưới thư mục gốc); Claude không tạo / di chuyển thư mục.
-- FSD lên phiên bản mới → đẩy bản mới vào thư mục user chọn; bản cũ trên Drive để nguyên (user tự dọn).
+- **Quy tắc cập nhật (user chốt 13/11/2026, chỉ dự án BBA):**
+  - Bản nháp, brainstorm, wireframe **để user review trước**; chỉ đẩy Drive / commit Git đúng những file user bảo cập nhật.
+  - **Drive:** khi cập nhật một tài liệu đã có, **chuyển file cũ vào thùng rác trước, rồi mới tải bản mới lên** (cùng tên, cùng thư mục). Không để hai bản cùng tên song song. Sau đó ghi ID mới vào `_drive.json` và đổi link trên Plane (subtask [BA]).
+  - **Git:** thay thế file cũ bằng bản mới. Không giữ bản cũ hoặc bản nháp song song (`*_Draft*`, wireframe / PNG cũ không còn dùng); xoá chúng trong cùng commit cập nhật.
 - Hiện tại: **Sprint 3 đã xong (BBA-40…44, bản Markdown ở `Document/FSD/Sprint 3/`), đang làm Sprint 4.**
 - Định dạng Word (`project.json` › `docx_style`): Arial 10; giãn dòng 1.5; thụt đầu dòng đoạn văn 0.5" (1,27 cm); bảng kẻ khung đơn 0.5 pt toàn bộ, hàng tiêu đề nền xám nhạt in đậm, lặp lại khi sang trang; chữ trong bảng giãn dòng 1.0; A4.
 - FRD có quy trình nhiều bước: vẽ sơ đồ **BPMN** (`Diagram/Flow/swimlanes/bpmn-<ticket>-<slug>.json`, `notation: bpmn`, render bằng `render-screens/scripts/swimlane.py`) và nhúng vào mục "Process Diagram (Sơ đồ BPMN)" của từng US. Wireframe theo bố cục BeeHive (sidebar, top bar ⌘K, card + filter + bảng + phân trang): mẫu `Diagram/Wireframe/_approvals-sprint4.template.html`, build bằng `_build.py` (đóng gói HTML + chụp PNG đã nén), publish HTML làm link chia sẻ; ảnh PNG nhúng ở mục UI Reference.
