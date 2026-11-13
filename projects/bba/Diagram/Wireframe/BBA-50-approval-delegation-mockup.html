@@ -315,7 +315,8 @@ const diff=(a,b)=>Math.round((new Date(b+'T00:00:00Z')-new Date(a+'T00:00:00Z'))
 const inScope=c=>S.role==='HQ'||c===me().centre;
 function hist(r,from,to,who,why){S.hist.unshift({when:`${fmt(S.today)} ${who==='System'?'00:00':'10:30'}`,who,c:r.c,what:`${r.n} · ${r.p}`,from,to,why:why||'—',id:r.id});}
 function log(t){S.log.unshift(t);$('#log').innerHTML=S.log.slice(0,14).map(x=>`<li>${x}</li>`).join('');}
-S.rows.forEach(r=>{S.hist.push({when:r.at.slice(8,10)+'/'+r.at.slice(5,7)+'/'+r.at.slice(0,4)+r.at.slice(10),who:r.by,c:r.c,what:`${r.n} · ${r.p}`,from:'Not held',to:`${r.from>r.at.slice(0,10)?'Scheduled':'Active'} · ${fmt(r.from)} → ${fmt(r.until)} · via ${r.via}`,why:r.why,id:r.id});});
+function seedHist(){S.rows.forEach(r=>{const w=r.at.slice(8,10)+'/'+r.at.slice(5,7)+'/'+r.at.slice(0,4)+r.at.slice(10),wh=`${r.n} · ${r.p}`;S.hist.push({when:w,who:r.by,c:r.c,what:wh,from:'Not held',to:`${r.from>r.at.slice(0,10)?'Scheduled':'Active'} · ${fmt(r.from)} → ${fmt(r.until)} · via ${r.via}`,why:r.why,id:r.id});if(r.rev)S.hist.unshift({when:fmt(r.rev.on)+' 11:00',who:r.rev.by,c:r.c,what:wh,from:'Active',to:'Revoked',why:'—',id:r.id});if(r.st==='Expired')S.hist.unshift({when:fmt(addD(r.until,1))+' 00:00',who:'System',c:r.c,what:wh,from:'Active',to:'Expired · ended '+fmt(r.until),why:'—',id:r.id});});}
+seedHist();
 
 function renderChrome(){
   const u=me();$('#meText').textContent=`${u.name} · ${u.role}${u.centre?' · '+u.centre:''}`;$('#meAv').textContent=u.av;
@@ -452,7 +453,7 @@ $('#plus1').onclick=()=>goTo(addD(S.today,1));
 $$('[data-go]').forEach(b=>b.onclick=()=>{if(b.dataset.go>S.today)goTo(b.dataset.go);});
 $$('#roleSeg button').forEach(b=>b.onclick=()=>{S.role=b.dataset.role;$('#fCentre').value='';closeAll();render();});
 $('#voidToggle').onchange=e=>{S.voidOk=e.target.checked;log(`HQ Admin: route “Attendance void” Can be delegated → ${S.voidOk?'ticked':'not ticked'}; “Void or delete attendance records” is ${S.voidOk?'offered':'not offered'} in Grant (FR-007).`);drawPerms();};
-function reset(){S=seed();S.rows.forEach(r=>S.hist.push({when:r.at.slice(8,10)+'/'+r.at.slice(5,7)+'/'+r.at.slice(0,4)+r.at.slice(10),who:r.by,c:r.c,what:`${r.n} · ${r.p}`,from:'Not held',to:`${r.from>r.at.slice(0,10)?'Scheduled':'Active'} · ${fmt(r.from)} → ${fmt(r.until)} · via ${r.via}`,why:r.why,id:r.id}));
+function reset(){S=seed();seedHist();
   ['#q','#fPerm'].forEach(s=>$(s).value='');closeAll();$('#log').innerHTML='';$$('.step').forEach(x=>x.classList.remove('on'));$('#stepNote').hidden=true;render();}
 $('#reset').onclick=reset;
 
