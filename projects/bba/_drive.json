@@ -241,13 +241,14 @@
       "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ",
-      "url": "https://drive.google.com/file/d/17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ/view",
+      "file_id": "1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r",
+      "url": "https://drive.google.com/file/d/1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-72 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "a6daa5bd0fb85c4049e77762b62bd39ba803c244f95836b077efb3f35efecc82",
-      "synced_at": "2026-11-10 10:27"
+      "title": "[FRD] BBA-72-3.1.5.01 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "eab37eca9ef2215d81e446e63604bf3be17564dd586a4beb2884b7cc9e97d414",
+      "synced_at": "2026-11-14 01:44",
+      "note": "v0.2: file cũ 17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ đã chuyển vào thùng rác (không sửa được .docx tại chỗ); link Plane [BA] BBA-603 đã đổi."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
       "file_id": "1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0",

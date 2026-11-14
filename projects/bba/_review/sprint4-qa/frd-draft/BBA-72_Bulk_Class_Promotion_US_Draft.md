@@ -6,7 +6,7 @@
 **Thay đổi chính so với bản trên Drive**
 1. Gần như giữ nguyên — SRS chỉ có 1 quy tắc (BR-CHF-048) và FRD đã khớp.
 2. Lớp ở level cao nhất (K2): gợi ý xử lý ở Joining & leaving › Graduation (đã có trong prototype) → cập nhật OQ-05.
-3. Ngày trong ví dụ đổi sang năm học 2027 (04/01/2027 — giả định, chờ OQ-02).
+3. Ngày trong ví dụ đổi sang năm học 2027: 01/01/2027 = ngày bắt đầu Term 1 năm 2027 của mọi brand (file "Centre Terms Setup.xlsx", Plane BBA-489). Dùng làm mặc định vẫn là giả định AS-01, chờ OQ-02.
 
 **Cập nhật theo file câu hỏi phản hồi (BBA_SMS_S4, 13/11/2026)**
 - Ticket này là **annual promotion** (cuối năm, cả lớp lên level kế). Infant promotion (từng trẻ, 18 tháng tuổi) và class change (đổi lớp cùng level) là luồng khác; **K2 graduation là mass withdrawal**, chỉ K2 rời vào tháng 12 (Q-74-01, Q-74-06) → BR-007, đóng OQ-05.
@@ -104,17 +104,17 @@ Là Centre Director, tôi muốn chuyển cả lớp lên level tiếp theo cho 
 | AC-001 *(sửa)* | lớp N2 · Sunbeams có 16 trẻ, đã có lớp K1 · Honeycombs cho năm học 2027 | Centre Director chọn Move class up | level đích mặc định K1, lớp đích Honeycombs, ngày đầu năm học 2027; 16 trẻ được chọn sẵn | FR-001; FR-002 |
 | AC-002 *(sửa)* | 2 trẻ học lại N2 | Centre Director bỏ chọn 2 trẻ và chọn Confirm move | 14 trẻ chuyển sang Honeycombs từ ngày hiệu lực; 2 trẻ ở lại Sunbeams | FR-003; FR-005; FR-006 |
 | AC-003 *(sửa)* | lớp Honeycombs tối đa 20 trẻ, đã có 8 trẻ | xem trước 14 trẻ chuyển sang | hiện "22 of 20 after the move" kèm cảnh báo; vẫn xác nhận được | FR-004; BR-003 |
-| AC-004 *(sửa)* | ngày hiệu lực 04/01/2027, hoá đơn tháng 1 chưa tạo | Centre Director xác nhận | hoá đơn tháng 1 của 14 trẻ dùng biểu phí K1 | FR-005; BR-002 |
-| AC-005 *(sửa)* | ngày hiệu lực 04/01/2027, hôm nay 15/12/2026 | giáo viên mở danh sách điểm danh lớp Sunbeams ngày 20/12 | 14 trẻ vẫn ở lớp Sunbeams; từ 04/01/2027 trẻ ở lớp Honeycombs | FR-008; BR-001 |
+| AC-004 *(sửa)* | ngày hiệu lực 01/01/2027, hoá đơn tháng 1 chưa tạo | Centre Director xác nhận | hoá đơn tháng 1 của 14 trẻ dùng biểu phí K1 | FR-005; BR-002 |
+| AC-005 *(sửa)* | ngày hiệu lực 01/01/2027, hôm nay 15/12/2026 | giáo viên mở danh sách điểm danh lớp Sunbeams ngày 20/12 | 14 trẻ vẫn ở lớp Sunbeams; từ 01/01/2027 trẻ ở lớp Honeycombs | FR-008; BR-001 |
 | AC-006 | đã xác nhận | Centre Director mở lịch sử một trẻ | có dòng lớp cũ, lớp mới, ngày hiệu lực, người thực hiện | FR-007; DATA-001 |
 | AC-007 | chưa có lớp K1 cho năm học mới | Centre Director chọn Move class up | hiện "Create a class for K1 in the new school year first." | VAL-001 |
 | AC-008 | Centre Director chọn ngày hiệu lực hôm qua | chọn Confirm move | không chuyển, hiện "The effective date cannot be in the past." | VAL-002 |
-| AC-009 | một trẻ đã có lần chuyển lớp hiệu lực 04/01/2027 | xem trước | trẻ đó bị bỏ chọn, ghi "Already has a class change on 04/01/2027" | VAL-003 |
+| AC-009 | một trẻ đã có lần chuyển lớp hiệu lực 01/01/2027 | xem trước | trẻ đó bị bỏ chọn, ghi "Already has a class change on 01/01/2027" | VAL-003 |
 | AC-010 | lớp Sunbeams không còn trẻ sau khi chuyển | Centre Director chọn Close this class | lớp chuyển trạng thái Closed, lịch sử giữ nguyên | FR-009; BR-004 |
 | AC-011 | lớp K2 là level cao nhất | Centre Director mở chi tiết lớp K2 | không có nút Move class up | FR-010 |
 | AC-012 | Teacher không có quyền cho lớp lên level | Teacher mở chi tiết lớp | không có nút Move class up | BR-005 |
 | AC-013 | Centre Director bỏ chọn tất cả trẻ trong xem trước | nhìn nút Confirm move | nút bị mờ, không xác nhận được | VAL-004 |
-| AC-014 *(mới)* | 14 trẻ đã chuyển sang Honeycombs từ 04/01/2027 | phụ huynh của một trẻ mở Messages ngày 05/01/2027 | thấy thread lớp Honeycombs mới; thread Sunbeams chỉ đọc | FR-005 |
+| AC-014 *(mới)* | 14 trẻ đã chuyển sang Honeycombs từ 01/01/2027 | phụ huynh của một trẻ mở Messages ngày 05/01/2027 | thấy thread lớp Honeycombs mới; thread Sunbeams chỉ đọc | FR-005 |
 
 #### Dependencies (Phụ thuộc)
 

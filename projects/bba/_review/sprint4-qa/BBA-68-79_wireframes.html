@@ -505,14 +505,43 @@ function consentCompliance() {
 }
 
 /* ===================== BBA-72 Move class up ===================== */
+const ED = "01/01/2027";
+function classDetail(k2, top) {
+  const name = k2 ? "K2 · Stars" : "N2 · Sunbeams";
+  const kids = k2 ? [["LK", "Lucas Koh", "6y 1m"], ["SC", "Sophia Chen", "5y 11m"], ["RI", "Rayyan Idris", "5y 10m"]] : [["EL", "Ethan Lim", "4y 9m"], ["NT", "Noah Tan", "4y 10m"], ["AT", "Aiden Tan Wei Jie", "4y 10m"], ["CL", "Chloe Lim Xin Yi", "4y"]];
+  const act = k2 || top ? '<span class="btn">✎ Edit class</span>' : `<span class="btn">✎ Edit class</span><span class="btn primary">Move class up${A(1)}</span>`;
+  return head(name, `${top ? "Junior campus · levels offered: Playgroup – N2" : "Small Wonder Tampines"} · School year 2026 · ${k2 ? "K2" : "N2"} · Teacher: Aisyah Rahman · ${k2 ? "3" : "4"} of 20 children`, act)
+    + utabs([["Children", kids.length], ["Teachers", 2], ["History"]], 0)
+    + (k2 ? `<div class="alert"><b>K2 is the highest level of this centre.</b><span>There is no Move class up. Children leaving in December go through Joining &amp; leaving › Graduation (mass withdrawal, reason Graduation).${A(1)}</span></div>` : "")
+    + (top ? `<div class="alert strong"><b>N2 is the highest level this centre offers.</b><span>There is no Move class up. Children going on to K1 at another centre move by Transfer (Joining &amp; leaving), or by Bulk transfer children for the whole class (Administration).${A(1)}</span></div>` : "")
+    + table(["Child", "!Age", "!Status", "!"], kids.map(k => tr([who(k[0], k[1]), k[2], '<span class="tag solid">Enrolled</span>', '<span class="act">⋯</span>'])));
+}
 function promotion(o) {
   o = o || {};
-  const kids = [["Ethan Lim", "N2 · Sunbeams", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Noah Tan", "N2 · Sunbeams", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Aiden Tan Wei Jie", "N2 · Sunbeams", "— stays in N2", "N2 full day", "—", 0], ["Chloe Lim Xin Yi", "N2 · Sunbeams", "K1 · Blossom", "N2 half day AM", "K1 half day AM", 1]];
-  const body = head("Move class up — N2 · Sunbeams", "Small Wonder Tampines · moves the selected children to the next level from the effective date.", "")
-    + `<div class="flt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${fl("Target level", "K1", { sel: 1, req: 1 })}${fl("Target class", "K1 · Honeycombs", { sel: 1, req: 1, hint: "18 of 20 after the move" + A(1) })}${fl("Effective date", "04/01/2027", { req: 1, hint: "Start of Term 1, 2027 (brand term calendar)" + A(2) })}</div>`
-    + table(["!☑", "Child", "Current class", "!Target class", "!Fee schedule now", "!Fee schedule from 04/01/2027"], kids.map(k => tr([k[5] ? "☑" : "☐", k[0], k[1], k[2], k[3], k[4]], k[5] ? "" : "muted")))
-    + `<div class="row between"><span style="color:var(--muted);font-size:13px">3 of 4 children selected · untick a child who repeats the level, withdraws or extends${A(3)}<br>Moved children join the K1 · Honeycombs class thread; the N2 · Sunbeams thread becomes read-only.${A(4)}</span><span class="row"><span class="btn">Cancel</span><span class="btn primary">Confirm move</span></span></div>`;
-  return body;
+  let kids = [["Ethan Lim", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Noah Tan", "K1 · Honeycombs", "N2 full day", "K1 full day", 1], ["Aiden Tan Wei Jie", "— stays in N2", "N2 full day", "—", 0], ["Chloe Lim Xin Yi", "K1 · Blossom", "N2 half day AM", "K1 half day AM", 1]];
+  if (o.none) kids = kids.map(k => [k[0], "— stays in N2", k[2], "—", 0]);
+  if (o.pending) kids[1] = ["Noah Tan", `<span class="tag dash">Already has a class change on ${ED}</span>${A(1)}`, "N2 full day", "—", -1];
+  const sel = kids.filter(k => k[4] === 1).length;
+  const cap = o.over ? `<b>22 of 20 after the move</b>${A(1)}` : "18 of 20 after the move" + (o.pending || o.none ? "" : A(1));
+  const tclass = o.noclass ? fl("Target class", "", { sel: 1, req: 1, ph: "No class for K1 in 2027", err: "Create a class for K1 in the new school year first." + A(1) }) : fl("Target class", "K1 · Honeycombs", { sel: 1, req: 1, hint: cap });
+  const box = k => k[4] === 1 ? "☑" : k[4] === -1 ? '<span style="opacity:.35">☐</span>' : "☐";
+  const tbl = o.noclass ? "" : table(["!☑", "Child", "Current class", "!Target class", "!Fee schedule now", "!Fee schedule from " + ED], kids.map(k => tr([box(k), k[0], "N2 · Sunbeams", k[1], k[2], k[3]], k[4] === 1 ? "" : "muted")));
+  const warn = o.over ? `<div class="alert strong"><b>⚠ K1 · Honeycombs will have 22 children; the maximum is 20.</b><span>You can still confirm. The Centre Director sets the maximum for each class.${A(2)}</span></div>` : "";
+  const dis = o.noclass || sel === 0;
+  const foot = `<div class="row between"><span style="color:var(--muted);font-size:13px">${o.noclass ? "Nothing to move until a K1 class exists for 2027." : `${sel} of ${kids.length} children selected · untick a child who repeats the level, withdraws or extends${o.none ? A(1) : o.over || o.pending ? "" : A(3)}`}${o.noclass || o.none || o.over || o.pending ? "" : `<br>Moved children join the K1 · Honeycombs class thread; the N2 · Sunbeams thread becomes read-only.${A(4)}`}</span><span class="row"><span class="btn">Cancel</span><span class="btn primary"${dis ? ' style="opacity:.35"' : ""}>Confirm move</span></span></div>`;
+  return head("Move class up — N2 · Sunbeams", "Small Wonder Tampines · moves the selected children to the next level from the effective date.", "")
+    + `<div class="flt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${fl("Target level", "K1", { sel: 1, req: 1 })}${tclass}${fl("Effective date", ED, { req: 1, hint: "Start of Term 1, 2027 (brand term calendar)" + (o.over || o.pending || o.none || o.noclass ? "" : A(2)) })}</div>`
+    + warn + tbl + foot;
+}
+function promotionResult(empty) {
+  if (empty) return head("Move class up — N2 · Sunbeams", "Confirmed 15/12/2026 10:42 by Grace Tan · effective " + ED, '<span class="btn">Open K1 · Honeycombs</span>')
+    + `<div class="alert"><b>4 of 4 children moved.</b><span>From ${ED} they are in K1 classes. Until then they stay in N2 · Sunbeams on every screen.</span></div>`
+    + `<div class="alert strong"><b>N2 · Sunbeams has no children from ${ED}.</b><span>Close this class? A closed class keeps its history; a class that had children is never deleted.${A(1)}</span><span class="row" style="margin-top:8px"><span class="btn">Keep open</span><span class="btn primary">Close this class</span></span></div>`;
+  const r = [["Ethan Lim", "K1 · Honeycombs", '<span class="tag solid">Moved</span>'], ["Noah Tan", "K1 · Honeycombs", '<span class="tag solid">Moved</span>'], ["Chloe Lim Xin Yi", "K1 · Blossom", '<span class="tag dash">Not moved</span><small>The move could not be saved for this child. Nothing changed for her.</small>'], ["Aiden Tan Wei Jie", "— stays in N2", '<span class="tag">Unticked</span>']];
+  return head("Move class up — N2 · Sunbeams", "Confirmed 15/12/2026 10:42 by Grace Tan · effective " + ED, '<span class="btn">⤓ Export result</span>')
+    + `<div class="cnt" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div><b>2</b>moved</div><div><b>1</b>not moved${A(1)}</div><div><b>1</b>stayed in N2</div></div>`
+    + table(["Child", "!Target class", "!Result"], r.map(x => tr([x[0], x[1], x[2]], x[2].includes("Unticked") ? "muted" : "")))
+    + `<div class="row between"><span style="color:var(--muted);font-size:13px">Children already moved are not moved again when you retry.${A(2)}</span><span class="btn primary">Retry 1 child</span></div>`;
 }
 
 /* ===================== BBA-73/74/75/77 Class attendance ===================== */
@@ -686,9 +715,27 @@ const SCREENS = [
   S("b71-2", "BBA-71 · 2", "Consent compliance", "Trẻ còn thiếu consent",
     [["default", "Danh sách", () => shell("safety", "Safety overview › <b>Consent compliance</b>", consentCompliance(), W.cd)]],
     { default: [["Đọc từ consent của từng trẻ, không lưu riêng; lọc Centre, lớp, loại consent; xuất Excel. Nội dung các loại consent theo file Consent Types của BBA.", "FR-011 · SRS Daily Operations §4.2 · Plane BBA-488 · OQ-10"]] }),
-  S("b72", "BBA-72", "Move class up", "Lên lớp hàng loạt — BR-CHF-048",
-    [["default", "Xem trước", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion(), W.cd)]],
-    { default: [["Vượt sĩ số chỉ cảnh báo.", "FR-004 · BR-003"], ["Ngày hiệu lực mặc định: ngày bắt đầu Term 1 năm sau theo lịch brand — chờ BBA chốt.", "Q-71-03 · AS-01 · OQ-02"], ["Bỏ chọn trẻ học lại, rút, gia hạn; trẻ bỏ chọn giữ lớp hoặc chuyển lớp khác cùng level.", "Q-74-03 · FR-003"], ["Lớp mới có thread mới; thread lớp cũ chỉ đọc.", "Q-74-10 · FR-005"]] }),
+  S("b72", "BBA-72", "Move class up", "Lên lớp hàng loạt — BR-CHF-048 · Q-74",
+    [["entry", "Chi tiết lớp", () => shell("classes", "Classes › <b>N2 · Sunbeams</b>", classDetail(), W.cd)],
+     ["default", "Xem trước", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion(), W.cd)],
+     ["over", "Vượt sĩ số", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion({ over: 1 }), W.cd)],
+     ["pending", "Trẻ đã có lần chuyển lớp", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion({ pending: 1 }), W.cd)],
+     ["noclass", "Chưa có lớp đích", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion({ noclass: 1 }), W.cd)],
+     ["none", "Bỏ chọn hết", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotion({ none: 1 }), W.cd)],
+     ["result", "Kết quả · lỗi từng phần", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotionResult(), W.cd)],
+     ["empty", "Lớp nguồn hết trẻ", () => shell("classes", "Classes › N2 · Sunbeams › <b>Move class up</b>", promotionResult(1), W.cd)],
+     ["k2", "Lớp K2", () => shell("classes", "Classes › <b>K2 · Stars</b>", classDetail(1), W.cd)],
+     ["top", "Level cao nhất chưa phải K2", () => shell("classes", "Classes › <b>N2 · Sunbeams</b>", classDetail(0, 1), W.cd)]],
+    { entry: [["\"Move class up\" ở chi tiết lớp; chỉ người có quyền (mặc định Centre Director, HQ Admin) thấy nút.", "FR-001 · BR-005"]],
+      default: [["Sĩ số lớp đích sau khi chuyển.", "FR-004 · Q-74-08"], ["Ngày hiệu lực mặc định: ngày bắt đầu Term 1 năm sau theo lịch brand — 01/01/2027 cho mọi brand (Centre Terms Setup, BBA-489). Mặc định này chờ BBA chốt.", "AS-01 · OQ-02 · Q-74-07"], ["Bỏ chọn trẻ học lại, rút, gia hạn; trẻ bỏ chọn giữ lớp hoặc chuyển lớp khác cùng level.", "Q-74-03 · FR-003"], ["Lớp mới có thread mới; thread lớp cũ chỉ đọc.", "Q-74-10 · FR-005"]],
+      over: [["Vượt sĩ số tối đa: hiện số sau khi chuyển.", "FR-004"], ["Chỉ cảnh báo, vẫn xác nhận được; CD cấu hình sĩ số từng lớp.", "Q-74-08 · BR-003"]],
+      pending: [["Trẻ đã có một lần chuyển lớp chưa đến ngày hiệu lực: bỏ chọn, không chọn lại được.", "VAL-003"]],
+      noclass: [["Level đích chưa có lớp cho năm học mới: không chuyển được.", "VAL-001 · Q-74-07"]],
+      none: [["Không còn trẻ nào được chọn: Confirm move mờ.", "VAL-004"]],
+      result: [["Lỗi từng phần: trẻ lỗi không chặn trẻ khác, trẻ lỗi giữ nguyên lớp cũ. Cách xử lý do DOTB quyết định — cần thêm FR.", "Q-74-12 · Plane BBA-72 (partial-failure report)"], ["Chạy lại không chuyển trùng trẻ đã chuyển.", "Q-74-13"]],
+      empty: [["Lớp nguồn hết trẻ: đề xuất đóng lớp; lớp đã có trẻ chỉ đóng, không xoá. Đóng tự động hay tay còn mở.", "FR-009 · BR-004 · OQ-04 · Q-74-15"]],
+      top: [["Centre không mở level kế tiếp (vd junior campus Malaysia): không có Move class up; lên level ở Centre khác là Transfer / Bulk transfer. Cách xử lý chờ BBA chốt.", "FR-010 · Q-74-02 · SRS ADM §1.2 Bulk transfer children · OQ-08"]],
+      k2: [["Level cao nhất không có Move class up; K2 tốt nghiệp tháng 12 qua Graduation (mass withdrawal).", "FR-010 · BR-007 · Q-74-01 · Q-74-06"]] }),
   S("b73", "BBA-73 · 74 · 75 · 77", "Class attendance", "Người đưa / đón, nhiệt độ, cờ muộn, huỷ điểm danh",
     [["default", "Bảng điểm danh", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance(), W.sa)],
      ["checkin", "Nhận trẻ · Someone else", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkIn(), W.sa)],
