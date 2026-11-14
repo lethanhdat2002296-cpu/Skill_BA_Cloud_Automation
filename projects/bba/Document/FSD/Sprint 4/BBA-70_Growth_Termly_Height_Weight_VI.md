@@ -20,8 +20,7 @@
 
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
-| 0.1 | 10/11/2026 | Business Analysis | Bản đầu cho ticket BBA-70: quy tắc nghiệp vụ, trường hợp đặc biệt và tiêu chí nghiệm thu để chốt với vận hành Centre (Centre Director) và HQ Ops. | HaiNguyen |
-| 0.2 | 13/11/2026 | Business Analysis | Cập nhật theo câu trả lời của BBA (Plane BBA-529, BBA-1059, BBA-489, BBA-524; file câu hỏi phản hồi Sprint 4) và tệp đính kèm (file export "Quarterly Heights & Weight Report" của Taidii, bảng quyền Taidii, Parent App Requirements, Centre Terms Setup): bỏ BMI; biểu đồ theo chuẩn Singapore / Malaysia; Term 1–4 theo lịch term của brand do HQ đặt; trẻ vắng và tạm nghỉ ở nhóm riêng; lưu cả lớp không bị dòng lỗi chặn; xoá số đo; nhắc giữa tháng cuối mỗi term; báo cáo completion chỉ có trạng thái hoàn thành; Measurement history và biểu đồ trên hồ sơ trẻ; Year view và Export theo bố cục Taidii. Sửa FR-001 đến FR-004, FR-008, FR-009, BR-003, DATA-001, AC-001, AC-002, AC-007, AC-009; thêm FR-010 đến FR-013, BR-005, DATA-003, AC-011 đến AC-017, OQ-06 đến OQ-09, AS-05, AS-06; thêm wireframe SCR-01 đến SCR-04 và mục 9 Tài liệu tham khảo. | HaiNguyen |
+| 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
 
 **Mức sẵn sàng:** Đã đặc tả màn nhập chiều cao, cân nặng theo lớp mỗi term, xem cả năm và xuất Excel, biểu đồ và lịch sử đo trên hồ sơ trẻ, xoá số đo, nhắc nhập, cảnh báo số liệu bất thường, phụ huynh xem ngay và báo cáo completion; có wireframe. 5 câu hỏi mở ở mục 7 cần BBA chốt (OQ-03, OQ-06 đến OQ-09).
 
@@ -128,18 +127,10 @@ Là giáo viên, tôi muốn nhập chiều cao và cân nặng của cả lớp
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Height & weight — nhập theo lớp | Wireframe: `Diagram/Wireframe/growth-height-weight-sprint4.html` (Nhập · Đã lưu · Xoá số đo) |
-| SCR-02 - Height & weight — Year view, Export | Wireframe: `Diagram/Wireframe/growth-height-weight-sprint4.html` (Xem cả năm · Export) |
-| SCR-03 - Child record — Health › Growth | Wireframe: `Diagram/Wireframe/growth-height-weight-sprint4.html` |
-| SCR-04 - Height & weight completion | Wireframe: `Diagram/Wireframe/growth-height-weight-sprint4.html` |
-
-![SCR-01 Height & weight — nhập theo lớp](../../../Diagram/Wireframe/png/SCR-01-growth-entry.png)
-
-![SCR-02 Height & weight — Year view](../../../Diagram/Wireframe/png/SCR-02-growth-year.png)
-
-![SCR-03 Child record — Health › Growth](../../../Diagram/Wireframe/png/SCR-03-child-growth.png)
-
-![SCR-04 Height & weight completion](../../../Diagram/Wireframe/png/SCR-04-growth-completion.png)
+| SCR-01 - Height & weight — nhập theo lớp |  |
+| SCR-02 - Height & weight — Year view, Export |  |
+| SCR-03 - Child record — Health › Growth |  |
+| SCR-04 - Height & weight completion |  |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
@@ -206,17 +197,6 @@ Danh sách lớp và trẻ (gồm trẻ vắng và tạm nghỉ); hồ sơ trẻ
 | OQ-07 | Có biểu đồ tăng trưởng không, có hiện đường percentile không? Q-71-02 (09/11): bỏ BMI và percentile, chỉ cần height + weight. BBA-1059 Q1 (13/11): gửi chuẩn biểu đồ Singapore / Malaysia. SRS Children & Families §4 mục 1.3: "View growth chart — height and weight against percentile curves". Taidii hiện vẽ 3 đường 3rd / 50th / 97th. FRD và wireframe đang theo BBA-1059. | HQ Ops | Cao |  |
 | OQ-08 | Brighton Montessori đo theo học kỳ nhưng dùng Term 1–4 (Centre Terms Setup; file export Taidii). Brighton đo ở term nào? Báo cáo completion có bỏ qua các term Brighton không đo không? | HQ Ops | Trung bình |  |
 | OQ-09 | "Health observations" (Parent App Requirements mục 19b) thuộc tính năng nào, có trong BBA-70 không? | HQ Ops | Thấp |  |
-
-### Giả định của BA (cần xác nhận cùng mục 7)
-
-| Mã | Giả định | Dùng ở |
-|---|---|---|
-| AS-01 | HQ Admin thiết lập lịch term theo brand. | FR-001 — đã xác nhận (Q-71-03) |
-| AS-02 | Khoảng hợp lệ tạm thời: chiều cao 40–150 cm, cân nặng 2–50 kg, cho tới khi BBA chốt. | VAL-001 — chờ OQ-03 |
-| AS-03 | Chiều cao và cân nặng nhập 1 chữ số thập phân. | FR-002 — chờ OQ-03 |
-| AS-04 | Báo cáo completion đếm số trẻ đã đo / chưa đo theo term. | FR-009 — đã xác nhận (BBA-1059 Q5) |
-| AS-05 | "Giữa tháng" là ngày 15. | FR-011 |
-| AS-06 | Ngày kết thúc một term là ngày trước ngày bắt đầu term sau; Term 4 kết thúc 31/12. | FR-001 — OQ-01 |
 
 ## 8. Phụ lục
 

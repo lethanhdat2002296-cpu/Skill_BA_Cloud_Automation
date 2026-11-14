@@ -1,4 +1,4 @@
-# BBA-71 Consent status per child & send consent request (Tiếng Việt)
+# Consent status per child & send consent request (Tiếng Việt)
 
 | Thuộc tính | Giá trị |
 |---|---|
@@ -20,10 +20,9 @@
 
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
-| 0.1 | 10/11/2026 | Business Analysis | Bản đầu cho ticket BBA-71: quy tắc nghiệp vụ, trường hợp đặc biệt và tiêu chí nghiệm thu để chốt với vận hành Centre (Centre Director) và HQ Ops. | HaiNguyen |
-| 0.2 | 13/11/2026 | Business Analysis | Cập nhật theo câu trả lời của BBA (file câu hỏi phản hồi Sprint 4 Q-73; Plane BBA-488, BBA-492) và file "Consent Types" (đính kèm BBA-488): Centre Director tạo và gửi consent theo lớp hoặc cả Centre, luôn kèm Announcement có link, email chỉ gửi khi chọn; loại và vòng đời consent (thu một lần lúc nhập học / theo sự kiện / Crossroad gia hạn hằng năm); nhiều consent cùng loại mỗi cái gắn một sự kiện; người nhận cả hai phụ huynh hoặc chỉ người liên hệ chính; tick checklist học sinh; thẻ "x of y families answered"; tuỳ chọn đồng ý lại khi có phiên bản mới; Consent compliance. Sửa FR-001, FR-003, FR-004, FR-005, FR-007, FR-009, BR-004, VAL-001, DATA-001, AC-001, AC-003, AC-004, AC-006 đến AC-008, AC-010; thêm FR-012 đến FR-014, BR-006, BR-007, VAL-004, AC-015 đến AC-021, OQ-06 đến OQ-10, AS-05; bỏ AS-02, AS-04 (mã cũ không dùng lại); thêm wireframe SCR-01 đến SCR-05 và mục 9 Tài liệu tham khảo. | HaiNguyen |
+| 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
 
-**Mức sẵn sàng:** Đã đặc tả tạo và gửi consent theo lớp / Centre, trạng thái consent của từng trẻ, nhắc và gửi lại, ghi nhận câu trả lời, phiên bản, vòng đời theo loại, thẻ tỷ lệ trả lời và Consent compliance; có wireframe. 6 câu hỏi mở ở mục 7 cần BBA chốt (OQ-04, OQ-05, OQ-07 đến OQ-10).
+**Mức sẵn sàng:** Đã đặc tả tạo và gửi consent theo lớp / Centre, trạng thái consent của từng trẻ, nhắc và gửi lại, ghi nhận câu trả lời, phiên bản, vòng đời theo loại, thẻ tỷ lệ trả lời và Consent compliance; có wireframe.
 
 ## 2. Mục tiêu và bối cảnh
 
