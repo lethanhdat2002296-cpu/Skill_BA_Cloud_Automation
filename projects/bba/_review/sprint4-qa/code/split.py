@@ -17,7 +17,7 @@ TITLES = {68: 'Medical alert banner', 69: 'Allergies list', 70: 'Growth — heig
 # screen id -> states kept (None = all)
 WF = {68: {'b68-1': None, 'b68-2': None}, 69: {'b69': None}, 70: {'b70-1': None, 'b70-2': None, 'b70-3': None},
       71: {'b71-1': None, 'b71-2': None}, 72: {'b72': None},
-      73: {'b73': ['default', 'checkin', 'checkinerr', 'checkout', 'blocked', 'bus', 'busin', 'busout', 'offline']}, 74: {'b73': ['default', 'checkin', 'reading'], 'b75': None},
+      73: {'b73': ['default', 'checkin', 'checkinerr', 'checkout', 'blocked', 'bus', 'busin', 'busout', 'offline']}, 74: {'b73': ['default', 'checkin', 'reading', 'fahrenheit', 'extra', 'manual', 'edit', 'missing'], 'b75': None},
       75: {'b73': ['default'], 'b75': None}, 76: {'b76': None}, 77: {'b73': ['default', 'void']},
       78: {'b78': None}, 79: {'b79-1': None, 'b79-2': None}}
 

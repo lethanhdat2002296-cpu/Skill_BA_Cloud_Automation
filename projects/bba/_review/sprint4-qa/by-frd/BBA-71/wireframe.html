@@ -575,11 +575,11 @@ function attendance(o) {
 function checkIn(o) {
   o = o || {};
   if (o.bus) return overlay("Sign in — Chloe Lim Xin Yi", `${fl("Time", "08:07", { req: 1, hint: "Defaults to now" })}
-    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1. A Bluetooth thermometer fills it in; staff can change it.${A(2)}</span></div>
+    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1 · °C / °F switch.${A(2)}</span></div>
     <div class="field"><label>Brought by <span class="req">*</span></label><div class="radio"><div><i></i>Mr Lim · Father</div><div><i></i>Mrs Lim · Mother</div><div class="on"><i></i>Bus driver · Bus 2 · Tampines North${A(1)}</div><div><i></i>Someone else</div></div></div>
     <div class="cam"><span>📷 Photo of the child with the bus driver — required${A(3)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Sign in</span>', 580);
   return overlay("Sign in — Noah Tan", `${fl("Time", "09:34", { req: 1, hint: "Defaults to now" })}
-    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1. A Bluetooth thermometer fills it in; staff can change it.${A(2)}</span></div>
+    <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1 · °C / °F switch.${A(2)}</span></div>
     <div class="field"><label>Brought by <span class="req">*</span></label><div class="radio">
       <div><i></i>Mr Tan · Father</div><div><i></i>Mrs Tan · Mother</div><div><i></i>Mdm Lee · Grandmother (authorised pickup)</div><div class="on"><i></i>Someone else${A(1)}</div></div></div>
     ${o.err ? grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "", { req: 1, err: "Enter the name and relationship of the adult." + A(4) })) : grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "Family driver", { req: 1 }))}
@@ -622,9 +622,36 @@ function voidRec() {
     ${fl("Reason", "Signed in against the wrong child at the gate; Noah arrived at 09:12.", { req: 1, ta: 1 })}
     <div class="alert"><span class="anno">1</span><span>The voided record no longer counts; staff then sign the child in again as usual. Voided records stay in the Void log with who, when and why. Direct edit vs void is still open (OQ-17).</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Void record</span>', 580);
 }
+function readingExtra(manual) {
+  const temp = manual ? fl("Temperature", "3.7", { req: 1, err: "Check the temperature." + A(1), hint: "Entered manually" }) : fl("Temperature", "37.2 °C", { req: 1, hint: "Picked with a quick button" });
+  const reason = manual ? "" : fl("Reason", "", { req: 1, ta: 1, ph: "Why was this extra reading taken?", err: "Enter why this extra reading was taken." + A(2) });
+  return overlay("Add a temperature reading — Mia Wong", `${grid2(temp, fl("Time", "11:05", { req: 1 }))}
+    <div class="field"><label>When <span class="req">*</span></label><div class="chips"><span>On arrival</span><span>After nap</span><span>Before pickup</span><span${manual ? "" : ' class="on"'}>Extra</span></div></div>${reason}`, '<span class="btn">Cancel</span><span class="btn primary" style="opacity:.35">Save reading</span>', 540);
+}
+function readingF() {
+  return overlay("Add a temperature reading — Aiden Tan Wei Jie", `<div class="field"><label>Temperature <span class="req">*</span></label>
+      <div class="row between"><div class="chips"><span>97.3</span><span>97.5</span><span>97.7</span><span>97.9</span><span>98.1</span><span class="on">Enter manually</span></div><div class="chips"><span>°C</span><span class="on">°F${A(1)}</span></div></div></div>
+    ${grid2(fl("Temperature (°F)", "100.2 °F", { req: 1, hint: "= 37.9 °C · at or above 37.5 °C (99.5 °F) is a fever" + A(2) }), fl("Time", "15:40", { req: 1 }))}
+    <div class="field"><label>When <span class="req">*</span></label><div class="chips"><span>On arrival</span><span>After nap</span><span class="on">Before pickup</span><span>Extra</span></div></div>
+    <div class="alert strong"><b>⚠ Fever</b><span>Saving notifies the class teacher and the Centre Director. Shown everywhere as 37.9 °C (100.2 °F).${A(3)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Save reading</span>', 600);
+}
+function readingEdit() {
+  return overlay("Edit temperature reading — Aiden Tan Wei Jie", `<div class="alert"><b>Before pickup · 15:40</b><span>37.9 °C · entered manually by Aisyah Rahman</span></div>
+    ${grid2(fl("Temperature", "36.9 °C", { req: 1, hint: "Was 37.9 °C" }), fl("Time", "15:40", { req: 1 }))}
+    ${fl("Reason", "Typed 37.9 instead of 36.9; re-measured 36.9 at 15:42.", { req: 1, ta: 1 })}
+    <div class="alert"><span class="anno">1</span><span>The old value, the new value, the reason, who and when are kept in the reading history. Delete also needs a reason.</span></div>`, '<span class="btn">Delete reading</span><span class="btn">Cancel</span><span class="btn primary">Save change</span>', 580);
+}
+function missingReadings() {
+  const r = [["Mia Wong", "Playgroup · Bumblebees", "On arrival 08:20 · 36.5", "Before pickup"], ["Caleb Ho", "Playgroup · Bumblebees", "On arrival 08:41 · 36.6 · After nap 14:35 · 36.7", "Before pickup"], ["Noah Tan", "N2 · Sunbeams", "On arrival 09:34 · 36.6", "After nap, Before pickup"]];
+  return head("Class attendance", "Children still missing a required temperature reading today.", '<span class="btn">⤓ Export (3)</span>')
+    + utabs([["Class attendance"], ["Overview by centre"], ["Late arrival", 1], ["Void log"]], 0)
+    + tb("Search child", 3) + flt("Small Wonder Tampines", "All classes", "Today · 24/11/2026", ["Temperature: Missing a reading" + A(1)], "Still in")
+    + table(["Child", "!Class", "!Readings today", "!Missing" + A(2), "!"], r.map(x => tr([x[0], x[1], x[2], `<span class="tag dash">${x[3]}</span>`, '<span class="btn sm">Add reading</span>'])))
+    + `<div class="alert"><span>Shown at 16:30. Which readings are required (only On arrival, or three a day) is set per centre — waiting for BBA.${A(3)}</span></div>`;
+}
 function lateSetting() {
   return head("Centre settings — Small Wonder Tampines", "One value per setting, set by country, brand, cluster or centre.", "")
-    + table(["Setting", "Value", "Set at", "!"], [tr(["Late arrival cut-off — morning" + A(1), "<b>09:15</b>", "Centre · default", '<span class="btn sm">Change</span>']), tr(["Late arrival cut-off — afternoon", "<b>12:15</b>", "Centre", '<span class="btn sm">Change</span>']), tr(["Fever threshold" + A(2), "<b>37.5 °C</b>", "Country · Singapore", '<span class="btn sm">Change</span>']), tr(["Required routines", "Infant, Playgroup", "Group · default", '<span class="btn sm">Change</span>'])]);
+    + table(["Setting", "Value", "Set at", "!"], [tr(["Late arrival cut-off — morning" + A(1), "<b>09:15</b>", "Centre · default", '<span class="btn sm">Change</span>']), tr(["Late arrival cut-off — afternoon", "<b>12:15</b>", "Centre", '<span class="btn sm">Change</span>']), tr(["Fever threshold" + A(2), "<b>37.5 °C</b>", "Country · Singapore", '<span class="btn sm">Change</span>']), tr(["Required temperature readings" + A(3), "On arrival, After nap, Before pickup", "Centre", '<span class="btn sm">Change</span>']), tr(["Required routines", "Infant, Playgroup", "Group · default", '<span class="btn sm">Change</span>'])]);
 }
 
 /* ===================== BBA-76 Overview today ===================== */
@@ -765,9 +792,14 @@ let SCREENS = [
      ["busout", "Trả trẻ lên xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }) + checkOutBus(), W.sa)],
      ["offline", "iPad cổng · mất mạng", () => gateOffline()],
      ["reading", "Thêm lần đo · sốt", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + addReading(), W.sa)],
+     ["extra", "Lần đo Extra · thiếu lý do", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + readingExtra(), W.t)],
+     ["manual", "Nhập tay · ngoài khoảng", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + readingExtra(1), W.t)],
+     ["fahrenheit", "Nhập theo °F", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + readingF(), W.t)],
+     ["edit", "Sửa lần đo", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + readingEdit(), W.cd)],
+     ["missing", "Trẻ còn thiếu lần đo", () => shell("attendance", "Daily operations › <b>Class attendance</b>", missingReadings(), W.cd)],
      ["void", "Huỷ lượt sai (BBA-77)", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + voidRec(), W.cd)]],
     { default: [["Người đưa: phụ huynh, người đón đã duyệt hoặc \"Someone else\" kèm tên và quan hệ.", "BBA-73 · SRS ATT §2.2"], ["Cờ \"Late (staff only)\" sau giờ chốt của Centre; không bao giờ hiện cho phụ huynh.", "BBA-75 · BR-OPS-014 · BR-OPS-015"], ["Lần đo ≥ 37.5 °C in đậm; \"x of 3\" = On arrival, After nap, Before pickup — chỉ một số Centre đo 3 lần.", "BBA-74 · Q-81-02 · AS-04 · OQ-06"]],
-      checkin: [["\"Someone else\" chỉ dùng khi nhận trẻ; bắt buộc tên và quan hệ.", "SRS ATT · BBA-73 FR-001"], ["Nút nhanh 36.3–36.7, mặc định 36.5, \"Enter manually\"; số từ nhiệt kế Bluetooth sửa được.", "Q-76-05 · Q-76-06 · BBA-74 FR-001 · FR-003"], ["Chụp ảnh trẻ cùng người giao; phụ huynh thấy ảnh trong app.", "Q-75-10 · Q-81-02 · BBA-73 FR-010"]],
+      checkin: [["\"Someone else\" chỉ dùng khi nhận trẻ; bắt buộc tên và quan hệ.", "SRS ATT · BBA-73 FR-001"], ["Nút nhanh 36.3–36.7, mặc định 36.5, \"Enter manually\", chuyển °C / °F. Nhiệt kế Bluetooth: chưa làm ở Sprint 4.", "Q-76-05 · BBA-74 FR-001 · FR-003 · FR-013"], ["Chụp ảnh trẻ cùng người giao; phụ huynh thấy ảnh trong app.", "Q-75-10 · Q-81-02 · BBA-73 FR-010"]],
       bus: [["Bộ lọc theo xe chỉ để gom; nhận / trả từng trẻ, mỗi trẻ một bản ghi và ảnh.", "Q-75-10 · BBA-73 FR-008"]],
       busin: [["Xe đến: người giao là tài xế; xe về: người nhận là phụ xe của công ty xe.", "Q-75-10 · BBA-73 FR-008"], [], ["Ảnh riêng từng trẻ.", "BBA-73 FR-010"]],
       checkinerr: [["\"Someone else\" bắt buộc tên và quan hệ.", "BBA-73 FR-001"], [], [], ["Thiếu một trong hai: không lưu.", "BBA-73 VAL-001"]],
@@ -775,11 +807,16 @@ let SCREENS = [
       busout: [["Xe về: người nhận là phụ xe của công ty xe. Phụ xe có phải nằm trong danh sách người đón đã duyệt của từng trẻ không — chờ BBA chốt.", "Q-75-10 · BBA-73 FR-008 · OQ-04"], ["Ảnh riêng từng trẻ.", "BBA-73 FR-010"]],
       offline: [["Attendance app chạy khi mất mạng và tự đồng bộ.", "Plane BBA-494"], ["Danh sách người đón đã duyệt lấy theo lần đồng bộ gần nhất; người vừa được duyệt sau đó chưa có — cách xử lý chờ BBA chốt.", "AS-04 · OQ-07"], ["Lượt trả lưu trên iPad, gửi khi có mạng; phụ huynh nhận thông báo lúc đó.", "BBA-73 FR-011 · AS-05"]],
       blocked: [["Người chờ duyệt không chọn được.", "BR-CDP-024"], ["Không override: gọi phụ huynh thêm người này trong Parents App; được duyệt mới đón.", "Q-75-02 · Q-75-04 · BBA-73 FR-004"]],
-      reading: [["Ngưỡng sốt theo quốc gia (mặc định 37.5 °C); nơi đặt ngưỡng còn chờ chốt.", "BR-OPS-012 · OQ-14"]],
+      reading: [["Ngưỡng sốt theo quốc gia (mặc định 37.5 °C); nơi đặt ngưỡng còn chờ chốt.", "BR-OPS-012 · BBA-535 · OQ-05"]],
+      extra: [[], ["Extra bắt buộc ghi lý do.", "BBA-74 FR-002 · VAL-002"]],
+      manual: [["Nhập tay ngoài khoảng hợp lệ: không lưu. Khoảng 34.0–42.0 °C là giả định; chặn hay cảnh báo còn chờ BBA.", "BBA-74 VAL-001 · AS-02 · OQ-04 · Q-76-05"]],
+      fahrenheit: [["Chuyển đơn vị °C / °F; nút nhanh và bộ chọn theo đơn vị đã chọn (mặc định °C — giả định).", "BBA-74 FR-013 · AS-05 · OQ-07"], ["Hiện giá trị quy đổi °C; ngưỡng sốt luôn so bằng °C.", "BBA-74 FR-013"], ["Hiển thị °C kèm °F ở bảng, Parents App, file xuất.", "BBA-74 FR-013 · AS-05"]],
+      edit: [["Sửa / xoá có lý do; lịch sử giữ giá trị cũ.", "BBA-74 FR-008 · DATA-002"]],
+      missing: [["Lọc trẻ còn thiếu lần đo bắt buộc.", "BBA-74 FR-006"], ["Thời điểm còn thiếu theo thiết lập của Centre.", "AS-04"], ["Số lần đo không giới hạn; một số Centre đo 3 lần — số lần bắt buộc theo Centre chờ BBA chốt.", "BBA-535 · Q-81-02 · OQ-06"]],
       void: [["Huỷ trực tiếp: Centre Admin, CD, Senior Teacher được giao; giáo viên gửi yêu cầu. Sửa trực tiếp hay chỉ huỷ + ghi lại còn chờ chốt.", "BR-OPS-022 · BR-OPS-023 · OQ-17 · OQ-18"]] }),
   S("b75", "BBA-75 · 74", "Centre settings", "Giờ chốt đến muộn, ngưỡng sốt",
     [["default", "Cài đặt", () => shell("settings", "Settings › <b>Centre settings</b>", lateSetting(), W.hq)]],
-    { default: [["Giờ chốt theo Centre: sáng 09:15, chiều 12:15; so với giờ ghi nhận ở cổng; đổi chỉ áp từ ngày đổi.", "Q-77-03 · BBA-75 FR-001 · FR-002 · FR-007"], ["Ngưỡng sốt theo quốc gia (SRS) — prototype iPad cho chỉnh trên máy.", "OQ-14"]] }),
+    { default: [["Giờ chốt theo Centre: sáng 09:15, chiều 12:15; so với giờ ghi nhận ở cổng; đổi chỉ áp từ ngày đổi.", "Q-77-03 · BBA-75 FR-001 · FR-002 · FR-007"], ["Ngưỡng sốt theo quốc gia (SRS) — prototype iPad cho chỉnh trên máy; nhân viên dùng cùng ngưỡng.", "OQ-14 · BBA-528 · BBA-535"], ["Lần đo bắt buộc theo Centre — đề xuất, chờ BBA chốt.", "BBA-74 AS-04 · OQ-06"]] }),
   S("b76", "BBA-76", "Overview today", "Tổng quan theo Centre / brand — Cluster Head",
     [["default", "Theo Centre", () => shell("attendance", "Daily operations › <b>Overview today</b>", overview(), W.ch)],
      ["drill", "Mở 1 Centre", () => shell("attendance", "Daily operations › <b>Overview today</b>", overview({ drill: 1 }), W.ch)]],

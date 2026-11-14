@@ -261,13 +261,14 @@
       "note": "v0.2: file cũ 1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0 đã chuyển vào thùng rác (không sửa được .docx tại chỗ); link Plane [BA] BBA-605 đã đổi."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
-      "file_id": "1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0",
-      "url": "https://drive.google.com/file/d/1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0/view",
+      "file_id": "1VQERqeIMNb7GGMFx7rLOcKSsAn4HTn04",
+      "url": "https://drive.google.com/file/d/1VQERqeIMNb7GGMFx7rLOcKSsAn4HTn04/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-74 Temperature readings (≥3/day) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "23f32bc3c4cb2930aa18f4dda1ca897729a4aec15a8256ac19231c0bda570407",
-      "synced_at": "2026-11-10 10:33"
+      "title": "[FRD] BBA-74-3.2.1.02 Temperature readings (3 or more per day) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "47bd17055e7b12204c1a02f352decff8e82afca1e45be01adfa130421d19d5ea",
+      "synced_at": "2026-11-14 03:11",
+      "note": "v0.2: file cũ 1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0 đã chuyển vào thùng rác; link Plane [BA] BBA-607 đã đổi."
     },
     "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
       "file_id": "15_DitKliX6XuS-t9KairbiOPDr8Fnmfh",
@@ -502,6 +503,16 @@
       "version": "0.1",
       "source_sha256": "d957217a3ee373e6f004e59d9220c945129476b65aed9227f8ef5432827bd849",
       "synced_at": "2026-11-11 07:40"
+    },
+    "Diagram/Wireframe/temperature-readings-sprint4": {
+      "file_id": "1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x",
+      "url": "https://drive.google.com/file/d/1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x/view",
+      "folder_id": "1Eofvv4J6wrH-Jgv3j4PV7xrZFc1kz4Os",
+      "title": "BBA-74.html",
+      "version": "0.2",
+      "source_sha256": "85aa3011c1665e16210e70465d8e235cf180257a98064662a909ee111a7a8623",
+      "synced_at": "2026-11-14 03:09",
+      "note": "Wireframe BBA-74 — thư mục wireframe do user chỉ định (14/11/2026)."
     }
   },
   "folders_used": {

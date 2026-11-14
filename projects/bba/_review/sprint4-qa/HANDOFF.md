@@ -29,6 +29,8 @@
 
 ## 3. Drive và Plane
 
+- Wireframe HTML từng ticket: thư mục Drive `1Eofvv4J6wrH-Jgv3j4PV7xrZFc1kz4Os` (user tạo; đã có BBA-69 → BBA-74). Link wireframe ghi vào mục UI Reference của FRD.
+
 - Thư mục Drive Sprint 4: `1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV` · thư mục TA (tiếng Anh): `1KqkgghHymUu7T9_xco51AIjnoSufVg7_`. ID từng file: `projects/bba/_drive.json`.
 - Plane: `https://plane.bba.dotb.vn/api/v1/workspaces/bba/projects/b3a74ce6-a01c-4d94-8287-7d03dd13e84e`, header `X-API-Key`. **Key không nằm trong gói này** — user đính kèm lại file CSV secret key; đọc bằng `tail -1 <csv> | awk -F, '{print $NF}'`, không in ra.
 - Link tài liệu chỉ gắn trên subtask **[BA]** (seq Plane): 66→591, 67→593, 68→595, 69→597, 70→599, 71→601, 72→603, 73→605, 74→607, 75→609, 76→611, 77→613, 78→615, 79→617. Danh sách đầy đủ + issue id: `R/plane/ba_subtasks.json`, link hiện có: `R/plane/links.json`.
@@ -46,7 +48,8 @@
 | BBA-71 Consent | **v0.2** (`1ce34a5`, gồm wireframe `consent-status-sprint4.html` + 6 PNG) | **vẫn v0.1** `1uQ4Ms_s…` | Tải bản Word v0.2 lên Drive (Upload new version, giữ ID) → `_drive.json` 0.2. OQ-10 mới (file Consent Types: "Accuracy of Information", "Outing"). |
 | BBA-72 | **v0.2** (14/11/2026) | v0.2 `1ZA2NCYv…` (file mới, cũ đã vào thùng rác); Plane [BA] 603 In Review, đã tag Hai.Nguyen | Chờ Hai.Nguyen review. |
 | BBA-73 | **v0.2** (14/11/2026) | v0.2 `167sUtxA…` (file mới, cũ đã vào thùng rác); Plane [BA] 605 In Review, đã tag Hai.Nguyen | Chờ Hai.Nguyen review. |
-| BBA-74 → BBA-79 | v0.1 | v0.1 | Nháp US đã cập nhật theo file câu hỏi phản hồi: `R/frd-draft/BBA-7x_…_US_Draft.md`. User đang đi **từng file**: với mỗi file, kiểm tra Plane "BBA input…" liên quan **và tệp đính kèm**, chỉnh wireframe, rồi khi user gửi file Word mẫu → làm v0.2 đủ mục (1–9) theo mẫu, như BBA-69/70/71. Script mẫu: `R/code/final_70.py`, `final_71.py` (tham số: thư mục chứa `frd-draft/`, `by-frd/`, `png/` và `projects/bba`). |
+| BBA-74 | **v0.2** (14/11/2026) | v0.2 `1VQERqeI…` (file mới, cũ đã vào thùng rác); wireframe `BBA-74.html` ở thư mục wireframe `1Eofvv4J…`; Plane [BA] 607 In Review, đã tag Hai.Nguyen | Chờ Hai.Nguyen review. Bluetooth (FR-003) để sprint sau; có quy đổi °F (FR-013). |
+| BBA-75 → BBA-79 | v0.1 | v0.1 | Nháp US đã cập nhật theo file câu hỏi phản hồi: `R/frd-draft/BBA-7x_…_US_Draft.md`. User đang đi **từng file**: với mỗi file, kiểm tra Plane "BBA input…" liên quan **và tệp đính kèm**, chỉnh wireframe, rồi khi user gửi file Word mẫu → làm v0.2 đủ mục (1–9) theo mẫu, như BBA-69/70/71. Script mẫu: `R/code/final_70.py`, `final_71.py` (tham số: thư mục chứa `frd-draft/`, `by-frd/`, `png/` và `projects/bba`). |
 | BBA-50 Approval delegation | v0.2 VI + EN | VI `1k4Qh7c_…`, EN `12GGYhBz…` | Drive còn bản cũ VI `1EhPKlTj…` và EN `1k2lwwOe…` — hỏi user có xoá không. |
 
 Liên quan Plane khác: BBA-528 (staff clock-in → BBA-79), BBA-488 (consent), BBA-489 (term dates — tệp đính kèm "Centre Terms Setup.xlsx"), BBA-524 (District Manager → Cluster Head), BBA-529 / BBA-1059 (growth, có tệp đính kèm).
