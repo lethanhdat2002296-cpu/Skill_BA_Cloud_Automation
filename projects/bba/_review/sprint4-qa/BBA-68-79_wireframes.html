@@ -582,7 +582,7 @@ function checkIn(o) {
     <div class="field"><label>Temperature <span class="req">*</span></label><div class="chips"><span>36.3</span><span>36.4</span><span class="on">36.5</span><span>36.6</span><span>36.7</span><span>Enter manually</span></div><span class="hint">Picker 36.0–40.0 °C, step 0.1. A Bluetooth thermometer fills it in; staff can change it.${A(2)}</span></div>
     <div class="field"><label>Brought by <span class="req">*</span></label><div class="radio">
       <div><i></i>Mr Tan · Father</div><div><i></i>Mrs Tan · Mother</div><div><i></i>Mdm Lee · Grandmother (authorised pickup)</div><div class="on"><i></i>Someone else${A(1)}</div></div></div>
-    ${grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "Family driver", { req: 1 }))}
+    ${o.err ? grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "", { req: 1, err: "Enter the name and relationship of the adult." + A(4) })) : grid2(fl("Name", "Ahmad", { req: 1 }), fl("Relationship", "Family driver", { req: 1 }))}
     <div class="cam"><span>📷 Photo of the child with the person — required${A(3)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Sign in</span>', 580);
 }
 function checkOut(block) {
@@ -593,6 +593,24 @@ function checkOut(block) {
       <div class="${block ? "on" : ""}"><i></i>Not on the list</div></div></div>
     ${block ? `<div class="alert strong"><b>⚠ Do not release the child.</b><span>Call the parent to add this person in the Parents App. The person can collect the child once approved.${A(2)}</span></div>` : `<div class="cam"><span>📷 Photo of the child with the person collecting — required${A(3)}</span></div>`}`,
     block ? '<span class="btn">Close</span><span class="btn primary" style="opacity:.35">Sign out</span>' : '<span class="btn">Cancel</span><span class="btn primary">Sign out</span>', 560);
+}
+function checkOutBus() {
+  return overlay("Sign out — Chloe Lim Xin Yi", `${fl("Time", "17:20", { req: 1 })}
+    <div class="field"><label>Collected by <span class="req">*</span></label><div class="radio">
+      <div><i></i><span class="mini-av">ML</span>Mr Lim · Father · ••••482K</div><div><i></i><span class="mini-av">ML</span>Mrs Lim · Mother · ••••117A</div>
+      <div class="on"><i></i><span class="mini-av">RS</span>Bus attendant · Bus 2 · Tampines North${A(1)}</div><div><i></i>Not on the list</div></div></div>
+    <div class="cam"><span>📷 Photo of the child with the bus attendant — required${A(2)}</span></div>`, '<span class="btn">Cancel</span><span class="btn primary">Sign out</span>', 560);
+}
+function gateOffline() {
+  return `<div style="padding:22px;background:var(--fill)"><div class="ipad"><div class="bar"><b>Busy Bees @ Tampines</b><span>Children · Staff · Visitors · Sync queue (3)</span><span>○ Offline${A(1)}</span></div><div class="body">
+    <div class="row between"><b style="font-size:18px">Sign out — Ethan Lim · N2 · Sunbeams</b><span class="tag">24/11/2026 · 17:40</span></div>
+    <div class="field"><label>Collected by <span class="req">*</span></label><div class="radio">
+      <div class="on"><i></i><span class="mini-av">ML</span>Mr Lim · Father · ••••482K</div><div><i></i><span class="mini-av">SL</span>Serena Lim · Mother · ••••117A</div>
+      <div><i></i><span class="mini-av">GL</span>Mdm Goh · Grandmother · ••••903C</div><div><i></i>Not on the list</div></div>
+      <span class="hint">Approved pickup list as of the last sync, 24/11/2026 16:55${A(2)}</span></div>
+    <div class="cam">📷 Photo of the child with the person collecting — required</div>
+    <div class="alert"><span>No internet. This sign-out is saved on the iPad and sent when the connection is back; the parent is notified then.${A(3)}</span></div>
+    <div class="row between"><span style="color:var(--muted);font-size:13px">3 records waiting to sync</span><span class="btn primary">Sign out</span></div></div></div></div>`;
 }
 function addReading() {
   return overlay("Add a temperature reading — Aiden Tan Wei Jie", `${grid2(fl("Temperature", "37.9 °C", { req: 1, hint: "Entered manually · at or above 37.5 °C is a fever" + A(1) }), fl("Time", "15:40", { req: 1 }))}
@@ -741,15 +759,21 @@ const SCREENS = [
      ["checkin", "Nhận trẻ · Someone else", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkIn(), W.sa)],
      ["bus", "Lọc theo xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }), W.sa)],
      ["busin", "Nhận trẻ từ xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }) + checkIn({ bus: 1 }), W.sa)],
+     ["checkinerr", "Someone else · thiếu quan hệ", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkIn({ err: 1 }), W.sa)],
      ["checkout", "Trả trẻ", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkOut(0), W.sa)],
      ["blocked", "Người đón ngoài danh sách", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + checkOut(1), W.sa)],
+     ["busout", "Trả trẻ lên xe", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance({ bus: 1 }) + checkOutBus(), W.sa)],
+     ["offline", "iPad cổng · mất mạng", () => gateOffline()],
      ["reading", "Thêm lần đo · sốt", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + addReading(), W.sa)],
      ["void", "Huỷ lượt sai (BBA-77)", () => shell("attendance", "Daily operations › <b>Class attendance</b>", attendance() + voidRec(), W.cd)]],
     { default: [["Người đưa: phụ huynh, người đón đã duyệt hoặc \"Someone else\" kèm tên và quan hệ.", "BBA-73 · SRS ATT §2.2"], ["Cờ \"Late (staff only)\" sau giờ chốt của Centre; không bao giờ hiện cho phụ huynh.", "BBA-75 · BR-OPS-014 · BR-OPS-015"], ["Lần đo ≥ 37.5 °C in đậm; \"x of 3\" = On arrival, After nap, Before pickup — chỉ một số Centre đo 3 lần.", "BBA-74 · Q-81-02 · AS-04 · OQ-06"]],
       checkin: [["\"Someone else\" chỉ dùng khi nhận trẻ; bắt buộc tên và quan hệ.", "SRS ATT · BBA-73 FR-001"], ["Nút nhanh 36.3–36.7, mặc định 36.5, \"Enter manually\"; số từ nhiệt kế Bluetooth sửa được.", "Q-76-05 · Q-76-06 · BBA-74 FR-001 · FR-003"], ["Chụp ảnh trẻ cùng người giao; phụ huynh thấy ảnh trong app.", "Q-75-10 · Q-81-02 · BBA-73 FR-010"]],
       bus: [["Bộ lọc theo xe chỉ để gom; nhận / trả từng trẻ, mỗi trẻ một bản ghi và ảnh.", "Q-75-10 · BBA-73 FR-008"]],
       busin: [["Xe đến: người giao là tài xế; xe về: người nhận là phụ xe của công ty xe.", "Q-75-10 · BBA-73 FR-008"], [], ["Ảnh riêng từng trẻ.", "BBA-73 FR-010"]],
+      checkinerr: [["\"Someone else\" bắt buộc tên và quan hệ.", "BBA-73 FR-001"], [], [], ["Thiếu một trong hai: không lưu.", "BBA-73 VAL-001"]],
       checkout: [["Chỉ chọn được người trong danh sách đã duyệt; người chờ duyệt không chọn được.", "BR-OPS-004 · BR-CDP-024"], [], ["Chụp ảnh trẻ cùng người đón.", "BBA-73 FR-010"]],
+      busout: [["Xe về: người nhận là phụ xe của công ty xe. Phụ xe có phải nằm trong danh sách người đón đã duyệt của từng trẻ không — chờ BBA chốt.", "Q-75-10 · BBA-73 FR-008 · OQ-04"], ["Ảnh riêng từng trẻ.", "BBA-73 FR-010"]],
+      offline: [["Attendance app chạy khi mất mạng và tự đồng bộ.", "Plane BBA-494"], ["Danh sách người đón đã duyệt lấy theo lần đồng bộ gần nhất; người vừa được duyệt sau đó chưa có — cách xử lý chờ BBA chốt.", "AS-04 · OQ-07"], ["Lượt trả lưu trên iPad, gửi khi có mạng; phụ huynh nhận thông báo lúc đó.", "BBA-73 FR-011 · AS-05"]],
       blocked: [["Người chờ duyệt không chọn được.", "BR-CDP-024"], ["Không override: gọi phụ huynh thêm người này trong Parents App; được duyệt mới đón.", "Q-75-02 · Q-75-04 · BBA-73 FR-004"]],
       reading: [["Ngưỡng sốt theo quốc gia (mặc định 37.5 °C); nơi đặt ngưỡng còn chờ chốt.", "BR-OPS-012 · OQ-14"]],
       void: [["Huỷ trực tiếp: Centre Admin, CD, Senior Teacher được giao; giáo viên gửi yêu cầu. Sửa trực tiếp hay chỉ huỷ + ghi lại còn chờ chốt.", "BR-OPS-022 · BR-OPS-023 · OQ-17 · OQ-18"]] }),

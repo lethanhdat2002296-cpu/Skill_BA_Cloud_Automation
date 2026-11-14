@@ -15,6 +15,14 @@
 - Parents App hiện ảnh lúc giao nhận (Q-81-02) → FR-010.
 - Ô nhập tay ở check-in: DOTB tự quyết (Q-75-02) → chỉ hiện khi chọn "Someone else".
 
+**Cập nhật theo Plane (14/11/2026)**
+- Không có task "BBA input…" riêng cho BBA-73; [BBA confirm] BBA-1087 chưa có comment.
+- Mô tả ticket BBA-73 ghi "'other' with note" và "picker verification **warning** if not on the list" — BBA đã chốt mới hơn ở Q-75-04: **chặn, không override** → giữ FR-004 (chặn).
+- BBA-544 (Todo, chưa trả lời): người đón một lần **không có ở Phase 1** (khớp BR-002); phụ huynh thêm người đón cần duyệt, **xoá có hiệu lực ngay**; workshop recap ghi người duyệt là **"teacher or Centre Director"** — lệch với SRS BR-CDP-024 (Centre Director hoặc School Admin) → OQ-06. Câu "người mới chưa duyệt có được đón không" vẫn mở ở BBA-544 nhưng Q-75-02/04 đã chốt là không.
+- BBA-494: Attendance app **chạy khi mất mạng và tự đồng bộ** (Phase 1) → FR-011 mới, AS-04, AS-05, OQ-07; wireframe thêm trạng thái "iPad cổng · mất mạng".
+- BBA-493: BBA hỏi giữ log dữ liệu cá nhân **tới 3 năm sau khi trẻ rời trường**, chưa chốt; liên hệ DPO@busybeesasia.com → liên quan OQ-05 (thời gian lưu ảnh), chưa đủ để đóng.
+- Wireframe thêm: "Someone else · thiếu quan hệ" (VAL-001), "Trả trẻ lên xe" (phụ xe — OQ-04), "iPad cổng · mất mạng".
+
 ---
 
 ## US-001 - Ghi người đưa trẻ đến và người đón trẻ về
@@ -36,6 +44,7 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 | FR-007 *(sửa)* | Thông báo nhận trẻ và trả trẻ gửi cho phụ huynh ghi tên người đưa / người đón và giờ; không nhắc cờ đến muộn và tên nhân viên ở cổng. |
 | FR-008 *(sửa)* | Bộ lọc theo tuyến xe gom trẻ của một xe vào một danh sách; nhận và trả vẫn làm từng trẻ, mỗi trẻ một bản ghi và ảnh riêng. Lúc xe đến, người giao là tài xế; lúc xe về, người nhận là phụ xe của công ty xe (Q-75-10). |
 | FR-009 | Mỗi lượt nhận / trả lưu người đưa / người đón, giờ, nhân viên thực hiện và thiết bị dùng (SMS web hoặc ứng dụng điểm danh). |
+| FR-011 *(mới)* | Ở ứng dụng điểm danh tại cổng, khi mất mạng nhân viên vẫn nhận / trả trẻ: danh sách người đón đã duyệt lấy theo lần đồng bộ gần nhất (hiện thời điểm đồng bộ); lượt nhận / trả lưu trên máy và tự gửi khi có mạng; thông báo cho phụ huynh gửi khi lượt đó được đồng bộ (Plane BBA-494; AS-04, AS-05). |
 | FR-010 *(mới)* | Mỗi lượt nhận / trả chụp ảnh trẻ cùng người giao / nhận; Parents App hiện ảnh này để phụ huynh thấy ai đưa / đón (Q-75-10, Q-81-02; SRS Daily Operations "Check out: time, photo and the person collecting"). |
 
 #### Functional Flow - Main (Luồng chính)
@@ -106,6 +115,7 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 | AC-009 *(sửa)* | 6 trẻ đi xe tuyến A đến trường | nhân viên lọc tuyến A và nhận từng trẻ | 6 bản ghi riêng, mỗi bản ghi có ảnh của trẻ, người đưa là tài xế tuyến A | FR-008 |
 | AC-010 | lượt nhận lưu trên ứng dụng điểm danh ở cổng | Centre Director xem lịch sử | thấy người đưa, giờ, nhân viên, thiết bị | FR-009; DATA-001; BR-004 |
 | AC-011 *(mới)* | Noah đến lúc 09:34, sau giờ chốt muộn | phụ huynh nhận thông báo nhận trẻ | thông báo có tên người đưa và giờ; không có chữ "Late" và không có tên nhân viên ở cổng | FR-007 |
+| AC-013 *(mới)* | iPad cổng mất mạng, lần đồng bộ gần nhất 16:55 | nhân viên trả Ethan cho bố lúc 17:40 | lượt trả lưu trên iPad với giờ 17:40; khi có mạng, lượt được gửi và phụ huynh nhận thông báo ghi 17:40 | FR-011 |
 | AC-012 *(mới)* | Ethan được bố đón lúc 17:40, nhân viên chụp ảnh | phụ huynh mở Parents App | thấy ảnh lúc giao nhận và tên người đón | FR-010 |
 
 #### Dependencies (Phụ thuộc)
@@ -123,4 +133,8 @@ Danh sách người được phép đón và việc duyệt (Children & Families
 | OQ-03 | Thông báo cho phụ huynh có ghi tên người đưa / người đón không? | Mở (SRS chỉ cấm cờ muộn và tên nhân viên ở cổng) |
 | OQ-04 | Trẻ đi xe về nhà: người nhận là phụ xe của công ty xe (Q-75-10). Phụ xe có phải nằm trong danh sách người đón đã duyệt của từng trẻ không? | Mở |
 | OQ-05 *(mới)* | Ảnh và bằng chứng giao nhận lưu bao lâu, ai xem / xuất, có tự xoá không? | Mở (Q-75-12) |
+| OQ-06 *(mới)* | Ai duyệt người đón mới: Centre Director và School Admin (SRS BR-CDP-024) hay teacher và Centre Director (workshop recap, Plane BBA-544)? | Mở (BBA-544) |
+| OQ-07 *(mới)* | Khi iPad cổng mất mạng: người đón vừa được duyệt sau lần đồng bộ gần nhất chưa có trong danh sách — nhân viên xử lý thế nào? | Mở (BBA-494) |
 | AS-03 | Thông báo cho phụ huynh có tên người đưa / người đón. | Chờ OQ-03 |
+| AS-04 *(mới)* | Khi mất mạng, danh sách người đón dùng bản của lần đồng bộ gần nhất; người chưa có trong bản đó coi như "Not on the list". | Chờ OQ-07 |
+| AS-05 *(mới)* | Thông báo nhận / trả trẻ gửi cho phụ huynh khi lượt đó được đồng bộ, kèm giờ thật của lượt. | FR-011 |
