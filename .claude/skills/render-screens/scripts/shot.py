@@ -6,7 +6,7 @@ Cách dùng:
     python .claude/skills/render-screens/scripts/shot.py <du-an> --only SCR-03 SCR-05
     python .claude/skills/render-screens/scripts/shot.py <du-an> --no-mobile
 
-Quy ước tên ảnh (outputs/<du-an>/ui/png/):
+Quy ước tên ảnh (projects/<du-an>/Diagram/Wireframe/png/):
     SCR-xx-<slug>.png               state đầu tiên (default), desktop 1440
     SCR-xx-<slug>--<state>.png      các state khác, desktop 1440
     SCR-xx-<slug>-mobile.png        state default, mobile 390 (chỉ storefront)
@@ -28,6 +28,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import resolve  # noqa: E402
 BUILD_UI = REPO / ".claude" / "skills" / "wireframe" / "scripts" / "build_ui.py"
 
 DESKTOP = {"width": 1440, "height": 900}
@@ -115,10 +117,10 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--no-mobile", action="store_true", help="bỏ khung 390 cho storefront")
     args = ap.parse_args(argv[1:])
 
-    du_an = args.du_an.strip("/\\")
-    project = REPO / "outputs" / du_an
-    screens_dir = project / "ui" / "screens"
-    png_dir = project / "ui" / "png"
+    project = resolve(args.du_an)
+    du_an = project.slug
+    screens_dir = project.screens
+    png_dir = project.png
     png_dir.mkdir(parents=True, exist_ok=True)
 
     files = sorted(screens_dir.glob("SCR-*.html"))
@@ -129,8 +131,8 @@ def main(argv: list[str]) -> int:
         print(f"ERROR: không có màn hình nào trong {screens_dir.relative_to(REPO)}")
         return 1
 
-    # Bảo đảm tokens.css đã được copy vào ui/assets
-    if not (project / "ui" / "assets" / "tokens.css").exists():
+    # Bảo đảm tokens.css đã được copy vào Diagram/Wireframe/assets
+    if not (project.assets / "tokens.css").exists():
         subprocess.run([sys.executable, str(BUILD_UI), du_an], check=False)
 
     try:
@@ -140,6 +142,7 @@ def main(argv: list[str]) -> int:
         return 1
 
     all_shots: list[Path] = []
+    review: list[Path] = []  # ảnh mặc định mỗi màn + ảnh có cảnh báo — chỉ những ảnh này cần mở xem
     problems = 0
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -154,7 +157,8 @@ def main(argv: list[str]) -> int:
                 shots += m_shots
                 issues += [dict(i, state=f"{i['state']} @390") for i in m_issues]
             all_shots += shots
-            print(f"OK: {stem} ({kind}) -> {len(shots)} ảnh")
+            review += [x for x in shots if x.stem == stem]
+            review += [x for x in shots if any(x.stem.endswith(f"--{i['state'].split(' ')[0]}") for i in issues)]
             for i in issues:
                 problems += 1
                 print(f"  LAYOUT [{i['state']}]: {i['issue']}")
@@ -162,10 +166,10 @@ def main(argv: list[str]) -> int:
 
     subprocess.run([sys.executable, str(BUILD_UI), du_an], check=False, capture_output=True)
 
-    print("\nẢnh cần mở xem (Read) để review:")
-    for s in all_shots:
+    print("Ảnh cần mở xem (Read) để review — chỉ ảnh mặc định và ảnh có cảnh báo; ảnh khác chỉ mở khi cần:")
+    for s in dict.fromkeys(review):
         print(f"  {s.relative_to(REPO).as_posix()}")
-    print(f"\nshot: {len(files)} màn, {len(all_shots)} ảnh, {problems} cảnh báo layout")
+    print(f"shot: {len(files)} màn, {len(all_shots)} ảnh, {problems} cảnh báo layout")
     return 0
 
 

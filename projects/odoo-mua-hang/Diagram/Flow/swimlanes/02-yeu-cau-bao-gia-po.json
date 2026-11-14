@@ -1,0 +1,28 @@
+{
+  "title": "Swimlane 2 — Vật tư Nhập kho: Yêu cầu báo giá → PO → nhập kho (v0.3)",
+  "orientation": "vertical",
+  "lanes": ["Nhân viên MH", "Hệ thống", "Nhà cung cấp", "Kế toán", "Trưởng phòng Mua hàng", "Thủ kho"],
+  "nodes": [
+    {"id": "s", "lane": 1, "col": 0, "type": "start", "label": "RFQ Nháp từ swimlane 1"},
+    {"id": "m1", "lane": 0, "col": 1, "label": "Send email: chọn N NCC (ngăn cách ;)"},
+    {"id": "x1", "lane": 1, "col": 2, "type": "system", "label": "Tách gửi riêng từng NCC; RFQ → RFQ"},
+    {"id": "v1", "lane": 2, "col": 3, "label": "Reply email kèm file Excel báo giá"},
+    {"id": "x2", "lane": 1, "col": 4, "type": "decision", "label": "Đọc được Excel?"},
+    {"id": "m0", "lane": 0, "col": 4, "label": "Nhập tay báo giá của NCC"},
+    {"id": "m2", "lane": 0, "col": 5, "label": "So sánh giá, chọn 1 NCC cho cả phiếu"},
+    {"id": "m3", "lane": 0, "col": 6, "label": "Tạo ĐNTT (bắt buộc), gửi kế toán"},
+    {"id": "m4", "lane": 0, "col": 7, "label": "Approve"},
+    {"id": "k1", "lane": 3, "col": 7, "label": "Duyệt ĐNTT, ghi nhận thanh toán"},
+    {"id": "t1", "lane": 4, "col": 8, "type": "decision", "label": "Duyệt đơn?"},
+    {"id": "x3", "lane": 1, "col": 9, "type": "system", "label": "Chuyển PO, tự tạo phiếu DO theo kho"},
+    {"id": "w1", "lane": 5, "col": 10, "label": "Kiểm đếm, xác nhận phiếu DO"},
+    {"id": "e", "lane": 5, "col": 11, "type": "end", "label": "Kết thúc"}
+  ],
+  "edges": [
+    ["s", "m1"], ["m1", "x1"], ["x1", "v1"], ["v1", "x2"],
+    ["x2", "m0", "Không"], ["x2", "m2", "Có"], ["m0", "m2"],
+    ["m2", "m3"], ["m3", "m4"], ["m3", "k1"], ["m4", "t1"],
+    ["t1", "x3", "Duyệt"], ["t1", "m2", "Từ chối → RFQ"],
+    ["x3", "w1"], ["w1", "e"]
+  ]
+}

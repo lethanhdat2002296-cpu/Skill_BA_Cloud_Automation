@@ -1,0 +1,798 @@
+{
+  "files": {
+    "FSD/Sprint 3/BBA-40-2.1.1.00_Inactive_Lead": {
+      "file_id": "12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn",
+      "url": "https://drive.google.com/file/d/12Mt9ql4Ik6BDHIEiWjmI7KChtkyAMOQn/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-40-2.1.1.00_Inactive_Lead_v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "d73cb489c3ba53eb11302e21984b5286fade0f03599393574c3a82f40243075b",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-41-2.1.1.01_Centre_Sharing": {
+      "file_id": "1ssSGdteYhaQnNBmNeAyz9FpLf9qt_7wu",
+      "url": "https://drive.google.com/file/d/1ssSGdteYhaQnNBmNeAyz9FpLf9qt_7wu/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-41-2.1.1.01_Centre_Sharing_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "b8505218757be59881240d455671d107d67903ef76d5ef0ba582eceb3ff48a96",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-42-2.1.1.02_Duplicate_Detection": {
+      "file_id": "11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh",
+      "url": "https://drive.google.com/file/d/11OwW2c3gZH2g9zExpxzpUSbMaFhR_vOh/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-42-2.1.1.02_Duplicate_Detection_v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "43a15ea1089a2dd78d934c056623edd55038d0639125be245b090d92357d9d79",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-43-2.1.2.01_Enquiry_Detail_Page": {
+      "file_id": "1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh",
+      "url": "https://drive.google.com/file/d/1n8vPgwrVW_1YHG7N6SF1lWEC7AOaG4Eh/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-43-2.1.2.01_Enquiry_Detail_Page_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "d066b28dac8cdb0c7e0525c05d85e12e60fe30dd57497366b37b14ca00df7468",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "FSD/Sprint 3/BBA-44-2.1.2.03_View_Timeline": {
+      "file_id": "1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q",
+      "url": "https://drive.google.com/file/d/1Qzk8QUM_RwDR0tnZ30Gd26jpbCZH58_Q/view",
+      "folder_id": "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "title": "[FRS] BBA-44-2.1.2.03_View_Timeline_v0.1.docx",
+      "version": "0.1",
+      "source_sha256": "e7b38377e0c7c966aae0d7f6d52296fe3c388503a2ec733d40e316b1ff3ebcaa",
+      "synced_at": "2026-11-09 05:03",
+      "note": "File khách tải lên (Sprint 3) — bản Markdown trong Git chuyển từ file này"
+    },
+    "SRS/workflow": {
+      "file_id": "1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk",
+      "url": "https://docs.google.com/document/d/1C-DEUoYnRXPDS5g2PtQrMKVxHBXUxhJ5JaBgyJPOTKk/edit",
+      "version": "",
+      "source_sha256": "162401eeec6f3d81249d00cca29d9f6123c6ed1c07c0cb80c0fec91e7ac2c428",
+      "synced_at": "2026-11-09 04:57",
+      "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+    },
+    "FSD/tom-tat-fsd": {
+      "file_id": "1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI",
+      "url": "https://docs.google.com/document/d/1BesAEcrVQ2FFqq6j8q0Hb6lIvOhWKV5dCKNpBlOQHYI/edit",
+      "version": "",
+      "source_sha256": "1318c0569fec0592d5195476caf9fb40e27455df92e5c8233f83bb4ad50d96c0",
+      "synced_at": "2026-11-09 04:58",
+      "folder_id": "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y"
+    },
+    "FSD/Sprint 4/2.3_Enquiry_Actions_VI": {
+      "file_id": "1HbIb1V3loJ1sMTGpK5qXI6pjkUykmBD5",
+      "url": "https://drive.google.com/file/d/1HbIb1V3loJ1sMTGpK5qXI6pjkUykmBD5/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.3 Enquiry Actions (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d929f5e645b03a84ed1e4adeef4f7fd28b8359becfe422335211de4768a7a93b",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/2.8_CRM_Administration_VI": {
+      "file_id": "1NjcVbRxjUQumUJQhhrz_qCt7gvoDlpxf",
+      "url": "https://drive.google.com/file/d/1NjcVbRxjUQumUJQhhrz_qCt7gvoDlpxf/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4 - v0.4.docx",
+      "version": "0.4",
+      "source_sha256": "ca7dd6bb5129ab1b7766a8fa236648046e2972de71506d556b787c90e4e5661d",
+      "synced_at": "2026-11-10 07:13"
+    },
+    "FSD/Sprint 4/3.1_Children_and_Families_VI": {
+      "file_id": "13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM",
+      "url": "https://drive.google.com/file/d/13ZIQPMneXIZOL_Ax75lDn0j_XuT0PcsM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Children and Families (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "cc3e3092bf24bc2108f861e94f64df8c9edeac9cfdb1b09f1d6b8183746c8cf4",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.2_Daily_Operations_VI": {
+      "file_id": "10X3PWnEHYAkrEj4tktCiHo-zSSN8Yb--",
+      "url": "https://drive.google.com/file/d/10X3PWnEHYAkrEj4tktCiHo-zSSN8Yb--/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.2 Daily Operations (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "01fe003449e9b6724bedd6a86e4febcb35d24a028368ffbc8eb09bdf4458c942",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.6_Finance_VI": {
+      "file_id": "1L3RvZDxc-0eQMeNC-lJ5A7ZapdNq6ASs",
+      "url": "https://drive.google.com/file/d/1L3RvZDxc-0eQMeNC-lJ5A7ZapdNq6ASs/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.6 Finance (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "0eef66b572e392919f36ca6ef45db2d13617f7b7abba5515ffb46e40a96f63ea",
+      "synced_at": "2026-11-09 12:13"
+    },
+    "FSD/Sprint 4/3.1_Child_Record_Overview_VI": {
+      "file_id": "11Lv9lKomObKdAZF27d5dC7_PU2NBhk8S",
+      "url": "https://drive.google.com/file/d/11Lv9lKomObKdAZF27d5dC7_PU2NBhk8S/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "571aa1a63725fe9abb110a3dc96ffec538a6fd23027091aa50d979c45c1614a7",
+      "synced_at": "2026-11-13 09:26"
+    },
+    "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
+      "file_id": "1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID",
+      "url": "https://drive.google.com/file/d/1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.7",
+      "source_sha256": "bda16e1d853d4247135e7afe42e8d1f6560f5fe54c5718c4c533fe63fb790e34",
+      "synced_at": "2026-11-12 01:29"
+    },
+    "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
+      "file_id": "1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ",
+      "url": "https://drive.google.com/file/d/1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Delegation (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "3f2e2294fcbafd921cc1bf4af1196618699e3c371a05a9becdbe7ad9f8443b86",
+      "synced_at": "2026-11-13 04:35"
+    },
+    "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
+      "file_id": "1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja",
+      "url": "https://drive.google.com/file/d/1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-51-Impact Preview Before Change (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "b89ee438e1aa1fd2e3de51e8c1b2255781dc6ce6220fa6e118d77063559cb149",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+    },
+    "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI": {
+      "file_id": "1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je",
+      "url": "https://drive.google.com/file/d/1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-52-1.3.1.03 Change request and second approval (Tiếng Việt) .docx",
+      "version": "0.1",
+      "source_sha256": "a3c943e664d17b2f2e1f0a9547065728afef883c5dac23f8859f63c3c21fe0f3",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+    },
+    "FSD/Sprint 4/2.8_Approval_Flows_Configuration_VI": {
+      "file_id": "1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi",
+      "url": "https://drive.google.com/file/d/1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-53-1.5.5.01-Approval Flows Configuration (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d32c481fa83b3527593e8cc63c584c352e35c4ea3facf1ac1b603723671b9038",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+    },
+    "FSD/Sprint 4/2.8_Approval_Delegation": {
+      "file_id": "12GGYhBzZ9ZKHcWWyIWTfxrVYVNGMMcUw",
+      "url": "https://drive.google.com/file/d/12GGYhBzZ9ZKHcWWyIWTfxrVYVNGMMcUw/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "41ea93da2a8fce3f276e7a6770ef7744d9e463db8eddd93c012e7332cfa0d924",
+      "synced_at": "2026-11-13 04:35"
+    },
+    "FSD/Sprint 4/2.8_Impact_Preview_Before_Change": {
+      "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
+      "url": "https://drive.google.com/file/d/1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Impact Preview Before Change - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "e3b97833d50fbd63b7892f0ceecc59705e1cf21478e8aacfc67dfa6b31419798",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/2.8_Change_Request_Second_Approval": {
+      "file_id": "1OwPQgKux_XT1uqAokcOnpar59OT6Rags",
+      "url": "https://drive.google.com/file/d/1OwPQgKux_XT1uqAokcOnpar59OT6Rags/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Change Request with Second Approval - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "281406333eb9f965ec0907b5df4576a6c48e19751433ce67c323d368072802cb",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/2.8_Approval_Flows_Configuration": {
+      "file_id": "1UgmLG7Nea3MAZqTmCsqQ5r-giE0lj5c7",
+      "url": "https://drive.google.com/file/d/1UgmLG7Nea3MAZqTmCsqQ5r-giE0lj5c7/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Flows Configuration - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "f15137ece5c30f1b6f483a9bcfd56fcf207983506a344f9c033418ae7bd19f15",
+      "synced_at": "2026-11-10 09:15"
+    },
+    "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI": {
+      "file_id": "1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme",
+      "url": "https://drive.google.com/file/d/1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "a698f8b66a8e9a32beca038646216cde99c3eb16cb81d1d898e6c7cd9b8bc8a4",
+      "synced_at": "2026-11-12 08:12"
+    },
+    "FSD/Sprint 4/BBA-69_Allergies_List_VI": {
+      "file_id": "1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv",
+      "url": "https://drive.google.com/file/d/1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-69 Allergies list (most severe first) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "d550b8d9ddf209e448831e597aea7eee962875f29f0334a0c68462cec8a57f6b",
+      "synced_at": "2026-11-13 15:22",
+      "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
+    },
+    "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI": {
+      "file_id": "1ztmuemedHDDErQeR9TYKJaiTdh-be50n",
+      "url": "https://drive.google.com/file/d/1ztmuemedHDDErQeR9TYKJaiTdh-be50n/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-70 Growth – termly height & weight entry by class (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "73eef0a5064f5f196766584de572bd03b4ff20bdee3c59d971ea8d2ad2d1389f",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
+      "file_id": "1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO",
+      "url": "https://drive.google.com/file/d/1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-71 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "80208a5368fa07c3a2efcec01475de79572aa2906ac96ce183731a2cd6892d92",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
+      "file_id": "17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ",
+      "url": "https://drive.google.com/file/d/17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-72 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "a6daa5bd0fb85c4049e77762b62bd39ba803c244f95836b077efb3f35efecc82",
+      "synced_at": "2026-11-10 10:27"
+    },
+    "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
+      "file_id": "1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0",
+      "url": "https://drive.google.com/file/d/1Ppoja8N0scPHbVUTVlOtMF6R5l1sUGr0/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-73 Handover recording (dropped off by / picked up by) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "374807edb0f5df42253ef6d787cd8302b3c69d7b2a0f51f6e38454e2812cdad6",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
+      "file_id": "1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0",
+      "url": "https://drive.google.com/file/d/1gLnxk0z14T8-1QOHb6Uid0WBAeD2zpy0/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-74 Temperature readings (≥3/day) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "23f32bc3c4cb2930aa18f4dda1ca897729a4aec15a8256ac19231c0bda570407",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
+      "file_id": "15_DitKliX6XuS-t9KairbiOPDr8Fnmfh",
+      "url": "https://drive.google.com/file/d/15_DitKliX6XuS-t9KairbiOPDr8Fnmfh/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-75 Late flag (internal only) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2934996fd6ed985ab40e8fd528ed5e894170baa1b6d151b5b69bf6ae983609d4",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-76_Centre_Brand_Overview_Today_VI": {
+      "file_id": "1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw",
+      "url": "https://drive.google.com/file/d/1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-76 Centre/brand overview today (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5e4861f149ce9da3ed40752f9015b7eaf58db61bed68c59da6d2a745b8c2817c",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-77_Attendance_Correction_VI": {
+      "file_id": "1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl",
+      "url": "https://drive.google.com/file/d/1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-77 Attendance correction with reason (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "151a2236c992623ed95b499442baf04cea7537611762f5707f50be3b33faa8e8",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-78_Daily_Routines_Web_VI": {
+      "file_id": "1eaWFc-IjCtbyxxmLlk9fcYynEoPStURi",
+      "url": "https://drive.google.com/file/d/1eaWFc-IjCtbyxxmLlk9fcYynEoPStURi/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-78 Daily routines – view & edit (web) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "8530a05710daa931c5ccc55f2708f95fff7609a5acb775bc6a100de7331af49d",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-79_Staff_Clock_In_Out_VI": {
+      "file_id": "1cGxj6sFG4inqDGAgS6JDeyPJyAYgX5Qr",
+      "url": "https://drive.google.com/file/d/1cGxj6sFG4inqDGAgS6JDeyPJyAYgX5Qr/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-79 Staff clock-in / out (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "e51873b33f5df19c3306630236ba8e904c81faca341ffb23dbffa0f924d44ec2",
+      "synced_at": "2026-11-10 10:33"
+    },
+    "FSD/Sprint 4/BBA-80_Payment_Schedule_Per_Child_VI": {
+      "file_id": "1To5PEfcnUiFfTKjm_SU6EoyaS25WaQYa",
+      "url": "https://drive.google.com/file/d/1To5PEfcnUiFfTKjm_SU6EoyaS25WaQYa/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-80 Payment schedule – edit per child (program type, amounts, effective period) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "e8c8e4432db17fb055829cd24c3ee891f3d3b0692d2cd319e069054f381cda30",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-81_Apply_Payment_Schedule_Template_VI": {
+      "file_id": "145pBOD54Sy6S1jCBXLlP6T1xz9tiWHKH",
+      "url": "https://drive.google.com/file/d/145pBOD54Sy6S1jCBXLlP6T1xz9tiWHKH/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-81 Apply payment schedule template (bulk) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "cb3e3a85cda7e5ef938ac01adb40fc2579423dcecd9c9f0942b1d89f2ac8e906",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-82_Batch_Update_Schedules_VI": {
+      "file_id": "199Z3YRbWJ_tUAECWnrd1SEUDWOrLxZ7g",
+      "url": "https://drive.google.com/file/d/199Z3YRbWJ_tUAECWnrd1SEUDWOrLxZ7g/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-82 Batch update schedules (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "1407367fc818a56c12cebeda8cc04fbc4bfdd1c26ad9af45bc158a7b92883b4e",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-83_Billing_Company_Assignment_VI": {
+      "file_id": "1gU9UfyAuIPPTs3yAZps6cN-qyUWQYJ0w",
+      "url": "https://drive.google.com/file/d/1gU9UfyAuIPPTs3yAZps6cN-qyUWQYJ0w/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-83 Billing company assignment (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "89b16d4d8d34adb77d03b26f824f5111d51c3906d161c99762bd30e4fc842311",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-84_Payment_Item_Create_Edit_VI": {
+      "file_id": "1nyqi6zQOw3xWvKZAA80CnWWkpTM7q2-L",
+      "url": "https://drive.google.com/file/d/1nyqi6zQOw3xWvKZAA80CnWWkpTM7q2-L/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-84 Payment item – create / edit (unit price, tax rate, criteria, effective period) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "044f6174f3eab17d754d330f153edc2e25d762cc37d4f60a835fab86cbe7f762",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-85_Payment_Item_Approval_VI": {
+      "file_id": "1jrrTzgRDk3FPTn3f1H4GSAcyRChsYnLd",
+      "url": "https://drive.google.com/file/d/1jrrTzgRDk3FPTn3f1H4GSAcyRChsYnLd/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-85 Payment item – approve / reject (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ed5850d11c6fad243da53efd89edfcb367f5b3593a45fcbc2acef02550979a7b",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-86_Discount_Approval_Notification_VI": {
+      "file_id": "1QeGcamMUCHYC_cbWnJXtP0cqDC5qYDFl",
+      "url": "https://drive.google.com/file/d/1QeGcamMUCHYC_cbWnJXtP0cqDC5qYDFl/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-86 Rebate & discount – approve / reject + in-app result notification (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "17d71e57dafa32636936e9111547db34f2b7cbc96664a21191d71c3756acc3f0",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-87_Calculation_Order_Settings_VI": {
+      "file_id": "1eCTwOg9R4N4s0eXTDiwB9Jv4rEOtMWgI",
+      "url": "https://drive.google.com/file/d/1eCTwOg9R4N4s0eXTDiwB9Jv4rEOtMWgI/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-87 General settings – calculation order toggles (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "42b056f2ead8d8a5d21ad593249eeab444ba564a54bbb9e3804c9a8545011667",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-88_Invoice_Generation_Due_Days_VI": {
+      "file_id": "1t9XBhzaYrZ-YxPaqxoNTxxSiJOx-oY8T",
+      "url": "https://drive.google.com/file/d/1t9XBhzaYrZ-YxPaqxoNTxxSiJOx-oY8T/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-88 General settings – invoice generation & due days (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "4e322fc56568af839bbf99a312f57814916b13f60a22558592d904786d7ef61b",
+      "synced_at": "2026-11-10 10:40"
+    },
+    "FSD/Sprint 4/BBA-89_GIRO_Accounts_List_VI": {
+      "file_id": "1o1J7McuwEZ-In3Zctdy2_OZES1wVmO1J",
+      "url": "https://drive.google.com/file/d/1o1J7McuwEZ-In3Zctdy2_OZES1wVmO1J/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-89 GIRO accounts – list (Non-CDA / CDA / Refund) & filters (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "6804d09c33d469989f99aad55380ab6cfe62ba66c1f40569f74e7087ca2bbd2d",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-90_GIRO_Mandate_Setup_VI": {
+      "file_id": "1_z05GXFc5vq7ZSWAsFSgQhfnTgjSSFE6",
+      "url": "https://drive.google.com/file/d/1_z05GXFc5vq7ZSWAsFSgQhfnTgjSSFE6/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-90 GIRO mandate – set up for a child (eGIRO / manual) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5f65237501cb7323514dac0e885cd9588859cf5fff86a43b143743daf949cc10",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-91_GIRO_Mandate_Status_Tracking_VI": {
+      "file_id": "1XwkiIy17iEa0EknOYCa-Va_1-MKWWpxk",
+      "url": "https://drive.google.com/file/d/1XwkiIy17iEa0EknOYCa-Va_1-MKWWpxk/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-91 GIRO mandate status tracking (Not set up/Pending/Rejected/Terminated) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "bac3afb7e6a86bfc2ca172da6e8662e4eff1978d01d61efba761bef4d194f485",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-92_Resend_Mandate_Request_VI": {
+      "file_id": "1Gq31SEwU045eu23H0IzuD-IJdWW5hIai",
+      "url": "https://drive.google.com/file/d/1Gq31SEwU045eu23H0IzuD-IJdWW5hIai/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-92 Resend mandate request to parent (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "74aa171b050f23686f33ab36e611c860ba310bfb5398e83163f4fcf98f99a3b0",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-93_Recreate_Mandate_VI": {
+      "file_id": "1DxIrMEaofTXYjHE0uQGJf-FSRX55rwtU",
+      "url": "https://drive.google.com/file/d/1DxIrMEaofTXYjHE0uQGJf-FSRX55rwtU/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-93 Recreate mandate (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "a2f5235e63453e0003d61db4db2a4b468c7a8bc7d28343d54220692035e4f71d",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-94_Import_GIRO_Mandates_VI": {
+      "file_id": "1wAQ189u9M6UAk16DmY9494ukdPciHPom",
+      "url": "https://drive.google.com/file/d/1wAQ189u9M6UAk16DmY9494ukdPciHPom/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-94 Import GIRO mandates (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "619f7887d6409cbfe52b97d9ed87f4a42e7df7023ab6cd652765cda798f6950b",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-95_Subsidy_Per_Child_List_VI": {
+      "file_id": "1H435VGYo1sGrS2mSGSxpy4uLjnsOUw1r",
+      "url": "https://drive.google.com/file/d/1H435VGYo1sGrS2mSGSxpy4uLjnsOUw1r/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-95 Subsidy per child – list & inline edit (SCFA type, subsidy, additional, FA, expiry, renewal) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ffe4634fb8f4ddf9cffe3cabc938f11a56582ef896eecb17adb37f288a0fe5fc",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-96_Subsidy_Download_Template_VI": {
+      "file_id": "1Ovz-QOYb0D448M9MOr7zxXCNwHKT3Q0V",
+      "url": "https://drive.google.com/file/d/1Ovz-QOYb0D448M9MOr7zxXCNwHKT3Q0V/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-96 Subsidy – download template (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "ea022fe1bc1063f70bfe5d9eb5f13111ec388333bcf79feaf4ae0760323e1367",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-97_Subsidy_Upload_Bulk_Import_VI": {
+      "file_id": "1Yb1wN1j0vKZqSPJKO1feLgo2AlBKulyN",
+      "url": "https://drive.google.com/file/d/1Yb1wN1j0vKZqSPJKO1feLgo2AlBKulyN/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-97 Subsidy – upload file (bulk import) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "27b459aaecc173c2903ed2f47a9393a15b55c32de3e92267557986b0435677ba",
+      "synced_at": "2026-11-10 10:47"
+    },
+    "FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI": {
+      "file_id": "1M0DUOevBicwKn1izLUSrKMjFWeemqbYn",
+      "url": "https://drive.google.com/file/d/1M0DUOevBicwKn1izLUSrKMjFWeemqbYn/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-001 Tab Enrolment – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "2ed8bb888836ec1697ffc42350b68f3f6ea945f05139cb75f786aeaad26bbaea",
+      "synced_at": "2026-11-11 04:59"
+    },
+    "FSD/Sprint 4/BBA-67_US-002_Tab_Enrichment_Draft_VI": {
+      "file_id": "1Ro40tizbpllzokPW3lNe1wNTxm0VUvMu",
+      "url": "https://drive.google.com/file/d/1Ro40tizbpllzokPW3lNe1wNTxm0VUvMu/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-002 Tab Enrichment – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2234b4866de79a7c18de9d1148908e02aee55d70dd2cfbd102d430b19efe3868",
+      "synced_at": "2026-11-11 07:12"
+    },
+    "FSD/Sprint 4/BBA-67_US-003_Tab_Attendance_Draft_VI": {
+      "file_id": "18oK9uiiQckvojin3OafGL5aPFYMDO1DC",
+      "url": "https://drive.google.com/file/d/18oK9uiiQckvojin3OafGL5aPFYMDO1DC/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-003 Tab Attendance – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d957217a3ee373e6f004e59d9220c945129476b65aed9227f8ef5432827bd849",
+      "synced_at": "2026-11-11 07:40"
+    }
+  },
+  "folders_used": {
+    "1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6": {
+      "name": "BBA › Sprint 3",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-09 05:03"
+    },
+    "1lJjzjZlXR1-h3uGOXkipXBWXn-jJHC9y": {
+      "name": "BA Projects › bba › docs",
+      "kinds": [
+        "SRS",
+        "FSD"
+      ],
+      "last_used": "2026-11-09 04:58"
+    },
+    "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV": {
+      "name": "BBA › Sprint 4",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-13 09:26"
+    },
+    "1KqkgghHymUu7T9_xco51AIjnoSufVg7_": {
+      "name": "BBA › Sprint 4 › TA",
+      "kinds": [
+        "FSD"
+      ],
+      "last_used": "2026-11-13 04:35"
+    }
+  },
+  "history": [
+    {
+      "action": "trash",
+      "keys": [
+        "FSD/Sprint 4/Lead_and_Contact_Management",
+        "FSD/Sprint 4/Lead_and_Contact_Management_VI"
+      ],
+      "ids": [
+        "1l-D4fj5uPfdFjuVdCAvhBUsVsTFLAKkZ",
+        "1nTuKWdEnhbMrUzs_jr4FZFivkxZlct78"
+      ],
+      "note": "Bản nháp Sprint 4 — user yêu cầu xoá 09/11/2026"
+    },
+    {
+      "file_id": "1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B",
+      "url": "https://drive.google.com/file/d/1j3cIonRp7MV0ryGzvXnpp-Z2jgg9-27B/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "9186f80b0cd4d6c5032b1b05facaa57f61bdb8fe2c0f80e587ab9ba469608463",
+      "synced_at": "2026-11-09 12:13",
+      "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
+      "replaced_at": "2026-11-09 14:17"
+    },
+    {
+      "at": "2026-11-10 02:30",
+      "action": "upload new version, keep previous",
+      "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
+      "new": {
+        "file_id": "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC",
+        "version": "0.3"
+      },
+      "kept": {
+        "file_id": "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
+        "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4.docx",
+        "version": "0.2",
+        "url": "https://drive.google.com/file/d/1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL/view"
+      }
+    },
+    {
+      "file_id": "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC",
+      "url": "https://drive.google.com/file/d/1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 CRM Administration (Tiếng Việt) - Sprint 4 - v0.3.docx",
+      "version": "0.3",
+      "source_sha256": "705a397b38a0cdb77f2ea983f69c19d11aa3a7f373574f8fd60755b5aabd2edc",
+      "synced_at": "2026-11-10 02:30",
+      "key": "FSD/Sprint 4/2.8_CRM_Administration_VI",
+      "replaced_at": "2026-11-10 07:13"
+    },
+    {
+      "at": "2026-11-10 07:13",
+      "action": "split FRD 2.8 into 5 files; trash old 2.8 v0.2 and v0.3",
+      "trashed": [
+        "1XxKaYxlNdAFq9mApLiBsHATnveAhAfNL",
+        "1FE4li_s4HmbWKWGB-J4ce6nVhk5ot0gC"
+      ]
+    },
+    {
+      "at": "2026-11-10 07:39",
+      "action": "upload new version, keep previous",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "kept": {
+        "file_id": "1VbAmVxRTRA-iYH0Ov4Eoo-7dL6Eg-C4a",
+        "version": "0.1"
+      }
+    },
+    {
+      "at": "2026-11-10 08:15",
+      "action": "pull user edits from Drive to Git",
+      "files": [
+        "3.1_Child_Record_Overview_VI",
+        "3.1_Child_Record_Read_Tabs_VI"
+      ],
+      "note": "User đã tự bỏ vào thùng rác trên Drive: 2.3 Enquiry Actions, 3.1 Children and Families, 3.2 Daily Operations, 3.6 Finance, 2.8 CRM Administration v0.4, Read Tabs v0.1"
+    },
+    {
+      "at": "2026-11-10 09:00",
+      "action": "pull user edits from Drive to Git",
+      "files": [
+        "FSD/Sprint 4/2.8_Approval_Delegation_VI",
+        "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
+        "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
+        "FSD/Sprint 4/2.8_Approval_Flows_Configuration_VI",
+        "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI"
+      ]
+    },
+    {
+      "file_id": "1h2e39At9-KwjEQMU5qTL_o3QIWMz0Qum",
+      "url": "https://drive.google.com/file/d/1h2e39At9-KwjEQMU5qTL_o3QIWMz0Qum/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Medical Alert Banner (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5116f5569fc0f7ff3c8970f57aad9f378254e99b02576c3622e44d83d46ee7f4",
+      "synced_at": "2026-11-10 09:26",
+      "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
+      "replaced_at": "2026-11-10 10:00"
+    },
+    {
+      "file_id": "1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM",
+      "url": "https://drive.google.com/file/d/1vb-bgOGcFDPukvnVf4Q5YW1oIdykE3VM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Child Record Overview (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "9ed22eb251aac96e2d27ad04971b5e17a2b3a8d6d19d475d26bd6425714d6d7a",
+      "synced_at": "2026-11-10 08:15 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-11 02:23"
+    },
+    {
+      "file_id": "12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45",
+      "url": "https://drive.google.com/file/d/12C4wPEM5g6OR0eJVHS6L4l70fm8Nhz45/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "d128f79b5d7c6db9fa4493967ec34f2a4dae42247d787d1766bd5e321472c3cd",
+      "synced_at": "2026-11-11 02:23",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-11 03:45"
+    },
+    {
+      "file_id": "1NmQOmfZgPqkyquOP7jk7SNO_mzRMdCaM",
+      "url": "https://drive.google.com/file/d/1NmQOmfZgPqkyquOP7jk7SNO_mzRMdCaM/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-67 US-001 Tab Enrolment – bản nháp (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "52b17fd747ca7962808a9ab7cf1ea3422c05b5b4415dc1665b39e4e54da76a2a",
+      "synced_at": "2026-11-11 04:16",
+      "key": "FSD/Sprint 4/BBA-67_US-001_Tab_Enrolment_Draft_VI",
+      "replaced_at": "2026-11-11 04:59"
+    },
+    {
+      "file_id": "1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ",
+      "url": "https://drive.google.com/file/d/1Er-YEF33ECLK6kSylKaOdsyCr5jbHFAQ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 3.1 Child Record Tabs – Read Views (Tiếng Việt) - Sprint 4 - v0.2.docx",
+      "version": "0.2",
+      "source_sha256": "eded84bcf310abb28443b9de0fca03e0b475743ba268d524f2ad9b51a3a31138",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 05:05"
+    },
+    {
+      "file_id": "1yON2uJfRhtg76vswYTri_dpdvGPQvteE",
+      "url": "https://drive.google.com/file/d/1yON2uJfRhtg76vswYTri_dpdvGPQvteE/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "1042093ddd1f056326cb92f8e37ef79eaeb36e0a1f353a5c446616e2c747e856",
+      "synced_at": "2026-11-11 05:05",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 07:10"
+    },
+    {
+      "file_id": "1ujheShbtZlnXVF977At-iFnbumnovUU4",
+      "url": "https://drive.google.com/file/d/1ujheShbtZlnXVF977At-iFnbumnovUU4/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.4",
+      "source_sha256": "a62dccb0ca637f788871db8f172a96247d60bb6afa720ef06e9070d12c9ec1f0",
+      "synced_at": "2026-11-11 07:10",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 07:25"
+    },
+    {
+      "file_id": "17d1PObwn_2f6XRUMtugHlgSHDrcVMcml",
+      "url": "https://drive.google.com/file/d/17d1PObwn_2f6XRUMtugHlgSHDrcVMcml/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.5",
+      "source_sha256": "a546c32db938d03fd326db3b7b27a272102bc07b50f8320307288a9234eb3337",
+      "synced_at": "2026-11-11 07:25",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 08:24"
+    },
+    {
+      "file_id": "1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID",
+      "url": "https://drive.google.com/file/d/1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.6",
+      "source_sha256": "168db0d0e82d797c07f3b0cda34a8e8b38ab8cad8aa973926d11ed969b5887fb",
+      "synced_at": "2026-11-11 08:24",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-11 09:31"
+    },
+    {
+      "file_id": "1GwNYrB2rBPfq4cKwnkbxte9v9r3TIPw8",
+      "url": "https://drive.google.com/file/d/1GwNYrB2rBPfq4cKwnkbxte9v9r3TIPw8/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.7",
+      "source_sha256": "bda16e1d853d4247135e7afe42e8d1f6560f5fe54c5718c4c533fe63fb790e34",
+      "synced_at": "2026-11-11 09:31",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-12 01:29"
+    },
+    {
+      "file_id": "1K3a3jyhFi46r_3Wz-EOec6eaCx7McMrA",
+      "url": "https://drive.google.com/file/d/1K3a3jyhFi46r_3Wz-EOec6eaCx7McMrA/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "10ff978a12894ebeb3c807fdaf1bbe243cb8f8dc5724655930ed065a8267efb5",
+      "synced_at": "2026-11-10 10:00",
+      "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
+      "replaced_at": "2026-11-12 08:12"
+    },
+    {
+      "file_id": "1gyt1QklpvxL1q9gnbDlqNbUmCy_p2bJV",
+      "url": "https://drive.google.com/file/d/1gyt1QklpvxL1q9gnbDlqNbUmCy_p2bJV/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "8625f81b34b777e6498394ddb2d4b74185da07eee99514d8c27ee8499a248dcf",
+      "synced_at": "2026-11-11 03:45",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-13 01:59"
+    },
+    {
+      "file_id": "1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB",
+      "url": "https://drive.google.com/file/d/1ugfy-UVgf4CyY4fNUP-SFmTYFUF9ObZB/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "7b81edb4f75367b28cc8594804d786bf5d079f09387faf19fde548b463e1f79a",
+      "synced_at": "2026-11-10 09:15",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation",
+      "replaced_at": "2026-11-13 04:27"
+    },
+    {
+      "file_id": "1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP",
+      "url": "https://drive.google.com/file/d/1EhPKlTjTDyadTOFVY2okh4wM8ys4PkcP/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-50-1.1.2.07 Approval delegation (Tiếng Việt).docx",
+      "version": "0.1",
+      "source_sha256": "057327bcd2caa3df8bcb576e85947803b72e6165ef9b9846babe436e6c9a24d9",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation_VI",
+      "replaced_at": "2026-11-13 04:35"
+    },
+    {
+      "file_id": "1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ",
+      "url": "https://drive.google.com/file/d/1k2lwwOeunNg3MsQ-5LW0HIc0y_G-57FJ/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRD] 2.8 Approval Delegation - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "829944b1de9fecd62d28662e39edf7326aeb830a69929b262175e222789337c2",
+      "synced_at": "2026-11-13 04:27",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation",
+      "replaced_at": "2026-11-13 04:35"
+    },
+    {
+      "file_id": "1P0IpDANtWAdMq05yx8y6X3UMLmN2Tp-n",
+      "url": "https://drive.google.com/file/d/1P0IpDANtWAdMq05yx8y6X3UMLmN2Tp-n/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Child Record Overview - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "66a240fc9f16c43eb585c967044e891dd2dcefb65594f31443b29cb004b71b92",
+      "synced_at": "2026-11-13 01:59",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
+      "replaced_at": "2026-11-13 09:26"
+    }
+  ]
+}

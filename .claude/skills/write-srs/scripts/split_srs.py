@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chuyển SRS.md một file (dự án cũ) sang cấu trúc tách phân hệ outputs/<du-an>/srs/*.md. Chạy MỘT lần / dự án.
+"""Chuyển SRS.md một file (dự án cũ) sang cấu trúc tách phân hệ projects/<du-an>/Document/SRS/srs/*.md. Chạy MỘT lần / dự án.
 
 Cách dùng:
     python .claude/skills/write-srs/scripts/split_srs.py <du-an>
@@ -30,6 +30,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import Project, resolve  # noqa: E402
 NAMES = {1: "gioi-thieu", 2: "tong-quan", 4: "phi-chuc-nang", 5: "tich-hop", 6: "man-hinh",
          7: "user-flow", 8: "truy-vet", 9: "gia-dinh-cau-hoi"}
 
@@ -99,9 +101,9 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args(argv[1:])
 
-    project = REPO / "outputs" / args.du_an.strip("/\\")
-    srs = project / "SRS.md"
-    out_dir = project / "srs"
+    project = resolve(args.du_an)
+    srs = project.doc("SRS.md")
+    out_dir = project.srs_dir
     if not srs.exists():
         print(f"ERROR: không có {srs.relative_to(REPO)}")
         return 1

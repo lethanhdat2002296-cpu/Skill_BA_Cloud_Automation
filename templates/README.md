@@ -11,4 +11,4 @@ Mở file trong Word → sửa **Styles** (Heading 1–3, Normal, Table, Caption
 
 ## Template SRS công ty (tùy chọn)
 Đặt `templates/template-srs-company.md` nếu muốn thay `.claude/skills/write-srs/template-srs.md`.
-Phải giữ đủ 9 mục (`## 1.` … `## 9.`) và định dạng mã `### FR-xx — Tên`, bảng Screen Inventory, dòng ảnh `ui/png/SCR-xx-<slug>.png` để `check_srs.py` và `to_docx.py` hoạt động.
+Phải giữ đủ 9 mục (`## 1.` … `## 9.`) và định dạng mã `### FR-xx — Tên`, bảng Screen Inventory, dòng ảnh `Diagram/Wireframe/png/SCR-xx-<slug>.png` để `check_srs.py` và `to_docx.py` hoạt động.

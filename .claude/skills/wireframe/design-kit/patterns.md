@@ -1,6 +1,6 @@
 # Patterns — quy ước vẽ wireframe
 
-Áp dụng cho mọi màn trong `outputs/<du-an>/ui/screens/`. Mục tiêu: các màn nhìn như **một bộ**, người review tập trung vào nội dung, không vào màu sắc.
+Áp dụng cho mọi màn trong `projects/<du-an>/Diagram/Wireframe/screens/`. Mục tiêu: các màn nhìn như **một bộ**, người review tập trung vào nội dung, không vào màu sắc.
 
 ## 1. Màu
 - Chỉ tông xám (`--wf-gray-*`). **Một** màu nhấn `--wf-accent` duy nhất, chỉ dùng cho `.wf-btn--primary`.

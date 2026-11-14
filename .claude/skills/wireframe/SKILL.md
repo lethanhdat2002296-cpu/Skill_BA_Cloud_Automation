@@ -1,14 +1,14 @@
 ---
 name: wireframe
-description: Vẽ wireframe HTML low/mid-fidelity tông xám cho từng màn hình SCR-xx từ ui/flows.md và Screen Inventory của SRS, chỉ dùng component trong design kit (storefront kiểu Magento 2, backend kiểu Odoo), vẽ đủ trạng thái (mặc định, rỗng, lỗi, loading, thành công), desktop 1440px và mobile 390px cho storefront, kèm trang gallery ui/index.html. Dùng sau ui-spec trong srs-pipeline, hoặc khi user yêu cầu "vẽ wireframe", "mockup màn hình", "phác thảo UI", "dựng màn hình HTML". Keywords - wireframe, mockup, low-fidelity, HTML prototype, design kit, Magento storefront, Odoo backend, list view, form view, chatter, screen states. Không hỏi user.
+description: Vẽ wireframe HTML (tông xám, chỉ dùng design kit) cho từng SCR-xx, đủ trạng thái, + gallery Diagram/Wireframe/index.html. Dùng sau ui-spec hoặc khi user nói "vẽ wireframe / mockup".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ---
 
 # wireframe — HTML từ design kit
 
 ## Input
-- `outputs/<du-an>/ui/flows.md` (mục 3: danh sách màn + bố cục) — bắt buộc.
-- `outputs/<du-an>/SRS.md` mục 6 (trường, hành động, trạng thái, FR).
+- `projects/<du-an>/Diagram/Wireframe/flows.md` (mục 3: danh sách màn + bố cục) — bắt buộc.
+- `projects/<du-an>/Document/SRS/SRS.md` mục 6 (trường, hành động, trạng thái, FR).
 - Design kit trong thư mục skill này:
   - `design-kit/tokens.css` — **toàn bộ** CSS (token + component). Không viết CSS mới.
   - `design-kit/components-storefront.html` — markup mẫu storefront.
@@ -18,7 +18,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
 ## Cách làm
 
 1. Đọc `patterns.md` và file component tương ứng loại màn (đọc một lần, dùng cho mọi màn).
-2. Với mỗi SCR trong `flows.md` mục 3, tạo `outputs/<du-an>/ui/screens/SCR-xx-<slug>.html` theo khung bên dưới:
+2. Với mỗi SCR trong `flows.md` mục 3, tạo `projects/<du-an>/Diagram/Wireframe/screens/SCR-xx-<slug>.html` theo khung bên dưới:
    - Copy khối markup từ kit, đổi nhãn/dữ liệu cho đúng nghiệp vụ. **Chỉ dùng class có trong `tokens.css`.** `style=""` chỉ cho kích thước (width, min-height, grid-template-columns).
    - Mỗi trạng thái trong cột "Trạng thái" của Screen Inventory là một `<section class="wf-state">` chứa nguyên một `.wf-frame`. State đầu tiên luôn là `default`.
    - Mọi trường và hành động trong Screen Inventory phải xuất hiện trên state `default` (hoặc state phù hợp).
@@ -28,7 +28,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
    ```bash
    python .claude/skills/wireframe/scripts/build_ui.py <du-an>
    ```
-   Script: copy `tokens.css` vào `ui/assets/`, kiểm tra từng màn (comment đầu file, meta, class lạ, URL ngoài, `<img>`, state), so khớp với ảnh dự kiến trong SRS mục 6.2, và sinh `ui/index.html`. Sửa mọi `ERROR`; `WARN` class lạ → thay bằng class của kit.
+   Script: copy `tokens.css` vào `Diagram/Wireframe/assets/`, kiểm tra từng màn (comment đầu file, meta, class lạ, URL ngoài, `<img>`, state), so khớp với ảnh dự kiến trong SRS mục 6.2, và sinh `Diagram/Wireframe/index.html`. Sửa mọi `ERROR`; `WARN` class lạ → thay bằng class của kit.
 4. Màn nào cần thông tin không có trong SRS → tự quyết theo `patterns.md`, cập nhật Screen Inventory trong SRS.md và thêm `AS-xx`/`OQ-xx` nếu là quyết định nghiệp vụ.
 
 ## Khung file màn hình
@@ -40,7 +40,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *), Bash(python3 *)
   FR: FR-05, FR-06, FR-07
   Loại: backend · Khung: 1440
   Trạng thái: default, approved, error
-  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+  Nguồn: SRS.md mục 6 · Diagram/Wireframe/flows.md mục 3
 -->
 <html lang="vi">
 <head>
@@ -75,10 +75,10 @@ Quy tắc khung:
 - `data-label`: nhãn tiếng Việt hiển thị trên ảnh.
 - Modal/toast: đặt trong `.wf-frame` (frame có `position: relative`), modal dùng `.wf-overlay`.
 
-## Gallery `ui/index.html`
+## Gallery `Diagram/Wireframe/index.html`
 Do `build_ui.py` sinh tự động (nhóm storefront/backend, thumbnail PNG nếu đã render, link tới HTML, FR, các state). Không sửa tay — chạy lại script.
 
 ## Output
-- `outputs/<du-an>/ui/screens/SCR-xx-<slug>.html`
-- `outputs/<du-an>/ui/assets/tokens.css`
-- `outputs/<du-an>/ui/index.html`
+- `projects/<du-an>/Diagram/Wireframe/screens/SCR-xx-<slug>.html`
+- `projects/<du-an>/Diagram/Wireframe/assets/tokens.css`
+- `projects/<du-an>/Diagram/Wireframe/index.html`

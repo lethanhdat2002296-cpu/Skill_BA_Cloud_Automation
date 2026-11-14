@@ -1,0 +1,416 @@
+<title>Child Record Tabs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: page header with screen switcher → one screen at a time, shown inside a BeeHive-like app frame (sidebar + top bar + content card). Greyscale wireframe, one accent for primary actions. */
+:root {
+  --bg: #eef0f2;
+  --paper: #ffffff;
+  --ink: #1d2126;
+  --muted: #69717c;
+  --line: #d8dce1;
+  --fill: #f2f4f6;
+  --fill-2: #e4e7eb;
+  --accent: #3b66c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ecf8;
+  --anno: #1d2126;
+  --anno-ink: #ffffff;
+  --scrim: rgba(20, 24, 30, .38);
+  --hatch: #c9ced5;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+    --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+    --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131518; --paper: #1c1f23; --ink: #e5e8ec; --muted: #9aa2ad; --line: #343940;
+  --fill: #23272c; --fill-2: #2c3137; --accent: #7196e6; --accent-ink: #0f1420; --accent-soft: #24304a;
+  --anno: #e5e8ec; --anno-ink: #131518; --scrim: rgba(0, 0, 0, .55); --hatch: #3b4148; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.page { max-width: 1340px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.page-head h1 { font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.switcher a { text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.switcher a b { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.switcher a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.switcher a:focus-visible, .states button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.screen-meta h2 { font-size: 18px; }
+.screen-meta .tickets { font-size: 12.5px; color: var(--muted); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.states button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.states button[aria-pressed="true"] { border-style: solid; border-color: var(--ink); background: var(--paper); font-weight: 600; }
+.frame-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { font-weight: 700; }
+.notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- BeeHive-like app shell (wireframe) ---------- */
+.app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
+.side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 2px 8px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.logo { width: 34px; height: 34px; border-radius: 8px; background: repeating-linear-gradient(45deg, var(--fill-2) 0 6px, var(--hatch) 6px 7px); border: 1px solid var(--line); }
+.brand b { display: block; font-size: 15px; }
+.brand small { font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.nav-group { font-weight: 700; font-size: 13px; padding: 12px 10px 4px; display: flex; justify-content: space-between; }
+.nav-group::after { content: "⌄"; color: var(--muted); font-weight: 400; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.nav-item i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; display: inline-block; opacity: .7; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .count { margin-left: auto; background: var(--ink); color: var(--paper); border-radius: 999px; font-size: 10.5px; padding: 0 6px; font-weight: 700; }
+.side .spacer { flex: 1; }
+.main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+.ico { width: 18px; height: 18px; border: 1.5px solid var(--muted); border-radius: 5px; display: inline-block; }
+.ico.round { border-radius: 50%; }
+.search-top { margin-left: auto; width: 222px; height: 32px; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; gap: 8px; padding: 0 8px; color: var(--muted); font-size: 13px; }
+.search-top kbd { margin-left: auto; font-family: var(--font); font-size: 10.5px; background: var(--fill); border-radius: 4px; padding: 1px 5px; }
+.bell { position: relative; }
+.bell::after { content: "3"; position: absolute; top: -7px; right: -8px; background: var(--ink); color: var(--paper); font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); flex: none; }
+.avatar.sm { width: 22px; height: 22px; }
+.content { flex: 1; padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.ph h3 { font-size: 20px; }
+.ph p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.btn { font: inherit; font-size: 13px; height: 32px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.sm { height: 26px; font-size: 12px; padding: 0 9px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.card { border: 1px solid var(--line); border-radius: 10px; }
+.card-body { padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+.tabs { display: flex; gap: 2px; }
+.tab { border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 8px 14px; font-size: 13px; color: var(--muted); background: var(--fill); }
+.tab.on { background: var(--paper); color: var(--ink); font-weight: 600; position: relative; top: 1px; }
+.tab .count { font-size: 11px; background: var(--fill-2); border-radius: 999px; padding: 0 6px; margin-left: 4px; }
+.input { height: 32px; border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 13px; background: var(--paper); }
+.input.filled { color: var(--ink); }
+.select::after { content: "⌄"; margin-left: auto; padding-left: 10px; color: var(--muted); }
+.select.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); color: var(--ink); }
+.total { font-size: 13px; color: var(--muted); }
+.total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
+.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t tr.sel td { background: var(--fill); }
+.t td.mono { font-family: var(--mono); font-size: 12.5px; }
+.t td.dim { color: var(--muted); }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--fill-2); color: var(--ink); white-space: nowrap; }
+.badge.out { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.badge.solid { background: var(--ink); color: var(--paper); }
+.badge.dash { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.who { display: flex; gap: 8px; align-items: center; }
+.pager { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); }
+.pager .pg { display: flex; gap: 6px; align-items: center; }
+.pager .pg span:not(.input) { min-width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; }
+.pager .pg span.on:not(.input) { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.split > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel h4 { margin: 0; font-size: 15px; }
+.kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.steps { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line); margin-left: 7px; }
+.step { position: relative; padding: 0 0 12px 16px; font-size: 13px; }
+.step::before { content: ""; position: absolute; left: -8px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: var(--paper); }
+.step.done::before { background: var(--ink); border-color: var(--ink); }
+.step.now::before { border-color: var(--accent); }
+.step small { display: block; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.field label { font-weight: 600; font-size: 12.5px; }
+.field label .req { color: var(--muted); font-weight: 400; }
+.field .hint { color: var(--muted); font-size: 12px; }
+.field.err .input { border-color: var(--ink); border-width: 2px; }
+.field .msg { font-size: 12px; font-weight: 600; }
+.field .msg::before { content: "✕ "; }
+.textarea { height: 64px; align-items: flex-start; padding-top: 7px; }
+.toggle { width: 32px; height: 18px; border-radius: 999px; background: var(--fill-2); border: 1px solid var(--line); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); }
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle.on::after { left: 16px; }
+.overlay { position: absolute; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 5; }
+.modal { width: 520px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 18px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; }
+.modal header, .modal footer { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.modal header { border-bottom: 1px solid var(--line); justify-content: space-between; }
+.modal header h4 { margin: 0; font-size: 16px; }
+.modal .body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { border-top: 1px solid var(--line); justify-content: flex-end; }
+.alert { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; background: var(--fill); }
+.alert.strong { border: 2px solid var(--ink); background: var(--paper); }
+.alert b { white-space: nowrap; }
+.impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.impact div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.impact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.impact span { font-size: 12px; color: var(--muted); }
+.toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; z-index: 6; }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 46px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.empty .ico { width: 40px; height: 40px; border-radius: 10px; }
+.empty p { margin: 0; color: var(--muted); max-width: 52ch; }
+.anno { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--anno); color: var(--anno-ink); font-size: 10.5px; font-weight: 700; flex: none; vertical-align: middle; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.settings-nav div { padding: 7px 10px; border-radius: 7px; color: var(--muted); }
+.settings-nav div.on { background: var(--fill); color: var(--ink); font-weight: 600; }
+.bpmn { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.bpmn figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bpmn figure img { width: 100%; height: auto; display: block; }
+.bpmn figcaption { font-size: 12.5px; color: #3a3f46; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--muted); }
+/* child record */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 84px; }
+.kpi small, .lbl { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.kpi.em { border: 2px solid var(--accent); }
+.kpi.alert { border: 2px solid var(--ink); background: var(--fill); }
+.ident { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 24px; font-size: 13.5px; }
+.ident .help { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.pill-tabs { display: flex; flex-wrap: wrap; gap: 2px; background: var(--fill); border-radius: 10px; padding: 4px; align-self: flex-start; }
+.pill-tabs span { padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); }
+.pill-tabs span.on { background: var(--paper); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.menu { position: absolute; right: 26px; top: 64px; width: 240px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: 6px; z-index: 4; font-size: 13px; }
+.menu div { padding: 8px 10px; border-radius: 6px; }
+.menu div:hover { background: var(--fill); }
+.big-av { width: 44px; height: 44px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; color: var(--muted); flex: none; }
+@media (max-width: 640px) { .page-head h1 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eyebrow">BBA · Sprint 4 · FRD 3.1 Child Record Tabs – Read Views</span>
+    <h1>Child record — read-only tabs</h1>
+    <p>5 tab chỉ đọc của hồ sơ trẻ: Enrolment, Enrichment, Attendance, Finance, Communication. Mỗi khối có liên kết "Open in &lt;module&gt;" sang màn của module. Chọn tab ở hàng dưới, chọn trạng thái bên phải tiêu đề. Dữ liệu là dữ liệu mẫu.</p>
+  </div>
+  <nav class="switcher" id="switcher" aria-label="Màn hình"></nav>
+  <div class="screen-meta">
+    <div>
+      <h2 id="scrTitle"></h2>
+      <div class="tickets" id="scrTickets"></div>
+    </div>
+    <div class="states" id="states" aria-label="Trạng thái"></div>
+  </div>
+  <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
+  <ol class="notes" id="notes"></ol>
+</div>
+
+<script>
+const NAV = [
+  ["Home"], ["My approvals", "", 26],
+  ["#Children & families"], ["Children", "children"], ["Families"], ["Health & allergies"], ["Documents"], ["Authorised pickup"], ["Classes"],
+  ["#Operations"], ["Daily operations"], ["Learning"], ["Fees & payments"], ["Joining & leaving"], ["Communication"],
+  ["#Administration"], ["Users & permissions"], ["Settings"], ["History"]
+];
+function shell(body, who) {
+  const nav = NAV.map(([n, key, c]) => n.startsWith("#")
+    ? `<div class="nav-group">${n.slice(1)}</div>`
+    : `<div class="nav-item${key === "children" ? " on" : ""}"><i></i>${n}${c ? `<span class="count">${c}</span>` : ""}</div>`).join("");
+  return `<div class="app">
+    <aside class="side"><div class="brand"><span class="logo"></span><div><b>BeeHive</b><small>BUSYBEES SG</small></div></div>${nav}<div class="spacer"></div><div class="nav-item"><i></i>${who}</div></aside>
+    <div class="main">
+      <div class="topbar"><span class="ico"></span><div class="search-top">⌕ Find a record<kbd>⌘ K</kbd></div><span class="ico round"></span><span class="ico bell"></span><span class="avatar"></span></div>
+      <div class="content">${body}</div>
+    </div></div>`;
+}
+const TABS = ["Overview", "Enrolment", "Enrichment", "Guardians", "Attendance", "Finance", "Health", "Communication", "Documents", "History"];
+function header(tab, c) {
+  c = c || { name: "Ethan Lim", id: "S1", init: "EL", centre: "Small Wonder Tampines · Sunbeams", owner: "Serena Lim", alert: true };
+  return `<div style="font-size:12.5px;color:var(--muted)">← Children</div>
+    <div class="ph"><div class="row" style="align-items:flex-start;gap:12px"><span class="big-av">${c.init}</span><div>
+      <h3>${c.name} <span style="font-size:13px;color:var(--muted);font-weight:400">${c.id}</span> ${c.alert ? '<span class="badge solid">⚠</span>' : ""}</h3>
+      <div class="row" style="gap:8px;margin-top:4px;font-size:13px"><span class="badge solid">Enrolled</span><span>${c.centre}</span><span style="color:var(--muted)">·</span><span>Owner · <u>${c.owner}</u></span></div></div></div>
+      <span class="btn">Actions ⋯</span></div>
+    <div class="pill-tabs">${TABS.map(t => `<span${t === tab ? ' class="on"' : ""}>${t}</span>`).join("")}</div>
+    <div style="font-size:12px;color:var(--muted)">Read-only · data from the module that owns it</div>`;
+}
+const card = (title, inner, link, a) => `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:15px">${title}${a ? ` <span class="anno">${a}</span>` : ""}</b>${link ? `<span style="font-size:13px;font-weight:600"><u>${link}</u> ↗</span>` : ""}</div>${inner}</div></div>`;
+const stat = (n, l) => `<div class="kpi"><small>${l}</small><b style="font-size:20px">${n}</b></div>`;
+const seg = (items, on) => `<div class="pill-tabs" style="background:var(--fill)">${items.map(x => `<span${x.startsWith(on) ? ' class="on"' : ""}>${x}</span>`).join("")}</div>`;
+const muted = (t) => `<span style="color:var(--muted)">${t}</span>`;
+
+/* ---------- SCR-01 Enrolment ---------- */
+function enrolment(state) {
+  const hist = state === "history";
+  const flags = card("Flags", `<table class="t"><thead><tr><th>Flag</th><th>Value</th><th>Since · set by</th><th>Effect on fees</th></tr></thead><tbody>
+      <tr><td>SUG child</td><td>No</td><td class="dim">—</td><td class="dim">—</td></tr>
+      <tr><td>Staff child</td><td><b>Yes</b></td><td>2026-01-01 · Daniel Yeo · HQ Admin</td><td>Staff child discount 50% from 1 Jan 2026</td></tr>
+      <tr><td>KA child</td><td>No</td><td class="dim">—</td><td class="dim">—</td></tr></tbody></table>`, "Open in Fees & payments", 1);
+  const cases = hist
+    ? card("Cases", `<div style="font-size:13.5px">${muted("No case running.")}</div><div class="row"><span class="btn sm">Start a withdrawal ↗</span><span class="btn sm">Start a temporary withdrawal ↗</span><span class="btn sm">Start a transfer ↗</span></div>`, "", 2)
+    : card("Cases", `<div class="row between" style="font-size:13.5px"><span><b>Withdrawal</b> · raised 30 Sept 2026 · waiting on the Centre Director</span><span class="badge">Pending</span></div>`, "Open the withdrawal", 2);
+  const enr = (head, status, line, entity, tl, on) => `<div class="card" style="${on ? "border:2px solid var(--ink)" : ""}"><div class="card-body">
+      <div class="row between"><b style="font-size:14px"><u>${head}</u></b><span class="badge${status === "Enrolled" ? " solid" : " out"}">${status}</span></div>
+      <div style="font-size:13px">${line}</div><div style="font-size:12.5px;color:var(--muted)">${entity}</div>
+      <div class="steps" style="margin-top:4px">${tl.map(([d, t, by], i) => `<div class="step${i === 0 ? " now" : " done"}">${t}<small>${d} · ${by}</small></div>`).join("")}</div></div></div>`;
+  const list = hist
+    ? enr("Small Wonder · Small Wonder Bukit Timah · K2 · Blossom", "Enrolled", "Full Day · Main programme · year 2026 · enrolled 2026-05-10 · commenced 2026-06-01 · ongoing", "Small Wonder Preschools Pte Ltd", [["2026-06-01", "Transfer in from Small Wonder Tampines", "Nadia Salleh · School Admin"], ["2026-06-01", "Commenced", "System"]], true)
+      + enr("Small Wonder · Small Wonder Tampines · K1 · Honeycombs", "Transferred", "Full Day · Main programme · year 2025 · enrolled 2024-10-02 · commenced 2025-01-06 · ended 2026-05-31", "Small Wonder Preschools Pte Ltd", [["2026-05-31", "Transfer out to Small Wonder Bukit Timah", "Grace Tan · Centre Director"], ["2026-01-05", "Class change: K1 · Honeycombs", "Nadia Salleh · School Admin"], ["2025-01-06", "Commenced", "System"]])
+    : enr("Small Wonder · Small Wonder Tampines · N2 · Sunbeams", "Enrolled", "Full Day · Main programme · year 2026 · enrolled 2025-11-24 · commenced 2026-01-05 · ongoing", "Small Wonder Preschools Pte Ltd", [["2026-09-30", "Withdrawal submitted", "Nadia Salleh · School Admin"], ["2026-01-05", "Commenced", "System"], ["2025-11-24", "Enrolled", "Registration (enrolment form)"]], true);
+  const c = hist ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" } : null;
+  return header("Enrolment", c) + flags + cases + `<div class="row between"><b style="font-size:13.5px">${hist ? "2 enrolments · 1 running now" : "1 enrolment · 1 running now"} <span class="anno">3</span></b><span style="font-size:13px;font-weight:600"><u>Open in Joining &amp; leaving</u> ↗</span></div>` + list;
+}
+
+/* ---------- SCR-02 Enrichment ---------- */
+function enrichment(state) {
+  if (state === "empty") return header("Enrichment", { name: "Adam Faris", id: "S17", init: "AF", centre: "The Schoolhouse Bangsar · Angsana", owner: "Mrs Faris" }) + seg(["Current", "Past"], "Current") + `<div class="empty"><span class="ico"></span><b>No enrichment programme for this child.</b><p>Enrichment classes are set up in Learning › Enrichment.</p><span class="btn">Open in Learning ↗</span></div>`;
+  const past = state === "past";
+  const head = `<tr><th>Programme <span class="anno">2</span></th><th>Centre</th><th>Day and time</th><th>Trainer</th><th class="s">Start date</th><th>End date</th><th>${past ? "Ended how · reason <span class=\"anno\">3</span>" : "Sessions this month"}</th></tr>`;
+  const rows = (past
+    ? [["Piano", "Enrichment", "Small Wonder Tampines", "Monday 15:30–16:15", "Mei Tan", "2026-01-12", "2026-08-31", "<b>Switched to Dance</b> · notice given 2026-08-01"], ["Little Chefs", "Enrichment", "Small Wonder Tampines", "Friday 15:30–16:30", "Rachel Ong", "2026-01-09", "2026-06-30", "<b>Withdrawn in the Parents App</b> · Schedule clash · No refund"]]
+    : [["Mandarin Explorers", "Enrichment", "Small Wonder Tampines", "Tuesday 15:30–16:15", "Li Wen", "2026-07-01", "—", "4 of 4"], ["Speech & Drama", "Enrichment", "Small Wonder Tampines", "Thursday 15:30–16:30", "Rachel Ong", "2026-07-01", "—", "3 of 4"], ["Dance <span style=\"font-size:12px;color:var(--muted);font-weight:400\">· switched from Piano</span>", "Enrichment", "Small Wonder Tampines", "Monday 15:30–16:15", "Joanne Lee", "2026-09-01", "—", "3 of 4"]])
+    .map(r => `<tr><td><u style="font-weight:600">${r[0]}</u><br><span style="font-size:12px;color:var(--muted)">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td${r[6] === "—" ? ' class="dim"' : ""}>${r[6]}</td><td>${r[7]}</td></tr>`).join("");
+  return header("Enrichment") + `<div class="row between">${seg(["Current (3)", "Past (2)"], past ? "Past" : "Current")}<span style="font-size:12.5px;color:var(--muted)">End date is set only when the child stops or is withdrawn. <span class="anno">1</span></span></div>` + card("Enrichment programmes",
+    `<table class="t"><thead>${head}</thead><tbody>${rows}</tbody></table>`, "Open in Learning");
+}
+
+/* ---------- SCR-03 Attendance ---------- */
+function attendance(state) {
+  if (state === "error") return header("Attendance") + `<div class="alert strong"><b>✕ We couldn't load Attendance.</b><span>The header and the other tabs still work. <span class="btn sm">Try again</span> <span class="anno">1</span></span></div>`;
+  const voided = state === "voided", none = state === "no-attendance";
+  const c = voided ? { name: "Lucas Ng", id: "S11", init: "LN", centre: "Small Wonder Bukit Timah · Blossom", owner: "Marcus Ng" }
+    : none ? { name: "Ava Koh", id: "S21", init: "AK", centre: "Small Wonder Tampines · Sunbeams", owner: "Mrs Koh" } : null;
+  const range = none ? "2026-10-01 → 2026-10-31" : "2026-09-01 → 2026-09-30";
+  const days = voided
+    ? [["2026-09-12", "Blossom", "Present", "08:05", "17:40"], ["2026-09-11", "Blossom", "Voided", "08:20", "—"], ["2026-09-10", "Blossom", "On leave", "—", "—"]]
+    : none ? [] : [["2026-09-17", "Sunbeams", "Present", "08:12", "—"], ["2026-09-16", "Sunbeams", "Present", "08:01", "17:32"], ["2026-09-15", "Sunbeams", "Present", "08:30 · late", "17:05"], ["2026-09-12", "Sunbeams", "Absent", "—", "—"]];
+  const rows = days.length ? days.map((d, i) => `<tr${i === (voided ? 1 : 0) ? ' class="sel"' : ""}><td>${d[0]}</td><td>${d[1]}</td><td>${d[2] === "Voided" ? '<span class="badge dash">Voided</span>' : `<span class="badge${d[2] === "Present" ? "" : " out"}">${d[2]}</span>`}</td><td${d[2] === "Voided" ? ' style="text-decoration:line-through;color:var(--muted)"' : ""}>${d[3]}</td><td>${d[4]}</td></tr>`).join("")
+    : `<tr><td colspan="5" class="dim">No attendance recorded between 2026-10-01 and 2026-10-19.</td></tr>`;
+  const rec = none ? `<div style="font-size:13px;color:var(--muted)">Choose a day to see its record.</div>` : voided
+    ? `<div style="font-size:13.5px"><b>2026-09-11 · Blossom · Main</b></div><div style="text-decoration:line-through;color:var(--muted);font-size:13px">Signed in 08:20 by Marcus Ng</div>
+       <div class="alert"><b>Voided</b><span>Requested by Siti Aminah · Teacher · approved by Grace Tan · Centre Director · 2026-09-11 10:02<br>Reason: Checked in by mistake <span class="anno">3</span></span></div>`
+    : `<div style="font-size:13.5px"><b>2026-09-17 · Sunbeams · Main · Present</b></div>
+       <dl class="kv"><dt>In</dt><dd>08:12 · brought by Serena Lim (mother)</dd><dt>Out</dt><dd>— not signed out yet</dd></dl>
+       <b style="font-size:13px">Every temperature (3) <span class="anno">4</span></b>
+       <div style="font-size:13px;display:grid;gap:4px"><div>08:12 · On arrival · 36.6 °C · Bluetooth thermometer</div><div>10:00 · Mid-morning · <b>37.8 °C ⚠</b> · Bluetooth thermometer</div><div>12:40 · Before nap · 36.8 °C · Bluetooth thermometer</div></div>`;
+  const warn = none ? `<div class="alert strong"><b>⚠ No attendance this month</b><span>Singapore citizen · checked on 18 October · 0 days attended in October. The subsidy for the month needs at least one attendance day. Same list as "No attendance this month" in the Centre Director app. <span class="anno">6</span></span></div>` : "";
+  const k = none ? [0, 0, 0, 0, 0] : voided ? [9, 24, 0, 1, 0] : [10, 25, 1, 0, 1];
+  return header("Attendance", c) + warn + `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${stat(k[0], "Days in range")}${stat(k[1], "Days this term")}${stat(k[2], "Absences")}${stat(k[3], "Leave days")}${stat(k[4], "Late arrivals")}</div>
+    <div class="row between"><div class="row"><span style="font-size:13px">Bus service: <b>No bus</b></span><span class="anno">5</span></div><div class="row"><div class="input select" style="width:240px">📅 ${range}</div><span class="anno">7</span><span style="font-size:13px;font-weight:600"><u>Open in Daily operations</u> ↗</span></div></div>
+    <div class="split" style="grid-template-columns:minmax(0,1fr) 420px">
+      ${card("Recent attendance", `<table class="t"><thead><tr><th class="s">Date</th><th>Class</th><th>Status</th><th>In</th><th>Out</th></tr></thead><tbody>${rows}</tbody></table>`, "", 2)}
+      ${card("Day record", rec, none ? "" : "Open the day")}
+    </div>`;
+}
+
+/* ---------- SCR-04 Finance ---------- */
+function finance(state) {
+  const my = state === "malaysia";
+  const c = my ? { name: "Iman Hakim", id: "S15", init: "IH", centre: "Small Wonder Damansara · Cempaka", owner: "Mrs Hakim" } : null;
+  const cur = my ? "MYR" : "SGD";
+  const pays = `<div class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">${[["Payment method (on the child)", my ? "⚠ To confirm" : "GIRO CDA + GIRO"], ["Citizenship the fee reads", my ? "Foreigner" : "Singapore Citizen"], ["Bill to", "Parent"], ["Deposit held", my ? "MYR 900" : "SGD 1,180"], ["Outstanding", my ? "MYR 0.00" : "<b>SGD 992.98</b>"]].map(([l, v]) => `<div class="kpi"><small>${l}</small>${v}</div>`).join("")}</div>`;
+  const todo = my ? card("What needs doing", muted("Nothing needs doing."), "", 2)
+    : card("What needs doing", `<div style="font-size:13.5px;display:grid;gap:6px">${[["SW-TAM-2026-10-0041", 34, "137.58"], ["SW-TAM-ENR-2026-10-0012", 34, "327.00"], ["INV-SW-TAM-202611-0001", 5, "300.00"], ["INV-SW-TAM-202611-0002", 5, "228.40"]].map(([n, d, a]) => `<div class="row between"><span>Invoice <u>${n}</u> is ${d} days overdue — SGD ${a}</span><span style="font-size:12.5px;font-weight:600"><u>Open in Receivables</u> ↗</span></div>`).join("")}</div>`, "", 2);
+  const inv = (my ? [["School fees · 1", [["INV-SW-DAM-202611-0007", "Nov 2026", "2026-11-05", "—", "—", "Paid", "1,150.00", "0.00"]]]]
+    : [["School fees · 3", [["INV-SW-TAM-202611-0001", "Nov 2026", "2026-11-05", "GIRO CDA", "CDA", "Billed", "300.00", "300.00"], ["INV-SW-TAM-202611-0002", "Nov 2026", "2026-11-05", "GIRO", "non-CDA", "Billed", "228.40", "228.40"], ["SW-TAM-2026-10-0041", "Oct 2026", "2026-10-07", "GIRO", "non-CDA", "Partially paid", "637.58", "137.58"]]], ["Enrichment · 1", [["SW-TAM-ENR-2026-10-0012", "Oct 2026", "2026-10-07", "GIRO", "non-CDA", "Billed", "327.00", "327.00"]]]])
+    .map(([g, rs]) => `<tr><td colspan="8" style="background:var(--fill);font-weight:600">${g}</td></tr>` + rs.map(r => `<tr><td><u>${r[0]}</u></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><span class="badge${r[5] === "Paid" ? " solid" : ""}">${r[5]}</span></td><td style="text-align:right">${r[6]}</td><td style="text-align:right">${r[7]}</td></tr>`).join("")).join("");
+  const invoices = card("Invoices", `<table class="t"><thead><tr><th>Number</th><th>Month</th><th>Due</th><th>Method</th><th>Account <span class="anno">5</span></th><th>Status</th><th style="text-align:right">Amount (${cur})</th><th style="text-align:right">Balance</th></tr></thead><tbody>${inv}</tbody></table>`, "Open in Invoices", 3);
+  const out = my ? "" : card("Outstanding", `<div style="font-size:13.5px"><b>SGD 992.98</b> · 1–30 days SGD 528.40 · 31–60 days SGD 464.58</div><div style="font-size:12.5px;color:var(--muted)">Reminders sent · 2026-09-25 and 2026-09-15 to Serena Lim</div>`, "Open in Receivables");
+  const giro = my ? "" : card("GIRO and CDA accounts · 2 of 2", `<table class="t"><thead><tr><th>Type</th><th>Bank · account</th><th>DDA reference</th><th>Applied by</th><th>Status</th><th>Pays by GIRO</th></tr></thead><tbody>
+      <tr><td>GIRO (non-CDA)</td><td>DBS · ••••4021</td><td>DDA-DBS-118204</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr>
+      <tr><td>GIRO CDA</td><td>OCBC (CDA) · ••••7730</td><td>DDA-CDA-551277</td><td>Paper form</td><td><span class="badge">Active</span></td><td>Yes</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">A child has at most one CDA and one non-CDA GIRO account; each is invoiced separately.</div>`, "Open in GIRO accounts", 4);
+  const sub = my ? "" : card("Subsidies", `<div style="font-size:13.5px;display:grid;gap:4px"><div>Basic subsidy · S$300 / month · expires 2026-12-31 · ECDA Form SUB-1 · 2026/004182</div><div>Additional subsidy · S$150 / month · expires 2026-10-31 · ECDA Form SUB-2 · 2026/004182-A <span class="badge dash">Expires soon</span></div></div>`, "", "");
+  const disc = card("Discounts", `<div style="font-size:13.5px;display:grid;gap:4px"><div><b>Staff child discount — 50%</b> · per month · 2026-01-01 → open · added by Daniel Yeo · <span class="badge solid">Applied</span></div><div>Second child — 5% · per month · 2026-01-01 → open · added by Priya Raman · <span class="badge out">Not applied</span> ${muted("only one discount applies to an invoice; the staff child discount is worth more")}</div></div>`, "Open in Discounts");
+  const dep = card("Deposit and payment schedule", `<div style="font-size:13.5px">${my ? "2025-12-02 · Received · DEP-SW-0102 · MYR 900 · remaining MYR 900" : "2025-11-14 · Received · DEP-SW-0088 · SGD 1,180 · remaining SGD 1,180"}</div><div style="font-size:13px;color:var(--muted)">Jan–Jun 2026 · Fee 1,520 · Discount 760 · <b style="color:var(--ink)">SGD 760</b> per month</div>`, "Open schedule");
+  return header("Finance", c) + `<b style="font-size:15px">How this family pays <span class="anno">1</span></b>` + pays + todo + invoices + out + giro + sub + disc + dep;
+}
+
+/* ---------- SCR-05 Communication ---------- */
+function communication(state) {
+  const map = { announcements: "Announcements", inquiries: "Inquiries", surveys: "Surveys", notifications: "Notifications" };
+  const which = map[state] || "Messages";
+  const segs = seg(["Announcements (3)", "Messages (5)", "Inquiries (1)", "Surveys & consents (4)", "Notifications"], which);
+  let body;
+  if (which === "Messages") {
+    const grp = (t, rows) => `<b style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">${t}</b>` + rows.map(r => `<div class="card"><div class="card-body" style="gap:4px"><div class="row between"><b style="font-size:14px"><u>${r[0]}</u></b><div class="row"><span class="badge out">${r[1]}</span>${r[4] ? `<span class="badge solid">${r[4]}</span>` : ""}</div></div><div style="font-size:12.5px;color:var(--muted)">${r[2]}</div><div style="font-size:13px">${r[3]}</div></div></div>`).join("");
+    body = grp("Class threads <span class=\"anno\">1</span>", [["Sunbeams (N2)", "Class thread", "Serena Lim · Daniel Ng (parents) · Aisyah Rahman · Chloe Ng (teachers) · Grace Tan (CD)", "Serena Lim · Parent · 2026-09-19 07:42 — Thank you. Could we also know how much water…", "Waiting on a reply · 51 days"],
+        ["Bumblebees (Playgroup)", "Previous class · read only", "Serena Lim · Daniel Ng · Marissa Tay · Grace Tan", "Nurul Aini · Staff · 2025-12-19 15:50 — Last day in Bumblebees…", ""]])
+      + grp("Group chats", [["Sports day volunteers", "Group · event", "Serena Lim · 6 other parents · Aisyah Rahman · Grace Tan", "Aisyah Rahman · Staff · 2026-09-12 09:30 — Thank you all for signing up…", ""],
+        ["Ethan Lim · both parents", "Group", "Serena Lim · Daniel Ng · Grace Tan · Aisyah Rahman", "Daniel Ng · Parent · 2026-09-11 21:05 — Mornings work better for us…", "Waiting on a reply · 59 days"]])
+      + grp("Private · Centre Director and parent <span class=\"anno\">2</span>", [["Serena Lim", "Private · teachers can't see", "Grace Tan · Serena Lim", "Grace Tan · CD · 2026-09-16 08:31 — About Ethan's pickup arrangement… · <b>Sent to Serena Lim only</b>", ""]]);
+  } else if (which === "Announcements") {
+    body = card("Announcements to this family", `<table class="t"><thead><tr><th>Title</th><th>Sent to</th><th>Sent by</th><th class="s">Posted</th><th>Status</th><th></th><th>Read by parent</th></tr></thead><tbody>
+      <tr><td><u>Field trip to the zoo</u></td><td>Every K1 parent in every centre</td><td>HQ</td><td>2026-09-20</td><td><span class="badge">Sent</span></td><td>📎 · ✉ Also sent by email</td><td>Read · Serena Lim</td></tr>
+      <tr><td><u>Mid-autumn lantern walk</u></td><td>Sunbeams (N2)</td><td>Grace Tan · CD</td><td>2026-10-02 09:00</td><td><span class="badge out">Scheduled</span></td><td>🖼</td><td class="dim">—</td></tr>
+      <tr><td><u>Sports day</u></td><td>Small Wonder Tampines</td><td>Grace Tan · CD</td><td>2026-08-20</td><td><span class="badge dash">Recalled</span></td><td></td><td class="dim">—</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">One-way: no replies or comments. Parents ask through chat or an inquiry. <span class="anno">1</span></div>`, "Open in Communication");
+  } else if (which === "Inquiries") {
+    body = card("Inquiries from this family", `<table class="t"><thead><tr><th>Subject</th><th>Type</th><th>Routed to</th><th>Handled by</th><th>Status</th><th class="s">Waiting</th></tr></thead><tbody>
+      <tr><td><u>Birthday celebration on 14 Feb</u></td><td>Birthday form</td><td>Homeroom teacher</td><td>Aisyah Rahman</td><td><span class="badge">In progress</span></td><td>3 days</td></tr>
+      <tr><td><u>Why is November higher?</u></td><td>Fees</td><td>School Admin or CD</td><td>Nadia Salleh · School Admin</td><td><span class="badge solid">Closed</span></td><td class="dim">—</td></tr>
+      <tr><td><u>Can Ethan bring his own snack?</u></td><td>General</td><td>CD and School Admin</td><td>Aisyah Rahman · passed on by Grace Tan</td><td><span class="badge out">Open</span></td><td>1 day</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">Parents don't pick who answers — routing follows the type. CD and School Admin always see every inquiry. <span class="anno">1</span></div>`, "Open in Inquiries");
+  } else if (which === "Surveys") {
+    body = card("Surveys & consents", `<table class="t"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>This child's answer</th><th class="s">Answered</th><th>Announcement</th></tr></thead><tbody>
+      <tr><td><u>Zoo trip — is your child going?</u> 📎</td><td>Survey</td><td><span class="badge">Answered</span></td><td>Going</td><td>2026-09-21</td><td><u>Field trip to the zoo</u></td></tr>
+      <tr><td><u>PDPA data sharing v3.1</u></td><td>Consent</td><td><span class="badge solid">Agreed</span></td><td>—</td><td>2026-01-06</td><td class="dim">—</td></tr>
+      <tr><td><u>Outings and excursions v1.4</u></td><td>Consent</td><td><span class="badge out">Sent, awaiting parent</span></td><td>—</td><td class="dim">—</td><td class="dim">—</td></tr>
+      <tr><td><u>Medical authorisation v2.2</u></td><td>Consent</td><td><span class="badge dash">Not sent</span></td><td>—</td><td class="dim">—</td><td class="dim">—</td></tr></tbody></table>
+      <div style="font-size:12.5px;color:var(--muted)">A survey comes with an announcement that links to it. <span class="anno">1</span></div>`, "Open in Surveys & consents");
+  } else {
+    body = `<div class="card"><div class="card-body"><div class="row between"><b style="font-size:16px">What one guardian sees <span class="anno">1</span></b><div class="row"><span style="font-size:13px">Viewing as guardian</span><div class="input select filled" style="width:240px">Serena Lim · mother</div></div></div>
+      <span style="font-size:12.5px;color:var(--muted)">Auntie Rosnah has not activated the Parents App.</span>
+      <div class="card" style="border:2px solid var(--ink)"><div class="card-body"><b>Needs you · 2</b>
+        <div class="row between" style="font-size:13.5px"><span>Pay invoice INV-SW-TAM-202611-0001 · SGD 300.00 · due 2026-11-05</span><span style="font-weight:600;font-size:12.5px"><u>Open in Invoices</u> ↗</span></div>
+        <div class="row between" style="font-size:13.5px"><span>Sign consent "Outings and excursions" · read on 2026-09-22, not signed</span><span style="font-weight:600;font-size:12.5px"><u>Open in Consents</u> ↗</span></div>
+        <span style="font-size:12px;color:var(--muted)">A task leaves this list only when it is done, not when it is read.</span></div></div>
+      <b style="font-size:13px">Recent</b>
+      <div style="font-size:13.5px;display:grid;gap:6px"><div>📣 Field trip to the zoo · HQ · 2026-09-20 · read</div><div>💬 Sunbeams (N2) · Aisyah Rahman: Ethan had a settled morning… · 2026-09-18</div><div>🎂 Birthday celebration on 14 Feb · In progress · 2026-11-07</div></div>
+    </div></div>`;
+  }
+  return header("Communication") + `<div class="row between">${segs}<span style="font-size:13px;font-weight:600"><u>Open in Communication</u> ↗</span></div>` + body + `<div style="font-size:12.5px;color:var(--muted)">Read only — reply, send or answer in Communication.</div>`;
+}
+
+const WHO = "Grace Tan · Centre Director";
+const SCREENS = [
+  { id: "scr-01", code: "SCR-01", name: "Tab Enrolment", slug: "tab-enrolment", tickets: "US-001 — lịch sử ghi danh, thay đổi trạng thái, case, cờ",
+    states: [["default", "Có case đang mở", () => enrolment("default")], ["history", "Đã chuyển Centre, không có case", () => enrolment("history")]],
+    notes: [["Cờ SUG / Staff / KA child chỉ đọc, kèm tác động lên học phí.", "FR-006 · OQ-RT-04"], ["Cases: case đang mở hoặc liên kết bắt đầu case theo quyền.", "FR-004 · FR-005 · VAL-001"], ["Mỗi lần ghi danh: Centre, lớp, programme, ngày, legal entity và dòng thời gian trạng thái.", "FR-001 đến FR-003"]] },
+  { id: "scr-02", code: "SCR-02", name: "Tab Enrichment", slug: "tab-enrichment", tickets: "US-002 — chương trình enrichment",
+    states: [["default", "Current", () => enrichment("default")], ["past", "Past: rút qua app, đổi chương trình", () => enrichment("past")], ["empty", "Chưa có chương trình", () => enrichment("empty")]],
+    notes: [["Đang học thì End date để trống; End date chỉ có khi dừng hoặc rút.", "FR-008 · FR-009"], ["Tên chương trình mở lớp enrichment trong Learning; đổi chương trình hiện \"switched from\".", "FR-010 · FR-044"], ["Past: cách kết thúc và lý do — rút qua app (không hoàn tiền), đổi chương trình (báo trước 1 tháng), rời trường (ngưng hoá đơn enrichment).", "FR-044 · FR-045 · BR-018 đến BR-020"]] },
+  { id: "scr-03", code: "SCR-03", name: "Tab Attendance", slug: "tab-attendance", tickets: "US-003 — tóm tắt, danh sách ngày, Day record, kiểm tra ngày 18 · US-006 lỗi tải",
+    states: [["default", "Tóm tắt + Day record", () => attendance("default")], ["voided", "Ngày có bản ghi void", () => attendance("voided")], ["no-attendance", "Ngày 18: chưa có buổi nào", () => attendance("no-attendance")], ["error", "Lỗi tải", () => attendance("error")]],
+    notes: [["Lỗi tải chỉ trong tab, header và tab khác vẫn dùng được.", "FR-038 · VAL-007"], ["Danh sách ngày: status, giờ vào ra, cờ đến muộn.", "FR-013"], ["Bản ghi void gạch ngang, không tính có mặt, ghi người yêu cầu, người duyệt, lý do.", "FR-015 · BR-004 · BR-005"], ["Mọi lần đo nhiệt độ; từ 37,5 °C có cảnh báo.", "FR-014 · FR-016 · AS-RT-04"], ["Bus service chỉ đọc.", "FR-017"], ["Công dân Singapore, qua ngày 18, 0 buổi trong tháng: cảnh báo No attendance this month (giữ trợ cấp).", "FR-043 · BR-021"], ["Mặc định tháng hiện tại của enrolment đang hiệu lực; chọn khoảng ngày.", "FR-012"]] },
+  { id: "scr-04", code: "SCR-04", name: "Tab Finance", slug: "tab-finance", tickets: "US-004 — hoá đơn, công nợ, GIRO CDA / non-CDA, trợ cấp, giảm giá, cọc",
+    states: [["default", "Singapore · CDA + non-CDA · có nợ", () => finance("default")], ["malaysia", "Malaysia · không có việc", () => finance("malaysia")]],
+    notes: [["Payment method thuộc hồ sơ trẻ: GIRO, GIRO CDA hoặc PayNow.", "FR-019 · BR-022"], ["What needs doing: hoá đơn quá hạn, GIRO bị từ chối, hoàn tiền lỗi — mở màn Fees & Payments.", "FR-020"], ["Invoices nhóm theo loại; mỗi hoá đơn mang phương thức để Finance lọc hàng loạt.", "FR-021 · BR-022"], ["Tối đa 2 tài khoản GIRO (CDA và non-CDA); số tài khoản chỉ hiện 4 số cuối; Centre Malaysia không có GIRO / CDA, ECDA.", "FR-023 · BR-007 · BR-023 · VAL-004"], ["CDA và non-CDA xuất hoá đơn riêng.", "BR-023"]] },
+  { id: "scr-05", code: "SCR-05", name: "Tab Communication", slug: "tab-communication", tickets: "US-005 — Announcements, Messages, Inquiries, Surveys & consents, Notifications",
+    states: [["default", "Messages", () => communication("default")], ["announcements", "Announcements", () => communication("announcements")], ["inquiries", "Inquiries", () => communication("inquiries")], ["surveys", "Surveys & consents", () => communication("surveys")], ["notifications", "Notifications", () => communication("notifications")]],
+    notes: [["Mỗi phần có quy tắc riêng: class thread có sẵn (lớp cũ chỉ đọc); announcement một chiều, hẹn giờ, tệp, gửi kèm email; inquiry chia theo loại; survey đi kèm announcement; Notifications mô phỏng phụ huynh thấy gì.", "FR-029 đến FR-031 · FR-039 · FR-040 · BR-009 · BR-012 · BR-015 · BR-016"], ["Private chat Centre Director – phụ huynh: giáo viên không thấy; tin gửi theo trẻ ghi người nhận thực tế.", "BR-013 · FR-033 · FR-042"]] }
+];
+
+let current = { screen: "scr-01", state: "default" };
+const $ = (id) => document.getElementById(id);
+function render() {
+  const s = SCREENS.find(x => x.id === current.screen) || SCREENS[0];
+  const st = s.states.find(x => x[0] === current.state) || s.states[0];
+  $("switcher").innerHTML = SCREENS.map(x => `<a href="#${x.id}"${x.id === s.id ? ' aria-current="page"' : ""}><b>${x.code}</b>${x.name}</a>`).join("");
+  $("scrTitle").textContent = `${s.code} · ${s.name}`;
+  $("scrTickets").textContent = s.tickets;
+  $("states").innerHTML = s.states.map(x => `<button type="button" data-state="${x[0]}" aria-pressed="${x[0] === st[0]}">${x[1]}</button>`).join("");
+  $("frame").innerHTML = shell(st[2](), WHO);
+  $("notes").innerHTML = s.notes.map(n => `<li>${n[0]} <span class="src">${n[1]}</span></li>`).join("");
+}
+$("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
+function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : "scr-01", state: "default" }; render(); }
+window.addEventListener("hashchange", fromHash);
+window.showWireframe = (screen, state) => { current = { screen, state }; render(); };
+window.WF_SCREENS = SCREENS.map(s => ({ id: s.id, code: s.code, name: s.name, slug: s.slug, states: s.states.map(x => x[0]) }));
+fromHash();
+</script>

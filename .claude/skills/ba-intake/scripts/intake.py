@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nạp tài liệu đầu vào cho một dự án vào inputs/<du-an>/, giữ phiên bản cũ, tạo diff, commit + push.
+"""Nạp tài liệu đầu vào cho một dự án vào projects/<du-an>/Document/Bien_Ban_Khao_Sat/, giữ phiên bản cũ, tạo diff, commit + push.
 
 Cách dùng:
     python .claude/skills/ba-intake/scripts/intake.py <du-an> \
@@ -12,13 +12,13 @@ Cách dùng:
     --source ghi vào manifest (mặc định: chat nếu file từ .intake/, attachment nếu file khác, url nếu --url).
     --note   ghi chú một dòng vào manifest (vd. "Email bổ sung của chị Hạnh").
     --no-push   chỉ commit, không push.
-    --no-branch không tự chuyển sang branch docs/<du-an>.
+    --no-branch không tự chuyển sang branch docs/<du-an>; vẫn commit (và push) trên branch hiện tại.
 
 Quy tắc giữ thông tin cũ:
   - Không bao giờ ghi đè. Trùng tên + khác nội dung -> lưu thành <ten>__v2.<ext>, __v3...
   - Trùng nội dung (SHA-256) với file đã có -> bỏ qua, báo "trùng".
-  - Mỗi lần nạp ghi thêm dòng vào inputs/<du-an>/_manifest.md.
-  - Lần nạp vào dự án đã có tài liệu -> tạo inputs/<du-an>/_changes/<thoi-diem>.md (diff + chỗ để BA mô tả khác biệt).
+  - Mỗi lần nạp ghi thêm dòng vào projects/<du-an>/Document/Bien_Ban_Khao_Sat/_manifest.md.
+  - Lần nạp vào dự án đã có tài liệu -> tạo projects/<du-an>/Document/Bien_Ban_Khao_Sat/_changes/<thoi-diem>.md (diff + chỗ để BA mô tả khác biệt).
 
 Cuối cùng in một dòng JSON (bắt đầu bằng "INTAKE_RESULT ") để Claude đọc.
 """
@@ -42,11 +42,13 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import SUBDIRS, Project, find  # noqa: E402
 INTAKE_DIR = REPO / ".intake"
 TEXT_EXT = {".md", ".txt", ".csv", ".json", ".eml", ".html", ".htm", ".xml", ".yaml", ".yml"}
 PANDOC_EXT = {".docx", ".odt", ".rtf", ".epub"}
 MAX_DOWNLOAD = 50 * 1024 * 1024
-META_PREFIX = "_"  # file/thư mục hệ thống trong inputs/<du-an>/
+META_PREFIX = "_"  # file/thư mục hệ thống trong projects/<du-an>/Document/Bien_Ban_Khao_Sat/
 DIFF_MAX_LINES = 400
 
 
@@ -226,12 +228,28 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--no-branch", action="store_true")
     args = ap.parse_args(argv[1:])
 
-    du_an = slugify(args.du_an) if args.du_an != "_example" else "_example"
     warnings: list[str] = []
-    branch = "" if args.no_branch else ensure_branch(du_an, warnings)
+    found, similar = find(args.du_an)
+    if found:
+        project = found
+    else:  # dự án mới — không gộp nhầm vào dự án có tên gần giống
+        project = Project(slugify(args.du_an) if args.du_an != "_example" else "_example")
+        near = [n for n in similar if set(n.split("-")) & set(project.slug.split("-"))]
+        if near:
+            warnings.append(f"tạo dự án mới '{project.slug}' (dự án tên gần giống: {', '.join(near)})")
+    du_an = project.slug
+    if args.no_branch:
+        # ở lại branch hiện tại (cloud chỉ cho dùng branch của session) nhưng vẫn commit
+        code, cur = git("rev-parse", "--abbrev-ref", "HEAD")
+        branch = cur if code == 0 and cur != "HEAD" else ""
+        if not branch:
+            warnings.append("không xác định được branch hiện tại — bỏ qua commit/push")
+    else:
+        branch = ensure_branch(du_an, warnings)
 
-    dest = REPO / "inputs" / du_an
-    dest.mkdir(parents=True, exist_ok=True)
+    for sub in SUBDIRS:
+        (project.root / sub).mkdir(parents=True, exist_ok=True)
+    dest = project.input
     existing_before = [p.name for p in content_files(dest)]
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -305,7 +323,7 @@ def main(argv: list[str]) -> int:
 
     commit = pushed = None
     if rows and branch:
-        git("add", "--", f"inputs/{du_an}")
+        git("add", "--", project.rel(dest))
         msg = f"input({du_an}): {len(added)} file mới, {len(versions)} phiên bản mới"
         code, out = git("commit", "-m", msg)
         if code == 0:
@@ -321,7 +339,7 @@ def main(argv: list[str]) -> int:
     for w in warnings:
         print(f"WARN: {w}")
     for a in added:
-        print(f"MỚI: inputs/{du_an}/{a['file']}")
+        print(f"MỚI: {project.rel(dest)}/{a['file']}")
     for v in versions:
         stat = f"+{v['added']}/−{v['removed']} dòng" if v.get("diff") is not None else "không diff được"
         print(f"PHIÊN BẢN MỚI: {v['previous']} → {v['file']} ({stat})")

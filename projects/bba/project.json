@@ -1,0 +1,64 @@
+{
+  "name": "BBA — Busy Bees Asia CRM + SMS (Edtech)",
+  "_note": "Quy tắc riêng của dự án BBA — thắng quy tắc chung. Đọc kèm templates/HUONG-DAN-FSD.md.",
+  "main_doc": "fsd",
+  "fsd": {
+    "language": "vi-first",
+    "template": "templates/template-fsd.md",
+    "guide": "templates/HUONG-DAN-FSD.md",
+    "sources": [
+      "Document/SRS/workflow.md",
+      "Document/SRS/*.md (13 SRS v0.1 dạng Markdown)",
+      "Document/FSD/Sprint 3/ (5 FRS đã có)"
+    ],
+    "dir": "Document/FSD",
+    "file_name": "Document/FSD/Sprint <n>/<WBS>_<Feature_Name>[_VI].md (H1 = '<WBS> <Feature>') → Drive: [FRD] <H1> - Sprint <n>.docx (đổi theo ticket khi có)",
+    "_language_note": "Viết bản tiếng Việt (<file>_VI.md) trước → user duyệt → mới dịch tiếng Anh (<file>.md, bản chuẩn gửi khách)."
+  },
+  "docx_style": {
+    "font": "Arial",
+    "size_pt": 10,
+    "line_spacing": 1.5,
+    "first_line_indent_in": 0.5,
+    "heading_sizes_pt": [
+      14,
+      12,
+      11,
+      10
+    ],
+    "table": {
+      "border_pt": 0.5,
+      "border_color": "000000",
+      "header_fill": "D9D9D9",
+      "header_bold": true,
+      "repeat_header": true,
+      "line_spacing": 1.0,
+      "cell_space_pt": 2
+    },
+    "toc": false,
+    "lang": "en-GB"
+  },
+  "drive": {
+    "root_url": "https://drive.google.com/drive/folders/199Zxc2yR_lxpasyaNkvo3db7vqKIIEyW",
+    "_note": "Thư mục do user tạo. Mỗi lần đẩy HỎI user thư mục đích; folder_hints chỉ là gợi ý. Luôn đẩy Word (.docx).",
+    "update_rule": "Chỉ đẩy khi user duyệt. Cập nhật tài liệu đã có: chuyển file cũ trên Drive vào thùng rác TRƯỚC, rồi mới tải bản mới (cùng tên, cùng thư mục); Git: thay file cũ, xoá bản cũ / nháp song song trong cùng commit. Xem templates/HUONG-DAN-FSD.md mục 4.",
+    "folder_hints": {
+      "FSD/Sprint 3": "https://drive.google.com/drive/folders/1smSAy1Zg8R0mjf0MNFl1iSmpZYE1e3g6",
+      "FSD/Sprint 4": "https://drive.google.com/drive/folders/1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV"
+    },
+    "titles": {
+      "FSD/Sprint 3": "[FRS] {stem}.docx",
+      "FSD/Sprint": "[FRD] {h1} - Sprint {sprint}.docx"
+    },
+    "docs": [
+      {
+        "src": "Document/SRS/workflow.md"
+      }
+    ]
+  },
+  "sprint": {
+    "enabled": true,
+    "current": 4,
+    "_note": "FSD / Test_Case lưu trong Document/<loại>/Sprint <n>/"
+  }
+}

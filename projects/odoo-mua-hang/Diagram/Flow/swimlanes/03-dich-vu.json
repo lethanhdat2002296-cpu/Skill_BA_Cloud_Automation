@@ -1,0 +1,19 @@
+{
+  "title": "Swimlane 3 — Vật tư Dịch vụ: PO trực tiếp (v0.3)",
+  "orientation": "vertical",
+  "lanes": ["Nhân viên MH", "Hệ thống", "Kế toán", "Trưởng phòng Mua hàng"],
+  "nodes": [
+    {"id": "s", "lane": 0, "col": 0, "type": "start", "label": "Bắt đầu"},
+    {"id": "m1", "lane": 0, "col": 1, "label": "Tạo PO dịch vụ (Nháp) — không YCMH, không RFQ"},
+    {"id": "m2", "lane": 0, "col": 2, "label": "Tạo ĐNTT (bắt buộc), gửi kế toán"},
+    {"id": "m3", "lane": 0, "col": 3, "label": "Approve"},
+    {"id": "k1", "lane": 2, "col": 3, "label": "Duyệt ĐNTT, ghi nhận thanh toán"},
+    {"id": "t1", "lane": 3, "col": 4, "type": "decision", "label": "Duyệt đơn?"},
+    {"id": "x1", "lane": 1, "col": 5, "type": "system", "label": "Chuyển PO, không tạo phiếu DO"},
+    {"id": "e", "lane": 1, "col": 6, "type": "end", "label": "Kết thúc"}
+  ],
+  "edges": [
+    ["s", "m1"], ["m1", "m2"], ["m2", "m3"], ["m2", "k1"], ["m3", "t1"],
+    ["t1", "x1", "Duyệt"], ["t1", "m1", "Từ chối → Nháp"], ["x1", "e"]
+  ]
+}

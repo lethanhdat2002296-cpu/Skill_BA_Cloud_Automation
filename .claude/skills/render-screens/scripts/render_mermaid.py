@@ -3,9 +3,10 @@
 
 Cách dùng (CLI):
     python .claude/skills/render-screens/scripts/render_mermaid.py <du-an>
-        -> render ui/flows.md  -> ui/diagrams/flows-01.png, flows-02.png, ...
-        -> render SRS.md       -> ui/diagrams/srs-01.png, ...
-    python .../render_mermaid.py <du-an> --file ui/flows.md --prefix flows
+        -> render Diagram/Wireframe/flows.md, Document/SRS/SRS.md, Document/URD/URD.md, Document/Use_Case/UC.md (nếu có)
+           -> projects/<du-an>/Diagram/Flow/flows-01.png, srs-01.png, urd-01.png, uc-01.png …
+    python .../render_mermaid.py <du-an> --file Diagram/Wireframe/flows.md --prefix flows   (đường dẫn tính từ projects/<du-an>/)
+    In 1 dòng tổng kết; chỉ in chi tiết khi lỗi (--verbose để in từng sơ đồ).
 
 Dùng như module (to_docx.py import):
     blocks = render_markdown(md_path, out_dir, prefix)  # [Diagram(...)]
@@ -28,6 +29,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO / "tools"))
+from ba_paths import resolve  # noqa: E402
 BLOCK_RE = re.compile(r"^```mermaid[ \t]*\n(.*?)^```[ \t]*$", re.S | re.M)
 HEADING_RE = re.compile(r"^#{1,6}\s+(.+?)\s*$", re.M)
 
@@ -118,7 +121,7 @@ def render_markdown(md_path: Path, out_dir: Path, prefix: str, quiet: bool = Fal
                     png = out
                     if not quiet:
                         print(f"OK: {out.relative_to(REPO)}  ({heading})")
-                elif not quiet:
+                else:
                     print(f"ERROR: render Mermaid #{i} trong {md_path.name} ({heading}) thất bại:\n{log}")
             diagrams.append(Diagram(i, m.start(), m.end(), m.group(1), heading, png))
     return diagrams
@@ -129,26 +132,28 @@ def main(argv: list[str]) -> int:
 
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("du_an")
-    ap.add_argument("--file", help="file Markdown tương đối với outputs/<du-an>/")
+    ap.add_argument("--file", help="file Markdown tương đối với projects/<du-an>/")
+    ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--prefix", help="tiền tố tên PNG")
     args = ap.parse_args(argv[1:])
 
-    project = REPO / "outputs" / args.du_an.strip("/\\")
-    out_dir = project / "ui" / "diagrams"
-    targets = [(project / args.file, args.prefix or Path(args.file).stem.lower())] if args.file else [
-        (project / "ui" / "flows.md", "flows"),
-        (project / "SRS.md", "srs"),
+    project = resolve(args.du_an)
+    out_dir = project.diagrams
+    targets = [(project.root / args.file, args.prefix or Path(args.file).stem.lower())] if args.file else [
+        (project.ui / "flows.md", "flows"),
+        (project.doc("SRS.md"), "srs"),
+        (project.doc("URD.md"), "urd"),
+        (project.doc("UC.md"), "uc"),
     ]
     failed = 0
     total = 0
     for md, prefix in targets:
         if not md.exists():
-            print(f"WARN: không có {md.relative_to(REPO)}")
             continue
-        ds = render_markdown(md, out_dir, prefix)
+        ds = render_markdown(md, out_dir, prefix, quiet=not args.verbose)
         total += len(ds)
         failed += sum(1 for d in ds if d.png is None)
-    print(f"render_mermaid: {total - failed}/{total} sơ đồ đã render vào outputs/{args.du_an}/ui/diagrams/")
+    print(f"render_mermaid: {total - failed}/{total} sơ đồ đã render vào {project.rel(out_dir)}/")
     return 1 if failed else 0
 
 

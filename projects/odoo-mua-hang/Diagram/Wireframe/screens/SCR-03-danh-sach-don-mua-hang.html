@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  SCR-03 — Danh sách RFQ và Đơn mua hàng
+  FR: FR-10, FR-17, FR-25, FR-27
+  Loại: backend · Khung: 1440
+  Trạng thái: default, empty
+  Nguồn: SRS.md mục 6 · ui/flows.md mục 3
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-screen" content="SCR-03">
+<meta name="wf-type" content="backend">
+<meta name="wf-fr" content="FR-10, FR-17, FR-25, FR-27">
+<title>SCR-03 — Danh sách RFQ và Đơn mua hàng</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body>
+<div class="wf-doc-header"><strong>SCR-03 · Danh sách RFQ và Đơn mua hàng</strong><span class="wf-doc-meta">backend · FR-10, FR-17, FR-25, FR-27</span></div>
+
+<section class="wf-state" data-state="default" data-label="Mặc định — RFQ và đơn đang xử lý">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Mua hàng</span><nav class="be-topbar__menu"><span class="is-active">Đơn hàng</span><span>Sản phẩm</span><span>Báo cáo</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu báo giá</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Đang xử lý</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span><span class="wf-anno">1</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>1-8 / 8</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><table class="wf-table"><thead><tr><th><input type="checkbox"></th><th>Số phiếu</th><th>Nhà cung cấp</th><th>Mã Yêu cầu mua hàng</th><th>Loại</th><th>Ngày dự kiến nhận hàng</th><th class="num">Tổng tiền</th><th>Trạng thái</th></tr></thead><tbody><tr><td><input type="checkbox"></td><td>HC-PO-0013-21-10-2026-01</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>HC_0013_21_10_26</td><td>Nhập kho</td><td>10/11/2026</td><td class="num">2.365.000₫</td><td><span class="wf-badge wf-badge--dashed">Nháp</span></td></tr><tr><td><input type="checkbox"></td><td>HC-PO-0013-21-10-2026-02</td><td>Công ty CP Thiên Long</td><td>HC_0013_21_10_26</td><td>Nhập kho</td><td>10/11/2026</td><td class="num">1.980.000₫</td><td><span class="wf-badge wf-badge--dashed">Nháp</span></td></tr><tr><td><input type="checkbox"></td><td>MH-PO-0003-21-10-2026</td><td>Công ty TNHH Vệ sinh Công nghiệp Sao Việt</td><td>—</td><td>Dịch vụ</td><td>01/11/2026</td><td class="num">13.200.000₫</td><td><span class="wf-badge wf-badge--dashed">Nháp</span></td></tr><tr><td><input type="checkbox"></td><td>HC-PO-0012-20-10-2026-01</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>HC_0012_20_10_26</td><td>Nhập kho</td><td>05/11/2026</td><td class="num">5.280.000₫</td><td><span class="wf-badge">RFQ</span></td></tr><tr><td><input type="checkbox"></td><td>HC-PO-0012-20-10-2026-02</td><td>Công ty TNHH Tin học Phong Vũ</td><td>HC_0012_20_10_26</td><td>Nhập kho</td><td>05/11/2026</td><td class="num">69.927.000₫</td><td><span class="wf-badge wf-badge--soft">Chờ duyệt</span></td></tr><tr><td><input type="checkbox"></td><td>KT-PO-0009-12-10-2026-01</td><td>Công ty TNHH Nội thất Hòa Phát</td><td>KT_0009_12_10_26</td><td>Nhập kho</td><td>28/10/2026</td><td class="num">18.700.000₫</td><td><span class="wf-badge wf-badge--solid">PO</span></td></tr><tr><td><input type="checkbox"></td><td>HC-PO-0008-10-10-2026-01</td><td>Công ty CP Thế Giới Di Động</td><td>HC_0008_10_10_26</td><td>Nhập kho</td><td>20/10/2026</td><td class="num">24.990.000₫</td><td><span class="wf-badge wf-badge--solid">PO</span></td></tr><tr><td><input type="checkbox"></td><td>HC-PO-0006-06-10-2026-01</td><td>Công ty Văn phòng phẩm Hồng Hà</td><td>HC_0006_06_10_26</td><td>Nhập kho</td><td>15/10/2026</td><td class="num">3.410.000₫</td><td><span class="wf-badge">Đã huỷ</span></td></tr></tbody></table></div></div></main></div></div>
+  </div>
+  <div class="wf-notes"><ol><li>① "Mới" tạo PO dịch vụ trực tiếp; vật tư Nhập kho chỉ mua qua Yêu cầu mua hàng (FR-25, BR-19.3).</li><li>Số phiếu theo mẫu Mã phòng ban-PO-XXXX-DD-MM-YYYY; RFQ từ YCMH thêm hậu tố -NN (FR-27, AS-42).</li><li>Gõ "HC_0012" ở ô tìm kiếm ra 2 RFQ của YCMH đó — tìm theo cả mã lưu ngầm (BR-27.3).</li><li>Nhãn trạng thái: Nháp, RFQ, Chờ duyệt, PO, Đã huỷ (BR-17.3). Bỏ thao tác gửi email hàng loạt (BR-06.6).</li></ol></div>
+</section>
+<section class="wf-state" data-state="empty" data-label="Rỗng — lọc Chờ tôi duyệt">
+  <div class="wf-frame">
+<div class="be-app"><header class="be-topbar"><span>☰</span><span class="be-topbar__app">Mua hàng</span><nav class="be-topbar__menu"><span class="is-active">Đơn hàng</span><span>Sản phẩm</span><span>Báo cáo</span><span>Cấu hình</span></nav><div class="be-topbar__right"><span class="wf-icon wf-icon--round">!</span><span class="wf-avatar">TQ</span></div></header><div class="be-body"><main class="be-main"><div class="be-controlpanel"><div class="be-controlpanel__left"><nav class="wf-breadcrumb"><span>Yêu cầu báo giá</span></nav></div><div class="be-controlpanel__right"><div class="be-search"><span class="be-facet"><span class="be-facet__type">Bộ lọc</span>Chờ tôi duyệt</span><span class="be-search__placeholder">Tìm kiếm...</span><span>▾</span></div></div><div class="be-controlpanel__left"><span class="wf-btn wf-btn--sm wf-btn--primary">Mới</span></div><div class="be-controlpanel__right"><div class="be-pager"><span>0 / 0</span><span class="be-pager__btn">‹</span><span class="be-pager__btn">›</span></div><div class="be-views"><span class="is-active">≡</span><span>▦</span></div></div></div><div class="be-content"><div class="be-list"><div class="wf-empty"><span class="wf-empty__icon"></span><span class="wf-empty__title">Không có đơn nào chờ bạn duyệt</span><span>Đơn mua hàng cần bạn duyệt sẽ xuất hiện tại đây và trong Hoạt động.</span></div></div></div></main></div></div>
+  </div>
+  <div class="wf-notes"><ol><li>Bộ lọc "Chờ tôi duyệt" chỉ hiện đơn có activity duyệt của người đăng nhập (BR-10.5).</li></ol></div>
+</section>
+</body>
+</html>

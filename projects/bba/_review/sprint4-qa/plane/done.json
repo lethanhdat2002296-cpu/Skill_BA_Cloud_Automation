@@ -1,0 +1,303 @@
+[
+ {
+  "seq": 1059,
+  "name": "BBA input: Height and weight – growth chart, absent children, deleting, parent view, HQ report",
+  "state": "Done",
+  "desc": "Needed by: Fri 13 Nov, so design can start before Sprint 4 (23 Nov).\nBBA owner: Alan → Centre Operations\nHow to reply: please answer in a comment, using the question numbers (for example \"Q1: …\").\nRelated: the measuring schedule for each brand (term or semester) is asked in BBA-529, so it is not repeated here.\nAttached files: Parent App Requirements Provided to DotB (30 July 2026).pdf; Taidii - Center Staff Role permissions.xlsx.\nQ1. Growth chart\nWhat we know: In the Parent App review (16 Sep) you removed BMI and asked for an age-based growth chart, and offered to send the Singapore chart. The Taidii Parents App today plots growth \"according to WHO standards\".\nTaidii Parents App today, Height & Weight screen\nQuestions:\n• Should we use the WHO standards, as Taidii does, or a Singapore chart? If Singapore, please send the chart and its source.\n\n• Which chart should Malaysia use?\n\nQ2. Absent children and children on temporary withdrawal\nWhat we know: In the Administration workshop (15 Sep) you described the entry screen as listing every child in the class for the teacher to fill in.\nQuestion: Should the class entry screen also list children who are absent or on temporary withdrawal, so teachers can leave them blank and fill in later?\nQ3. Deleting a measurement\nWhat we know: The Centre Director does not need to approve measurements (Centre Leadership workshop, 17 Sep). In Taidii, \"Update Height and Weight\" is held by both CD/ACD/Admin and Teachers.\nFile \"Taidii - Center Staff Role permissions.xlsx\", sheet \"Center Staff Role\", row 14 (table redrawn from the Excel file; wording unchanged)\nQuestion: May a measurement be deleted? If yes, which role may delete it?\nQ4. When parents see measurements\nWhat we know: Your Parent App requirements let parents view height, weight and growth history (item 19). A measurement is just a record, with no approval step (Administration workshop, 16 Sep).\nFile \"Parent App Requirements Provided to DotB (30 July 2026).pdf\", page 4, item 19\nQuestion: Should parents see a new measurement as soon as the teacher saves it, or only at a set time, for example at the end of term like the portfolio?\nQ5. Report for HQ\nWhat we know: Many centres forget to enter measurements, so portfolios end up blank, and you asked for a checklist showing \"what is done and what is not done\" (Administration workshop, 15 Sep).\nQuestions:\n• Does the HQ report only need completion status (by centre, class and term, and the percentage of children measured), or also growth statistics?\n\n• Who will use the report?",
+  "comments": [
+   "Q2. Yes, should include those children, possibly group them separately from the present students depending on the UX design.\nQ3. A measurement can be deleted, can be a single permission for CRUD. Currently we assign to CD, Admin, and all Teachers.\nQ4. Parents can see the measurements as soon as the entries are recorded.\nQ5. Report only needs completion status. CD, Admin, Cluster Heads will be main users of the report for a start.",
+   "Q1\n• Singapore base on the Anthropometric study conducted by the Singapore National Healthcare Group Polyclinics.\n• Sample chart reference available at https://littleetoile.com.sg/baby-weight-chart-singapore-13884/?srsltid=AYCX9vJaox5_lNWjZfVxbi4ej3JN8xhk8VSjOqcpxDMpcpPXTOy2RKr4.\n\n• Malaysia chart reference - https://www.malaysia.gov.my/en/categories/health/babies-and-children/child-health-record-book"
+  ],
+  "id": "07d1b47b-663d-4e8f-83c5-87c58dd64319",
+  "parent": "2e5a6e8c-8cad-4ab6-9be9-233d53a253c5"
+ },
+ {
+  "seq": 1058,
+  "name": "BBA input: Health changes in the system, 6-monthly review, printing the allergy list",
+  "state": "Done",
+  "desc": "Needed by: Fri 13 Nov, so design can start before Sprint 4 (23 Nov).\nBBA owner: Alan → Centre Operations / Safeguarding\nHow to reply: please answer in a comment, using the question numbers (for example \"Q1: …\").\nAttached files: Appendix 3Medical Care Assessment Review 2025.pdf; Appendix 1 Medical Care Assessment Checklist_.pdf.\nQ1. Health changes in the system and the 6-monthly review\nWhat we know:\n• When a parent updates health information in the Parents App, the Centre Director and class teachers are notified (process review, 21 Sep).\n\n• Your review form: after any change, a new Medical Care Assessment, Medical Overview and medicine form must be completed; the Centre Director or senior staff confirm with the parent every 6 months and both sign.\n\nFile \"Appendix 3 Medical Care Assessment Review 2025\", page 1\nQuestions:\n• When a parent changes health information in the app, does it apply straight away, or only after the Centre Director completes the new assessment?\n\n• Should the 6-monthly review be tracked in the system, with a reminder on the \"Date of Next Review\" and a sign-off?\n\nQ2. Printing and exporting the allergy list\nWhat we know: Your Medical Care Assessment Checklist asks parents to agree that their child's name and photo may be shown on the medical list.\nFile \"Appendix 1 Medical Care Assessment Checklist\", page 3\nQuestions:\n• Which roles may print or export the allergy list?\n\n• Should we record who printed or exported it, and when?\n\n• For a child whose parent did not agree, what should the printed list show?",
+  "comments": [
+   "Q1. Changes should apply only after CD or Admin completes the assessment. Yes, 6-monthly review should be tracked as part of the centre checklist, with auto reminder 1 month before to trigger the form to parents for reassessment.\nQ2. CD, Admin, Teachers may print/export the allergy list. No need to reach who print/export. For children whose parents did not sign off, data will not appear in the child profile."
+  ],
+  "id": "f61eb70b-71a3-4032-af9f-f60364f45713",
+  "parent": "9181238d-c671-4d18-aef2-6b9e0dc1599c"
+ },
+ {
+  "seq": 529,
+  "name": "BBA input: Height and weight records today",
+  "state": "Done",
+  "desc": "Requested in: email \"Sprint 4 – SRS & prototype sign-off needed by Fri 6 Nov\". Needed by Fri 6 Nov so design can start for Sprint 4 (23 Nov).\nBBA owner: Alan → Centre Operations\nWhat we already have from you\n• Singapore measures height and weight every term, 4 terms a year \n\n• Reminder to centres in the middle of the last month of each quarter: mid-March, mid-June, mid-September, mid-December \n\n• Teachers enter height and weight for the whole class on one screen, instead of opening each child's record \n\n• Parents see height and weight in the app, and the same figures appear in the portfolio \"About me\" page \n\nWhat we still need\n• Does any brand measure on a different schedule? The portfolio samples suggest Brighton measures by semester and Agape once per term. Please confirm the schedule for each brand, Singapore and Malaysia\n\n• One sample export of the height and weight records from Taidii (one class is enough), so the new screen, the HQ report and the data migration match what you keep today",
+  "comments": [
+   "Though Brighton measures by semester while the rest of the brands does the height and weight measurement term-wise. It would be sufficient to send the reminder in the middle of the last quarter for all brands. Sample export as attached."
+  ],
+  "id": "4dd7c37c-a16a-45ad-a906-17665b5eae82",
+  "parent": "2e5a6e8c-8cad-4ab6-9be9-233d53a253c5"
+ },
+ {
+  "seq": 528,
+  "name": "BBA input: Staff clock-in / clock-out flow",
+  "state": "Done",
+  "desc": "Requested in: email \"Sprint 4 – SRS & prototype sign-off needed by Fri 6 Nov\". Needed by Fri 6 Nov so design can start for Sprint 4 (23 Nov).\nBBA owner: Alan → Centre Operations / HR\nWhat we already have from you\n• Staff clock-in and clock-out is in Phase 1 and needs a report (24 Sep)\n\n• Today staff clock in on their own phone in Taidii, by location (GPS) or QR code, with monthly statistics: late, leave early, absent, on leave, overtime\n\n• Temperature is recorded at clock-in (same fever threshold as children)\n\n• All staff have a BBA Microsoft account (27 Oct, BBA-470)\n\nWhat we still need\nPlease discuss with the departments concerned and confirm how staff will clock in and out in the new system:\n• Where and how staff clock in and out (for example own phone, gate iPad, SMS web), and how to make sure no one can clock in or out for a colleague\n\n• Who must clock in and out: all centre staff? HQ staff too?\n\n• Are breaks recorded, or only start and end of the day?\n\n• What happens when a staff member forgets to clock in or out, and who corrects it\n\n• One sample of the staff attendance report you use from Taidii today",
+  "comments": [
+   "• Staff clock in and out only on attendance app on gate iPad, with photo to be captured.\n• Exception for CD app.\n\n• Source user (attendance app or CD) to be captured.\n\n• All centre staff to clock in/out. HQ staff and all visitors are also required to clock in/out as visitors, along with purpose to be captured.\n\n• Breaks not required to be recorded.\n\n• CD to monitor attendance and to correct if necessary.\n• Possibly a notification to CD at configured time e.g. 1000 hr, on any staff absence?\n\n• Sample of the staff attendance report as attached"
+  ],
+  "id": "9eb3169e-f7ed-4a35-948e-bdc4007004ab",
+  "parent": "6b0a088c-36e7-421d-a44e-918d67f225d7"
+ },
+ {
+  "seq": 525,
+  "name": "BBA input: GIRO \"keep enough funds\" reminder (Singapore)",
+  "state": "Done",
+  "desc": "Requested in: email \"Sprint 4 – SRS & prototype sign-off needed by Fri 6 Nov\". Needed by Fri 6 Nov so design can start for Sprint 4 (23 Nov).\nBBA owner: Alan → Finance SG\nWhat we already have from you\n• Singapore bills monthly: draft on the 24th, billed on the second-last day of the month, due on the 5th, reminders on the 15th and 25th\n\n• Malaysia bills by term (one invoice for 3 months, about 80% of invoices), monthly for corporate and instalment cases; the monthly fee and discount are kept separately inside the term invoice. Malaysia has no GIRO and collects by payment gateway, card and bank transfer (MY Finance SMS requirement)\n\n• GST (Singapore): 9% of (gross − discount), rate set per period, GST number per legal entity\n\n• GIRO runs (Singapore): 1st run submitted around the 3rd (value ~5th), 2nd run around the 17th (value ~21st) and re-collects what failed\n\n• Parents on GIRO get an app reminder to keep enough funds before each deduction (25 Sep)\n\nWhat we still need\n• How many days before each GIRO deduction should the \"keep enough funds\" reminder go out?",
+  "comments": [
+   "• One reminder to go out on 1st of the month.\n\n• If able to track those on GIRO with outstanding amounts, e.g. first deduction failed or adhoc invoices, second reminder to go out on 15th of the month."
+  ],
+  "id": "0629bca4-8813-42c0-a35d-57bb1ec4e7b6",
+  "parent": "36647c34-bbb2-495c-a32e-737451522ffd"
+ },
+ {
+  "seq": 524,
+  "name": "BBA input: Approval matrix – who approves and amount limits",
+  "state": "Done",
+  "desc": "Requested in: email \"Sprint 4 – SRS & prototype sign-off needed by Fri 6 Nov\". Needed by Fri 6 Nov so design can start for Sprint 4 (23 Nov).\nBBA owner: Alan / YC → HQ Operations, Finance SG, Finance MY\nCD = Centre Director · DM = District Manager · HOB = Head of Brand\nWhat we already have from you and need your double check:\n• Approval routes must be configurable down to brand level (for both SG and MY?)\n\n• Monthly recurring invoices: no approval; drafts are checked and confirmed automatically on the 31st (for both SG and MY?)\n\n• Discounts: promo codes are pre-approved; any other discount (for example staff discount) must be approved in the system when it is given to a child, with name and date. Each discount item is marked \"pre-approved\" or \"requires approval\". There is no discount approval matrix today; centres set their own (for both SG and MY?)\n\n• Refund: Finance prepares it, the head of Finance approves it (for both SG and MY?)\n\n• Credit note requests and notice-period waivers need an approval workflow that traces back to a name and a date (for both SG and MY?)\n\n• Withdrawal with full notice: no approval. Short notice: DM (SG) / Ops Manager (MY) / CD (Odyssey) / HOB (Brighton) (for both SG and MY?)\n\n• Withdrawal or transfer on any day other than the last day of the month goes to a second-level approval (for both SG and MY?)\n\n• Transfer with short notice: DM of both centres (for both SG and MY?)\n\n• Malaysia fee waivers and retention fee waivers: CD informs the Ops Manager, who asks Finance; Finance gives the final approval and keeps an approval matrix with limits (for both SG and MY?)\n\n• Attendance void: anyone can request; Centre Admin, CD or a senior teacher named by the CD approves; when they void it themselves no approval is needed.\n\nWhat we still need\n• Discounts that require approval: who approves, and is there an amount above which a second approver is needed?\n\n• Credit note requests, refunds and notice-period waivers: who approves, and above what amount is a second approver needed?\n\n• Malaysia: please share the Finance approval matrix (approver and limit per level) \n\n• Withdrawal or transfer in the middle of the month: who is the second-level approver? \n\n• Temporary withdrawal: Please confirm the approver(s) for Singapore and Malaysia, per brand where different\n\n• Short-notice withdrawal: Please confirm if this approval was to stay on email or to be configured in the system for Phase 1, and the approvers?",
+  "comments": [
+   "DM will now be known as Cluster Heads (CH) for both SG and MY. \nFinance = anyone under Finance role group. \nFinance Super Admin = Finance Managers.\n• Discounts that require approval: who approves, and is there an amount above which a second approver is needed? → Currently all discount items are pre-approved and entered into the list by Finance, except \"BBS Discount\" which is open amount and will route to Finance for approval. \n\n• Credit note requests, refunds and notice-period waivers: who approves, and above what amount is a second approver needed?\n• CN → CH\n\n• Refunds → Finance Super Admin\n\n• Notice-period waivers → CH\n\n• Malaysia: please share the Finance approval matrix (approver and limit per level) → Currently no limit set, but will be ideal to have that configurable.\n\n• Withdrawal or transfer in the middle of the month: who is the second-level approver? → CH / HOB\n\n• Temporary withdrawal: Please confirm the approver(s) for Singapore and Malaysia, per brand where different → CH / HOB\n\n• Short-notice withdrawal: Please confirm if this approval was to stay on email or to be configured in the system for Phase 1, and the approvers? → Preferably be configured in system for phase 1. CH / HOB"
+  ],
+  "id": "9594ed8d-5834-461e-8192-16e183afe0ea",
+  "parent": "6b3e708e-ac10-4434-9518-94ebc0e4d877"
+ },
+ {
+  "seq": 512,
+  "name": "BBA input: Handling rules for NRIC / FIN / MyKad numbers",
+  "state": "Done",
+  "desc": "Requested in: email \"Sprint 4 – SRS, prototype and inputs needed by Fri 6 Nov\" (listed as still open).\nBBA owner: Alan\nWhat we already have from you\n• Parents and guardians are identified by NRIC / FIN / MyKad / passport number; children by birth certificate or passport number (BBA-471, BBA-473, 27 Oct)\n\n• The same parent across centres or brands is merged into one account (BBA-471, 27 Oct)\n\n• Citizenship drives the billing structure and the admin keeps it up to date on the child record (25 Sep)\n\n• Taidii today has a separate permission \"View Full IC of Child and Parent\", and teachers can currently see the full IC (Taidii role permissions you sent)\n\n• Bank account numbers on the profile must be masked (9 Sep)\n\n• Registration forms by brand (Singapore and Malaysia); ECDA Withdrawal Form 3\n\nWhat we still need\n• Parents and guardians: do you need to keep the full NRIC / FIN / MyKad number, or are the last 3 digits and letter enough (for example ••••567D)? Under the PDPC NRIC guidelines, the full number should only be collected when the law requires it\n\n• Children: for which purposes do you need the full number (for example ECDA subsidy claims)?\n\n• Who may view a full ID number (for example Centre Director, centre admin, HQ Finance)?\n\n• How long should ID numbers be kept after a child withdraws or graduates?\n\n• An NRIC number does not show whether the person is a Singapore citizen or a PR. Where is citizenship or residency recorded today?\n\n• Which documents must print the full ID number (for example ECDA forms, invoices, receipts)?",
+  "comments": [
+   "Pls find the reply above.",
+   "• Parents and guardians: do you need to keep the full NRIC / FIN / MyKad number, or are the last 3 digits and letter enough (for example ••••567D)? Under the PDPA NRIC guidelines, the full number should only be collected when the law requires it. Yes, need to collect the full number. However, based on PDPA guidelines shld mask and display the last 4 characters. \n\n• Children: for which purposes do you need the full number (for example ECDA subsidy claims)?Registration form, ECDA Forms(1,2 & 3)\n\n• Who may view a full ID number (for example Centre Director, centre admin, HQ Finance)? Teacher, Admin, CD and also Finance staffs\n\n• How long should ID numbers be kept after a child withdraws or graduates? 5 years\n\n• An NRIC number does not show whether the person is a Singapore citizen or a PR. Where is citizenship or residency recorded today? Currently captured in the Enquiry record and admin will be updating correctly for the subsidy calculations\n\n• Which documents must print the full ID number (for example ECDA forms, invoices, receipts)? Registration form, ECDA Forms(1,2 & 3). All Finance documents - Eg.Invoice, Receipts are to be masked."
+  ],
+  "id": "6a3634dd-8112-4c9e-b423-57c60ef3f2d7",
+  "parent": "f2c31aa4-1bae-412a-9d3b-8a4b88b01346"
+ },
+ {
+  "seq": 494,
+  "name": "BBA input: Apps – working offline, photos and videos",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\". Ideally by Mon 2 Nov, before the Sprint 3 grooming.\nBBA owner: Alan / YC\nWhat we already have from you\n• The Attendance app works offline and syncs automatically (Phase 1 scope)\n\n• Class updates are mostly photos, with some video and no audio; Taidii limits video to about 1–2 minutes, and the limit should be configurable (8 Sep)\n\n• BBA asked how long media stays in fast storage before moving to cheaper long-term storage (18 Sep)\n\nWhat we still need\n• Apart from attendance at the gate, which centre tasks must still work without internet (for example routines in the Teacher App)?\n\n• Default maximum video length for class updates (we will make it configurable)",
+  "comments": [
+   "",
+   "• Routines are good to have to work without internet, other tasks to work with internet.\n\n• Set 2min as the default max video length for a start."
+  ],
+  "id": "59ba621b-37ff-48fb-9665-ed328222d573",
+  "parent": "04e3ce57-7129-4632-9a22-cb89522d791c"
+ },
+ {
+  "seq": 493,
+  "name": "BBA input: Personal data (PDPA) – log retention and contact",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\". Ideally by Mon 2 Nov, before the Sprint 3 grooming.\nBBA owner: YC\nWhat we already have from you\n• Financial records must be kept for 5 years and be retrievable for audit (9 Sep)\n\n• BBA is preparing an overview of PDPA and data policy for Singapore and Malaysia with the UK team (18 Sep)\n\nWhat we still need\n• The PDPA / data policy overview mentioned on 18 Sep, when ready\n\n• The system keeps a log of who viewed or changed personal data. How long should this log be kept?\n\n• Who at BBA handles personal data requests from parents?",
+  "comments": [
+   "• No timeline yet on the data policy readiness.\n\n• Will the log retention period be easily configured on front/back end? Any major concerns to keep up to 3 years from students' exit date?\n\n• Parents may contact DPO@busybeesasia.com"
+  ],
+  "id": "86e7000e-53d6-4bd9-a9aa-b18734e0d91e",
+  "parent": "d24a92de-0c0b-469b-a5f7-0e68d1434955"
+ },
+ {
+  "seq": 492,
+  "name": "BBA input: Additional document templates",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\". Ideally by Mon 2 Nov, before the Sprint 3 grooming.\nBBA owner: Alan → Admin / Finance\nChinese versions are not used today, and notices are written case by case (BBA-475). No need to send them.\nWhat we already have from you\n• Invoice, receipt and credit note templates (six brands)\n\n• Finance email templates: invoice issued, Learning Horizon ad-hoc invoice, payment receipt, overdue reminders (SG and MY), payment reminder (Finance Email templates.xlsx, 2 Nov)\n\n• Three new-enrolment emails\n\n• K2 year-end withdrawal notice (Small Wonder) and the guide to update bank details for refunds\n\n• Progress checklists (Agape, Learning Vision, Odyssey, Small Wonder, The Schoolhouse) and portfolio samples (six brands)\n\n• 2027 BBS Common Terms for Enrolment (draft)\n\n• An issued invoice is fixed at that point in time, including the master data (company name, address, fees, tax); reopening it shows that version (18 Sep)\n\nWhat we still need\n• If you use them today: refund voucher, welcome letter, transfer letter, consent request letter, progress report cover page",
+  "comments": [
+   "• refund voucher: currently not in use by either finance/centre teams\n\n• welcome letter: a standard template has been set up in taidii\n• \n\n• transfer letter: not in use, but it would be good to have system notifications across centres to notify them of student transfers\n\n• consent request letter: not in use, as parents have already given their consent through registration form declaration\n\n• progress report cover page: there isn't a separate cover page for progress reports for each brand, as progress report is the checklist items, we can export the checklist in excel format"
+  ],
+  "id": "9ba6a873-69c8-407b-9585-7ac5105a8aa9",
+  "parent": "b71c621a-b5c1-4cc1-828c-d9cfed0f2ccd"
+ },
+ {
+  "seq": 491,
+  "name": "BBA input: Notification rules (quiet hours, email fallback)",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\". Ideally by Mon 2 Nov, before the Sprint 3 grooming.\nBBA owner: Alan / YC\nWhat we already have from you\n• Notifications are organised per parent, not per child: a parent with three children does not get the same notice three times \n\n• Six notification categories (routines, fees, messages, announcements, surveys and consents, approvals); parents can turn each category on or off \n\n• No email summary and no SMS; WhatsApp if ever needed \n\n• Malaysia: the centre admin is notified whenever a teacher messages a parent; Singapore does not need this \n\n• Parents on GIRO do not get payment reminders \n\nWhat we still need\n• Quiet hours (no push notifications) for Singapore and Malaysia, if any\n\n• If an important notification (for example an approval result or an invoice) is still unread after some time, should it also go by email? If yes, after how long?",
+  "comments": [
+   "• Will the Quiet hours be configurable? At brand/centre level?\n• Current operating hours configured as Monday to Friday, 0700 to 1900.\n\n• Parents' message outside the operating hours will receive Auto Reply message, template attached.\n\n• Can an in-app prompt be triggered instead? To show the prompt every time the app is opened until acknowledged/actioned."
+  ],
+  "id": "cf6c58ce-1cdc-469a-8737-d97f1ab076e1",
+  "parent": "14027385-b43b-4dfb-8b52-67452a89f840"
+ },
+ {
+  "seq": 490,
+  "name": "BBA input: Reminder rules to confirm",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\". Ideally by Mon 2 Nov, before the Sprint 3 grooming.\nBBA owner: Alan → Finance / Admin\nWhat we already have from you\n• Invoice reminders: on the 15th and 25th at 8 pm, at most twice a cycle, in-app and email; parents on GIRO do not get payment reminders; reminder templates in Finance Email templates.xlsx\n\n• Height and weight reminder: middle of March, June, September and December\n\n• Every discount and subsidy should have an expiry date so admin knows what is coming up \n\n• A centre checklist (monthly / onboarding / quarterly) covering height and weight, portfolio and progress report was suggested by YC and Alan \n\n• Medicine and medical care forms\n\nWhat we still need\n• Which documents expire and need a reminder (for example passport, work pass, immunisation records), how early, and to whom?\n\n• What should the centre checklist contain, and how often (monthly, quarterly, onboarding)?",
+  "comments": [
+   "• Some other key documents with expiry and need reminder (should be configurable):\n• Immunisation record - trigger reminder to parents, cc CD and Admin, up to 1 month before.\n\n• Subsidy - trigger to CD and Admin, up to 2 months before.\n\n• Giro application - trigger reminder to parents, cc CD and Admin, up to 2 months before.\n\n• Allergy - no expiry, but to trigger review and confirmation to parents, cc CD and Admin, every 6 months.\n\n• Centre checklist should contain mainly operational tasks.\n• Separate checklist for BAU operations and onboarding.\n\n• BAU operations - item frequency varies, e.g. check school fees receivables and student attendance on monthly basis, progress report completion every term.\n\n• Onboarding checklist to contain items like collection of medical history documents, set up of Giro accounts."
+  ],
+  "id": "c81fbe3f-9007-493b-a0d3-e86920475d46",
+  "parent": "97986302-0ce4-46bb-9a1c-69db1123a043"
+ },
+ {
+  "seq": 489,
+  "name": "BBA input: 2027 term dates for each brand",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\", and again in the Sprint 4 email. Needed by Fri 6 Nov.\nBBA owner: Alan → Curriculum\nWhat we already have from you\n• The school year runs from 1 January to 31 December, with 4 terms; term dates change every year \n\n• Each brand has its own term calendar, set by HQ; centres cannot change it. Example: The Schoolhouse Term 1 2 Jan – 15 Mar, Agape 2 Jan – 10 Mar \n\n• Some brands start the curriculum term one week after the school term \n\n• Screenshot of the current term set-up, Academic Year 2026: Term 1 01/01–22/03, Term 2 23/03–28/06, Term 3 29/06–13/09, Term 4 14/09–31/12 \n\n• Height and weight reminder: middle of March, June, September and December \n\n• Event calendar import template (format only)\n\nWhat we still need\n• The 2027 start and end date of Term 1 to 4 for each brand (Singapore and Malaysia), and the curriculum term dates where they differ from the school term",
+  "comments": [
+   "• Use attached file for the initial set up"
+  ],
+  "id": "71c2319b-815d-4a83-907e-7489f4af3dfd",
+  "parent": "97986302-0ce4-46bb-9a1c-69db1123a043"
+ },
+ {
+  "seq": 488,
+  "name": "BBA input: Consent types and wording",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 3: business information needed from BBA\", and again in the Sprint 4 email.\nBBA owner: Alan → Admin / Safeguarding\nWhat we already have from you\n• Consent is collected once at enrolment: privacy policy, medical authorisation, and media / marketing consent \n\n• Media consent is a separate paper form today; it is sometimes asked again for a marketing event \n\n• Children without media consent must not be photographed or posted \n\n• In the app, a consent is a tick box, usually given once \n\n• 2025 Outdoor Learning Consent Form; registration form declarations (The Schoolhouse, Small Wonder); Learning Vision registration form; Parent App requirements \n\nWhat we still need\n• The list of consent types for each brand, with the current wording (for example photography, outings, road crossing, medical, PDPA, and any others you use)\n\n• When the wording of a consent changes, should parents be asked to agree again?",
+  "comments": [
+   "• Consent Types as attached.\n\n• Possible to have a retrigger consent collection upon update submission? Not all updates need to collect the consent again."
+  ],
+  "id": "57363bba-da7c-4912-b892-ef4a9f356e1a",
+  "parent": "c45f2edc-3bd4-4081-a519-623a5d1fb381"
+ },
+ {
+  "seq": 487,
+  "name": "BBA input: Confirm fields to track in change history",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – For your review: reference lists (Sprint 2) and change history fields (Sprint 3)\" (26 Oct). Ideally by Mon 2 Nov.\nBBA owner: YC/Alan\nAttachment: BBA-Change-History-Proposed-Fields-v0.1.xlsx\nWhat it is\nThe fields where the system keeps every change: old value, new value, who, when and why. Our proposal covers 38 fields, for example child details, fees, attendance, approvals, users and settings. Approvals, status changes and records created or deleted are always logged.\nWhat we need from you\n• For each field, choose Keep, Remove or Not sure in column G\n\n• Add any field we missed at the bottom of the list\n\n• Tell us if any other field should be masked for the External Auditor (column H)\n\nBBA can add or remove tracked fields later from the admin screen, so this does not need to be complete now.",
+  "comments": [
+   "Updated the Google Sheets."
+  ],
+  "id": "89c804d6-7031-456c-aca4-a9cdf4d3362a",
+  "parent": "7875f96a-a342-4fde-a457-022af3355464"
+ },
+ {
+  "seq": 486,
+  "name": "BBA input: Confirm reference lists (dropdown values)",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – For your review: reference lists (Sprint 2) and change history fields (Sprint 3)\" (26 Oct). Ideally by Mon 2 Nov.\nBBA owner: Alan / YC\nAttachment: BBA-Reference-Lists-Draft-v0.1.xlsx\nWhat it is\nThe lists people pick from in the new system (18 lists): country, brands, levels, sessions, citizenship, nationality, race, gender, relationship to the child, mother tongue, means-test band, ECDA class type, child status, reasons for leaving, payment methods, GIRO banks, calendar event types. We built them from your current Taidii data and forms, and cleaned up duplicate spellings.\nWhat we need from you\n• For each list, choose Confirm or Change in column G; if Change, write the correct values in column H\n\n• Answer the short question in column F where there is one\n\nPlease upload the completed file to the shared Teams folder and put the link in a comment here.",
+  "comments": [
+   "Updated the Google Sheets."
+  ],
+  "id": "17a5ccac-2a27-4a5f-9467-bca9bf3b8293",
+  "parent": "8e64506f-07c3-4a9f-9b72-42dfeb03e6c8"
+ },
+ {
+  "seq": 475,
+  "name": "BBA input: Document templates (letters, notices, emails; EN / ZH)",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan\nWhat we already have from you\n• Invoice, receipt and credit note templates (six brands)\n\n• Three new-enrolment emails\n\n• K2 year-end withdrawal notice (Small Wonder) and the guide to update bank details for refunds\n\n• Registration form declarations (The Schoolhouse, Small Wonder)\n\nWhat we still need\n• Chinese versions of the templates where you use them\n\n• Letters or notices centres send today that we have not received, for example withdrawal confirmation and fee change notice\n\n• Registration form declarations for the other brands",
+  "comments": [
+   "Thanks Alan. Since there are no standard notice templates today, we will set up a few placeholder templates in the system (e.g. withdrawal confirmation, fee change notice) so the flows can be built and tested. Before go-live, your team can log in to the system to edit these placeholders or create your own templates.\ncc:",
+   "• Currently we do not use any Chinese versions of the letters/notices.\n\n• No standard template for notices at the moment; they are ad hoc generated.\n\n• Common registration form declaration at 2027 BBS Common Terms for Enrolment.pdf - pending finalized version & confirmation if fine to use same for MY."
+  ],
+  "id": "d7e92676-01f4-49e1-a495-ad545ffb27f8",
+  "parent": "b71c621a-b5c1-4cc1-828c-d9cfed0f2ccd"
+ },
+ {
+  "seq": 474,
+  "name": "BBA input: Brand identity and email domains",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan → Marketing; YC\nWhat we already have from you\n• Printed invoice, receipt and credit note templates for six brands (logos visible, but no logo files)\n\nWhat we still need\n• Marketing, for each brand in Singapore and Malaysia: logo files (SVG or high-resolution PNG, light and dark versions), brand colours (hex codes), app icon, and the sender name parents should see in emails\n\n• YC: the sending email domain for each brand, and who can add the DNS records we will provide",
+  "comments": [
+   "please access to folder Marketing to get access to Brand logo files and brand colors. https://kupl.sharepoint.com/:f:/s/Asia-Project-Project-CRMSMS/IgDGWTZDy6LtQp4jntLCjEoLAQxpaBVIMI5S2Dx8ilXgrBw?e=oO56tR",
+   "Added SWM files. Added DNS records. Pending app icon",
+   "Pending app icon, and Small Wonder Malaysia's files",
+   "• Brand logo files and brand colors available at Marketing\n\n• Email sender name will be \"{centre name + acroynm} Team\", e.g. Learning Vision Techpoint (TPT) Team"
+  ],
+  "id": "6228719b-0f81-4f9a-bab1-159a02d6acad",
+  "parent": "0eb9e76b-20c9-49a6-8138-046afad53613"
+ },
+ {
+  "seq": 473,
+  "name": "BBA input: ID types for children and parents",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan\nWhat we already have from you\n• Registration forms by brand (Singapore and Malaysia)\n\n• ECDA Withdrawal Form 3\n\nWhat we still need\n• Which ID types you record for children and for parents / guardians in each country, for example birth certificate number, NRIC / FIN, MyKid, MyKad, passport",
+  "comments": [
+   "thank you.\ncc:",
+   "• Children - Birth certificate / Passport number\n\n• Parents / Guardians - NRIC / FIN / MyKad / Passport number"
+  ],
+  "id": "0516c9f4-4e60-4df1-86aa-6dee0dd346b6",
+  "parent": "f2c31aa4-1bae-412a-9d3b-8a4b88b01346"
+ },
+ {
+  "seq": 472,
+  "name": "BBA input: Languages and formats",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan\nWhat we already have from you\n• —\n\nWhat we still need\n• Languages for the Parents App and for the staff screens. Our plan is English and Chinese. Is Malay needed for Malaysia in Phase 1?\n\n• Date format: we propose DD/MM/YYYY\n\n• Currency: SGD for Singapore, MYR for Malaysia",
+  "comments": [
+   "thank you.\ncc:",
+   "• Malay not needed in phase 1.\n\n• DD/MM/YYYY is good.\n\n• Yes, SGD and MYR."
+  ],
+  "id": "e3c72540-f42b-49e9-b366-10c74ecb5490",
+  "parent": "0887f260-e32e-4591-b2ad-9d56cf8d370f"
+ },
+ {
+  "seq": 471,
+  "name": "BBA input: One account per parent – matching rules",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan / YC\nWhat we already have from you\n• Taidii registration form export (26 Aug)\n\n• Registration forms by brand\n\nWhat we still need\n• Which detail identifies the same parent: mobile number, email address, or NRIC / passport number?\n\n• Who gets app access: mother, father, legal guardian, other contacts?\n\n• Parents who have several Taidii accounts today: may we merge them into one account at migration?",
+  "comments": [
+   "thank you.\ncc:",
+   "• Use NRIC / FIN / MyKad / Passport number as the identifier.\n\n• Both parents / legal guardians get app access. Pick up contacts by default do not get access unless specifically requested by parents for certain arrangement.\n\n• Yes, merge them into one account."
+  ],
+  "id": "56fe2104-8eaa-4f5c-8bcd-3666232513fc",
+  "parent": "b20715ec-3d83-44aa-b864-d677eec58d26"
+ },
+ {
+  "seq": 470,
+  "name": "BBA input: Staff sign-in with Microsoft (Entra)",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: YC\nWhat we already have from you\n• —\n\nWhat we still need\n• Microsoft Entra app registration for each environment (Development, UAT, Staging, Production), plus tenant details. We will send the redirect addresses for each environment\n\n• Do all staff who will use the system have a BBA Microsoft account, including part-time and relief teachers? If not, how should they sign in?\n\n• Should a staff member's role come from their Microsoft (Entra) group, or be assigned in the new system?",
+  "comments": [
+   "Evidence – Microsoft Entra ID SSO\nScreenshot evidence of Microsoft SSO integration. Pending BBA confirmation: app registrations for all four environments, sign-in options staff, and role assignment via Entra groups or within the system.",
+   "Details in Teams Channel folder, General → 06 Migration → Restricted Files → DotB UAT – Microsoft Entra SSO Configuration.pdf.\n  please check if all in order.",
+   "Redirect URI / Callback URL: https://uat.bba.dotb.cloud/api/auth/microsoft/callback\nAuthentication method: OpenID Connect (OIDC)\n Authorization: OAuth 2.0",
+   "• Yes, all staff have BBA Microsoft account. However, we should allow dual login options, i.e. username+password, due to common/shared terminals.\n\n• Staff role ideally should be from MS group, but pending BBA to sort out the roles. Should also allow manual change in assignments.",
+   "Could you share the authentication protocol (e.g. SAML 2.0 or OAuth 2.0) to be used and the redirect address please?"
+  ],
+  "id": "78f2d56d-ac87-40d3-b691-a06a63b739e1",
+  "parent": "a70a74b3-7771-429a-9225-4fb4452c9947"
+ },
+ {
+  "seq": 469,
+  "name": "BBA input: Legal entities and bank accounts",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan → Finance\nWhat we already have from you\n• Bank Account list (12 Singapore legal entities)\n\n• Cost Centre Mapping\n\n• Account Mapping (SG) and MY Account Mapping\n\nWhat we still need\n• Per legal entity: company name, registration number (UEN for Singapore, SSM for Malaysia), GST or SST registration number, registered address, text printed at the bottom of invoices, and the brands and centres it bills for\n\n• Per bank account: GIRO originator ID; PayNow UEN (Singapore) or DuitNow details (Malaysia)\n\n• Malaysian legal entities and bank accounts\n\n• Please confirm the 12 Singapore entities are still current\n\nPlease do not send bank account numbers by email or in a comment here. A restricted folder on the project SharePoint would be best.",
+  "comments": [
+   "received. Thanks\ncc:",
+   "• Details uploaded in Teams channel folder. General → 06 Migration → Restricted Files → Entity Master Data and Bank Account.xlsx\n\n• Brand/centres to entity mapping is available at Centre List for Setup.xlsx\n\n• 12 Singapore entities + Learning Horizon SG are current."
+  ],
+  "id": "666c471e-5767-4eef-b02a-013c37bab00d",
+  "parent": "94072f60-1d59-4178-aaea-848e1e54c2f1"
+ },
+ {
+  "seq": 468,
+  "name": "BBA input: Brands and districts",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan\nWhat we already have from you\n• Invoice, receipt and credit note templates for six Singapore brands\n\nWhat we still need\n• Full list of brands in Singapore and Malaysia\n\n• List of districts / regions, and the District Manager for each",
+  "comments": [
+   "received. Thanks.\ncc:",
+   "As per BBA-467, listing in Centre List for Setup.xlsx"
+  ],
+  "id": "56a06ea2-45ff-4e8e-9701-92f9152f1fad",
+  "parent": "dfc78daf-8d49-4176-8f40-111b1ffeaa7d"
+ },
+ {
+  "seq": 467,
+  "name": "BBA input: Organisation structure – list of centres for Phase 1",
+  "state": "Done",
+  "desc": "Requested in: email \"BBA Phase 1 – Sprint 2: business information needed from BBA\" (22 Oct). Ideally by Fri 30 Oct.\nBBA owner: Alan → HQ Operations\nWhat we already have from you\n• Monthly POP Reconciliation – Jul'26 (cost centre master list, 197 cost centres)\n\n• Cost Centre Mapping (93 Singapore centres)\n\n• Class Programme Capacity master list (26 Aug)\n\nWhat we still need\n• One row per centre going live on the new system: country, brand, district, centre name (as parents see it), centre code and cost centre code, POP / Non-POP, licence type and number, licensed capacity, address\n\n• Go-live wave per centre: 1 May, 1 Jun or 1 Jul 2027, or not in Phase 1\n\n• Malaysian centres added to the brand and legal entity mapping\n\nPlease upload the file to the shared Teams folder and put the link in a comment here.",
+  "comments": [
+   "thank you.\ncc:",
+   "• SG & MY list of centres in Centre List for Setup.xlsx\n\n• Indication of centres in which Go-live wave TBC."
+  ],
+  "id": "b632e3e6-7916-4618-bd8e-4fae3f941a89",
+  "parent": "dfc78daf-8d49-4176-8f40-111b1ffeaa7d"
+ },
+ {
+  "seq": 410,
+  "name": "BBA organization tree mapping",
+  "state": "Done",
+  "desc": "Description: Map BBA Group/Country/Brand/District/Centre/Class to the existing Teams hierarchy using a documented configuration, without a second hierarchy engine.\nExpected: BBA organization units and their memberships can be configured using existing Teams.",
+  "comments": [],
+  "id": "eda366fc-7e3d-40f8-8f6b-96bed17b353c",
+  "parent": "6aa44296-365c-4ea2-ab5a-168a9a095c15"
+ }
+]

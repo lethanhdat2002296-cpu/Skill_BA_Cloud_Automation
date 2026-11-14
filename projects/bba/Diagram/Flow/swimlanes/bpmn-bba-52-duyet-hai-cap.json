@@ -1,0 +1,166 @@
+{
+ "title": "BBA-52 · Yêu cầu có duyệt cấp 2",
+ "lanes": [
+  "Người yêu cầu",
+  "Hệ thống",
+  "Người duyệt cấp 1 (hoặc HQ Admin)",
+  "Người duyệt cấp 2 (khác người cấp 1)"
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "lane": 0,
+   "col": 0,
+   "type": "start",
+   "label": "Có yêu cầu"
+  },
+  {
+   "id": "a1",
+   "lane": 0,
+   "col": 1,
+   "label": "Gửi yêu cầu (loại, Centre, số tiền)"
+  },
+  {
+   "id": "x1",
+   "lane": 1,
+   "col": 2,
+   "type": "system",
+   "label": "Tìm route theo loại, quốc gia, brand"
+  },
+  {
+   "id": "a2",
+   "lane": 2,
+   "col": 3,
+   "label": "Mở My approvals, chọn Decide (Level 1 of 2)"
+  },
+  {
+   "id": "g1",
+   "lane": 2,
+   "col": 4,
+   "type": "decision",
+   "label": "Duyệt cấp 1?"
+  },
+  {
+   "id": "g3",
+   "lane": 1,
+   "col": 5,
+   "type": "decision",
+   "label": "Cần cấp 2?"
+  },
+  {
+   "id": "r1",
+   "lane": 2,
+   "col": 6,
+   "label": "Reject, nhập Reason (bắt buộc)"
+  },
+  {
+   "id": "a3",
+   "lane": 3,
+   "col": 6,
+   "label": "Mở My approvals, chọn Decide (Level 2 of 2)"
+  },
+  {
+   "id": "g2",
+   "lane": 3,
+   "col": 7,
+   "type": "decision",
+   "label": "Duyệt cấp 2?"
+  },
+  {
+   "id": "x3",
+   "lane": 1,
+   "col": 8,
+   "type": "system",
+   "label": "Ghi Approved, Approval history, chạy hành động nguồn"
+  },
+  {
+   "id": "r2",
+   "lane": 3,
+   "col": 8,
+   "label": "Reject, nhập Reason (bắt buộc)"
+  },
+  {
+   "id": "n",
+   "lane": 0,
+   "col": 9,
+   "label": "Nhận thông báo Approved / Declined"
+  },
+  {
+   "id": "e",
+   "lane": 0,
+   "col": 10,
+   "type": "end",
+   "label": "Kết thúc"
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "a1"
+  ],
+  [
+   "a1",
+   "x1"
+  ],
+  [
+   "x1",
+   "a2"
+  ],
+  [
+   "a2",
+   "g1"
+  ],
+  [
+   "g1",
+   "g3",
+   "Duyệt"
+  ],
+  [
+   "g1",
+   "r1",
+   "Từ chối"
+  ],
+  [
+   "g3",
+   "a3",
+   "Có"
+  ],
+  [
+   "g3",
+   "x3",
+   "Không"
+  ],
+  [
+   "a3",
+   "g2"
+  ],
+  [
+   "g2",
+   "x3",
+   "Duyệt"
+  ],
+  [
+   "g2",
+   "r2",
+   "Từ chối"
+  ],
+  [
+   "r1",
+   "n"
+  ],
+  [
+   "x3",
+   "n"
+  ],
+  [
+   "r2",
+   "n"
+  ],
+  [
+   "n",
+   "e"
+  ]
+ ],
+ "orientation": "vertical",
+ "notation": "bpmn"
+}

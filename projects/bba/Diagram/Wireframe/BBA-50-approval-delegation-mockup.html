@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BBA-50 Approval delegation — Mockup v0.2</title>
+<!-- Mockup for FRD BBA-50 (2.8 Approval Delegation) v0.2, SCR-04 Extra permissions.
+     Behaviour follows the FRD: FR-001..FR-009, BR-001..BR-003, VAL-001..VAL-004, DATA-001, AC-001..AC-015.
+     The BBA prototype (/organisation/delegations) is a reference only; layout reworked for easy use and reading. Sample data only. -->
+<style>
+:root{
+  --red:#e3243b;--red-d:#c81d31;--red-soft:#fdecee;
+  --ink:#24262b;--ink-2:#5b5f68;--ink-3:#8b9099;--line:#e6e3df;--line-2:#f0ede9;--bg:#fff;--canvas:#f4f2ef;--side:#faf8f6;
+  --green:#18794e;--green-soft:#e6f4ec;--blue:#2457c5;--blue-soft:#e9f0fd;--amber:#9a5b00;--amber-soft:#fdf3e1;--grey:#6b6f76;--grey-soft:#f0efed;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.45 var(--font)}
+button,input,select,textarea{font:inherit;color:inherit}
+/* mockup chrome */
+.mock-bar{position:sticky;top:0;z-index:60;background:#1e2230;color:#e7eaf2;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:9px 16px;font-size:13px}
+.mock-bar b{color:#fff}.mock-bar .g{display:flex;align-items:center;gap:6px}
+.seg{display:inline-flex;border:1px solid #485066;border-radius:8px;overflow:hidden}
+.seg button{background:transparent;border:0;color:#c9cfdd;padding:5px 10px;cursor:pointer}
+.seg button.on{background:#e7eaf2;color:#1e2230;font-weight:600}
+.mbtn{background:#2c3343;border:1px solid #485066;color:#e7eaf2;border-radius:8px;padding:5px 10px;cursor:pointer}
+.mbtn:hover{background:#384154}
+.today{background:#384154;border-radius:6px;padding:2px 8px;color:#fff;font-weight:600}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:16px;padding:16px;max-width:1840px;margin:0 auto}
+@media(max-width:1250px){.wrap{grid-template-columns:1fr}}
+/* app */
+.app{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:232px minmax(0,1fr);min-height:980px}
+.side{background:var(--side);border-right:1px solid var(--line);padding:14px 10px}
+.brand{display:flex;gap:10px;align-items:center;padding:2px 4px 14px}
+.logo{width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.brand b{display:block;font-size:13.5px}.brand small{color:var(--ink-2);font-size:11.5px}
+.nav a{display:block;padding:7px 10px;border-radius:8px;color:var(--ink);text-decoration:none}
+.nav .sec{font-size:11.5px;color:var(--ink-3);padding:14px 10px 4px;text-transform:uppercase;letter-spacing:.05em}
+.nav a.on{background:var(--red-soft);color:var(--red-d);font-weight:600}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.crumb{color:var(--ink-2)}.crumb b{color:var(--ink)}
+.me{display:flex;align-items:center;gap:10px;color:var(--ink-2)}
+.av{width:32px;height:32px;border-radius:50%;background:#fff3cf;display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--ink)}
+.content{padding:22px 24px 28px}
+.subtabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.subtabs span{padding:8px 12px;color:var(--ink-2);border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs span.on{color:var(--red-d);border-color:var(--red);font-weight:600}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}
+h1{margin:0;font-size:24px}
+.lead{color:var(--ink-2);margin-top:4px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#faf8f6}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.btn.primary:hover{background:var(--red-d)}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:9px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink-2)}
+/* status tabs */
+.stabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.stab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.stab .n{background:var(--grey-soft);border-radius:999px;padding:0 7px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.stab.on{border-color:var(--ink);background:var(--ink);color:#fff}.stab.on .n{background:#fff;color:var(--ink)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.d-active{background:var(--green)}.d-scheduled{background:var(--blue)}.d-expired{background:#9aa0a8}.d-revoked{background:var(--red)}
+/* toolbar */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.in,.sel{height:36px;border:1px solid var(--line);border-radius:10px;padding:0 11px;background:#fff}
+.in.search{width:300px;padding-left:32px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23888' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l3 3'/%3E%3C/svg%3E") no-repeat 10px center}
+.sel:disabled{background:#f7f5f3;color:var(--ink-2)}
+.bar .sp{flex:1}
+/* table */
+.tcard{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table.grid{width:100%;border-collapse:collapse}
+.grid th{font-size:12px;color:var(--ink-2);text-align:left;font-weight:600;padding:11px 14px;background:#faf8f6;border-bottom:1px solid var(--line);white-space:nowrap}
+.grid td{padding:12px 14px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.grid tbody tr{cursor:pointer}.grid tbody tr:hover td{background:#fcfbfa}
+.grid tr:last-child td{border-bottom:0}
+.grid .who b{display:block;font-weight:600}.muted{color:var(--ink-3);font-size:12.5px}
+.ptag{display:inline-block;font-size:11px;border-radius:6px;padding:1px 6px;margin-top:3px}
+.ptag.a{background:var(--amber-soft);color:var(--amber)}.ptag.b{background:var(--grey-soft);color:var(--grey)}
+.date{white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.b-active{background:var(--green-soft);color:var(--green)}.b-scheduled{background:var(--blue-soft);color:var(--blue)}
+.b-expired{background:var(--grey-soft);color:var(--grey)}.b-revoked{background:var(--red-soft);color:var(--red-d)}
+.grid tr.flash td{animation:fl 2.4s ease-out}@keyframes fl{0%{background:#fff1bd}100%{background:transparent}}
+.empty{padding:30px;text-align:center;color:var(--ink-2)}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--ink-2)}
+.pager .r{display:flex;gap:8px;align-items:center}
+/* history */
+details.hist{margin-top:20px;border:1px solid var(--line);border-radius:14px;padding:0 16px}
+details.hist summary{cursor:pointer;padding:14px 0;font-weight:600}
+.hist table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px}
+.hist th{color:var(--ink-2);text-align:left;font-weight:600;padding:8px;border-bottom:1px solid var(--line)}
+.hist td{padding:8px;border-bottom:1px solid var(--line-2);vertical-align:top}
+/* overlays */
+.scrim{position:absolute;inset:0;background:rgba(18,20,26,.5);display:none;z-index:20}
+.scrim.show{display:block}
+.modal{position:absolute;left:50%;top:70px;transform:translateX(-50%);width:600px;max-width:calc(100% - 32px);background:#fff;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.mh{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.mh h2{margin:0;font-size:18px}.x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:var(--ink-2)}
+.mb{padding:18px 22px}
+.mf{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 22px;border-top:1px solid var(--line);background:#fcfbfa;border-radius:0 0 16px 16px}
+.f{margin-bottom:16px}.f>label,.f>.lab{display:block;font-weight:600;margin-bottom:6px}
+.hint{color:var(--ink-3);font-size:12.5px;font-weight:400}
+.err{color:var(--red-d);font-size:12.5px;margin-top:5px;display:none}
+.f.bad .err{display:block}
+.f.bad .in,.f.bad textarea,.f.bad .combo-btn{border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
+textarea{width:100%;min-height:64px;border:1px solid var(--line);border-radius:10px;padding:8px 11px;resize:vertical}
+.period{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:start}
+.period .arrow{text-align:center;padding-top:34px;color:var(--ink-3)}
+.period .f{margin-bottom:0}.period .in{width:100%}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.presets button{border:1px dashed #cfcac4;background:#fff;border-radius:999px;padding:3px 10px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.presets button:hover{border-color:var(--ink-2);color:var(--ink)}
+.preview{margin-top:10px;border-radius:10px;padding:8px 11px;font-size:13px;display:none}
+.preview.show{display:block}.preview.act{background:var(--green-soft);color:var(--green)}.preview.sch{background:var(--blue-soft);color:var(--blue)}
+.pop .opt.col{display:block}.pop .opt.col small{display:block;color:var(--ink-3);font-size:12px}
+.pop mark{background:#fff1bd;color:inherit;padding:0}
+#permDesc{margin-top:6px}
+.chk{display:flex;gap:10px;align-items:center;cursor:pointer;user-select:none;font-weight:600}
+.chk input{width:18px;height:18px;accent-color:var(--red)}
+.f.bad .chk{color:var(--red-d)}.f.bad .chk input{outline:3px solid var(--red-soft)}
+.summary{font-size:13px;color:var(--ink-2)}
+/* combobox */
+.combo{position:relative}
+.combo-btn{width:100%;height:38px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;padding:0 34px 0 11px;cursor:pointer;position:relative}
+.combo-btn::after{content:"";position:absolute;right:14px;top:13px;width:7px;height:7px;border:solid var(--ink-3);border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.ph{color:var(--ink-3)}
+.pop{position:absolute;left:0;right:0;top:42px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.13);z-index:5;display:none;max-height:280px;overflow:auto}
+.combo.open .pop{display:block}
+.pop input{width:calc(100% - 16px);margin:8px;height:34px;border:1px solid var(--line);border-radius:9px;padding:0 10px}
+.pop .grp{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);padding:8px 12px 3px}
+.pop .opt{padding:7px 12px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.pop .opt:hover,.pop .opt.sel{background:var(--red-soft)}
+/* drawer */
+.drawer{position:absolute;top:0;right:0;bottom:0;width:420px;max-width:100%;background:#fff;border-left:1px solid var(--line);box-shadow:-12px 0 30px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.drawer .mb{overflow:auto;flex:1}
+dl.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 12px;margin:0 0 16px}
+dl.kv dt{color:var(--ink-3)}dl.kv dd{margin:0}
+.tl{border-left:2px solid var(--line);margin-left:6px;padding-left:14px}
+.tl div{position:relative;margin-bottom:12px;font-size:13px}
+.tl div::before{content:"";position:absolute;left:-20px;top:5px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--ink-3)}
+.confirm{position:absolute;left:50%;top:180px;transform:translateX(-50%);width:440px;max-width:calc(100% - 32px);background:#fff;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+/* process panel */
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;align-self:start;position:sticky;top:58px;max-height:calc(100vh - 74px);overflow:auto}
+.panel h3{margin:0 0 2px;font-size:15px}.panel .ph2{margin:0 0 8px;color:var(--ink-2);font-size:12.5px}
+.panel h4{margin:12px 0 5px;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.step{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px;margin-bottom:5px;cursor:pointer;font-size:12.8px}
+.step:hover,.step.on{border-color:var(--blue);background:var(--blue-soft)}
+.step i{font-style:normal;display:block;color:var(--blue);font-size:11.5px;margin-top:1px}
+.note{background:#fff8e6;border:1px solid #f1dda4;border-radius:9px;padding:8px 10px;font-size:12.5px;color:#634700;margin-top:10px}
+.log{margin-top:12px;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px}
+.log ol{margin:6px 0 0;padding-left:18px;color:var(--ink-2)}.log li{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<div class="mock-bar" role="region" aria-label="Mockup controls">
+  <b>BBA-50 · SCR-04 Extra permissions · mockup v0.2</b>
+  <span class="g">Viewing as <span class="seg" id="roleSeg"><button data-role="CD" class="on">Centre Director · Grace Tan</button><button data-role="HQ">HQ Admin · Daniel Yeo</button></span></span>
+  <label class="g"><input type="checkbox" id="voidToggle" checked> Route “Attendance void”: Can be delegated</label>
+  <span class="g">Today <span class="today" id="todayTag"></span>
+    <button class="mbtn" id="plus1">+1 day</button><button class="mbtn" data-go="2026-11-17">Go to 17/11</button><button class="mbtn" data-go="2026-12-01">Go to 01/12</button><button class="mbtn" id="reset">Reset</button></span>
+</div>
+
+<div class="wrap">
+<div class="app" id="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">BB</div><div><b>Busy Bees Asia</b><small>Student Management System</small></div></div>
+    <nav class="nav">
+      <a>Home</a><a>Children &amp; families</a><a>Daily operations</a><a>Learning</a><a>Fees &amp; payments</a><a>Joining &amp; leaving</a><a>Communication</a>
+      <div class="sec">Administration</div>
+      <a>Organisation</a><a class="on">Users &amp; permissions</a><a>Templates</a><a>Settings</a><a>History</a>
+    </nav>
+  </aside>
+  <section class="main">
+    <header class="top">
+      <span class="crumb">Administration › Users &amp; permissions › <b>Extra permissions</b></span>
+      <span class="me"><span id="meText">Grace Tan · Centre Director · Small Wonder Tampines</span><span class="av" id="meAv">GT</span></span>
+    </header>
+    <div class="content">
+      <div class="subtabs"><span>Users</span><span>Roles</span><span class="on">Extra permissions</span><span>Approval routes</span><span>Sign-in &amp; security</span></div>
+      <div class="head">
+        <div><h1>Extra permissions</h1><div class="lead">Permissions given to one person on top of their role, for a set period.</div></div>
+        <button class="btn primary" id="grantBtn">+ Grant permission</button>
+      </div>
+
+      <div class="stabs" id="stabs"></div>
+
+      <div class="bar">
+        <input class="in search" id="q" placeholder="Search person, permission or granted by">
+        <select class="sel" id="fPerm"></select>
+        <select class="sel" id="fCentre"></select>
+        <span class="sp"></span>
+        <button class="btn sm" id="exportBtn">Export</button>
+      </div>
+
+      <div class="tcard"><table class="grid">
+        <thead><tr><th>Person</th><th>Permission</th><th>Granted by</th><th>From</th><th>Until</th><th>Status</th><th></th></tr></thead>
+        <tbody id="rows"></tbody></table></div>
+      <div class="pager"><span id="range"></span><span class="r"><select class="sel"><option>20 rows</option><option>50 rows</option><option>100 rows</option></select><button class="btn sm" disabled>‹ Previous</button><button class="btn sm" disabled>Next ›</button></span></div>
+
+      <details class="hist" id="histBox"><summary id="histTitle">History</summary>
+        <table><thead><tr><th>When</th><th>Who</th><th>What</th><th>From</th><th>To</th><th>Why</th></tr></thead><tbody id="hist"></tbody></table></details>
+    </div>
+  </section>
+
+  <!-- Grant -->
+  <div class="scrim" id="grantScrim"><div class="modal" role="dialog" aria-labelledby="gt">
+    <div class="mh"><h2 id="gt">Grant an extra permission</h2><button class="x" data-close>×</button></div>
+    <div class="mb">
+      <div class="f" id="fPerson"><label>Person</label>
+        <div class="combo" id="personCombo"><button type="button" class="combo-btn"><span class="ph">Choose a person</span></button>
+          <div class="pop"><input placeholder="Search a person"><div class="list"></div></div></div></div>
+      <div class="f" id="fPermission"><label>Permission</label>
+        <div class="combo" id="permCombo"><button type="button" class="combo-btn"><span class="ph">Choose a permission</span></button>
+          <div class="pop"><input placeholder="Search a permission"><div class="list"></div></div></div>
+        <div class="hint" id="permDesc"></div></div>
+      <div class="f" id="fPeriod"><div class="lab">Period <span class="hint">— valid from the start of From to the end of Until</span></div>
+        <div class="period">
+          <div class="f" id="fFrom"><label for="from" class="hint">From</label><input type="date" class="in" id="from"><div class="err" id="eFrom"></div></div>
+          <div class="arrow">→</div>
+          <div class="f" id="fUntil"><label for="until" class="hint">Until</label><input type="date" class="in" id="until"><div class="err" id="eUntil"></div></div>
+        </div>
+        <div class="presets"><span class="hint">Quick end date:</span><button type="button" data-days="7">1 week</button><button type="button" data-days="14">2 weeks</button><button type="button" data-days="30">1 month</button></div>
+        <div class="preview" id="preview"></div>
+      </div>
+      <div class="f" id="fReason"><label for="reason">Reason</label><textarea id="reason" placeholder="Why this person needs it"></textarea><div class="err">Enter a reason for granting this permission.</div></div>
+      <div class="f" id="fConfirm" style="margin-bottom:0"><label class="chk"><input type="checkbox" id="confirm"> I confirm this person should hold it</label><div class="err">Required</div></div>
+    </div>
+    <div class="mf"><span class="summary" id="summary">Fill in the fields above.</span><span style="display:flex;gap:8px"><button class="btn" data-close>Cancel</button><button class="btn primary" id="doGrant">Grant</button></span></div>
+  </div></div>
+
+  <!-- Detail drawer -->
+  <div class="scrim" id="drawerScrim"><aside class="drawer" role="dialog" aria-labelledby="dt">
+    <div class="mh"><h2 id="dt">Permission</h2><button class="x" data-close>×</button></div>
+    <div class="mb" id="dBody"></div>
+    <div class="mf" id="dFoot"></div>
+  </aside></div>
+
+  <!-- Revoke confirm -->
+  <div class="scrim" id="revokeScrim"><div class="confirm" role="dialog" aria-labelledby="rt">
+    <div class="mh"><h2 id="rt">Revoke?</h2><button class="x" data-close>×</button></div>
+    <div class="mb" id="rBody" style="color:var(--ink-2)"></div>
+    <div class="mf" style="justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn primary" id="doRevoke">Revoke</button></div>
+  </div></div>
+</div>
+
+<aside class="panel">
+  <h3>Process — FRD BBA-50 v0.2</h3>
+  <p class="ph2">Click a step to put the screen in that state, then keep using it.</p>
+  <h4>Main flow</h4>
+  <button class="step" data-s="m1">1. Open Grant — From is today, Until empty<i>FR-001 · AC-010</i></button>
+  <button class="step" data-s="m2">2. Pick person, permission, period, reason, tick<i>FR-001 · FR-007 · VAL-001..004</i></button>
+  <button class="step" data-s="m3">3. Grant → Scheduled (From in future) or Active<i>FR-003 · FR-004 · FR-009</i></button>
+  <button class="step" data-s="m4">4. From date arrives → Active, used in My approvals<i>FR-005 · FR-009 · AC-014</i></button>
+  <h4>Alternative flow</h4>
+  <button class="step" data-s="a1">1. Revoke an Active permission<i>FR-003 · FR-008 · AC-008</i></button>
+  <button class="step" data-s="a1b">1b. Revoke a Scheduled permission<i>FR-009 · FR-008 · AC-015</i></button>
+  <button class="step" data-s="a2">2. HQ Admin grants to any centre<i>FR-001 · AC-009</i></button>
+  <button class="step" data-s="a3">3. Until passed → Expired<i>FR-003 · BR-002 · AC-002</i></button>
+  <button class="step" data-s="a4">4. Scheduled reaches From → Active<i>FR-009 · FR-004</i></button>
+  <h4>Exception flow</h4>
+  <button class="step" data-s="e1">1. Permission not offered<i>VAL-001 · FR-007 · AC-001</i></button>
+  <button class="step" data-s="e2">2. Missing reason<i>VAL-002 · AC-004</i></button>
+  <button class="step" data-s="e3">3. Confirmation not ticked<i>VAL-003 · AC-007</i></button>
+  <button class="step" data-s="e4">4a. Until empty<i>VAL-004 · BR-003 · AC-011</i></button>
+  <button class="step" data-s="e5">4b. Until before From<i>VAL-004 · AC-012</i></button>
+  <button class="step" data-s="e6">4c. From before today<i>VAL-004 · AC-013</i></button>
+  <div class="note" id="stepNote" hidden></div>
+  <div class="log"><b>Event log</b> <span class="muted">— what the system does behind the screen</span><ol id="log"></ol></div>
+  <div class="note"><b>UI suggestions, not in the FRD</b> (keep or drop): status tabs with counts, row detail panel, “x days left” hint, quick end-date buttons, live status preview and summary line in Grant.</div>
+</aside>
+</div>
+
+<script>
+const T0='2026-11-13';
+const CENTRES=['Small Wonder Tampines','Small Wonder Damansara','The Schoolhouse Bangsar'];
+const STAFF=[
+ ['Chloe Ng','Senior Teacher','Small Wonder Tampines'],['Nadia Salleh','School Admin','Small Wonder Tampines'],['Serene Tan','Enrolment Specialist','Small Wonder Tampines'],
+ ['Aisyah Rahman','Teacher','Small Wonder Tampines'],['Farah Idris','Teacher','Small Wonder Tampines'],['Mei Ling Chua','Enrichment Trainer','Small Wonder Tampines'],
+ ['Siti Aminah','Teacher','Small Wonder Damansara'],['Hafiz Rahim','Senior Teacher','Small Wonder Damansara'],['Bryan Chua','Senior Teacher','The Schoolhouse Bangsar']
+].map(([n,r,c])=>({n,r,c}));
+const PERMS=[
+ {p:'Approve leave requests',g:'a',route:'Child leave',d:'Leave requests of the centre reach their My approvals.'},
+ {p:'Review class update photos',g:'a',route:'Photos',d:'Class update photos of the centre reach their My approvals.'},
+ {p:'Void or delete attendance records',g:'a',route:'Attendance void',d:'Attendance void requests reach their My approvals.'},
+ {p:'Assign teachers to a class',g:'b',d:'Opens teacher assignment for classes of the centre.'},
+ {p:"Move a class's children up",g:'b',d:'Opens class promotion for the centre.'},
+ {p:'Manage users of their own centre',g:'b',d:'Opens user management for the centre.'},
+];
+const USERS={CD:{name:'Grace Tan',role:'Centre Director',av:'GT',centre:'Small Wonder Tampines'},HQ:{name:'Daniel Yeo',role:'HQ Admin',av:'DY',centre:null}};
+const seed=()=>({role:'CD',today:T0,voidOk:true,status:'',log:[],next:20,
+ rows:[
+  {id:1,n:'Siti Aminah',c:'Small Wonder Damansara',p:'Review class update photos',by:'Nurul Hakim',from:'2026-09-08',until:'2026-12-31',st:'Active',why:'Covers photo review while the Centre Director runs the parent events.',via:'CRM',at:'2026-09-08 09:20'},
+  {id:2,n:'Chloe Ng',c:'Small Wonder Tampines',p:'Approve leave requests',by:'Grace Tan',from:'2026-08-04',until:'2026-12-31',st:'Active',why:"Covers leave approvals on the Centre Director's off days.",via:'Centre Director app',at:'2026-08-04 08:40'},
+  {id:3,n:'Chloe Ng',c:'Small Wonder Tampines',p:'Review class update photos',by:'Grace Tan',from:'2026-08-04',until:'2026-11-30',st:'Active',why:'Term 4 photo review.',via:'CRM',at:'2026-08-04 08:45'},
+  {id:4,n:'Serene Tan',c:'Small Wonder Tampines',p:'Approve leave requests',by:'Grace Tan',from:'2026-11-01',until:'2026-11-16',st:'Active',why:'Covers leave approvals while the Centre Director is on annual leave.',via:'CRM',at:'2026-11-01 09:12'},
+  {id:5,n:'Farah Idris',c:'Small Wonder Tampines',p:'Assign teachers to a class',by:'Grace Tan',from:'2026-11-18',until:'2026-11-30',st:'Scheduled',why:'Prepares class assignments for the new intake.',via:'CRM',at:'2026-11-10 14:05'},
+  {id:6,n:'Hafiz Rahim',c:'Small Wonder Damansara',p:'Approve leave requests',by:'Nurul Hakim',from:'2026-07-22',until:'2026-12-31',st:'Active',why:'Second approver for the Damansara centre.',via:'CRM',at:'2026-07-22 10:00'},
+  {id:7,n:'Nadia Salleh',c:'Small Wonder Tampines',p:'Void or delete attendance records',by:'Grace Tan',from:'2026-06-17',until:'2026-12-15',st:'Active',why:'Office handles attendance corrections.',via:'CRM',at:'2026-06-17 11:30'},
+  {id:8,n:'Mei Ling Chua',c:'Small Wonder Tampines',p:"Move a class's children up",by:'Grace Tan',from:'2026-05-04',until:'2026-06-30',st:'Expired',why:'Mid-year promotion.',via:'CRM',at:'2026-05-04 09:00'},
+  {id:10,n:'Serene Tan',c:'Small Wonder Tampines',p:'Review class update photos',by:'Grace Tan',from:'2026-09-01',until:'2026-10-31',st:'Revoked',rev:{by:'Grace Tan',on:'2026-09-20'},why:'Photo review during the September holidays.',via:'CRM',at:'2026-09-01 08:30'},
+  {id:9,n:'Bryan Chua',c:'The Schoolhouse Bangsar',p:'Void or delete attendance records',by:'Sharon Lim',from:'2026-03-11',until:'2026-09-30',st:'Revoked',rev:{by:'Sharon Lim',on:'2026-09-01'},why:'Covers the term break.',via:'CRM',at:'2026-03-11 08:15'},
+ ],hist:[]});
+let S=seed();
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const me=()=>USERS[S.role];
+const fmt=d=>d?d.slice(8,10)+'/'+d.slice(5,7)+'/'+d.slice(0,4):'';
+const addD=(d,n)=>{const x=new Date(d+'T00:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10);};
+const diff=(a,b)=>Math.round((new Date(b+'T00:00:00Z')-new Date(a+'T00:00:00Z'))/864e5);
+const inScope=c=>S.role==='HQ'||c===me().centre;
+function hist(r,from,to,who,why){S.hist.unshift({when:`${fmt(S.today)} ${who==='System'?'00:00':'10:30'}`,who,c:r.c,what:`${r.n} · ${r.p}`,from,to,why:why||'—',id:r.id});}
+function log(t){S.log.unshift(t);$('#log').innerHTML=S.log.slice(0,14).map(x=>`<li>${x}</li>`).join('');}
+function seedHist(){S.rows.forEach(r=>{const w=r.at.slice(8,10)+'/'+r.at.slice(5,7)+'/'+r.at.slice(0,4)+r.at.slice(10),wh=`${r.n} · ${r.p}`;S.hist.push({when:w,who:r.by,c:r.c,what:wh,from:'Not held',to:`${r.from>r.at.slice(0,10)?'Scheduled':'Active'} · ${fmt(r.from)} → ${fmt(r.until)} · via ${r.via}`,why:r.why,id:r.id});if(r.rev)S.hist.unshift({when:fmt(r.rev.on)+' 11:00',who:r.rev.by,c:r.c,what:wh,from:'Active',to:'Revoked',why:'—',id:r.id});if(r.st==='Expired')S.hist.unshift({when:fmt(addD(r.until,1))+' 00:00',who:'System',c:r.c,what:wh,from:'Active',to:'Expired · ended '+fmt(r.until),why:'—',id:r.id});});}
+seedHist();
+
+function renderChrome(){
+  const u=me();$('#meText').textContent=`${u.name} · ${u.role}${u.centre?' · '+u.centre:''}`;$('#meAv').textContent=u.av;
+  $$('#roleSeg button').forEach(b=>b.classList.toggle('on',b.dataset.role===S.role));
+  $('#todayTag').textContent=fmt(S.today);$('#voidToggle').checked=S.voidOk;
+  const fp=$('#fPerm'),v=fp.value;fp.innerHTML='<option value="">Every permission</option>'+PERMS.map(x=>`<option>${esc(x.p)}</option>`).join('');fp.value=v;
+  const fc=$('#fCentre');
+  if(S.role==='CD'){fc.innerHTML=`<option>${esc(u.centre)}</option>`;fc.disabled=true;}
+  else{const c=fc.value;fc.disabled=false;fc.innerHTML='<option value="">Every centre</option>'+CENTRES.map(x=>`<option>${esc(x)}</option>`).join('');fc.value=c;}
+}
+function base(){const q=$('#q').value.trim().toLowerCase(),fp=$('#fPerm').value,fc=S.role==='HQ'?$('#fCentre').value:'';
+  return S.rows.filter(r=>inScope(r.c)&&(!q||(r.n+' '+r.p+' '+r.by).toLowerCase().includes(q))&&(!fp||r.p===fp)&&(!fc||r.c===fc));}
+function renderRows(flash){
+  const b=base(),cnt=s=>b.filter(r=>!s||r.st===s).length;
+  $('#stabs').innerHTML=[['','All'],['Active','Active'],['Scheduled','Scheduled'],['Expired','Expired'],['Revoked','Revoked']].map(([s,l])=>
+    `<button class="stab ${S.status===s?'on':''}" data-st="${s}">${s?`<span class="dot d-${s.toLowerCase()}"></span>`:''}${l}<span class="n">${cnt(s)}</span></button>`).join('');
+  const order={Scheduled:0,Active:1,Expired:2,Revoked:3};
+  const list=b.filter(r=>!S.status||r.st===S.status).sort((x,y)=>order[x.st]-order[y.st]||x.until.localeCompare(y.until));
+  $('#rows').innerHTML=list.map(r=>{const P=PERMS.find(x=>x.p===r.p);
+    let hint='';if(r.st==='Active'){const d=diff(S.today,r.until)+1;hint=`<div class="muted">${d===1?'last day today':d+' days left'}</div>`;}
+    if(r.st==='Scheduled'){const d=diff(S.today,r.from);hint=`<div class="muted">starts in ${d} day${d>1?'s':''}</div>`;}
+    if(r.st==='Revoked')hint=`<div class="muted">revoked ${fmt(r.rev.on)}</div>`;
+    return `<tr data-id="${r.id}" class="${r.id===flash?'flash':''}">
+      <td class="who"><b>${esc(r.n)}</b><span class="muted">${esc(STAFF.find(s=>s.n===r.n).r)}${S.role==='HQ'?' · '+esc(r.c):''}</span></td>
+      <td>${esc(r.p)}<br><span class="ptag ${P.g}">${P.g==='a'?'Approval':'Action'}</span></td>
+      <td>${esc(r.by)}</td><td class="date">${fmt(r.from)}</td><td class="date">${fmt(r.until)}${r.st==='Active'?hint:''}</td>
+      <td><span class="badge b-${r.st.toLowerCase()}"><span class="dot d-${r.st.toLowerCase()}"></span>${r.st}</span>${r.st!=='Active'?hint:''}</td>
+      <td style="text-align:right">${r.st==='Active'||r.st==='Scheduled'?`<button class="btn sm" data-revoke="${r.id}">Revoke</button>`:''}</td></tr>`;}).join('')
+    ||`<tr><td colspan="7" class="empty">No permissions match these filters.</td></tr>`;
+  $('#range').textContent=list.length?`1–${list.length} of ${list.length}`:'0 of 0';
+  $('#exportBtn').textContent=`Export (${list.length})`;
+  const h=S.hist.filter(x=>inScope(x.c));$('#histTitle').textContent=`History · ${h.length} entries`;
+  $('#hist').innerHTML=h.map(x=>`<tr><td class="date">${x.when}</td><td>${esc(x.who)}</td><td>${esc(x.what)}</td><td>${esc(x.from)}</td><td>${esc(x.to)}</td><td>${esc(x.why)}</td></tr>`).join('');
+}
+function render(f){renderChrome();renderRows(f);}
+$('#stabs').addEventListener('click',e=>{const b=e.target.closest('.stab');if(b){S.status=b.dataset.st;renderRows();}});
+['#q','#fPerm','#fCentre'].forEach(s=>$(s).addEventListener('input',()=>renderRows()));
+
+/* ---------- Grant ---------- */
+let G={person:null,perm:null};
+const personCombo=(()=>{const el=$('#personCombo'),btn=el.querySelector('.combo-btn'),inp=el.querySelector('input'),list=el.querySelector('.list');
+  const items=()=>STAFF.filter(s=>inScope(s.c));
+  const draw=()=>{const q=inp.value.toLowerCase();let h='',g=null;items().filter(s=>!q||s.n.toLowerCase().includes(q)).forEach(s=>{
+      if(S.role==='HQ'&&s.c!==g){g=s.c;h+=`<div class="grp">${esc(g)}</div>`;}
+      h+=`<div class="opt ${G.person===s.n?'sel':''}" data-v="${esc(s.n)}"><span>${esc(s.n)}</span><span class="muted">${esc(s.r)}</span></div>`;});
+    list.innerHTML=h||'<div class="opt muted">No match.</div>';};
+  btn.onclick=e=>{e.stopPropagation();$$('.combo.open').forEach(c=>c!==el&&c.classList.remove('open'));el.classList.toggle('open');inp.value='';draw();inp.focus();};
+  inp.oninput=draw;el.querySelector('.pop').onclick=e=>e.stopPropagation();
+  list.onclick=e=>{const o=e.target.closest('[data-v]');if(!o)return;set(o.dataset.v);el.classList.remove('open');};
+  const set=v=>{G.person=v;const s=STAFF.find(x=>x.n===v);btn.innerHTML=s?`${esc(s.n)} <span class="muted">· ${esc(s.r)}${S.role==='HQ'?' · '+esc(s.c):''}</span>`:'<span class="ph">Choose a person</span>';$('#fPerson').classList.remove('bad');upd();};
+  return{set,open:()=>{el.classList.add('open');draw();},close:()=>el.classList.remove('open')};})();
+document.addEventListener('click',()=>$$('.combo.open').forEach(c=>c.classList.remove('open')));
+const availPerms=()=>PERMS.filter(x=>x.g==='b'||x.route!=='Attendance void'||S.voidOk);
+const hl=(t,q)=>{if(!q)return esc(t);const k=t.toLowerCase().indexOf(q);return k<0?esc(t):esc(t.slice(0,k))+'<mark>'+esc(t.slice(k,k+q.length))+'</mark>'+esc(t.slice(k+q.length));};
+const permCombo=(()=>{const el=$('#permCombo'),btn=el.querySelector('.combo-btn'),inp=el.querySelector('input'),list=el.querySelector('.list');
+  const draw=()=>{const q=inp.value.trim().toLowerCase();let h='';
+    ['a','b'].forEach(g=>{const its=availPerms().filter(x=>x.g===g&&(!q||(x.p+' '+x.d).toLowerCase().includes(q)));
+      if(!its.length)return;h+=`<div class="grp">${g==='a'?'Approval permissions':'Action permissions'}</div>`;
+      its.forEach(x=>{h+=`<div class="opt col ${G.perm===x.p?'sel':''}" data-v="${esc(x.p)}">${hl(x.p,q)}<small>${esc(x.d)}</small></div>`;});});
+    list.innerHTML=h||'<div class="opt muted">No permission matches.</div>';};
+  btn.onclick=e=>{e.stopPropagation();$$('.combo.open').forEach(c=>c!==el&&c.classList.remove('open'));el.classList.toggle('open');inp.value='';draw();inp.focus();};
+  inp.oninput=draw;el.querySelector('.pop').onclick=e=>e.stopPropagation();
+  inp.onkeydown=e=>{if(e.key==='Enter'){const o=list.querySelector('[data-v]');if(o){set(o.dataset.v);el.classList.remove('open');}}if(e.key==='Escape')el.classList.remove('open');};
+  list.onclick=e=>{const o=e.target.closest('[data-v]');if(!o)return;set(o.dataset.v);el.classList.remove('open');};
+  const set=v=>{G.perm=v&&availPerms().some(x=>x.p===v)?v:null;const P=PERMS.find(x=>x.p===G.perm);
+    btn.innerHTML=P?`${esc(P.p)} <span class="ptag ${P.g}" style="margin-left:6px">${P.g==='a'?'Approval':'Action'}</span>`:'<span class="ph">Choose a permission</span>';
+    $('#permDesc').textContent=P?P.d:'';$('#fPermission').classList.remove('bad');upd();};
+  return{set,draw,open:()=>{el.classList.add('open');inp.value='';draw();},close:()=>el.classList.remove('open')};})();
+function drawPerms(){permCombo.set(G.perm);permCombo.draw();}
+function setErr(id,msg){const f=$(id);f.classList.toggle('bad',!!msg);const e=f.querySelector('.err');if(e&&msg!==undefined)e.textContent=msg||'';}
+function upd(){ // live preview + summary
+  const fr=$('#from').value,un=$('#until').value,pv=$('#preview');
+  if(fr&&un&&fr>=S.today&&un>=fr){const days=diff(fr,un)+1;const sch=fr>S.today;
+    pv.className='preview show '+(sch?'sch':'act');
+    pv.textContent=sch?`Starts on ${fmt(fr)} — status Scheduled until then, then Active for ${days} day${days>1?'s':''}.`:`Starts today — status Active for ${days} day${days>1?'s':''}, ends after ${fmt(un)}.`;}
+  else pv.className='preview';
+  $('#summary').textContent=G.person&&G.perm&&fr&&un?`${G.person} will hold “${G.perm}” from ${fmt(fr)} to ${fmt(un)}.`:'Fill in the fields above.';}
+function openGrant(pre){G={person:null,perm:null};personCombo.set(null);
+  $('#from').value=S.today;$('#from').min=S.today;$('#until').value='';$('#until').min=S.today;$('#reason').value='';$('#confirm').checked=false;
+  $$('#grantScrim .bad').forEach(x=>x.classList.remove('bad'));
+  if(pre){if(pre.n)personCombo.set(pre.n);if(pre.p)G.perm=pre.p;if(pre.from)$('#from').value=pre.from;if(pre.until!==undefined)$('#until').value=pre.until;
+    if(pre.why!==undefined)$('#reason').value=pre.why;$('#confirm').checked=!!pre.ok;}
+  drawPerms();upd();$('#grantScrim').classList.add('show');}
+$('#from').addEventListener('input',()=>{$('#until').min=$('#from').value>S.today?$('#from').value:S.today;setErr('#fFrom','');upd();});
+$('#until').addEventListener('input',()=>{setErr('#fUntil','');upd();});
+$('#reason').addEventListener('input',()=>$('#fReason').classList.remove('bad'));
+$('#confirm').addEventListener('change',()=>$('#fConfirm').classList.remove('bad'));
+$$('.presets button').forEach(b=>b.addEventListener('click',()=>{const f=$('#from').value||S.today;$('#until').value=addD(f,+b.dataset.days-1);setErr('#fUntil','');upd();}));
+function tryGrant(){
+  const fr=$('#from').value,un=$('#until').value,why=$('#reason').value.trim(),ok=$('#confirm').checked,miss=[];
+  if(!G.person){$('#fPerson').classList.add('bad');miss.push('person');}
+  if(!G.perm){$('#fPermission').classList.add('bad');miss.push('permission');}
+  if(!fr||fr<S.today){setErr('#fFrom','The start date cannot be before today.');miss.push('From before today (VAL-004)');}
+  if(!un){setErr('#fUntil','Choose an end date.');miss.push('Until missing (VAL-004)');}
+  else if(fr&&un<fr){setErr('#fUntil','The end date cannot be before the start date.');miss.push('Until before From (VAL-004)');}
+  if(!why){$('#fReason').classList.add('bad');miss.push('reason (VAL-002)');}
+  if(!ok){$('#fConfirm').classList.add('bad');miss.push('confirmation (VAL-003)');}
+  if(miss.length){log(`Grant not saved — ${miss.join(', ')}.`);return false;}
+  const s=STAFF.find(x=>x.n===G.person),st=fr>S.today?'Scheduled':'Active',id=S.next++;
+  const r={id,n:s.n,c:s.c,p:G.perm,by:me().name,from:fr,until:un,st,why,via:'CRM',at:S.today+' 10:30'};S.rows.push(r);
+  hist(r,'Not held',`${st} · ${fmt(fr)} → ${fmt(un)} · via CRM`,me().name,why);
+  log(`${me().name} granted “${r.p}” to ${r.n}, ${fmt(fr)} → ${fmt(un)}. Status ${st} (${st==='Scheduled'?'FR-009':'FR-003'}). History added (FR-006, DATA-001).`);
+  log(`In-app notification to ${r.n}: permission given (FR-004).`);
+  if(st==='Active')usable(r);else log(`${r.n} cannot use it before ${fmt(fr)} (FR-009).`);
+  closeAll();S.status='';render(id);return true;}
+function usable(r){const P=PERMS.find(x=>x.p===r.p);
+  log(P.g==='a'?`${r.n} now gets ${P.route} requests of ${r.c} in My approvals until ${fmt(r.until)} (FR-005).`:`${r.n} can now open “${r.p}” in ${r.c} until ${fmt(r.until)}; cannot pass it on (FR-007).`);}
+$('#grantBtn').onclick=()=>openGrant();$('#doGrant').onclick=tryGrant;
+
+/* ---------- detail drawer ---------- */
+function openDrawer(id){const r=S.rows.find(x=>x.id===id),P=PERMS.find(x=>x.p===r.p),s=STAFF.find(x=>x.n===r.n);
+  $('#dt').textContent=r.p;
+  $('#dBody').innerHTML=`<p><span class="badge b-${r.st.toLowerCase()}"><span class="dot d-${r.st.toLowerCase()}"></span>${r.st}</span> <span class="ptag ${P.g}">${P.g==='a'?'Approval':'Action'}</span></p>
+   <dl class="kv"><dt>Person</dt><dd>${esc(r.n)}<div class="muted">${esc(s.r)} · ${esc(r.c)}</div></dd>
+   <dt>Period</dt><dd>${fmt(r.from)} → ${fmt(r.until)}<div class="muted">${diff(r.from,r.until)+1} days</div></dd>
+   <dt>Granted by</dt><dd>${esc(r.by)}<div class="muted">${r.at.slice(8,10)}/${r.at.slice(5,7)}/${r.at.slice(0,4)}${r.at.slice(10)} · via ${esc(r.via)}</div></dd>
+   <dt>Reason</dt><dd>${esc(r.why)}</dd>
+   ${r.rev?`<dt>Revoked by</dt><dd>${esc(r.rev.by)} · ${fmt(r.rev.on)}</dd>`:''}
+   <dt>What it gives</dt><dd>${esc(P.d)}</dd></dl>
+   <div class="lab" style="font-weight:600;margin-bottom:8px">History of this permission</div>
+   <div class="tl">${S.hist.filter(h=>h.id===id).map(h=>`<div><b>${esc(h.to.split(' · ')[0])}</b> · ${h.when}<br><span class="muted">${esc(h.who)}${h.why!=='—'?' — '+esc(h.why):''}</span></div>`).join('')}</div>`;
+  $('#dFoot').innerHTML=(r.st==='Active'||r.st==='Scheduled')?`<span></span><button class="btn" data-revoke="${r.id}">Revoke</button>`:'<span class="muted">No action — permission has ended.</span>';
+  $('#drawerScrim').classList.add('show');}
+$('#rows').addEventListener('click',e=>{const rv=e.target.closest('[data-revoke]');if(rv){e.stopPropagation();openRevoke(+rv.dataset.revoke);return;}
+  const tr=e.target.closest('tr[data-id]');if(tr)openDrawer(+tr.dataset.id);});
+$('#dFoot').addEventListener('click',e=>{const rv=e.target.closest('[data-revoke]');if(rv){closeAll();openRevoke(+rv.dataset.revoke);}});
+
+/* ---------- revoke ---------- */
+let RID=null;
+function openRevoke(id){const r=S.rows.find(x=>x.id===id);RID=id;$('#rt').textContent=`Revoke ${r.p}?`;
+  $('#rBody').textContent=`${r.n} loses it now and is told in the app.`;$('#revokeScrim').classList.add('show');}
+$('#doRevoke').onclick=()=>{const r=S.rows.find(x=>x.id===RID),was=r.st;r.st='Revoked';r.rev={by:me().name,on:S.today};
+  hist(r,was,'Revoked',me().name);log(`${me().name} revoked “${r.p}” from ${r.n} (was ${was}) — Revoked at once${was==='Scheduled'?', never becomes Active (FR-009)':''} (FR-003, FR-008).`);
+  log(`In-app notification to ${r.n}: permission taken back (FR-004).`);closeAll();render(r.id);};
+function closeAll(){$$('.scrim').forEach(s=>s.classList.remove('show'));}
+$$('[data-close]').forEach(b=>b.addEventListener('click',closeAll));
+$$('.scrim').forEach(s=>s.addEventListener('click',e=>{if(e.target===s)closeAll();}));
+
+/* ---------- time ---------- */
+function goTo(d){while(S.today<d){S.today=addD(S.today,1);tick();}render();}
+function tick(){S.rows.forEach(r=>{
+  if(r.st==='Scheduled'&&r.from<=S.today){r.st='Active';hist(r,'Scheduled','Active','System');log(`${fmt(S.today)}: System started “${r.p}” of ${r.n} — Active (FR-009).`);log(`In-app notification to ${r.n}: permission starts (FR-004).`);usable(r);}
+  if(r.st==='Active'&&r.until<S.today){r.st='Expired';hist(r,'Active',`Expired · ended ${fmt(r.until)}`,'System');log(`${fmt(S.today)}: System ended “${r.p}” of ${r.n} after ${fmt(r.until)} — Expired (FR-003).`);log(`In-app notification to ${r.n}: permission ended (FR-004, BR-002).`);}
+});}
+$('#plus1').onclick=()=>goTo(addD(S.today,1));
+$$('[data-go]').forEach(b=>b.onclick=()=>{if(b.dataset.go>S.today)goTo(b.dataset.go);});
+$$('#roleSeg button').forEach(b=>b.onclick=()=>{S.role=b.dataset.role;$('#fCentre').value='';closeAll();render();});
+$('#voidToggle').onchange=e=>{S.voidOk=e.target.checked;log(`HQ Admin: route “Attendance void” Can be delegated → ${S.voidOk?'ticked':'not ticked'}; “Void or delete attendance records” is ${S.voidOk?'offered':'not offered'} in Grant (FR-007).`);drawPerms();};
+function reset(){S=seed();seedHist();
+  ['#q','#fPerm'].forEach(s=>$(s).value='');closeAll();$('#log').innerHTML='';$$('.step').forEach(x=>x.classList.remove('on'));$('#stepNote').hidden=true;render();}
+$('#reset').onclick=reset;
+
+/* ---------- process steps ---------- */
+const AIS={n:'Aisyah Rahman',p:'Approve leave requests',from:'2026-11-17',until:'2026-11-21',why:'Covers leave approvals while I attend the cluster meeting week.',ok:true};
+const note=t=>{$('#stepNote').innerHTML=t;$('#stepNote').hidden=!t;};
+const STEPS={
+ m1(){openGrant();note('From shows today (13/11/2026) and can be changed; Until is empty and required (AC-010).');},
+ m2(){openGrant(AIS);note('Aisyah Rahman, Approve leave requests, 17/11 → 21/11. The blue preview says the permission will be <b>Scheduled</b> until 17/11. Click <b>Grant</b>.');},
+ m3(){openGrant(AIS);tryGrant();note('New row: <b>Scheduled</b>, “starts in 4 days”. Aisyah cannot use it yet (FR-009). Open the row to see its detail and history.');},
+ m4(){if(!S.rows.some(r=>r.n==='Aisyah Rahman')){openGrant(AIS);tryGrant();}goTo('2026-11-17');S.status='Active';renderRows();
+   note('Today 17/11: Aisyah’s permission is <b>Active</b>; she is notified and leave requests now reach her My approvals (AC-014). Serene Tan’s permission (until 16/11) is now Expired.');},
+ a1(){const r=S.rows.find(x=>x.n==='Chloe Ng'&&x.p==='Review class update photos');if(r.st==='Active')openRevoke(r.id);note('FR-008 wording (AC-008). Choose Revoke → Revoked at once.');},
+ a1b(){let r=S.rows.find(x=>x.st==='Scheduled'&&inScope(x.c));if(r)openRevoke(r.id);note('A Scheduled permission can be revoked; it then never becomes Active (AC-015).');},
+ a2(){S.role='HQ';render();openGrant();setTimeout(()=>personCombo.open(),20);note('HQ Admin: people of every centre, grouped by centre (AC-009). The list shows the Centre filter and centre under each name.');},
+ a3(){goTo('2026-11-17');S.status='Expired';renderRows();note('Serene Tan’s permission had Until 16/11 → on 17/11 it is <b>Expired</b> and she is notified (AC-002, BR-002).');},
+ a4(){goTo('2026-11-18');S.status='';renderRows();note('Farah Idris’s permission had From 18/11 → today it moved from Scheduled to <b>Active</b> (FR-009) — see the event log.');},
+ e1(){S.voidOk=false;render();log('HQ Admin: route “Attendance void” Can be delegated → not ticked (FR-007).');openGrant();setTimeout(()=>permCombo.open(),20);note('“Void or delete attendance records” is not offered; “approve refunds” is never offered (AC-001). Turn the switch in the top bar back on to see it again.');},
+ e2(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'2026-11-27',why:'',ok:true});tryGrant();note('Reason empty → not saved (VAL-002, AC-004).');},
+ e3(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'2026-11-27',why:'Covers photo review during school holidays.',ok:false});tryGrant();note('Not ticked → Grant does nothing; the box is marked (VAL-003, AC-007).');},
+ e4(){openGrant({n:'Nadia Salleh',p:'Review class update photos',until:'',why:'Covers photo review during school holidays.',ok:true});tryGrant();note('Until empty → “Choose an end date.” (VAL-004, BR-003, AC-011).');},
+ e5(){openGrant({n:'Nadia Salleh',p:'Review class update photos',from:'2026-11-20',until:'2026-11-15',why:'Covers photo review during school holidays.',ok:true});tryGrant();note('Until before From → “The end date cannot be before the start date.” (VAL-004, AC-012).');},
+ e6(){openGrant({n:'Nadia Salleh',p:'Review class update photos',from:'2026-11-10',until:'2026-11-27',why:'Covers photo review during school holidays.',ok:true});tryGrant();note('From before today (typed in; the date picker already blocks past days) → “The start date cannot be before today.” (VAL-004, AC-013).');},
+};
+$$('.step').forEach(b=>b.onclick=()=>{reset();$$('.step').forEach(x=>x.classList.toggle('on',x===b));STEPS[b.dataset.s]();
+  window.scrollTo({top:$('#app').getBoundingClientRect().top+window.scrollY-56,behavior:'smooth'});});
+render();
+</script>
+</body>
+</html>

@@ -5,5 +5,20 @@ node_modules/
 .DS_Store
 Thumbs.db
 ~$*.docx
-outputs/**/.tmp/
+projects/**/.tmp/
 .intake/
+
+# Git chỉ lưu Markdown trong Document/: file xuất ra (.output/) và file gốc của khách (_goc/, docx/pdf/ảnh…) ở Drive
+projects/*/.output/
+projects/**/_goc/
+projects/*/Document/**/*.docx
+projects/*/Document/**/*.doc
+projects/*/Document/**/*.pdf
+projects/*/Document/**/*.xlsx
+projects/*/Document/**/*.xls
+projects/*/Document/**/*.pptx
+projects/*/Document/**/*.png
+projects/*/Document/**/*.jpg
+projects/*/Document/**/*.jpeg
+projects/*/Document/**/*.eml
+projects/*/Document/**/*.zip

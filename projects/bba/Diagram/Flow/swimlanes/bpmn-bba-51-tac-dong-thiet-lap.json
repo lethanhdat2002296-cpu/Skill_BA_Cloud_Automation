@@ -1,0 +1,135 @@
+{
+ "title": "BBA-51 · Xem tác động trước khi đổi thiết lập",
+ "lanes": [
+  "Người dùng có quyền",
+  "Hệ thống"
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "lane": 0,
+   "col": 0,
+   "type": "start",
+   "label": "Cần đổi thiết lập"
+  },
+  {
+   "id": "a1",
+   "lane": 0,
+   "col": 1,
+   "label": "Mở thiết lập, xem giá trị và nguồn mỗi Centre"
+  },
+  {
+   "id": "a2",
+   "lane": 0,
+   "col": 2,
+   "label": "Change: chọn Applies to và Value"
+  },
+  {
+   "id": "g1",
+   "lane": 1,
+   "col": 3,
+   "type": "decision",
+   "label": "Giá trị hợp lệ?"
+  },
+  {
+   "id": "x1",
+   "lane": 1,
+   "col": 4,
+   "type": "system",
+   "label": "See the impact: Centre cũ → mới; trẻ, hoá đơn, yêu cầu chờ"
+  },
+  {
+   "id": "a3",
+   "lane": 0,
+   "col": 5,
+   "label": "Xem tác động"
+  },
+  {
+   "id": "g2",
+   "lane": 0,
+   "col": 6,
+   "type": "decision",
+   "label": "Confirm?"
+  },
+  {
+   "id": "e2",
+   "lane": 0,
+   "col": 7,
+   "type": "end",
+   "label": "Không thay đổi"
+  },
+  {
+   "id": "x2",
+   "lane": 1,
+   "col": 7,
+   "type": "system",
+   "label": "Lưu; Centre không override nhận giá trị mới"
+  },
+  {
+   "id": "x3",
+   "lane": 1,
+   "col": 8,
+   "type": "system",
+   "label": "Ghi lịch sử: cũ, mới, người, thời điểm"
+  },
+  {
+   "id": "e",
+   "lane": 1,
+   "col": 9,
+   "type": "end",
+   "label": "Kết thúc"
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "a1"
+  ],
+  [
+   "a1",
+   "a2"
+  ],
+  [
+   "a2",
+   "g1"
+  ],
+  [
+   "g1",
+   "a2",
+   "Không"
+  ],
+  [
+   "g1",
+   "x1",
+   "Có"
+  ],
+  [
+   "x1",
+   "a3"
+  ],
+  [
+   "a3",
+   "g2"
+  ],
+  [
+   "g2",
+   "e2",
+   "Huỷ"
+  ],
+  [
+   "g2",
+   "x2",
+   "Xác nhận"
+  ],
+  [
+   "x2",
+   "x3"
+  ],
+  [
+   "x3",
+   "e"
+  ]
+ ],
+ "orientation": "vertical",
+ "notation": "bpmn"
+}
