@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 13/11/2026 |
+| Ngày | 14/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -40,15 +40,11 @@ Mục tiêu đo được: danh sách hiển thị 100% trẻ đang đi học có
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Teacher / Senior Teacher | Lớp của mình. | Xem danh sách lớp mình, in cho bếp, xuất file. |
-| Centre Director, School Admin | Centre của mình. | Xem toàn Centre, in, xuất file; liên hệ phụ huynh khi thông tin dị ứng thiếu. |
-| HQ Admin | Mọi Centre. | Xem, in, xuất file mọi Centre. |
-| HQ Ops (District Manager, Operations Manager) | Các Centre mình phụ trách. | Xem theo quyền được cấp. |
-| Bếp | Centre. | Dùng bản in do Centre đưa (AS-01). |
-| Phụ huynh (Parents App) | Con mình. | Khai thông tin dị ứng; đồng ý cho hiện tên và ảnh trên Medical Health Alert List. |
-| Hệ thống | Toàn hệ thống. | Sắp xếp theo mức độ, ghi thời điểm in, tính hạn đánh giá lại. |
+| Authorised User | Trẻ có thông tin sức khoẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có (lớp hoặc Centre). | Xem, lọc, in cho bếp và xuất danh sách khi vai trò được cấp quyền xem chi tiết y tế. |
+| System | Medical Care Assessment đã xác nhận của trẻ. | Sắp xếp theo mức độ, tính hạn đánh giá lại, ghi thời điểm in. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
 
-Quy tắc chung: chỉ vai trò được phép xem chi tiết y tế mới mở được danh sách này (mặc định Centre Director, Teacher, School Admin, HQ Admin); không lưu nhật ký in / xuất (BBA-1058 Q2).
+Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng; hệ thống không lưu nhật ký in / xuất (BBA-1058 Q2).
 
 ## 5. Tổng quan tính năng
 
@@ -72,7 +68,7 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 | FR-002 | Thứ tự mặc định: trẻ có mức nặng nhất ở trên cùng (Severe — tương ứng "Life Threatening" trên form của BBA — rồi Moderate, rồi Mild); cùng mức thì xếp theo lớp, rồi theo tên trẻ. Dị ứng chưa chọn mức độ được xếp cùng nhóm Severe và ghi "Severity not set". |
 | FR-003 | Bên dưới danh sách dị ứng có phần riêng "Other conditions and diet" cho trẻ không có dị ứng nhưng có Medical Condition, Medical Conditions & History (Appendix 1 tr. 1) hoặc chế độ ăn đặc biệt; mỗi dòng có loại, mô tả, kế hoạch xử trí, Next review. |
 | FR-004 | Tìm theo tên trẻ hoặc chất gây dị ứng; lọc theo Centre, lớp, mức độ, loại (Food, Environmental, Medication, Insect, Medical condition — theo Appendix 1) và hạn đánh giá lại (Any, Due within 1 month, Overdue); các bộ lọc dùng kết hợp được. |
-| FR-005 | Giáo viên mở danh sách thì mặc định lọc theo lớp của mình; Centre Director và School Admin mặc định thấy toàn Centre. |
+| FR-005 | Bộ lọc mặc định theo phạm vi dữ liệu của người dùng: người có quyền trên một số lớp thấy các lớp đó; người có quyền toàn Centre thấy toàn Centre. |
 | FR-007 | "Print for the kitchen" in "Medical Health Alert List" theo bộ lọc đang chọn (một lớp hoặc cả Centre); đầu trang ghi tên Centre, lớp, ngày giờ in (ví dụ "Printed 24/11/2026 08:15") và số trẻ; cột: Photo, Child, Type · allergen · severity, Can tolerate, Traces of eggs / nuts, Emergency action plan (chờ OQ-04). |
 | FR-008 | "Export" xuất danh sách theo bộ lọc đang chọn ra Excel. Hệ thống không lưu nhật ký in / xuất. |
 | FR-009 | Chọn tên trẻ mở tab Health trong hồ sơ trẻ. |
@@ -106,7 +102,7 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 | BR-001 | Phụ huynh khai thông tin dị ứng (Medical Care Assessment); Centre Director hoặc Senior Staff kiểm tra và xác nhận (Appendix 1 tr. 3, BBA-1058 Q1). Danh sách chỉ đọc; nhân viên chỉ thêm "Note from staff" ở tab Health. |
 | BR-002 | Trẻ nặng nhất luôn ở trên cùng; dị ứng chưa chọn mức độ được coi như Severe. |
 | BR-003 | Bản in luôn ghi ngày giờ in, để bếp biết bản nào là bản mới nhất. |
-| BR-004 | Centre Director, School Admin và Teacher được xem, in và xuất danh sách; không lưu nhật ký in / xuất. |
+| BR-004 | Người dùng có quyền xem chi tiết y tế (Authorised User) được xem, in và xuất danh sách; không lưu nhật ký in / xuất (BBA-1058 Q2). |
 | BR-005 | Một trẻ không bị giới hạn số dị ứng hoặc bệnh (Q-70-02). |
 | BR-006 | Mỗi Medical Care Assessment được đánh giá lại tối đa 6 tháng một lần, hoặc sớm hơn khi có thay đổi / sự cố (Appendix 3). |
 

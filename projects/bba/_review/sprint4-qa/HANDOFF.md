@@ -79,3 +79,8 @@ Liên quan Plane khác: BBA-528 (staff clock-in → BBA-79), BBA-488 (consent), 
 1. Kiểm tra công cụ Google Drive có trong phiên (`mcp__Google_Drive__*`).
 2. Hỏi user: BBA-70, BBA-71 đã tải v0.2 lên Drive chưa (nếu Drive có công cụ thì làm luôn khi user đồng ý).
 3. Tiếp tục BBA-72 theo quy trình ở mục 4.
+
+## 8. Cập nhật 14/11/2026 (tối) — BBA-68 → BBA-72
+- Mục 4 viết lại theo mẫu BBA-40 (Authorised User / … Viewer / System / Unauthorised User + câu nguyên tắc phân quyền); mục 6 đồng bộ các câu về quyền. **Mục 5 (Module · Feature · Function · User Story, tách US) chưa làm** — user sẽ đi từng file.
+- Review của chị Hải (Mỹ Hải - DOTB) trên Drive: BBA-69 1, BBA-70 10, BBA-71 2, BBA-72 2 comment. Khi thay file, comment được chèn lại vào Word mới bằng `R/code/add_comments.py` (vị trí gắn do BA chọn gần đúng; file cũ trong thùng rác Drive còn comment gốc). Chị Hải hẹn trao đổi BBA-72 thứ 2.
+- Ý chính của chị Hải: đúng cấu trúc Module → chức năng → function, US; tách nhiều US; FR ngắn, chi tiết vào BR; SMS không mô tả Parents App; bỏ phần không có trong yêu cầu (vd Year view BBA-70); không ảnh / link wireframe trong FRD.

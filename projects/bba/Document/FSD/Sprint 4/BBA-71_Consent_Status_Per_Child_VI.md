@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 13/11/2026 |
+| Ngày | 14/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -40,13 +40,12 @@ Mục tiêu đo được: từ hồ sơ trẻ, nhân viên thấy trạng thái 
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Centre Director | Centre của mình. | Tạo và gửi consent cho các lớp hoặc cả Centre; xem, nhắc, gửi lại; xem Consent compliance. |
-| School Admin | Centre của mình. | Như Centre Director khi được cấp quyền (Roles & permissions). |
-| Teacher | Lớp của mình. | Chỉ xem trạng thái consent của trẻ lớp mình. |
-| HQ Admin | Mọi Centre. | Mọi quyền; công bố phiên bản mới của consent. |
-| HQ Marketing | Mọi Centre. | Nhận thông báo khi phụ huynh rút lại Media release. |
-| Phụ huynh / người giám hộ | Con mình. | Đồng ý hoặc không đồng ý, ký khi biểu mẫu yêu cầu; rút lại consent khi biểu mẫu cho phép. |
-| Hệ thống | Toàn hệ thống. | Tạo Announcement kèm link, tự nhắc 1 ngày trước ngày đóng, đếm số lần nhắc, chuyển Expired, tick checklist học sinh, lưu lịch sử. |
+| Authorised User | Consent của trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có (lớp hoặc Centre). | Tạo, gửi, nhắc, gửi lại consent, công bố phiên bản mới và xem Consent compliance — mỗi thao tác khi vai trò được cấp quyền. |
+| Consent Viewer | Consent của trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Xem trạng thái consent của trẻ; không có nút thao tác. |
+| System | Consent đã tạo và câu trả lời của phụ huynh. | Tạo Announcement kèm link, tự nhắc 1 ngày trước ngày đóng, đếm số lần nhắc, chuyển Expired, tick checklist học sinh, gửi thông báo khi Media release bị rút lại, lưu lịch sử. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
+
+Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
 
 ## 5. Tổng quan tính năng
 
@@ -112,7 +111,7 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 | BR-001 | Câu trả lời ghi rõ phụ huynh nào trả lời, ngày giờ, kênh và chữ ký khi form yêu cầu. |
 | BR-002 | Câu trả lời cho phiên bản cũ chỉ còn dùng cho phiên bản mới khi người công bố chọn "Keep current answers". |
 | BR-003 | Câu trả lời cũ và việc rút lại không bao giờ bị xoá. |
-| BR-004 | Centre Director tạo và gửi consent cho các lớp của Centre; Teacher chỉ xem consent của lớp mình (Q-73-04). |
+| BR-004 | Tạo, gửi, nhắc và gửi lại consent là quyền cấp theo vai trò (BBA: Centre Director gửi theo lớp — Q-73-04); người dùng chỉ có quyền xem thấy trạng thái consent trong phạm vi của mình, không có nút thao tác. |
 | BR-005 | Trẻ không có Media release đã Agreed không được chụp, đăng hay gắn tên; hệ thống chặn hoặc cảnh báo khi gắn tên trẻ (Q-73-13; SRS BR-TCH-030). |
 | BR-006 | Privacy policy, Medical authorisation, Media release thu một lần lúc nhập học theo từng trẻ và không hết hạn; Field trip, Ad hoc theo từng sự kiện; Crossroad gia hạn hằng năm (Q-73-12). |
 | BR-007 | Email không gửi mặc định; chỉ gửi khi người tạo chọn (Q-73-08). |

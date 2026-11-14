@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 13/11/2026 |
+| Ngày | 14/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -40,12 +40,12 @@ Mục tiêu đo được: giáo viên nhập xong một lớp trong một lần 
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Teacher / Senior Teacher | Lớp của mình. | Nhập, sửa, xoá số đo của trẻ lớp mình; xem cả năm, xuất Excel. |
-| Centre Director, School Admin | Centre của mình. | Nhập, sửa, xoá số đo của mọi trẻ; xem báo cáo completion. |
-| HQ Admin | Mọi Centre. | Thiết lập lịch term theo brand. |
-| Cluster Head (trước đây District Manager — BBA-524) | Các Centre mình phụ trách. | Xem báo cáo completion. |
-| Phụ huynh (Parents App) | Con mình. | Xem số đo, biểu đồ tăng trưởng và lịch sử đo ngay khi lưu. |
-| Hệ thống | Toàn hệ thống. | Tính tuổi, vị trí trên biểu đồ; nhắc nhập giữa tháng cuối mỗi term; lưu lịch sử. |
+| Authorised User | Trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có (lớp hoặc Centre). | Thêm, sửa, xoá số đo khi vai trò được cấp quyền (một quyền chung — BBA-1059); xem Year view và xuất Excel khi vai trò được cấp quyền. |
+| Report Viewer | Các Centre trong phạm vi dữ liệu hiện có. | Xem báo cáo Height & weight completion khi vai trò được cấp quyền (BBA-1059 Q5). |
+| System | Số đo của trẻ; lịch term do HQ cấu hình. | Tính tuổi và vị trí trên biểu đồ; gửi nhắc giữa tháng cuối mỗi term; lưu lịch sử. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
+
+Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
 
 ## 5. Tổng quan tính năng
 
@@ -75,7 +75,7 @@ Là giáo viên, tôi muốn nhập chiều cao và cân nặng của cả lớp
 | FR-006 | Một trẻ chỉ có một số đo cho mỗi kỳ; nhập lại trong cùng kỳ thì số mới thay số cũ, số cũ giữ trong lịch sử kèm người sửa và thời điểm. |
 | FR-007 | Từ hồ sơ trẻ, người dùng có quyền nhập được số đo cho riêng một trẻ, bất kỳ ngày nào, cho trẻ ở mọi độ tuổi. |
 | FR-008 | Hồ sơ trẻ và mục Health & growth trong Parents App hiển thị chiều cao, cân nặng, ngày đo và biểu đồ tăng trưởng; số đo mới hiện cho phụ huynh ngay sau khi lưu. |
-| FR-009 | Báo cáo "Height & weight completion" theo Centre, lớp và kỳ đo: số trẻ, số trẻ đã đo, tỷ lệ hoàn thành; lọc theo Centre và kỳ đo; xuất ra Excel. Không có thống kê tăng trưởng. Người dùng ban đầu: Centre Director, School Admin, Cluster Head (BBA-1059 Q5). |
+| FR-009 | Báo cáo "Height & weight completion" theo Centre, lớp và kỳ đo: số trẻ, số trẻ đã đo, tỷ lệ hoàn thành; lọc theo Centre và kỳ đo; xuất ra Excel. Không có thống kê tăng trưởng. Người xem: người dùng có quyền xem báo cáo (Report Viewer — BBA-1059 Q5). |
 | FR-010 | "Delete" ở một số đo đã lưu mở hộp xác nhận "Delete this measurement?"; xoá thì phụ huynh không còn thấy số đo đó; lịch sử ghi việc xoá, người xoá, thời điểm. |
 | FR-011 | Hệ thống gửi nhắc nhập chiều cao, cân nặng vào giữa tháng cuối mỗi term (tháng 3, 6, 9, 12) cho mọi brand, kể cả Brighton (Q-71-03, BBA-529). |
 | FR-012 | Hồ sơ trẻ, tab Health › Growth có biểu đồ chiều cao / cân nặng theo tuổi (FR-004) và "Measurement history": mọi lần đo theo ngày đo — term, ngày đo, chiều cao, cân nặng, thay đổi so với kỳ trước, người nhập và nơi nhập (class entry / child record); mỗi dòng có Edit, Delete theo quyền (Q-71-07, Q-71-08, Q-71-11). |
@@ -113,7 +113,7 @@ Là giáo viên, tôi muốn nhập chiều cao và cân nặng của cả lớp
 | BR-002 | Mỗi trẻ một số đo cho mỗi kỳ; số mới thay số cũ, lịch sử được giữ. |
 | BR-003 | Vị trí trên biểu đồ do hệ thống tính, người dùng không sửa tay. |
 | BR-004 | Phụ huynh chỉ xem số đo của con mình. |
-| BR-005 | Thêm, sửa và xoá số đo là một quyền chung (BBA-1059); Teacher thao tác trên lớp mình, Centre Director và School Admin trên mọi trẻ của Centre (Q-71-10). |
+| BR-005 | Thêm, sửa và xoá số đo là một quyền chung (BBA-1059), cấp theo vai trò; người dùng thao tác trên trẻ thuộc phạm vi dữ liệu của mình — lớp hoặc Centre (Q-71-10). |
 
 #### Validation Rules (Quy tắc kiểm tra)
 

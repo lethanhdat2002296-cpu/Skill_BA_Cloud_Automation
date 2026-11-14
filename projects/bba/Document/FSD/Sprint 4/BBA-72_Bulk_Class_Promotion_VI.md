@@ -42,12 +42,12 @@ Mục tiêu đo được: chuyển xong một lớp trong một lần xác nhậ
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Centre Director | Centre của mình. | Cho lớp lên level mới, chạy lại trẻ lỗi, đóng lớp cũ (quyền mặc định). |
-| HQ Admin | Mọi Centre. | Mọi quyền. |
-| School Admin | Centre của mình. | Theo quyền được cấp trong Roles & permissions. |
-| Teacher | Lớp của mình. | Xem lớp mới của trẻ từ ngày hiệu lực; không cho lớp lên level. |
-| Phụ huynh (Parents App) | Con mình. | Thấy thread lớp mới từ ngày hiệu lực; thread lớp cũ chỉ đọc. |
-| Hệ thống | Toàn hệ thống. | Đề xuất level, lớp đích và ngày hiệu lực; chuyển từng trẻ; báo kết quả; cập nhật ghi danh, học phí, danh sách điểm danh, thread; lưu lịch sử. |
+| Authorised User | Lớp và trẻ của Centre trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Cho lớp lên level, chạy lại trẻ lỗi, đóng lớp cũ khi vai trò được cấp quyền. |
+| Class Viewer | Lớp và trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Xem lớp mới của trẻ từ ngày hiệu lực; không thấy nút Move class up. |
+| System | Lớp nguồn, lớp đích và trẻ được chọn. | Đề xuất level, lớp đích và ngày hiệu lực; chuyển từng trẻ; báo kết quả; cập nhật ghi danh, học phí, danh sách điểm danh, thread; lưu lịch sử. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
+
+Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
 
 ## 5. Tổng quan tính năng
 
@@ -111,7 +111,7 @@ Là Centre Director, tôi muốn chuyển cả lớp lên level tiếp theo cho 
 | BR-002 | Hoá đơn đã phát hành không bị sửa; học phí theo level mới chỉ áp cho hoá đơn tạo sau ngày hiệu lực; chỉnh hoá đơn đã phát hành bằng credit note (Q-74-09). |
 | BR-003 | Vượt sĩ số tối đa chỉ cảnh báo, không chặn; Centre Director cấu hình sĩ số tối đa từng lớp (Q-74-08). |
 | BR-004 | Lớp đã có trẻ không bị xoá, chỉ được đóng; lịch sử giữ nguyên. |
-| BR-005 | Quyền cho lớp lên level theo Roles & permissions; mặc định Centre Director và HQ Admin. |
+| BR-005 | Cho lớp lên level là quyền cấp theo vai trò (Roles & permissions); người dùng không có quyền không thấy nút Move class up. |
 | BR-006 | Chỉ chuyển trong cùng Centre. Khác Centre cùng brand là Transfer; khác brand là withdrawal ở Centre cũ và đăng ký mới; junior campus → senior campus ở Malaysia (hai brand) là Transfer (Q-74-02). |
 | BR-007 | Màn này chỉ dùng cho annual promotion; Infant promotion và class change là luồng riêng (Q-74-01). |
 
@@ -128,15 +128,9 @@ Là Centre Director, tôi muốn chuyển cả lớp lên level tiếp theo cho 
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Classes — chi tiết lớp | Wireframe: `Diagram/Wireframe/class-promotion-sprint4.html` (Chi tiết lớp · Lớp K2 · Level cao nhất chưa phải K2) |
-| SCR-02 - Move class up — xem trước | Wireframe: `Diagram/Wireframe/class-promotion-sprint4.html` (Xem trước · Vượt sĩ số · Trẻ đã có lần chuyển lớp · Chưa có lớp đích · Bỏ chọn hết) |
-| SCR-03 - Move class up — kết quả | Wireframe: `Diagram/Wireframe/class-promotion-sprint4.html` (Kết quả · Lớp nguồn hết trẻ) |
-
-![SCR-01 Classes — chi tiết lớp](../../../Diagram/Wireframe/png/SCR-01-promotion-class-detail.png)
-
-![SCR-02 Move class up — xem trước](../../../Diagram/Wireframe/png/SCR-02-promotion-preview.png)
-
-![SCR-03 Move class up — kết quả](../../../Diagram/Wireframe/png/SCR-03-promotion-result.png)
+| SCR-01 - Classes — chi tiết lớp |  |
+| SCR-02 - Move class up — xem trước |  |
+| SCR-03 - Move class up — kết quả |  |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 

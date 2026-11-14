@@ -202,53 +202,54 @@
       "synced_at": "2026-11-10 09:15"
     },
     "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI": {
-      "file_id": "1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme",
-      "url": "https://drive.google.com/file/d/1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme/view",
+      "file_id": "1enBKoI7lyFCyE0iCbSwvQn4pQUUOKBLZ",
+      "url": "https://drive.google.com/file/d/1enBKoI7lyFCyE0iCbSwvQn4pQUUOKBLZ/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "title": "[FRD] 3.1 Medical Alert Banner (Tiếng Việt) v0.2 - Sprint 4.docx",
       "version": "0.2",
-      "source_sha256": "a698f8b66a8e9a32beca038646216cde99c3eb16cb81d1d898e6c7cd9b8bc8a4",
-      "synced_at": "2026-11-12 08:12"
+      "source_sha256": "e4bb1492ee518e0c5abbc8f836dbc61ca72b8da119c5c9c4b37d6c862bd8b72d",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme trong thùng rác."
     },
     "FSD/Sprint 4/BBA-69_Allergies_List_VI": {
-      "file_id": "1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv",
-      "url": "https://drive.google.com/file/d/1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv/view",
+      "file_id": "1LkFfQ8VpcrbE_di-GdRe8Z5kIt8QZ7kx",
+      "url": "https://drive.google.com/file/d/1LkFfQ8VpcrbE_di-GdRe8Z5kIt8QZ7kx/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-69 Allergies list (most severe first) (Tiếng Việt) - Sprint 4.docx",
+      "title": "[FRD] BBA-69-3.1.3.02 Allergies list (most severe first) (Tiếng Việt) - Sprint 4.docx",
       "version": "0.2",
-      "source_sha256": "d550b8d9ddf209e448831e597aea7eee962875f29f0334a0c68462cec8a57f6b",
-      "synced_at": "2026-11-13 15:22",
-      "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
+      "source_sha256": "73dc9a28ce4aebb7546756fa5f19793431cc63306debfb7464ac69102f66d049",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1N7O0j6u1vAVesSvPTuJ29QW3DfiHpcrv trong thùng rác."
     },
     "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI": {
-      "file_id": "1ztmuemedHDDErQeR9TYKJaiTdh-be50n",
-      "url": "https://drive.google.com/file/d/1ztmuemedHDDErQeR9TYKJaiTdh-be50n/view",
+      "file_id": "1Z4UlMZYN_VMsMm1ytKLvLoOxChTKb_7D",
+      "url": "https://drive.google.com/file/d/1Z4UlMZYN_VMsMm1ytKLvLoOxChTKb_7D/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] BBA-70-3.1.3.03 Growth – termly height & weight entry by class (Tiếng Việt) - Sprint 4.docx",
       "version": "0.2",
-      "source_sha256": "e7dbee01553dac5a2204ad6067296dab86b448c77d12d8e677d95fe1963287d0",
-      "synced_at": "2026-11-14",
-      "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
+      "source_sha256": "47b531b4b7cb655c003b52639c0f926a39068e06090015313854629e43315dd3",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1ztmuemedHDDErQeR9TYKJaiTdh-be50n trong thùng rác."
     },
     "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
-      "file_id": "1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO",
-      "url": "https://drive.google.com/file/d/1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO/view",
+      "file_id": "183BM2-pSBPcZm0Bk8XWCpfmqePOUgbgn",
+      "url": "https://drive.google.com/file/d/183BM2-pSBPcZm0Bk8XWCpfmqePOUgbgn/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
       "version": "0.2",
-      "source_sha256": "ed1fd1889d6409d5d6ba885146688bfe3a7326d4b0a52f185731ea53d9a4cbeb",
-      "synced_at": "2026-11-14",
-      "note": "Bản trên Drive do user cập nhật (13/11/2026); Git đồng bộ theo Drive."
+      "source_sha256": "93906e03bb64c6168cced69e04f60295009e78a95d9f59f0eee106bd46d3ef7d",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1uQ4Ms_sLnGN38X1hqbyGf_N7QrD8N8oO trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r",
-      "url": "https://drive.google.com/file/d/1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r/view",
+      "file_id": "1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v",
+      "url": "https://drive.google.com/file/d/1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
       "title": "[FRD] BBA-72-3.1.5.01 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
       "version": "0.2",
-      "source_sha256": "eab37eca9ef2215d81e446e63604bf3be17564dd586a4beb2884b7cc9e97d414",
-      "synced_at": "2026-11-14 01:44",
-      "note": "v0.2: file cũ 17L1eN6hulZ-KuMm8EnuHbxSZFp9MMYBZ đã chuyển vào thùng rác (không sửa được .docx tại chỗ); link Plane [BA] BBA-603 đã đổi."
+      "source_sha256": "55e02f5238751dd8a0cc90a908ba10042af02f27508152d16a959d83d4350be6",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
       "file_id": "167sUtxABDD_v0rbtSF1RP7EcPT-vXWXi",
