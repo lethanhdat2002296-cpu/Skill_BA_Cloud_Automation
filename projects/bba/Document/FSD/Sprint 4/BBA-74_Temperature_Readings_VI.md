@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 15/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -66,7 +66,7 @@ Là giáo viên, tôi muốn ghi nhanh nhiệt độ của trẻ theo từng th�
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-001 | "Add reading" cho mỗi trẻ: nhiệt độ (mặc định 36,5 °C; nút chọn nhanh 36,3 – 36,4 – 36,5 – 36,6 – 36,7; bộ chọn từ 36 đến 40 °C, bước 0,1; nút "Enter manually" để nhập tay), giờ (mặc định hiện tại), thời điểm: On arrival, After nap, Before pickup, Extra (Q-76-05). |
+| FR-001 | "Add reading" cho mỗi trẻ: nhiệt độ (mặc định 36,5 °C; nút chọn nhanh 36,3 – 36,4 – 36,5 – 36,6 – 36,7; bộ chọn từ 36 đến 40 °C, bước 0,1; nút "Enter manually" để nhập tay), giờ (mặc định hiện tại), thời điểm: On arrival, After nap, Before pickup, Extra (Q-76-05). Hộp thoại Add reading mở từ menu ⋯ cuối dòng trẻ trên bảng điểm danh hoặc từ nút Add reading ở danh sách trẻ còn thiếu lần đo (FR-006); cột Temperatures (°C) trên bảng điểm danh chỉ hiển thị, không có link Add reading (wireframe BBA-73, 15/11/2026; AS-06). |
 | FR-002 | Thời điểm Extra bắt buộc ghi lý do đo thêm (ví dụ "trẻ mệt, má đỏ"). |
 | FR-003 | **[Chưa làm ở Sprint 4 — làm ở sprint sau]** Nhiệt kế Bluetooth đã kết nối với máy tính bảng tự điền nhiệt độ; nhân viên sửa được giá trị (Q-76-06) và vẫn chọn thời điểm. Trong Sprint 4, nhiệt độ chỉ nhập bằng nút chọn nhanh, bộ chọn hoặc "Enter manually" (FR-001). |
 | FR-004 | Các thời điểm đo bắt buộc trong ngày là thiết lập theo Centre ("Required temperature readings"; mặc định On arrival; Centre đo 3 lần đặt On arrival, After nap, Before pickup — AS-04). Bảng điểm danh hiện số lần đã đo trên số lần bắt buộc (ví dụ "2 of 3") và các lần đo dạng "36,6 · On arrival · 08:12"; không giới hạn số lần đo thêm (BBA-535). |
@@ -125,7 +125,7 @@ Là giáo viên, tôi muốn ghi nhanh nhiệt độ của trẻ theo từng th�
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Class attendance — nhiệt độ | Wireframe BBA-74 trên Drive: https://drive.google.com/file/d/1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x/view (Bảng điểm danh · Trẻ còn thiếu lần đo) |
+| SCR-01 - Class attendance — nhiệt độ | Wireframe BBA-74 trên Drive: https://drive.google.com/file/d/19Gg6HdSVhOJenLL_3Abh9CxEMY9qZrBe/view (Bảng điểm danh · Trẻ còn thiếu lần đo) |
 | SCR-02 - Sign in — nhiệt độ khi nhận trẻ | Như trên (Nhận trẻ) |
 | SCR-03 - Add temperature reading | Như trên (Thêm lần đo · sốt · Nhập theo °F · Lần đo Extra thiếu lý do · Nhập tay ngoài khoảng) |
 | SCR-04 - Edit temperature reading | Như trên (Sửa lần đo) |
@@ -151,6 +151,8 @@ Là giáo viên, tôi muốn ghi nhanh nhiệt độ của trẻ theo từng th�
 | Time | Giờ | Có | Hiện tại | VAL-003. | — |
 | Số lần đo | Chữ | — | "x of y" | — | y = số lần bắt buộc của Centre (FR-004). |
 | Cảnh báo sốt | Khối cảnh báo trong hộp thoại | Khi ≥ ngưỡng | — | — | "Saving notifies the class teacher and the Centre Director." (FR-005). |
+| Temperatures (°C) | Cột bảng điểm danh | — | "—" khi chưa đo | — | Mỗi lần đo là một nhãn "nhiệt độ · thời điểm · giờ"; lần ≥ ngưỡng sốt in đậm, có ⚠; nhãn "x of y" = số lần đã đo trên số lần bắt buộc; chỉ hiển thị (FR-001; FR-004; FR-005). |
+| Add reading | Mục trong menu ⋯ cuối dòng trẻ | Theo quyền | — | — | Mở hộp thoại thêm lần đo (FR-001; AS-06). |
 | Temperature: Missing a reading | Bộ lọc bảng điểm danh | Không | — | — | Cột Missing, nút Add reading (FR-006). |
 | Edit / Delete reading | Hộp thoại | Theo quyền | — | Lý do bắt buộc. | FR-008. |
 | Required temperature readings | Dòng ở Centre settings | Có | On arrival | — | AS-04. |
@@ -207,6 +209,7 @@ Class attendance và nhận trẻ (BBA-73); ứng dụng điểm danh ở cổng
 | AS-02 | Khoảng hợp lệ khi nhập tay: 34,0–42,0 °C; ngoài khoảng thì chặn. | VAL-001 — chờ OQ-04 |
 | AS-04 | Lần đo bắt buộc là thiết lập theo Centre, mặc định On arrival; Centre đo 3 lần đặt On arrival, After nap, Before pickup. | FR-004; BR-001 — chờ OQ-06 |
 | AS-05 | Đơn vị mặc định khi nhập là °C; người nhập chuyển sang °F khi cần; mọi nơi hiển thị °C kèm °F. | FR-013 — chờ OQ-07 |
+| AS-06 | Trên bảng điểm danh, Add reading nằm trong menu ⋯ cuối dòng trẻ (wireframe BBA-73 bỏ link Add reading ở cột Temperatures; menu ⋯ dùng cho thao tác phụ). | FR-001 — chờ DOTB / BBA xác nhận vị trí |
 
 ## 8. Phụ lục
 
@@ -237,3 +240,4 @@ Số trang của SRS tính theo bản Word gốc khi xuất PDF; "—" là chưa
 | 10 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Đã chốt: Q-76-05, Q-76-06, Q-81-02 | — | FR-001; FR-003; FR-004; FR-012. |
 | 11 | DOTB — review FRD BBA-74 (14/11/2026) | Bluetooth để sprint sau; bổ sung quy đổi °F | — | FR-003; FR-013. |
 | 12 | Plane — dự án BBA Phase 1, ticket BBA-74 (WBS 3.2.1.02) | Temperature readings (≥3/day) | — | Phạm vi tính năng. |
+| 13 | Wireframe BBA-73 do DOTB cập nhật (15/11/2026) | Class attendance — cột Temperatures (°C) chỉ hiển thị | — | FR-001; AS-06. |

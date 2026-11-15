@@ -41,7 +41,7 @@ Mục tiêu đo được: 100% lượt nhận và trả trẻ có người đưa
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
 | Nhân viên ở cổng (iPad chung) | Centre của mình. | Nhận và trả trẻ trên ứng dụng điểm danh, chụp ảnh. |
-| Centre Admin / School Admin, Teacher | Centre / lớp của mình. | Nhận và trả trẻ trên SMS web; xem cột Handover. |
+| Centre Admin / School Admin, Teacher | Centre / lớp của mình. | Nhận và trả trẻ trên SMS web; xem cột Handover_In, Handover_Out. |
 | Centre Director | Centre của mình. | Như trên; duyệt người được phép đón (cùng School Admin — BR-CDP-024; chờ OQ-06); xem lại các lần "Not on the list". |
 | Phụ huynh (Parents App) | Con mình. | Nhận thông báo khi con được nhận và được đón, có tên người đưa / người đón và ảnh. |
 | Hệ thống | Toàn hệ thống. | Lấy danh sách người được phép đón, chặn người ngoài danh sách, lưu giờ, ảnh, nhân viên và thiết bị, đồng bộ lượt làm khi mất mạng, gửi thông báo. |
@@ -50,7 +50,7 @@ Mục tiêu đo được: 100% lượt nhận và trả trẻ có người đưa
 
 | Khu vực | Chức năng | User Story |
 |---|---|---|
-| Daily operations › Class attendance (SMS web) | Cột Handover; nhận / trả trẻ; lọc theo xe. | US-001 |
+| Daily operations › Class attendance (SMS web) | Cột In, Out, Handover_In, Handover_Out; nhận / trả trẻ; lọc theo xe. | US-001 |
 | Ứng dụng điểm danh ở cổng (iPad) | Nhận / trả trẻ, chụp ảnh, làm việc khi mất mạng. | US-001 |
 
 ## 6. Yêu cầu chức năng
@@ -70,7 +70,7 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 | FR-003 | Người phụ huynh đã thêm nhưng Centre chưa duyệt hiện với chữ "Pending approval" và không chọn được khi trả trẻ. |
 | FR-004 | Khi người đến đón không có trong danh sách, nhân viên chọn "Not on the list"; hệ thống không cho trả trẻ và hiện "Do not release the child. Call the parent to add this person in the Parents App. The person can collect the child once approved." Không có cơ chế override (Q-75-04). |
 | FR-005 | Giờ nhận và giờ trả mặc định là giờ hiện tại; nhân viên sửa được trong cùng ngày; giờ trả không được trước giờ nhận; trẻ chưa được nhận thì không trả được. |
-| FR-006 | Bảng điểm danh của lớp có cột "Handover" ghi "Dropped off by" và "Picked up by" kèm tên người. |
+| FR-006 | Bảng điểm danh của lớp có các cột In (giờ nhận, HH:mm), Out (giờ trả, HH:mm), Handover_In (người đưa trẻ đến: tên · quan hệ — phụ huynh, người đón đã duyệt, tài xế "Bus driver · Bus n", hoặc "Someone else: tên · quan hệ") và Handover_Out (người đón trẻ về: tên · quan hệ — người trong danh sách đón đã duyệt hoặc phụ xe "Bus attendant · Bus n"); ô chưa có dữ liệu hiện "—". Khi lọc theo xe, bảng có thêm cột Class và Handover_In có dòng phụ "📷 Photo · HH:mm" (wireframe 15/11/2026). |
 | FR-007 | Mỗi lượt nhận / trả gửi thông báo trong Parents App cho phụ huynh, có tên người đưa / người đón và giờ; không nhắc cờ đến muộn và tên nhân viên ở cổng (BR-ATT-049, BR-ATT-051). |
 | FR-008 | Bộ lọc theo xe gom trẻ của một xe vào một danh sách; nhận và trả vẫn làm từng trẻ, mỗi trẻ một bản ghi và ảnh riêng. Lúc xe đến, người giao là tài xế; lúc xe về, người nhận là phụ xe của công ty xe (Q-75-10). |
 | FR-009 | Mỗi lượt nhận / trả lưu người đưa / người đón, giờ, ảnh, nhân viên thực hiện và thiết bị (SMS web hoặc ứng dụng điểm danh). |
@@ -119,12 +119,12 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Class attendance — cột Handover | Wireframe: `Diagram/Wireframe/handover-sprint4.html` (Bảng điểm danh · Lọc theo xe) |
+| SCR-01 - Class attendance — cột Handover_In / Handover_Out | Wireframe: `Diagram/Wireframe/handover-sprint4.html` (Bảng điểm danh · Lọc theo xe) |
 | SCR-02 - Sign in | Wireframe: `Diagram/Wireframe/handover-sprint4.html` (Nhận trẻ · Someone else thiếu quan hệ · Nhận trẻ từ xe) |
 | SCR-03 - Sign out | Wireframe: `Diagram/Wireframe/handover-sprint4.html` (Trả trẻ · Người đón ngoài danh sách · Trả trẻ lên xe) |
 | SCR-04 - iPad cổng — mất mạng | Wireframe: `Diagram/Wireframe/handover-sprint4.html` (iPad cổng · mất mạng) |
 
-![SCR-01 Class attendance — cột Handover](../../../Diagram/Wireframe/png/SCR-01-handover-attendance.png)
+![SCR-01 Class attendance — cột Handover_In / Handover_Out](../../../Diagram/Wireframe/png/SCR-01-handover-attendance.png)
 
 ![SCR-02 Sign in](../../../Diagram/Wireframe/png/SCR-02-handover-sign-in.png)
 
@@ -189,7 +189,7 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 
 | AC ID | Given | When | Then | Linked Rule |
 |---|---|---|---|---|
-| AC-001 | bà ngoại của Ethan có trong danh sách người được phép đón | nhân viên nhận Ethan, chọn bà ngoại và chụp ảnh | lượt nhận lưu bà ngoại, ảnh và giờ hiện tại; cột Handover hiện "Dropped off by" tên bà | FR-001; FR-005; FR-006; FR-010 |
+| AC-001 | bà ngoại của Ethan có trong danh sách người được phép đón | nhân viên nhận Ethan, chọn bà ngoại và chụp ảnh | lượt nhận lưu bà ngoại, ảnh và giờ hiện tại; cột In hiện giờ nhận và cột Handover_In hiện tên · quan hệ của bà | FR-001; FR-005; FR-006; FR-010 |
 | AC-002 | tài xế gia đình đưa Noah đến, không có trong danh sách | nhân viên chọn "Someone else", Name "Ahmad", Relationship "Family driver" | lượt nhận được lưu kèm tên và quan hệ | FR-001; BR-003 |
 | AC-003 | nhân viên chọn "Someone else" nhưng để trống Relationship | chọn Sign in | không lưu, hiện "Enter the name and relationship of the adult." | VAL-001 |
 | AC-004 | chú của trẻ có trong danh sách đã duyệt | nhân viên trả trẻ | danh sách hiện ảnh, họ tên, quan hệ, 4 ký tự cuối giấy tờ của chú; chọn chú và chụp ảnh thì lượt trả được lưu | FR-002; BR-001 |

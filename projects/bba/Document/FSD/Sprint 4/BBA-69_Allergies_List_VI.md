@@ -22,7 +22,7 @@
 |---|---|---|---|---|
 | 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
 
-**Mức sẵn sàng:** Đã đặc tả danh sách dị ứng theo Centre / lớp theo các trường của form Medical Care Assessment, thứ tự theo mức độ, hạn đánh giá lại, lọc, in cho bếp, xuất file và quyền xem; có wireframe.
+**Mức sẵn sàng:** Đã đặc tả danh sách sức khoẻ theo Centre / lớp với các cột theo prototype BeeHive (From the family, Note from staff, Vaccination, Updated by the family), thứ tự theo mức độ, lọc, in cho bếp, xuất file và quyền xem.
 
 ## 2. Mục tiêu và bối cảnh
 
@@ -34,7 +34,7 @@ Mục tiêu đo được: danh sách hiển thị 100% trẻ đang đi học có
 
 | Trong phạm vi | Ngoài phạm vi |
 |---|---|
-| Danh sách dị ứng theo Centre và lớp, trẻ nặng nhất lên đầu. Các cột theo form Medical Care Assessment Checklist: trẻ (ảnh), lớp, loại, chất gây dị ứng, mức độ, triệu chứng, điều kiện dung nạp, vết trứng / hạt, kế hoạch xử trí và thuốc dùng ngay, hạn đánh giá lại, ghi chú của nhân viên. Phần riêng cho trẻ chỉ có bệnh hoặc chế độ ăn đặc biệt; nhóm trẻ chưa khai thông tin sức khoẻ. Tìm kiếm, lọc, in cho bếp, xuất file. Quyền xem theo vai trò. | Phụ huynh nhập và sửa Medical Care Assessment (Parents App); quy trình đánh giá và đánh giá lại 6 tháng (BBA-68). Cảnh báo đỏ trên hồ sơ trẻ và các danh sách khác (BBA-68). Biểu đồ tăng trưởng (BBA-70). Khai báo và ghi nhận cho trẻ uống thuốc. |
+| Danh sách sức khoẻ theo Centre và lớp (dị ứng, bệnh, tiền sử trong cùng một bảng), trẻ dị ứng nặng nhất lên đầu. Các cột: Child, Class, Type, From the family, Note from staff, Vaccination, Updated by the family. Dòng cuối cho trẻ chưa khai thông tin sức khoẻ. Tìm kiếm, lọc, in cho bếp, xuất file. Quyền xem theo vai trò. | Phụ huynh nhập và sửa Medical Care Assessment (Parents App); quy trình đánh giá và đánh giá lại 6 tháng (BBA-68). Cảnh báo đỏ trên hồ sơ trẻ và các danh sách khác (BBA-68). Biểu đồ tăng trưởng (BBA-70). Khai báo và ghi nhận cho trẻ uống thuốc. |
 
 ## 4. Tác nhân, vai trò và quyền truy cập
 
@@ -64,29 +64,29 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-001 | Danh sách có một dòng cho mỗi trẻ có ít nhất một dị ứng, theo các trường của Medical Care Assessment Checklist (Appendix 1): ảnh và tên trẻ, lớp, "Note from staff"; loại (Food, Environmental, Medication, Insect) và các chất gây dị ứng, mỗi chất kèm mức độ (Mild / Moderate / Severe); Symptoms; Can tolerate (điều kiện dung nạp) kèm "Traces · Eggs: Yes/No · Nuts: Yes/No"; Emergency action plan (các bước xử trí) kèm thuốc dùng ngay và trạng thái Medication Held On Site Form; Next review (FR-013). |
-| FR-002 | Thứ tự mặc định: trẻ có mức nặng nhất ở trên cùng (Severe — tương ứng "Life Threatening" trên form của BBA — rồi Moderate, rồi Mild); cùng mức thì xếp theo lớp, rồi theo tên trẻ. Dị ứng chưa chọn mức độ được xếp cùng nhóm Severe và ghi "Severity not set". |
-| FR-003 | Bên dưới danh sách dị ứng có phần riêng "Other conditions and diet" cho trẻ không có dị ứng nhưng có Medical Condition, Medical Conditions & History (Appendix 1 tr. 1) hoặc chế độ ăn đặc biệt; mỗi dòng có loại, mô tả, kế hoạch xử trí, Next review. |
-| FR-004 | Tìm theo tên trẻ hoặc chất gây dị ứng; lọc theo Centre, lớp, mức độ, loại (Food, Environmental, Medication, Insect, Medical condition — theo Appendix 1) và hạn đánh giá lại (Any, Due within 1 month, Overdue); các bộ lọc dùng kết hợp được. |
-| FR-005 | Bộ lọc mặc định theo phạm vi dữ liệu của người dùng: người có quyền trên một số lớp thấy các lớp đó; người có quyền toàn Centre thấy toàn Centre. |
-| FR-007 | "Print for the kitchen" in "Medical Health Alert List" theo bộ lọc đang chọn (một lớp hoặc cả Centre); đầu trang ghi tên Centre, lớp, ngày giờ in (ví dụ "Printed 24/11/2026 08:15") và số trẻ; cột: Photo, Child, Type · allergen · severity, Can tolerate, Traces of eggs / nuts, Emergency action plan (chờ OQ-04). |
-| FR-008 | "Export" xuất danh sách theo bộ lọc đang chọn ra Excel. Hệ thống không lưu nhật ký in / xuất. |
+| FR-001 | Danh sách có một dòng cho mỗi trẻ có thông tin sức khoẻ (dị ứng, bệnh, tiền sử) với các cột: Child (ảnh hoặc chữ viết tắt và họ tên), Class, Type (Food, Environmental, Medication, Insect, Medical condition, Medical history), From the family (nguyên văn phụ huynh khai trong Medical Care Assessment — chất gây dị ứng, triệu chứng, cách xử trí — bản đã được Centre xác nhận), Note from staff, Vaccination, Updated by the family. Các cột Child, Class, Type, Vaccination, Updated by the family sắp xếp được (prototype BeeHive — wireframe 15/11/2026). |
+| FR-002 | Thứ tự mặc định: trẻ có mức dị ứng nặng nhất ở trên cùng (Severe — tương ứng "Life Threatening" trên form của BBA — rồi Moderate, rồi Mild, rồi bệnh và tiền sử); cùng mức thì xếp theo lớp, rồi theo tên trẻ. Mức độ lấy từ Medical Care Assessment, không hiển thị thành cột riêng; dị ứng chưa chọn mức độ được xếp cùng nhóm Severe. |
+| FR-003 | Trẻ chỉ có bệnh hoặc tiền sử (không có dị ứng) nằm chung bảng với Type Medical condition hoặc Medical history; không có phần riêng (thay cho phần "Other conditions and diet" trước đây). |
+| FR-004 | Tìm theo tên trẻ; lọc theo Centre, Class, Type, Vaccination và Updated (khoảng ngày phụ huynh cập nhật); các bộ lọc dùng kết hợp được; Total là số trẻ khớp tìm kiếm và bộ lọc. |
+| FR-005 | Bộ lọc mặc định: Centre là Centre của người dùng, Class là All classes; danh sách chỉ gồm trẻ trong phạm vi dữ liệu của người dùng. |
+| FR-007 | "Print for the kitchen" in theo bộ lọc đang chọn: tiêu đề "Allergies — {phạm vi}" (tên Centre, tên lớp hoặc "All my centres"), số trẻ, ngày in (ví dụ "Printed 24/11/2026"); cột Child, Class, Allergies (nội dung From the family); chỉ in trẻ có Type Food, Environmental, Medication, Insect; không có ảnh trẻ, không có chân trang. |
+| FR-008 | "Export (n)" xuất danh sách theo bộ lọc đang chọn ra Excel; n là số trẻ đang hiển thị. Hệ thống không lưu nhật ký in / xuất. |
 | FR-009 | Chọn tên trẻ mở tab Health trong hồ sơ trẻ. |
 | FR-010 | Danh sách chỉ gồm trẻ đang đi học; trẻ đang tạm nghỉ, đã thôi học hoặc đã tốt nghiệp không có trong danh sách. |
 | FR-011 | Trẻ mà phụ huynh chưa ký đồng ý cho hiện tên và ảnh trên danh sách y tế (Medical Care Assessment Checklist) không có trong danh sách và bản in. |
-| FR-012 | Trẻ chưa khai Health record ("chưa cung cấp") được phân biệt với trẻ đã khai không có dị ứng: cuối danh sách có nhóm "Health information not provided" để Centre liên hệ phụ huynh. Trẻ chưa sinh không nằm trong nhóm này (Q-70-09). Mỗi dòng có "Contact the family". |
-| FR-013 | Cột "Next review" hiện Date of Next Review của lần đánh giá gần nhất (mỗi 6 tháng — Appendix 3); từ 1 tháng trước ngày đó hiện "Due in …" (lúc hệ thống nhắc và gửi form đánh giá lại cho phụ huynh — BBA-1058 Q1); qua ngày đó chưa đánh giá hiện "Overdue". |
-| FR-014 | Khi phụ huynh sửa thông tin sức khoẻ trong Parents App, danh sách và bản in giữ thông tin đã được xác nhận gần nhất và gắn nhãn "Awaiting assessment" cho tới khi CD / Admin hoàn tất đánh giá (BBA-1058 Q1). |
+| FR-012 | Trẻ chưa khai Medical Care Assessment được phân biệt với trẻ đã khai không có dị ứng: dòng của trẻ luôn ở cuối danh sách, ô From the family và Note from staff gộp lại hiện câu thông báo và "Contact the family"; dòng ẩn khi lớp đang lọc không có trẻ nào chưa khai. Trẻ chưa sinh không nằm trong nhóm này (Q-70-09). |
+| FR-014 | Khi phụ huynh sửa thông tin sức khoẻ trong Parents App, danh sách và bản in giữ thông tin đã được xác nhận gần nhất; cột Updated by the family hiện nhãn "Awaiting assessment" cho tới khi CD / Admin hoàn tất đánh giá (BBA-1058 Q1). |
+| FR-015 | Cột Vaccination hiện tình trạng tiêm chủng của trẻ: Up to date (nhãn viền liền), Not up to date hoặc Not provided (nhãn viền đứt) (wireframe 15/11/2026; nguồn dữ liệu chờ OQ-10). |
 
 #### Functional Flow - Main (Luồng chính)
 
 1. Giáo viên mở Children & families › Health & allergies; danh sách mặc định lọc theo lớp của mình (FR-005).
-2. Hệ thống hiển thị trẻ có dị ứng, trẻ nặng nhất lên đầu (FR-001, FR-002), và phần "Other conditions and diet" (FR-003).
+2. Hệ thống hiển thị trẻ có thông tin sức khoẻ, trẻ dị ứng nặng nhất lên đầu, trẻ chưa khai ở cuối (FR-001, FR-002, FR-012).
 3. Giáo viên chọn "Print for the kitchen" và đưa bản in cho bếp (FR-007).
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Centre Director lọc toàn Centre theo mức Severe để rà soát (FR-004).
+1. Centre Director lọc toàn Centre theo Type hoặc Vaccination để rà soát (FR-004, FR-015).
 2. Centre Director, School Admin hoặc giáo viên xuất danh sách ra Excel (FR-008).
 3. Người dùng chọn tên trẻ để xem đủ Health record (FR-009).
 
@@ -104,7 +104,6 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 | BR-003 | Bản in luôn ghi ngày giờ in, để bếp biết bản nào là bản mới nhất. |
 | BR-004 | Người dùng có quyền xem chi tiết y tế (Authorised User) được xem, in và xuất danh sách; không lưu nhật ký in / xuất (BBA-1058 Q2). |
 | BR-005 | Một trẻ không bị giới hạn số dị ứng hoặc bệnh (Q-70-02). |
-| BR-006 | Mỗi Medical Care Assessment được đánh giá lại tối đa 6 tháng một lần, hoặc sớm hơn khi có thay đổi / sự cố (Appendix 3). |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
@@ -161,29 +160,28 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 
 | ID | Yêu cầu |
 |---|---|
-| DATA-001 | Danh sách đọc từ Medical Care Assessment đã xác nhận: loại, chất gây dị ứng, mức độ, triệu chứng, điều kiện dung nạp, traces of eggs / nuts, menu modifications, các bước xử trí, thuốc dùng ngay, Medication Held On Site Form, bệnh và tiền sử, đồng ý hiện tên và ảnh, người xác nhận và ngày; "Note from staff". |
-| DATA-003 | Mỗi lần đánh giá lại lưu: số thứ tự, Date of Review, Date of Next Review, còn phù hợp không, có thay đổi không, thuốc còn hạn tới lần đánh giá sau không, người đánh giá, xác nhận của phụ huynh (Appendix 3). |
+| DATA-001 | Danh sách đọc từ Medical Care Assessment đã xác nhận: loại (Type), nội dung phụ huynh khai (From the family), mức độ dị ứng (để sắp xếp), đồng ý hiện tên và ảnh, ngày phụ huynh cập nhật, trạng thái chờ đánh giá; "Note from staff"; tình trạng tiêm chủng. |
 
 #### Acceptance Criteria (Tiêu chí nghiệm thu)
 
 | AC ID | Given | When | Then | Linked Rule |
 |---|---|---|---|---|
-| AC-001 | lớp Sunbeams có Ethan (hải sản và hạt, Severe) và một trẻ dị ứng trứng mức Mild | giáo viên lớp Sunbeams mở danh sách | Ethan ở dòng đầu, trẻ dị ứng trứng ở dưới; mỗi chất gây dị ứng ghi kèm mức độ | FR-001; FR-002; BR-002 |
-| AC-002 | một trẻ dị ứng trứng chưa chọn mức độ | danh sách hiển thị | trẻ nằm trong nhóm Severe và ghi "Severity not set" | FR-002; BR-002 |
-| AC-003 | Rayyan chỉ có hen suyễn, không có dị ứng | danh sách hiển thị | Rayyan nằm ở phần "Other conditions and diet" | FR-003 |
-| AC-005 | giáo viên đang lọc lớp Sunbeams | giáo viên chọn "Print for the kitchen" | bản in chỉ có trẻ lớp Sunbeams, đầu trang ghi Centre, lớp, ngày giờ in và số trẻ | FR-007; BR-003 |
+| AC-001 | lớp Sunbeams có Ethan (hải sản và hạt, Severe) và một trẻ dị ứng trứng mức Mild | giáo viên mở danh sách và lọc lớp Sunbeams | Ethan ở dòng trên, trẻ dị ứng trứng ở dưới; mỗi dòng có Child, Class, Type, From the family, Note from staff, Vaccination, Updated by the family | FR-001; FR-002; BR-002 |
+| AC-002 | một trẻ dị ứng trứng chưa chọn mức độ | danh sách hiển thị | trẻ được xếp cùng nhóm Severe | FR-002; BR-002 |
+| AC-003 | Rayyan chỉ có hen suyễn, không có dị ứng | danh sách hiển thị | Rayyan nằm chung bảng, Type "Medical condition", xếp dưới các trẻ có dị ứng | FR-002; FR-003 |
+| AC-005 | giáo viên đang lọc lớp Sunbeams | giáo viên chọn "Print for the kitchen" | bản in có tiêu đề "Allergies — N2 · Sunbeams", số trẻ, ngày in; cột Child, Class, Allergies; không có trẻ chỉ có Medical condition / Medical history | FR-007; BR-003 |
 | AC-006 | giáo viên lọc lớp Sunbeams | giáo viên chọn Export | file Excel có đúng các trẻ đang hiện; không có bản ghi nhật ký xuất | FR-008; BR-004 |
-| AC-007 | giáo viên lớp Sunbeams | giáo viên mở danh sách | bộ lọc lớp mặc định là Sunbeams | FR-005 |
+| AC-007 | Centre Director của Small Wonder Tampines | mở danh sách | bộ lọc Centre là Small Wonder Tampines, Class là All classes | FR-005 |
 | AC-008 | một trẻ dị ứng đang tạm nghỉ | Centre Director mở danh sách toàn Centre | trẻ đó không có trong danh sách | FR-010 |
 | AC-009 | HQ Finance không được xem chi tiết y tế | HQ Finance mở đường dẫn danh sách | hiện "You do not have access to medical details." | VAL-002; BR-004 |
 | AC-010 | lớp không có trẻ dị ứng | giáo viên mở danh sách | hiện "No children with allergies match these filters."; nút in và xuất file bị mờ | VAL-001 |
 | AC-011 | đang xem danh sách | giáo viên chọn tên Ethan | mở tab Health trong hồ sơ Ethan | FR-009; BR-001 |
 | AC-012 | phụ huynh của Caleb chưa ký đồng ý cho hiện trên danh sách y tế | giáo viên mở danh sách và in cho bếp | Caleb không có trong danh sách và bản in | FR-011 |
-| AC-013 | phụ huynh của Mia chưa khai Health record | Centre Director mở danh sách toàn Centre | Mia ở nhóm "Health information not provided", không nằm trong nhóm dị ứng | FR-012 |
-| AC-014 | lần đánh giá gần nhất của Sophia có Date of Next Review 16/12/2026; hôm nay 24/11/2026 | Centre Director mở danh sách | Next review của Sophia ghi "16/12/2026 · Due in 3 weeks" | FR-013; BR-006 |
-| AC-015 | Next review của Lucas là 02/11/2026, chưa đánh giá lại | Centre Director lọc Review: Overdue | Lucas có trong kết quả, nhãn "Overdue" | FR-004; FR-013 |
-| AC-016 | mẹ của Ethan sửa triệu chứng trong Parents App, CD chưa đánh giá | giáo viên mở danh sách | dòng Ethan vẫn hiện triệu chứng đã xác nhận, có nhãn "Awaiting assessment" | FR-014 |
-| AC-017 | Lucas khai 5 chất gây dị ứng | danh sách hiển thị | dòng của Lucas liệt kê đủ 5 chất, mỗi chất kèm mức độ | BR-005; AS-02 |
+| AC-013 | phụ huynh của Mia chưa khai Medical Care Assessment | Centre Director mở danh sách toàn Centre | dòng của Mia ở cuối danh sách, có câu thông báo và "Contact the family" | FR-012 |
+| AC-016 | mẹ của Ethan sửa triệu chứng trong Parents App, CD chưa đánh giá | giáo viên mở danh sách | dòng Ethan vẫn hiện nội dung đã xác nhận ở From the family; cột Updated by the family có nhãn "Awaiting assessment" | FR-014 |
+| AC-017 | Lucas khai 5 chất gây dị ứng | danh sách hiển thị | ô From the family của Lucas hiện đủ 5 chất như phụ huynh khai | BR-005; FR-001 |
+| AC-018 | Lucas có tình trạng tiêm chủng "Not up to date" | Centre Director lọc Vaccination: Not up to date | Lucas có trong kết quả, nhãn viền đứt "Not up to date" | FR-004; FR-015 |
+| AC-019 | mẹ của Ethan cập nhật thông tin ngày 23/11/2026 | Centre Director lọc Updated: tuần này | Ethan có trong kết quả, cột Updated by the family ghi "23/11/2026 18:42" | FR-004; FR-001 |
 
 #### Dependencies (Phụ thuộc)
 
@@ -196,12 +194,13 @@ Medical Care Assessment (phụ huynh khai trong Parents App, Centre Director / A
 | OQ-01 | Phản ứng, cách xử trí và nơi để thuốc khẩn cấp có thành trường riêng không? | Centre Director / HQ Ops | Cao | Form Medical Care Assessment Checklist có trường riêng Symptoms, Steps to follow, Medication for immediate administration → đã tách cột. Nơi để thuốc chuyển sang OQ-02. |
 | OQ-02 | Nơi để thuốc khẩn cấp có cần ghi không, ai ghi? Form chỉ có "Medication Held On Site Form Has Been Completed? Yes / Not Applicable". | Centre Director / HQ Ops | Cao |  |
 | OQ-03 | Bếp dùng bản in hay có tài khoản xem trên máy; được xem dữ liệu nhận dạng nào? | Centre Director / HQ Ops | Trung bình |  |
-| OQ-04 | Bản in cho bếp dùng các cột Photo, Child, Type · allergen · severity, Can tolerate, Traces of eggs / nuts, Emergency action plan; có cần thêm Menu modifications không? | Centre Director / HQ Ops | Thấp |  |
+| OQ-04 | Bản in cho bếp chỉ có cột Child, Class, Allergies (theo wireframe); có cần thêm Can tolerate, traces of eggs / nuts, Menu modifications không? | Centre Director / HQ Ops | Thấp |  |
 | OQ-05 | "Chưa ký đồng ý thì không hiện" áp cho toàn bộ thông tin sức khoẻ (giáo viên cũng không thấy) hay chỉ tên / ảnh trên danh sách và bản in? Ẩn toàn bộ có rủi ro an toàn. | Centre Director / HQ Ops | Cao |  |
 | OQ-06 | Thang mức độ có cần cấu hình theo brand / Centre ngay Phase 1 không? | HQ Ops | Trung bình |  |
-| OQ-07 | Medical condition, medical history nằm chung danh sách dị ứng hay nhóm riêng? Form vừa có "Medical Condition" trong Type of Allergies, vừa có mục "Medical Conditions & History" riêng. FRD đang để nhóm riêng. | Centre Director / HQ Ops | Trung bình |  |
+| OQ-07 | Medical condition, medical history nằm chung danh sách dị ứng hay nhóm riêng? Form vừa có "Medical Condition" trong Type of Allergies, vừa có mục "Medical Conditions & History" riêng. FRD đang để chung bảng, phân biệt bằng cột Type. | Centre Director / HQ Ops | Trung bình |  |
 | OQ-08 | Can tolerate, traces of eggs / nuts, menu modifications do phụ huynh khai trong Parents App hay Centre ghi khi đánh giá ("Menu reviewed with parents")? | Centre Director / HQ Ops | Trung bình |  |
 | OQ-09 | Tên màn hình dùng "Allergies & conditions" hay theo form "Medical Health Alert List"? | HQ Ops | Thấp |  |
+| OQ-10 | Tình trạng tiêm chủng (Vaccination) lấy từ đâu (vaccination record phụ huynh khai trong Parents App?), các giá trị Up to date / Not up to date / Not provided do ai xác định? | Centre Director / HQ Ops | Trung bình |  |
 
 ## 8. Phụ lục
 
@@ -212,10 +211,10 @@ Medical Care Assessment (phụ huynh khai trong Parents App, Centre Director / A
 | Medical Care Assessment | Form thông tin sức khoẻ của trẻ (Medical Care Assessment Checklist): loại dị ứng, chất gây dị ứng, mức độ, triệu chứng, điều kiện dung nạp, yêu cầu chăm sóc hằng ngày, kế hoạch xử trí, thuốc, bác sĩ, đồng ý của phụ huynh. Phụ huynh khai, Centre Director hoặc Senior Staff kiểm tra và xác nhận. |
 | Medical Health Alert List | Tên danh sách y tế trên form của BBA ("Medical Overview / Medical Health Alert List"); trong hệ thống là màn Allergies & conditions. |
 | Mức độ dị ứng | Mild (nhẹ), Moderate (vừa), Severe (nặng — tương ứng "Life Threatening" trên form của BBA). |
-| Next review | Ngày đánh giá lại Medical Care Assessment (Date of Next Review), tối đa 6 tháng sau lần đánh giá gần nhất. |
 | Can tolerate | Điều kiện trẻ vẫn dùng được chất gây dị ứng (ví dụ ăn được bánh nướng có trứng nhưng không ăn trứng luộc). |
 | EpiPen | Bút tiêm adrenaline dùng khi trẻ bị sốc phản vệ. |
 | Ghi chú của nhân viên | Ghi chú do nhân viên Centre thêm ở tab Health, tách khỏi thông tin phụ huynh khai. |
+| Vaccination | Tình trạng tiêm chủng của trẻ: Up to date, Not up to date, Not provided. |
 
 ## 9. Tài liệu tham khảo
 
@@ -232,7 +231,8 @@ Số trang của SRS tính theo bản Word gốc khi xuất PDF. Form của BBA 
 | 7 | BBA-SMS-SRS-Teacher-App-v0.1 | §5 Business rules (BR-TCH-015) | 12 | FR-003 — nhóm riêng cho trẻ có bệnh không kèm dị ứng. |
 | 8 | BBA — Appendix 1 Medical Care Assessment Checklist (đính kèm Plane BBA-1058) | Child's details; Medical conditions & history; Allergies & food tolerances; Daily care requirements for allergies; Emergency action plan | 1–2 | FR-001, FR-003, FR-004, FR-007, DATA-001 — các cột của danh sách và bản in. |
 | 9 | BBA — Appendix 1 Medical Care Assessment Checklist (đính kèm Plane BBA-1058) | Parent's acknowledgement; For Centre's use; Note for Centre | 3 | FR-011, BR-001 — đồng ý hiện tên và ảnh, Centre Director / Senior Staff xác nhận, tên "Medical Health Alert List". |
-| 10 | BBA — Appendix 3 Medical Care Assessment Review Record 2025 (SOP14, đính kèm Plane BBA-1058) | Review sheet (Date of Review, Date of Next Review) | 1 | FR-013, BR-006, DATA-003 — đánh giá lại 6 tháng. |
-| 11 | Plane — BBA-1058 "BBA input: Health changes in the system, 6-monthly review, printing the allergy list" | Q1 (áp dụng sau đánh giá, nhắc trước 1 tháng); Q2 (vai trò in / xuất, không lưu nhật ký, trẻ chưa đồng ý không hiện) | — | FR-008, FR-011, FR-013, FR-014, BR-004. |
+| 10 | BBA — Appendix 3 Medical Care Assessment Review Record 2025 (SOP14, đính kèm Plane BBA-1058) | Review sheet (Date of Review, Date of Next Review) | 1 | Tham khảo — đánh giá lại 6 tháng thuộc BBA-68; cột Next review đã bỏ khỏi danh sách theo wireframe 15/11/2026. |
+| 11 | Plane — BBA-1058 "BBA input: Health changes in the system, 6-monthly review, printing the allergy list" | Q1 (áp dụng sau đánh giá, nhắc trước 1 tháng); Q2 (vai trò in / xuất, không lưu nhật ký, trẻ chưa đồng ý không hiện) | — | FR-008, FR-011, FR-014, BR-004. |
 | 12 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Đã chốt: Q-70-02, Q-70-03, Q-70-09, Q-70-10 · DOTB quyết định: Q-70-01, Q-70-04, Q-70-11 · Chưa phản hồi: Q-70-05, Q-70-06, Q-70-07, Q-70-12 | — | BR-005, FR-002, FR-012, BR-001; AS-02, AS-04, FR-008; OQ-01, OQ-02, OQ-03, OQ-07. |
 | 13 | Plane — dự án BBA Phase 1, ticket BBA-69 (WBS 3.1.3.02) | Allergies list (most severe first) | — | Phạm vi tính năng. |
+| 14 | Wireframe BBA-69 do DOTB cập nhật (15/11/2026), theo prototype BeeHive (emsv3) | Allergies & conditions; Print for the kitchen | — | FR-001 đến FR-005, FR-007, FR-008, FR-012, FR-014, FR-015; UI Components. |

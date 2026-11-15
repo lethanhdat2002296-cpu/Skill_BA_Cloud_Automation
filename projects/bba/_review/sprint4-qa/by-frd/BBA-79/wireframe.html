@@ -558,7 +558,7 @@ function attendance(o) {
       `<span class="tag${a[4] === "Present" ? " solid" : ""}">${a[4]}</span>`,
       `${a[5]}${a[10] === "late" ? ` <span class="tag dash">Late (staff only)</span>${A(2)}` : ""}<small>out ${a[6]}</small>`,
       `<small style="margin:0">Dropped off by</small>${a[7]}${a[0] === "NT" ? A(1) : ""}<small>Picked up by</small>${a[8]}`,
-      temps + ' <span class="lnk" style="font-size:12px">Add reading</span>',
+      temps,
       '<span class="btn sm">Sign out</span> <span class="act">⋯</span>'], a[3]);
   });
   if (o.bus) return head("Class attendance", "Bus 2 · Tampines North — children on this bus. Each child is signed in on their own, with a photo.", '<span class="btn">⤓ Export</span>')
