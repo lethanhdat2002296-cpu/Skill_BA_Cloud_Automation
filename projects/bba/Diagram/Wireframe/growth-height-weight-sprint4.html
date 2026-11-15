@@ -261,6 +261,13 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
 .radio div.off { color: var(--muted); border-style: dashed; }
 .radio i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--muted); flex: none; }
 .radio div.on i { border: 4px solid var(--ink); }
+.fields { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px 16px; display: flex; flex-direction: column; gap: 8px; }
+.fields:empty { display: none; }
+.fields h3 { font-size: 15px; }
+.fields > p { margin: 0; color: var(--muted); font-size: 12.5px; }
+.fields table.t th, .fields table.t td { vertical-align: top; }
+.fields td.f { font-weight: 600; white-space: nowrap; }
+.fields td.k { color: var(--muted); font-size: 12.5px; }
 .mini-av { width: 26px; height: 26px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 700; color: var(--muted); vertical-align: middle; margin-right: 8px; flex: none; }
 .cellwho { display: flex; align-items: center; }
 </style>
@@ -278,6 +285,7 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
   </div>
   <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
   <ol class="notes" id="notes"></ol>
+  <section class="fields" id="fields"></section>
 </div>
 
 <script>
@@ -388,24 +396,23 @@ function kitchenPrint() {
 }
 
 /* ===================== BBA-70 Growth ===================== */
-const GR = [["Ethan Lim", "4y 9m", "107 cm · 17.6 kg", "14/08/2026", "108.5", "18.1"], ["Aiden Tan Wei Jie", "4y 10m", "93 cm · 13.5 kg", "14/08/2026", "", ""], ["Chloe Lim Xin Yi", "4y", "95 cm · 14.7 kg", "14/08/2026", "96.5", "15.0"], ["Noah Tan", "4y 10m", "—", "—", "", ""]];
+// name, age, recorded date this term, height, weight, [height, weight] typed in and saved in the "saved" state
+const GR = [["Ethan Lim", "4y 9m", "24/11/2026", "108.5", "18.1"], ["Aiden Tan Wei Jie", "4y 10m", "", "", "", ["94.0", "13.8"]], ["Chloe Lim Xin Yi", "4y", "24/11/2026", "96.5", "15.0"], ["Noah Tan", "4y 10m", "", "", "", ["110.0", "19.2"]]];
 function growthEntry(o) {
   o = o || {};
-  const inp = (v) => `<div class="input${v ? " filled" : ""}" style="width:110px">${v || ""}</div>`;
-  const rows = [tr(["<b>Present today</b> · 4", "", "", "", "", ""], "grp")]
-    .concat(GR.map(g => tr([g[0], g[1], g[2] + (g[3] !== "—" ? `<small>Term 3 · ${g[3]}</small>` : ""), inp(o.saved ? g[4] : g[4]), inp(o.saved ? g[5] : g[5]), o.saved && g[4] ? '<span class="tag">Saved</span> <span class="btn sm ghost">Delete</span>' : ""])))
-    .concat([tr([`<b>Absent today · Temporary withdrawal</b> · 2${A(2)}`, "", "", "", "", ""], "grp")])
-    .concat([tr(["Olivia Wong Mei Ling<small>Absent today</small>", "3y 11m", "98 cm · 14.1 kg", inp(""), inp(""), ""], "muted"), tr(["Sofia D'Cruz<small>Temporary withdrawal</small>", "4y 9m", "101 cm · 15.2 kg", inp(""), inp(""), ""], "muted")]);
-  return head("Height & weight", "Term 1 to Term 4 of the brand term calendar (Brighton measures by semester). Every age, no approval. Entries appear immediately for the family.", `<span class="btn primary">Save the whole class${A(1)}</span>`)
+  const inp = (v) => `<div class="input${v ? " filled" : ""}" style="width:110px">${v || "—"}</div>`;
+  const rec = (h, w) => h ? `<span class="badge" style="font-weight:500">${h} cm · ${w} kg</span>` : '<span class="badge out" style="font-weight:500;color:var(--ink)">Not recorded yet</span>';
+  const rows = GR.map(g => { const h = o.saved && g[5] ? g[5][0] : g[3], w = o.saved && g[5] ? g[5][1] : g[4]; return tr([g[0], g[1], rec(h, w), inp(h), inp(w)]); });
+  return head("Height & weight", "Four terms a year (Brighton: two semesters). Every age, no approval. Entries appear immediately for the family.", `<span class="btn primary">Save the whole class${A(1)}</span>`)
     + utabs([["Allergies & conditions", 5], ["Growth"]], 1)
     + '<div class="chips" style="margin-bottom:10px"><span class="on">Enter this term</span><span>Year view</span></div>'
     + `<div class="flt" style="grid-template-columns:repeat(4,minmax(0,1fr))">${sel("Small Wonder Tampines")}${sel("N2 · Sunbeams", 1)}${sel("Term 4 · 2026", 1)}${fl("Date measured", "24/11/2026").replace('class="field"', 'class="field" style="flex-direction:row;align-items:center;gap:8px"')}</div>`
-    + `<div class="alert"><b>Term 4 · 2026</b><span>${o.saved ? "4 of 6 recorded" : "2 of 6 recorded"} · reminder sent to the centre on 15/12/2026${A(3)}</span></div>`
-    + table(["Child", "Age", "!Last measurement", "!Height (cm)", "!Weight (kg)", "!"], rows)
+    + `<div class="alert"><b>Term 4 · 2026</b><span>${o.saved ? "4 of 4 recorded" : "2 of 4 recorded"} · reminder sent to the centre on 15/12/2026${A(2)}</span></div>`
+    + table(["!Child", "!Age", "!Already recorded this term" + A(3), "!Height (cm)", "!Weight (kg)"], rows)
     + (o.saved ? `<div class="toast">Saved 2 measurements · the family can see them now</div>` : "");
 }
 function growthDelete() {
-  return overlay("Delete this measurement?", `<p style="margin:0">Ethan Lim · Term 4 · 2026 · 108.5 cm · 18.1 kg, measured 24/11/2026.</p><p style="margin:0;color:var(--muted)">The family stops seeing it. The deletion is kept in History.${A(4)}</p>`, '<span class="btn">Cancel</span><span class="btn primary">Delete</span>', 460);
+  return overlay("Delete this measurement?", `<p style="margin:0">Ethan Lim · Term 4 · 2026 · 108.5 cm · 18.1 kg, measured 24/11/2026.</p><p style="margin:0;color:var(--muted)">The family stops seeing it. The deletion is kept in History.${A(6)}</p>`, '<span class="btn">Cancel</span><span class="btn primary">Delete</span>', 460);
 }
 const YR = [["Ethan Lim", "14/02/2022", "••••482K", "N2 full day", ["104.0", "16.9"], ["105.5", "17.2"], ["107.0", "17.6"], ["108.5", "18.1"]],
   ["Aiden Tan Wei Jie", "20/01/2022", "••••115J", "N2 full day", ["91.0", "13.0"], ["92.0", "13.2"], ["93.0", "13.5"], ["", ""]],
@@ -422,7 +429,7 @@ function growthYear() {
     + '<div class="chips" style="margin-bottom:10px"><span>Enter this term</span><span class="on">Year view</span></div>'
     + `<div class="flt" style="grid-template-columns:repeat(3,minmax(0,1fr))">${sel("Small Wonder Tampines")}${sel("N2 · Sunbeams", 1)}${sel("Year 2026", 1)}</div>`
     + `<style>.yr th,.yr td{padding:8px 6px;font-size:12px}.yr td:nth-child(2){white-space:nowrap}</style><div class="card" style="overflow:auto"><table class="t yr"><thead>${th}</thead><tbody>${rows}</tbody></table></div>`
-    + `<div class="alert"><span>Every brand, Brighton included, has Term 1 to Term 4. Brighton measures by semester, so two of its four terms stay empty.${A(3)}</span></div>`;
+    + `<div class="alert"><span>Brighton Montessori measures by semester; the Taidii export of a Brighton centre still shows Term 1 to Term 4 columns.${A(3)}</span></div>`;
 }
 function growthChart() {
   const X = (m) => 40 + (m - 24) * 7.5, Y = (cm) => 230 - (cm - 80) * 4;   // 24–72 months, 80–130 cm
@@ -661,14 +668,15 @@ let SCREENS = [
   S("b70-1", "BBA-70 · 1", "Height & weight — class entry", "Nhập cả lớp theo kỳ — BBA-529, BBA-1059",
     [["default", "Nhập", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry(), W.t)],
      ["saved", "Đã lưu", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry({ saved: 1 }), W.t)],
-     ["delete", "Xoá số đo", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry({ saved: 1 }) + growthDelete(), W.t)],
      ["year", "Xem cả năm · Export", () => shell("health", "Health & allergies › <b>Growth</b>", growthYear(), W.t)]],
-    { default: [["Lưu một lần cả lớp; lưu lại trong cùng kỳ thì ghi đè, số cũ giữ trong lịch sử; phụ huynh thấy ngay. Không có BMI.", "BR-CHF-026 · Plane BBA-1059 Q4"], ["Trẻ vắng và tạm nghỉ vẫn có trong danh sách, tách nhóm riêng.", "Plane BBA-1059 Q2"], ["Term 1–4 theo lịch term của brand do HQ đặt, mọi brand kể cả Brighton (Brighton đo theo học kỳ); nhắc giữa tháng cuối mỗi term cho mọi brand.", "Q-71-03 · Plane BBA-489 Centre Terms Setup · BBA-529 · FR-001 · FR-011 · OQ-08"]],
-      saved: [], delete: [[], [], [], ["Một quyền chung thêm / sửa / xoá; hiện giao CD, Admin, mọi Teacher (Taidii: \"Update Height and Weight\" cho CD/ACD/Admin và Teachers).", "Plane BBA-1059 Q3 · Taidii Center Staff Role permissions, dòng 14"]],
-      year: [["Bảng cả năm và file Excel theo đúng bố cục \"Quarterly Heights & Weight Report\" của Taidii: No., Name, Birthdate, IC/BC No., Program Type, Term 1–4 mỗi kỳ Height cm / Weight kg; đầu file ghi Centre, Class, Year, Generated on.", "Plane BBA-529 — file mẫu Student_quarterly_height_weight_2026-sample.xlsx · FR-013"], ["Số giấy tờ che theo vai trò như hồ sơ trẻ.", "BBA-66"], ["Brighton cũng có Term 1–4 (Centre Terms Setup, file export Taidii); Brighton đo ở term nào → OQ-08.", "Plane BBA-489 · BBA-529 · OQ-08"]] }),
+    { default: [["Lưu một lần cả lớp; lưu lại trong cùng kỳ thì ghi đè, số cũ giữ trong lịch sử; phụ huynh thấy ngay. Không có BMI.", "BR-CHF-026 · Plane BBA-1059 Q4"], ["4 kỳ / năm do HQ đặt theo brand (Brighton 2 học kỳ); nhắc giữa tháng cuối mỗi term cho mọi brand.", "Plane BBA-529 · Q-71-03 · FR-001 · FR-011 · OQ-08"], ["Đã đo trong kỳ → hiện số đã lưu \"107 cm · 17.6 kg\" và ô Height / Weight điền sẵn số đó; sửa rồi lưu lại là ghi đè. Chưa đo → \"Not recorded yet\", ô trống hiện \"—\". Màn này không có nút xoá — xoá từng số đo ở hồ sơ trẻ (BBA-70 · 3).", "BR-CHF-026"]],
+      saved: [],
+      year: [["Bảng cả năm và file Excel theo đúng bố cục \"Quarterly Heights & Weight Report\" của Taidii: No., Name, Birthdate, IC/BC No., Program Type, Term 1–4 mỗi kỳ Height cm / Weight kg; đầu file ghi Centre, Class, Year, Generated on.", "Plane BBA-529 — file mẫu Student_quarterly_height_weight_2026-sample.xlsx · FR-013"], ["Số giấy tờ che theo vai trò như hồ sơ trẻ.", "BBA-66"], ["File mẫu của Brighton (đo theo học kỳ) vẫn có cột Term 1–4 → hỏi lại cách hiện Brighton.", "Plane BBA-529 · OQ-08"]] }),
   S("b70-3", "BBA-70 · 3", "Child record — Growth", "Biểu đồ và Measurement history trên hồ sơ trẻ — BBA-1059 Q1, Q4",
-    [["default", "Tab Health · Growth", () => shell("children", "All children › <b>Ethan Lim</b>", growthChild(), W.cd, childTabs(6))]],
-    { default: [["Phụ huynh thấy ngay khi lưu.", "Plane BBA-1059 Q4 · FR-008"], ["Nhập riêng một trẻ từ hồ sơ.", "FR-007"], ["Biểu đồ theo tuổi: Singapore theo nghiên cứu nhân trắc của NHG Polyclinics, Malaysia theo Child Health Record Book; Taidii hiện vẽ theo WHO với 3 đường 3rd / 50th / 97th. Đường cong trên wireframe chỉ minh hoạ. Có hiện đường percentile hay không còn chờ OQ-07 (Q-71-02 bỏ percentile).", "Plane BBA-1059 Q1 · ảnh Taidii Parents App · OQ-07"], ["Thay đổi so với kỳ trước.", "Q-71-11 · FR-012"], ["Mọi lần đo theo ngày đo, người nhập.", "Q-71-07 · Q-71-08 · FR-012"]] }),
+    [["default", "Tab Health · Growth", () => shell("children", "All children › <b>Ethan Lim</b>", growthChild(), W.cd, childTabs(6))],
+     ["delete", "Xoá số đo", () => shell("children", "All children › <b>Ethan Lim</b>", growthChild() + growthDelete(), W.cd, childTabs(6))]],
+    { default: [["Phụ huynh thấy ngay khi lưu.", "Plane BBA-1059 Q4 · FR-008"], ["Nhập riêng một trẻ từ hồ sơ.", "FR-007"], ["Biểu đồ theo tuổi: Singapore theo nghiên cứu nhân trắc của NHG Polyclinics, Malaysia theo Child Health Record Book; Taidii hiện vẽ theo WHO với 3 đường 3rd / 50th / 97th. Đường cong trên wireframe chỉ minh hoạ. Có hiện đường percentile hay không còn chờ OQ-07 (Q-71-02 bỏ percentile).", "Plane BBA-1059 Q1 · ảnh Taidii Parents App · OQ-07"], ["Thay đổi so với kỳ trước.", "Q-71-11 · FR-012"], ["Mọi lần đo theo ngày đo, người nhập.", "Q-71-07 · Q-71-08 · FR-012"]],
+      delete: [[], [], [], [], [], ["Một quyền chung thêm / sửa / xoá; hiện giao CD, Admin, mọi Teacher (Taidii: \"Update Height and Weight\" cho CD/ACD/Admin và Teachers).", "Plane BBA-1059 Q3 · Taidii Center Staff Role permissions, dòng 14"]] }),
   S("b70-2", "BBA-70 · 2", "Height & weight completion (HQ)", "Báo cáo hoàn thành — BBA-1059 Q5",
     [["default", "Báo cáo", () => shell("health", "Reports › <b>Height & weight completion</b>", growthReport(), W.ch)]],
     { default: [["Chỉ trạng thái hoàn thành theo Centre, lớp, kỳ; người dùng ban đầu: CD, Admin, Cluster Head.", "Plane BBA-1059 Q5 · FR-009"]] }),
@@ -727,6 +735,100 @@ let SCREENS = [
     { default: [["Chụp ảnh bắt buộc khi chấm công.", "Plane BBA-528"], ["Đã chấm vào thì thấy Clock out.", "SRS ATT"], ["HQ staff và khách chấm như khách, ghi mục đích.", "Plane BBA-528 · AS-06 · OQ-20"]], fever: [] })
 ];
 
+/* ===================== Mô tả trường thông tin (cho Design) =====================
+   ["#Vùng"] = dòng nhóm · [Field trên màn hình, Ý nghĩa, Kiểu / định dạng / ghi chú] */
+const FIELDS = {
+  "b70-1": {
+    default: [
+      ["#Đầu trang"],
+      ["Height & weight", "Tiêu đề màn hình nhập chiều cao, cân nặng theo lớp.", "Text"],
+      ["Save the whole class", "Lưu một lần số đo của tất cả trẻ đã nhập trong lớp. Phụ huynh thấy ngay sau khi lưu.", "Nút chính (primary). Chỉ bật khi có ít nhất 1 ô được nhập / sửa"],
+      ["Allergies & conditions · Growth", "Tab trong mục Health & allergies. Màn này là tab Growth.", "Tab gạch chân"],
+      ["Enter this term · Year view", "Chuyển giữa chế độ nhập số đo kỳ hiện tại và bảng xem cả năm.", "Chip chọn 1"],
+      ["#Bộ lọc"],
+      ["Centre", "Trung tâm. Mặc định Centre của người dùng; người quản lý nhiều Centre mới đổi được.", "Dropdown"],
+      ["Class", "Lớp cần nhập số đo. Đổi lớp thì danh sách trẻ bên dưới đổi theo.", "Dropdown · bắt buộc"],
+      ["Term", "Kỳ đo trong năm: Term 1–4 (Brighton: Semester 1–2). Mặc định kỳ hiện tại.", "Dropdown · bắt buộc · \"Term 4 · 2026\""],
+      ["Date measured", "Ngày đo, áp cho tất cả trẻ được lưu lần này. Mặc định hôm nay.", "Date picker · DD/MM/YYYY · bắt buộc"],
+      ["#Thanh tiến độ"],
+      ["Term 4 · 2026 — x of y recorded", "Số trẻ đã có số đo trong kỳ / tổng số trẻ của lớp.", "Text · cập nhật sau mỗi lần lưu"],
+      ["Reminder sent to the centre on …", "Ngày hệ thống gửi nhắc Centre nhập số đo (giữa tháng cuối của kỳ). Ẩn nếu chưa gửi.", "Text · DD/MM/YYYY"],
+      ["#Bảng danh sách trẻ"],
+      ["Child", "Thông tin trẻ: họ tên đầy đủ của trẻ.", "Text · không sửa được"],
+      ["Age", "Tuổi của trẻ tính tại ngày đo.", "Text · \"4y 9m\" (năm, tháng) · không sửa được"],
+      ["Already recorded this term", "Số đo đã lưu của trẻ trong kỳ đang chọn. Đã đo: hiện chiều cao · cân nặng đã lưu. Chưa đo: hiện \"Not recorded yet\". Sửa số ở ô bên cạnh rồi lưu là ghi đè (số cũ giữ trong lịch sử).", "Tag nền xám \"107 cm · 17.6 kg\" · Tag viền \"Not recorded yet\" · không sửa được"],
+      ["Height (cm)", "Chiều cao của trẻ, đơn vị cm. Trẻ đã đo trong kỳ thì điền sẵn số đã lưu.", "Ô nhập số · 1 chữ số thập phân · trống hiện placeholder \"—\" · để trống = không lưu cho trẻ này · khoảng giá trị hợp lệ chưa chốt"],
+      ["Weight (kg)", "Cân nặng của trẻ, đơn vị kg. Trẻ đã đo trong kỳ thì điền sẵn số đã lưu.", "Ô nhập số · 1 chữ số thập phân · trống hiện placeholder \"—\" · để trống = không lưu cho trẻ này · khoảng giá trị hợp lệ chưa chốt"],
+      ["#Sau khi lưu"],
+      ["Saved n measurements · the family can see them now", "Thông báo lưu thành công, kèm số trẻ vừa được lưu.", "Toast · tự ẩn"]
+    ],
+    year: [
+      ["#Đầu trang"],
+      ["Height & weight", "Tiêu đề màn hình; dòng phụ nói rõ đây là bảng cả năm theo mẫu Quarterly Heights & Weight Report.", "Text"],
+      ["Export (Excel)", "Xuất bảng đang xem ra file Excel, đúng bố cục mẫu Taidii; đầu file ghi Centre, Class, Year, Generated on.", "Nút phụ"],
+      ["Enter this term · Year view", "Chuyển giữa chế độ nhập kỳ hiện tại và bảng xem cả năm (đang chọn Year view).", "Chip chọn 1"],
+      ["#Bộ lọc"],
+      ["Centre", "Trung tâm.", "Dropdown"],
+      ["Class", "Lớp cần xem.", "Dropdown · bắt buộc"],
+      ["Year", "Năm học cần xem.", "Dropdown · \"Year 2026\""],
+      ["#Bảng cả năm"],
+      ["No.", "Số thứ tự.", "Số"],
+      ["Child", "Thông tin trẻ: họ tên đầy đủ.", "Text"],
+      ["Birthdate", "Ngày sinh của trẻ.", "DD/MM/YYYY"],
+      ["IC / BC No.", "Số giấy tờ tuỳ thân / giấy khai sinh của trẻ; che bớt theo vai trò người xem.", "Text · \"••••482K\""],
+      ["Programme", "Chương trình học của trẻ (level + loại buổi).", "Text · \"N2 full day\""],
+      ["Term 1 – Term 4 · Height cm / Weight kg", "Chiều cao, cân nặng của từng kỳ; mỗi kỳ 2 cột con. Kỳ chưa đo hiện \"—\".", "Số 1 chữ số thập phân · tiêu đề 2 tầng"],
+      ["#Ghi chú cuối"],
+      ["Thông báo Brighton", "Giải thích Brighton đo theo học kỳ nhưng file xuất vẫn có cột Term 1–4.", "Alert · chỉ hiện khi Centre thuộc Brighton (chờ OQ-08)"]
+    ]
+  },
+  "b70-3": {
+    default: [
+      ["#Đầu hồ sơ trẻ"],
+      ["Header hồ sơ trẻ", "Ảnh, tên, mã trẻ, trạng thái, Centre / lớp, cảnh báo y tế — dùng chung toàn bộ hồ sơ trẻ.", "Component dùng chung"],
+      ["Allergies & conditions · Growth", "Mục con của tab Health; đang ở Growth.", "Chip chọn 1"],
+      ["+ Add measurement", "Nhập số đo riêng cho một trẻ (ngoài cách nhập cả lớp).", "Nút chính · mở form Term, Date measured, Height, Weight"],
+      ["#Biểu đồ"],
+      ["Height for age · Height / Weight", "Biểu đồ tăng trưởng theo tuổi; chip đổi giữa chiều cao và cân nặng.", "Biểu đồ đường · chip chọn 1"],
+      ["Ghi chú chuẩn tham chiếu", "Nguồn đường chuẩn: Singapore theo NHG Polyclinics, Malaysia theo Child Health Record Book. Không có BMI.", "Text phụ (muted)"],
+      ["#Bảng lịch sử đo"],
+      ["Term", "Kỳ đo.", "Text · \"Term 4 · 2026\""],
+      ["Date measured", "Ngày đo.", "DD/MM/YYYY"],
+      ["Height (cm)", "Chiều cao.", "Số 1 chữ số thập phân"],
+      ["Weight (kg)", "Cân nặng.", "Số 1 chữ số thập phân"],
+      ["Change since last term", "Chênh lệch so với kỳ trước. Lần đo đầu tiên hiện \"—\".", "Text · \"+1.5 cm · +0.5 kg\""],
+      ["Recorded by", "Người nhập, vai trò và nơi nhập (class entry = nhập cả lớp, child record = nhập trên hồ sơ trẻ).", "Text"],
+      ["Edit · Delete", "Sửa hoặc xoá một lần đo. Xoá mở hộp xác nhận.", "Link"],
+      ["Measurement history · n measurements", "Tổng số lần đo của trẻ.", "Text"]
+    ],
+    delete: [
+      ["#Hộp xác nhận xoá"],
+      ["Delete this measurement?", "Tiêu đề hộp xác nhận.", "Modal"],
+      ["Thông tin lần đo", "Tên trẻ · kỳ · chiều cao · cân nặng · ngày đo của số đo sắp xoá.", "Text"],
+      ["Mô tả hệ quả", "Phụ huynh không thấy số đo này nữa; lần xoá vẫn lưu trong History.", "Text phụ (muted)"],
+      ["Cancel · Delete", "Huỷ / xác nhận xoá.", "Nút phụ · nút chính"]
+    ]
+  },
+  "b70-2": {
+    default: [
+      ["#Đầu trang"],
+      ["Height & weight completion", "Báo cáo tỉ lệ trẻ đã được đo trong kỳ, theo Centre và lớp. Chỉ trạng thái hoàn thành, không có số liệu tăng trưởng.", "Text"],
+      ["Export (n)", "Xuất danh sách đang lọc; n là số dòng.", "Nút phụ"],
+      ["#Tìm kiếm & bộ lọc"],
+      ["Search centre or class", "Tìm theo tên Centre hoặc lớp.", "Ô tìm kiếm"],
+      ["Total", "Số dòng kết quả.", "Số"],
+      ["Centre", "Lọc theo Centre.", "Dropdown · mặc định All centres"],
+      ["Term", "Kỳ cần xem.", "Dropdown · mặc định kỳ hiện tại"],
+      ["#Bảng"],
+      ["Centre", "Tên trung tâm.", "Text"],
+      ["Class", "Tên lớp (level · tên lớp).", "Text"],
+      ["Children", "Tổng số trẻ của lớp.", "Số"],
+      ["Measured", "Số trẻ đã có số đo trong kỳ.", "Số"],
+      ["Completed", "Tỉ lệ Measured / Children.", "Phần trăm, làm tròn số nguyên"]
+    ]
+  }
+};
+
 const ONLY = {"b70-1": null, "b70-2": null, "b70-3": null};
 SCREENS = SCREENS.filter(s => s.id in ONLY).map(s => ONLY[s.id] ? Object.assign({}, s, { states: s.states.filter(x => ONLY[s.id].includes(x[0])) }) : s);
 let current = { screen: SCREENS[0].id, state: "default" };
@@ -741,6 +843,12 @@ function render() {
   $("frame").innerHTML = st[2]();
   const n = (s.notes[st[0]] && s.notes[st[0]].length ? s.notes[st[0]] : s.notes.default) || [];
   $("notes").innerHTML = n.map((x, i) => x.length ? `<li value="${i + 1}">${x[0]} <span class="src">${x[1]}</span></li>` : "").join("");
+  const fs = FIELDS[s.id] ? (FIELDS[s.id][st[0]] || FIELDS[s.id].default) : null;
+  let no = 0;
+  $("fields").innerHTML = fs ? `<h3>Mô tả trường thông tin trên màn hình</h3><p>Dành cho Design: tên field giữ đúng như trên màn hình (tiếng Anh), cột bên cạnh giải thích ý nghĩa và kiểu hiển thị.</p>
+    <div class="card" style="overflow:hidden"><table class="t"><thead><tr><th style="width:36px">#</th><th style="width:250px">Field trên màn hình</th><th>Ý nghĩa</th><th style="width:300px">Kiểu / định dạng / ghi chú</th></tr></thead><tbody>${fs.map(f => f[0].startsWith("#")
+      ? `<tr class="grp"><td colspan="4">${f[0].slice(1)}</td></tr>`
+      : `<tr><td class="k">${++no}</td><td class="f">${f[0]}</td><td>${f[1]}</td><td class="k">${f[2]}</td></tr>`).join("")}</tbody></table></div>` : "";
 }
 $("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
 function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : SCREENS[0].id, state: "default" }; render(); }

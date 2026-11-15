@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 15/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -149,14 +149,57 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Bảng Consents | Bảng ở tab Documents | Có | Mỗi consent một dòng | — | Cột: Consent, Event, Version, Status, Answer / last action, Closing date (FR-001). |
-| Remind | Nút | Theo quyền | Dòng Waiting on the parent | VAL-002. | FR-004. |
-| Send again | Nút | Theo quyền | Dòng Declined, Expired | VAL-001; VAL-002. | FR-008. |
-| History | Liên kết | — | — | — | FR-010. |
-| New consent | Form ở Surveys & consents | Theo quyền | — | VAL-004. | Loại, Event, nội dung, Closing date, Audience (lớp / cả Centre), "Also send by email" (tắt) (FR-003). |
-| Thẻ "x of y answered" | Thẻ trên danh sách consent | — | — | — | Bấm → chỉ trẻ chưa trả lời (FR-012). |
-| Publish new version | Hộp thoại | Theo quyền | "Ask families to agree again" | VAL-003. | FR-006. |
-| Consent compliance | Màn danh sách | — | Centre của người dùng | — | FR-011. |
+| **SCR-01 — Child record — Consents** | | | | | |
+| Phần đầu hồ sơ trẻ | Component dùng chung | — | — | — | Ảnh / chữ viết tắt, tên, mã trẻ, trạng thái, biểu tượng ⚠, Centre · Level · Class, Owner, thẻ Date of birth, Citizenship, Payment method, Medical alert, banner Severe allergy, nút Edit / Actions, thanh tab (chi tiết ở BBA-66, BBA-68). Consent nằm trong tab Documents. |
+| Consents | Tiêu đề khu vực | — | Chỉ xem | — | Danh sách câu trả lời consent của gia đình cho trẻ này. |
+| Open Surveys & consents | Nút | Theo quyền | — | — | Mở Communication › Surveys & consents — nơi tạo, nhắc, gửi lại consent. |
+| Consent | Cột | — | — | — | Loại consent theo danh mục Consent Types của BBA: Media release, Field trip / learning journey, Medical authorisation, Privacy policy… (FR-001). |
+| Event | Cột | — | "—" khi không theo sự kiện | — | Sự kiện gắn với consent, ví dụ Singapore Zoo. |
+| Status | Cột (nhãn) | — | — | — | Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired; nhãn đặc = Agreed, nét đứt = Waiting, viền thường = trạng thái khác (FR-002). |
+| Answer | Cột | — | "—" khi chưa trả lời | — | Người trả lời (tên · quan hệ); dòng phụ: ngày trả lời · kênh (Parents App / Registration form) (FR-005). |
+| Last action | Cột | — | — | — | Thao tác gần nhất: Sent / Reminded / Answered / New version published; dòng phụ: ngày và chi tiết (ngày gửi, số lần nhắc) (FR-004; FR-010). |
+| Closing date | Cột | — | "—" khi không có hạn | — | DD/MM/YYYY (FR-007). |
+| **SCR-02 — Surveys & consents — danh sách consent** | | | | | |
+| + New consent | Nút chính | Theo quyền | — | VAL-002. | Mở popup New consent (SCR-03). |
+| Surveys / Consents | Tab | — | Consents | — | Số trên tab là số consent đang mở. |
+| Thẻ "x of y families answered" | Thẻ số liệu, bấm được | — | — | — | Số gia đình đã trả lời / tổng số trẻ trong đối tượng; bấm thẻ → danh sách trẻ chưa trả lời (FR-012). |
+| Tìm kiếm, Total | Ô tìm kiếm, số | Không | Trống | — | Tìm theo tên consent / sự kiện; Total là số dòng sau lọc. |
+| Centre, Type, Class, Status, Closing date | Bộ lọc | Không | — | — | FR-012. |
+| Consent | Cột | — | — | — | Tên sự kiện / tiêu đề consent. |
+| Type | Cột | — | — | — | Loại consent. |
+| Audience | Cột | — | — | — | Danh sách lớp hoặc Whole centre (FR-003). |
+| Closing date | Cột | — | — | — | DD/MM/YYYY. |
+| Answered | Cột | — | — | — | "x of y". |
+| Breadcrumb (danh sách chưa trả lời) | Đường dẫn | — | — | — | Consent đang xem › Not answered (số trẻ). |
+| Child | Cột (danh sách chưa trả lời) | — | — | — | Tên trẻ chưa trả lời; bấm → mở hồ sơ trẻ. |
+| Class | Cột (danh sách chưa trả lời) | — | — | — | Lớp của trẻ. |
+| Last action | Cột (danh sách chưa trả lời) | — | — | — | Lần gửi / nhắc gần nhất và số lần đã nhắc. |
+| Remind | Nút nhỏ | Theo quyền | — | VAL-002. | Gửi nhắc lại cho gia đình trẻ này (FR-004). |
+| **SCR-03 — New consent** | | | | | |
+| Type | Danh sách chọn | Có | — | — | Danh mục Consent Types; Crossroad chỉ cho Centre Singapore không có sân ngoài trời (FR-014). |
+| Event | Ô nhập | Có | — | VAL-004. | Tên sự kiện gắn với consent. |
+| Content | Ô nhập nhiều dòng | Có | — | — | Nội dung gia đình đọc trước khi đồng ý. |
+| Closing date | Chọn ngày | Có | — | VAL-004. | Hạn trả lời. |
+| Audience | Radio | Có | — | — | Classes / Whole centre (FR-003). |
+| Classes | Chọn nhiều (chip) | Khi Audience = Classes | — | — | Chọn lớp nhận. |
+| Also send by email | Công tắc | Không | Tắt | — | Gửi thêm email; luôn tạo Announcement kèm link (BR-007). |
+| Thông báo dưới form | Thông báo | — | — | — | Gửi sẽ tạo Announcement; mỗi trẻ bắt đầu ở Waiting on the parent. |
+| Cancel / Send | Nút | — | — | VAL-001; VAL-004. | Huỷ hoặc gửi consent. |
+| **SCR-04 — Publish new version** | | | | | |
+| Summary of changes | Ô nhập nhiều dòng | Có | — | VAL-003. | Tóm tắt nội dung thay đổi của phiên bản mới (FR-006). |
+| Ask families to agree again | Radio | Có (chọn 1) | Chọn sẵn | — | Mọi trẻ quay về Not sent cho phiên bản mới (BR-002). |
+| Keep current answers | Radio | Có (chọn 1) | — | — | Sửa nhỏ câu chữ; câu trả lời cũ vẫn tính (BR-002). |
+| Cancel / Publish | Nút | — | — | VAL-003. | Huỷ hoặc phát hành phiên bản mới. |
+| **SCR-05 — Consent compliance** | | | | | |
+| Today by centre / Drills / Consent compliance | Tab | — | Consent compliance | — | Các tab của Safety overview; số trên tab = số trẻ còn thiếu consent. |
+| Export (n) | Nút | Theo quyền | n = số dòng | — | Xuất Excel danh sách đang lọc (FR-011). |
+| Tìm kiếm, Total | Ô tìm kiếm, số | Không | Trống | — | Tìm theo tên trẻ. |
+| Centre, Class, Consent, trạng thái trẻ, Status consent | Bộ lọc | Không | Trạng thái trẻ: Enrolled | — | FR-011. |
+| Child | Cột | — | — | — | Tên trẻ; bấm → mở hồ sơ trẻ. |
+| Class | Cột | — | — | — | Lớp của trẻ. |
+| Not sent | Cột | — | "—" khi không có | — | Các consent chưa gửi cho gia đình trẻ. |
+| Waiting on the parent | Cột | — | "—" khi không có | — | Các consent đã gửi, đang chờ trả lời. |
+| Declined or withdrawn | Cột | — | "—" khi không có | — | Các consent gia đình từ chối hoặc rút lại. |
 
 #### Data and Audit (Dữ liệu và audit)
 

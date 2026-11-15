@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 15/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -136,14 +136,47 @@ Là nhân viên ở cổng, khi nhận và trả trẻ tôi muốn chọn nhanh 
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Brought by | Lựa chọn | Có | Trống | VAL-001. | Phụ huynh, người được phép đón, "Someone else". |
-| Name, Relationship | Ô nhập | Khi chọn Someone else | Ẩn | VAL-001. | FR-001. |
-| Collected by | Lựa chọn có ảnh | Có | Trống | VAL-002. | Chỉ người đã duyệt; người chờ duyệt bị mờ; có "Not on the list" (FR-002 đến FR-004). |
-| Time | Giờ | Có | Giờ hiện tại | VAL-003. | FR-005. |
-| Photo | Chụp ảnh | Có | — | VAL-004. | FR-010. |
-| Bus service | Bộ lọc | Không | All bus routes | — | Gom trẻ của một xe (FR-008). |
-| Handover | Cột bảng | — | — | — | "Dropped off by", "Picked up by" (FR-006). |
-| Trạng thái mạng, Sync queue | Thanh trên iPad | — | Online | — | Offline, số lượt chờ đồng bộ, thời điểm đồng bộ danh sách người đón (FR-011). |
+| **SCR-01 — Class attendance** | | | | | |
+| Signed in of expected · Signed out · Still in · Absent · High temperature today | Thẻ tổng hợp | — | — | — | Đã nhận / dự kiến ("3 of 4"), đã trả, đang ở trường, vắng, số trẻ có ít nhất 1 lần đo ≥ ngưỡng sốt (mặc định 37.5 °C). |
+| Search child, Total | Ô tìm kiếm, số | Không | Trống | — | Tìm theo tên / mã trẻ; Total là số trẻ theo bộ lọc. |
+| 1 child with a severe allergy | Text | — | Ẩn khi lọc theo xe | — | Số trẻ dị ứng mức Severe trong danh sách. |
+| Centre | Danh sách chọn | Không | Centre của người dùng | — | — |
+| Class | Danh sách chọn | Không | All classes | — | Chọn 1 lớp thì ô có viền nhấn. |
+| Date | Chọn ngày | Không | Hôm nay ("Today · DD/MM/YYYY") | — | Ngày điểm danh. |
+| Bus route | Danh sách chọn | Không | All bus routes | — | Gom trẻ đi cùng xe; nhận / trả vẫn từng trẻ (FR-008). |
+| Temperature / Status | Danh sách chọn | Không | Any | — | Bảng lớp: lọc trẻ có lần đo sốt; khi lọc theo xe: lọc theo trạng thái điểm danh. |
+| Child | Cột | — | — | — | Avatar, họ tên, dòng phụ "Level · tuổi"; trẻ dị ứng Severe có nhãn "⚠ Severe" và vạch đậm ở mép trái dòng. |
+| Class | Cột (khi lọc theo xe) | — | — | — | Lớp của trẻ — xe chở trẻ nhiều lớp. |
+| Status | Cột (nhãn) | — | — | — | Present (nền đặc) · Absent · Not signed in (viền). |
+| In | Cột | — | "—" khi chưa nhận | — | Giờ nhận ở cổng, HH:mm; đến sau giờ chốt thêm nhãn "Late (staff only)", không hiện cho phụ huynh (BBA-75). |
+| Out | Cột | — | "—" khi chưa trả | — | Giờ trả, HH:mm. |
+| Handover_In | Cột | — | "—" khi chưa nhận | — | Người đưa trẻ đến: tên · quan hệ — phụ huynh, người đón đã duyệt, tài xế ("Bus driver · Bus n"), hoặc "Someone else: tên · quan hệ"; khi lọc theo xe có dòng phụ "📷 Photo · HH:mm" (FR-006). |
+| Handover_Out | Cột | — | "—" khi chưa trả | — | Người đón trẻ về: tên · quan hệ — chỉ người trong danh sách đón đã duyệt hoặc phụ xe ("Bus attendant · Bus n") (FR-006). |
+| Temperatures (°C) | Cột | — | "—" khi chưa đo | — | Mỗi lần đo là một nhãn "nhiệt độ · thời điểm · giờ"; lần ≥ ngưỡng sốt in đậm, có ⚠; nhãn "x of 3" = số lần đã đo; chỉ hiển thị (BBA-74). |
+| Nút cuối dòng | Nút | Theo quyền | — | — | Sign in khi trẻ chưa nhận; Sign out khi trẻ đang ở trường; menu ⋯ cho thao tác phụ (ví dụ Void record — BBA-77). |
+| **SCR-02 — Sign in** | | | | | |
+| Sign in — [Tên trẻ] | Tiêu đề popup | — | — | — | — |
+| Time | Giờ | Có | Giờ hiện tại | VAL-003. | HH:mm, sửa được (FR-005). |
+| Temperature | Nút chọn nhanh, bộ chọn | Có | 36.5 | — | Nút nhanh 36.3–36.7; "Enter manually" mở bộ chọn 36.0–40.0 °C, bước 0.1 (BBA-74; nhiệt kế Bluetooth chưa làm ở Sprint 4 — BBA-74 FR-003). |
+| Brought by | Radio | Có | — | VAL-001. | Phụ huynh, người đón đã duyệt (ghi rõ quan hệ), "Someone else"; khi trẻ đi xe có thêm "Bus driver · Bus n · tuyến"; giá trị hiện ở cột Handover_In (FR-001; FR-008). |
+| Name | Ô nhập | Khi chọn Someone else | Ẩn | VAL-001. | Tên người đưa trẻ. |
+| Relationship | Ô nhập | Khi chọn Someone else | Ẩn | VAL-001. | Quan hệ với trẻ; thiếu tên hoặc quan hệ: không lưu, lỗi dưới ô "Enter the name and relationship of the adult." |
+| Photo | Chụp ảnh | Có | — | VAL-004. | Ảnh trẻ cùng người đưa (trẻ đi xe: cùng tài xế, mỗi trẻ 1 ảnh) (FR-010). |
+| Cancel / Sign in | Nút | — | — | — | Sign in là nút chính. |
+| **SCR-03 — Sign out** | | | | | |
+| Sign out — [Tên trẻ] | Tiêu đề popup | — | — | — | — |
+| Time | Giờ | Có | Giờ hiện tại | VAL-003. | HH:mm (FR-005). |
+| Collected by | Radio có ảnh | Có | — | VAL-002. | Danh sách người đón đã duyệt: avatar, tên · quan hệ · 4 ký tự cuối giấy tờ (••••567D); người "Pending approval" mờ, viền đứt, không chọn được; khi trẻ đi xe có thêm "Bus attendant · Bus n · tuyến"; giá trị hiện ở cột Handover_Out (FR-002; FR-003; FR-008). |
+| Not on the list | Radio | — | — | VAL-002. | Hiện cảnh báo "⚠ Do not release the child" (viền đậm), ẩn ô chụp ảnh, khoá nút Sign out; không có override (FR-004). |
+| Photo | Chụp ảnh | Có | — | VAL-004. | Ảnh trẻ cùng người đón (trẻ đi xe: cùng phụ xe) (FR-010). |
+| Cancel / Sign out | Nút | — | — | — | Sign out là nút chính. |
+| **SCR-04 — iPad cổng — mất mạng** | | | | | |
+| Thanh trên | Header iPad | — | ● Online | — | Tên Centre · Children / Staff / Visitors / Sync queue (n) · trạng thái ● Online / ○ Offline (FR-011). |
+| Sign out — [Tên trẻ] · [Lớp] | Tiêu đề | — | — | — | Kèm nhãn ngày giờ DD/MM/YYYY · HH:mm. |
+| Collected by | Radio có ảnh | Có | — | VAL-002. | Như popup Sign out; danh sách lấy theo lần đồng bộ gần nhất, ghi "as of the last sync, DD/MM/YYYY HH:mm" (FR-011). |
+| Photo | Chụp ảnh | Có | — | VAL-004. | — |
+| Thông báo offline | Thông báo | — | — | — | Lượt trả lưu trên iPad, gửi khi có mạng; phụ huynh nhận thông báo lúc đó (FR-011). |
+| n records waiting to sync | Text | — | — | — | Số lượt nhận / trả đang chờ đồng bộ. |
 
 #### Data and Audit (Dữ liệu và audit)
 

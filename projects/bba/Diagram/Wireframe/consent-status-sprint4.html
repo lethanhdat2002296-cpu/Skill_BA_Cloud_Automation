@@ -56,6 +56,12 @@ h1, h2, h3 { text-wrap: balance; margin: 0; }
 .notes { margin: 0; padding: 14px 18px 14px 36px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 6px; font-size: 13px; }
 .notes li::marker { font-weight: 700; }
 .notes .src { color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+.fields { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; }
+.fields h3 { font-size: 16px; }
+.fields p { margin: 0; color: var(--muted); font-size: 13px; }
+.fields .t td { vertical-align: top; }
+.fields .t td:first-child { width: 260px; }
+.fields .t td:last-child { width: 260px; }
 
 /* ---------- BeeHive-like app shell (wireframe) ---------- */
 .app { width: 1280px; min-height: 720px; display: grid; grid-template-columns: 228px 1fr; position: relative; background: var(--paper); color: var(--ink); }
@@ -278,6 +284,11 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
   </div>
   <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
   <ol class="notes" id="notes"></ol>
+  <section class="fields" id="fields" aria-labelledby="fieldsTitle">
+    <h3 id="fieldsTitle">Mô tả thông tin trên màn hình</h3>
+    <p>Dành cho Design: mỗi field trên màn hình có ý nghĩa gì và hiển thị kiểu gì. Đổi trạng thái ở trên thì bảng đổi theo.</p>
+    <table class="t"><thead><tr><th>Field trên màn hình</th><th>Mô tả</th><th>Cách hiển thị</th></tr></thead><tbody id="fieldsBody"></tbody></table>
+  </section>
 </div>
 
 <script>
@@ -457,16 +468,17 @@ function growthReport() {
 }
 
 /* ===================== BBA-71 Consents ===================== */
-const CONS = [["Media release", "—", "v2 · 01/09/2026", '<span class="tag solid">Agreed</span>', "Serena Lim · registration form · 05/01/2026", "—"],
-  ["Field trip / learning journey", "Singapore Zoo", "v1 · 18/11/2026", '<span class="tag dash">Waiting on the parent</span>', "Sent 18/11/2026 · reminded 1 time", "28/11/2026"],
-  ["Field trip / learning journey", "Science Centre", "v1 · 20/11/2026", '<span class="tag dash">Waiting on the parent</span>', "Sent 20/11/2026", "05/12/2026"],
-  ["Medical authorisation", "—", "v1 · 01/01/2026", '<span class="tag solid">Agreed</span>', "Serena Lim · registration form · 05/01/2026", "—"],
-  ["Privacy policy", "—", "v3 · 15/11/2026", '<span class="tag">Not sent</span>', "New version — agree again", "—"]];
+// consent, event, status, answer, last action, closing date
+const CONS = [["Media release", "—", '<span class="tag solid">Agreed</span>', "Serena Lim · Mother<small>05/01/2026 · Registration form</small>", "Answered<small>05/01/2026</small>", "—"],
+  ["Field trip / learning journey", "Singapore Zoo", '<span class="tag dash">Waiting on the parent</span>', "—", "Reminded<small>22/11/2026 · sent 18/11/2026 · 1 reminder</small>", "28/11/2026"],
+  ["Field trip / learning journey", "Science Centre", '<span class="tag dash">Waiting on the parent</span>', "—", "Sent<small>20/11/2026</small>", "05/12/2026"],
+  ["Medical authorisation", "—", '<span class="tag solid">Agreed</span>', "Serena Lim · Mother<small>05/01/2026 · Registration form</small>", "Answered<small>05/01/2026</small>", "—"],
+  ["Privacy policy", "—", '<span class="tag">Not sent</span>', "—", "New version published<small>15/11/2026 · family must agree again</small>", "—"]];
 function consentTab(o) {
   o = o || {};
   const body = childHeader({ level: "severe" })
     + `<div class="ph2"><div><b style="font-size:15px">Consents</b><p>Answers from the family. Consents are created in Communication › Surveys & consents.${A(1)}</p></div><div class="row"><span class="btn">Open Surveys & consents</span></div></div>`
-    + table(["Consent", "Event" + A(3), "!Version", "!Status" + A(2), "!Answer / last action", "!Closing date", "!"], CONS.map(c => tr([c[0], c[1], c[2], c[3], c[4], c[5], c[3].includes("Waiting") ? '<span class="btn sm">Remind</span>' : c[3].includes("Declined") || c[3].includes("Expired") ? '<span class="btn sm">Send again</span>' : '<span class="lnk">History</span>'])));
+    + table(["Consent", "Event" + A(3), "!Status" + A(2), "!Answer" + A(4), "!Last action" + A(4), "!Closing date"], CONS.map(c => tr([c[0], c[1], c[2], c[3], c[4], c[5]])));
   return body;
 }
 function consentNewVersion() {
@@ -641,6 +653,80 @@ function staffIpad(o) {
 
 /* ===================== Screens ===================== */
 const S = (id, code, name, tickets, states, notes) => ({ id, code, name, slug: name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""), tickets, states, notes });
+
+/* ---------- Mô tả field cho Design: [field trên màn hình, ý nghĩa, cách hiển thị] ---------- */
+const FIELDS = {
+  "b71-1": {
+    default: [
+      ["#Phần đầu hồ sơ trẻ (dùng chung mọi tab — chi tiết ở BBA-68)"],
+      ["Ảnh / chữ viết tắt + Tên trẻ", "Thông tin trẻ: tên đầy đủ và ảnh đại diện (không có ảnh thì hiện chữ cái đầu).", "Avatar tròn + tiêu đề"],
+      ["Mã trẻ (S1)", "Mã định danh trẻ trong hệ thống.", "Chữ xám cạnh tên"],
+      ["Trạng thái hồ sơ (Enrolled)", "Trạng thái học của trẻ: Enrolled, Temporary withdrawal, Withdrawn, Graduated.", "Badge"],
+      ["Biểu tượng ⚠", "Trẻ có cảnh báo y tế.", "Badge icon"],
+      ["Centre · Level · Class", "Centre, cấp học và lớp hiện tại của trẻ.", "Dòng phụ dưới tên"],
+      ["Owner", "Nhân viên phụ trách hồ sơ trẻ.", "Link"],
+      ["Date of birth", "Ngày sinh và tuổi tính tới hôm nay.", "Thẻ KPI · DD/MM/YYYY · Xy Ym"],
+      ["Citizenship", "Quốc tịch / diện cư trú của trẻ.", "Thẻ KPI (viền nhấn)"],
+      ["Payment method", "Hình thức thanh toán học phí (GIRO, ...).", "Thẻ KPI"],
+      ["Medical alert", "Tóm tắt dị ứng / bệnh của trẻ.", "Thẻ KPI cảnh báo, tối đa 3 dòng"],
+      ["Banner Severe allergy", "Chỉ hiện khi trẻ có dị ứng mức Severe; không đóng được.", "Khung viền đậm + Show more"],
+      ["Nút Edit / Actions", "Sửa hồ sơ trẻ; menu thao tác khác.", "Nút phụ"],
+      ["Thanh tab", "Các tab của hồ sơ trẻ; consent nằm trong tab Documents.", "Tab gạch chân"],
+      ["#Khu vực Consents"],
+      ["Tiêu đề Consents + mô tả", "Danh sách câu trả lời consent của gia đình cho trẻ này. Chỉ xem.", "Tiêu đề khu vực + dòng phụ"],
+      ["Nút Open Surveys & consents", "Mở màn Communication › Surveys & consents — nơi tạo, nhắc, gửi lại consent.", "Nút phụ"],
+      ["Consent", "Loại consent: Media release, Field trip / learning journey, Medical authorisation, Privacy policy… theo danh mục Consent Types của BBA.", "Text"],
+      ["Event", "Sự kiện gắn với consent (vd. Singapore Zoo). Consent chung không theo sự kiện thì hiện \"—\".", "Text"],
+      ["Status", "Trạng thái consent của trẻ: Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired.", "Tag: đặc = Agreed; nét đứt = Waiting; viền thường = Not sent / khác"],
+      ["Answer", "Câu trả lời của gia đình: người trả lời (tên · quan hệ), dòng phụ ngày trả lời · kênh (Parents App / Registration form). Chưa trả lời → \"—\".", "Text 2 dòng (dòng phụ xám)"],
+      ["Last action", "Thao tác gần nhất trên consent của trẻ: Sent / Reminded / Answered / New version published; dòng phụ là ngày và chi tiết (ngày gửi, số lần nhắc).", "Text 2 dòng (dòng phụ xám)"],
+      ["Closing date", "Hạn trả lời của consent. Consent không có hạn → \"—\".", "DD/MM/YYYY"]],
+    list: [
+      ["Nút + New consent", "Tạo consent mới (mở popup New consent).", "Nút chính"],
+      ["Tab Surveys / Consents", "Chuyển giữa khảo sát và consent; số trên tab là số consent đang mở.", "Tab gạch chân + số đếm"],
+      ["Thẻ \"x of y families answered\"", "Số gia đình đã trả lời / tổng số trẻ trong đối tượng của từng consent. Bấm thẻ → danh sách trẻ chưa trả lời.", "Thẻ số liệu, bấm được"],
+      ["Ô tìm kiếm + Total", "Tìm theo tên consent / sự kiện; Total là số dòng sau lọc.", "Input + badge số"],
+      ["Bộ lọc", "Centre · Type · Class · Status · Closing date.", "Dropdown"],
+      ["Consent", "Tên sự kiện / tiêu đề consent.", "Text"],
+      ["Type", "Loại consent.", "Text"],
+      ["Audience", "Đối tượng nhận: danh sách lớp hoặc Whole centre.", "Text"],
+      ["Closing date", "Hạn trả lời.", "DD/MM/YYYY"],
+      ["Answered", "Số đã trả lời / tổng.", "x of y"]],
+    unanswered: [
+      ["Breadcrumb", "Consent đang xem › Not answered (số trẻ).", "Đường dẫn"],
+      ["Child", "Tên trẻ chưa trả lời; bấm → mở hồ sơ trẻ.", "Link"],
+      ["Class", "Lớp của trẻ.", "Text"],
+      ["Last action", "Lần gửi / nhắc gần nhất và số lần đã nhắc.", "Text"],
+      ["Nút Remind", "Gửi nhắc lại cho gia đình trẻ này.", "Nút nhỏ"]],
+    new: [
+      ["Type *", "Loại consent; danh mục Consent Types. Crossroad chỉ cho Centre Singapore không có sân ngoài trời.", "Dropdown, bắt buộc"],
+      ["Event *", "Tên sự kiện gắn với consent.", "Text, bắt buộc"],
+      ["Content *", "Nội dung consent gia đình đọc trước khi đồng ý.", "Textarea, bắt buộc"],
+      ["Closing date *", "Hạn trả lời.", "Date picker, bắt buộc"],
+      ["Audience *", "Gửi theo lớp hay cả Centre.", "Radio: Classes / Whole centre"],
+      ["Classes *", "Chọn lớp nhận (chỉ hiện khi Audience = Classes).", "Chọn nhiều (chip)"],
+      ["Also send by email", "Gửi thêm email; mặc định tắt. Luôn tạo Announcement kèm link.", "Toggle"],
+      ["Thông báo dưới form", "Giải thích: gửi sẽ tạo Announcement, mỗi trẻ bắt đầu ở Waiting on the parent.", "Alert thông tin"],
+      ["Cancel / Send", "Huỷ hoặc gửi consent.", "Nút phụ / nút chính"]],
+    version: [
+      ["Summary of changes *", "Tóm tắt nội dung thay đổi của phiên bản mới.", "Textarea, bắt buộc"],
+      ["Ask families to agree again", "Mọi trẻ quay về Not sent cho phiên bản mới.", "Radio (mặc định chọn)"],
+      ["Keep current answers", "Sửa nhỏ câu chữ; câu trả lời cũ vẫn tính.", "Radio"],
+      ["Cancel / Publish", "Huỷ hoặc phát hành phiên bản mới.", "Nút phụ / nút chính"]]
+  },
+  "b71-2": {
+    default: [
+      ["Tab Today by centre / Drills / Consent compliance", "Các tab của Safety overview; số trên tab = số trẻ còn thiếu consent.", "Tab gạch chân + số đếm"],
+      ["Nút Export", "Xuất Excel danh sách đang lọc; số trong ngoặc là số dòng.", "Nút phụ"],
+      ["Ô tìm kiếm + Total", "Tìm theo tên trẻ.", "Input + badge số"],
+      ["Bộ lọc", "Centre · Class · Consent · trạng thái trẻ (Enrolled) · Status consent.", "Dropdown"],
+      ["Child", "Tên trẻ; bấm → mở hồ sơ trẻ.", "Link"],
+      ["Class", "Lớp của trẻ.", "Text"],
+      ["Not sent", "Các consent chưa gửi cho gia đình trẻ.", "Danh sách tên consent, \"—\" nếu không có"],
+      ["Waiting on the parent", "Các consent đã gửi, đang chờ trả lời.", "Danh sách tên consent / sự kiện"],
+      ["Declined or withdrawn", "Các consent gia đình từ chối hoặc rút lại.", "Danh sách tên consent"]]
+  }
+};
 let SCREENS = [
   S("b68-1", "BBA-68 · 1", "Child record — medical alert", "Red banner, icon, pending assessment — FRD Medical Alert Banner · BBA-1058",
     [["default", "Severe · banner", () => shell("children", "All children › <b>Ethan Lim</b>", childHeader({ level: "severe", pending: 1 }), W.sa, childTabs())],
@@ -678,7 +764,7 @@ let SCREENS = [
      ["unanswered", "Chưa trả lời", () => shell("consents", "Communication › <b>Surveys & consents</b>", surveysList({ unanswered: 1 }), W.cd)],
      ["new", "Tạo consent", () => shell("consents", "Communication › <b>Surveys & consents</b>", surveysList() + consentNew(), W.cd)],
      ["version", "Phiên bản mới", () => shell("consents", "Surveys & consents › <b>Privacy policy</b>", surveysList() + consentNewVersion(), W.hq)]],
-    { default: [["Consent nằm ở tab Documents của hồ sơ trẻ (SRS liệt kê tab Consents riêng — chờ xác nhận); hồ sơ trẻ chỉ xem, nhắc, gửi lại; consent tạo ở Surveys & consents.", "FR-001 · BR-CHF-010 · AS-05"], ["Trạng thái: Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired.", "FR-002"], ["Nhiều consent cùng loại đang mở, mỗi cái gắn một sự kiện.", "Q-73-14 · FR-001"]],
+    { default: [["Consent nằm ở tab Documents của hồ sơ trẻ (SRS liệt kê tab Consents riêng — chờ xác nhận); trên hồ sơ trẻ chỉ xem, không có nút History / Remind / Send again; tạo, nhắc, gửi lại làm ở Surveys & consents.", "FR-001 · BR-CHF-010 · AS-05"], ["Trạng thái: Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired.", "FR-002"], ["Nhiều consent cùng loại đang mở, mỗi cái gắn một sự kiện.", "Q-73-14 · FR-001"], ["Answer và Last action là hai cột riêng, đúng như DB lưu hai trường: Answer = ai trả lời, ngày, kênh; Last action = thao tác gần nhất trên consent của trẻ (gửi, nhắc, trả lời, phát hành phiên bản mới).", "Review BBA-71"]],
       list: [["Thẻ \"x of y families answered\" mỗi consent; chọn thẻ → chỉ trẻ chưa trả lời.", "Q-73-10 · FR-012"]],
       unanswered: [["Danh sách trẻ chưa trả lời, Remind từng trẻ.", "Q-73-10 · FR-004 · FR-012"]],
       new: [["Đối tượng theo lớp hoặc cả Centre, có ngày đóng.", "Q-73-04 · FR-003"], ["Email chỉ gửi khi bật; luôn tạo Announcement kèm link.", "Q-73-08 · FR-003"]],
@@ -741,6 +827,11 @@ function render() {
   $("frame").innerHTML = st[2]();
   const n = (s.notes[st[0]] && s.notes[st[0]].length ? s.notes[st[0]] : s.notes.default) || [];
   $("notes").innerHTML = n.map((x, i) => x.length ? `<li value="${i + 1}">${x[0]} <span class="src">${x[1]}</span></li>` : "").join("");
+  const f = (FIELDS[s.id] && (FIELDS[s.id][st[0]] || FIELDS[s.id].default)) || [];
+  $("fields").hidden = !f.length;
+  $("fieldsBody").innerHTML = f.map(x => x.length === 1
+    ? `<tr class="grp"><td colspan="3">${x[0].slice(1)}</td></tr>`
+    : `<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td class="dim">${x[2]}</td></tr>`).join("");
 }
 $("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
 function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : SCREENS[0].id, state: "default" }; render(); }

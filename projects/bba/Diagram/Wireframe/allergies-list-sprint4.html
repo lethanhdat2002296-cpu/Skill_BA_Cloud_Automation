@@ -104,9 +104,14 @@ h1, h2, h3 { text-wrap: balance; margin: 0; }
 .total { font-size: 13px; color: var(--muted); }
 .total b { background: var(--fill); color: var(--ink); border-radius: 6px; padding: 1px 6px; font-size: 12px; margin-left: 4px; }
 table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
-.t th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.t { table-layout: fixed; }
+.t th { text-align: left; font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--fill); vertical-align: bottom; }
 .t th.s::after { content: " ⇅"; color: var(--muted); font-weight: 400; }
-.t td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.t td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: break-word; }
+.t td .tag { white-space: normal; }
+/* Column dividers so adjacent columns never run together */
+.t th + th, .t td + td { border-left: 1px solid var(--line); }
+.t tbody tr:last-child td { border-bottom: none; }
 .t tr.sel td { background: var(--fill); }
 .t td.mono { font-family: var(--mono); font-size: 12.5px; }
 .t td.dim { color: var(--muted); }
@@ -262,7 +267,35 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
 .radio i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--muted); flex: none; }
 .radio div.on i { border: 4px solid var(--ink); }
 .mini-av { width: 26px; height: 26px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 700; color: var(--muted); vertical-align: middle; margin-right: 8px; flex: none; }
-.cellwho { display: flex; align-items: center; }
+.cellwho { display: flex; align-items: flex-start; }
+.print .t th { background: #f2f4f6; color: #111; }
+.print .t th, .print .t td { border-color: #d8dce1; }
+.hscroll { overflow-x: auto; }
+.t.wide th:first-child, .t.wide tr:not(.grp) td:first-child { position: sticky; left: 0; z-index: 1; box-shadow: 1px 0 0 var(--line); }
+.t.wide th:first-child { background: var(--fill); }
+.t.wide tr:not(.grp) td:first-child { background: var(--paper); }
+.t.wide tr.sev td:first-child { box-shadow: inset 3px 0 0 var(--ink), 1px 0 0 var(--line); }
+.t .stick { position: sticky; left: 14px; display: inline-block; }
+.kp { max-width: 720px; margin: 8px 0; padding: 8px 4px; color: var(--ink); }
+.kp-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.kp-head h4 { margin: 0 0 4px; font-size: 22px; font-weight: 700; }
+.kp-head span { font-size: 14px; color: var(--muted); }
+.kp table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 15px; }
+.kp th { text-align: left; font-weight: 700; padding: 14px 12px 12px 0; border-bottom: 2px solid var(--ink); }
+.kp td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.55; }
+.kp td b { font-weight: 700; }
+/* ---------- Field description (for designers) ---------- */
+.fdoc[hidden] { display: none; }
+.fdoc { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.fdoc h3 { font-size: 16px; }
+.fdoc > p { margin: 0; color: var(--muted); font-size: 13px; }
+.fdoc table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+.fdoc th, .fdoc td { text-align: left; padding: 9px 12px; border: 1px solid var(--line); vertical-align: top; }
+.fdoc th { background: var(--fill); font-weight: 600; }
+.fdoc td.grp { background: var(--fill-2); font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.fdoc td b { font-weight: 600; }
+.fdoc td .vi { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.fdoc td.ex { color: var(--muted); font-size: 12.5px; }
 </style>
 
 <div class="page">
@@ -278,6 +311,7 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
   </div>
   <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
   <ol class="notes" id="notes"></ol>
+  <section class="fdoc" id="fdoc" aria-label="Mô tả thông tin trên màn hình"></section>
 </div>
 
 <script>
@@ -307,7 +341,7 @@ const utabs = (list, on) => `<div class="utabs">${list.map(([t, c], i) => `<span
 const sel = (v, active) => `<div class="input select${active ? " active" : ""}">${v}</div>`;
 const tb = (ph, total, right) => `<div class="tb"><div class="input srch">⌕ ${ph}</div><span class="tot">Total<b>${total}</b></span><span class="sp"></span>${right || ""}</div>`;
 const flt = (...xs) => `<div class="flt">${xs.map(x => typeof x === "string" ? sel(x) : sel(x[0], 1)).join("")}</div>`;
-const table = (cols, rows) => `<div class="card" style="overflow:hidden"><table class="t"><thead><tr>${cols.map(c => `<th${c.startsWith("!") ? "" : ' class="s"'}>${c.replace(/^!/, "")}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+const table = (cols, rows, widths) => `<div class="card" style="overflow:hidden"><table class="t">${widths ? `<colgroup>${widths.map(w => `<col style="width:${w}">`).join("")}</colgroup>` : ""}<thead><tr>${cols.map(c => `<th${c.startsWith("!") ? "" : ' class="s"'}>${c.replace(/^!/, "")}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
 const tr = (cells, cls) => `<tr${cls ? ` class="${cls}"` : ""}>${cells.map(c => `<td>${c}</td>`).join("")}</tr>`;
 const who = (init, name, sub) => `<span class="cellwho"><span class="mini-av">${init}</span><span>${name}${sub ? `<small>${sub}</small>` : ""}</span></span>`;
 const pager = (n) => `<div class="pager"><span>1–${n} of ${n}</span><span class="pg"><span class="input select" style="height:28px">20 rows</span><span>‹</span><span class="on">1</span><span>›</span></span></div>`;
@@ -350,43 +384,37 @@ function childList() {
 
 /* ===================== BBA-69 Allergies list ===================== */
 const ALG = [
-  // initials, name, class, type, [[allergen, severity]], symptoms, can tolerate, traces eggs/nuts, action plan, medication, next review, review tag, staff note, severe, awaiting
-  ["EL", "Ethan Lim", "N2 · Sunbeams", "Food", [["Shellfish and nuts, including peanuts", "Severe"]], "Lip swelling, hives, difficulty breathing", "Can eat fish but not shellfish", "Eggs: Yes · Nuts: No", "Give the EpiPen, call 995, then call the mother.", "EpiPen Jr 0.15 mg · medication form ✓", "18/03/2027", "", "Reacted to a biscuit with traces of nut on 03/09.", 1, 1],
-  ["SC", "Sophia Chen", "K1 · Honeycombs", "Food", [["Dairy", "Severe"]], "Vomiting, hives", "Butter or baked dairy (cookies, bread); no milk, cheese or yogurt", "Eggs: Yes · Nuts: Yes", "Give the auto-injector, call 995, then call the father.", "Adrenaline auto-injector · medication form ✓", "16/12/2026", "due", "", 1, 0],
-  ["LK", "Lucas Koh", "K1 · Honeycombs", "Insect", [["Bee and wasp stings", "Moderate"]], "Swelling at the sting site", "—", "—", "Remove the sting, cold pack, antihistamine; call the mother.", "Antihistamine syrup 5 ml · medication form ✓", "02/11/2026", "over", "", 0, 0],
-  ["CL", "Chloe Lim Xin Yi", "N2 · Sunbeams", "Medication", [["Penicillin", "Moderate"]], "Rash", "—", "—", "Tell the parent before any medicine is given.", "Not applicable", "05/04/2027", "", "", 0, 0]];
-const OTHER = [
-  ["RI", "Rayyan Idris", "K1 · Honeycombs", "Medical condition", "Asthma; coughing can start after outdoor play on very hot afternoons.", "Inhaler, 2 puffs; call the mother.", "21/01/2027"],
-  ["NT", "Noah Tan", "N2 · Sunbeams", "Medical history", "Receives speech therapy through the Early Intervention programme.", "—", "03/03/2027"]];
-const reviewCell = (d, t) => d + (t === "due" ? ` <span class="tag dash">Due in 3 weeks</span>${A(5)}` : t === "over" ? ' <span class="tag solid">Overdue</span>' : "");
+  // initials, name, class, type, from the family, note from staff, vaccination, updated by the family, awaiting assessment
+  ["EL", "Ethan Lim", "N2 · Sunbeams", "Food", "Allergic to shellfish and nuts, including peanuts. Lips swell, hives, difficulty breathing. Can eat fish. EpiPen Jr 0.15 mg — give it, call 995, then call me.", "Reacted to a biscuit with traces of nut on 03/09.", "Up to date", "23/11/2026 18:42", 1],
+  ["SC", "Sophia Chen", "K1 · Honeycombs", "Food", "Dairy allergy — vomiting and hives. Butter or baked dairy (cookies, bread) is fine; no milk, cheese or yogurt.", "—", "Up to date", "02/06/2026 09:15", 0],
+  ["LK", "Lucas Koh", "K1 · Honeycombs", "Insect", "Bee and wasp stings cause swelling. Antihistamine syrup 5 ml, then call me.", "Keep away from the garden flower beds.", "Not up to date", "14/05/2026 20:03", 0],
+  ["CL", "Chloe Lim Xin Yi", "N2 · Sunbeams", "Medication", "Penicillin gives her a rash. Please tell us before giving any medicine.", "—", "Up to date", "05/10/2026 07:50", 0],
+  ["RI", "Rayyan Idris", "K1 · Honeycombs", "Medical condition", "Asthma. Coughing can start after outdoor play on very hot afternoons. Inhaler, 2 puffs.", "Inhaler kept in the class first-aid box.", "Up to date", "21/07/2026 12:30", 0],
+  ["NT", "Noah Tan", "N2 · Sunbeams", "Medical history", "Receives speech therapy through the Early Intervention programme.", "—", "Not provided", "03/09/2026 16:10", 0]];
+const ALG_COLS = ["Child", "Class", "Type", "!From the family" + A(2), "!Note from staff", "Vaccination", "Updated by the family" + A(5)];
+const ALG_W = ["14%", "12%", "10%", "25%", "15%", "11%", "13%"];
+const vacTag = (v) => `<span class="tag${v === "Up to date" ? "" : " dash"}">${v}</span>`;
+const nameCell = (init, name) => `<span class="cellwho"><span class="mini-av">${init}</span><span>${name}</span></span>`;
 function allergyList(o) {
   o = o || {};
   const kids = o.cls ? ALG.filter(a => a[2] === "N2 · Sunbeams") : ALG;
-  const others = o.cls ? OTHER.filter(a => a[2] === "N2 · Sunbeams") : OTHER;
-  const g = (t) => tr([t, "", "", "", "", ""], "grp");
-  const rows = [g('<b>Allergies</b> · most severe first' + A(1))]
-    .concat(kids.map(a => tr([who(a[0], a[1] + (a[14] ? `` : ""), a[2]) + (a[14] ? `<small><span class="tag dash">Awaiting assessment</span>${A(4)}</small>` : "") + (a[12] ? `<small>📝 ${a[12]}</small>` : ""),
-      `<small style="margin:0">${a[3]}</small>` + a[4].map(x => `${x[0]} <span class="tag${x[1] === "Severe" ? " solid" : ""}">${x[1]}</span>`).join("<br>"),
-      a[5], a[6] + (a[7] !== "—" ? `<small>Traces · ${a[7]}</small>` : ""), `${a[8]}<small>${a[9]}</small>`, reviewCell(a[10], a[11])], a[13] ? "sev" : "")))
-    .concat([g('<b>Other conditions and diet</b>' + A(2))])
-    .concat(others.map(a => tr([who(a[0], a[1], a[2]), `<small style="margin:0">${a[3]}</small>${a[4]}`, "—", "—", a[5], a[6]])));
-  if (!o.cls) rows.push(g('<b>Health information not provided</b>' + A(6)), tr([who("MW", "Mia Wong", "Playgroup · Bumblebees"), '<span style="color:var(--muted)">The family has not filled in the Medical Care Assessment yet.</span><small><span class="lnk">Contact the family</span></small>', "", "", "", "—"]));
-  const n = kids.length + others.length;
+  const rows = kids.map(a => tr([nameCell(a[0], a[1]), a[2], a[3], a[4], a[5], vacTag(a[6]),
+    a[7] + (a[8] ? `<small><span class="tag dash">Awaiting assessment</span>${A(4)}</small>` : "")]));
+  if (!o.cls) rows.push(`<tr><td>${nameCell("MW", "Mia Wong")}</td><td>Playgroup · Bumblebees</td><td>—</td><td colspan="2" style="color:var(--muted)">The family has not filled in the Medical Care Assessment yet. <span class="lnk">Contact the family</span>${A(6)}</td><td>${vacTag("Not provided")}</td><td>—</td></tr>`);
+  const n = kids.length;
   return head("Allergies & conditions", "Medical Health Alert List · from each child's Medical Care Assessment, as confirmed by the Centre.", `<span class="btn">⤓ Export (${n})${A(3)}</span><span class="btn primary">🖨 Print for the kitchen${A(3)}</span>`)
     + utabs([["Allergies & conditions", n], ["Growth"]], 0)
-    + tb("Search child or allergen", n)
-    + flt("Small Wonder Tampines", o.cls ? ["N2 · Sunbeams"] : "All classes", "All severities", "Type: all", "Review: any")
-    + table(["Child", "!Type · allergen · severity", "!Symptoms", "!Can tolerate", "!Emergency action plan · medication", "!Next review"], rows) + pager(n);
+    + tb("Search child", n)
+    + flt("Small Wonder Tampines", o.cls ? ["N2 · Sunbeams"] : "All classes", "Type: all", "Vaccination: any", "Updated: any time")
+    + table(ALG_COLS, rows, ALG_W) + pager(n);
 }
 function kitchenPrint() {
-  const k = ALG.filter(a => a[2] === "N2 · Sunbeams");
-  return `<div class="print"><div class="row between"><div><h4>Medical Health Alert List — Small Wonder Tampines · N2 · Sunbeams</h4><span>Printed 24/11/2026 08:15 · ${k.length + 1} children${A(1)}</span></div><span>Page 1 of 1</span></div>
-    <table class="t" style="margin-top:10px"><thead><tr><th>Photo</th><th>Child</th><th>Type · allergen · severity</th><th>Can tolerate</th><th>Traces of eggs / nuts</th><th>Emergency action plan</th></tr></thead><tbody>
-    ${k.map(a => tr([`<span class="mini-av">${a[0]}</span>`, `<b>${a[1]}</b>`, `${a[3]} · ${a[4].map(x => `${x[0]} — <b>${x[1]}</b>`).join("<br>")}`, a[6], a[7], a[8]])).join("")}
-    ${tr(['<span class="mini-av">NT</span>', "<b>Noah Tan</b>", "Medical history · speech therapy (Early Intervention)", "—", "—", "—"])}
-    </tbody></table><p style="margin:10px 0 0;color:#555">Most severe first. Only children whose families agreed to show the name and photo on the Medical Health Alert List are printed.${A(2)}</p></div>`;
+  const k = ALG.filter(a => ["Food", "Environmental", "Medication", "Insect"].includes(a[3]));
+  return `<div class="kp"><div class="kp-head"><div><h4>Allergies — Small Wonder Tampines${A(1)}</h4><span>${k.length} children</span></div><span>Printed 24/11/2026${A(2)}</span></div>
+    <table><colgroup><col style="width:20%"><col style="width:22%"><col style="width:58%"></colgroup><thead><tr><th>Child</th><th>Class</th><th>Allergies${A(3)}</th></tr></thead><tbody>
+    ${k.map(a => `<tr><td><b>${a[1]}</b></td><td>${a[2]}</td><td>${a[4]}</td></tr>`).join("")}
+    </tbody></table></div>`;
 }
-
 /* ===================== BBA-70 Growth ===================== */
 const GR = [["Ethan Lim", "4y 9m", "107 cm · 17.6 kg", "14/08/2026", "108.5", "18.1"], ["Aiden Tan Wei Jie", "4y 10m", "93 cm · 13.5 kg", "14/08/2026", "", ""], ["Chloe Lim Xin Yi", "4y", "95 cm · 14.7 kg", "14/08/2026", "96.5", "15.0"], ["Noah Tan", "4y 10m", "—", "—", "", ""]];
 function growthEntry(o) {
@@ -613,8 +641,8 @@ let SCREENS = [
     [["default", "Toàn Centre", () => shell("health", "Health & allergies › <b>Allergies & conditions</b>", allergyList(), W.t)],
      ["class", "Lọc 1 lớp", () => shell("health", "Health & allergies › <b>Allergies & conditions</b>", allergyList({ cls: 1 }), W.t)],
      ["print", "Bản in cho bếp", () => shell("health", "Health & allergies › <b>Print</b>", kitchenPrint(), W.t)]],
-    { default: [["Cột theo form Medical Care Assessment Checklist: loại (Food, Environmental, Medication, Insect, Medical condition), chất gây dị ứng, mức độ, triệu chứng, điều kiện dung nạp, ăn được vết trứng / hạt, kế hoạch xử trí, thuốc dùng ngay. Severe → Moderate → Mild; chưa chọn mức coi như Severe.", "Appendix 1 tr. 1–2 · FR-001 · FR-002"], ["Bệnh / tiền sử không kèm dị ứng ở nhóm riêng.", "Appendix 1 tr. 1 · FR-003 · OQ-07"], ["CD, Admin, Teacher được in / xuất; không lưu nhật ký in / xuất.", "Plane BBA-1058 Q2 · FR-008"], ["Phụ huynh sửa trong app → danh sách giữ thông tin đã xác nhận, gắn nhãn chờ đánh giá cho tới khi CD / Admin hoàn tất.", "Plane BBA-1058 Q1 · FR-014"], ["Đánh giá lại mỗi 6 tháng; nhắc trước 1 tháng (gửi form cho phụ huynh); quá ngày hiện Overdue.", "Appendix 3 · Plane BBA-1058 Q1 · FR-013"], ["Trẻ chưa khai Health record ở nhóm riêng cuối danh sách.", "Q-70-09 · FR-012"]],
-      class: [], print: [["Bản in ghi ngày giờ in và số trẻ.", "FR-007 · BR-003"], ["Chỉ in trẻ có phụ huynh đồng ý hiện tên và ảnh trên Medical Health Alert List.", "Appendix 1 tr. 3 · Plane BBA-1058 Q2 · FR-011"]] }),
+    { default: [["Cột theo danh sách prototype BeeHive: Child, Class, Type, From the family, Note from staff, Vaccination, Updated by the family.", "Prototype emsv3"], ["\"From the family\" hiện nguyên văn phụ huynh khai trong Medical Care Assessment, bản đã được Centre xác nhận.", "Appendix 1 · FR-001"], ["CD, Admin, Teacher được in / xuất; không lưu nhật ký in / xuất.", "Plane BBA-1058 Q2 · FR-008"], ["Phụ huynh sửa trong app → danh sách giữ thông tin đã xác nhận, gắn nhãn chờ đánh giá cho tới khi CD / Admin hoàn tất.", "Plane BBA-1058 Q1 · FR-014"], ["Ngày giờ phụ huynh cập nhật gần nhất; sắp xếp được.", "Prototype emsv3"], ["Trẻ chưa khai Health record ở cuối danh sách.", "Q-70-09 · FR-012"]],
+      class: [], print: [["Tiêu đề theo phạm vi đang lọc: Centre, lớp hoặc \"All my centres\".", "Prototype emsv3"], ["Ngày in. Chỉ in trẻ có phụ huynh đồng ý hiện tên trên Medical Health Alert List.", "FR-007 · Appendix 1 tr. 3 · Plane BBA-1058 Q2 · FR-011"], ["Chỉ in trẻ có dị ứng (Food, Environmental, Medication, Insect); nội dung lấy từ \"From the family\".", "Prototype emsv3 · FR-001"]] }),
   S("b70-1", "BBA-70 · 1", "Height & weight — class entry", "Nhập cả lớp theo kỳ — BBA-529, BBA-1059",
     [["default", "Nhập", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry(), W.t)],
      ["saved", "Đã lưu", () => shell("health", "Health & allergies › <b>Growth</b>", growthEntry({ saved: 1 }), W.t)],
@@ -679,6 +707,60 @@ let SCREENS = [
     { default: [["Chụp ảnh bắt buộc khi chấm công.", "Plane BBA-528"], ["Đã chấm vào thì thấy Clock out.", "SRS ATT"], ["HQ staff và khách chấm như khách, ghi mục đích.", "Plane BBA-528 · AS-06 · OQ-20"]], fever: [] })
 ];
 
+/* ===================== Mô tả thông tin trên màn hình (cho Design) ===================== */
+// Mỗi dòng: [Trường trên UI, Tên tiếng Việt, Mô tả / quy tắc hiển thị, Ví dụ]. Dòng chỉ có 1 phần tử = tiêu đề nhóm.
+const FD_LIST = [
+  ["Phần đầu trang"],
+  ["Breadcrumb", "Đường dẫn", "Health & allergies › Allergies & conditions. Mục menu trái \"Health & allergies\" được tô sáng.", "Health & allergies › Allergies & conditions"],
+  ["Allergies & conditions", "Tiêu đề màn hình", "Tên màn hình = Medical Health Alert List. Dòng mô tả bên dưới: dữ liệu lấy từ Medical Care Assessment của từng trẻ, đã được Centre xác nhận.", "—"],
+  ["⤓ Export (n)", "Nút xuất file", "Xuất danh sách đang lọc; n = số trẻ đang hiển thị. Chỉ CD, Admin, Teacher thấy nút.", "Export (6)"],
+  ["🖨 Print for the kitchen", "Nút in cho bếp", "Nút chính (màu nhấn). Mở bản in theo lớp đang lọc — xem trạng thái \"Bản in cho bếp\".", "—"],
+  ["Tab Allergies & conditions / Growth", "Tab", "Tab 1: danh sách dị ứng & bệnh lý (số trẻ ở badge). Tab 2: chiều cao cân nặng (BBA-70).", "Allergies & conditions 6"],
+  ["Tìm kiếm & bộ lọc"],
+  ["Search child", "Ô tìm kiếm", "Tìm theo tên trẻ.", "\"Ethan\""],
+  ["Total", "Tổng số", "Số trẻ khớp tìm kiếm + bộ lọc.", "Total 6"],
+  ["Centre", "Cơ sở", "Mặc định Centre của người dùng.", "Small Wonder Tampines"],
+  ["Class", "Lớp", "Mặc định All classes. Khi chọn 1 lớp, ô lọc có viền màu nhấn.", "N2 · Sunbeams"],
+  ["Type", "Loại", "Lọc theo cột Type.", "Type: all"],
+  ["Vaccination", "Tiêm chủng", "Lọc theo cột Vaccination.", "Vaccination: any"],
+  ["Updated", "Ngày phụ huynh cập nhật", "Lọc theo khoảng ngày của cột Updated by the family.", "Updated: any time"],
+  ["Bảng — cột"],
+  ["Child", "Tên trẻ", "Avatar (ảnh hoặc chữ viết tắt) + họ tên. Sắp xếp được.", "Ethan Lim"],
+  ["Class", "Lớp", "Level · tên lớp hiện tại. Sắp xếp được.", "N2 · Sunbeams"],
+  ["Type", "Loại", "Loại thông tin sức khoẻ: Food · Environmental · Medication · Insect · Medical condition · Medical history. Sắp xếp được.", "Food"],
+  ["From the family", "Thông tin từ gia đình", "Nguyên văn phụ huynh khai trong Medical Care Assessment (chất gây dị ứng, triệu chứng, cách xử trí…). Hiển thị bản đã được Centre xác nhận.", "Allergic to shellfish and nuts, including peanuts…"],
+  ["Note from staff", "Ghi chú của nhân viên", "Ghi chú nội bộ của Centre. Không có → \"—\".", "Reacted to a biscuit with traces of nut on 03/09."],
+  ["Vaccination", "Tiêm chủng", "Tình trạng tiêm chủng của trẻ. Up to date: nhãn viền liền; Not up to date / Not provided: nhãn viền đứt. Sắp xếp được.", "Up to date"],
+  ["Updated by the family", "Ngày phụ huynh cập nhật", "Lần cuối phụ huynh cập nhật thông tin (DD/MM/YYYY HH:mm). Sắp xếp được. Nếu bản cập nhật chưa được CD / Admin đánh giá → nhãn \"Awaiting assessment\" bên dưới.", "23/11/2026 18:42"],
+  ["Bảng — trường hợp đặc biệt"],
+  ["Dòng chưa khai thông tin", "Trẻ chưa điền Medical Care Assessment", "Luôn ở cuối danh sách. Ô From the family + Note from staff gộp hiện câu thông báo và link \"Contact the family\". Ẩn khi lọc lớp không có trẻ nào chưa khai.", "Mia Wong"],
+  ["Pager", "Phân trang", "\"1–n of n\", chọn số dòng / trang (mặc định 20).", "1–6 of 6 · 20 rows"]
+];
+const FD_PRINT = [
+  ["Phần đầu bản in"],
+  ["Allergies — {phạm vi}", "Tiêu đề bản in", "\"Allergies — \" + phạm vi đang lọc khi bấm in: tên Centre, tên lớp, hoặc \"All my centres\" nếu người dùng xem nhiều Centre.", "Allergies — Small Wonder Tampines"],
+  ["n children", "Số trẻ", "Số trẻ trên bản in, dưới tiêu đề.", "4 children"],
+  ["Printed …", "Ngày in", "Căn phải, cùng hàng với số trẻ. Phía dưới là đường kẻ đậm ngăn phần đầu với bảng.", "Printed 24/11/2026"],
+  ["Bảng in — cột"],
+  ["Child", "Tên trẻ", "Họ tên in đậm.", "Ethan Lim"],
+  ["Class", "Lớp", "Level · tên lớp.", "N2 · Sunbeams"],
+  ["Allergies", "Dị ứng", "Nội dung cột \"From the family\" của trẻ. Chỉ trẻ có Type là Food, Environmental, Medication, Insect.", "Allergic to shellfish and nuts, including peanuts…"],
+  ["Kiểu bảng"],
+  ["Đường kẻ", "Phân cách", "Không kẻ dọc. Kẻ đậm dưới tiêu đề cột; kẻ mảnh giữa các dòng. Không có ảnh trẻ, không có chân trang.", "—"]
+];
+const FIELD_DOC = { b69: { default: FD_LIST, class: FD_LIST, print: FD_PRINT } };
+function renderFieldDoc(sid, state) {
+  const d = FIELD_DOC[sid] && (FIELD_DOC[sid][state] || FIELD_DOC[sid].default);
+  const el = $("fdoc");
+  if (!d) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<h3>Mô tả thông tin trên màn hình</h3><p>Dành cho Design: mỗi trường trên giao diện, tên tiếng Việt, ý nghĩa và quy tắc hiển thị. Dữ liệu ví dụ lấy từ wireframe.</p>
+    <table><colgroup><col style="width:22%"><col style="width:18%"><col style="width:40%"><col style="width:20%"></colgroup>
+    <thead><tr><th>Trường trên UI</th><th>Tên tiếng Việt</th><th>Mô tả / quy tắc hiển thị</th><th>Ví dụ</th></tr></thead><tbody>
+    ${d.map(r => r.length === 1 ? `<tr><td class="grp" colspan="4">${r[0]}</td></tr>` : `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td class="ex">${r[3]}</td></tr>`).join("")}
+    </tbody></table>`;
+}
+
 const ONLY = {"b69": null};
 SCREENS = SCREENS.filter(s => s.id in ONLY).map(s => ONLY[s.id] ? Object.assign({}, s, { states: s.states.filter(x => ONLY[s.id].includes(x[0])) }) : s);
 let current = { screen: SCREENS[0].id, state: "default" };
@@ -693,6 +775,7 @@ function render() {
   $("frame").innerHTML = st[2]();
   const n = (s.notes[st[0]] && s.notes[st[0]].length ? s.notes[st[0]] : s.notes.default) || [];
   $("notes").innerHTML = n.map((x, i) => x.length ? `<li value="${i + 1}">${x[0]} <span class="src">${x[1]}</span></li>` : "").join("");
+  renderFieldDoc(s.id, st[0]);
 }
 $("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
 function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : SCREENS[0].id, state: "default" }; render(); }

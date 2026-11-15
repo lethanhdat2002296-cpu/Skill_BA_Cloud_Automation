@@ -263,6 +263,19 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
 .radio div.on i { border: 4px solid var(--ink); }
 .mini-av { width: 26px; height: 26px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--line); display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 700; color: var(--muted); vertical-align: middle; margin-right: 8px; flex: none; }
 .cellwho { display: flex; align-items: center; }
+/* ---------- Field description (cho Design) ---------- */
+.fdesc { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+.fdesc > h3 { font-size: 16px; }
+.fdesc > p { margin: -8px 0 0; color: var(--muted); font-size: 13px; }
+.fdesc h4 { margin: 4px 0 6px; font-size: 13.5px; }
+.fdesc table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+.fdesc th:first-child { width: 230px; } .fdesc th:nth-child(2) { width: 170px; }
+.fdesc td:first-child { white-space: normal !important; }
+.fdesc th, .fdesc td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.fdesc th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--fill); }
+.fdesc td:first-child { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; font-weight: 600; width: 190px; }
+.fdesc td:nth-child(2) { width: 150px; }
+.fdesc td:last-child { color: var(--muted); }
 </style>
 
 <div class="page">
@@ -278,6 +291,7 @@ table.t { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-
   </div>
   <div class="frame-scroll" id="frameWrap"><div id="frame"></div></div>
   <ol class="notes" id="notes"></ol>
+  <section class="fdesc" id="fdesc"></section>
 </div>
 
 <script>
@@ -556,21 +570,23 @@ function attendance(o) {
     const temps = a[9].length ? a[9].map(t => `<span class="read${t.startsWith("37.9") ? " hot" : ""}">${t.startsWith("37.9") ? "⚠ " : ""}${t} °C</span>`).join("") + ` <span class="tag">${a[9].length} of 3</span>${a[0] === "AT" ? A(3) : ""}` : '<span style="color:var(--muted)">—</span>';
     return tr([who(a[0], a[1] + (a[3] ? ' <span class="badge solid">⚠ Severe</span>' : ""), a[2]),
       `<span class="tag${a[4] === "Present" ? " solid" : ""}">${a[4]}</span>`,
-      `${a[5]}${a[10] === "late" ? ` <span class="tag dash">Late (staff only)</span>${A(2)}` : ""}<small>out ${a[6]}</small>`,
-      `<small style="margin:0">Dropped off by</small>${a[7]}${a[0] === "NT" ? A(1) : ""}<small>Picked up by</small>${a[8]}`,
-      temps + ' <span class="lnk" style="font-size:12px">Add reading</span>',
+      `${a[5]}${a[10] === "late" ? ` <span class="tag dash">Late (staff only)</span>${A(2)}` : ""}`,
+      a[6],
+      `${a[7]}${a[0] === "NT" ? A(1) : ""}`,
+      a[8],
+      temps,
       '<span class="btn sm">Sign out</span> <span class="act">⋯</span>'], a[3]);
   });
   if (o.bus) return head("Class attendance", "Bus 2 · Tampines North — children on this bus. Each child is signed in on their own, with a photo.", '<span class="btn">⤓ Export</span>')
     + utabs([["Class attendance"], ["Overview by centre"], ["Late arrival", 1], ["Void log"]], 0)
     + tb("Search child", 2) + flt("Small Wonder Tampines", "All classes", "Today · 24/11/2026", ["Bus 2 · Tampines North"], "Any status")
-    + table(["Child", "!Class", "!Status", "!Handover", "!"], [tr([who("CL", "Chloe Lim Xin Yi", "N2 · 4y"), "N2 · Sunbeams", '<span class="tag">Not signed in</span>', '<small style="margin:0">Dropped off by</small>Bus driver · Bus 2' + A(1), '<span class="btn sm">Sign in</span>']),
-      tr([who("LK", "Lucas Koh", "K1 · 5y 6m"), "K1 · Honeycombs", '<span class="tag solid">Present</span>', '<small style="margin:0">Dropped off by</small>Bus driver · Bus 2<small>📷 Photo · 08:05</small>', '<span class="act">⋯</span>'])]);
+    + table(["Child", "!Class", "!Status", "!Handover_In", "!Handover_Out", "!"], [tr([who("CL", "Chloe Lim Xin Yi", "N2 · 4y"), "N2 · Sunbeams", '<span class="tag">Not signed in</span>', 'Bus driver · Bus 2' + A(1), "—", '<span class="btn sm">Sign in</span>']),
+      tr([who("LK", "Lucas Koh", "K1 · 5y 6m"), "K1 · Honeycombs", '<span class="tag solid">Present</span>', 'Bus driver · Bus 2<small>📷 Photo · 08:05</small>', "—", '<span class="act">⋯</span>'])]);
   return head("Class attendance", "The gate records arrival and departure; staff correct and void here.", '<span class="btn">⤓ Export</span>')
     + utabs([["Class attendance"], ["Overview by centre"], ["Late arrival", 1], ["Void log"]], 0)
     + `<div class="cnt"><div><b>3 of 4</b>signed in of expected</div><div><b>1</b>signed out</div><div><b>2</b>still in</div><div><b>1</b>absent</div><div><b>1</b>high temperature today</div></div>`
     + tb("Search child", 4, `<span class="tot">1 child with a severe allergy</span>`) + flt("Small Wonder Tampines", ["N2 · Sunbeams"], "Today · 24/11/2026", "All bus routes", "Any temperature")
-    + table(["Child", "!Status", "!In / out", "!Handover", "!Temperatures (°C)", "!"], rows);
+    + table(["Child", "!Status", "!In", "!Out", "!Handover_In", "!Handover_Out", "!Temperatures (°C)", "!"], rows);
 }
 function checkIn(o) {
   o = o || {};
@@ -798,6 +814,78 @@ let SCREENS = [
     { default: [["Chụp ảnh bắt buộc khi chấm công.", "Plane BBA-528"], ["Đã chấm vào thì thấy Clock out.", "SRS ATT"], ["HQ staff và khách chấm như khách, ghi mục đích.", "Plane BBA-528 · AS-06 · OQ-20"]], fever: [] })
 ];
 
+/* ===================== Field description cho Design ===================== */
+// [Field trên màn hình, Ý nghĩa, Mô tả: dữ liệu · định dạng · quy tắc hiển thị]
+const FD_LIST_KPI = ["Thẻ tổng hợp (đầu bảng)", [
+  ["Signed in of expected", "Đã nhận / dự kiến", "Số trẻ đã nhận hôm nay trên số trẻ dự kiến đến của lớp đang lọc. Định dạng \"3 of 4\"."],
+  ["Signed out", "Đã trả", "Số trẻ đã được đón về."],
+  ["Still in", "Đang ở trường", "Số trẻ đã nhận nhưng chưa trả."],
+  ["Absent", "Vắng", "Số trẻ vắng hôm nay."],
+  ["High temperature today", "Sốt hôm nay", "Số trẻ có ít nhất 1 lần đo ≥ ngưỡng sốt (mặc định 37.5 °C)."]]];
+const FD_FILTER = (bus) => ["Tìm kiếm & bộ lọc", [
+  ["Search child", "Tìm trẻ", "Ô tìm theo tên trẻ / mã trẻ."],
+  ["Total", "Tổng số", "Số trẻ trong danh sách theo bộ lọc hiện tại."]]
+  .concat(bus ? [] : [["1 child with a severe allergy", "Trẻ dị ứng nặng", "Số trẻ có dị ứng mức Severe trong danh sách — nhắc staff chú ý."]])
+  .concat([
+  ["Centre", "Cơ sở", "Dropdown. Mặc định Centre của người dùng."],
+  ["Class", "Lớp", "Dropdown, chọn 1 lớp hoặc All classes. Ô có viền xanh = đang lọc."],
+  ["Date", "Ngày điểm danh", "Mặc định hôm nay. Định dạng \"Today · DD/MM/YYYY\"."],
+  ["Bus route", "Tuyến xe", "Dropdown tuyến xe của Centre. Chỉ để gom trẻ đi cùng xe; nhận / trả vẫn từng trẻ."],
+  [bus ? "Status" : "Temperature", bus ? "Trạng thái" : "Nhiệt độ", bus ? "Lọc theo trạng thái điểm danh (Any status / Present / Not signed in…)." : "Lọc Any temperature / chỉ trẻ có lần đo sốt."]])];
+const FD_LIST_COLS = ["Cột bảng điểm danh", [
+  ["Child", "Thông tin trẻ", "Avatar (ảnh hoặc chữ viết tắt) + họ tên + dòng phụ \"Level · tuổi\" (vd N2 · 4y 9m). Trẻ dị ứng mức Severe có badge \"⚠ Severe\" và vạch đậm ở mép trái dòng."],
+  ["Status", "Trạng thái điểm danh", "Tag: Present (nền đặc) · Absent · Not signed in (viền)."],
+  ["In", "Giờ đến", "Giờ nhận trẻ ghi nhận ở cổng, HH:mm. \"—\" nếu chưa nhận. Đến sau giờ chốt của Centre: thêm tag \"Late (staff only)\" — không bao giờ hiện cho phụ huynh."],
+  ["Out", "Giờ về", "Giờ trả trẻ, HH:mm. \"—\" nếu chưa trả."],
+  ["Handover_In", "Người đưa trẻ đến", "Tên · quan hệ của người giao trẻ lúc nhận: phụ huynh, người đón đã duyệt, tài xế xe (Bus driver · Bus n), hoặc \"Someone else: tên · quan hệ\". \"—\" nếu chưa nhận."],
+  ["Handover_Out", "Người đón trẻ về", "Tên · quan hệ của người nhận trẻ lúc trả: chỉ người trong danh sách đón đã duyệt hoặc phụ xe (Bus attendant). \"—\" nếu chưa trả."],
+  ["Temperatures (°C)", "Nhiệt độ trong ngày", "Mỗi lần đo là 1 chip \"nhiệt độ · thời điểm · giờ\" (On arrival / After nap / Before pickup). Lần ≥ ngưỡng sốt: viền đậm, chữ đậm, có ⚠. Tag \"x of 3\" = số lần đã đo. Cột chỉ hiển thị, không có link Add reading. \"—\" nếu chưa đo."],
+  ["(Thao tác)", "Nút cuối dòng", "Sign in khi trẻ chưa nhận; Sign out khi trẻ đang ở trường; menu ⋯ cho thao tác phụ (vd Void record)."]]];
+const FD_BUS_COLS = ["Cột bảng (lọc theo xe)", [
+  ["Child", "Thông tin trẻ", "Avatar + họ tên + \"Level · tuổi\"."],
+  ["Class", "Lớp", "Tên lớp của trẻ (vd N2 · Sunbeams) — xe chở trẻ nhiều lớp."],
+  ["Status", "Trạng thái điểm danh", "Present · Not signed in."],
+  ["Handover_In", "Người đưa trẻ đến", "Xe đến: tài xế \"Bus driver · Bus n\". Sau khi nhận có dòng phụ \"📷 Photo · HH:mm\"."],
+  ["Handover_Out", "Người đón trẻ về", "Xe về: phụ xe \"Bus attendant · Bus n\". \"—\" nếu chưa trả."],
+  ["(Thao tác)", "Nút cuối dòng", "Sign in / Sign out từng trẻ; menu ⋯."]]];
+const FD_IN = (bus) => ["Popup Sign in — nhận trẻ", [
+  ["Tiêu đề", "Tên popup", "\"Sign in — [Tên trẻ]\"."],
+  ["Time *", "Giờ nhận", "HH:mm, mặc định giờ hiện tại, sửa được."],
+  ["Temperature *", "Nhiệt độ lúc đến", "Nút nhanh 36.3–36.7, mặc định chọn 36.5. \"Enter manually\" mở picker 36.0–40.0 °C, bước 0.1. Nhiệt kế Bluetooth tự điền, staff sửa được."],
+  ["Brought by *", "Người đưa trẻ", bus ? "Radio: phụ huynh, người đón đã duyệt, \"Bus driver · Bus n · tuyến\", Someone else." : "Radio: phụ huynh + người đón đã duyệt của trẻ (ghi rõ quan hệ) + \"Someone else\". Giá trị này hiện ở cột Handover_In."]]
+  .concat(bus ? [] : [
+  ["Name *", "Tên người đưa", "Chỉ hiện khi chọn Someone else. Text."],
+  ["Relationship *", "Quan hệ với trẻ", "Chỉ hiện khi chọn Someone else. Text. Thiếu tên hoặc quan hệ: không lưu, báo lỗi dưới ô \"Enter the name and relationship of the adult.\""]])
+  .concat([
+  ["Photo *", "Ảnh bàn giao", bus ? "Chụp ảnh trẻ cùng tài xế, bắt buộc, mỗi trẻ 1 ảnh." : "Chụp ảnh trẻ cùng người đưa, bắt buộc. Phụ huynh thấy ảnh trong Parents App."],
+  ["Cancel / Sign in", "Nút", "Sign in là nút chính."]])];
+const FD_OUT = (bus) => ["Popup Sign out — trả trẻ", [
+  ["Tiêu đề", "Tên popup", "\"Sign out — [Tên trẻ]\"."],
+  ["Time *", "Giờ trả", "HH:mm, mặc định giờ hiện tại."],
+  ["Collected by *", "Người đón trẻ", (bus ? "Radio: người đón đã duyệt + \"Bus attendant · Bus n · tuyến\" + Not on the list. " : "Radio: danh sách người đón đã duyệt — avatar, tên · quan hệ · 4 ký tự cuối giấy tờ (••••567D). Người \"Pending approval\" hiện mờ, viền đứt, không chọn được. ") + "Giá trị này hiện ở cột Handover_Out."],
+  ["Not on the list", "Người lạ", "Chọn mục này: hiện cảnh báo \"⚠ Do not release the child\" (viền đậm), ẩn ô chụp ảnh, nút Sign out bị khoá. Không có override."],
+  ["Photo *", "Ảnh bàn giao", bus ? "Chụp ảnh trẻ cùng phụ xe, bắt buộc." : "Chụp ảnh trẻ cùng người đón, bắt buộc."],
+  ["Cancel / Sign out", "Nút", "Sign out là nút chính."]]];
+const FD_OFF = ["iPad cổng — mất mạng", [
+  ["Thanh trên", "Header iPad", "Tên Centre · menu Children / Staff / Visitors / Sync queue (n) · trạng thái ● Online / ○ Offline."],
+  ["Tiêu đề", "Thao tác đang làm", "\"Sign out — [Tên trẻ] · [Lớp]\" + tag ngày giờ DD/MM/YYYY · HH:mm."],
+  ["Collected by *", "Người đón trẻ", "Như popup Sign out; danh sách lấy theo lần đồng bộ gần nhất, ghi chú \"as of the last sync, DD/MM/YYYY HH:mm\"."],
+  ["Photo *", "Ảnh bàn giao", "Bắt buộc."],
+  ["Thông báo offline", "Alert", "Lượt trả lưu trên iPad, gửi khi có mạng; phụ huynh nhận thông báo lúc đó."],
+  ["n records waiting to sync", "Số bản ghi chờ", "Số lượt nhận / trả đang chờ đồng bộ."]]];
+const FDESC = { b73: {
+  default: [FD_LIST_KPI, FD_FILTER(0), FD_LIST_COLS],
+  checkin: [FD_IN(0)], checkinerr: [FD_IN(0)], busin: [FD_IN(1)],
+  checkout: [FD_OUT(0)], blocked: [FD_OUT(0)], busout: [FD_OUT(1)],
+  bus: [FD_FILTER(1), FD_BUS_COLS], offline: [FD_OFF] } };
+function renderFdesc(sid, st) {
+  const m = FDESC[sid], g = m && (m[st] || m.default);
+  if (!g) { $("fdesc").hidden = true; return; }
+  $("fdesc").hidden = false;
+  $("fdesc").innerHTML = `<h3>Mô tả field trên màn hình</h3><p>Cho Design: mỗi field hiển thị gì, lấy dữ liệu nào, quy tắc hiển thị. Dấu * = bắt buộc.</p>`
+    + g.map(([title, rows]) => `<div><h4>${title}</h4><table><thead><tr><th>Field</th><th>Ý nghĩa</th><th>Mô tả</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div>`).join("");
+}
+
 const ONLY = {"b73": ["default", "checkin", "checkinerr", "checkout", "blocked", "bus", "busin", "busout", "offline"]};
 SCREENS = SCREENS.filter(s => s.id in ONLY).map(s => ONLY[s.id] ? Object.assign({}, s, { states: s.states.filter(x => ONLY[s.id].includes(x[0])) }) : s);
 let current = { screen: SCREENS[0].id, state: "default" };
@@ -812,6 +900,7 @@ function render() {
   $("frame").innerHTML = st[2]();
   const n = (s.notes[st[0]] && s.notes[st[0]].length ? s.notes[st[0]] : s.notes.default) || [];
   $("notes").innerHTML = n.map((x, i) => x.length ? `<li value="${i + 1}">${x[0]} <span class="src">${x[1]}</span></li>` : "").join("");
+  renderFdesc(s.id, st[0]);
 }
 $("states").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { current.state = b.dataset.state; render(); } });
 function fromHash() { const h = location.hash.slice(1); current = { screen: SCREENS.some(x => x.id === h) ? h : SCREENS[0].id, state: "default" }; render(); }

@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 15/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -126,14 +126,36 @@ Là giáo viên, tôi muốn xem và in danh sách dị ứng của lớp mình,
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Tìm kiếm | Ô nhập | Không | Trống | — | Tên trẻ, chất gây dị ứng. |
-| Centre, Class, Severity, Type, Review | Bộ lọc | Không | Theo vai trò (FR-005) | VAL-001. | FR-004. |
-| Danh sách dị ứng | Bảng | Có | Nặng nhất lên đầu | — | Cột: Child (kèm Note from staff), Type · allergen · severity, Symptoms, Can tolerate, Emergency action plan · medication, Next review (FR-001; FR-002; FR-013). |
-| Awaiting assessment | Nhãn dưới tên trẻ | Khi có | — | — | FR-014. |
-| Health information not provided | Nhóm cuối danh sách | Khi có | — | — | Kèm "Contact the family" (FR-012). |
-| Other conditions and diet | Bảng | Khi có | — | — | FR-003. |
-| Print for the kitchen | Nút | Có | — | VAL-001. | FR-007. |
-| Export | Nút | Có | — | VAL-001. | FR-008. |
+| **SCR-01 — Allergies & conditions (Medical Health Alert List)** | | | | | |
+| Breadcrumb | Đường dẫn | — | Health & allergies › Allergies & conditions | — | Mục menu "Health & allergies" được tô sáng. |
+| Allergies & conditions | Tiêu đề màn hình | — | — | — | Tên màn hình = Medical Health Alert List; dòng mô tả: dữ liệu lấy từ Medical Care Assessment của từng trẻ, đã được Centre xác nhận. |
+| Export (n) | Nút | Theo quyền | n = số trẻ đang hiển thị | VAL-001. | Xuất danh sách đang lọc (FR-008). |
+| Print for the kitchen | Nút chính | Theo quyền | — | VAL-001. | Mở bản in theo bộ lọc đang chọn (FR-007; SCR-02). |
+| Allergies & conditions · Growth | Tab | — | Allergies & conditions | — | Badge = số trẻ; tab Growth là BBA-70. |
+| Search child | Ô tìm kiếm | Không | Trống | — | Tìm theo tên trẻ. |
+| Total | Số | — | — | — | Số trẻ khớp tìm kiếm và bộ lọc. |
+| Centre | Bộ lọc | Không | Centre của người dùng | — | FR-005. |
+| Class | Bộ lọc | Không | All classes | — | Chọn một lớp thì ô lọc có viền nhấn. |
+| Type | Bộ lọc | Không | All | — | Lọc theo cột Type. |
+| Vaccination | Bộ lọc | Không | Any | — | Lọc theo cột Vaccination. |
+| Updated | Bộ lọc | Không | Any time | — | Lọc theo khoảng ngày của cột Updated by the family. |
+| Child | Cột | — | — | — | Avatar (ảnh hoặc chữ viết tắt) và họ tên; sắp xếp được; chọn tên mở tab Health (FR-009). |
+| Class | Cột | — | — | — | Level · tên lớp hiện tại; sắp xếp được. |
+| Type | Cột | — | — | — | Food, Environmental, Medication, Insect, Medical condition, Medical history; sắp xếp được. |
+| From the family | Cột | — | — | — | Nguyên văn phụ huynh khai trong Medical Care Assessment (chất gây dị ứng, triệu chứng, cách xử trí…); hiển thị bản đã được Centre xác nhận (BR-001). |
+| Note from staff | Cột | — | "—" khi không có | — | Ghi chú nội bộ của Centre. |
+| Vaccination | Cột (nhãn) | — | — | — | Tình trạng tiêm chủng: Up to date — nhãn viền liền; Not up to date / Not provided — nhãn viền đứt; sắp xếp được. |
+| Updated by the family | Cột | — | — | — | Lần cuối phụ huynh cập nhật (DD/MM/YYYY HH:mm); sắp xếp được; bản cập nhật chưa được đánh giá có nhãn "Awaiting assessment" bên dưới (FR-014). |
+| Dòng trẻ chưa khai thông tin | Dòng cuối bảng | Khi có | — | — | Trẻ chưa điền Medical Care Assessment, luôn ở cuối danh sách; ô From the family và Note from staff gộp lại, hiện câu thông báo và "Contact the family"; ẩn khi lớp đang lọc không có trẻ nào chưa khai (FR-012). |
+| Pager | Phân trang | — | 20 dòng / trang | — | "1–n of n", chọn số dòng mỗi trang. |
+| **SCR-02 — Print for the kitchen** | | | | | |
+| Allergies — {phạm vi} | Tiêu đề bản in | — | — | — | Phạm vi đang lọc khi bấm in: tên Centre, tên lớp, hoặc "All my centres" nếu người dùng xem nhiều Centre. |
+| n children | Text | — | — | — | Số trẻ trên bản in, dưới tiêu đề. |
+| Printed … | Text | — | Ngày in | — | Căn phải, cùng hàng với số trẻ; bên dưới là đường kẻ đậm ngăn phần đầu với bảng (BR-003). |
+| Child | Cột in | — | — | — | Họ tên in đậm. |
+| Class | Cột in | — | — | — | Level · tên lớp. |
+| Allergies | Cột in | — | — | — | Nội dung cột From the family; chỉ trẻ có Type là Food, Environmental, Medication, Insect. |
+| Kiểu bảng in | Định dạng | — | — | — | Không kẻ dọc; kẻ đậm dưới tiêu đề cột, kẻ mảnh giữa các dòng; không có ảnh trẻ, không có chân trang. |
 
 #### Data and Audit (Dữ liệu và audit)
 

@@ -11,7 +11,7 @@
 | Sprint | 4 |
 | Phiên bản | 0.2 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 15/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -136,19 +136,58 @@ Là giáo viên, tôi muốn nhập chiều cao và cân nặng của cả lớp
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Class | Danh sách chọn | Có | Lớp đầu tiên của giáo viên | — | Giáo viên chỉ thấy lớp mình. |
-| Term | Danh sách chọn | Có | Term hiện tại | — | Term 1–4 theo lịch term của brand, mọi brand kể cả Brighton. |
-| Date measured | Ngày | Có | Hôm nay | VAL-003. | — |
-| Height (cm) | Số, 1 chữ số thập phân | Khi nhập dòng | Trống | VAL-001; VAL-002. | — |
-| Weight (kg) | Số, 1 chữ số thập phân | Khi nhập dòng | Trống | VAL-001; VAL-002. | — |
-| Nhóm "Absent today · Temporary withdrawal" | Nhóm dòng | Khi có | — | — | FR-002. |
-| Save the whole class | Nút | Có | — | — | FR-003. |
-| Delete | Nút ở số đo đã lưu | Theo quyền | — | — | FR-010. |
-| Enter this term / Year view | Nút chuyển chế độ | Có | Enter this term | — | FR-013. |
-| Year | Danh sách chọn (Year view) | Có | Năm hiện tại | — | FR-013. |
-| Export (Excel) | Nút (Year view) | Theo quyền | — | — | FR-013. |
-| Biểu đồ Height / Weight for age | Biểu đồ trên hồ sơ trẻ | — | Height | — | FR-004; FR-012; chờ OQ-07. |
-| Measurement history | Bảng trên hồ sơ trẻ | — | Mới nhất lên đầu | — | FR-012. |
+| **SCR-01 — Height & weight — nhập theo lớp** | | | | | |
+| Height & weight | Tiêu đề màn hình | — | — | — | Màn nhập chiều cao, cân nặng theo lớp. |
+| Save the whole class | Nút chính | Có | Chỉ bật khi có ít nhất 1 ô được nhập / sửa | VAL-001; VAL-002; VAL-003. | Lưu một lần số đo của mọi trẻ đã nhập; phụ huynh thấy ngay sau khi lưu (FR-003; FR-008). |
+| Allergies & conditions · Growth | Tab | — | Growth | — | Tab trong mục Health & allergies. |
+| Enter this term · Year view | Chip chọn 1 | Có | Enter this term | — | Chuyển giữa nhập số đo kỳ hiện tại và bảng cả năm (FR-013). |
+| Centre | Danh sách chọn | Không | Centre của người dùng | — | Người quản lý nhiều Centre mới đổi được. |
+| Class | Danh sách chọn | Có | — | — | Lớp cần nhập; đổi lớp thì danh sách trẻ đổi theo. |
+| Term | Danh sách chọn | Có | Kỳ hiện tại, ví dụ "Term 4 · 2026" | — | Term 1–4 (Brighton: Semester 1–2) (FR-001). |
+| Date measured | Chọn ngày | Có | Hôm nay | VAL-003. | DD/MM/YYYY; áp cho mọi trẻ được lưu lần này. |
+| Term … — x of y recorded | Text | — | — | — | Số trẻ đã có số đo trong kỳ / tổng số trẻ của lớp; cập nhật sau mỗi lần lưu. |
+| Reminder sent to the centre on … | Text | — | Ẩn nếu chưa gửi | — | Ngày hệ thống gửi nhắc Centre (giữa tháng cuối của kỳ), DD/MM/YYYY (FR-011). |
+| Child | Cột | — | — | — | Họ tên đầy đủ của trẻ; không sửa được. |
+| Age | Cột | — | — | — | Tuổi tại ngày đo, dạng "4y 9m"; không sửa được. |
+| Already recorded this term | Cột (nhãn) | — | "Not recorded yet" khi chưa đo | — | Số đo đã lưu trong kỳ đang chọn, ví dụ "107 cm · 17.6 kg" (nhãn nền xám); sửa số ở ô bên cạnh rồi lưu là ghi đè, số cũ giữ trong lịch sử (FR-006). |
+| Height (cm) | Ô nhập số, 1 chữ số thập phân | Khi nhập dòng | Số đã lưu trong kỳ, nếu có; trống hiện "—" | VAL-001; VAL-002. | Để trống thì không lưu cho trẻ đó; khoảng hợp lệ chờ OQ-03. |
+| Weight (kg) | Ô nhập số, 1 chữ số thập phân | Khi nhập dòng | Số đã lưu trong kỳ, nếu có; trống hiện "—" | VAL-001; VAL-002. | Để trống thì không lưu cho trẻ đó; khoảng hợp lệ chờ OQ-03. |
+| Saved n measurements · the family can see them now | Thông báo (toast) | — | Tự ẩn | — | Báo lưu thành công kèm số trẻ vừa lưu. |
+| **SCR-02 — Height & weight — Year view** | | | | | |
+| Height & weight | Tiêu đề màn hình | — | — | — | Dòng phụ ghi đây là bảng cả năm theo mẫu Quarterly Heights & Weight Report. |
+| Export (Excel) | Nút | Theo quyền | — | — | Xuất bảng đang xem đúng bố cục mẫu Taidii; đầu file ghi Centre, Class, Year, Generated on (FR-013). |
+| Centre, Class, Year | Danh sách chọn | Class, Year: có | Year hiện tại, ví dụ "Year 2026" | — | Chọn lớp và năm cần xem. |
+| No. | Cột | — | — | — | Số thứ tự. |
+| Child | Cột | — | — | — | Họ tên đầy đủ. |
+| Birthdate | Cột | — | — | — | DD/MM/YYYY. |
+| IC / BC No. | Cột | — | — | — | Số giấy tờ của trẻ, che bớt theo vai trò người xem, ví dụ "••••482K" (BBA-66). |
+| Programme | Cột | — | — | — | Level và loại buổi, ví dụ "N2 full day". |
+| Term 1 – Term 4 · Height cm / Weight kg | Cột hai tầng | — | Kỳ chưa đo hiện "—" | — | Mỗi kỳ 2 cột con, số 1 chữ số thập phân. |
+| Thông báo Brighton | Thông báo | — | Chỉ hiện khi Centre thuộc Brighton | — | Brighton đo theo học kỳ nhưng file xuất vẫn có cột Term 1–4 (chờ OQ-08). |
+| **SCR-03 — Child record — Health › Growth** | | | | | |
+| Phần đầu hồ sơ trẻ | Component dùng chung | — | — | — | Ảnh, tên, mã trẻ, trạng thái, Centre / lớp, cảnh báo y tế. |
+| Allergies & conditions · Growth | Chip chọn 1 | — | Growth | — | Mục con của tab Health. |
+| + Add measurement | Nút chính | Theo quyền | — | VAL-001; VAL-002; VAL-003. | Nhập số đo cho riêng một trẻ: Term, Date measured, Height, Weight (FR-007). |
+| Height for age · Height / Weight | Biểu đồ đường, chip chọn 1 | — | Height | — | Biểu đồ tăng trưởng theo tuổi; ghi chú chuẩn tham chiếu: Singapore theo NHG Polyclinics, Malaysia theo Child Health Record Book; không có BMI (FR-004; chờ OQ-07). |
+| Term | Cột | — | — | — | Ví dụ "Term 4 · 2026". |
+| Date measured | Cột | — | — | — | DD/MM/YYYY. |
+| Height (cm), Weight (kg) | Cột | — | — | — | Số 1 chữ số thập phân. |
+| Change since last term | Cột | — | Lần đo đầu tiên hiện "—" | — | Ví dụ "+1.5 cm · +0.5 kg" (FR-012). |
+| Recorded by | Cột | — | — | — | Người nhập, vai trò và nơi nhập (class entry / child record). |
+| Edit · Delete | Liên kết | Theo quyền | — | — | Sửa hoặc xoá một lần đo; Delete mở hộp xác nhận (FR-010). |
+| Measurement history · n measurements | Text | — | — | — | Tổng số lần đo của trẻ. |
+| Delete this measurement? | Hộp xác nhận | — | — | — | Hiện tên trẻ, kỳ, chiều cao, cân nặng, ngày đo của số đo sắp xoá; ghi rõ phụ huynh không thấy số đo này nữa và lần xoá vẫn lưu trong History; nút Cancel · Delete (FR-010). |
+| **SCR-04 — Height & weight completion** | | | | | |
+| Height & weight completion | Tiêu đề màn hình | — | — | — | Tỉ lệ trẻ đã được đo trong kỳ theo Centre và lớp; chỉ trạng thái hoàn thành, không có số liệu tăng trưởng (FR-009). |
+| Export (n) | Nút | Theo quyền | n = số dòng | — | Xuất danh sách đang lọc. |
+| Search centre or class | Ô tìm kiếm | Không | Trống | — | Tìm theo tên Centre hoặc lớp. |
+| Total | Số | — | — | — | Số dòng kết quả. |
+| Centre | Danh sách chọn | Không | All centres | — | Lọc theo Centre. |
+| Term | Danh sách chọn | Không | Kỳ hiện tại | — | Kỳ cần xem. |
+| Centre, Class | Cột | — | — | — | Tên Centre; lớp dạng level · tên lớp. |
+| Children | Cột | — | — | — | Tổng số trẻ của lớp. |
+| Measured | Cột | — | — | — | Số trẻ đã có số đo trong kỳ. |
+| Completed | Cột | — | — | — | Measured / Children, phần trăm làm tròn số nguyên. |
 
 #### Data and Audit (Dữ liệu và audit)
 
