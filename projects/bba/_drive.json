@@ -131,13 +131,13 @@
       "synced_at": "2026-11-12 01:29"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
-      "file_id": "1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ",
-      "url": "https://drive.google.com/file/d/1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ/view",
+      "file_id": "1xNuiAx0z5EQ7ijvX67FCKGoEMSMPjV9U",
+      "url": "https://drive.google.com/file/d/1xNuiAx0z5EQ7ijvX67FCKGoEMSMPjV9U/view",
       "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 2.8 Approval Delegation (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "3f2e2294fcbafd921cc1bf4af1196618699e3c371a05a9becdbe7ad9f8443b86",
-      "synced_at": "2026-11-13 04:35"
+      "title": "[FRD] BBA-50-1.1.2.07 Approval delegation (Tiếng Việt).docx",
+      "version": "0.3",
+      "source_sha256": "de423fb142da1e81066a6a192f7c877692dfb3a3472d036b9890125c58ac32fa",
+      "synced_at": "2026-11-16 09:23"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
       "file_id": "1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja",
@@ -810,6 +810,17 @@
       "synced_at": "2026-11-13 01:59",
       "key": "FSD/Sprint 4/3.1_Child_Record_Overview_VI",
       "replaced_at": "2026-11-13 09:26"
+    },
+    {
+      "file_id": "1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ",
+      "url": "https://drive.google.com/file/d/1k4Qh7c_ViSHWLKIOcu86ExsIeSbDh4fQ/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Approval Delegation (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "3f2e2294fcbafd921cc1bf4af1196618699e3c371a05a9becdbe7ad9f8443b86",
+      "synced_at": "2026-11-13 04:35",
+      "key": "FSD/Sprint 4/2.8_Approval_Delegation_VI",
+      "replaced_at": "2026-11-16 09:23"
     }
   ]
 }
