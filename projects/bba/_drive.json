@@ -140,31 +140,31 @@
       "synced_at": "2026-11-18 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
-      "file_id": "1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja",
-      "url": "https://drive.google.com/file/d/1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-51-Impact Preview Before Change (Tiếng Việt) - Sprint 4.docx",
+      "file_id": "1tHwcLD8iFm8lyR1HM8GamqVDVVpZ-Fam",
+      "url": "https://drive.google.com/file/d/1tHwcLD8iFm8lyR1HM8GamqVDVVpZ-Fam/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "b89ee438e1aa1fd2e3de51e8c1b2255781dc6ce6220fa6e118d77063559cb149",
-      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+      "source_sha256": "9e65163795cefbce65e01952eb388572974aa3531323c3fe308947c80a4f8784",
+      "synced_at": "2026-11-18T12:06:27+00:00"
     },
     "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI": {
-      "file_id": "1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je",
-      "url": "https://drive.google.com/file/d/1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-52-1.3.1.03 Change request and second approval (Tiếng Việt) .docx",
-      "version": "0.1",
-      "source_sha256": "a3c943e664d17b2f2e1f0a9547065728afef883c5dac23f8859f63c3c21fe0f3",
-      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+      "file_id": "1JAqYutyq888KB0bc_6m0ezzvUSzhaXcj",
+      "url": "https://drive.google.com/file/d/1JAqYutyq888KB0bc_6m0ezzvUSzhaXcj/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "121099147c80cc0d21deefc34b8731274f4276e3250b64d999de750ec5380e49",
+      "synced_at": "2026-11-18T12:06:27+00:00"
     },
     "FSD/Sprint 4/2.8_Approval_Flows_Configuration_VI": {
-      "file_id": "1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi",
-      "url": "https://drive.google.com/file/d/1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-53-1.5.5.01-Approval Flows Configuration (Tiếng Việt) - Sprint 4.docx",
+      "file_id": "1SqURFCdGMP6R1uG-S0j1Hp7GepkzUKVC",
+      "url": "https://drive.google.com/file/d/1SqURFCdGMP6R1uG-S0j1Hp7GepkzUKVC/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-53-1.5.5.01_Approval_Flows_Configuration_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "d32c481fa83b3527593e8cc63c584c352e35c4ea3facf1ac1b603723671b9038",
-      "synced_at": "2026-11-10 09:00 (từ Drive về Git)"
+      "source_sha256": "39880d6bb98d79a0dc1a70b4c614ada96c1ac45fa7753ad6c2e989249ea054d3",
+      "synced_at": "2026-11-18T12:06:27+00:00"
     },
     "FSD/Sprint 4/2.8_Approval_Delegation": {
       "file_id": "12GGYhBzZ9ZKHcWWyIWTfxrVYVNGMMcUw",
@@ -856,6 +856,46 @@
       "note": "15/11/2026: UI Components / Field Specification theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1Z4UlMZYN_VMsMm1ytKLvLoOxChTKb_7D trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI",
       "replaced_at": "2026-11-18 03:51"
+    },
+    {
+      "file_id": "1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja",
+      "url": "https://drive.google.com/file/d/1lDQMVIroJtouGM2wzOkBx9E5BIfCPxja/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-51-Impact Preview Before Change (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "b89ee438e1aa1fd2e3de51e8c1b2255781dc6ce6220fa6e118d77063559cb149",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
+      "replaced_at": "2026-11-18T12:06:27+00:00"
+    },
+    {
+      "file_id": "1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je",
+      "url": "https://drive.google.com/file/d/1YJKyjHgmYGRta-4PkV96PsaIYdO9p9Je/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-52-1.3.1.03 Change request and second approval (Tiếng Việt) .docx",
+      "version": "0.1",
+      "source_sha256": "a3c943e664d17b2f2e1f0a9547065728afef883c5dac23f8859f63c3c21fe0f3",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
+      "replaced_at": "2026-11-18T12:06:27+00:00"
+    },
+    {
+      "file_id": "1LRX9f7Zqg1XfPzmBPm6qzBtWDWPozAz0",
+      "title": "[FRS] BBA-52-1.3.1.03 Change request and second approval_v0.2_VI.docx",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
+      "replaced_at": "2026-11-18T12:06:27+00:00"
+    },
+    {
+      "file_id": "1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi",
+      "url": "https://drive.google.com/file/d/1XTiGVd2lemweY0HJfWn_hRo3AzinKtDi/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-53-1.5.5.01-Approval Flows Configuration (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "d32c481fa83b3527593e8cc63c584c352e35c4ea3facf1ac1b603723671b9038",
+      "synced_at": "2026-11-10 09:00 (từ Drive về Git)",
+      "key": "FSD/Sprint 4/2.8_Approval_Flows_Configuration_VI",
+      "replaced_at": "2026-11-18T12:06:27+00:00"
     }
   ]
 }
