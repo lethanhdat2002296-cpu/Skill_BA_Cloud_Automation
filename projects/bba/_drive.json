@@ -233,14 +233,14 @@
       "note": "15/11/2026: UI Components / Field Specification theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1Z4UlMZYN_VMsMm1ytKLvLoOxChTKb_7D trong thùng rác."
     },
     "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
-      "file_id": "1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9",
-      "url": "https://drive.google.com/file/d/1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "file_id": "1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q",
+      "url": "https://drive.google.com/file/d/1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "2e1cdf2b0d16777039ded1c7e83d97c3f6658ddc6c942ba10dd09a647ed89c9d",
-      "synced_at": "2026-11-15 05:57",
-      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1SvfMrtRRNjIgELtBiFvkVo9g-UWESckX trong thùng rác."
+      "version": "0.3",
+      "source_sha256": "e966579e25fbe71b8d7247ea8308491730eee69db460e24910024eecb2414a2b",
+      "synced_at": "2026-11-19T07:08:35+00:00",
+      "note": "19/11/2026: v0.3; 2 comment của Mỹ Hải (DOTB) chèn lại. File cũ 1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9 trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
       "file_id": "1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v",
@@ -929,6 +929,18 @@
       "synced_at": "2026-11-18T12:06:27+00:00",
       "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
       "replaced_at": "2026-11-19T07:04:51+00:00"
+    },
+    {
+      "file_id": "1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9",
+      "url": "https://drive.google.com/file/d/1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "2e1cdf2b0d16777039ded1c7e83d97c3f6658ddc6c942ba10dd09a647ed89c9d",
+      "synced_at": "2026-11-15 05:57",
+      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1SvfMrtRRNjIgELtBiFvkVo9g-UWESckX trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI",
+      "replaced_at": "2026-11-19T07:08:35+00:00"
     }
   ]
 }

@@ -9,9 +9,9 @@
 | Mã WBS | 3.1.4.01 |
 | Mã tài liệu | FRD-BBA-71 |
 | Sprint | 4 |
-| Phiên bản | 0.2 |
+| Phiên bản | 0.3 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 15/11/2026 |
+| Ngày | 16/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -21,6 +21,7 @@
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
 | 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
+| 0.3 | 16/11/2026 | Business Analysis | Viết lại FR dạng tổng quan: mỗi FR một câu; quy tắc chi tiết chuyển xuống Business Rules (nhiều dòng cùng loại theo sự kiện, gửi qua Announcement, nơi nhắc / gửi lại, Summary of changes, vòng đời Expired, người nhận, điều kiện Crossroad); chi tiết giao diện giữ ở UI Components. FR, BR đánh số lại liên tục. Mục 4, mục 5 viết gọn theo mẫu chung. |  |
 
 **Mức sẵn sàng:** Đã đặc tả tạo và gửi consent theo lớp / Centre, trạng thái consent của từng trẻ, nhắc và gửi lại, ghi nhận câu trả lời, phiên bản, vòng đời theo loại, thẻ tỷ lệ trả lời và Consent compliance; có wireframe.
 
@@ -40,24 +41,22 @@ Mục tiêu đo được: từ hồ sơ trẻ, nhân viên thấy trạng thái 
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Authorised User | Consent của trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có (lớp hoặc Centre). | Tạo, gửi, nhắc, gửi lại consent, công bố phiên bản mới và xem Consent compliance — mỗi thao tác khi vai trò được cấp quyền. |
-| Consent Viewer | Consent của trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Xem trạng thái consent của trẻ; không có nút thao tác. |
-| System | Consent đã tạo và câu trả lời của phụ huynh. | Tạo Announcement kèm link, tự nhắc 1 ngày trước ngày đóng, đếm số lần nhắc, chuyển Expired, tick checklist học sinh, gửi thông báo khi Media release bị rút lại, lưu lịch sử. |
-| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
+| Authorised User | Consent của trẻ trong lớp / Centre được cấp. | Tạo, gửi, nhắc, gửi lại, công bố phiên bản mới; xem Consent compliance. |
+| Consent Viewer | Consent của trẻ trong phạm vi được cấp. | Chỉ xem trạng thái consent. |
+| System | Consent và câu trả lời của phụ huynh. | Gửi thông báo, tự nhắc, chuyển Expired, tick checklist, lưu lịch sử. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi được cấp. | Không thấy và không thao tác được. |
 
 Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
 
-## 5. Tổng quan tính năng
+## 5. Tổng quan tính năng và phân rã chức năng
 
-| Khu vực | Chức năng | User Story |
-|---|---|---|
-| Hồ sơ trẻ › Documents › Consents | Trạng thái consent của trẻ, nhắc, gửi lại, lịch sử. | US-001 |
-| Communication › Surveys & consents | Tạo và gửi consent, thẻ "x of y families answered", công bố phiên bản mới. | US-001 |
-| Daily operations › Safety overview › Consent compliance | Trẻ còn thiếu consent theo Centre, lớp. | US-001 |
+| Module | Tính năng | Mô tả | User Story |
+|---|---|---|---|
+| **Children & Families / Communication** | Consent của từng trẻ | Trạng thái consent trên hồ sơ trẻ; tạo, gửi, nhắc, gửi lại, công bố phiên bản mới; danh sách trẻ còn thiếu consent. | BBA-71: US-001 |
 
 ## 6. Yêu cầu chức năng
 
-### 6.1 US-001 - Trạng thái consent của từng trẻ và gửi yêu cầu
+### 6.1 BBA-71: US-001 - Trạng thái consent của từng trẻ và gửi yêu cầu
 
 #### User Story
 
@@ -67,35 +66,32 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-001 | Tab Documents của hồ sơ trẻ có khu vực "Consents" chỉ xem, mỗi dòng một consent của trẻ với các cột: Consent (loại theo danh mục Consent Types), Event (sự kiện gắn với consent, "—" nếu không theo sự kiện), Status, Answer (người trả lời tên · quan hệ; dòng phụ ngày trả lời · kênh Parents App / Registration form; "—" nếu chưa trả lời), Last action (Sent / Reminded / Answered / New version published; dòng phụ ngày và chi tiết như ngày gửi, số lần nhắc), Closing date ("—" nếu không có hạn). Nút "Open Surveys & consents" mở nơi tạo, nhắc, gửi lại consent. Một trẻ có thể có nhiều dòng cùng loại, mỗi dòng gắn một sự kiện (Q-73-14; wireframe 15/11/2026). |
+| FR-001 | Tab Documents của hồ sơ trẻ có khu vực Consents chỉ xem, liệt kê từng consent của trẻ và trạng thái. |
 | FR-002 | Trạng thái của mỗi dòng là một trong: Not sent, Waiting on the parent, Agreed, Declined, Withdrawn, Expired. |
-| FR-003 | Centre Director tạo consent ở Communication › Surveys & consents: loại, tên sự kiện (với loại theo sự kiện), nội dung, ngày đóng, đối tượng **theo lớp hoặc cả Centre** (Q-73-04). Khi gửi, hệ thống tạo **Announcement kèm link** tới consent (Q-73-08); email chỉ gửi kèm khi người tạo bật "Also send by email" (Q-73-08). Mỗi trẻ trong đối tượng có dòng trạng thái Waiting on the parent. |
-| FR-004 | "Remind" ở danh sách trẻ chưa trả lời của một consent (Surveys & consents — FR-012) gửi lại thông báo cho gia đình trẻ, tăng số lần nhắc và ghi ngày nhắc; cột Last action trên hồ sơ trẻ hiện "Reminded" kèm số lần nhắc. Hệ thống tự nhắc 1 ngày trước ngày đóng (SRS Parents App). Hồ sơ trẻ không có nút Remind (wireframe 15/11/2026). |
-| FR-005 | Khi phụ huynh trả lời trong Parents App, hệ thống lưu câu trả lời, chữ ký (nếu form yêu cầu), tên phụ huynh, ngày giờ, kênh, phiên bản; kết quả về SMS và **tự tick mục Consent trong checklist học sinh** (Q-73-08). |
-| FR-006 | Khi người có quyền công bố phiên bản mới của một consent, họ chọn "Ask families to agree again" (mọi trẻ về Not sent cho phiên bản mới) hoặc "Keep current answers" (câu trả lời phiên bản trước vẫn dùng). "Summary of changes" là bắt buộc (Plane BBA-488). |
-| FR-007 | Vòng đời theo loại (Q-73-12): Privacy policy, Medical authorisation, Media release — thu một lần lúc nhập học trong registration form, theo từng trẻ, không hết hạn; Field trip / learning journey và Ad hoc — dòng Waiting on the parent chuyển **Expired** khi qua ngày đóng; Crossroad — Agreed có hiệu lực tới hết năm học (tháng 12), đầu năm học sau chuyển Expired và cần gia hạn. |
-| FR-008 | "Send again" cho trẻ có consent Declined hoặc Expired thực hiện ở Surveys & consents, tạo một yêu cầu mới với ngày đóng mới; câu trả lời cũ giữ trong lịch sử. Hồ sơ trẻ không có nút Send again (wireframe 15/11/2026). |
-| FR-009 | Phụ huynh rút lại Media release hoặc consent dữ liệu (khi consent cho phép rút) → dòng chuyển Withdrawn; câu đồng ý ban đầu và việc rút lại đều được giữ; Centre Director và HQ Marketing nhận thông báo (Q-73-13: "Marketing cũng phải biết"). |
-| FR-010 | Mọi lần gửi, nhắc, trả lời, rút lại, đổi phiên bản được lưu kèm ngày giờ và người thực hiện; hồ sơ trẻ hiện thao tác gần nhất ở cột Last action; lịch sử đầy đủ xem ở bản ghi consent trong Surveys & consents (AS-06). |
-| FR-011 | Màn "Consent compliance" (Daily operations › Safety overview, tab Consent compliance — số trên tab là số trẻ còn thiếu consent) liệt kê trẻ còn thiếu consent theo Centre: Child (bấm mở hồ sơ trẻ), Class, Not sent, Waiting on the parent, Declined or withdrawn ("—" nếu không có); tìm theo tên trẻ; lọc Centre, Class, Consent, trạng thái trẻ (mặc định Enrolled), Status consent; "Export (n)" xuất ra Excel. |
-| FR-012 | Danh sách consent ở Surveys & consents (tab Consents) có các cột Consent, Type, Audience (danh sách lớp hoặc Whole centre), Closing date, Answered ("x of y") và thẻ tổng quan mỗi consent "x of y families answered"; chọn thẻ thì mở danh sách trẻ chưa trả lời (Child, Class, Last action kèm số lần đã nhắc, nút Remind); tìm theo tên consent / sự kiện; lọc theo Centre, Type, Class, Status, Closing date (Q-73-10 — mong muốn của BBA, DOTB thiết kế). |
-| FR-013 | Người nhận consent của một trẻ theo cấu hình lúc nhập học: "Both parents" (mặc định) hoặc "Primary contact only"; trường hợp đặc biệt (vd ly hôn) chọn một người (Q-73-07). |
-| FR-014 | Loại Crossroad chỉ chọn được cho Centre Singapore được đánh dấu "không có sân ngoài trời" (Q-73-04); nơi đánh dấu chờ OQ-09. |
+| FR-003 | Người dùng có quyền tạo và gửi consent cho các lớp hoặc cả Centre ở Communication › Surveys & consents. |
+| FR-004 | Người dùng có quyền nhắc gia đình chưa trả lời; hệ thống tự nhắc 1 ngày trước ngày đóng. |
+| FR-005 | Hệ thống lưu câu trả lời của phụ huynh và tự tick mục Consent trong checklist học sinh (Q-73-08). |
+| FR-006 | Người dùng có quyền công bố phiên bản mới của consent, chọn hỏi lại các gia đình hoặc giữ câu trả lời hiện có. |
+| FR-007 | Người dùng có quyền gửi lại consent cho trẻ Declined hoặc Expired; câu trả lời cũ giữ trong lịch sử. |
+| FR-008 | Phụ huynh rút lại Media release hoặc consent dữ liệu thì consent chuyển Withdrawn; Centre Director và HQ Marketing nhận thông báo (Q-73-13). |
+| FR-009 | Hệ thống lưu mọi lần gửi, nhắc, trả lời, rút lại, đổi phiên bản kèm ngày giờ và người thực hiện. |
+| FR-010 | Màn Consent compliance liệt kê trẻ còn thiếu consent theo Centre; tìm, lọc, xuất Excel. |
+| FR-011 | Tab Consents ở Surveys & consents liệt kê các consent kèm số gia đình đã trả lời và mở được danh sách trẻ chưa trả lời (Q-73-10). |
 
 #### Functional Flow - Main (Luồng chính)
 
 1. Centre Director tạo consent (vd Field trip "Singapore Zoo 28/11"), chọn lớp, ngày đóng, gửi; hệ thống tạo Announcement kèm link (FR-003).
 2. Phụ huynh trả lời trong Parents App; kết quả về SMS, tick checklist (FR-005).
-3. Centre Director xem thẻ "x of y answered" ở Surveys & consents, chọn để thấy trẻ chưa trả lời và nhắc (FR-012, FR-004).
+3. Centre Director xem thẻ "x of y answered" ở Surveys & consents, chọn để thấy trẻ chưa trả lời và nhắc (FR-011, FR-004).
 4. Centre Director mở hồ sơ trẻ, tab Documents, xem khu vực Consents (chỉ xem) (FR-001, FR-002).
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Phụ huynh không đồng ý hoặc consent quá ngày đóng: Centre Director mở Surveys & consents và chọn Send again (FR-007, FR-008).
+1. Phụ huynh không đồng ý hoặc consent quá ngày đóng: Centre Director mở Surveys & consents và chọn Send again (BR-012, FR-007).
 2. Consent có phiên bản mới: người công bố chọn yêu cầu đồng ý lại hoặc giữ câu trả lời (FR-006).
-3. Phụ huynh rút lại Media release (FR-009).
-4. Đầu năm học: Crossroad của năm trước chuyển Expired, Centre gửi gia hạn (FR-007).
-5. Centre Director mở Consent compliance để xem trẻ nào còn thiếu trước một hoạt động (FR-011).
+3. Phụ huynh rút lại Media release (FR-008).
+4. Đầu năm học: Crossroad của năm trước chuyển Expired, Centre gửi gia hạn (BR-012).
+5. Centre Director mở Consent compliance để xem trẻ nào còn thiếu trước một hoạt động (FR-010).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
@@ -115,6 +111,13 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 | BR-005 | Trẻ không có Media release đã Agreed không được chụp, đăng hay gắn tên; hệ thống chặn hoặc cảnh báo khi gắn tên trẻ (Q-73-13; SRS BR-TCH-030). |
 | BR-006 | Privacy policy, Medical authorisation, Media release thu một lần lúc nhập học theo từng trẻ và không hết hạn; Field trip, Ad hoc theo từng sự kiện; Crossroad gia hạn hằng năm (Q-73-12). |
 | BR-007 | Email không gửi mặc định; chỉ gửi khi người tạo chọn (Q-73-08). |
+| BR-008 | Một trẻ có thể có nhiều dòng cùng loại consent, mỗi dòng gắn một sự kiện (Q-73-14). |
+| BR-009 | Gửi consent tạo Announcement kèm link tới consent (Q-73-08); mỗi trẻ trong đối tượng có dòng Waiting on the parent. |
+| BR-010 | Nhắc và gửi lại thực hiện ở Surveys & consents; hồ sơ trẻ không có nút Remind, Send again. Mỗi lần nhắc tăng số lần nhắc và ghi ngày; cột Last action trên hồ sơ trẻ hiện "Reminded" kèm số lần. |
+| BR-011 | Công bố phiên bản mới bắt buộc "Summary of changes"; chọn "Ask families to agree again" thì mọi trẻ về Not sent cho phiên bản mới (Plane BBA-488). |
+| BR-012 | Field trip / learning journey và Ad hoc: dòng Waiting on the parent chuyển Expired khi qua ngày đóng. Crossroad: Agreed có hiệu lực tới hết năm học (tháng 12), đầu năm sau chuyển Expired và cần gia hạn (Q-73-12). |
+| BR-013 | Người nhận consent của trẻ theo cấu hình lúc nhập học: "Both parents" (mặc định) hoặc "Primary contact only"; trường hợp đặc biệt (vd. ly hôn) chọn một người (Q-73-07). |
+| BR-014 | Loại Crossroad chỉ chọn được cho Centre Singapore được đánh dấu "không có sân ngoài trời" (Q-73-04); nơi đánh dấu chờ OQ-09. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
@@ -157,14 +160,14 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 | Event | Cột | — | "—" khi không theo sự kiện | — | Sự kiện gắn với consent, ví dụ Singapore Zoo. |
 | Status | Cột (nhãn) | — | — | — | Not sent · Waiting on the parent · Agreed · Declined · Withdrawn · Expired; nhãn đặc = Agreed, nét đứt = Waiting, viền thường = trạng thái khác (FR-002). |
 | Answer | Cột | — | "—" khi chưa trả lời | — | Người trả lời (tên · quan hệ); dòng phụ: ngày trả lời · kênh (Parents App / Registration form) (FR-005). |
-| Last action | Cột | — | — | — | Thao tác gần nhất: Sent / Reminded / Answered / New version published; dòng phụ: ngày và chi tiết (ngày gửi, số lần nhắc) (FR-004; FR-010). |
-| Closing date | Cột | — | "—" khi không có hạn | — | DD/MM/YYYY (FR-007). |
+| Last action | Cột | — | — | — | Thao tác gần nhất: Sent / Reminded / Answered / New version published; dòng phụ: ngày và chi tiết (ngày gửi, số lần nhắc) (FR-004; FR-009). |
+| Closing date | Cột | — | "—" khi không có hạn | — | DD/MM/YYYY (BR-012). |
 | **SCR-02 — Surveys & consents — danh sách consent** | | | | | |
 | + New consent | Nút chính | Theo quyền | — | VAL-002. | Mở popup New consent (SCR-03). |
 | Surveys / Consents | Tab | — | Consents | — | Số trên tab là số consent đang mở. |
-| Thẻ "x of y families answered" | Thẻ số liệu, bấm được | — | — | — | Số gia đình đã trả lời / tổng số trẻ trong đối tượng; bấm thẻ → danh sách trẻ chưa trả lời (FR-012). |
+| Thẻ "x of y families answered" | Thẻ số liệu, bấm được | — | — | — | Số gia đình đã trả lời / tổng số trẻ trong đối tượng; bấm thẻ → danh sách trẻ chưa trả lời (FR-011). |
 | Tìm kiếm, Total | Ô tìm kiếm, số | Không | Trống | — | Tìm theo tên consent / sự kiện; Total là số dòng sau lọc. |
-| Centre, Type, Class, Status, Closing date | Bộ lọc | Không | — | — | FR-012. |
+| Centre, Type, Class, Status, Closing date | Bộ lọc | Không | — | — | FR-011. |
 | Consent | Cột | — | — | — | Tên sự kiện / tiêu đề consent. |
 | Type | Cột | — | — | — | Loại consent. |
 | Audience | Cột | — | — | — | Danh sách lớp hoặc Whole centre (FR-003). |
@@ -176,7 +179,7 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 | Last action | Cột (danh sách chưa trả lời) | — | — | — | Lần gửi / nhắc gần nhất và số lần đã nhắc. |
 | Remind | Nút nhỏ | Theo quyền | — | VAL-002. | Gửi nhắc lại cho gia đình trẻ này (FR-004). |
 | **SCR-03 — New consent** | | | | | |
-| Type | Danh sách chọn | Có | — | — | Danh mục Consent Types; Crossroad chỉ cho Centre Singapore không có sân ngoài trời (FR-014). |
+| Type | Danh sách chọn | Có | — | — | Danh mục Consent Types; Crossroad chỉ cho Centre Singapore không có sân ngoài trời (BR-014). |
 | Event | Ô nhập | Có | — | VAL-004. | Tên sự kiện gắn với consent. |
 | Content | Ô nhập nhiều dòng | Có | — | — | Nội dung gia đình đọc trước khi đồng ý. |
 | Closing date | Chọn ngày | Có | — | VAL-004. | Hạn trả lời. |
@@ -192,9 +195,9 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 | Cancel / Publish | Nút | — | — | VAL-003. | Huỷ hoặc phát hành phiên bản mới. |
 | **SCR-05 — Consent compliance** | | | | | |
 | Today by centre / Drills / Consent compliance | Tab | — | Consent compliance | — | Các tab của Safety overview; số trên tab = số trẻ còn thiếu consent. |
-| Export (n) | Nút | Theo quyền | n = số dòng | — | Xuất Excel danh sách đang lọc (FR-011). |
+| Export (n) | Nút | Theo quyền | n = số dòng | — | Xuất Excel danh sách đang lọc (FR-010). |
 | Tìm kiếm, Total | Ô tìm kiếm, số | Không | Trống | — | Tìm theo tên trẻ. |
-| Centre, Class, Consent, trạng thái trẻ, Status consent | Bộ lọc | Không | Trạng thái trẻ: Enrolled | — | FR-011. |
+| Centre, Class, Consent, trạng thái trẻ, Status consent | Bộ lọc | Không | Trạng thái trẻ: Enrolled | — | FR-010. |
 | Child | Cột | — | — | — | Tên trẻ; bấm → mở hồ sơ trẻ. |
 | Class | Cột | — | — | — | Lớp của trẻ. |
 | Not sent | Cột | — | "—" khi không có | — | Các consent chưa gửi cho gia đình trẻ. |
@@ -213,27 +216,27 @@ Là Centre Director, tôi muốn gửi consent cho các lớp hoặc cả Centre
 
 | AC ID | Given | When | Then | Linked Rule |
 |---|---|---|---|---|
-| AC-001 | Centre Director tạo Field trip "Singapore Zoo" cho lớp N2 · Sunbeams, ngày đóng 26/11/2026 | chọn Send | phụ huynh lớp Sunbeams nhận Announcement có link; mỗi trẻ có dòng "Field trip · Singapore Zoo" Waiting on the parent | FR-001; FR-003 |
-| AC-002 | Field trip "Singapore Zoo" của Noah đang Waiting on the parent, đã nhắc 1 lần | Centre Director chọn Remind ở danh sách trẻ chưa trả lời | số lần nhắc là 2; cột Last action trên hồ sơ Noah hiện "Reminded" kèm ngày nhắc mới | FR-004; FR-012 |
+| AC-001 | Centre Director tạo Field trip "Singapore Zoo" cho lớp N2 · Sunbeams, ngày đóng 26/11/2026 | chọn Send | phụ huynh lớp Sunbeams nhận Announcement có link; mỗi trẻ có dòng "Field trip · Singapore Zoo" Waiting on the parent | FR-001; FR-003; BR-009 |
+| AC-002 | Field trip "Singapore Zoo" của Noah đang Waiting on the parent, đã nhắc 1 lần | Centre Director chọn Remind ở danh sách trẻ chưa trả lời | số lần nhắc là 2; cột Last action trên hồ sơ Noah hiện "Reminded" kèm ngày nhắc mới | FR-004; FR-011; BR-010 |
 | AC-003 | Field trip đóng ngày 26/11 | ngày 25/11 phụ huynh chưa trả lời | hệ thống tự nhắc và số lần nhắc tăng 1 | FR-004 |
 | AC-004 | mẹ của Ethan đồng ý Field trip trong Parents App | Centre Director mở bảng consent | dòng hiện Agreed, tên người mẹ, ngày giờ, kênh Parents App; mục Consent trong checklist học sinh được tick | FR-005; BR-001; DATA-002 |
-| AC-005 | Ethan đã Agreed Privacy policy phiên bản 2 | HQ Admin công bố phiên bản 3 và chọn "Ask families to agree again" | dòng Privacy policy của Ethan hiện Not sent, Last action "New version published"; câu trả lời v2 vẫn có trong lịch sử | FR-006; BR-002 |
-| AC-006 | Field trip của Noah Waiting on the parent | qua ngày đóng | dòng chuyển Expired; Centre Director gửi lại được bằng Send again ở Surveys & consents | FR-007; FR-008 |
-| AC-007 | phụ huynh rút lại Media release | Centre Director mở bảng | dòng hiện Withdrawn; lịch sử có cả câu đồng ý và việc rút lại; Centre Director và HQ Marketing đã nhận thông báo | FR-009; BR-003 |
+| AC-005 | Ethan đã Agreed Privacy policy phiên bản 2 | HQ Admin công bố phiên bản 3 và chọn "Ask families to agree again" | dòng Privacy policy của Ethan hiện Not sent, Last action "New version published"; câu trả lời v2 vẫn có trong lịch sử | FR-006; BR-002; BR-011 |
+| AC-006 | Field trip của Noah Waiting on the parent | qua ngày đóng | dòng chuyển Expired; Centre Director gửi lại được bằng Send again ở Surveys & consents | BR-012; FR-007 |
+| AC-007 | phụ huynh rút lại Media release | Centre Director mở bảng | dòng hiện Withdrawn; lịch sử có cả câu đồng ý và việc rút lại; Centre Director và HQ Marketing đã nhận thông báo | FR-008; BR-003 |
 | AC-008 | trẻ không có phụ huynh nào có Parents App, người tạo không bật email | Centre Director gửi consent cho lớp | dòng của trẻ hiện "No guardian of this child can receive this in the app." | VAL-001 |
 | AC-009 | Teacher mở hồ sơ trẻ lớp mình | xem khu vực Consents | thấy các cột Consent, Event, Status, Answer, Last action, Closing date; không có nút Remind, Send again | VAL-002; BR-004; FR-001 |
 | AC-010 | người tạo bật "Also send by email" | gửi consent | phụ huynh nhận cả Announcement trong app và email | FR-003; BR-007 |
-| AC-011 | consent của Noah đã có 3 lần gửi và nhắc | Centre Director mở bản ghi consent ở Surveys & consents | lịch sử hiện đủ 3 lần với ngày giờ, người thực hiện; hồ sơ Noah hiện lần gần nhất ở Last action | FR-010 |
+| AC-011 | consent của Noah đã có 3 lần gửi và nhắc | Centre Director mở bản ghi consent ở Surveys & consents | lịch sử hiện đủ 3 lần với ngày giờ, người thực hiện; hồ sơ Noah hiện lần gần nhất ở Last action | FR-009 |
 | AC-012 | Ethan đã Agreed Media release v2 | HQ Admin công bố v3 (sửa chính tả) và chọn "Keep current answers" | dòng của Ethan vẫn Agreed theo câu trả lời v2; Last action "New version published" | FR-006; BR-002 |
 | AC-013 | HQ Admin công bố phiên bản mới, để trống Summary of changes | chọn Publish | không lưu, hiện "Enter a summary of changes." | VAL-003 |
-| AC-014 | Noah chưa trả lời Field trip và đã từ chối Media release | Centre Director mở Consent compliance | dòng Noah có Field trip ở cột Waiting on the parent và Media release ở cột Declined or withdrawn | FR-011 |
-| AC-015 | Field trip "Singapore Zoo" gửi cho 18 gia đình, 12 đã trả lời | Centre Director chọn thẻ "12 of 18 families answered" | danh sách chỉ còn 6 trẻ chưa trả lời, mỗi dòng có Remind | FR-012 |
-| AC-016 | Ethan đang có Field trip "Singapore Zoo" mở | Centre Director gửi tiếp Ad hoc "Cooking day" | hồ sơ Ethan có 2 dòng mở, mỗi dòng gắn một sự kiện | FR-001 |
-| AC-017 | Mia cấu hình "Primary contact only" | consent được gửi cho lớp của Mia | chỉ người liên hệ chính của Mia nhận | FR-013 |
-| AC-018 | Centre Malaysia | Centre Director tạo consent | không có loại Crossroad | FR-014 |
+| AC-014 | Noah chưa trả lời Field trip và đã từ chối Media release | Centre Director mở Consent compliance | dòng Noah có Field trip ở cột Waiting on the parent và Media release ở cột Declined or withdrawn | FR-010 |
+| AC-015 | Field trip "Singapore Zoo" gửi cho 18 gia đình, 12 đã trả lời | Centre Director chọn thẻ "12 of 18 families answered" | danh sách chỉ còn 6 trẻ chưa trả lời, mỗi dòng có Remind | FR-011 |
+| AC-016 | Ethan đang có Field trip "Singapore Zoo" mở | Centre Director gửi tiếp Ad hoc "Cooking day" | hồ sơ Ethan có 2 dòng mở, mỗi dòng gắn một sự kiện | FR-001; BR-008 |
+| AC-017 | Mia cấu hình "Primary contact only" | consent được gửi cho lớp của Mia | chỉ người liên hệ chính của Mia nhận | BR-013 |
+| AC-018 | Centre Malaysia | Centre Director tạo consent | không có loại Crossroad | BR-014 |
 | AC-019 | Centre Director tạo Field trip không chọn ngày đóng | chọn Send | không gửi, hiện "Choose a closing date." | VAL-004 |
 | AC-020 | Noah chưa có Media release ở trạng thái Agreed | giáo viên gắn tên Noah vào một ảnh | không gắn được tên Noah, hiện lý do chưa có Media release | BR-005 |
-| AC-021 | Ethan đồng ý Privacy policy, Medical authorisation, Media release trong registration form ngày 05/01/2026 | Centre Director mở tab Consents ngày 13/11/2026 | ba dòng ở trạng thái Agreed, không có ngày đóng, không chuyển Expired | FR-002; FR-007; BR-006 |
+| AC-021 | Ethan đồng ý Privacy policy, Medical authorisation, Media release trong registration form ngày 05/01/2026 | Centre Director mở tab Consents ngày 13/11/2026 | ba dòng ở trạng thái Agreed, không có ngày đóng, không chuyển Expired | FR-002; BR-012; BR-006 |
 
 #### Dependencies (Phụ thuộc)
 
@@ -244,7 +247,7 @@ Communication › Surveys & consents và Announcements; registration form (conse
 | Mã câu hỏi | Quyết định cần có | Người quyết định | Ưu tiên | Quyết định của BBA |
 |---|---|---|---|---|
 | OQ-01 | Danh sách loại consent và nội dung từng loại; có khác theo brand không? | Centre Director / HQ Ops | Cao | Loại: Privacy policy, Medical authorisation, Media release (thu lúc nhập học), Field trip / learning journey, Ad hoc (theo sự kiện), Crossroad (Q-73-04). Nội dung: file "Consent Types" (BBA-488) — Privacy Policy, Media Consent, Medical, Outing, Accuracy of Information, "Initial setup for all brands". Xem OQ-10. |
-| OQ-02 | "Expired" nghĩa là gì; thời hạn hiệu lực của từng loại? | Centre Director / HQ Ops | Cao | Theo vòng đời từng loại (Q-73-12) → FR-007. |
+| OQ-02 | "Expired" nghĩa là gì; thời hạn hiệu lực của từng loại? | Centre Director / HQ Ops | Cao | Theo vòng đời từng loại (Q-73-12) → BR-012. |
 | OQ-03 | Khi consent có phiên bản mới, có cần đồng ý lại không? | Business Owner | Cao | Tuỳ từng lần cập nhật (BBA-488) → FR-006. |
 | OQ-04 | Nhắc thủ công hay tự động; giới hạn số lần và khoảng cách? | Centre Director / HQ Ops | Thấp |  |
 | OQ-05 | Phụ huynh trả lời qua email có cần ký không? | Business Owner | Trung bình | Email chỉ là kênh báo kèm, phụ huynh trả lời trong app (Q-73-08); câu hỏi còn mở nếu sau này cho trả lời qua email. |
@@ -258,10 +261,10 @@ Communication › Surveys & consents và Announcements; registration form (conse
 
 | Mã | Giả định | Dùng ở |
 |---|---|---|
-| AS-01 | Có trạng thái Withdrawn cho consent phụ huynh đã rút lại. | FR-002; FR-009 |
-| AS-03 | Expired là qua ngày đóng (Field trip, Ad hoc) hoặc hết năm học (Crossroad). | FR-007 — theo Q-73-12 |
+| AS-01 | Có trạng thái Withdrawn cho consent phụ huynh đã rút lại. | FR-002; FR-008 |
+| AS-03 | Expired là qua ngày đóng (Field trip, Ad hoc) hoặc hết năm học (Crossroad). | BR-012 — theo Q-73-12 |
 | AS-05 | Bảng Consents nằm ở tab Documents của hồ sơ trẻ; SRS Children & Families liệt kê tab Consents riêng. | FR-001 — chờ xác nhận |
-| AS-06 | Lịch sử đầy đủ của một consent xem ở bản ghi consent trong Surveys & consents (SRS Communication "View consent record"); hồ sơ trẻ chỉ hiện thao tác gần nhất. | FR-010 — theo wireframe 15/11/2026 |
+| AS-06 | Lịch sử đầy đủ của một consent xem ở bản ghi consent trong Surveys & consents (SRS Communication "View consent record"); hồ sơ trẻ chỉ hiện thao tác gần nhất. | FR-009 — theo wireframe 15/11/2026 |
 
 Bằng chứng lưu (Q-73-15) và cách đếm lần nhắc (Q-73-10) do DOTB quyết định, theo DATA-002 và FR-004.
 
@@ -287,15 +290,15 @@ Số trang của SRS tính theo bản Word gốc khi xuất PDF. Tệp của BBA
 | 1 | BBA-SMS-SRS-Children-and-Families-v0.1 | §1.2 Not in Phase 1 (consent quản lý ở Communication › Surveys & consents) | 3 | Mục 3. |
 | 2 | BBA-SMS-SRS-Children-and-Families-v0.1 | §4 mục 1.1 Children (View child profile — tab Consents; View consents) | 6 | FR-001; AS-05. |
 | 3 | BBA-SMS-SRS-Children-and-Families-v0.1 | §5 Business rules (BR-CHF-010) | 9 | FR-001 — hồ sơ trẻ chỉ đọc consent. |
-| 4 | BBA-SMS-SRS-Communication-v0.1 | §3 P6 Consent | 5 | Luồng chính; FR-003, FR-009. |
-| 5 | BBA-SMS-SRS-Communication-v0.1 | §4 mục 4.2 Consents (View consent list, Create consent form, Respond, Withdraw, Edit, View consent record) | 8 | FR-003, FR-005, FR-009, FR-010, FR-012. |
-| 6 | BBA-SMS-SRS-Communication-v0.1 | §5 Business rules (BR-COM-002, BR-COM-016, BR-COM-039, BR-COM-043, BR-COM-044) | 9–10 | Mục 4; FR-004, FR-005, FR-009; BR-001, BR-003. |
-| 7 | BBA-SMS-SRS-Parents-App-v0.1 | §5.1 Announcements (Open linked survey); §5.4 Surveys & consents | 10–12 | FR-003, FR-005, FR-009. |
+| 4 | BBA-SMS-SRS-Communication-v0.1 | §3 P6 Consent | 5 | Luồng chính; FR-003, FR-008. |
+| 5 | BBA-SMS-SRS-Communication-v0.1 | §4 mục 4.2 Consents (View consent list, Create consent form, Respond, Withdraw, Edit, View consent record) | 8 | FR-003, FR-005, FR-008, FR-009, FR-011. |
+| 6 | BBA-SMS-SRS-Communication-v0.1 | §5 Business rules (BR-COM-002, BR-COM-016, BR-COM-039, BR-COM-043, BR-COM-044) | 9–10 | Mục 4; FR-004, FR-005, FR-008; BR-001, BR-003. |
+| 7 | BBA-SMS-SRS-Parents-App-v0.1 | §5.1 Announcements (Open linked survey); §5.4 Surveys & consents | 10–12 | FR-003, FR-005, FR-008. |
 | 8 | BBA-SMS-SRS-Teacher-App-v0.1 | §5.4 Survey & consent; §5 Business rules (BR-TCH-030, BR-TCH-054) | 11, 13–14 | BR-004, BR-005. |
-| 9 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4.2 Safety overview (View consent gaps) | 9 | FR-011. |
-| 10 | Plane — BBA-488 "BBA input: Consent types and wording" | Consent thu lúc nhập học; Media consent; đồng ý lại khi đổi nội dung | — | FR-006, FR-007; BR-005; OQ-03. |
+| 9 | BBA-SMS-SRS-Daily-Operations-v0.1 | §4.2 Safety overview (View consent gaps) | 9 | FR-010. |
+| 10 | Plane — BBA-488 "BBA input: Consent types and wording" | Consent thu lúc nhập học; Media consent; đồng ý lại khi đổi nội dung | — | FR-006, BR-012; BR-005; OQ-03. |
 | 11 | Plane — BBA-488, tệp đính kèm "Consent Types.xlsx" | Sheet Privacy Policy, Media Consent, Medical, Outing, Accuracy of Information | — | OQ-01, OQ-10. |
 | 12 | Plane — BBA-492 "BBA input: Additional document templates" | Consent request letter không dùng, phụ huynh đã đồng ý qua registration form | — | Mục 2; BR-006. |
-| 13 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Q-73-04 đến Q-73-15 | — | FR-001, FR-003, FR-005, FR-007, FR-009, FR-012 đến FR-014; BR-004 đến BR-007; OQ-04 đến OQ-09. |
+| 13 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Q-73-04 đến Q-73-15 | — | FR-001, FR-003, FR-005, BR-012, FR-008, FR-011 đến BR-014; BR-004 đến BR-007; OQ-04 đến OQ-09. |
 | 14 | Plane — dự án BBA Phase 1, ticket BBA-71 (WBS 3.1.4.01) | Consent status per child & send consent request | — | Phạm vi tính năng. |
-| 15 | Wireframe BBA-71 do DOTB cập nhật (15/11/2026) | Child record — Consents; Surveys & consents; New consent; Publish new version; Consent compliance | — | FR-001; FR-004; FR-008; FR-010 đến FR-012; UI Components. |
+| 15 | Wireframe BBA-71 do DOTB cập nhật (15/11/2026) | Child record — Consents; Surveys & consents; New consent; Publish new version; Consent compliance | — | FR-001; FR-004; FR-007; FR-009 đến FR-011; UI Components. |
