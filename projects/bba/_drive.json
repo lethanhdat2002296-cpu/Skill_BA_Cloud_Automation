@@ -223,14 +223,14 @@
       "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1rDlcJbz7lLRmTlQGxkDdSX2YXG1cDufk trong thùng rác."
     },
     "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI": {
-      "file_id": "1GzUArB74G9MexLtrz6xwWj7EZBEBuBcZ",
-      "url": "https://drive.google.com/file/d/1GzUArB74G9MexLtrz6xwWj7EZBEBuBcZ/view",
+      "file_id": "1nOYkLbIEHIGCTixKWCIOKMVWRvhmj10x",
+      "url": "https://drive.google.com/file/d/1nOYkLbIEHIGCTixKWCIOKMVWRvhmj10x/view",
       "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
       "title": "[FRS] BBA-70 Health & Allergies List Growth_V0.2_VI.docx",
       "version": "0.2",
-      "source_sha256": "a9c25ddbd7141c2a0489fec4a5d93972e1ee15e60ba8012f21f5d0f6e12f066a",
-      "synced_at": "2026-11-20T01:44:50+00:00",
-      "note": "20/11/2026: v0.2 theo wireframe; bản Drive trước không còn comment nên không chèn lại comment của Mỹ Hải. File cũ 1MoW6OGsVKXIKib_iuzpysBk-Sm1n-0Es trong thùng rác."
+      "source_sha256": "dadeb0492cb9ebed6471131a997d43365cc5035dff4ebad367a32206d8d19a21",
+      "synced_at": "2026-11-20T04:28:57+00:00",
+      "note": "20/11/2026: v0.2 — bỏ US biểu đồ, gộp nhắc nhập vào US-001, Date = ngày tạo phiếu. File cũ 1GzUArB74G9MexLtrz6xwWj7EZBEBuBcZ trong thùng rác."
     },
     "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
       "file_id": "1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q",
@@ -975,6 +975,18 @@
       "note": "15/11/2026: UI Components / Field Specification theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1Z4UlMZYN_VMsMm1ytKLvLoOxChTKb_7D trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI",
       "replaced_at": "2026-11-20T01:44:50+00:00"
+    },
+    {
+      "file_id": "1GzUArB74G9MexLtrz6xwWj7EZBEBuBcZ",
+      "url": "https://drive.google.com/file/d/1GzUArB74G9MexLtrz6xwWj7EZBEBuBcZ/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-70 Health & Allergies List Growth_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "a9c25ddbd7141c2a0489fec4a5d93972e1ee15e60ba8012f21f5d0f6e12f066a",
+      "synced_at": "2026-11-20T01:44:50+00:00",
+      "note": "20/11/2026: v0.2 theo wireframe; bản Drive trước không còn comment nên không chèn lại comment của Mỹ Hải. File cũ 1MoW6OGsVKXIKib_iuzpysBk-Sm1n-0Es trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-70_Growth_Termly_Height_Weight_VI",
+      "replaced_at": "2026-11-20T04:28:57+00:00"
     }
   ]
 }
