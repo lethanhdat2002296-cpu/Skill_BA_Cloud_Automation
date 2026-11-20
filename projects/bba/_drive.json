@@ -203,14 +203,14 @@
       "synced_at": "2026-11-10 09:15"
     },
     "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI": {
-      "file_id": "1Amk0Hh0CF1D9UwgrD3rdPSNshZsTJ7dX",
-      "url": "https://drive.google.com/file/d/1Amk0Hh0CF1D9UwgrD3rdPSNshZsTJ7dX/view",
+      "file_id": "1ClnnEDHkftU29IZkCqkxQGGVoDQnEVEO",
+      "url": "https://drive.google.com/file/d/1ClnnEDHkftU29IZkCqkxQGGVoDQnEVEO/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-68 Medical Alert Banner (Tiếng Việt) v0.2 - Sprint 4.docx",
       "version": "0.1",
-      "source_sha256": "2144fab90e1202817d931ae94914019245589597f220be63e95947e6dfbf41db",
-      "synced_at": "2026-11-20T07:42:34+00:00",
-      "note": "20/11/2026: nội dung bản FR tổng quan (v0.3 local) + mục 1 theo bản user sửa trên Drive (lịch sử chỉ còn 0.1, Mức sẵn sàng). File cũ 1enBKoI7… trong thùng rác."
+      "source_sha256": "17c7e6827f0955e401d585cd219123ee82a7ff479153be66f0771fc0f10b645e",
+      "synced_at": "2026-11-20T07:58:16+00:00",
+      "note": "20/11/2026: sửa theo câu trả lời Plane (BBA-1055/1056/1058); xoá OQ đã trả lời; giữ chỉnh sửa của user ở mục 2. File cũ 1Amk0Hh0… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-69_Allergies_List_VI": {
       "file_id": "1gAESCodOpmyg6IoHuhpIC36w2UaFWQaW",
@@ -1011,6 +1011,18 @@
       "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1w3Q0W9J08l2T_Sr3Z_Xp9ck2oKP41rme trong thùng rác.",
       "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
       "replaced_at": "2026-11-20T07:42:34+00:00"
+    },
+    {
+      "file_id": "1Amk0Hh0CF1D9UwgrD3rdPSNshZsTJ7dX",
+      "url": "https://drive.google.com/file/d/1Amk0Hh0CF1D9UwgrD3rdPSNshZsTJ7dX/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-68 Medical Alert Banner (Tiếng Việt) v0.2 - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2144fab90e1202817d931ae94914019245589597f220be63e95947e6dfbf41db",
+      "synced_at": "2026-11-20T07:42:34+00:00",
+      "note": "20/11/2026: nội dung bản FR tổng quan (v0.3 local) + mục 1 theo bản user sửa trên Drive (lịch sử chỉ còn 0.1, Mức sẵn sàng). File cũ 1enBKoI7… trong thùng rác.",
+      "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
+      "replaced_at": "2026-11-20T07:58:16+00:00"
     }
   ]
 }
