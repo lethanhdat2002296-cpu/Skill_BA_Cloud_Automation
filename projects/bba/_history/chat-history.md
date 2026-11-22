@@ -26,3 +26,22 @@
 | BBA-75 Late flag | 3: giờ chốt; tự đánh dấu Late nội bộ; báo cáo đến muộn | Bỏ đón muộn; thêm OQ về "Mark late — teacher judgement" của prototype |
 | BBA-76 Overview today | 2: bảng tổng hợp theo Centre / brand; mở xuống lớp | District Manager → Cluster Head |
 | BBA-77 Attendance correction | 3: sửa trạng thái; sửa giờ; lịch sử sửa | Thêm Void có lý do + xác nhận, Absent cần lý do và người báo (prototype) |
+
+---
+
+## 22/11/2026 — Update BBA-71 → BBA-77 lên Drive
+
+**User:**
+> Update lên drive
+
+**Claude:** Kiểm tra Drive: 7 file không có chỉnh sửa mới. Xuất Word, gắn lại comment của Mỹ Hải (BBA-71: 2, BBA-72: 2, BBA-73: 3). Upload 7 file mới vào thư mục Drive 1uZpPo7…, file cũ vào thùng rác; cập nhật `_drive.json`; commit Git; thay link trên Plane.
+
+| Ticket | File mới |
+|---|---|
+| BBA-71 | [FRS] BBA-71-3.1.4.01_Consent_Status_Per_Child_V0.4_VI.docx |
+| BBA-72 | [FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.3_VI.docx |
+| BBA-73 | [FRS] BBA-73-3.2.1.01_Handover_Recording_V0.3_VI.docx |
+| BBA-74 | [FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.3_VI.docx |
+| BBA-75 | [FRS] BBA-75-3.2.1.03_Late_Flag_Internal_V0.2_VI.docx |
+| BBA-76 | [FRS] BBA-76-3.2.1.06_Centre_Brand_Overview_Today_V0.2_VI.docx |
+| BBA-77 | [FRS] BBA-77-3.2.1.07_Attendance_Correction_V0.2_VI.docx |

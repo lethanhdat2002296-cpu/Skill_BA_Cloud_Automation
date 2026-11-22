@@ -235,71 +235,74 @@
       "note": "20/11/2026: nội dung theo bản user sửa trên Drive (1MoW6…, 07:21); chỉ đánh lại số US/FR/BR/VAL/DATA/AC và bỏ tham chiếu tới mã đã xoá. File 1MoW6… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
-      "file_id": "1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q",
-      "url": "https://drive.google.com/file/d/1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q/view",
+      "file_id": "1BKzrlWtkdCY052lAvuciumCemT8WRtnK",
+      "url": "https://drive.google.com/file/d/1BKzrlWtkdCY052lAvuciumCemT8WRtnK/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
-      "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.3",
-      "source_sha256": "e966579e25fbe71b8d7247ea8308491730eee69db460e24910024eecb2414a2b",
-      "synced_at": "2026-11-19T07:08:35+00:00",
-      "note": "19/11/2026: v0.3; 2 comment của Mỹ Hải (DOTB) chèn lại. File cũ 1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9 trong thùng rác."
+      "title": "[FRS] BBA-71-3.1.4.01_Consent_Status_Per_Child_V0.4_VI.docx",
+      "version": "0.4",
+      "source_sha256": "139928fbd7f906b37405f36ff6f0e56ab423aa3998f7025fe279b27b527dbf84",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1q1ed4shP… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v",
-      "url": "https://drive.google.com/file/d/1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-72-3.1.5.01 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "55e02f5238751dd8a0cc90a908ba10042af02f27508152d16a959d83d4350be6",
-      "synced_at": "2026-11-14 23:57",
-      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r trong thùng rác."
+      "file_id": "1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe",
+      "url": "https://drive.google.com/file/d/1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "a4d32580b7dac5dce99a4c467ebaa961aa35cfb5ed5a0ace4db5429ce79ed54e",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "1wZIzt3OxDlfn3Ees5DVe2s0fXpcZirQR",
-      "url": "https://drive.google.com/file/d/1wZIzt3OxDlfn3Ees5DVe2s0fXpcZirQR/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-73-3.2.1.01 Handover recording (dropped off by - picked up by) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "35f6198fad826d2fb304ab2eb60d6ff1f7521617a5d3a05d35ba2b6cca5ebb5f",
-      "synced_at": "2026-11-15 05:57",
-      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1p4E2yhrKRAsW8gGBDH7huAxGqoqdugjj trong thùng rác."
+      "file_id": "1op-QOQGYFqRMknt4-euiacCracFzPTD3",
+      "url": "https://drive.google.com/file/d/1op-QOQGYFqRMknt4-euiacCracFzPTD3/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "1cf3a76d3a15a6249df1d2550f90c31431f4fbc92aaeaa60392aadc35b92ae2c",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1wZIzt3Ox… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
-      "file_id": "1flRtes6YHAyIbf7wxixsAIVfLBKuTnUu",
-      "url": "https://drive.google.com/file/d/1flRtes6YHAyIbf7wxixsAIVfLBKuTnUu/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-74-3.2.1.02 Temperature readings (3 or more per day) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.2",
-      "source_sha256": "bb188d7ed96b25b606e96445fb499eb01ffe0ef13f28e824df08287e5e343471",
-      "synced_at": "2026-11-15 05:57",
-      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1VQERqeIMNb7GGMFx7rLOcKSsAn4HTn04 trong thùng rác."
+      "file_id": "1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c",
+      "url": "https://drive.google.com/file/d/1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "496efdd7bb709cf6d3f7d6900c23eee07434dc15b6411198c21f99c3b1c7528a",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1flRtes6Y… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
-      "file_id": "15_DitKliX6XuS-t9KairbiOPDr8Fnmfh",
-      "url": "https://drive.google.com/file/d/15_DitKliX6XuS-t9KairbiOPDr8Fnmfh/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-75 Late flag (internal only) (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "2934996fd6ed985ab40e8fd528ed5e894170baa1b6d151b5b69bf6ae983609d4",
-      "synced_at": "2026-11-10 10:33"
+      "file_id": "1oH92E5xlAPKq3aB-a_BJYbFZ2RSmlwdn",
+      "url": "https://drive.google.com/file/d/1oH92E5xlAPKq3aB-a_BJYbFZ2RSmlwdn/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-75-3.2.1.03_Late_Flag_Internal_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "8dad3af20916db6dcf89b28bff17976adefb4c3a6289ef799bf141e8d7b474c4",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 15_DitKli… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-76_Centre_Brand_Overview_Today_VI": {
-      "file_id": "1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw",
-      "url": "https://drive.google.com/file/d/1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-76 Centre/brand overview today (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "5e4861f149ce9da3ed40752f9015b7eaf58db61bed68c59da6d2a745b8c2817c",
-      "synced_at": "2026-11-10 10:33"
+      "file_id": "1st_Gh-bixkiNDScLVxgKrhssiy-JHqDG",
+      "url": "https://drive.google.com/file/d/1st_Gh-bixkiNDScLVxgKrhssiy-JHqDG/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-76-3.2.1.06_Centre_Brand_Overview_Today_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "54c2c6258ec48648bc7f50a57523b81774cd7a6b0126d2270f3c647d9b395837",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1pxDNuG0F… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-77_Attendance_Correction_VI": {
-      "file_id": "1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl",
-      "url": "https://drive.google.com/file/d/1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] BBA-77 Attendance correction with reason (Tiếng Việt) - Sprint 4.docx",
-      "version": "0.1",
-      "source_sha256": "151a2236c992623ed95b499442baf04cea7537611762f5707f50be3b33faa8e8",
-      "synced_at": "2026-11-10 10:33"
+      "file_id": "121dff6AnEG36tc8O-gtSEU7GPJK9_Z-B",
+      "url": "https://drive.google.com/file/d/121dff6AnEG36tc8O-gtSEU7GPJK9_Z-B/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-77-3.2.1.07_Attendance_Correction_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "b7edc08d86afd6cf6ac3eff0fe740d36ea636475ae77c31c2461512f47ec7085",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1cIagNgb4… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-78_Daily_Routines_Web_VI": {
       "file_id": "1eaWFc-IjCtbyxxmLlk9fcYynEoPStURi",
@@ -1059,6 +1062,87 @@
       "synced_at": "2026-11-19T08:32:08+00:00",
       "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
       "replaced_at": "2026-11-22T02:25:07+00:00"
+    },
+    {
+      "file_id": "1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q",
+      "url": "https://drive.google.com/file/d/1q1ed4shP8yu2ECHrSa_CuaA6mo-yT63Q/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRD] BBA-71-3.1.4.01 Consent status per child & send consent request (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.3",
+      "source_sha256": "e966579e25fbe71b8d7247ea8308491730eee69db460e24910024eecb2414a2b",
+      "synced_at": "2026-11-19T07:08:35+00:00",
+      "note": "19/11/2026: v0.3; 2 comment của Mỹ Hải (DOTB) chèn lại. File cũ 1bjM4ToNFAy2mKQkvDQjBHkghECs9jjS9 trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v",
+      "url": "https://drive.google.com/file/d/1Dnt_uhzWiV-yeANRaDOpPMTOEcYp2J-v/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-72-3.1.5.01 Move whole class up a level (bulk promotion) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "55e02f5238751dd8a0cc90a908ba10042af02f27508152d16a959d83d4350be6",
+      "synced_at": "2026-11-14 23:57",
+      "note": "14/11/2026: mục 4 theo mẫu BBA-40, đồng bộ quyền ở mục 6; comment của Mỹ Hải (DOTB) chèn lại vào file Word mới. File cũ 1ZA2NCYvRlnxDjaPZQpCozmJw3khQ5K7r trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1wZIzt3OxDlfn3Ees5DVe2s0fXpcZirQR",
+      "url": "https://drive.google.com/file/d/1wZIzt3OxDlfn3Ees5DVe2s0fXpcZirQR/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-73-3.2.1.01 Handover recording (dropped off by - picked up by) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "35f6198fad826d2fb304ab2eb60d6ff1f7521617a5d3a05d35ba2b6cca5ebb5f",
+      "synced_at": "2026-11-15 05:57",
+      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1p4E2yhrKRAsW8gGBDH7huAxGqoqdugjj trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1flRtes6YHAyIbf7wxixsAIVfLBKuTnUu",
+      "url": "https://drive.google.com/file/d/1flRtes6YHAyIbf7wxixsAIVfLBKuTnUu/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-74-3.2.1.02 Temperature readings (3 or more per day) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.2",
+      "source_sha256": "bb188d7ed96b25b606e96445fb499eb01ffe0ef13f28e824df08287e5e343471",
+      "synced_at": "2026-11-15 05:57",
+      "note": "15/11/2026: FR / AC sửa theo wireframe do user cập nhật; comment của Mỹ Hải (DOTB) chèn lại nếu có. File cũ 1VQERqeIMNb7GGMFx7rLOcKSsAn4HTn04 trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-74_Temperature_Readings_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "15_DitKliX6XuS-t9KairbiOPDr8Fnmfh",
+      "url": "https://drive.google.com/file/d/15_DitKliX6XuS-t9KairbiOPDr8Fnmfh/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-75 Late flag (internal only) (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "2934996fd6ed985ab40e8fd528ed5e894170baa1b6d151b5b69bf6ae983609d4",
+      "synced_at": "2026-11-10 10:33",
+      "key": "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw",
+      "url": "https://drive.google.com/file/d/1pxDNuG0Ftcp4_UC5iP8OvYs8-tU-KkVw/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-76 Centre/brand overview today (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "5e4861f149ce9da3ed40752f9015b7eaf58db61bed68c59da6d2a745b8c2817c",
+      "synced_at": "2026-11-10 10:33",
+      "key": "FSD/Sprint 4/BBA-76_Centre_Brand_Overview_Today_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl",
+      "url": "https://drive.google.com/file/d/1cIagNgb41yCEMMCEhh8C8kNZv5g0WVUl/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] BBA-77 Attendance correction with reason (Tiếng Việt) - Sprint 4.docx",
+      "version": "0.1",
+      "source_sha256": "151a2236c992623ed95b499442baf04cea7537611762f5707f50be3b33faa8e8",
+      "synced_at": "2026-11-10 10:33",
+      "key": "FSD/Sprint 4/BBA-77_Attendance_Correction_VI",
+      "replaced_at": "2026-11-22T04:21:09+00:00"
     }
   ]
 }

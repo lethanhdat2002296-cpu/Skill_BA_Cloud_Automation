@@ -1,17 +1,15 @@
-# BBA-72 Move whole class up a level (bulk promotion) (Tiếng Việt)
+# Move Whole Class up a Level (Bulk Promotion)
 
 | Thuộc tính | Giá trị |
 |---|---|
 | Dự án | Busy Bees Asia SMS |
 | Module | Children & Families — Classes |
-| Tính năng | Move whole class up a level (bulk promotion) |
-| Mã ticket | BBA-72 |
-| Mã WBS | 3.1.5.01 |
-| Mã tài liệu | FRD-BBA-72 |
+| Tính năng | BBA-72 Move whole class up a level (bulk promotion) |
+| Mã tài liệu | FRD-3.1.5.01_Bulk_Class_Promotion |
 | Sprint | 4 |
-| Phiên bản | 0.2 |
+| Phiên bản | 0.3 |
 | Trạng thái | BẢN NHÁP CHỜ XÁC NHẬN |
-| Ngày | 14/11/2026 |
+| Ngày | 22/11/2026 |
 | Người soạn | Business Analysis |
 | Người review | HaiNguyen |
 | Người duyệt | HaiNguyen |
@@ -21,189 +19,306 @@
 | Phiên bản | Ngày | Tác giả | Tóm tắt thay đổi | Duyệt |
 |---|---|---|---|---|
 | 0.1 | 10/11/2026 | Business Analysis | Khởi tạo | HaiNguyen |
+| 0.2 | 14/11/2026 | Business Analysis | Bổ sung theo phản hồi của BBA. | |
+| 0.3 | 22/11/2026 | Business Analysis | Theo góp ý: xác định lại tính năng, tách 3 User Story (chọn lớp đích và ngày hiệu lực; xem trước trẻ và tác động; xác nhận và kết quả). Lớp cũ giữ danh sách trẻ; cập nhật trạng thái trẻ trong lớp và trạng thái lớp. Đối chiếu prototype. | |
 
-**Mức sẵn sàng:** Đã đặc tả việc cho cả lớp lên level mới trong cùng Centre: chọn lớp đích và ngày hiệu lực, xem trước, bỏ chọn trẻ ở lại, xác nhận, kết quả từng trẻ và chạy lại, cập nhật ghi danh, học phí theo level, danh sách điểm danh, thread của lớp và lịch sử; ranh giới với Graduation và Transfer; có wireframe.
+**Mức sẵn sàng:** Đã đặc tả đủ User Story, FR, quy tắc, kiểm tra, dữ liệu, tiêu chí nghiệm thu.
 
-## 2. Mục tiêu và bối cảnh
+## 2. Mục đích và bối cảnh
 
-Năm học chạy từ tháng 1 đến tháng 12. Tháng 11–12, Centre lập lớp cho năm sau; cuối năm, Centre chuyển cả lớp lên level tiếp theo (ví dụ N2 lên K1) cho năm học mới (Q-74-07). Thay vì chuyển từng trẻ, Centre Director chọn lớp, chọn lớp đích và ngày hiệu lực, xem trước danh sách trẻ, bỏ chọn trẻ ngoại lệ, rồi xác nhận một lần.
+Năm học chạy từ tháng 1 đến tháng 12. Cuối năm, Centre chuyển cả lớp lên level kế tiếp (ví dụ N2 lên K1) cho năm học mới. Thay vì chuyển từng trẻ, người dùng chọn lớp, chọn lớp đích và ngày hiệu lực, xem trước trẻ và tác động, bỏ chọn trẻ ngoại lệ, rồi xác nhận một lần. Việc lên lớp không làm mất lớp cũ: lớp cũ và danh sách trẻ của lớp cũ vẫn còn, chỉ trạng thái của trẻ trong lớp và trạng thái lớp được cập nhật.
 
-Màn này chỉ dùng cho annual promotion trong cùng Centre. Infant promotion (từng trẻ, 18 tháng tuổi) và class change là luồng riêng; K2 tốt nghiệp là mass withdrawal ở Joining & leaving; lên level ở Centre khác là Transfer (Q-74-01, Q-74-02).
-
-Mục tiêu đo được: chuyển xong một lớp trong một lần xác nhận; 100% trẻ được chuyển có lịch sử ghi lớp cũ, lớp mới, ngày hiệu lực và người thực hiện; 100% trẻ không chuyển được có trong kết quả kèm lý do.
-
-## 3. Phạm vi
+## 3. Phạm vi và ranh giới phase
 
 | Trong phạm vi | Ngoài phạm vi |
 |---|---|
-| Chọn lớp nguồn, level đích, lớp đích, ngày hiệu lực. Xem trước trẻ bị ảnh hưởng, bỏ chọn trẻ ngoại lệ, đổi lớp đích cho từng trẻ, cảnh báo sĩ số. Xác nhận: cập nhật ghi danh, học phí theo level, danh sách điểm danh, thread của lớp. Kết quả từng trẻ và chạy lại trẻ lỗi. Lịch sử từng trẻ. Đề xuất đóng lớp cũ khi hết trẻ. Chỉ dẫn sang Graduation / Transfer ở lớp level cao nhất. | Infant promotion và class change từng trẻ (Q-74-01). K2 graduation — Joining & leaving (BBA-143). Lên level ở Centre khác — Transfer (BBA-304) hoặc Bulk transfer children (Administration). Tạo lớp cho năm học mới (Classes). Sửa hoá đơn đã phát hành — credit note ở Fees & Payments (Q-74-09). |
+| Lên lớp cả lớp trong cùng Centre (annual promotion): chọn lớp đích năm học mới, tạo lớp đích khi chưa có, ngày hiệu lực; xem trước trẻ, bỏ chọn trẻ ngoại lệ; xem tác động (lớp, ghi danh, học phí, thread của lớp); xác nhận; kết quả từng trẻ và chạy lại trẻ lỗi; giữ lớp cũ và danh sách trẻ cũ; lịch sử từng trẻ. | Lên lớp từng trẻ (Infant promotion) và đổi lớp từng trẻ (class change). K2 tốt nghiệp (Joining & leaving › Graduation). Chuyển sang Centre khác (Transfer). |
 
 ## 4. Tác nhân, vai trò và quyền truy cập
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Authorised User | Lớp và trẻ của Centre trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Cho lớp lên level, chạy lại trẻ lỗi, đóng lớp cũ khi vai trò được cấp quyền. |
-| Class Viewer | Lớp và trẻ trong phạm vi vai trò và phạm vi dữ liệu hiện có. | Xem lớp mới của trẻ từ ngày hiệu lực; không thấy nút Move class up. |
-| System | Lớp nguồn, lớp đích và trẻ được chọn. | Đề xuất level, lớp đích và ngày hiệu lực; chuyển từng trẻ; báo kết quả; cập nhật ghi danh, học phí, danh sách điểm danh, thread; lưu lịch sử. |
-| Unauthorised User | Ngoài vai trò hoặc phạm vi dữ liệu được phép. | Không thấy và không thực hiện được thao tác bị giới hạn; không thay đổi dữ liệu. |
+| Authorised User | Lớp và trẻ của Centre được cấp. | Lên lớp cả lớp, tạo lớp đích, chạy lại trẻ lỗi. |
+| Class Viewer | Lớp và trẻ trong phạm vi được cấp. | Xem lớp và lịch sử lớp; không thấy Move children up. |
+| System | Lớp nguồn, lớp đích, trẻ được chọn. | Chuyển từng trẻ từ ngày hiệu lực, cập nhật trạng thái trẻ trong lớp và trạng thái lớp, cập nhật ghi danh, học phí, thread; báo kết quả; lưu lịch sử. |
+| Unauthorised User | Ngoài vai trò hoặc phạm vi được cấp. | Không thấy và không thao tác được. |
 
-Mọi quyền xem và thao tác theo mô hình phân quyền theo vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
+**Quy tắc chung:** Quyền xem và thao tác theo phân quyền vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
 
-## 5. Tổng quan tính năng
+## 5. Tổng quan tính năng và phân rã chức năng
 
-| Khu vực | Chức năng | User Story |
-|---|---|---|
-| Classes › chi tiết lớp | Nút Move class up; chỉ dẫn sang Graduation / Transfer ở lớp level cao nhất. | US-001 |
-| Classes › Move class up | Xem trước, xác nhận, kết quả từng trẻ, chạy lại, đề xuất đóng lớp. | US-001 |
+| Module | Tính năng | Mô tả | User Story |
+|---|---|---|---|
+| **Classes** | Chọn lớp đích và ngày hiệu lực | Từ chi tiết lớp chọn Move children up; chọn lớp đích năm học mới (tạo mới nếu chưa có) và ngày hiệu lực. | BBA-72: US-001 |
+| **Classes** | Xem trước trẻ và tác động | Danh sách trẻ sẽ lên lớp, bỏ chọn trẻ ngoại lệ; tác động tới lớp, ghi danh, học phí, thread của lớp. | BBA-72: US-002 |
+| **Classes** | Xác nhận và kết quả | Chuyển trẻ từ ngày hiệu lực; lớp cũ giữ danh sách trẻ; cập nhật trạng thái trẻ trong lớp và trạng thái lớp; kết quả từng trẻ, chạy lại trẻ lỗi; lịch sử. | BBA-72: US-003 |
 
-## 6. Yêu cầu chức năng
+## 6. Yêu cầu chức năng theo User Story
 
-### 6.1 US-001 - Cho cả lớp lên level mới
+### 6.1 BBA-72: US-001 - Chọn lớp đích và ngày hiệu lực
 
 #### User Story
 
-Là Centre Director, tôi muốn chuyển cả lớp lên level tiếp theo cho năm học mới trong một lần, bỏ chọn được trẻ học lại, để không phải chuyển từng trẻ và không bỏ sót việc đổi học phí, danh sách điểm danh.
+Là Centre Director, tôi muốn chọn lớp đích của năm học mới và ngày hiệu lực cho cả lớp, để chuẩn bị lên lớp mà không phải chuyển từng trẻ.
 
 #### Functional Requirements (Yêu cầu chức năng)
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-001 | Ở chi tiết lớp, "Move class up" mở màn chuyển lớp với: lớp nguồn (lớp đang xem), level đích (mặc định level kế tiếp trong các level Centre có mở), lớp đích (các lớp của level đích, năm học mới, cùng Centre), ngày hiệu lực (mặc định ngày bắt đầu Term 1 năm học mới theo lịch term của brand — AS-01). |
-| FR-002 | Màn xem trước liệt kê mọi trẻ đang học trong lớp nguồn: tên, lớp hiện tại, lớp đích, biểu phí hiện tại và biểu phí theo level mới từ ngày hiệu lực; mỗi trẻ có ô chọn, mặc định được chọn. |
-| FR-003 | Người dùng bỏ chọn trẻ ngoại lệ (học lại, rút, gia hạn) và đổi lớp đích cho từng trẻ khi cần; trẻ bị bỏ chọn giữ lớp cũ hoặc được chuyển sang lớp khác cùng level bằng luồng class change (Q-74-03). |
-| FR-004 | Xem trước hiện sĩ số lớp đích sau khi chuyển (ví dụ "18 of 20 after the move"); vượt sĩ số tối đa thì cảnh báo, người dùng vẫn xác nhận được (Q-74-08). |
-| FR-005 | "Confirm move" chuyển mọi trẻ được chọn từ ngày hiệu lực: cập nhật level và lớp trong ghi danh; áp biểu phí theo level mới cho các hoá đơn tạo sau ngày hiệu lực; đưa trẻ vào danh sách điểm danh của lớp đích; tạo thread cho lớp mới, thread lớp cũ chuyển chỉ đọc và giữ tới khi trẻ rời trường (Q-74-10). |
-| FR-006 | Trẻ bị bỏ chọn ở lại lớp nguồn, không thay đổi gì. |
-| FR-007 | Mỗi trẻ được chuyển có một dòng lịch sử: lớp cũ, lớp mới, ngày hiệu lực, người thực hiện, thời điểm xác nhận. |
-| FR-008 | Trước ngày hiệu lực, lớp của trẻ trên mọi màn hình vẫn là lớp cũ; từ ngày hiệu lực là lớp mới. |
-| FR-009 | Sau khi chuyển, nếu lớp nguồn không còn trẻ nào từ ngày hiệu lực, hệ thống đề xuất "Close this class"; lớp đã có trẻ chỉ được đóng, không xoá, lịch sử giữ nguyên (BR-CHF-049). |
-| FR-010 | Lớp ở level cao nhất Centre có mở không có nút "Move class up". Nếu level đó là K2: chi tiết lớp chỉ dẫn sang Joining & leaving › Graduation (mass withdrawal, reason Graduation, chỉ K2 rời vào tháng 12 — Q-74-01, Q-74-06). Nếu level đó chưa phải K2 (Centre không mở level kế tiếp, ví dụ junior campus ở Malaysia): chi tiết lớp chỉ dẫn sang Transfer (Joining & leaving) hoặc Bulk transfer children (Administration) (Q-74-02; chờ OQ-08). |
-| FR-011 | Sau khi xác nhận, màn kết quả hiện từng trẻ: Moved, Not moved (kèm lý do), Unticked; một trẻ lỗi không chặn trẻ khác và giữ nguyên lớp cũ; "Retry" chỉ chạy lại trẻ lỗi; chạy lại không chuyển trùng trẻ đã chuyển; kết quả xuất được ra Excel (Q-74-11, Q-74-12, Q-74-13 — DOTB quyết định). |
+| FR-001 | Ở chi tiết lớp, người dùng có quyền chọn Actions › Move children up để mở luồng lên lớp (BR-001, BR-002). |
+| FR-002 | Người dùng chọn lớp đích trong các lớp của level kế tiếp, năm học mới, cùng Centre; chưa có lớp thì tạo lớp đích ngay trong luồng (BR-003). |
+| FR-003 | Người dùng chọn ngày hiệu lực; hệ thống đề xuất sẵn (BR-004). |
 
 #### Functional Flow - Main (Luồng chính)
 
-1. Centre Director mở lớp N2 · Sunbeams, chọn Move class up (FR-001).
-2. Hệ thống đề xuất level K1, lớp đích và ngày bắt đầu Term 1 năm học mới.
-3. Centre Director xem trước, bỏ chọn trẻ học lại (FR-002, FR-003, FR-004).
-4. Centre Director chọn Confirm move; hệ thống chuyển từng trẻ, ghi lịch sử và hiện kết quả (FR-005, FR-007, FR-011).
+1. Centre Director mở lớp N2 · Sunbeams, chọn Actions › Move children up (FR-001).
+2. Hệ thống hiển thị lớp đích năm học mới của level K1 kèm sĩ số và ngày hiệu lực đề xuất (FR-002, FR-003).
+3. Centre Director chọn lớp đích, giữ hoặc đổi ngày hiệu lực, chọn Continue sang US-002.
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Lớp đích vượt sĩ số: cảnh báo, Centre Director vẫn xác nhận được (FR-004).
-2. Một số trẻ chuyển sang lớp đích khác (FR-003).
-3. Một trẻ không chuyển được: Centre Director chọn Retry cho trẻ đó (FR-011).
-4. Lớp nguồn hết trẻ: Centre Director đóng lớp (FR-009).
-5. Lớp K2: Centre Director đi Graduation (FR-010).
-6. Lớp ở level cao nhất Centre có mở nhưng chưa phải K2: Centre Director đi Transfer / Bulk transfer (FR-010).
+1. Chưa có lớp K1 cho năm học mới: hệ thống báo và hiện form tạo lớp (Name, Level, Capacity, Room); Centre Director chọn Create a class, lớp mới được chọn làm lớp đích (FR-002; BR-003).
+2. Lớp ở level K2: không có Move children up; chi tiết lớp chỉ dẫn sang Joining & leaving › Graduation (BR-002).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
-1. Chưa có lớp nào ở level đích cho năm học mới: không chuyển được (VAL-001).
-2. Ngày hiệu lực trước hôm nay: không chuyển được (VAL-002).
-3. Trẻ đã có một lần chuyển lớp, transfer hoặc withdrawal chờ hiệu lực: trẻ bị bỏ chọn và ghi lý do (VAL-003).
-4. Không còn trẻ nào được chọn: không xác nhận được (VAL-004).
+1. Ngày hiệu lực trước hôm nay: không cho tiếp tục (VAL-001).
 
 #### Business Rules (Quy tắc nghiệp vụ)
 
-| BR ID | Quy tắc nghiệp vụ |
+| BR ID | Quy tắc |
 |---|---|
-| BR-001 | Việc lên lớp có ngày hiệu lực; mọi thay đổi (lớp, level, học phí, điểm danh, thread) bắt đầu từ ngày đó. |
-| BR-002 | Hoá đơn đã phát hành không bị sửa; học phí theo level mới chỉ áp cho hoá đơn tạo sau ngày hiệu lực; chỉnh hoá đơn đã phát hành bằng credit note (Q-74-09). |
-| BR-003 | Vượt sĩ số tối đa chỉ cảnh báo, không chặn; Centre Director cấu hình sĩ số tối đa từng lớp (Q-74-08). |
-| BR-004 | Lớp đã có trẻ không bị xoá, chỉ được đóng; lịch sử giữ nguyên. |
-| BR-005 | Cho lớp lên level là quyền cấp theo vai trò (Roles & permissions); người dùng không có quyền không thấy nút Move class up. |
-| BR-006 | Chỉ chuyển trong cùng Centre. Khác Centre cùng brand là Transfer; khác brand là withdrawal ở Centre cũ và đăng ký mới; junior campus → senior campus ở Malaysia (hai brand) là Transfer (Q-74-02). |
-| BR-007 | Màn này chỉ dùng cho annual promotion; Infant promotion và class change là luồng riêng (Q-74-01). |
+| BR-001 | Chỉ lên lớp trong cùng Centre. Chuyển sang Centre khác là Transfer (Joining & leaving). |
+| BR-002 | Lớp ở level cao nhất của Centre không có Move children up. Lớp K2: chỉ dẫn sang Graduation. Centre không mở level kế tiếp (chưa tới K2): chỉ dẫn sang Transfer. |
+| BR-003 | Lớp đích phải thuộc level kế tiếp, năm học mới, cùng Centre. Chưa có lớp nào như vậy thì người dùng tạo lớp trong luồng; lớp tạo xong dùng được ngay làm lớp đích. |
+| BR-004 | Ngày hiệu lực mặc định là ngày bắt đầu Term 1 của năm học mới theo lịch term của brand. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
-| VAL ID | Điều kiện | Phản hồi hệ thống |
+| VAL ID | Điều kiện | Phản hồi của hệ thống |
 |---|---|---|
-| VAL-001 | Level đích chưa có lớp nào cho năm học mới. | Không chuyển; ô Target class hiện "Create a class for K1 in the new school year first." (tên level theo lựa chọn). |
-| VAL-002 | Ngày hiệu lực trước hôm nay. | Không chuyển; hiện "The effective date cannot be in the past." |
-| VAL-003 | Trẻ đã có một lần chuyển lớp, transfer hoặc withdrawal chưa đến ngày hiệu lực (AS-04). | Trẻ bị bỏ chọn, không chọn lại được; ghi "Already has a class change on" (hoặc transfer / withdrawal) kèm ngày. |
-| VAL-004 | Không còn trẻ nào được chọn. | Nút Confirm move bị mờ. |
+| VAL-001 | Ngày hiệu lực trước hôm nay. | Không cho tiếp tục; báo lỗi "The effective date cannot be in the past." |
 
 #### UI Reference (Tham chiếu giao diện)
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| SCR-01 - Classes — chi tiết lớp |  |
-| SCR-02 - Move class up — xem trước |  |
-| SCR-03 - Move class up — kết quả |  |
+| Move children up — bước Request | Prototype: Classes › chi tiết lớp › Actions › Move children up |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Move class up | Nút ở chi tiết lớp | Theo quyền | Ẩn ở lớp level cao nhất | — | FR-001; FR-010; BR-005. |
-| Target level | Danh sách chọn | Có | Level kế tiếp | VAL-001. | Chỉ các level Centre có mở. |
-| Target class | Danh sách chọn | Có | Lớp đầu tiên của level đích | VAL-001. | Đổi được cho từng trẻ (FR-003); hiện sĩ số sau khi chuyển (FR-004). |
-| Effective date | Ngày | Có | Ngày bắt đầu Term 1 năm học mới | VAL-002. | AS-01. |
-| Danh sách trẻ | Bảng có ô chọn | Có | Tất cả được chọn | VAL-003; VAL-004. | Cột: Child, Current class, Target class, Fee schedule now, Fee schedule from (ngày hiệu lực) (FR-002). |
-| Confirm move | Nút | Có | — | VAL-004. | FR-005. |
-| Kết quả | Thẻ đếm + bảng | — | Sau khi xác nhận | — | Moved, Not moved, Stayed; cột Child, Target class, Result (FR-011). |
-| Retry | Nút ở màn kết quả | Khi có trẻ lỗi | — | — | Chỉ chạy lại trẻ Not moved (FR-011). |
-| Export result | Nút ở màn kết quả | — | — | — | Excel (FR-011). |
-| Close this class | Nút ở màn kết quả | Khi lớp nguồn hết trẻ | — | — | FR-009. |
+| Move children up | Mục trong Actions | Theo quyền | Ẩn ở lớp level cao nhất | — | Mở luồng lên lớp (FR-001; BR-002). |
+| Thanh bước | Display | — | Request | — | Request › Children › Impact › Confirmation. |
+| Destination class — <năm> | Danh sách chọn | Có | Lớp đầu tiên của level kế tiếp | — | Mỗi lớp hiện level, "x of y enrolled", số chỗ còn lại (FR-002). |
+| Tạo lớp đích | Form | Khi chưa có lớp | — | — | Name, Level (level kế tiếp), Capacity, Room; nút Create a class (BR-003). |
+| Effective date | Chọn ngày | Có | Ngày bắt đầu Term 1 năm học mới | VAL-001. | FR-003; BR-004. |
+| Back / Continue / Close | Nút | — | — | VAL-001. | Chuyển bước hoặc đóng. |
 
 #### Data and Audit (Dữ liệu và audit)
 
 | ID | Yêu cầu |
 |---|---|
-| DATA-001 | Mỗi trẻ được chuyển lưu: lớp và level cũ, lớp và level mới, ngày hiệu lực, người thực hiện, thời điểm xác nhận. |
-| DATA-002 | Mỗi lần cho lớp lên level lưu: lớp nguồn, số trẻ được chuyển, số trẻ không chuyển được kèm lý do, số trẻ ở lại, người thực hiện, thời điểm. |
+| — | Lớp tạo trong luồng lưu như lớp tạo ở Classes (tên, level, năm học, sĩ số, phòng, Centre, người tạo). |
 
 #### Acceptance Criteria (Tiêu chí nghiệm thu)
 
-| AC ID | Given | When | Then | Linked Rule |
+| AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
-| AC-001 | lớp N2 · Sunbeams có 16 trẻ, đã có lớp K1 · Honeycombs cho năm học 2027 | Centre Director chọn Move class up | level đích mặc định K1, lớp đích Honeycombs, ngày hiệu lực 01/01/2027; 16 trẻ được chọn sẵn | FR-001; FR-002 |
-| AC-002 | 2 trẻ học lại N2 | Centre Director bỏ chọn 2 trẻ và chọn Confirm move | 14 trẻ chuyển sang Honeycombs từ ngày hiệu lực; 2 trẻ ở lại Sunbeams | FR-003; FR-005; FR-006 |
-| AC-003 | lớp Honeycombs tối đa 20 trẻ, đã có 8 trẻ | xem trước 14 trẻ chuyển sang | hiện "22 of 20 after the move" kèm cảnh báo; vẫn xác nhận được | FR-004; BR-003 |
-| AC-004 | ngày hiệu lực 01/01/2027, hoá đơn tháng 1 chưa tạo | Centre Director xác nhận | hoá đơn tháng 1 của 14 trẻ dùng biểu phí K1 | FR-005; BR-002 |
-| AC-005 | ngày hiệu lực 01/01/2027, hôm nay 15/12/2026 | giáo viên mở danh sách điểm danh lớp Sunbeams ngày 20/12 | 14 trẻ vẫn ở lớp Sunbeams; từ 01/01/2027 trẻ ở lớp Honeycombs | FR-008; BR-001 |
-| AC-006 | đã xác nhận | Centre Director mở lịch sử một trẻ | có dòng lớp cũ, lớp mới, ngày hiệu lực, người thực hiện | FR-007; DATA-001 |
-| AC-007 | chưa có lớp K1 cho năm học mới | Centre Director chọn Move class up | ô Target class hiện "Create a class for K1 in the new school year first."; Confirm move bị mờ | VAL-001 |
-| AC-008 | Centre Director chọn ngày hiệu lực hôm qua | chọn Confirm move | không chuyển, hiện "The effective date cannot be in the past." | VAL-002 |
-| AC-009 | một trẻ đã có lần chuyển lớp hiệu lực 01/01/2027 | xem trước | trẻ đó bị bỏ chọn, không chọn lại được, ghi "Already has a class change on 01/01/2027" | VAL-003 |
-| AC-010 | lớp Sunbeams không còn trẻ từ ngày hiệu lực | Centre Director chọn Close this class | lớp chuyển trạng thái Closed, lịch sử giữ nguyên | FR-009; BR-004 |
-| AC-011 | lớp K2 · Stars là level cao nhất của Centre | Centre Director mở chi tiết lớp | không có nút Move class up; có chỉ dẫn sang Graduation | FR-010; BR-007 |
-| AC-012 | Teacher không có quyền cho lớp lên level | Teacher mở chi tiết lớp | không có nút Move class up | BR-005 |
-| AC-013 | Centre Director bỏ chọn tất cả trẻ trong xem trước | nhìn nút Confirm move | nút bị mờ, không xác nhận được | VAL-004 |
-| AC-014 | 14 trẻ đã chuyển sang Honeycombs từ 01/01/2027 | phụ huynh của một trẻ mở Messages ngày 05/01/2027 | thấy thread lớp Honeycombs mới; thread Sunbeams chỉ đọc | FR-005 |
-| AC-015 | 3 trẻ được chọn, việc chuyển của Chloe không lưu được | Centre Director xem kết quả | 2 trẻ Moved, Chloe Not moved kèm lý do và vẫn ở lớp Sunbeams; Retry chỉ chạy lại Chloe | FR-011 |
-| AC-016 | Ethan đã Moved trong lần chạy trước | Centre Director chọn Retry | Ethan không bị chuyển lần nữa, lịch sử Ethan chỉ có một dòng | FR-011; DATA-001 |
-| AC-017 | Centre chỉ mở Playgroup đến N2 | Centre Director mở chi tiết lớp N2 | không có nút Move class up; có chỉ dẫn sang Transfer / Bulk transfer children | FR-010; BR-006 |
-| AC-018 | một trẻ có transfer sang Centre khác, ngày học cuối 31/12/2026 | Centre Director xem trước Move class up | trẻ đó bị bỏ chọn, không chọn lại được, ghi lý do transfer kèm ngày | VAL-003 |
+| AC-001 | lớp N2 · Sunbeams năm 2026; đã có lớp K1 · Honeycombs năm 2027 cùng Centre | Centre Director chọn Actions › Move children up | danh sách lớp đích chỉ có lớp K1 năm 2027 của cùng Centre, mặc định K1 · Honeycombs kèm sĩ số; ngày hiệu lực là ngày bắt đầu Term 1 năm 2027 | FR-001; FR-002; FR-003; BR-001; BR-004 |
+| AC-002 | chưa có lớp K1 nào năm 2027 ở Centre | Centre Director chọn Move children up | hệ thống báo chưa có lớp năm 2027 và hiện form tạo lớp; tạo K1 · Honeybees xong thì lớp này là lớp đích | FR-002; BR-003 |
+| AC-003 | lớp K2 · Blossom | Centre Director mở Actions | không có Move children up; có chỉ dẫn sang Graduation | BR-002 |
+| AC-004 | Centre chỉ mở tới N2 | Centre Director mở Actions của lớp N2 | không có Move children up; có chỉ dẫn sang Transfer | BR-002 |
+| AC-005 | Centre Director chọn ngày hiệu lực là hôm qua | chọn Continue | không sang bước sau, hiện "The effective date cannot be in the past." | VAL-001 |
+| AC-006 | Teacher không có quyền lên lớp | Teacher mở Actions của lớp | không có Move children up | FR-001 |
 
 #### Dependencies (Phụ thuộc)
 
-Classes (lớp của năm học mới, sĩ số tối đa); level Centre có mở (Administration › Centres); lịch term theo brand; biểu phí theo level (Fees & Payments); danh sách điểm danh; thread của lớp (Communication); Joining & leaving › Graduation (lớp K2) và Transfer; Bulk transfer children (Administration).
+Classes (lớp năm học mới, sĩ số); level Centre có mở; lịch term theo brand; Joining & leaving (Graduation, Transfer).
+
+### 6.2 BBA-72: US-002 - Xem trước trẻ và tác động
+
+#### User Story
+
+Là Centre Director, tôi muốn xem trước trẻ nào sẽ lên lớp và việc lên lớp ảnh hưởng gì, bỏ chọn được trẻ ngoại lệ, để chắc chắn trước khi xác nhận.
+
+#### Functional Requirements (Yêu cầu chức năng)
+
+| FR ID | Yêu cầu chức năng |
+|---|---|
+| FR-004 | Hệ thống liệt kê mọi trẻ đang học trong lớp nguồn, mỗi trẻ có ô chọn, mặc định được chọn (BR-005, BR-006). |
+| FR-005 | Người dùng bỏ chọn trẻ ngoại lệ (học lại, sắp rút, sắp chuyển Centre); trẻ bị bỏ chọn ở lại lớp nguồn (BR-005). |
+| FR-006 | Hệ thống hiển thị tác động của việc lên lớp trước khi xác nhận (BR-007, BR-008). |
+
+#### Functional Flow - Main (Luồng chính)
+
+1. Hệ thống hiển thị danh sách trẻ của lớp nguồn, tất cả được chọn (FR-004).
+2. Centre Director bỏ chọn trẻ học lại, chọn Continue (FR-005).
+3. Hệ thống hiển thị tác động; Centre Director chọn Continue sang US-003 (FR-006).
+
+#### Functional Flow - Alternative (Luồng thay thế)
+
+1. Lớp đích vượt sĩ số sau khi chuyển: hiển thị cảnh báo, vẫn tiếp tục được (BR-008).
+2. Centre Director chọn Back để đổi lớp đích hoặc ngày hiệu lực (US-001).
+
+#### Functional Flow - Exception (Luồng ngoại lệ)
+
+1. Không còn trẻ nào được chọn: không tiếp tục được (VAL-002).
+2. Trẻ đã có đổi lớp, transfer hoặc withdrawal chờ hiệu lực: trẻ bị bỏ chọn, không chọn lại được (VAL-003).
+
+#### Business Rules (Quy tắc nghiệp vụ)
+
+| BR ID | Quy tắc |
+|---|---|
+| BR-005 | Mặc định mọi trẻ đang học được chọn ("Moves up"). Trẻ bị bỏ chọn ở lại lớp nguồn, không thay đổi gì. |
+| BR-006 | Trẻ đã có đổi lớp, transfer hoặc withdrawal chưa tới ngày hiệu lực không được chọn, kèm lý do và ngày. |
+| BR-007 | Tác động gồm: số trẻ lên lớp đích; sĩ số lớp đích sau khi chuyển; số trẻ lớp nguồn còn lại và số trẻ kết thúc ở lớp nguồn; level trong ghi danh đổi từ level cũ sang level mới từ ngày hiệu lực; học phí tính theo level mới từ ngày hiệu lực; thread tin nhắn mới với giáo viên lớp đích, thread cũ vẫn đọc được. |
+| BR-008 | Lớp đích vượt sĩ số tối đa chỉ cảnh báo, không chặn. |
+
+#### Validation Rules (Quy tắc kiểm tra)
+
+| VAL ID | Điều kiện | Phản hồi của hệ thống |
+|---|---|---|
+| VAL-002 | Không còn trẻ nào được chọn. | Nút Continue tắt. |
+| VAL-003 | Trẻ đã có đổi lớp, transfer hoặc withdrawal chưa tới ngày hiệu lực. | Ô chọn của trẻ tắt; ghi "Already has a class change on DD/MM/YYYY" (hoặc transfer / withdrawal). |
+
+#### UI Reference (Tham chiếu giao diện)
+
+| Mã màn hình / Phiên bản | Tham chiếu / Link |
+|---|---|
+| Move children up — bước Children, Impact | Prototype: Move children up › Continue |
+
+#### UI Components / Field Specification (Thành phần giao diện)
+
+| Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
+|---|---|---|---|---|---|
+| Danh sách trẻ | Bảng có ô chọn | Có ít nhất 1 trẻ | Tất cả được chọn | VAL-002; VAL-003. | Mỗi dòng: tên trẻ, "Moves up" khi được chọn, lý do khi không chọn được (FR-004; FR-005). |
+| Impact | Section | — | — | — | Các dòng tác động theo nhóm Class, Enrolment, Billing, Access (BR-007). |
+| Cảnh báo sĩ số | Thông báo | — | Khi vượt sĩ số | — | Ví dụ "K1 · Honeybees would hold 22 of 20" (BR-008). |
+| Back / Continue | Nút | — | — | VAL-002. | — |
+
+#### Data and Audit (Dữ liệu và audit)
+
+| ID | Yêu cầu |
+|---|---|
+| — | Xem trước không lưu dữ liệu. |
+
+#### Acceptance Criteria (Tiêu chí nghiệm thu)
+
+| AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
+|---|---|---|---|---|
+| AC-007 | lớp Sunbeams có 16 trẻ đang học | Centre Director sang bước Children | 16 trẻ được chọn sẵn, mỗi trẻ ghi "Moves up" | FR-004; BR-005 |
+| AC-008 | 2 trẻ học lại N2 | Centre Director bỏ chọn 2 trẻ, sang bước Impact | tác động hiện "14 of 16 children move into K1 · Honeycombs"; Sunbeams giữ 2 trẻ | FR-005; FR-006; BR-007 |
+| AC-009 | lớp Honeycombs tối đa 20, đã có 8 trẻ | 14 trẻ được chọn | tác động hiện "K1 · Honeycombs would hold 22 of 20" kèm cảnh báo; Continue vẫn bật | BR-008 |
+| AC-010 | ngày hiệu lực 04/01/2027 | Centre Director xem Impact | có dòng "Level moves from N2 to K1 on 04/01/2027", "Fees re-resolve from the new level on that date" và dòng thread tin nhắn mới | BR-007 |
+| AC-011 | Centre Director bỏ chọn tất cả trẻ | nhìn nút Continue | nút tắt | VAL-002 |
+| AC-012 | một trẻ có transfer, ngày học cuối 31/12/2026 | Centre Director xem bước Children | trẻ đó không được chọn, ô chọn tắt, ghi lý do transfer kèm ngày | BR-006; VAL-003 |
+
+#### Dependencies (Phụ thuộc)
+
+US-001; ghi danh của trẻ; biểu phí theo level (Fees & Payments); thread của lớp (Communication).
+
+### 6.3 BBA-72: US-003 - Xác nhận và kết quả
+
+#### User Story
+
+Là Centre Director, tôi muốn xác nhận một lần để cả lớp lên lớp mới mà lớp cũ vẫn giữ danh sách trẻ, và biết trẻ nào đã chuyển, trẻ nào lỗi, để xử lý tiếp.
+
+#### Functional Requirements (Yêu cầu chức năng)
+
+| FR ID | Yêu cầu chức năng |
+|---|---|
+| FR-007 | Khi xác nhận, hệ thống chuyển từng trẻ được chọn sang lớp đích từ ngày hiệu lực và cập nhật ghi danh, học phí, danh sách điểm danh, thread của lớp (BR-009, BR-010). |
+| FR-008 | Lớp cũ và danh sách trẻ của lớp cũ được giữ; hệ thống cập nhật trạng thái của trẻ trong lớp cũ và trạng thái lớp cũ (BR-011, BR-012). |
+| FR-009 | Hệ thống hiển thị kết quả từng trẻ và cho chạy lại trẻ lỗi (BR-013). |
+| FR-010 | Hệ thống ghi lịch sử cho từng trẻ và cho lớp (DATA-001, DATA-002). |
+
+#### Functional Flow - Main (Luồng chính)
+
+1. Ở bước Confirmation, hệ thống tóm tắt "n children move into <lớp đích> on <ngày>"; Centre Director chọn Done (FR-007).
+2. Hệ thống chuyển từng trẻ, cập nhật trạng thái trẻ trong lớp cũ và trạng thái lớp cũ, ghi lịch sử (FR-007, FR-008, FR-010).
+3. Hệ thống hiển thị kết quả từng trẻ (FR-009).
+
+#### Functional Flow - Alternative (Luồng thay thế)
+
+1. Một số trẻ không chuyển được: kết quả ghi Not moved kèm lý do; Centre Director chọn Retry, chỉ trẻ lỗi được chạy lại (FR-009; BR-013).
+2. Trước ngày hiệu lực, người dùng mở lớp cũ hoặc hồ sơ trẻ: trẻ vẫn ở lớp cũ (BR-009).
+
+#### Functional Flow - Exception (Luồng ngoại lệ)
+
+1. Lỗi khi chuyển một trẻ: trẻ đó giữ nguyên lớp cũ, các trẻ khác vẫn được chuyển (BR-013).
+
+#### Business Rules (Quy tắc nghiệp vụ)
+
+| BR ID | Quy tắc |
+|---|---|
+| BR-009 | Mọi thay đổi (lớp, level trong ghi danh, học phí, danh sách điểm danh, thread) bắt đầu từ ngày hiệu lực. Trước ngày đó trẻ vẫn ở lớp cũ trên mọi màn hình. |
+| BR-010 | Hoá đơn đã phát hành không bị sửa; học phí theo level mới chỉ áp cho hoá đơn tạo sau ngày hiệu lực. Thread lớp cũ chuyển chỉ đọc. |
+| BR-011 | Việc lên lớp không xoá trẻ khỏi lớp cũ: lớp cũ giữ danh sách trẻ; với mỗi trẻ được chuyển, lần xếp lớp ở lớp cũ kết thúc vào ngày trước ngày hiệu lực và trạng thái của trẻ trong lớp cũ chuyển sang đã lên lớp, kèm lớp mới. Trẻ bị bỏ chọn giữ trạng thái đang học ở lớp cũ. |
+| BR-012 | Trạng thái lớp cũ được cập nhật theo số trẻ còn đang học từ ngày hiệu lực: còn trẻ thì giữ Open; không còn trẻ thì lớp chuyển sang Closed (OQ-02). Lớp đã có trẻ không bị xoá. |
+| BR-013 | Mỗi trẻ được chuyển độc lập: một trẻ lỗi không chặn trẻ khác. Retry chỉ chạy lại trẻ Not moved và không chuyển trùng trẻ đã Moved. |
+
+#### Validation Rules (Quy tắc kiểm tra)
+
+| VAL ID | Điều kiện | Phản hồi của hệ thống |
+|---|---|---|
+| — | — | — |
+
+#### UI Reference (Tham chiếu giao diện)
+
+| Mã màn hình / Phiên bản | Tham chiếu / Link |
+|---|---|
+| Move children up — bước Confirmation; kết quả | Prototype: Move children up › Confirmation |
+| Classes — chi tiết lớp › Children, History | Prototype: Classes › chi tiết lớp |
+
+#### UI Components / Field Specification (Thành phần giao diện)
+
+| Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
+|---|---|---|---|---|---|
+| Tóm tắt xác nhận | Display | — | — | — | "n children move into <lớp đích> on <ngày>". |
+| Done | Nút | — | — | — | Xác nhận lên lớp (FR-007). |
+| Kết quả | Thẻ đếm + bảng | — | Sau khi xác nhận | — | Moved / Not moved / Stayed; cột Child, Destination class, Result, Reason (FR-009). |
+| Retry | Nút | — | Chỉ hiện khi có trẻ Not moved | — | Chạy lại trẻ lỗi (BR-013). |
+| Lớp cũ › Children | Danh sách | — | — | — | Vẫn hiện trẻ đã lên lớp, kèm trạng thái đã lên lớp, lớp mới và ngày kết thúc (BR-011). |
+| Lớp cũ › trạng thái lớp | Nhãn | — | Open | — | Theo BR-012. |
+| Lớp › History | Danh sách | — | — | — | Dòng lên lớp: lớp cũ → lớp mới, số trẻ, ngày hiệu lực, người thực hiện, thời điểm (FR-010). |
+
+#### Data and Audit (Dữ liệu và audit)
+
+| ID | Yêu cầu |
+|---|---|
+| DATA-001 | Mỗi trẻ được chuyển lưu: lớp và level cũ, lớp và level mới, ngày hiệu lực, ngày kết thúc ở lớp cũ, trạng thái trong lớp cũ, người thực hiện, thời điểm xác nhận. |
+| DATA-002 | Mỗi lần lên lớp lưu: lớp nguồn, lớp đích, ngày hiệu lực, số trẻ Moved, Not moved (kèm lý do), Stayed, trạng thái lớp nguồn sau khi chuyển, người thực hiện, thời điểm. |
+
+#### Acceptance Criteria (Tiêu chí nghiệm thu)
+
+| AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
+|---|---|---|---|---|
+| AC-013 | 14 trẻ được chọn, ngày hiệu lực 04/01/2027 | Centre Director chọn Done | 14 trẻ ở lớp K1 · Honeycombs từ 04/01/2027; kết quả hiện 14 Moved | FR-007; FR-009 |
+| AC-014 | đã xác nhận, hôm nay 15/12/2026 | giáo viên mở điểm danh lớp Sunbeams ngày 20/12/2026 | 14 trẻ vẫn ở Sunbeams; từ 04/01/2027 trẻ ở danh sách điểm danh Honeycombs | BR-009 |
+| AC-015 | đã xác nhận | Centre Director mở lớp Sunbeams › Children sau 04/01/2027 | vẫn thấy 14 trẻ đã lên lớp, mỗi trẻ ghi trạng thái đã lên lớp, lớp K1 · Honeycombs, ngày kết thúc 03/01/2027; 2 trẻ ở lại ghi đang học | FR-008; BR-011 |
+| AC-016 | 2 trẻ ở lại Sunbeams | qua ngày 04/01/2027 | lớp Sunbeams vẫn Open | BR-012 |
+| AC-017 | tất cả 16 trẻ lên lớp | qua ngày 04/01/2027 | lớp Sunbeams chuyển Closed, danh sách 16 trẻ và lịch sử vẫn còn | BR-012 |
+| AC-018 | hoá đơn tháng 1/2027 chưa tạo | hoá đơn tháng 1/2027 được tạo | 14 trẻ tính học phí K1 | BR-010 |
+| AC-019 | 3 trẻ được chọn, việc chuyển của Chloe lỗi | Centre Director xem kết quả | 2 Moved, Chloe Not moved kèm lý do và vẫn ở Sunbeams; Retry chỉ chạy lại Chloe | BR-013 |
+| AC-020 | Ethan đã Moved | Centre Director chọn Retry | Ethan không bị chuyển lần nữa; lịch sử Ethan chỉ có một dòng lên lớp | BR-013; DATA-001 |
+| AC-021 | đã xác nhận | Centre Director mở lịch sử một trẻ | có dòng lớp cũ, lớp mới, ngày hiệu lực, người thực hiện | FR-010; DATA-001 |
+| AC-022 | 14 trẻ đã lên Honeycombs từ 04/01/2027 | phụ huynh một trẻ mở Messages ngày 05/01/2027 | thấy thread lớp Honeycombs; thread Sunbeams chỉ đọc | BR-010 |
+
+#### Dependencies (Phụ thuộc)
+
+US-001, US-002; ghi danh; Fees & Payments (biểu phí theo level); danh sách điểm danh; Communication (thread của lớp).
 
 ## 7. Câu hỏi mở
 
 | Mã câu hỏi | Quyết định cần có | Người quyết định | Ưu tiên | Quyết định của BBA |
 |---|---|---|---|---|
-| OQ-01 | Việc cho lớp lên level có cần ai duyệt (ví dụ HQ Ops) trước khi có hiệu lực không? | Centre Director / HQ Ops | Trung bình |  |
-| OQ-02 | Ngày hiệu lực mặc định là ngày nào; có cho lên lịch và huỷ trước ngày hiệu lực không? | HQ Ops | Cao | Một phần: năm học tháng 1–12, lập lớp năm sau tháng 11–12 (Q-74-07); Term 1 năm 2027 của mọi brand bắt đầu 01/01/2027 (Centre Terms Setup — BBA-489). Mặc định ngày hiệu lực, lên lịch và huỷ chưa chốt. |
-| OQ-03 | Trẻ đang tạm nghỉ (tối đa 3 tháng, vẫn trong hệ thống) có được chuyển cùng lớp không; trạng thái nào đủ điều kiện? | Centre Director / HQ Ops | Trung bình | Một phần: tạm nghỉ tối đa 3 tháng, trẻ vẫn trong hệ thống (Q-74-06, BBA-536). Điều kiện cho annual promotion chưa chốt. |
-| OQ-04 | Phụ huynh / giáo viên có nhận thông báo khi lên lớp không; lớp cũ tự đóng hay đóng tay? | Centre Director / HQ Ops | Thấp | Một phần: HQ / Centre dùng Announcement để báo thay đổi lớn (Q-74-15). Thông báo khi annual promotion và cách đóng lớp chưa chốt. |
-| OQ-05 | Trẻ K2 cuối năm (tốt nghiệp) xử lý ở đâu? | Business Owner | Trung bình | Graduation ở Joining & leaving (mass withdrawal), chỉ K2 rời vào tháng 12 (Q-74-01, Q-74-06). |
-| OQ-06 | Biểu phí level mới áp từ ngày hiệu lực hay từ đầu tháng sau? | Finance | Cao | Một phần: hoá đơn đã phát hành sửa bằng credit note (Q-74-09); giá năm 2027 thay đổi, chốt trong tháng 11 (BBA-522). |
-| OQ-07 | Danh sách điểm danh chuyển ngay khi xác nhận hay tại ngày hiệu lực? | Centre Director / HQ Ops | Trung bình | Một phần: thread lớp mới tạo khi lên lớp, thread cũ chỉ đọc (Q-74-10). Danh sách điểm danh chưa chốt. |
-| OQ-08 | Centre không mở level kế tiếp (ví dụ junior campus ở Malaysia): cuối năm xử lý bằng Bulk transfer children (Administration) hay Transfer từng trẻ (Joining & leaving); ai làm? | HQ Ops | Cao | Một phần: junior → senior campus là Transfer, không phải promotion (Q-74-02). |
-| OQ-09 | Trẻ có transfer hoặc withdrawal chờ hiệu lực có bị loại khỏi danh sách lên lớp không? | Centre Director / HQ Ops | Trung bình |  |
-| OQ-10 | Ở junior → senior campus, Centre nhận xếp trẻ vào level nào: level kế tiếp tự động hay admin Centre nhận chọn khi nhận trẻ? | HQ Ops | Trung bình |  |
-
-### Giả định của BA (cần xác nhận cùng mục 7)
-
-| Mã | Giả định | Dùng ở |
-|---|---|---|
-| AS-01 | Ngày hiệu lực mặc định là ngày bắt đầu Term 1 năm học mới theo lịch term của brand. | FR-001 — chờ OQ-02 |
-| AS-02 | Không cần duyệt; xác nhận là có hiệu lực theo ngày đã chọn. | FR-005 — chờ OQ-01 |
-| AS-03 | Trẻ đang tạm nghỉ có trong danh sách xem trước và được chuyển như trẻ khác. | FR-002 — chờ OQ-03 |
-| AS-04 | Trẻ có transfer hoặc withdrawal chờ hiệu lực bị loại khỏi danh sách lên lớp. | VAL-003 — chờ OQ-09 |
+| OQ-01 | Việc lên lớp có cần ai duyệt (ví dụ HQ Ops) trước khi có hiệu lực không? Có cho huỷ trước ngày hiệu lực không? | Centre Director / HQ Ops | Trung bình | |
+| OQ-02 | Lớp cũ không còn trẻ từ ngày hiệu lực: hệ thống tự chuyển Closed hay Centre Director đóng tay? Tên trạng thái của trẻ trong lớp cũ sau khi lên lớp là gì (đề xuất "Moved up")? | Centre Director / HQ Ops | Trung bình | |
+| OQ-03 | Trẻ đang tạm nghỉ (tối đa 3 tháng, vẫn trong hệ thống) có được lên lớp cùng lớp không? | Centre Director / HQ Ops | Trung bình | |
+| OQ-04 | Phụ huynh và giáo viên có nhận thông báo khi lên lớp không? | Centre Director / HQ Ops | Thấp | |
+| OQ-05 | Centre không mở level kế tiếp (ví dụ junior campus ở Malaysia): cuối năm dùng Bulk transfer children (Administration) hay Transfer từng trẻ; Centre nhận xếp trẻ vào level nào? | HQ Ops | Cao | |
 
 ## 8. Phụ lục
 
@@ -211,29 +326,17 @@ Classes (lớp của năm học mới, sĩ số tối đa); level Centre có m�
 
 | Thuật ngữ | Định nghĩa trong FRD này |
 |---|---|
-| Level | Cấp lớp theo độ tuổi, ví dụ Playgroup, N1, N2, K1, K2; mỗi Centre chỉ mở một số level. |
+| Level | Cấp lớp theo độ tuổi: Infant, Playgroup, N1, N2, K1, K2; mỗi Centre chỉ mở một số level. |
 | Annual promotion | Cuối năm học, cả lớp lên level kế tiếp trong cùng Centre. |
-| Ngày hiệu lực | Ngày việc chuyển lớp bắt đầu áp dụng. |
-| Biểu phí theo level | Mức học phí áp cho trẻ theo level đang học. |
+| Lớp nguồn / lớp đích | Lớp hiện tại của trẻ / lớp năm học mới trẻ được chuyển tới. |
+| Ngày hiệu lực | Ngày việc lên lớp bắt đầu áp dụng. |
 | Học lại | Trẻ ở lại level cũ thêm một năm. |
-| Transfer | Trẻ chuyển sang Centre khác cùng quốc gia; giữ hồ sơ trẻ, tạo ghi danh mới ở Centre nhận. |
-| Graduation | Trẻ K2 rời trường vào tháng 12, xử lý như mass withdrawal. |
+| Graduation | Trẻ K2 rời trường vào tháng 12 (Joining & leaving). |
+| Transfer | Trẻ chuyển sang Centre khác (Joining & leaving). |
 
-## 9. Tài liệu tham khảo
+### Phụ lục B. Danh mục
 
-Số trang của SRS tính theo bản Word gốc khi xuất PDF; "—" là chưa đối chiếu được với bản Word gốc. Tệp của BBA là tệp đính kèm trên Plane.
-
-| STT | Tài liệu | Mục | Trang | Dùng cho |
-|---|---|---|---|---|
-| 1 | BBA-SMS-SRS-Children-and-Families-v0.1 | §1.1 In scope for Phase 1 (Classes: annual promotion) | 3 | Mục 3. |
-| 2 | BBA-SMS-SRS-Children-and-Families-v0.1 | §3 P5 Class set-up and assignment; P6 Annual promotion | — | Luồng chính; FR-001 đến FR-005, FR-009. |
-| 3 | BBA-SMS-SRS-Children-and-Families-v0.1 | §4 mục 1.6 Classes (Close class, Move children, Run annual promotion, View history) | — | FR-001; FR-002; FR-007; FR-009. |
-| 4 | BBA-SMS-SRS-Children-and-Families-v0.1 | §5 Business rules › Classes (BR-CHF-042 đến BR-CHF-049) | — | BR-003; BR-004; BR-005; FR-005; FR-009. |
-| 5 | BBA-SMS-SRS-Administration-v0.1 | §1.2 Centres (Set levels offered; Bulk transfer children) | — | FR-010; OQ-08. |
-| 6 | BBA-SMS-SRS-Joining-and-Leaving-v0.1 | §3 P4 Transfer between centres; §5 Business rules › Transfers (BR-JNL-038 đến BR-JNL-048) | — | BR-006; FR-010; AC-018. |
-| 7 | Plane — ticket BBA-72 (WBS 3.1.5.01) | Annual exercise; preview before commit; async batch job with progress & partial-failure report | — | Phạm vi; FR-002; FR-011. |
-| 8 | Plane — BBA-489, tệp đính kèm "Centre Terms Setup.xlsx" | Sheet "Term Setup" (Term 1 năm 2027 của mọi brand bắt đầu 01/01/2027) | — | FR-001; AS-01; OQ-02. |
-| 9 | Plane — BBA-536 "BBA input: Temporary withdrawal – reminder before the child returns" | Tạm nghỉ tối đa 3 tháng | — | OQ-03. |
-| 10 | Plane — BBA-522 "BBA input: Fee items and prices to set up in the new system" | Comment 12/11/2026: giá năm 2027 thay đổi, chốt trong tháng 11 | — | OQ-06. |
-| 11 | BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi, sheet "Tổng hợp" | Đã chốt: Q-74-01, Q-74-02, Q-74-06, Q-74-08 · Một phần: Q-74-03, Q-74-07, Q-74-09, Q-74-10, Q-74-15 · DOTB quyết định: Q-74-11, Q-74-12, Q-74-13 · Chưa phản hồi: Q-74-05 | — | FR-003; FR-005; FR-010; FR-011; BR-002; BR-003; BR-006; BR-007; OQ-02 đến OQ-08. |
-| 12 | Plane — dự án BBA Phase 1, ticket BBA-72 (WBS 3.1.5.01) | Move whole class up a level (bulk promotion) | — | Phạm vi tính năng. |
+| Danh mục | Mô tả | Phụ thuộc vào |
+|---|---|---|
+| Kết quả lên lớp | Moved, Not moved, Stayed. | Lựa chọn trẻ và kết quả xử lý. |
+| Trạng thái lớp | Open, Closed. | Số trẻ đang học (BR-012). |
