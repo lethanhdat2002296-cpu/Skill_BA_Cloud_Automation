@@ -140,13 +140,14 @@
       "synced_at": "2026-11-18 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
-      "file_id": "1sIagEbS1V4Rd91ZxrftdBtfXhRuUXa-d",
-      "url": "https://drive.google.com/file/d/1sIagEbS1V4Rd91ZxrftdBtfXhRuUXa-d/view",
+      "file_id": "1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG",
+      "url": "https://drive.google.com/file/d/1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG/view",
       "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
-      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.2_VI.docx",
-      "version": "0.2",
-      "source_sha256": "71ca02a5ea72eac85231e4104983b7b5472b7e060b0bb6ac631bb0dcace2875e",
-      "synced_at": "2026-11-19T06:44:06+00:00"
+      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "a64ed589508ed5976bed51976eb2d7dc1c4cca9bcbfe267129f7f9731cbb1f38",
+      "synced_at": "2026-11-22T00:08:42+00:00",
+      "note": "22/11/2026: nền là bản user gửi sau review của sếp; chỉ xoay quanh See the impact; thêm quy tắc ngừng dùng (ví dụ ECDA); 2 comment của Mỹ Hải chèn lại. File cũ 1sIagEbS1… trong thùng rác."
     },
     "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI": {
       "file_id": "1hvPOs9B0InPchOrde0czJbuKyDCRleya",
@@ -1023,6 +1024,17 @@
       "note": "20/11/2026: nội dung bản FR tổng quan (v0.3 local) + mục 1 theo bản user sửa trên Drive (lịch sử chỉ còn 0.1, Mức sẵn sàng). File cũ 1enBKoI7… trong thùng rác.",
       "key": "FSD/Sprint 4/3.1_Medical_Alert_Banner_VI",
       "replaced_at": "2026-11-20T07:58:16+00:00"
+    },
+    {
+      "file_id": "1sIagEbS1V4Rd91ZxrftdBtfXhRuUXa-d",
+      "url": "https://drive.google.com/file/d/1sIagEbS1V4Rd91ZxrftdBtfXhRuUXa-d/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "71ca02a5ea72eac85231e4104983b7b5472b7e060b0bb6ac631bb0dcace2875e",
+      "synced_at": "2026-11-19T06:44:06+00:00",
+      "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
+      "replaced_at": "2026-11-22T00:08:42+00:00"
     }
   ]
 }
