@@ -150,13 +150,14 @@
       "note": "22/11/2026: nền là bản user sửa trên Drive (01:05); US-002 gộp hộp xác nhận vào BR-003, bỏ Centre giá trị riêng và quy tắc ngừng dùng, bỏ \"quy trình\"; giữ 1 comment Mỹ Hải. File cũ 1fpmFMDq… trong thùng rác."
     },
     "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI": {
-      "file_id": "1hvPOs9B0InPchOrde0czJbuKyDCRleya",
-      "url": "https://drive.google.com/file/d/1hvPOs9B0InPchOrde0czJbuKyDCRleya/view",
+      "file_id": "1NKFjpvs9Hzo0dNtR2wQWFyu5O0vUKPOP",
+      "url": "https://drive.google.com/file/d/1NKFjpvs9Hzo0dNtR2wQWFyu5O0vUKPOP/view",
       "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
-      "title": "[FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.2_VI.docx",
-      "version": "0.2",
-      "source_sha256": "e10e4a679680eee45ea6c1d99fc9c5bdb2cfc745346c7ab4ae2de9220778da3b",
-      "synced_at": "2026-11-19T08:32:08+00:00"
+      "title": "[FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "203d28e85b7500405bc90f1d081c51d7b4c89aa0dd79717c4d8a52591daf1ed5",
+      "synced_at": "2026-11-22T02:25:07+00:00",
+      "note": "22/11/2026: nền là bản user sửa trên Drive (02:01, bỏ US-001 cũ); viết lại quanh người duyệt thứ 2 nhìn thấy gì; đánh số lại. File cũ 1hvPOs9B… trong thùng rác."
     },
     "FSD/Sprint 4/2.8_Approval_Flows_Configuration_VI": {
       "file_id": "1SqURFCdGMP6R1uG-S0j1Hp7GepkzUKVC",
@@ -1047,6 +1048,17 @@
       "note": "22/11/2026: nền là bản user gửi sau review của sếp; chỉ xoay quanh See the impact; thêm quy tắc ngừng dùng (ví dụ ECDA); 2 comment của Mỹ Hải chèn lại. File cũ 1sIagEbS1… trong thùng rác.",
       "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
       "replaced_at": "2026-11-22T01:32:46+00:00"
+    },
+    {
+      "file_id": "1hvPOs9B0InPchOrde0czJbuKyDCRleya",
+      "url": "https://drive.google.com/file/d/1hvPOs9B0InPchOrde0czJbuKyDCRleya/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.2_VI.docx",
+      "version": "0.2",
+      "source_sha256": "e10e4a679680eee45ea6c1d99fc9c5bdb2cfc745346c7ab4ae2de9220778da3b",
+      "synced_at": "2026-11-19T08:32:08+00:00",
+      "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI",
+      "replaced_at": "2026-11-22T02:25:07+00:00"
     }
   ]
 }
