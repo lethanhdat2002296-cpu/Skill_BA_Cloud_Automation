@@ -140,14 +140,14 @@
       "synced_at": "2026-11-18 (từ Drive về Git)"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI": {
-      "file_id": "1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG",
-      "url": "https://drive.google.com/file/d/1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG/view",
+      "file_id": "1UJ5Xt90XrL47iYUku6qDAVmfMlYVrAoE",
+      "url": "https://drive.google.com/file/d/1UJ5Xt90XrL47iYUku6qDAVmfMlYVrAoE/view",
       "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
       "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "a64ed589508ed5976bed51976eb2d7dc1c4cca9bcbfe267129f7f9731cbb1f38",
-      "synced_at": "2026-11-22T00:08:42+00:00",
-      "note": "22/11/2026: nền là bản user gửi sau review của sếp; chỉ xoay quanh See the impact; thêm quy tắc ngừng dùng (ví dụ ECDA); 2 comment của Mỹ Hải chèn lại. File cũ 1sIagEbS1… trong thùng rác."
+      "source_sha256": "5b2f72017234a71a521409061680899c55c3587660ff2de7460d4bc286648f0b",
+      "synced_at": "2026-11-22T01:32:46+00:00",
+      "note": "22/11/2026: nền là bản user sửa trên Drive (01:05); US-002 gộp hộp xác nhận vào BR-003, bỏ Centre giá trị riêng và quy tắc ngừng dùng, bỏ \"quy trình\"; giữ 1 comment Mỹ Hải. File cũ 1fpmFMDq… trong thùng rác."
     },
     "FSD/Sprint 4/2.8_Change_Request_Second_Approval_VI": {
       "file_id": "1hvPOs9B0InPchOrde0czJbuKyDCRleya",
@@ -1035,6 +1035,18 @@
       "synced_at": "2026-11-19T06:44:06+00:00",
       "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
       "replaced_at": "2026-11-22T00:08:42+00:00"
+    },
+    {
+      "file_id": "1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG",
+      "url": "https://drive.google.com/file/d/1fpmFMDqHr51OQO8lOQen8KkVBoUO81MG/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "a64ed589508ed5976bed51976eb2d7dc1c4cca9bcbfe267129f7f9731cbb1f38",
+      "synced_at": "2026-11-22T00:08:42+00:00",
+      "note": "22/11/2026: nền là bản user gửi sau review của sếp; chỉ xoay quanh See the impact; thêm quy tắc ngừng dùng (ví dụ ECDA); 2 comment của Mỹ Hải chèn lại. File cũ 1sIagEbS1… trong thùng rác.",
+      "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change_VI",
+      "replaced_at": "2026-11-22T01:32:46+00:00"
     }
   ]
 }
