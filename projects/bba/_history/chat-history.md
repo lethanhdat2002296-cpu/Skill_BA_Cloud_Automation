@@ -74,3 +74,17 @@
 - BBA-71: bổ sung từ Q-73-04, 06, 07, 08, 09, 10, 11, 12, 14 (loại consent theo brand / Crossroad; người nhận theo lớp hoặc cả Centre, cả hai phụ huynh hoặc người liên hệ chính; Announcement kèm link, email tuỳ chọn, nhóm "Surveys + Consents"; câu trả lời về SMS và tick checklist; giáo viên chỉ thấy consent lớp mình ở Surveys & consents; thẻ tổng quan bấm vào chỉ hiện trẻ chưa trả lời; năm học tháng 1–12, Crossroad gia hạn đầu năm; nhiều consent mở cùng lúc; lưu phiên bản và thời điểm đồng ý). Câu chưa phản hồi đưa vào OQ (Q-73-09, Q-73-11, Q-73-12 phần gia hạn, Q-73-06 phần consent gửi sau). Q-73-13 (rút consent, chặn ảnh) không thêm vì ngoài phạm vi; Q-73-15 DOTB tự quyết. Không có Q-73-05 trong file. Đánh số lại.
 - BBA-73: chỉ mô tả thông tin màn hình ghi nhận khi trẻ được đưa đến / đón về; bỏ phần chờ duyệt người đón và OQ về người duyệt. Bổ sung từ Q-75-02, 04, 08, 10, 12: ảnh giao nhận bắt buộc, phụ huynh xem ảnh; trẻ đi xe mỗi trẻ một bản ghi, một ảnh; người đưa có thể là người giúp việc; không override. OQ mới: khoảng chỉnh giờ (Q-75-08), thời gian lưu ảnh (Q-75-12). Gộp sửa của user trên Drive (tên tài liệu, phiên bản 0.1). Đánh số lại.
 - Chưa đẩy Drive / Git (chờ "update").
+
+---
+
+## 23/11/2026 — Update BBA-71, BBA-73; sửa BBA-74 (SMS chỉ hiển thị)
+
+**User:**
+> update BBA-71 và BBA-73 lên drive
+> Trong khi Update 2 tài liệu trên. Tài liệu BBA-74 cũng cần thay đổi như sau
+> 1. Phần đo và nhập nhiệt độ sẽ ở trên App. Còn SMS sẽ hiển thị thông tin từ App lên => Đối với tài liệu này sẽ mô tả thông tin hiển thị chứ không đi mô tả chức năng trên SMS
+> 2. Check trong File excel đó luôn "Q-76-05 đến Q-76-06" để update thêm thông tin. Lưu ý, hệ thống SMS trong tài liệu này chỉ hiển thông tin không đề cập đến việc sửa hay xóa gì trên SMS nha
+
+**Claude:**
+- BBA-71, BBA-73: kiểm tra Drive (BBA-71 chỉ đổi tên file, BBA-73 đã gộp trước đó), upload bản mới (V0.1), file cũ vào thùng rác, commit e9dbdb9, thay link Plane.
+- BBA-74: viết lại thành tài liệu hiển thị: 3 US (hiển thị lần đo trên bảng điểm danh; cảnh báo sốt và trẻ còn thiếu lần đo; chi tiết lần đo trong ngày ở Day record). Bỏ thêm / sửa / xoá trên SMS, Sign in nhập nhiệt độ, Parent App chuyển ra ngoài phạm vi. Q-76-05: dải nhập trên App (mặc định 36.5, dải nhanh 36.3–36.7, thang 36–40, "Enter manually") ghi vào BR-003; phần nhập ngoài thang cảnh báo hay chặn → OQ-04. Q-76-06: giá trị Bluetooth sửa được trên App, SMS hiện cách đo và nhãn đã sửa (BR-008). Giữ sửa của user trên Drive (tên, phiên bản 0.1, "Parent App", "sức khỏe"). Chưa đẩy Drive / Git.
