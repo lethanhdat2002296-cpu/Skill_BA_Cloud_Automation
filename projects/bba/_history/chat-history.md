@@ -139,3 +139,12 @@
 > Dịch BBA-51 và BBA-52 sang tiếng anh nhé. Không push lên Plane
 
 **Claude:** Bản tiếng Việt trên Drive có sửa lúc 04:26 (BBA-51 bỏ US "Xem thiết lập", còn 1 US / 1 AC; BBA-52 bỏ mục Câu hỏi mở, đổi AC-005, rút gọn mục đích). Đồng bộ bản VI trong repo theo Drive (sửa "Depedencies", US-002 → US-001 ở mục 5 của BBA-51), rồi dịch sang tiếng Anh: `2.8_Impact_Preview_Before_Change.md`, `2.8_Change_Request_Second_Approval.md` (ghi đè bản tiếng Anh cũ 14/11). Không đụng Plane. Chưa đẩy Drive / Git.
+
+---
+
+## 23/11/2026 — Update bản tiếng Anh BBA-51, BBA-52
+
+**User:**
+> Update vô folder này. Vẫn giữ file TV lại (thư mục: https://drive.google.com/drive/folders/1KqkgghHymUu7T9_xco51AIjnoSufVg7_)
+
+**Claude:** Upload 2 file tiếng Anh vào thư mục trên: [FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_EN.docx (1FiL7-K-6ecTxxne8HKM1xxHVRI0WREDq), [FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.1_EN.docx (12sViWlFTOipQ1_DGcgGUQtgsxUUprVfB). File tiếng Việt giữ nguyên, không xoá gì trên Drive. Commit bản EN + VI đồng bộ + `_drive.json`. Không đụng Plane.

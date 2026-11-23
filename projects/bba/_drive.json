@@ -178,22 +178,24 @@
       "synced_at": "2026-11-13 04:35"
     },
     "FSD/Sprint 4/2.8_Impact_Preview_Before_Change": {
-      "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
-      "url": "https://drive.google.com/file/d/1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 2.8 Impact Preview Before Change - Sprint 4.docx",
-      "version": "",
-      "source_sha256": "e3b97833d50fbd63b7892f0ceecc59705e1cf21478e8aacfc67dfa6b31419798",
-      "synced_at": "2026-11-10 09:15"
+      "file_id": "1FiL7-K-6ecTxxne8HKM1xxHVRI0WREDq",
+      "url": "https://drive.google.com/file/d/1FiL7-K-6ecTxxne8HKM1xxHVRI0WREDq/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_EN.docx",
+      "version": "0.1",
+      "source_sha256": "8923e7fd5369f26525828b6a048c5f310ea964bcbcee2cf49bc4da6989b4a17c",
+      "synced_at": "2026-11-23T04:41:50+00:00",
+      "note": "23/11/2026: bản tiếng Anh dịch từ bản VI trên Drive (04:26). Bản VI giữ nguyên ở thư mục 18AJ7…; không gắn Plane."
     },
     "FSD/Sprint 4/2.8_Change_Request_Second_Approval": {
-      "file_id": "1OwPQgKux_XT1uqAokcOnpar59OT6Rags",
-      "url": "https://drive.google.com/file/d/1OwPQgKux_XT1uqAokcOnpar59OT6Rags/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] 2.8 Change Request with Second Approval - Sprint 4.docx",
-      "version": "",
-      "source_sha256": "281406333eb9f965ec0907b5df4576a6c48e19751433ce67c323d368072802cb",
-      "synced_at": "2026-11-10 09:15"
+      "file_id": "12sViWlFTOipQ1_DGcgGUQtgsxUUprVfB",
+      "url": "https://drive.google.com/file/d/12sViWlFTOipQ1_DGcgGUQtgsxUUprVfB/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.1_EN.docx",
+      "version": "0.1",
+      "source_sha256": "b20bf4ca57fd1d3dccafba20edbf62fd64f545d11d53b5e796e128d1b39ca3ce",
+      "synced_at": "2026-11-23T04:41:50+00:00",
+      "note": "23/11/2026: bản tiếng Anh dịch từ bản VI trên Drive (04:26). Bản VI giữ nguyên ở thư mục 18AJ7…; không gắn Plane."
     },
     "FSD/Sprint 4/2.8_Approval_Flows_Configuration": {
       "file_id": "1UgmLG7Nea3MAZqTmCsqQ5r-giE0lj5c7",
@@ -1191,6 +1193,28 @@
       "note": "23/11/2026: chỉ mô tả thông tin ghi nhận khi đưa / đón trên SMS; bổ sung Q-75-02..12; gộp sửa của user trên Drive; giữ 1 comment Mỹ Hải. File cũ 1op-QOQGY… trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
       "replaced_at": "2026-11-23T03:33:46+00:00"
+    },
+    {
+      "file_id": "1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f",
+      "url": "https://drive.google.com/file/d/1_sOe8LTo7pXDDgqH-5AbFa18VhaQ3U3f/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Impact Preview Before Change - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "e3b97833d50fbd63b7892f0ceecc59705e1cf21478e8aacfc67dfa6b31419798",
+      "synced_at": "2026-11-10 09:15",
+      "key": "FSD/Sprint 4/2.8_Impact_Preview_Before_Change",
+      "replaced_at": "2026-11-23T04:41:50+00:00"
+    },
+    {
+      "file_id": "1OwPQgKux_XT1uqAokcOnpar59OT6Rags",
+      "url": "https://drive.google.com/file/d/1OwPQgKux_XT1uqAokcOnpar59OT6Rags/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] 2.8 Change Request with Second Approval - Sprint 4.docx",
+      "version": "",
+      "source_sha256": "281406333eb9f965ec0907b5df4576a6c48e19751433ce67c323d368072802cb",
+      "synced_at": "2026-11-10 09:15",
+      "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval",
+      "replaced_at": "2026-11-23T04:41:50+00:00"
     }
   ]
 }
