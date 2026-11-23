@@ -45,3 +45,16 @@
 | BBA-75 | [FRS] BBA-75-3.2.1.03_Late_Flag_Internal_V0.2_VI.docx |
 | BBA-76 | [FRS] BBA-76-3.2.1.06_Centre_Brand_Overview_Today_V0.2_VI.docx |
 | BBA-77 | [FRS] BBA-77-3.2.1.07_Attendance_Correction_V0.2_VI.docx |
+
+---
+
+## 23/11/2026 — BBA-71: sửa theo bản user chỉnh trên Drive
+
+**User:**
+> BBA-71 thay đổi chút ít
+> 1. Hiện tại, tao có update lại câu từ trong tài liệu => Dựa vào đó update lại nội dung
+> 2. Bổ sung thêm thông tin tại US-001, toàn bộ thông tin ở tab Document cho phép toàn bộ giáo viên xem kể cả khi bé chuyển lớp khác. Dựa vào câu từ tao viết hãy mô tả cho chỉnh chu lại nhé
+> 3. Chỉ gửi thông tin lại cho phụ huynh khi hết hạn, không gửi lại cho phụ huynh khi họ từ chối
+> 4. Ngoài ra, đánh số thứ tự lại giúp tao
+
+**Claude:** Lấy bản Drive (user sửa 23/11 02:02) làm gốc, giữ nguyên câu chữ user sửa. Bổ sung US-001: FR-003, BR-004 (mọi giáo viên xem toàn bộ tab Documents, kể cả khi trẻ chuyển lớp; chỉ xem), luồng thay thế, AC-006, AC-007, dòng Teacher ở mục 4. Gửi lại chỉ khi Expired: BR-009 viết lại, nút Send again chỉ hiện với Expired, thêm AC-020 (Declined không gửi lại), sửa mục 3, mục 5, thuật ngữ. Gỡ tham chiếu tới BR-004, BR-006, BR-007 đã xoá; bỏ AC "Primary contact only". Đánh số lại: FR-001..011, BR-001..009, VAL-001..003, DATA-001..003, AC-001..020. Chưa đẩy Drive / Git (chờ "update").
