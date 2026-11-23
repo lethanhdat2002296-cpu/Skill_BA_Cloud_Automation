@@ -235,14 +235,14 @@
       "note": "20/11/2026: nội dung theo bản user sửa trên Drive (1MoW6…, 07:21); chỉ đánh lại số US/FR/BR/VAL/DATA/AC và bỏ tham chiếu tới mã đã xoá. File 1MoW6… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI": {
-      "file_id": "1BKzrlWtkdCY052lAvuciumCemT8WRtnK",
-      "url": "https://drive.google.com/file/d/1BKzrlWtkdCY052lAvuciumCemT8WRtnK/view",
+      "file_id": "1B5NAUAlAaO79e3tMv03w91wE_kVjXRZg",
+      "url": "https://drive.google.com/file/d/1B5NAUAlAaO79e3tMv03w91wE_kVjXRZg/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
-      "title": "[FRS] BBA-71-3.1.4.01_Consent_Status_Per_Child_V0.4_VI.docx",
-      "version": "0.4",
-      "source_sha256": "139928fbd7f906b37405f36ff6f0e56ab423aa3998f7025fe279b27b527dbf84",
-      "synced_at": "2026-11-22T04:21:09+00:00",
-      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1q1ed4shP… trong thùng rác."
+      "title": "[FRS] BBA-71-3.1.4.01_Consent_Status_Per_Child_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "39a92edb940b07038f30715eb7edb06184c8bc2ddecc3cf3e0dfe1df9b20944a",
+      "synced_at": "2026-11-23T02:34:52+00:00",
+      "note": "23/11/2026: nền là bản user sửa trên Drive; GV xem toàn bộ tab Documents kể cả khi chuyển lớp; chỉ gửi lại khi Expired; bổ sung Q-73-04..15; đánh số lại. File cũ 1BKzrlWtk… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
       "file_id": "1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe",
@@ -255,14 +255,14 @@
       "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "1op-QOQGYFqRMknt4-euiacCracFzPTD3",
-      "url": "https://drive.google.com/file/d/1op-QOQGYFqRMknt4-euiacCracFzPTD3/view",
+      "file_id": "17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk",
+      "url": "https://drive.google.com/file/d/17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
-      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.3_VI.docx",
-      "version": "0.3",
-      "source_sha256": "1cf3a76d3a15a6249df1d2550f90c31431f4fbc92aaeaa60392aadc35b92ae2c",
-      "synced_at": "2026-11-22T04:21:09+00:00",
-      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1wZIzt3Ox… trong thùng rác."
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "7a0fbef02fabc6089a3e6d974e98d7425cc903ba5736d81c6c258c0fc72c0498",
+      "synced_at": "2026-11-23T02:34:52+00:00",
+      "note": "23/11/2026: chỉ mô tả thông tin ghi nhận khi đưa / đón trên SMS; bổ sung Q-75-02..12; gộp sửa của user trên Drive; giữ 1 comment Mỹ Hải. File cũ 1op-QOQGY… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
       "file_id": "1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c",
@@ -1143,6 +1143,30 @@
       "synced_at": "2026-11-10 10:33",
       "key": "FSD/Sprint 4/BBA-77_Attendance_Correction_VI",
       "replaced_at": "2026-11-22T04:21:09+00:00"
+    },
+    {
+      "file_id": "1BKzrlWtkdCY052lAvuciumCemT8WRtnK",
+      "url": "https://drive.google.com/file/d/1BKzrlWtkdCY052lAvuciumCemT8WRtnK/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-71-3.1.4.01_Consent_Status_Per_Child_V0.4_VI.docx",
+      "version": "0.4",
+      "source_sha256": "139928fbd7f906b37405f36ff6f0e56ab423aa3998f7025fe279b27b527dbf84",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1q1ed4shP… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-71_Consent_Status_Per_Child_VI",
+      "replaced_at": "2026-11-23T02:34:52+00:00"
+    },
+    {
+      "file_id": "1op-QOQGYFqRMknt4-euiacCracFzPTD3",
+      "url": "https://drive.google.com/file/d/1op-QOQGYFqRMknt4-euiacCracFzPTD3/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "1cf3a76d3a15a6249df1d2550f90c31431f4fbc92aaeaa60392aadc35b92ae2c",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1wZIzt3Ox… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-23T02:34:52+00:00"
     }
   ]
 }
