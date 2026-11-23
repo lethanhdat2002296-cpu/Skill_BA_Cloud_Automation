@@ -58,3 +58,19 @@
 > 4. Ngoài ra, đánh số thứ tự lại giúp tao
 
 **Claude:** Lấy bản Drive (user sửa 23/11 02:02) làm gốc, giữ nguyên câu chữ user sửa. Bổ sung US-001: FR-003, BR-004 (mọi giáo viên xem toàn bộ tab Documents, kể cả khi trẻ chuyển lớp; chỉ xem), luồng thay thế, AC-006, AC-007, dòng Teacher ở mục 4. Gửi lại chỉ khi Expired: BR-009 viết lại, nút Send again chỉ hiện với Expired, thêm AC-020 (Declined không gửi lại), sửa mục 3, mục 5, thuật ngữ. Gỡ tham chiếu tới BR-004, BR-006, BR-007 đã xoá; bỏ AC "Primary contact only". Đánh số lại: FR-001..011, BR-001..009, VAL-001..003, DATA-001..003, AC-001..020. Chưa đẩy Drive / Git (chờ "update").
+
+---
+
+## 23/11/2026 — BBA-71, BBA-73: bổ sung theo file Excel câu hỏi phản hồi
+
+**User:**
+> (đính kèm BBA_SMS_S4 — Tổng hợp câu hỏi phản hồi.xlsx) Cập nhật tiếp về BBA-71
+> 1. Dựa vào file Excel tao mới gửi. Check từ "Q-73-04 đến Q-73-15" rồi bổ sung thêm vào tài liệu nhé. không bịa thêm ra nha
+> Sửa thông tin lại BBA-73
+> 1. Tài liệu này đang chỉ mô tả thông tin hệ thống ghi nhận khi có người đưa và người đón trẻ ở trên SMS. Không mô tả thông tin như tạo người đưa người đón trẻ như nào. Chỉ mô tả xem màn hình đó lưu các thông tin gì của trẻ khi được đưa đi đón về
+> 2. Check thêm trong file excel từ "Q-75-02 đến Q-75-12" để bổ sung thêm thông tin
+
+**Claude:**
+- BBA-71: bổ sung từ Q-73-04, 06, 07, 08, 09, 10, 11, 12, 14 (loại consent theo brand / Crossroad; người nhận theo lớp hoặc cả Centre, cả hai phụ huynh hoặc người liên hệ chính; Announcement kèm link, email tuỳ chọn, nhóm "Surveys + Consents"; câu trả lời về SMS và tick checklist; giáo viên chỉ thấy consent lớp mình ở Surveys & consents; thẻ tổng quan bấm vào chỉ hiện trẻ chưa trả lời; năm học tháng 1–12, Crossroad gia hạn đầu năm; nhiều consent mở cùng lúc; lưu phiên bản và thời điểm đồng ý). Câu chưa phản hồi đưa vào OQ (Q-73-09, Q-73-11, Q-73-12 phần gia hạn, Q-73-06 phần consent gửi sau). Q-73-13 (rút consent, chặn ảnh) không thêm vì ngoài phạm vi; Q-73-15 DOTB tự quyết. Không có Q-73-05 trong file. Đánh số lại.
+- BBA-73: chỉ mô tả thông tin màn hình ghi nhận khi trẻ được đưa đến / đón về; bỏ phần chờ duyệt người đón và OQ về người duyệt. Bổ sung từ Q-75-02, 04, 08, 10, 12: ảnh giao nhận bắt buộc, phụ huynh xem ảnh; trẻ đi xe mỗi trẻ một bản ghi, một ảnh; người đưa có thể là người giúp việc; không override. OQ mới: khoảng chỉnh giờ (Q-75-08), thời gian lưu ảnh (Q-75-12). Gộp sửa của user trên Drive (tên tài liệu, phiên bản 0.1). Đánh số lại.
+- Chưa đẩy Drive / Git (chờ "update").
