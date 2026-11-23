@@ -88,3 +88,15 @@
 **Claude:**
 - BBA-71, BBA-73: kiểm tra Drive (BBA-71 chỉ đổi tên file, BBA-73 đã gộp trước đó), upload bản mới (V0.1), file cũ vào thùng rác, commit e9dbdb9, thay link Plane.
 - BBA-74: viết lại thành tài liệu hiển thị: 3 US (hiển thị lần đo trên bảng điểm danh; cảnh báo sốt và trẻ còn thiếu lần đo; chi tiết lần đo trong ngày ở Day record). Bỏ thêm / sửa / xoá trên SMS, Sign in nhập nhiệt độ, Parent App chuyển ra ngoài phạm vi. Q-76-05: dải nhập trên App (mặc định 36.5, dải nhanh 36.3–36.7, thang 36–40, "Enter manually") ghi vào BR-003; phần nhập ngoài thang cảnh báo hay chặn → OQ-04. Q-76-06: giá trị Bluetooth sửa được trên App, SMS hiện cách đo và nhãn đã sửa (BR-008). Giữ sửa của user trên Drive (tên, phiên bản 0.1, "Parent App", "sức khỏe"). Chưa đẩy Drive / Git.
+
+---
+
+## 23/11/2026 — HTML giao diện BBA-73; update BBA-74
+
+**User:**
+> Output UX/UI của BBA-73 ra HTML tao xem
+> và Update BBA-74 lên drive nhé
+
+**Claude:**
+- BBA-74: Drive không có sửa mới; upload [FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_VI.docx (1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP), file cũ vào thùng rác, commit c439f7c, thay link Plane.
+- BBA-73: tạo giao diện nháp `projects/bba/_review/sprint4-qa/frd-draft/BBA-73_giao-dien-nhap.html` (4 màn: Class attendance cột Handover, Sign in, Sign out, Handover sửa; 13 trạng thái), ghi chú dẫn mã FR/BR theo FRS. File nháp, chưa đẩy Git.
