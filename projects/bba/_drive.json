@@ -255,14 +255,14 @@
       "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk",
-      "url": "https://drive.google.com/file/d/17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk/view",
+      "file_id": "1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx",
+      "url": "https://drive.google.com/file/d/1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "7a0fbef02fabc6089a3e6d974e98d7425cc903ba5736d81c6c258c0fc72c0498",
-      "synced_at": "2026-11-23T02:34:52+00:00",
-      "note": "23/11/2026: chỉ mô tả thông tin ghi nhận khi đưa / đón trên SMS; bổ sung Q-75-02..12; gộp sửa của user trên Drive; giữ 1 comment Mỹ Hải. File cũ 1op-QOQGY… trong thùng rác."
+      "source_sha256": "62f144b10c4a2f51a86151e4024308316e4fa543a618cd2921242e2fcb437565",
+      "synced_at": "2026-11-23T03:33:46+00:00",
+      "note": "23/11/2026: còn 1 US xem thông tin ra vào (SMS chỉ hiển thị dữ liệu App); gộp sửa của user trên Drive 03:15 (tên tính năng, người đưa, xe bus, bỏ câu hỏi mở). File cũ 17xkFNSVo… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
       "file_id": "1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP",
@@ -1179,6 +1179,18 @@
       "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1flRtes6Y… trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-74_Temperature_Readings_VI",
       "replaced_at": "2026-11-23T03:14:39+00:00"
+    },
+    {
+      "file_id": "17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk",
+      "url": "https://drive.google.com/file/d/17xkFNSVoN6dvcsAI3MaQym6yb01EcWhk/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "7a0fbef02fabc6089a3e6d974e98d7425cc903ba5736d81c6c258c0fc72c0498",
+      "synced_at": "2026-11-23T02:34:52+00:00",
+      "note": "23/11/2026: chỉ mô tả thông tin ghi nhận khi đưa / đón trên SMS; bổ sung Q-75-02..12; gộp sửa của user trên Drive; giữ 1 comment Mỹ Hải. File cũ 1op-QOQGY… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-23T03:33:46+00:00"
     }
   ]
 }

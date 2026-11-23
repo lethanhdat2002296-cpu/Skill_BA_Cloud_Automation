@@ -121,3 +121,12 @@
 > 3. Bỏ luôn Us-003
 
 **Claude:** Viết lại BBA-73 còn 1 US: "Xem thông tin ra vào của trẻ" trên Class attendance (chỉ xem): giờ vào / ra, Dropped off by, Picked up by (tên · quan hệ; Someone else; Bus driver / Bus attendant), ảnh giao nhận, lọc theo xe. FR-001..003, BR-001..006, DATA-001, AC-001..009. Bỏ toàn bộ Sign in / Sign out / Record, VAL nhập liệu, đồng bộ App–SMS, Day record, Not on the list. OQ còn 2 (phụ xe trong danh sách đón; thời gian lưu ảnh). Giữ anchor comment của Hải (BR-002). Chưa đẩy Drive / Git; HTML nháp chưa vẽ lại.
+
+---
+
+## 23/11/2026 — Update BBA-73
+
+**User:**
+> update bba-73
+
+**Claude:** Drive có sửa lúc 03:15 (trên bản 3 US cũ). Gộp phần còn áp dụng vào bản 1 US: tên tính năng "BBA-73 Handover recording"; người đưa chỉ là phụ huynh / Someone else / tài xế xe bus; "xe bus"; bỏ mục Câu hỏi mở; không còn comment để gắn. Upload [FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx (1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx), file cũ vào thùng rác, commit, thay link Plane.
