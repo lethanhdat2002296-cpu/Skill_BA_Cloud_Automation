@@ -110,3 +110,14 @@
 > Trên SMS không có tạo hay sửa hay xóa thông tin đưa đón. Chỉ quản lý thông tin ra vào của trẻ thôi
 
 **Claude:** Đề xuất khung mới (chưa sửa tài liệu): App ghi nhận, SMS nhận và hiển thị. 3 US: (1) SMS nhận và lưu lượt ra / vào từ App; (2) xem thông tin ra vào trên bảng điểm danh (chỉ đọc); (3) xem chi tiết ra vào trong ngày của một trẻ và các lần "Not on the list". Bỏ toàn bộ popup Sign in / Sign out / Record và VAL nhập liệu trên SMS. Nêu 4 điểm cần user chốt (sửa giờ ở BBA-77, thông báo phụ huynh, thông tin thiết bị, xem lịch sử nhiều ngày).
+
+---
+
+## 23/11/2026 — BBA-73: chỉ giữ US xem thông tin ra vào
+
+**User:**
+> 1. Bỏ Us-001 cái này tao không quan tâm hệ thống sync giữa SMS và App
+> 2. Giữ lại Us-002
+> 3. Bỏ luôn Us-003
+
+**Claude:** Viết lại BBA-73 còn 1 US: "Xem thông tin ra vào của trẻ" trên Class attendance (chỉ xem): giờ vào / ra, Dropped off by, Picked up by (tên · quan hệ; Someone else; Bus driver / Bus attendant), ảnh giao nhận, lọc theo xe. FR-001..003, BR-001..006, DATA-001, AC-001..009. Bỏ toàn bộ Sign in / Sign out / Record, VAL nhập liệu, đồng bộ App–SMS, Day record, Not on the list. OQ còn 2 (phụ xe trong danh sách đón; thời gian lưu ảnh). Giữ anchor comment của Hải (BR-002). Chưa đẩy Drive / Git; HTML nháp chưa vẽ lại.
