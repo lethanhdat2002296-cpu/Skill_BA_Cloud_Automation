@@ -100,3 +100,13 @@
 **Claude:**
 - BBA-74: Drive không có sửa mới; upload [FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_VI.docx (1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP), file cũ vào thùng rác, commit c439f7c, thay link Plane.
 - BBA-73: tạo giao diện nháp `projects/bba/_review/sprint4-qa/frd-draft/BBA-73_giao-dien-nhap.html` (4 màn: Class attendance cột Handover, Sign in, Sign out, Handover sửa; 13 trạng thái), ghi chú dẫn mã FR/BR theo FRS. File nháp, chưa đẩy Git.
+
+---
+
+## 23/11/2026 — Động não BBA-73: SMS chỉ ghi nhận thông tin ra vào từ App
+
+**User:**
+> Cần mày động não phần tài liệu này giúp tao. Đối với tài liệu FRS BBA-73 này, hệ thống SMS ghi nhận thông tin từ App lưu thông tin đưa đón của trẻ như thế nào trên SMS.
+> Trên SMS không có tạo hay sửa hay xóa thông tin đưa đón. Chỉ quản lý thông tin ra vào của trẻ thôi
+
+**Claude:** Đề xuất khung mới (chưa sửa tài liệu): App ghi nhận, SMS nhận và hiển thị. 3 US: (1) SMS nhận và lưu lượt ra / vào từ App; (2) xem thông tin ra vào trên bảng điểm danh (chỉ đọc); (3) xem chi tiết ra vào trong ngày của một trẻ và các lần "Not on the list". Bỏ toàn bộ popup Sign in / Sign out / Record và VAL nhập liệu trên SMS. Nêu 4 điểm cần user chốt (sửa giờ ở BBA-77, thông báo phụ huynh, thông tin thiết bị, xem lịch sử nhiều ngày).
