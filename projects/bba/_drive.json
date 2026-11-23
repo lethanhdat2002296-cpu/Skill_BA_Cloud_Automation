@@ -265,14 +265,14 @@
       "note": "23/11/2026: chỉ mô tả thông tin ghi nhận khi đưa / đón trên SMS; bổ sung Q-75-02..12; gộp sửa của user trên Drive; giữ 1 comment Mỹ Hải. File cũ 1op-QOQGY… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
-      "file_id": "1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c",
-      "url": "https://drive.google.com/file/d/1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c/view",
+      "file_id": "1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP",
+      "url": "https://drive.google.com/file/d/1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
-      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.3_VI.docx",
-      "version": "0.3",
-      "source_sha256": "496efdd7bb709cf6d3f7d6900c23eee07434dc15b6411198c21f99c3b1c7528a",
-      "synced_at": "2026-11-22T04:21:09+00:00",
-      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1flRtes6Y… trong thùng rác."
+      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "6c23eedd233bab6e2b6faed8e834549d586e36a73e6ea57a5816f25b4a49cb8f",
+      "synced_at": "2026-11-23T03:14:39+00:00",
+      "note": "23/11/2026: SMS chỉ hiển thị thông tin nhiệt độ từ App; bổ sung Q-76-05, Q-76-06; giữ sửa của user trên Drive. File cũ 1VdjLZ9Cf… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
       "file_id": "1oH92E5xlAPKq3aB-a_BJYbFZ2RSmlwdn",
@@ -1167,6 +1167,18 @@
       "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1wZIzt3Ox… trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
       "replaced_at": "2026-11-23T02:34:52+00:00"
+    },
+    {
+      "file_id": "1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c",
+      "url": "https://drive.google.com/file/d/1VdjLZ9CfLVAq0ZMWd5DuwR00kQTrfY8c/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "496efdd7bb709cf6d3f7d6900c23eee07434dc15b6411198c21f99c3b1c7528a",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1flRtes6Y… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-74_Temperature_Readings_VI",
+      "replaced_at": "2026-11-23T03:14:39+00:00"
     }
   ]
 }
