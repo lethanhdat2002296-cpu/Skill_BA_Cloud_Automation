@@ -130,3 +130,12 @@
 > update bba-73
 
 **Claude:** Drive có sửa lúc 03:15 (trên bản 3 US cũ). Gộp phần còn áp dụng vào bản 1 US: tên tính năng "BBA-73 Handover recording"; người đưa chỉ là phụ huynh / Someone else / tài xế xe bus; "xe bus"; bỏ mục Câu hỏi mở; không còn comment để gắn. Upload [FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx (1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx), file cũ vào thùng rác, commit, thay link Plane.
+
+---
+
+## 23/11/2026 — Dịch BBA-51, BBA-52 sang tiếng Anh
+
+**User:**
+> Dịch BBA-51 và BBA-52 sang tiếng anh nhé. Không push lên Plane
+
+**Claude:** Bản tiếng Việt trên Drive có sửa lúc 04:26 (BBA-51 bỏ US "Xem thiết lập", còn 1 US / 1 AC; BBA-52 bỏ mục Câu hỏi mở, đổi AC-005, rút gọn mục đích). Đồng bộ bản VI trong repo theo Drive (sửa "Depedencies", US-002 → US-001 ở mục 5 của BBA-51), rồi dịch sang tiếng Anh: `2.8_Impact_Preview_Before_Change.md`, `2.8_Change_Request_Second_Approval.md` (ghi đè bản tiếng Anh cũ 14/11). Không đụng Plane. Chưa đẩy Drive / Git.
