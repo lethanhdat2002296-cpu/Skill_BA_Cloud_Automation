@@ -257,24 +257,24 @@
       "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx",
-      "url": "https://drive.google.com/file/d/1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx/view",
+      "file_id": "1i-g3BA5Is9mJHpgVYb4o30pgNa2_KdSq",
+      "url": "https://drive.google.com/file/d/1i-g3BA5Is9mJHpgVYb4o30pgNa2_KdSq/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "62f144b10c4a2f51a86151e4024308316e4fa543a618cd2921242e2fcb437565",
-      "synced_at": "2026-11-23T03:33:46+00:00",
-      "note": "23/11/2026: còn 1 US xem thông tin ra vào (SMS chỉ hiển thị dữ liệu App); gộp sửa của user trên Drive 03:15 (tên tính năng, người đưa, xe bus, bỏ câu hỏi mở). File cũ 17xkFNSVo… trong thùng rác."
+      "source_sha256": "71796f91802f1d344cc3f799a87b1b3b49732552fd32a373c5888adda7a52d97",
+      "synced_at": "2026-11-23T07:49:49+00:00",
+      "note": "23/11/2026: SMS hiển thị và cho thêm / sửa / xoá thông tin đưa / đón; gộp sửa của user trên Drive 03:49. File cũ 1wG-LSBiH… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
-      "file_id": "1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP",
-      "url": "https://drive.google.com/file/d/1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP/view",
+      "file_id": "1MRxzS8VQaQcH_in8og50nCp1JWdaNhTI",
+      "url": "https://drive.google.com/file/d/1MRxzS8VQaQcH_in8og50nCp1JWdaNhTI/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "6c23eedd233bab6e2b6faed8e834549d586e36a73e6ea57a5816f25b4a49cb8f",
-      "synced_at": "2026-11-23T03:14:39+00:00",
-      "note": "23/11/2026: SMS chỉ hiển thị thông tin nhiệt độ từ App; bổ sung Q-76-05, Q-76-06; giữ sửa của user trên Drive. File cũ 1VdjLZ9Cf… trong thùng rác."
+      "source_sha256": "d00a2219c54ac9b2e2fcdb1f8b83ba87f27b962102d739bcedf7e377caf0031a",
+      "synced_at": "2026-11-23T07:49:49+00:00",
+      "note": "23/11/2026: SMS hiển thị và cho thêm / sửa / xoá lần đo; gộp sửa của user trên Drive 03:35. File cũ 1nTld6QjL… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-75_Late_Flag_Internal_VI": {
       "file_id": "1oH92E5xlAPKq3aB-a_BJYbFZ2RSmlwdn",
@@ -1215,6 +1215,30 @@
       "synced_at": "2026-11-10 09:15",
       "key": "FSD/Sprint 4/2.8_Change_Request_Second_Approval",
       "replaced_at": "2026-11-23T04:41:50+00:00"
+    },
+    {
+      "file_id": "1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx",
+      "url": "https://drive.google.com/file/d/1wG-LSBiHVKpttH8YqdRe24iu5xLZ4TYx/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "62f144b10c4a2f51a86151e4024308316e4fa543a618cd2921242e2fcb437565",
+      "synced_at": "2026-11-23T03:33:46+00:00",
+      "note": "23/11/2026: còn 1 US xem thông tin ra vào (SMS chỉ hiển thị dữ liệu App); gộp sửa của user trên Drive 03:15 (tên tính năng, người đưa, xe bus, bỏ câu hỏi mở). File cũ 17xkFNSVo… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-23T07:49:49+00:00"
+    },
+    {
+      "file_id": "1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP",
+      "url": "https://drive.google.com/file/d/1nTld6QjLYq4zezJWGwXd0YmPVBg8bQsP/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "6c23eedd233bab6e2b6faed8e834549d586e36a73e6ea57a5816f25b4a49cb8f",
+      "synced_at": "2026-11-23T03:14:39+00:00",
+      "note": "23/11/2026: SMS chỉ hiển thị thông tin nhiệt độ từ App; bổ sung Q-76-05, Q-76-06; giữ sửa của user trên Drive. File cũ 1VdjLZ9Cf… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-74_Temperature_Readings_VI",
+      "replaced_at": "2026-11-23T07:49:49+00:00"
     }
   ]
 }

@@ -163,3 +163,12 @@
 - BBA-73: US-001 xem thông tin đưa / đón (từ App và SMS); thêm US-002 thêm, sửa, xoá người đưa / người đón và giờ trên SMS (người đưa: phụ huynh / Someone else / tài xế; người đón chỉ trong danh sách, không override; giờ hợp lệ; xoá đưa thì xoá cả đón; lịch sử). OQ: khoảng thời gian sửa, ảnh khi thêm trên SMS, lý do khi sửa / xoá. Bỏ trạng thái điểm danh khỏi phạm vi.
 - BBA-74: US-001 xem lần đo (từ App và SMS); thêm US-002 thêm, sửa, xoá lần đo trên SMS (dải nhập Q-76-05, Extra cần lý do, giờ hợp lệ, sửa được cả giá trị Bluetooth Q-76-06, lịch sử). OQ: ngoài thang chặn hay cảnh báo; lý do / khoảng thời gian khi sửa xoá.
 - Chưa đẩy Drive / Git.
+
+---
+
+## 23/11/2026 — Update BBA-73, BBA-74
+
+**User:**
+> Update lên Drive để tao xem nhé
+
+**Claude:** Drive không có sửa mới. Upload BBA-73 (1i-g3BA5Is9mJHpgVYb4o30pgNa2_KdSq) và BBA-74 (1MRxzS8VQaQcH_in8og50nCp1JWdaNhTI) vào thư mục 1uZpPo7…, file cũ vào thùng rác, commit, thay link Plane.
