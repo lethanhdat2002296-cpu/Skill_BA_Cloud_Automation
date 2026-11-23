@@ -148,3 +148,18 @@
 > Update vô folder này. Vẫn giữ file TV lại (thư mục: https://drive.google.com/drive/folders/1KqkgghHymUu7T9_xco51AIjnoSufVg7_)
 
 **Claude:** Upload 2 file tiếng Anh vào thư mục trên: [FRS] BBA-51-1.3.1.02_Impact_Preview_Before_Change_V0.1_EN.docx (1FiL7-K-6ecTxxne8HKM1xxHVRI0WREDq), [FRS] BBA-52-1.3.1.03_Change_request_and_second_approval_V0.1_EN.docx (12sViWlFTOipQ1_DGcgGUQtgsxUUprVfB). File tiếng Việt giữ nguyên, không xoá gì trên Drive. Commit bản EN + VI đồng bộ + `_drive.json`. Không đụng Plane.
+
+---
+
+## 23/11/2026 — BBA-73, BBA-74: SMS cho thêm / sửa / xoá
+
+**User:**
+> Quay lại tài liệu BBA-73 và 74
+> 1. Tao mới trao đổi lại với sếp: Hệ thống SMS vẫn cho phép người dùng thêm, xóa, sửa => Ngoài việc lấy thông tin từ App, cho người dùng được phép thêm xóa sửa
+> 2. Đối với BBA-73. Nhớ chỉ tập trung vào thông tin là Đón và Đưa thôi nhé
+> 3. Đối với BBA-74. Nhớ chỉ tập trung vào thông tin đo sốt cho trẻ
+
+**Claude:** Lấy bản Drive làm gốc (BBA-73 sửa 03:49: "attendance", bộ lọc "Bus"; BBA-74 sửa 03:35: còn 1 US xem lần đo, bỏ cảnh báo sốt / Day record / OQ / Phụ lục B — giữ nguyên các chỗ bỏ).
+- BBA-73: US-001 xem thông tin đưa / đón (từ App và SMS); thêm US-002 thêm, sửa, xoá người đưa / người đón và giờ trên SMS (người đưa: phụ huynh / Someone else / tài xế; người đón chỉ trong danh sách, không override; giờ hợp lệ; xoá đưa thì xoá cả đón; lịch sử). OQ: khoảng thời gian sửa, ảnh khi thêm trên SMS, lý do khi sửa / xoá. Bỏ trạng thái điểm danh khỏi phạm vi.
+- BBA-74: US-001 xem lần đo (từ App và SMS); thêm US-002 thêm, sửa, xoá lần đo trên SMS (dải nhập Q-76-05, Extra cần lý do, giờ hợp lệ, sửa được cả giá trị Bluetooth Q-76-06, lịch sử). OQ: ngoài thang chặn hay cảnh báo; lý do / khoảng thời gian khi sửa xoá.
+- Chưa đẩy Drive / Git.
