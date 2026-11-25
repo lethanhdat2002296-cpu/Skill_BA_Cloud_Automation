@@ -202,3 +202,15 @@
 > (đính kèm FRS_BBA-79-3.2.5.01_Staff_Clock_In_Out_v0.1.docx, link Figma node 1417-17) Tài liệu 73 và 74 nó na ná như tài liệu BBA-79 kèm theo cái link figma. Thế nên là hãy dựa vào 2 thông tin mới rồi update lại 73 và 74 nhé
 
 **Claude:** Đã đọc FRS BBA-79 (Signed-off). Không mở được link Figma: tài khoản Figma đang kết nối không có quyền vào file (lỗi "don't have edit access"). Chưa sửa tài liệu; nêu hướng sửa theo mẫu BBA-79 và xin quyền / ảnh xuất từ Figma.
+
+---
+
+## 25/11/2026 — BBA-73, BBA-74 theo khung BBA-79 (không dùng Figma)
+
+**User:**
+> Không cần phải xem trong Figma đâu
+
+**Claude:** Viết lại BBA-73, BBA-74 theo khung FRS BBA-79 (Signed-off), vẫn tiếng Việt.
+- BBA-73: US-001 Xem và xuất thông tin đưa / đón (tìm, lọc Centre / lớp / ngày, ảnh lúc đưa và lúc đón, trẻ đang ở trường, xuất theo khoảng ngày, mục 8 cột xuất); US-002 Ghi và sửa trên SMS (không cần lý do / duyệt, không giới hạn thời gian như BBA-79; giữ các quy tắc người đưa / người đón và giờ).
+- BBA-74: US-001 Xem lần đo (tab Temperature, lọc Brand / Centre / lớp / ngày, tìm tên, mỗi lần đo một dòng, x of 3, ≥37.5 tô đỏ); US-002 Thêm / sửa / xóa / View audit (thêm từ dòng điểm danh hoặc tab; Measurement method Manual / Device; sửa xóa không cần lý do; giữ 36.0–40.0, Extra cần lý do, giờ hợp lệ). Bỏ cấu hình Round và bỏ "lý do bắt buộc" của bản V13.
+- Không đụng Plane. Chưa đẩy Drive / Git.
