@@ -172,3 +172,15 @@
 > Update lên Drive để tao xem nhé
 
 **Claude:** Drive không có sửa mới. Upload BBA-73 (1i-g3BA5Is9mJHpgVYb4o30pgNa2_KdSq) và BBA-74 (1MRxzS8VQaQcH_in8og50nCp1JWdaNhTI) vào thư mục 1uZpPo7…, file cũ vào thùng rác, commit, thay link Plane.
+
+---
+
+## 25/11/2026 — BBA-73, BBA-74 theo UX/UI V13
+
+**User:**
+> (đính kèm BBA-73-74_Version_moi.html) Chỗ tài liệu BBA-73 và BBA-74. Sửa thông tin lại theo UX/UI mới nhất tao gửi cho mày. Nhưng vẫn tuân thủ theo các nguyên tắc khi viết FRS mà tao nói mày nhé. Với lần này thay đổi chút là mày không được phép update lên Plane nữa nhé
+
+**Claude:** Đọc UX/UI V13 (tab Attendance và Temperature, sửa trên dòng, Changelog, Round config) và bản user sửa trên Drive (BBA-73 08:06: giờ tự ghi, OQ còn 1; BBA-74 09:00: ô nhiệt độ mặc định trống, bỏ OQ).
+- BBA-73: 2 US — xem thông tin đưa / đón (bảng Attendance results, lọc, ảnh bàn giao lúc đón) và thêm / sửa / xóa trên dòng (lý do bắt buộc, Someone else popup, quy tắc nhập cùng nhau, đón sau đưa, chỉ khi Có mặt, Changelog từng trường). Sửa Kết quả / Hủy kết quả để ở BBA-77; bỏ bộ lọc xe bus (V13 không có).
+- BBA-74: 4 US — xem lần đo (tab Temperature, x of 3, ≥37.5 tô đỏ), thêm lần đo (dòng mới + popup từ Attendance), sửa / xóa nhiều dòng / Changelog, cấu hình danh mục Round.
+- Không đụng Plane từ lần này. Chưa đẩy Drive / Git.
