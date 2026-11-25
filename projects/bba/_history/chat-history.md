@@ -193,3 +193,12 @@
 > Update lên drive nhé
 
 **Claude:** Drive không có sửa mới. Upload BBA-73 (17sT9eCHW1GcVRu9iLBpc4-BVUmgNaRT5) và BBA-74 (1s7BQ0UyeHED89EV3kT27JQrKmegyR05y) vào thư mục 1uZpPo7…, file cũ vào thùng rác, commit Git. Không cập nhật Plane (theo yêu cầu).
+
+---
+
+## 25/11/2026 — BBA-73, BBA-74 theo mẫu BBA-79 và Figma
+
+**User:**
+> (đính kèm FRS_BBA-79-3.2.5.01_Staff_Clock_In_Out_v0.1.docx, link Figma node 1417-17) Tài liệu 73 và 74 nó na ná như tài liệu BBA-79 kèm theo cái link figma. Thế nên là hãy dựa vào 2 thông tin mới rồi update lại 73 và 74 nhé
+
+**Claude:** Đã đọc FRS BBA-79 (Signed-off). Không mở được link Figma: tài khoản Figma đang kết nối không có quyền vào file (lỗi "don't have edit access"). Chưa sửa tài liệu; nêu hướng sửa theo mẫu BBA-79 và xin quyền / ảnh xuất từ Figma.
