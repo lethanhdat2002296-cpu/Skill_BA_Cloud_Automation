@@ -505,14 +505,14 @@
       "note": "Cột Temperatures chỉ hiển thị (bỏ link Add reading) theo wireframe BBA-73 của user. File cũ 1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_",
-      "url": "https://drive.google.com/file/d/1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_/view",
+      "file_id": "1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L",
+      "url": "https://drive.google.com/file/d/1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "73a8b70e25ad129fe702cbbf3e4c006aac47cf483beacb1f11f9042b3868b213",
-      "synced_at": "2026-11-26T02:49:23+00:00",
-      "note": "26/11/2026: FR tổng quát, nghiệp vụ dồn vào BR/VAL; gộp sửa của user trên Drive 22/11; bổ sung SRS Children & Families (BR-CHF-043, 049); giữ comment chị Hải (BR-012). File cũ 1VT7dKxX… trong thùng rác."
+      "source_sha256": "f28df8b5ffb944bb2f536471d4d51cd0e50cc62587df590f5fe0287078235770",
+      "synced_at": "2026-11-26T03:23:38+00:00",
+      "note": "26/11/2026: sửa theo comment của user (bỏ tạo lớp trong luồng, Actions → Edit), đối chiếu Excel Q-74-06..Q-74-15, bỏ quy tắc không có nguồn, thêm Phụ lục C nguồn; giữ comment chị Hải (BR-012). File cũ 1DcRS8KI… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
       "file_id": "1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed",
@@ -1311,6 +1311,18 @@
       "synced_at": "2026-11-12 01:29",
       "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
       "replaced_at": "2026-11-26T02:49:23+00:00"
+    },
+    {
+      "file_id": "1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_",
+      "url": "https://drive.google.com/file/d/1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "73a8b70e25ad129fe702cbbf3e4c006aac47cf483beacb1f11f9042b3868b213",
+      "synced_at": "2026-11-26T02:49:23+00:00",
+      "note": "26/11/2026: FR tổng quát, nghiệp vụ dồn vào BR/VAL; gộp sửa của user trên Drive 22/11; bổ sung SRS Children & Families (BR-CHF-043, 049); giữ comment chị Hải (BR-012). File cũ 1VT7dKxX… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
+      "replaced_at": "2026-11-26T03:23:38+00:00"
     }
   ]
 }

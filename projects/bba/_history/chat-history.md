@@ -269,3 +269,9 @@
 **Hỏi:** Sửa BBA-72 theo comment trên Drive, cập nhật lại toàn bộ; đối chiếu Excel Q-74-06 đến Q-74-15.
 
 **Trả lời:** Comment: (1) bỏ tạo lớp trong luồng — lớp đích phải tạo trước ở Classes bởi người có quyền; chưa có lớp thì báo theo prototype, không tiếp tục; (2) nguồn của "tác động" = bước Impact trên prototype + Q-74-11 (DOTB tự quyết); (3) user đổi Actions → Edit. Excel: Q-74-08 sĩ số chỉ cảnh báo, CD cấu hình; Q-74-09 hoá đơn đã phát hành không void, điều chỉnh bằng credit note; Q-74-10 thread cũ inactive giữ tới khi rời trường; Q-74-12/13 DOTB tự quyết (lỗi từng trẻ, Retry). Câu chưa trả lời → OQ-01 (lên lịch/huỷ, ngày quá khứ), OQ-02 (đóng lớp), OQ-03 (trạng thái đủ điều kiện), OQ-04 (thông báo), OQ-07 (đề xuất lớp đích), OQ-08 (học phí từ ngày nào), OQ-09 (thời điểm chuyển điểm danh/thread). Bỏ các quy tắc không có nguồn: chặn ngày quá khứ, trẻ có thay đổi chờ hiệu lực, tự đóng lớp. Thêm Phụ lục C nguồn đối chiếu. Chưa đẩy Drive.
+
+## 26/11/2026 — Update BBA-72 lên Drive
+
+**Hỏi:** "Update BBA-72 lên nhé còn BBA-73 không cần"
+
+**Trả lời:** Drive không có sửa mới sau lần đọc comment. Upload BBA-72 → 1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L (giữ comment chị Hải ở BR-012; comment của user đã xử lý nên không chuyển). File cũ 1DcRS8KI… vào thùng rác; cập nhật _drive.json; commit Git. BBA-73 không đẩy. Không cập nhật Plane.
