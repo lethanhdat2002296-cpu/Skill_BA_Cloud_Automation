@@ -121,15 +121,6 @@
       "synced_at": "2026-11-15 14:49",
       "note": "15/11/2026: Git đồng bộ theo bản user sửa trên Drive (15Z5jLzL…); US-002 rút gọn theo review của Mỹ Hải (3 FR, BR-012 đến BR-014, Nickname). Trash 15Z5jLzL… và bản trùng v0.2 1P0IpDAN…; 4 comment của Mỹ Hải chèn lại vào Word. 15/11 14:17: đánh số lại FR / BR / AC liên tục theo yêu cầu user; file 1HG4hj5g… trong thùng rác. 15/11 14:49: US-004 rút gọn (3 FR, BR-013 đến BR-016, Lead → Enquiry); đồng bộ chỉnh sửa của user trên Drive; file 1xb7uJ94… trong thùng rác."
     },
-    "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI": {
-      "file_id": "1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID",
-      "url": "https://drive.google.com/file/d/1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID/view",
-      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
-      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
-      "version": "0.7",
-      "source_sha256": "bda16e1d853d4247135e7afe42e8d1f6560f5fe54c5718c4c533fe63fb790e34",
-      "synced_at": "2026-11-12 01:29"
-    },
     "FSD/Sprint 4/2.8_Approval_Delegation_VI": {
       "file_id": "1w05KOlOwI6HMTF9Vyirhdw6iVdVYO8AP",
       "url": "https://drive.google.com/file/d/1w05KOlOwI6HMTF9Vyirhdw6iVdVYO8AP/view",
@@ -245,16 +236,6 @@
       "source_sha256": "39a92edb940b07038f30715eb7edb06184c8bc2ddecc3cf3e0dfe1df9b20944a",
       "synced_at": "2026-11-23T02:34:52+00:00",
       "note": "23/11/2026: nền là bản user sửa trên Drive; GV xem toàn bộ tab Documents kể cả khi chuyển lớp; chỉ gửi lại khi Expired; bổ sung Q-73-04..15; đánh số lại. File cũ 1BKzrlWtk… trong thùng rác."
-    },
-    "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe",
-      "url": "https://drive.google.com/file/d/1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe/view",
-      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
-      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.3_VI.docx",
-      "version": "0.3",
-      "source_sha256": "a4d32580b7dac5dce99a4c467ebaa961aa35cfb5ed5a0ace4db5429ce79ed54e",
-      "synced_at": "2026-11-22T04:21:09+00:00",
-      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
       "file_id": "1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN",
@@ -522,6 +503,26 @@
       "source_sha256": "b006e965a3293f59661a42d12a42b9f321423e0b5a2807a1ed9bad38976c9505",
       "synced_at": "2026-11-15 05:55",
       "note": "Cột Temperatures chỉ hiển thị (bỏ link Add reading) theo wireframe BBA-73 của user. File cũ 1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x trong thùng rác."
+    },
+    "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
+      "file_id": "1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_",
+      "url": "https://drive.google.com/file/d/1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "73a8b70e25ad129fe702cbbf3e4c006aac47cf483beacb1f11f9042b3868b213",
+      "synced_at": "2026-11-26T02:49:23+00:00",
+      "note": "26/11/2026: FR tổng quát, nghiệp vụ dồn vào BR/VAL; gộp sửa của user trên Drive 22/11; bổ sung SRS Children & Families (BR-CHF-043, 049); giữ comment chị Hải (BR-012). File cũ 1VT7dKxX… trong thùng rác."
+    },
+    "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
+      "file_id": "1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed",
+      "url": "https://drive.google.com/file/d/1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-67-3.1.1.02-Child Record Tabs – All_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "3dd31f2ff73607126e35198d71593457a29df8f1eb0f0864ea4a51b88314dba7",
+      "synced_at": "2026-11-26T02:49:23+00:00",
+      "note": "26/11/2026: viết mới theo format BBA-66, 9 tab (Enrolment…History), nội dung tổng quan + thao tác theo quyền; giữ 3 comment chị Hải. Thay file 1XvEUZcj… (trong thùng rác)."
     }
   },
   "folders_used": {
@@ -1287,6 +1288,29 @@
       "note": "25/11/2026: theo UX/UI V13 (tab Temperature, thêm / sửa / xóa, Changelog, cấu hình Round); gộp sửa của user trên Drive 23/11 09:00. File cũ 1MRxzS8VQ… trong thùng rác. Không cập nhật Plane.",
       "key": "FSD/Sprint 4/BBA-74_Temperature_Readings_VI",
       "replaced_at": "2026-11-26T01:21:08+00:00"
+    },
+    {
+      "file_id": "1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe",
+      "url": "https://drive.google.com/file/d/1VT7dKxX2DBjEfnbdf48k6GZNYjVPnwRe/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.3_VI.docx",
+      "version": "0.3",
+      "source_sha256": "a4d32580b7dac5dce99a4c467ebaa961aa35cfb5ed5a0ace4db5429ce79ed54e",
+      "synced_at": "2026-11-22T04:21:09+00:00",
+      "note": "22/11/2026: viết lại theo format BBA-50/66/51/52, tách US theo tính năng, đối chiếu Plane + prototype. File cũ 1Dnt_uhzW… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
+      "replaced_at": "2026-11-26T02:49:23+00:00"
+    },
+    {
+      "file_id": "1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID",
+      "url": "https://drive.google.com/file/d/1XvEUZcjlpROwLZgYzfipwhXT4EpcNQID/view",
+      "folder_id": "1vqr-4orVQTgkA0oXESBlLpo5pVwl1PlV",
+      "title": "[FRD] Functional Requirements Specification - Sprint 4.docx",
+      "version": "0.7",
+      "source_sha256": "bda16e1d853d4247135e7afe42e8d1f6560f5fe54c5718c4c533fe63fb790e34",
+      "synced_at": "2026-11-12 01:29",
+      "key": "FSD/Sprint 4/3.1_Child_Record_Read_Tabs_VI",
+      "replaced_at": "2026-11-26T02:49:23+00:00"
     }
   ]
 }

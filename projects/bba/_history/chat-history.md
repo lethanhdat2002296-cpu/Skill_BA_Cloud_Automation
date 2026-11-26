@@ -257,3 +257,9 @@
 **Hỏi:** "Nhập thông tin điểm danh của trẻ phải có giờ đến và giờ đi và người đưa đón của trẻ"
 
 **Trả lời:** BR-010 = "Nhập thông tin điểm danh của trẻ phải có giờ đến, giờ về, người đưa và người đón của trẻ." VAL-004 = thiếu một trong bốn thông tin thì không lưu; 4 trường đổi thành bắt buộc. Hỏi lại: trẻ mới đến, chưa về thì có lưu được giờ đến trước không.
+
+## 26/11/2026 — Update BBA-72 và BBA-67 lên Drive
+
+**Hỏi:** "Update BBA-72 và 67 lên drive đi"
+
+**Trả lời:** Drive không có sửa mới (72: 22/11 13:27, 67: 18/11). Upload vào thư mục 1uZpPo7…: BBA-72 → 1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_ (1 comment chị Hải), BBA-67 → 1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed (3 comment chị Hải). File cũ 1VT7dKxX…, 1XvEUZcj… vào thùng rác. Cập nhật _drive.json, commit Git. Không cập nhật Plane. BBA-73 (BR-010) chưa đẩy, chờ user xác nhận.
