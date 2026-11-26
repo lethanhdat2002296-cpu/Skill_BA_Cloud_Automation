@@ -238,14 +238,14 @@
       "note": "23/11/2026: nền là bản user sửa trên Drive; GV xem toàn bộ tab Documents kể cả khi chuyển lớp; chỉ gửi lại khi Expired; bổ sung Q-73-04..15; đánh số lại. File cũ 1BKzrlWtk… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN",
-      "url": "https://drive.google.com/file/d/1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN/view",
-      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "file_id": "1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6",
+      "url": "https://drive.google.com/file/d/1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
       "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "e63519ed0f464113647b9c6c9e169e27163102b4e3874ecb52311738e46ec4e3",
-      "synced_at": "2026-11-26T01:21:08+00:00",
-      "note": "26/11/2026: viết lại theo khung FRS BBA-79 (Signed-off). File cũ 17sT9eCHW… trong thùng rác. Không cập nhật Plane."
+      "source_sha256": "ffbdeb017130c6eb739d411459c6de948535743c556c8d2689933822981784f5",
+      "synced_at": "2026-11-26T04:15:47+00:00",
+      "note": "26/11/2026: gộp bản user sửa trên Drive 03:38; US-002 chỉ thêm mới (không sửa/xoá), có lý do + qua duyệt; tách BR người thân / xe bus / người đón; thêm nhiệt độ lúc đưa/đón, lý do; bỏ OQ. Thư mục mới 18AJ7fN7… (user đã chuyển). File cũ 1Wggw3KE… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
       "file_id": "19CDqUSUd-nH8byRIh8zffQ6AZq15RMHM",
@@ -1323,6 +1323,18 @@
       "note": "26/11/2026: FR tổng quát, nghiệp vụ dồn vào BR/VAL; gộp sửa của user trên Drive 22/11; bổ sung SRS Children & Families (BR-CHF-043, 049); giữ comment chị Hải (BR-012). File cũ 1VT7dKxX… trong thùng rác.",
       "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
       "replaced_at": "2026-11-26T03:23:38+00:00"
+    },
+    {
+      "file_id": "1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN",
+      "url": "https://drive.google.com/file/d/1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "e63519ed0f464113647b9c6c9e169e27163102b4e3874ecb52311738e46ec4e3",
+      "synced_at": "2026-11-26T01:21:08+00:00",
+      "note": "26/11/2026: viết lại theo khung FRS BBA-79 (Signed-off). File cũ 17sT9eCHW… trong thùng rác. Không cập nhật Plane.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-26T04:15:47+00:00"
     }
   ]
 }

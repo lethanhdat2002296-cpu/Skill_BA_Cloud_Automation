@@ -305,3 +305,9 @@
 **Hỏi:** BBA-73 chỉ được thêm mới, không xoá hay sửa bất kỳ cái gì, kể cả khi đã có thông tin điểm danh buổi sáng.
 
 **Trả lời:** BR-010 = "Trên SMS chỉ được thêm mới thông tin đưa / đón; không được sửa hay xoá bất kỳ thông tin nào đã có, kể cả khi trẻ đã có thông tin điểm danh buổi sáng." BR-011 chỉ còn: sau khi thêm phải đủ giờ đến, giờ về, người đưa, người đón. Bỏ câu "sửa thuộc BBA-77" khỏi BR-011. Chưa đẩy Drive.
+
+## 26/11/2026 — Update BBA-73 lên Drive
+
+**Hỏi:** "Update nhé"
+
+**Trả lời:** Drive (03:38) là bản user gửi, đã gộp; không có comment. Upload vào thư mục user đã chuyển file tới (18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5) → 1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6. File cũ 1Wggw3KE… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
