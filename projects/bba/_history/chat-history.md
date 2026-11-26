@@ -233,3 +233,9 @@
 - BBA-72: viết lại FR ngắn (8 FR), nghiệp vụ dồn vào 14 BR / 4 VAL; giữ chỉnh sửa trên Drive (tiêu đề, US-001, FR-003, version 0.1); bổ sung từ SRS Children & Families (mã lớp duy nhất trong Centre + năm học, lớp có trẻ chỉ đóng không xoá); OQ-06: SRS P6 cho đổi lớp đích từng trẻ.
 - ems.help.dotb.vn: không đọc được từ môi trường cloud (proxy chặn / không phân giải được tên miền).
 - Chưa đẩy Drive / Git tài liệu, chờ "update".
+
+## 26/11/2026 — Hỏi về BR-010 của BBA-73
+
+**Hỏi:** "Giờ đến đi cùng người đưa, giờ về đi cùng người đón. Chỉ ghi được thông tin đón khi đã có thông tin đưa; giờ về không sớm hơn giờ đến." — không hiểu.
+
+**Trả lời:** BR-010 (US-002) gộp 3 quy tắc khi ghi/sửa trên SMS: (1) có giờ thì phải có người (VAL-004, AC-017); (2) phải có thông tin đưa trong ngày mới ghi được thông tin đón (VAL-005, AC-018); (3) giờ về bằng hoặc sau giờ đến (VAL-006, AC-019). Ý (2), (3) là BA suy luận, không có trong Excel / V13 / BBA-79. Đề xuất viết lại thành 3 gạch đầu dòng; chờ user chọn giữ hay bỏ ý (2), (3).
