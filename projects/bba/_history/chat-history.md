@@ -263,3 +263,9 @@
 **Hỏi:** "Update BBA-72 và 67 lên drive đi"
 
 **Trả lời:** Drive không có sửa mới (72: 22/11 13:27, 67: 18/11). Upload vào thư mục 1uZpPo7…: BBA-72 → 1DcRS8KItpdOTWs_PIS-Cy1N3f20Idmu_ (1 comment chị Hải), BBA-67 → 1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed (3 comment chị Hải). File cũ 1VT7dKxX…, 1XvEUZcj… vào thùng rác. Cập nhật _drive.json, commit Git. Không cập nhật Plane. BBA-73 (BR-010) chưa đẩy, chờ user xác nhận.
+
+## 26/11/2026 — BBA-72 điều chỉnh theo comment trên Drive và Excel Q-74-06..Q-74-15
+
+**Hỏi:** Sửa BBA-72 theo comment trên Drive, cập nhật lại toàn bộ; đối chiếu Excel Q-74-06 đến Q-74-15.
+
+**Trả lời:** Comment: (1) bỏ tạo lớp trong luồng — lớp đích phải tạo trước ở Classes bởi người có quyền; chưa có lớp thì báo theo prototype, không tiếp tục; (2) nguồn của "tác động" = bước Impact trên prototype + Q-74-11 (DOTB tự quyết); (3) user đổi Actions → Edit. Excel: Q-74-08 sĩ số chỉ cảnh báo, CD cấu hình; Q-74-09 hoá đơn đã phát hành không void, điều chỉnh bằng credit note; Q-74-10 thread cũ inactive giữ tới khi rời trường; Q-74-12/13 DOTB tự quyết (lỗi từng trẻ, Retry). Câu chưa trả lời → OQ-01 (lên lịch/huỷ, ngày quá khứ), OQ-02 (đóng lớp), OQ-03 (trạng thái đủ điều kiện), OQ-04 (thông báo), OQ-07 (đề xuất lớp đích), OQ-08 (học phí từ ngày nào), OQ-09 (thời điểm chuyển điểm danh/thread). Bỏ các quy tắc không có nguồn: chặn ngày quá khứ, trẻ có thay đổi chờ hiệu lực, tự đóng lớp. Thêm Phụ lục C nguồn đối chiếu. Chưa đẩy Drive.
