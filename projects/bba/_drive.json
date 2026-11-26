@@ -515,14 +515,14 @@
       "note": "26/11/2026: sửa theo comment của user (bỏ tạo lớp trong luồng, Actions → Edit), đối chiếu Excel Q-74-06..Q-74-15, bỏ quy tắc không có nguồn, thêm Phụ lục C nguồn; giữ comment chị Hải (BR-012). File cũ 1DcRS8KI… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
-      "file_id": "1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed",
-      "url": "https://drive.google.com/file/d/1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed/view",
+      "file_id": "1orjPYgyLluEavRwohAtTvb9euq3AfUAt",
+      "url": "https://drive.google.com/file/d/1orjPYgyLluEavRwohAtTvb9euq3AfUAt/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-67-3.1.1.02-Child Record Tabs – All_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "3dd31f2ff73607126e35198d71593457a29df8f1eb0f0864ea4a51b88314dba7",
-      "synced_at": "2026-11-26T02:49:23+00:00",
-      "note": "26/11/2026: viết mới theo format BBA-66, 9 tab (Enrolment…History), nội dung tổng quan + thao tác theo quyền; giữ 3 comment chị Hải. Thay file 1XvEUZcj… (trong thùng rác)."
+      "source_sha256": "01ebd6534b0238a69c23270d185cd6eb1aa4d0e91f1171543f5f408bdcd54a98",
+      "synced_at": "2026-11-26T07:19:41+00:00",
+      "note": "26/11/2026: sửa theo 7 comment của user (Enrolment, Enrichment, Guardians, Attendance, Health; Finance giữ nguyên); gắn lại 10 comment (7 user + 3 chị Hải), lưu ở _review/sprint4-qa/by-frd/BBA-67/drive-comments.*. File cũ 1ggBSCBB… trong thùng rác. Không cập nhật Plane."
     }
   },
   "folders_used": {
@@ -1335,6 +1335,18 @@
       "note": "26/11/2026: viết lại theo khung FRS BBA-79 (Signed-off). File cũ 17sT9eCHW… trong thùng rác. Không cập nhật Plane.",
       "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
       "replaced_at": "2026-11-26T04:15:47+00:00"
+    },
+    {
+      "file_id": "1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed",
+      "url": "https://drive.google.com/file/d/1ggBSCBBbjINkhn_yep2vQ_UFHZsTX1ed/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-67-3.1.1.02-Child Record Tabs – All_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "3dd31f2ff73607126e35198d71593457a29df8f1eb0f0864ea4a51b88314dba7",
+      "synced_at": "2026-11-26T02:49:23+00:00",
+      "note": "26/11/2026: viết mới theo format BBA-66, 9 tab (Enrolment…History), nội dung tổng quan + thao tác theo quyền; giữ 3 comment chị Hải. Thay file 1XvEUZcj… (trong thùng rác).",
+      "key": "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI",
+      "replaced_at": "2026-11-26T07:19:41+00:00"
     }
   ]
 }

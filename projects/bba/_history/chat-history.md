@@ -317,3 +317,9 @@
 **Hỏi:** BBA-67 có comment trong tài liệu, dựa vào đó update; lưu trữ lại các comment.
 
 **Trả lời:** 7 comment của user: Enrolment (xem toàn bộ thông tin nhập học, flag, tạo withdrawal… chuyển sang đúng module không popup, change log vào History); Enrichment (bỏ FR liên kết sang Learning, chỉ hiển thị); Guardians (bảng, thêm / sửa / xoá, xoá cần duyệt, mọi thao tác ghi change log; anh chị em và người được đón thuộc task khác); "gỡ người được đón không cần duyệt — check lại" → bỏ, xoá cần duyệt; Attendance (bảng giờ vào / ra + nhiệt độ, không thêm / sửa / xoá, xe đưa rước chỉ xem); Finance (giữ nguyên); Health (thêm nhiệt độ tại tab và hiển thị trên màn BBA-74, nhiệt độ theo ngày, xem full ở BBA-74; chiều cao cân nặng theo kỳ chỉ xem; thông tin phụ huynh không sửa, chỉ thêm / sửa ghi chú nhân viên). Gộp sửa tay trên Drive ("sức khỏe"). Lưu comment ở `_review/sprint4-qa/by-frd/BBA-67/drive-comments.md|json` (kèm 3 comment chị Hải từ bản trước) để gắn lại khi update. Chưa đẩy Drive.
+
+## 26/11/2026 — Update BBA-67 lên Drive
+
+**Hỏi:** "Update"
+
+**Trả lời:** Drive không có sửa mới (07:11). Upload BBA-67 → 1orjPYgyLluEavRwohAtTvb9euq3AfUAt, gắn lại 10 comment (7 của user, 3 của chị Hải). File cũ 1ggBSCBB… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
