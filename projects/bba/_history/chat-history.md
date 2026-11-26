@@ -341,3 +341,9 @@
 **Hỏi:** "Lên lớp cả lớp" có từ nào hay hơn không?
 
 **Trả lời:** Gợi ý: (1) Lên lớp hàng loạt cuối năm học (đề xuất — khớp "bulk promotion" và "annual promotion"); (2) Chuyển cả lớp lên level mới; (3) Lên lớp đầu năm học mới; (4) Chuyển lớp theo năm học. Chờ user chọn, chưa sửa file.
+
+## 26/11/2026 — BBA-67 US-002 UI theo wireframe
+
+**Hỏi:** Update UI ở US-002 của BBA-67 theo file wireframe-BBA-67-health.html; không update US khác.
+
+**Trả lời:** Chỉ sửa US-002 (tab Enrichment): bảng cột Programme, Centre, Day, From, To, Start date, End date, Status; Status Waiting / Active / Completed / Withdrawn; lớp Waiting lên đầu, ô lịch và ngày "—"; tiêu đề + dòng phụ + tóm tắt "n programmes · n Waiting · n active"; bỏ khối Waiting for HQ to confirm riêng. Sửa kèm BR-005, BR-006, luồng thay thế, AC-004 trong US-002 cho khớp. Wireframe ghi "Waitting" — dùng "Waiting". Các US khác không đụng. Chưa đẩy Drive.
