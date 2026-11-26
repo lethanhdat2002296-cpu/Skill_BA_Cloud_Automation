@@ -275,3 +275,9 @@
 **Hỏi:** "Update BBA-72 lên nhé còn BBA-73 không cần"
 
 **Trả lời:** Drive không có sửa mới sau lần đọc comment. Upload BBA-72 → 1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L (giữ comment chị Hải ở BR-012; comment của user đã xử lý nên không chuyển). File cũ 1DcRS8KI… vào thùng rác; cập nhật _drive.json; commit Git. BBA-73 không đẩy. Không cập nhật Plane.
+
+## 26/11/2026 — BBA-73 theo file user gửi (FRS_BBA-73…V0.1_VI)
+
+**Hỏi:** (1) BR-004 viết lại dễ hiểu (người đưa không có trong danh sách → chọn Someone else, nhập thông tin); (2) UI thêm "Nhiệt độ đưa / đón", "Lý do khi chỉnh sửa"; (3) US-002 chỉ thêm thông tin, không sửa; mọi lần thêm phải có lý do và qua duyệt.
+
+**Trả lời:** Viết lại BBA-73 từ file user gửi. BR-004 chia 3 trường hợp người đưa + người đón. US-001: thêm cột Nhiệt độ lúc đưa / lúc đón (theo BBA-74) và Lý do (thông tin thêm trên SMS). US-002 đổi thành "Thêm thông tin đưa / đón": chỉ thêm thông tin còn thiếu, không sửa / xoá (BR-008); lý do bắt buộc theo BBA-77 (BR-011, VAL-005); qua duyệt theo BBA-53 / My approvals BBA-52, chỉ ghi nhận khi được duyệt (BR-012); lịch sử có lý do, người duyệt, kết quả (BR-013). Không đưa lại 2 quy tắc tự suy (phải có đưa trước đón, giờ về sau giờ đến). OQ-01: chỉ thêm phần đón khi App đã có phần đưa? OQ-02: hiển thị trạng thái chờ duyệt? Chưa đẩy Drive.
