@@ -335,3 +335,9 @@
 **Hỏi:** "Update BBA-72 lên drive nhé"
 
 **Trả lời:** Drive không có sửa mới. Upload → 1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU (gắn lại comment chị Hải ở BR-009). File cũ 1nc2zHpf… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
+
+## 26/11/2026 — Tên US BBA-72
+
+**Hỏi:** "Lên lớp cả lớp" có từ nào hay hơn không?
+
+**Trả lời:** Gợi ý: (1) Lên lớp hàng loạt cuối năm học (đề xuất — khớp "bulk promotion" và "annual promotion"); (2) Chuyển cả lớp lên level mới; (3) Lên lớp đầu năm học mới; (4) Chuyển lớp theo năm học. Chờ user chọn, chưa sửa file.
