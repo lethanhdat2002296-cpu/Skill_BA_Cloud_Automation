@@ -239,3 +239,9 @@
 **Hỏi:** "Giờ đến đi cùng người đưa, giờ về đi cùng người đón. Chỉ ghi được thông tin đón khi đã có thông tin đưa; giờ về không sớm hơn giờ đến." — không hiểu.
 
 **Trả lời:** BR-010 (US-002) gộp 3 quy tắc khi ghi/sửa trên SMS: (1) có giờ thì phải có người (VAL-004, AC-017); (2) phải có thông tin đưa trong ngày mới ghi được thông tin đón (VAL-005, AC-018); (3) giờ về bằng hoặc sau giờ đến (VAL-006, AC-019). Ý (2), (3) là BA suy luận, không có trong Excel / V13 / BBA-79. Đề xuất viết lại thành 3 gạch đầu dòng; chờ user chọn giữ hay bỏ ý (2), (3).
+
+## 26/11/2026 — Viết lại BR-010 BBA-73 cho dễ hiểu
+
+**Hỏi:** Ghi lại BR-010 cho dễ hiểu.
+
+**Trả lời:** BR-010 mới: "Khi nhập thông tin đưa đón: (1) Nhập giờ trẻ đến thì phải chọn ai đưa trẻ đến; nhập giờ trẻ về thì phải chọn ai đón trẻ về. (2) Trẻ chưa có giờ đến thì chưa nhập được giờ về. (3) Giờ về phải sau giờ đến." VAL-005 và AC-018 đổi thông báo thành "Trẻ chưa có giờ đến, chưa nhập được giờ về." Chỉ sửa repo, chưa đẩy Drive.
