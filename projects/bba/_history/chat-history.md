@@ -329,3 +329,9 @@
 **Hỏi:** Gom các US của BBA-72 thành 1 (đặt tên hợp lý); tập trung đưa toàn bộ trẻ lên lớp, bỏ qua tác động.
 
 **Trả lời:** Drive không có sửa / comment mới. Gom thành "US-001 - Lên lớp cả lớp" (6 FR, 10 BR, 2 VAL, 15 AC): mở từ Edit › Move children up → chọn lớp đích có sẵn + ngày hiệu lực → toàn bộ trẻ chọn sẵn, bỏ chọn trẻ ở lại → Done → kết quả từng trẻ, Retry → lịch sử. Bỏ phần Impact (học phí, hoá đơn, thread, danh sách điểm danh) — đưa vào Ngoài phạm vi; bỏ OQ-08, OQ-09. Giữ cảnh báo sĩ số, giữ quy tắc lớp cũ vẫn giữ danh sách trẻ (comment chị Hải). Chưa đẩy Drive.
+
+## 26/11/2026 — Update BBA-72 (1 US) lên Drive
+
+**Hỏi:** "Update BBA-72 lên drive nhé"
+
+**Trả lời:** Drive không có sửa mới. Upload → 1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU (gắn lại comment chị Hải ở BR-009). File cũ 1nc2zHpf… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.

@@ -505,14 +505,14 @@
       "note": "Cột Temperatures chỉ hiển thị (bỏ link Add reading) theo wireframe BBA-73 của user. File cũ 1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L",
-      "url": "https://drive.google.com/file/d/1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L/view",
+      "file_id": "1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU",
+      "url": "https://drive.google.com/file/d/1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "f28df8b5ffb944bb2f536471d4d51cd0e50cc62587df590f5fe0287078235770",
-      "synced_at": "2026-11-26T03:23:38+00:00",
-      "note": "26/11/2026: sửa theo comment của user (bỏ tạo lớp trong luồng, Actions → Edit), đối chiếu Excel Q-74-06..Q-74-15, bỏ quy tắc không có nguồn, thêm Phụ lục C nguồn; giữ comment chị Hải (BR-012). File cũ 1DcRS8KI… trong thùng rác."
+      "source_sha256": "21d25560aadc7a71ec5b2501add03effd097a90218ca2a03da4a8082834a6f15",
+      "synced_at": "2026-11-26T07:42:38+00:00",
+      "note": "26/11/2026: gom 1 US (Lên lớp cả lớp), bỏ phần tác động; giữ comment chị Hải (BR-009). File cũ 1nc2zHpf… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
       "file_id": "1orjPYgyLluEavRwohAtTvb9euq3AfUAt",
@@ -1347,6 +1347,18 @@
       "note": "26/11/2026: viết mới theo format BBA-66, 9 tab (Enrolment…History), nội dung tổng quan + thao tác theo quyền; giữ 3 comment chị Hải. Thay file 1XvEUZcj… (trong thùng rác).",
       "key": "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI",
       "replaced_at": "2026-11-26T07:19:41+00:00"
+    },
+    {
+      "file_id": "1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L",
+      "url": "https://drive.google.com/file/d/1nc2zHpfVmDJrLh4gmdFZI4fuLgVMrP1L/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "f28df8b5ffb944bb2f536471d4d51cd0e50cc62587df590f5fe0287078235770",
+      "synced_at": "2026-11-26T03:23:38+00:00",
+      "note": "26/11/2026: sửa theo comment của user (bỏ tạo lớp trong luồng, Actions → Edit), đối chiếu Excel Q-74-06..Q-74-15, bỏ quy tắc không có nguồn, thêm Phụ lục C nguồn; giữ comment chị Hải (BR-012). File cũ 1DcRS8KI… trong thùng rác.",
+      "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
+      "replaced_at": "2026-11-26T07:42:38+00:00"
     }
   ]
 }
