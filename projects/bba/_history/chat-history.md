@@ -251,3 +251,9 @@
 **Hỏi:** "Với đừng tự ý bịa ra"
 
 **Trả lời:** BBA-73: BR-010 chỉ còn "Nhập giờ trẻ đến thì phải chọn ai đưa trẻ đến; nhập giờ trẻ về thì phải chọn ai đón trẻ về."; bỏ quy tắc tự suy (phải có giờ đến mới nhập giờ về; giờ về sau giờ đến) cùng VAL và AC tương ứng; đánh số lại (6 VAL, 18 AC). BBA-67: bỏ chi tiết tự suy (Export theo bộ lọc, nhãn chờ trả lời mất sau khi gửi). Chưa đẩy Drive.
+
+## 26/11/2026 — BR-010 BBA-73 theo câu của user
+
+**Hỏi:** "Nhập thông tin điểm danh của trẻ phải có giờ đến và giờ đi và người đưa đón của trẻ"
+
+**Trả lời:** BR-010 = "Nhập thông tin điểm danh của trẻ phải có giờ đến, giờ về, người đưa và người đón của trẻ." VAL-004 = thiếu một trong bốn thông tin thì không lưu; 4 trường đổi thành bắt buộc. Hỏi lại: trẻ mới đến, chưa về thì có lưu được giờ đến trước không.
