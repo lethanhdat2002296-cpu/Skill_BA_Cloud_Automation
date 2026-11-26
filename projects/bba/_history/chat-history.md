@@ -223,3 +223,13 @@
 > Update lên drive nhé
 
 **Claude:** Drive không có sửa mới. Upload BBA-73 (1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN) và BBA-74 (19CDqUSUd-nH8byRIh8zffQ6AZq15RMHM) vào thư mục 1uZpPo7…, file cũ vào thùng rác, commit Git. Không cập nhật Plane.
+
+## 26/11/2026 — Quay lại BBA-72 và BBA-67 (trong lúc chờ duyệt 73, 74)
+
+**Hỏi:** BBA-67 mô tả tổng quan các tab trong hồ sơ trẻ dựa vào zip FRS đã duyệt, có mô tả quyền sửa / Edit nếu tab có, viết tiếng Việt. BBA-72 (lên lớp): đọc folder SRS trên Drive; FRD chỉ mô tả tổng quát, nghiệp vụ để ở BR và VAL. Nghiên cứu ems.help.dotb.vn để bổ sung.
+
+**Trả lời:**
+- BBA-67: file mới `BBA-67_Child_Record_Tabs_VI.md` — 9 US cho 9 tab (Enrolment, Enrichment, Guardians, Attendance, Finance, Health, Communication, Documents, History), mỗi tab: nội dung tổng quan + thao tác theo quyền + module sở hữu; chi tiết trỏ sang BBA-66/68/69/70/71/73/74. Theo góp ý chị Hải: liệt kê đủ tab của prototype, bỏ "Mô tả của task", Enrolment = lịch sử quá trình ghi danh. OQ-01: tab Communication có nhắn tin trực tiếp (prototype có Reply/Send, bản cũ ghi chỉ đọc). OQ-02: chặn gỡ Primary contact duy nhất?
+- BBA-72: viết lại FR ngắn (8 FR), nghiệp vụ dồn vào 14 BR / 4 VAL; giữ chỉnh sửa trên Drive (tiêu đề, US-001, FR-003, version 0.1); bổ sung từ SRS Children & Families (mã lớp duy nhất trong Centre + năm học, lớp có trẻ chỉ đóng không xoá); OQ-06: SRS P6 cho đổi lớp đích từng trẻ.
+- ems.help.dotb.vn: không đọc được từ môi trường cloud (proxy chặn / không phân giải được tên miền).
+- Chưa đẩy Drive / Git tài liệu, chờ "update".
