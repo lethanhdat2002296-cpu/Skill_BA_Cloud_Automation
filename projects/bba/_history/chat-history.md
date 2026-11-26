@@ -299,3 +299,9 @@
 **Hỏi:** Tài liệu chỉ cho bổ sung, không sửa; câu hỏi về sửa đưa qua BBA-77. OQ-02 không cần, bỏ qua, cứ nhập xong là được.
 
 **Trả lời:** BR-011: chỉ nhập phần còn thiếu, phần đã có giữ nguyên; sau khi thêm phải đủ giờ đến, giờ về, người đưa, người đón; sửa thuộc BBA-77. VAL-004 và 4 trường đổi theo; thêm AC chỉ nhập phần về khi App đã có phần đến. Bỏ OQ-02 và câu "danh sách chưa hiện thông tin mới" ở AC; xoá mục Câu hỏi mở; Phụ lục thành mục 7. Chưa đẩy Drive.
+
+## 26/11/2026 — BR-010/011 BBA-73: chỉ thêm mới
+
+**Hỏi:** BBA-73 chỉ được thêm mới, không xoá hay sửa bất kỳ cái gì, kể cả khi đã có thông tin điểm danh buổi sáng.
+
+**Trả lời:** BR-010 = "Trên SMS chỉ được thêm mới thông tin đưa / đón; không được sửa hay xoá bất kỳ thông tin nào đã có, kể cả khi trẻ đã có thông tin điểm danh buổi sáng." BR-011 chỉ còn: sau khi thêm phải đủ giờ đến, giờ về, người đưa, người đón. Bỏ câu "sửa thuộc BBA-77" khỏi BR-011. Chưa đẩy Drive.
