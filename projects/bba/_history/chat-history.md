@@ -293,3 +293,9 @@
 **Hỏi:** OQ-01 và OQ-02 đọc không hiểu.
 
 **Trả lời:** Viết lại bằng ví dụ. OQ-01: App đã ghi phần đến, chỉ thiếu phần về — SMS cho nhập riêng phần về, hay bắt buộc đủ 4 thông tin? OQ-02: đã gửi duyệt mà chưa duyệt — danh sách chưa hiện gì, hay hiện kèm nhãn "Chờ duyệt"? Đã sửa câu chữ trong file.
+
+## 26/11/2026 — Chốt OQ-01, OQ-02 BBA-73
+
+**Hỏi:** Tài liệu chỉ cho bổ sung, không sửa; câu hỏi về sửa đưa qua BBA-77. OQ-02 không cần, bỏ qua, cứ nhập xong là được.
+
+**Trả lời:** BR-011: chỉ nhập phần còn thiếu, phần đã có giữ nguyên; sau khi thêm phải đủ giờ đến, giờ về, người đưa, người đón; sửa thuộc BBA-77. VAL-004 và 4 trường đổi theo; thêm AC chỉ nhập phần về khi App đã có phần đến. Bỏ OQ-02 và câu "danh sách chưa hiện thông tin mới" ở AC; xoá mục Câu hỏi mở; Phụ lục thành mục 7. Chưa đẩy Drive.
