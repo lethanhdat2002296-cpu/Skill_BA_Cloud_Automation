@@ -347,3 +347,9 @@
 **Hỏi:** Update UI ở US-002 của BBA-67 theo file wireframe-BBA-67-health.html; không update US khác.
 
 **Trả lời:** Chỉ sửa US-002 (tab Enrichment): bảng cột Programme, Centre, Day, From, To, Start date, End date, Status; Status Waiting / Active / Completed / Withdrawn; lớp Waiting lên đầu, ô lịch và ngày "—"; tiêu đề + dòng phụ + tóm tắt "n programmes · n Waiting · n active"; bỏ khối Waiting for HQ to confirm riêng. Sửa kèm BR-005, BR-006, luồng thay thế, AC-004 trong US-002 cho khớp. Wireframe ghi "Waitting" — dùng "Waiting". Các US khác không đụng. Chưa đẩy Drive.
+
+## 26/11/2026 — Update BBA-67 lên Drive (US-002 UI + sửa của user)
+
+**Hỏi:** "update lên drive"
+
+**Trả lời:** Drive có sửa mới 09:38 và comment mới "Cái này cần làm rõ" ở BR-002. Gộp sửa của user: bỏ tác nhân Read-only User; rút gọn User Story US-001; FR-003 "từ tab Enrolment"; bỏ "không mở popup" ở luồng thay thế; xoá link prototype ở UI Reference (Enrolment, Guardians, Attendance); FR-005 "đã đăng ký"; bỏ câu nhắc tiêm chủng ở BR-019; bỏ "vai trò khác chỉ đọc" ở BR-022; "xoá" → "xóa". Làm rõ BR-002 theo prototype (3 flag Yes / No; Staff Child gắn Staff child discount; SUG / KA chưa có quy tắc tính phí) + OQ-03 (ý nghĩa SUG / KA, Staff Child có tự áp giảm giá không). Upload → 1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc, gắn lại 7 comment đang mở (comment đã resolve không gắn lại). File cũ 1orjPYgy… vào thùng rác; commit Git. Không cập nhật Plane.

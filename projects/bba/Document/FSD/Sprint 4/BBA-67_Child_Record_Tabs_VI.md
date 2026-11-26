@@ -37,7 +37,6 @@ Hồ sơ trẻ gom về một chỗ những gì các module ghi nhận về tr�
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
 | Authorised User | Trẻ trong phạm vi dữ liệu được cấp (HQ: mọi Centre; nhân viên Centre: Centre của mình; Teacher: lớp của mình). | Xem các tab được cấp quyền; thực hiện thao tác trên tab theo quyền. |
-| Read-only User | Trẻ trong phạm vi được cấp. | Xem tab; không thấy nút thao tác. |
 | System | Dữ liệu các module của trẻ. | Đọc dữ liệu module, áp quyền, che hoặc ẩn trường được bảo vệ, ghi History. |
 | Unauthorised User | Ngoài vai trò hoặc phạm vi được cấp. | Không thấy tab hoặc hồ sơ trẻ. |
 
@@ -49,7 +48,7 @@ Hồ sơ trẻ gom về một chỗ những gì các module ghi nhận về tr�
 |---|---|---|---|---|
 | **Enrolment** | Lịch sử quá trình ghi danh của trẻ; flag của trẻ. | Đặt flag; tạo withdrawal, temporary withdrawal, transfer (chuyển sang màn hình module); ghi change log. | Enrolment; Joining & leaving | US-001 |
 | **Enrichment** | Lớp enrichment trẻ đang học, đã học, đang chờ HQ xác nhận. | Không có; chỉ hiển thị. | Learning | US-002 |
-| **Guardians** | Bảng người giám hộ và vai trò. | Thêm, sửa; xoá phải qua duyệt; ghi change log. | Children & Families | US-003 |
+| **Guardians** | Bảng người giám hộ và vai trò. | Thêm, sửa; xóa phải qua duyệt; ghi change log. | Children & Families | US-003 |
 | **Attendance** | Bảng giờ vào, giờ ra, nhiệt độ theo ngày; xe đưa rước (chỉ xem). | Không có; chỉ hiển thị. | Daily Operations | US-004 |
 | **Finance** | Việc cần làm, trợ cấp, GIRO/CDA, cách thanh toán, lịch thanh toán, đặt cọc, hoá đơn, công nợ, giảm giá. | Gửi nhắc phí, review trợ cấp, đổi Bill to, xuất GIRO, quản lý đặt cọc, thêm giảm giá. | Fees & Payments | US-005 |
 | **Health** | Thông tin từ gia đình, ghi chú nhân viên, tiêm chủng, nhiệt độ theo ngày, chiều cao cân nặng theo kỳ. | Thêm lần đo nhiệt độ; thêm, sửa ghi chú nhân viên. | Children & Families; Daily Operations | US-006 |
@@ -63,7 +62,7 @@ Hồ sơ trẻ gom về một chỗ những gì các module ghi nhận về tr�
 
 #### User Story
 
-Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ khi học ở trường, đánh dấu trẻ và tạo các việc rút, tạm nghỉ, chuyển Centre ngay từ hồ sơ trẻ, để không phải tìm ở nhiều nơi.
+Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ khi học ở trường, đánh dấu trẻ và tạo các việc rút, tạm nghỉ, chuyển Centre ngay từ hồ sơ trẻ.
 
 #### Functional Requirements (Yêu cầu chức năng)
 
@@ -71,7 +70,7 @@ Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ
 |---|---|
 | FR-001 | Tab hiển thị toàn bộ thông tin nhập học của trẻ (BR-001). |
 | FR-002 | Người dùng có quyền đánh dấu trẻ (flag) (BR-002). |
-| FR-003 | Người dùng có quyền tạo withdrawal, temporary withdrawal, transfer từ tab; hệ thống chuyển sang màn hình của module tương ứng (BR-003). |
+| FR-003 | Người dùng có quyền tạo withdrawal, temporary withdrawal, transfer từ tab Enrolment; hệ thống chuyển sang màn hình của module tương ứng (BR-003). |
 | FR-004 | Mọi thay đổi thực hiện từ tab được ghi change log vào tab History (BR-004). |
 
 #### Functional Flow - Main (Luồng chính)
@@ -81,7 +80,7 @@ Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Người dùng chọn Start a withdrawal / Start a temporary withdrawal / Start a transfer: hệ thống chuyển sang màn hình tạo yêu cầu của Joining & leaving, không mở popup; hệ thống ghi change log (FR-003, FR-004).
+1. Người dùng chọn Start a withdrawal / Start a temporary withdrawal / Start a transfer: hệ thống chuyển sang màn hình tạo yêu cầu của Joining & leaving; hệ thống ghi change log (FR-003, FR-004).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
@@ -91,8 +90,8 @@ Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ
 
 | BR ID | Quy tắc |
 |---|---|
-| BR-001 | Mỗi lần ghi danh một dòng: Centre, level, lớp, programme (Full day / Half day), năm học, ngày ghi danh, ngày bắt đầu học, ngày kết thúc hoặc “ongoing”, trạng thái, pháp nhân. Dòng đầu ghi tổng số lần ghi danh và số lần đang chạy. Ghi danh và thay đổi không bị xoá. |
-| BR-002 | Flag gồm SUG Child, Staff Child, KA Child, giá trị Yes / No. Mỗi flag hiện quy tắc tính phí đang áp; chưa có quy tắc thì ghi chờ Finance xác nhận. |
+| BR-001 | Mỗi lần ghi danh một dòng: Centre, level, lớp, programme (Full day / Half day), năm học, ngày ghi danh, ngày bắt đầu học, ngày kết thúc hoặc “ongoing”, trạng thái, pháp nhân. Dòng đầu ghi tổng số lần ghi danh và số lần đang chạy. Ghi danh và thay đổi không bị xóa. |
+| BR-002 | Tab có 3 flag: SUG Child, Staff Child, KA Child; mỗi flag có giá trị Yes / No, mặc định No. Cạnh mỗi flag hiện quyền lợi tính phí đi kèm: Staff Child gắn với giảm giá “Staff child discount” trong Fees & Payments; SUG Child và KA Child chưa có quy tắc tính phí, hiện “<flag> — no billing rule set. Finance to confirm what this entitles the child to.” |
 | BR-003 | Withdrawal, temporary withdrawal, transfer thuộc Joining & leaving. Bấm Start, hệ thống chuyển sang đúng màn hình của module, không mở popup trên tab. Trạng thái ghi danh chỉ đổi qua Joining & leaving. |
 | BR-004 | Đánh dấu trẻ và tạo yêu cầu withdrawal, temporary withdrawal, transfer từ tab đều ghi change log vào tab History: nội dung, giá trị cũ → giá trị mới, người thực hiện, thời điểm. |
 
@@ -100,7 +99,7 @@ Là người dùng, tôi muốn xem lịch sử quá trình ghi danh của trẻ
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Child record › Enrolment | Prototype: Records › Child › Enrolment |
+| Child record › Enrolment | |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
@@ -137,7 +136,7 @@ Là người dùng, tôi muốn xem các lớp enrichment của trẻ, để bi�
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-005 | Tab chỉ hiển thị các lớp enrichment của trẻ và yêu cầu đang chờ HQ xác nhận (BR-005, BR-006, BR-007). |
+| FR-005 | Tab chỉ hiển thị các lớp enrichment của trẻ đã đăng ký và yêu cầu đang chờ HQ xác nhận (BR-005, BR-006, BR-007). |
 
 #### Functional Flow - Main (Luồng chính)
 
@@ -145,7 +144,7 @@ Là người dùng, tôi muốn xem các lớp enrichment của trẻ, để bi�
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Trẻ có yêu cầu tham gia lớp đang chờ HQ: hiển thị ở khối Waiting for HQ to confirm (BR-006).
+1. Trẻ có yêu cầu tham gia lớp đang chờ HQ: dòng lớp có trạng thái Waiting, nằm đầu bảng (BR-006).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
@@ -155,9 +154,9 @@ Là người dùng, tôi muốn xem các lớp enrichment của trẻ, để bi�
 
 | BR ID | Quy tắc |
 |---|---|
-| BR-005 | Mỗi lớp một dòng: Programme, Centre, Day and time, Start date, End date. Lớp đang học có End date “—”. Một trẻ học được nhiều lớp. |
-| BR-006 | Yêu cầu tham gia lớp chờ HQ xác nhận hiện tên lớp, ngày gửi, người gửi và vai trò. |
-| BR-007 | Tab chỉ hiển thị thông tin; không có thao tác thêm, sửa, xoá. |
+| BR-005 | Mỗi lớp một dòng: Programme, Centre, Day, From, To, Start date, End date, Status. Status gồm Waiting (chờ HQ xác nhận), Active (đang học), Completed (đã học xong), Withdrawn (đã rút). Lớp đang học có End date “—”. Một trẻ học được nhiều lớp. |
+| BR-006 | Thứ tự: lớp Waiting trước, rồi lớp đang học, rồi lớp đã kết thúc. Lớp Waiting chưa có lịch học và ngày: các ô Day, From, To, Start date, End date hiện “—”. |
+| BR-007 | Tab chỉ hiển thị thông tin; không có thao tác thêm, sửa, xóa. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
@@ -169,14 +168,16 @@ Là người dùng, tôi muốn xem các lớp enrichment của trẻ, để bi�
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Child record › Enrichment | Prototype: Records › Child › Enrichment |
+| Child record › Enrichment | Wireframe BBA-67 (26/11/2026) › tab Enrichment; Prototype: Records › Child › Enrichment |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| Enrichment programmes | Bảng | — | — | VAL-001. | Chỉ xem (BR-005; BR-007). |
-| Waiting for HQ to confirm | Section | — | Khi có yêu cầu | — | Chỉ xem (BR-006). |
+| Tiêu đề | Display | — | “Enrichment programmes” | — | Dòng phụ “Pending requests first, followed by current and past programmes.” |
+| Tóm tắt | Display | — | — | — | “n programmes · n Waiting · n active”. |
+| Bảng Enrichment programmes | Bảng | — | Theo thứ tự BR-006 | VAL-001. | Cột Programme, Centre, Day, From, To, Start date, End date, Status; chỉ xem (BR-005; BR-007). |
+| Status | Nhãn | — | — | — | Waiting, Active, Completed, Withdrawn (BR-005). |
 
 #### Data and Audit (Dữ liệu và audit)
 
@@ -188,8 +189,8 @@ Là người dùng, tôi muốn xem các lớp enrichment của trẻ, để bi�
 
 | AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
-| AC-004 | trẻ học Speech & Drama (Thứ Năm 15:30–16:30) và Swimming từ 01/07/2026; yêu cầu Mandarin Explorers gửi 15/09/2026 | người dùng mở tab Enrichment | 2 dòng lớp, End date “—”; khối Waiting for HQ to confirm hiện Mandarin Explorers, ngày gửi, người gửi | FR-005; BR-005; BR-006; DATA-002 |
-| AC-005 | người dùng có quyền xem trẻ | mở tab Enrichment | không có thao tác thêm, sửa, xoá | BR-007 |
+| AC-004 | trẻ học Speech & Drama (Thứ Năm 15:30–16:30) và Swimming từ 01/07/2026; đã học xong Little Coders (12/01–29/06/2026); đã rút Art Explorers; yêu cầu Mandarin Explorers chờ HQ | người dùng mở tab Enrichment | tóm tắt “5 programmes · 1 Waiting · 2 active”; dòng đầu Mandarin Explorers Waiting, các ô lịch và ngày “—”; tiếp theo Speech & Drama, Swimming Active, End date “—”; sau cùng Little Coders Completed, Art Explorers Withdrawn | FR-005; BR-005; BR-006; DATA-002 |
+| AC-005 | người dùng có quyền xem trẻ | mở tab Enrichment | không có thao tác thêm, sửa, xóa | BR-007 |
 | AC-006 | trẻ chưa có lớp enrichment | mở tab Enrichment | hiện “No enrichment programme for this child.” | VAL-001 |
 
 #### Dependencies (Phụ thuộc)
@@ -206,7 +207,7 @@ Là người dùng, tôi muốn xem và cập nhật người giám hộ của t
 | FR ID | Yêu cầu chức năng |
 |---|---|
 | FR-006 | Tab hiển thị người giám hộ của trẻ dạng bảng (BR-008). |
-| FR-007 | Người dùng có quyền thêm, sửa, xoá người giám hộ; xoá phải qua duyệt (BR-009, BR-010). |
+| FR-007 | Người dùng có quyền thêm, sửa, xóa người giám hộ; xóa phải qua duyệt (BR-009, BR-010). |
 | FR-008 | Mọi thao tác trên tab được ghi change log vào tab History (BR-011). |
 
 #### Functional Flow - Main (Luồng chính)
@@ -216,7 +217,7 @@ Là người dùng, tôi muốn xem và cập nhật người giám hộ của t
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Người dùng chọn Remove ở một người giám hộ: hệ thống gửi yêu cầu xoá đi duyệt; người duyệt chọn Approve thì người giám hộ bị xoá (FR-007; BR-010).
+1. Người dùng chọn Remove ở một người giám hộ: hệ thống gửi yêu cầu xóa đi duyệt; người duyệt chọn Approve thì người giám hộ bị xóa (FR-007; BR-010).
 2. Người duyệt chọn Reject: người giám hộ giữ nguyên (BR-010).
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
@@ -229,14 +230,14 @@ Là người dùng, tôi muốn xem và cập nhật người giám hộ của t
 |---|---|
 | BR-008 | Bảng người giám hộ: họ tên, quan hệ với trẻ, điện thoại, email, vai trò (Primary contact, Emergency contact, Authorised to collect, Billing contact). Một người giám hộ có một hoặc nhiều vai trò. |
 | BR-009 | Thêm, sửa người giám hộ có hiệu lực khi lưu. |
-| BR-010 | Xoá người giám hộ phải qua duyệt theo approval route (BBA-53), duyệt trong My approvals (BBA-52). Người giám hộ chỉ bị xoá khi được duyệt; bị từ chối thì giữ nguyên. |
-| BR-011 | Thêm, sửa, yêu cầu xoá, kết quả duyệt xoá đều ghi change log vào tab History: nội dung, giá trị cũ → giá trị mới, người thực hiện, người duyệt (với xoá), thời điểm. |
+| BR-010 | Xóa người giám hộ phải qua duyệt theo approval route (BBA-53), duyệt trong My approvals (BBA-52). Người giám hộ chỉ bị xóa khi được duyệt; bị từ chối thì giữ nguyên. |
+| BR-011 | Thêm, sửa, yêu cầu xóa, kết quả duyệt xóa đều ghi change log vào tab History: nội dung, giá trị cũ → giá trị mới, người thực hiện, người duyệt (với xóa), thời điểm. |
 
 #### UI Reference (Tham chiếu giao diện)
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Child record › Guardians | Prototype: Records › Child › Guardians (chỉ phần Guardians) |
+| Child record › Guardians | |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
@@ -244,7 +245,7 @@ Là người dùng, tôi muốn xem và cập nhật người giám hộ của t
 |---|---|---|---|---|---|
 | Bảng Guardians | Bảng | — | — | — | BR-008. |
 | Create guardian / Edit | Nút | — | Theo quyền | — | FR-007; BR-009. |
-| Remove | Nút | — | Theo quyền | — | Gửi yêu cầu xoá đi duyệt (BR-010). |
+| Remove | Nút | — | Theo quyền | — | Gửi yêu cầu xóa đi duyệt (BR-010). |
 | Vai trò | Nhãn chọn | Có ít nhất 1 | — | — | BR-008. |
 
 #### Data and Audit (Dữ liệu và audit)
@@ -259,9 +260,9 @@ Là người dùng, tôi muốn xem và cập nhật người giám hộ của t
 |---|---|---|---|---|
 | AC-007 | trẻ có người giám hộ Mr Wong (father, Primary contact) | người dùng mở tab Guardians | bảng hiện Mr Wong, quan hệ father, điện thoại, email, vai trò Primary contact | FR-006; BR-008 |
 | AC-008 | người dùng có quyền | chọn Create guardian, nhập Mrs Wong, vai trò Emergency contact, lưu | Mrs Wong hiện trong bảng; History có dòng thêm người giám hộ | FR-007; FR-008; BR-009; BR-011; DATA-003 |
-| AC-009 | Mrs Wong có trong bảng | người dùng chọn Remove | yêu cầu xoá được gửi đi duyệt; Mrs Wong vẫn trong bảng | FR-007; BR-010 |
-| AC-010 | yêu cầu xoá Mrs Wong đang chờ duyệt | người duyệt chọn Approve | Mrs Wong bị xoá khỏi bảng; History có dòng xoá kèm người duyệt | BR-010; BR-011 |
-| AC-011 | yêu cầu xoá Mrs Wong đang chờ duyệt | người duyệt chọn Reject | Mrs Wong giữ nguyên trong bảng | BR-010 |
+| AC-009 | Mrs Wong có trong bảng | người dùng chọn Remove | yêu cầu xóa được gửi đi duyệt; Mrs Wong vẫn trong bảng | FR-007; BR-010 |
+| AC-010 | yêu cầu xóa Mrs Wong đang chờ duyệt | người duyệt chọn Approve | Mrs Wong bị xóa khỏi bảng; History có dòng xóa kèm người duyệt | BR-010; BR-011 |
+| AC-011 | yêu cầu xóa Mrs Wong đang chờ duyệt | người duyệt chọn Reject | Mrs Wong giữ nguyên trong bảng | BR-010 |
 
 #### Dependencies (Phụ thuộc)
 
@@ -278,7 +279,7 @@ Là người dùng, tôi muốn xem giờ vào, giờ ra và nhiệt độ của
 |---|---|
 | FR-009 | Tab hiển thị thông tin điểm danh của trẻ dạng bảng: giờ vào, giờ ra, nhiệt độ (BR-012). |
 | FR-010 | Tab hiển thị xe đưa rước của trẻ ở dạng chỉ xem (BR-013). |
-| FR-011 | Tab chỉ hiển thị; không có thao tác thêm, sửa, xoá (BR-014). |
+| FR-011 | Tab chỉ hiển thị; không có thao tác thêm, sửa, xóa (BR-014). |
 
 #### Functional Flow - Main (Luồng chính)
 
@@ -298,7 +299,7 @@ Là người dùng, tôi muốn xem giờ vào, giờ ra và nhiệt độ của
 |---|---|
 | BR-012 | Bảng mỗi ngày một dòng: ngày, giờ vào, giờ ra, nhiệt độ đo được trong ngày; mới nhất trước. Dữ liệu lấy từ điểm danh (BBA-73) và đo nhiệt độ (BBA-74). |
 | BR-013 | Xe đưa rước (tuyến xe hoặc No bus) lấy từ thông tin điểm danh; chỉ xem, không chọn được trên tab. |
-| BR-014 | Tab không có thao tác thêm, sửa, xoá. |
+| BR-014 | Tab không có thao tác thêm, sửa, xóa. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
@@ -310,7 +311,7 @@ Là người dùng, tôi muốn xem giờ vào, giờ ra và nhiệt độ của
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Child record › Attendance | Prototype: Records › Child › Attendance |
+| Child record › Attendance | |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
@@ -332,7 +333,7 @@ Là người dùng, tôi muốn xem giờ vào, giờ ra và nhiệt độ của
 | AC-012 | ngày 25/11/2026 trẻ vào 08:03, ra 17:20, đo 36.7 °C lúc đến | người dùng mở tab Attendance | dòng 25/11/2026 hiện giờ vào 08:03, giờ ra 17:20, nhiệt độ 36.7 °C | FR-009; BR-012; DATA-004 |
 | AC-013 | ngày 26/11/2026 trẻ vào 08:10, chưa ra, chưa đo nhiệt độ | người dùng mở tab Attendance | giờ ra và nhiệt độ hiện “—” | BR-012 |
 | AC-014 | trẻ đi Bus A — Tampines North loop | người dùng mở tab Attendance | xe đưa rước hiện Bus A, không chọn hay đổi được | FR-010; BR-013 |
-| AC-015 | người dùng có quyền xem trẻ | mở tab Attendance | không có thao tác thêm, sửa, xoá | FR-011; BR-014 |
+| AC-015 | người dùng có quyền xem trẻ | mở tab Attendance | không có thao tác thêm, sửa, xóa | FR-011; BR-014 |
 | AC-016 | trẻ chưa có thông tin điểm danh | mở tab Attendance | bảng rỗng | VAL-002 |
 
 #### Dependencies (Phụ thuộc)
@@ -449,10 +450,10 @@ Là người dùng, tôi muốn xem thông tin sức khỏe của trẻ ở mộ
 | BR ID | Quy tắc |
 |---|---|
 | BR-018 | Các khối: From the family (tiền sử bệnh, dị ứng, chế độ ăn, người cập nhật, kênh); Note from staff; Attachments from the family; Vaccination record; History; Temperature log; Height and weight by term; Height percentile. |
-| BR-019 | Thông tin gia đình khai chỉ dùng sau khi có consent và Centre Director duyệt; bản chờ duyệt không thay bản đã duyệt (BBA-68, BBA-69). Gia đình được nhắc cập nhật tiêm chủng 12 tháng sau lần ghi gần nhất. |
+| BR-019 | Thông tin gia đình khai chỉ dùng sau khi có consent và Centre Director duyệt; bản chờ duyệt không thay bản đã duyệt (BBA-68, BBA-69). |
 | BR-020 | Nhiệt độ hiển thị theo ngày. Người dùng có quyền thêm lần đo nhiệt độ tại tab; lần đo thêm ở đây hiển thị trên màn Temperature (BBA-74). Xem toàn bộ các lần đo của trẻ ở màn Temperature (BBA-74). |
 | BR-021 | Chiều cao, cân nặng hiển thị số đo theo kỳ của trẻ; không thêm, không sửa số đo tại tab (BBA-70). |
-| BR-022 | Thông tin phụ huynh khai về sức khỏe của trẻ không sửa được. Nhân viên chỉ được thêm, sửa ghi chú của nhân viên (Edit) theo quyền; vai trò khác chỉ đọc. |
+| BR-022 | Thông tin phụ huynh khai về sức khỏe của trẻ không sửa được. Nhân viên chỉ được thêm, sửa ghi chú của nhân viên (Edit) theo quyền |
 
 #### UI Reference (Tham chiếu giao diện)
 
@@ -655,7 +656,7 @@ Là người dùng, tôi muốn xem mọi thay đổi trên hồ sơ trẻ và a
 | BR ID | Quy tắc |
 |---|---|
 | BR-028 | Mỗi dòng: nội dung thay đổi, giá trị cũ → giá trị mới (kèm lý do nếu có), thời điểm, người thực hiện, vai trò, kênh (SMS / Parent app). |
-| BR-029 | Nhật ký chỉ thêm, không sửa, không xoá. Sửa sai thêm một dòng mới mang giá trị cũ. |
+| BR-029 | Nhật ký chỉ thêm, không sửa, không xóa. Sửa sai thêm một dòng mới mang giá trị cũ. |
 | BR-030 | Export theo quyền. |
 
 #### UI Reference (Tham chiếu giao diện)
@@ -684,7 +685,7 @@ Là người dùng, tôi muốn xem mọi thay đổi trên hồ sơ trẻ và a
 | AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
 | AC-033 | HQ Admin vừa xem đầy đủ số NRIC của trẻ | người dùng mở tab History | dòng đầu ghi Viewed NRIC / identity document number → Viewed unmasked, thời điểm, người xem, vai trò, SMS | FR-022; BR-028; DATA-009 |
-| AC-034 | người dùng có quyền | tìm một dòng để sửa hoặc xoá | không có thao tác sửa hay xoá | BR-029 |
+| AC-034 | người dùng có quyền | tìm một dòng để sửa hoặc xóa | không có thao tác sửa hay xóa | BR-029 |
 | AC-035 | người dùng có quyền Export | người dùng chọn Export | hệ thống xuất nhật ký của trẻ | FR-023; BR-030 |
 
 #### Dependencies (Phụ thuộc)
@@ -697,6 +698,7 @@ BBA-66 (nhật ký sửa hồ sơ, xem NRIC); các module ghi thay đổi cho tr
 |---|---|---|---|---|
 | OQ-01 | Bản trước mô tả tab Communication chỉ hiển thị, không trả lời; prototype có Start a message và Reply / Send. Xác nhận tab cho nhắn tin trực tiếp. | HQ Ops | Cao |  |
 | OQ-02 | Gỡ guardian duy nhất giữ vai trò Primary contact có bị chặn không? | HQ Ops | Trung bình |  |
+| OQ-03 | SUG Child và KA Child nghĩa là gì, trẻ được hưởng quyền lợi tính phí gì? Đặt Staff Child = Yes có tự áp giảm giá Staff child discount không, hay Finance áp tay? | HQ Finance | Cao |  |
 
 ## 8. Phụ lục
 

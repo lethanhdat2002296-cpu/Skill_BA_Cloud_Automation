@@ -1,12 +1,51 @@
 [
-{"anchor":"US-001 - Tab Enrolment","text":"Dị tao tóm tắt tab lại như sau: 1. Tab này xem được toàn bộ thông tin nhập học của trẻ 2. Cho phép đánh dấu trẻ (Flag) 3. Được quyền tạo withdrawal, v...v... tại đây.Nhưng hệ thống sẽ tự điều chuyển qua đúng model chứ không popup 4. Lưu change log khi thực hiện thay đổi như đánh dấu trẻ, bấm tạo thông tin điều chuyển v..v.. qua tap history của trẻ","date":"26/11/2026","where":"Tab Enrolment — đã cập nhật US-001","author":"Đạt Lê Thành"},
-{"anchor":"Tab chỉ hiển thị thông tin; không có thao tác thêm, sửa, xoá.","text":"Không có phần này nhé. Chỉ hiển thị thông tin thôi","date":"26/11/2026","where":"FR-005 cũ (tab Enrichment) — đã bỏ, thay bằng quy tắc chỉ hiển thị","author":"Đạt Lê Thành"},
-{"anchor":"US-003 - Tab Guardians","text":"Trong Prototype thì đang có chia nhiều task. Tuy nhiên, Tab Guardians này hiển thị ở dạng bảng. Người dùng có quyền thêm, sửa, xóa. Tuy nhiên, khi xóa thì cần có bước duyệt. Với khi thực hiện bất kỳ thao tác nào cx phải changelog nhé","date":"26/11/2026","where":"Tab Guardians — đã cập nhật US-003","author":"Đạt Lê Thành"},
-{"anchor":"Xoá người giám hộ phải qua duyệt","text":"Cái này check lại","date":"26/11/2026","where":"\"Người dùng gỡ người được đón: gỡ có hiệu lực ngay, không cần duyệt\" — đã bỏ (người được đón thuộc task khác); xoá người giám hộ cần duyệt","author":"Đạt Lê Thành"},
-{"anchor":"US-004 - Tab Attendance","text":"Tab này chỉ hiển thị thông tin điểm danh của trẻ giờ ra và giờ vào kèm nhiệt độ đo được của trẻ. Trên tab này sẽ không được phép thêm , xóa, sửa gì được hết. Và hiển thị ở dạng Bảng . Còn thông tin chọn xe đưa rước thì cái này đã hiển thị ở điểm danh rồi. Nếu cần thì view hiển thị thông tin để người dùng xem chứ không có quyền được chọn","date":"26/11/2026","where":"Tab Attendance — đã cập nhật US-004","author":"Đạt Lê Thành"},
-{"anchor":"US-005 - Tab Finance","text":"Để sếp tao cook nên để yên :))","date":"26/11/2026","where":"Tab Finance — giữ nguyên","author":"Đạt Lê Thành"},
-{"anchor":"US-006 - Tab Health","text":"Chỗ tab này cần thêm rules như sau: 1. Đối với đo nhiệt độ. Cho phép thêm nhiệt độ tại đây. => Màn hình bên tài liệu BBA-74 phải có thông tin 2. Thông tin trong tab này sẽ hiển thị theo ngày đối với nhiệt độ. Muốn xem full của trẻ thì bấm qua bên tài liệu BBA-74 để xem 3. Đối với cân nặng và chiều cao hiển thị thông tin đo theo kỳ của mỗi trẻ. Không được phép chỉnh sửa hay thêm số đo ở đây 4. Thông tin mà phụ huynh nhập mô tả sức khỏe cho trẻ Cũng không được sửa. Chỉ được phép nhập thêm ghi chú của nhân viên. (Edit)","date":"26/11/2026","where":"Tab Health — đã cập nhật US-006","author":"Đạt Lê Thành"},
-{"anchor":"tôi muốn xem lịch sử quá trình ghi danh của trẻ","text":"Lịch sử quá trình ghi danh của trẻ khi học ở trường.","date":"14/11/2026","where":"User Story tab Enrolment","author":"Mỹ Hải - DOTB"},
-{"anchor":"Các tab Enrolment, Enrichment, Guardians, Attendance","text":"Liệt kê đủ các tab trên prototype => cập nhật lại mô tả của task. :))","date":"14/11/2026","where":"Phạm vi và ranh giới phase","author":"Mỹ Hải - DOTB"},
-{"anchor":"Hồ sơ trẻ gom về một chỗ","text":"Dư thừa","date":"14/11/2026","where":"dòng \"Mô tả của task:\" ở mục 2 — đã bỏ","author":"Mỹ Hải - DOTB"}
+ {
+  "anchor": "US-006 - Tab Health",
+  "text": "Chỗ tab này cần thêm rules như sau: 1. Đối với đo nhiệt độ. Cho phép thêm nhiệt độ tại đây. => Màn hình bên tài liệu BBA-74 phải có thông tin 2. Thông tin trong tab này sẽ hiển thị theo ngày đối với nhiệt độ. Muốn xem full của trẻ thì bấm qua bên tài liệu BBA-74 để xem 3. Đối với cân nặng và chiều cao hiển thị thông tin đo theo kỳ của mỗi trẻ. Không được phép chỉnh sửa hay thêm số đo ở đây 4. Thông tin mà phụ huynh nhập mô tả sức khỏe cho trẻ Cũng không được sửa. Chỉ được phép nhập thêm ghi chú của nhân viên. (Edit)",
+  "date": "26/11/2026",
+  "where": "Tab Health — đã cập nhật US-006",
+  "author": "Đạt Lê Thành"
+ },
+ {
+  "anchor": "US-003 - Tab Guardians",
+  "text": "Trong Prototype thì đang có chia nhiều task. Tuy nhiên, Tab Guardians này hiển thị ở dạng bảng. Người dùng có quyền thêm, sửa, xóa. Tuy nhiên, khi xóa thì cần có bước duyệt. Với khi thực hiện bất kỳ thao tác nào cx phải changelog nhé",
+  "date": "26/11/2026",
+  "where": "Tab Guardians — đã cập nhật US-003",
+  "author": "Đạt Lê Thành"
+ },
+ {
+  "anchor": "US-004 - Tab Attendance",
+  "text": "Tab này chỉ hiển thị thông tin điểm danh của trẻ giờ ra và giờ vào kèm nhiệt độ đo được của trẻ. Trên tab này sẽ không được phép thêm , xóa, sửa gì được hết. Và hiển thị ở dạng Bảng . Còn thông tin chọn xe đưa rước thì cái này đã hiển thị ở điểm danh rồi. Nếu cần thì view hiển thị thông tin để người dùng xem chứ không có quyền được chọn",
+  "date": "26/11/2026",
+  "where": "Tab Attendance — đã cập nhật US-004",
+  "author": "Đạt Lê Thành"
+ },
+ {
+  "anchor": "Hồ sơ trẻ gom về một chỗ",
+  "text": "Dư thừa",
+  "date": "14/11/2026",
+  "where": "dòng \"Mô tả của task:\" ở mục 2 — đã bỏ",
+  "author": "Mỹ Hải - DOTB"
+ },
+ {
+  "anchor": "Các tab Enrolment, Enrichment, Guardians, Attendance",
+  "text": "Liệt kê đủ các tab trên prototype => cập nhật lại mô tả của task. :))",
+  "date": "14/11/2026",
+  "where": "Phạm vi và ranh giới phase",
+  "author": "Mỹ Hải - DOTB"
+ },
+ {
+  "anchor": "Xóa người giám hộ phải qua duyệt",
+  "text": "Cái này check lại",
+  "date": "26/11/2026",
+  "where": "\"Người dùng gỡ người được đón: gỡ có hiệu lực ngay, không cần duyệt\" — đã bỏ (người được đón thuộc task khác); xoá người giám hộ cần duyệt",
+  "author": "Đạt Lê Thành"
+ },
+ {
+  "anchor": "Tab có 3 flag: SUG Child",
+  "text": "Cái này cần làm rõ",
+  "date": "26/11/2026",
+  "where": "BR-002 — đã làm rõ theo prototype (Staff Child gắn Staff child discount; SUG / KA chưa có quy tắc tính phí), thêm OQ-03",
+  "author": "Đạt Lê Thành"
+ }
 ]
