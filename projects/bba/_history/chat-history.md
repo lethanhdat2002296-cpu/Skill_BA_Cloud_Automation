@@ -287,3 +287,9 @@
 **Hỏi:** Tách người thân và bus driver ra riêng, không chung một rule.
 
 **Trả lời:** BR-004 tách thành 3: BR-004 người đưa là người thân / Someone else; BR-005 xe bus (Bus driver đưa, Bus attendant đón, kèm số xe, chỉ khi trẻ đi bus); BR-006 người đón chỉ từ danh sách người được phép đón. Bỏ BR trùng ở US-002, đánh số lại (14 BR). Chưa đẩy Drive.
+
+## 26/11/2026 — Giải thích OQ-01, OQ-02 BBA-73
+
+**Hỏi:** OQ-01 và OQ-02 đọc không hiểu.
+
+**Trả lời:** Viết lại bằng ví dụ. OQ-01: App đã ghi phần đến, chỉ thiếu phần về — SMS cho nhập riêng phần về, hay bắt buộc đủ 4 thông tin? OQ-02: đã gửi duyệt mà chưa duyệt — danh sách chưa hiện gì, hay hiện kèm nhãn "Chờ duyệt"? Đã sửa câu chữ trong file.
