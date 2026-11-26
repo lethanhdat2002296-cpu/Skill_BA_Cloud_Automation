@@ -24,267 +24,254 @@
 
 ## 2. Mục đích và bối cảnh
 
-Ghi nhận và quản lý thông tin đưa và đón trẻ trên SMS: ai đưa trẻ đến, ai đón trẻ về, quan hệ với trẻ, giờ đến, giờ về và ảnh bàn giao lúc đón. Thông tin được ghi trên App và hiển thị trên SMS; ngoài ra người dùng có quyền thêm, sửa, xóa thông tin đưa / đón ngay trên SMS, mỗi thay đổi đều có lý do và được ghi lịch sử.
+Tài liệu đặc tả việc quản lý thông tin đưa / đón trẻ trên SMS: xem giờ đến, giờ về, người đưa, người đón, quan hệ với trẻ và ảnh bàn giao; tìm kiếm, lọc; nhận biết trẻ đang ở trường; xuất dữ liệu; và cho người dùng có quyền ghi hoặc sửa thông tin đưa / đón ngay trên SMS.
+
+Thông tin đưa / đón được ghi trên App khi nhân viên nhận và trả trẻ, rồi cung cấp cho SMS. Luồng và màn hình trên App thuộc đặc tả của App.
 
 ## 3. Phạm vi và ranh giới phase
 
 | Trong phạm vi | Ngoài phạm vi |
 |---|---|
-| Trên SMS (Daily Operations › tab Attendance): bảng kết quả điểm danh theo trẻ và ngày, hiển thị giờ đến, người đưa, quan hệ, giờ về, người đón, quan hệ, ảnh bàn giao lúc đón; lọc, tìm kiếm. Thêm, sửa, xóa thông tin đưa / đón ngay trên dòng của trẻ, bắt buộc lý do. Changelog của thông tin đưa / đón. | Đồng bộ dữ liệu giữa App và SMS. Tạo, thêm, duyệt người được phép đón (Children & Families, Parents App). Sửa kết quả điểm danh (Có mặt / Vắng) và Hủy kết quả (BBA-77). Thêm và quản lý nhiệt độ (BBA-74). Đến muộn (BBA-75). Xuất CSV điểm danh. Thông báo cho phụ huynh. |
+| Xem, tìm kiếm, lọc thông tin đưa / đón trên SMS; xem ảnh bàn giao lúc đưa và lúc đón; nhận biết trẻ đang ở trường; xuất dữ liệu; người dùng có quyền ghi hoặc sửa thông tin đưa / đón; lưu lịch sử cập nhật. | Luồng và màn hình nhận / trả trẻ trên App; chụp ảnh và đồng bộ dữ liệu của App; tạo, thêm, duyệt người được phép đón (Children & Families, Parents App); ghi và sửa kết quả điểm danh Có mặt / Vắng (BBA-77); đo nhiệt độ (BBA-74); đến muộn (BBA-75); thông báo cho phụ huynh. |
 
 ## 4. Tác nhân, vai trò và quyền truy cập
 
 | Tác nhân | Phạm vi | Quyền / Trách nhiệm |
 |---|---|---|
-| Authorised User (Centre Administrator, Centre Director, Teacher) | Centre / lớp được cấp. | Xem thông tin đưa / đón; thêm, sửa, xóa thông tin đưa / đón; xem Changelog. |
-| App | Centre được cấp. | Ghi nhận thông tin đưa / đón khi nhận và trả trẻ, kèm ảnh bàn giao. |
-| System | Centre được cấp. | Hiển thị thông tin đưa / đón từ App và SMS; kiểm tra dữ liệu; ghi lịch sử. |
-| Unauthorised User | Ngoài vai trò hoặc phạm vi được cấp. | Không thấy và không thao tác được. |
-
-**Quy tắc chung:** Quyền xem và thao tác theo phân quyền vai trò và phạm vi dữ liệu hiện có (Roles & permissions). Tính năng này không tạo vai trò riêng.
+| Centre Director (CD) | Trẻ trong các Centre được cấp. | Xem dữ liệu và ảnh; ghi và sửa thông tin đưa / đón. |
+| Authorised SMS user | Dữ liệu trong phạm vi được cấp. | Xem dữ liệu, mở ảnh, tìm kiếm, lọc, xuất dữ liệu; ghi và sửa thông tin đưa / đón theo quyền. |
+| System | Thông tin đưa / đón và hồ sơ trẻ liên quan. | Cung cấp dữ liệu để hiển thị và xuất; xác định trẻ đang ở trường; kiểm tra quyền; ghi lịch sử cập nhật. |
 
 ## 5. Tổng quan tính năng và phân rã chức năng
 
+BBA-73 gồm hai User Story trên SMS, đặc tả ở mục 6.
+
 | Module | Tính năng | Mô tả | User Story |
 |---|---|---|---|
-| **Daily Operations › Attendance** | Xem thông tin đưa / đón | Bảng kết quả điểm danh theo trẻ và ngày; mỗi dòng có giờ đến, người đưa, giờ về, người đón, quan hệ, ảnh bàn giao lúc đón; lọc, tìm kiếm. | BBA-73: US-001 |
-| **Daily Operations › Attendance** | Thêm, sửa, xóa thông tin đưa / đón | Sửa ngay trên dòng của trẻ; bắt buộc lý do; ghi Changelog theo từng trường. | BBA-73: US-002 |
+| **Attendance** | Xem và xuất thông tin đưa / đón | Xem thông tin đưa / đón, ảnh bàn giao và trẻ đang ở trường; tìm kiếm, lọc, xuất dữ liệu. | BBA-73: US-001 |
+| **Attendance** | Ghi và sửa thông tin đưa / đón | Người dùng có quyền ghi hoặc sửa giờ đến, người đưa, giờ về, người đón trên SMS. | BBA-73: US-002 |
 
 ## 6. Yêu cầu chức năng theo User Story
 
-### 6.1 BBA-73: US-001 - Xem thông tin đưa / đón
+### 6.1 BBA-73: US-001 - Xem và xuất thông tin đưa / đón
 
 #### User Story
 
-Là người dùng của Centre, tôi muốn xem ai đưa trẻ đến, ai đón trẻ về và lúc mấy giờ theo từng trẻ, từng ngày, để quản lý việc đưa đón của trẻ.
+Là người dùng có quyền trên SMS, tôi muốn xem thông tin đưa / đón và ảnh bàn giao, tìm kiếm, lọc và xuất dữ liệu, để theo dõi ai đưa, ai đón trẻ, lúc mấy giờ và trẻ nào đang ở trường.
 
 #### Functional Requirements (Yêu cầu chức năng)
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-001 | Tab Attendance hiển thị bảng kết quả điểm danh, mỗi dòng là một trẻ trong một ngày, kèm thông tin đưa / đón (BR-001, BR-002, BR-003). |
-| FR-002 | Người dùng tìm kiếm và lọc bảng theo trẻ, ngày, Centre, lớp, kết quả điểm danh (BR-004). |
-| FR-003 | Người dùng xem ảnh bàn giao lúc đón của trẻ (BR-005). |
+| FR-001 | Hệ thống phải hiển thị thông tin đưa / đón của trẻ trong phạm vi dữ liệu được cấp. |
+| FR-002 | Hệ thống phải cho tìm theo tên hoặc mã trẻ và lọc theo Centre, lớp, ngày. |
+| FR-003 | Hệ thống phải cho người dùng có quyền xuất dữ liệu đưa / đón theo khoảng ngày đã chọn, với các cột ở mục 8. |
+| FR-004 | Hệ thống phải hiển thị ảnh bàn giao lúc đưa và lúc đón, và cho người dùng có quyền mở từng ảnh. |
 
 #### Functional Flow - Main (Luồng chính)
 
-1. Nhân viên nhận / trả trẻ trên App, hoặc người dùng ghi trên SMS (US-002); thông tin đưa / đón hiện trên SMS.
-2. Người dùng mở Daily Operations › tab Attendance; bảng hiển thị các dòng kết quả, ngày mới nhất trước (FR-001).
-3. Người dùng tìm theo tên / mã trẻ hoặc lọc theo Date, Centre, Class, Attendance result (FR-002).
+1. Người dùng mở Daily Operations › Attendance.
+2. Hệ thống hiển thị thông tin đưa / đón và ảnh bàn giao trong phạm vi được cấp.
+3. Người dùng tìm theo tên / mã trẻ hoặc chọn Centre, lớp, ngày; chọn một ảnh để mở.
+4. Người dùng chọn khoảng ngày và xuất dữ liệu bằng chức năng xuất dữ liệu chuẩn.
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Người dùng bấm ảnh ở cột Picture: hiện ảnh trẻ cùng người đón, tên người đón, quan hệ, giờ về và nguồn ghi (FR-003; BR-005).
-2. Người dùng chọn Xóa bộ lọc: bảng quay về tất cả ngày, ngày mới nhất trước (FR-002).
+1. Không có dữ liệu phù hợp: hệ thống hiển thị kết quả trống theo thiết kế chuẩn.
+2. Trẻ chưa có giờ đến, giờ về hoặc ảnh: ô thiếu hiển thị "—".
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
-1. Không có dòng nào khớp bộ lọc: bảng hiện "Không có dữ liệu phù hợp với bộ lọc."
-2. Trẻ chưa được đưa đến hoặc chưa được đón: ô tương ứng hiện "—" (BR-001).
+1. Người dùng không có quyền hoặc yêu cầu dữ liệu ngoài phạm vi: hệ thống không cung cấp dữ liệu đó.
+2. Không tải hoặc không xuất được dữ liệu: hệ thống báo lỗi theo hành vi chuẩn của hệ thống.
 
 #### Business Rules (Quy tắc nghiệp vụ)
 
 | BR ID | Quy tắc |
 |---|---|
-| BR-001 | Mỗi dòng là một kết quả điểm danh của một trẻ trong một ngày, gồm: Ngày, Child, Class, Kết quả, Giờ đến, Người đưa, Quan hệ, Giờ về, Người đón, Quan hệ, Picture. Ô chưa có dữ liệu hiện "—". Dòng đã Hủy kết quả không hiện thông tin đưa / đón. |
-| BR-002 | Người đưa là phụ huynh / người trong danh sách của trẻ, người khác ngoài danh sách (Quan hệ hiện "<quan hệ> (Someone else)"), hoặc tài xế xe bus ("Bus driver", Quan hệ hiện số xe). Người đón là người trong danh sách người được phép đón, hoặc phụ xe bus ("Bus attendant", Quan hệ hiện số xe). Cột Quan hệ lấy tự động theo người được chọn. |
-| BR-003 | Giờ đến và giờ về hiển thị đúng giờ ghi nhận (HH:mm), không gắn với buổi hay giờ cố định trong ngày. |
-| BR-004 | Mặc định bảng hiện mọi ngày, ngày mới nhất trước. Trẻ đang tạm nghỉ (Temporary Withdrawal) không hiện trong các ngày thuộc thời gian tạm nghỉ. |
-| BR-005 | Cột Picture hiện ảnh bàn giao lúc đón (ảnh trẻ cùng người đón) khi đã có thông tin đón; chưa có thì hiện "—". |
+| BR-001 | Xem dữ liệu, mở ảnh và xuất dữ liệu theo quyền người dùng và phạm vi dữ liệu Centre. |
+| BR-002 | Trẻ được coi là đang ở trường khi có giờ đến và chưa có giờ về. |
+| BR-003 | Danh sách gồm: ngày, tên trẻ, lớp, Centre, giờ đến, người đưa, quan hệ, giờ về, người đón, quan hệ, ảnh lúc đưa, ảnh lúc đón. Ô thiếu hiển thị "—"; ảnh có sẵn thì mở được. |
+| BR-004 | Người đưa là người trong danh sách của trẻ, người khác ngoài danh sách (ghi tên và quan hệ, kèm "Someone else") hoặc tài xế xe bus ("Bus driver", kèm số xe). Người đón là người trong danh sách người được phép đón hoặc phụ xe bus ("Bus attendant", kèm số xe). |
+| BR-005 | Giờ đến / giờ về là ngày giờ lúc nhân viên lưu trên App (hoặc giờ người dùng ghi trên SMS), hiển thị theo múi giờ của người dùng, không gắn với buổi hay giờ cố định trong ngày. |
+| BR-006 | Xuất dữ liệu dùng các cột ở mục 8, theo khoảng ngày đã chọn và phạm vi dữ liệu được cấp; theo chức năng xuất dữ liệu chuẩn. |
+| BR-007 | Trẻ đang tạm nghỉ (Temporary Withdrawal) không hiện trong các ngày thuộc thời gian tạm nghỉ. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
 | VAL ID | Điều kiện | Phản hồi của hệ thống |
 |---|---|---|
-| — | — | — |
+| VAL-001 | Người dùng yêu cầu xem hoặc xuất dữ liệu ngoài phạm vi được cấp. | Không cung cấp dữ liệu ngoài phạm vi. |
+| VAL-002 | Ngày bắt đầu xuất sau ngày kết thúc. | Báo khoảng ngày không hợp lệ và không xuất. |
 
 #### UI Reference (Tham chiếu giao diện)
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Daily Operations — tab Attendance (Attendance results) | UX/UI V13: BBA-73-74_Version_moi.html |
+| BBA-73: UI-US-001 - Thông tin đưa / đón trên SMS | |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| **Bộ lọc** | | | | | |
-| Search child / ID | Ô tìm kiếm | Không | Trống | — | Tìm theo tên hoặc mã trẻ (FR-002). |
-| Date | Chọn ngày | Không | Trống = tất cả ngày | — | BR-004. |
-| Centre, Class | Danh sách chọn | Không | All centres, All classes | — | FR-002. |
-| Attendance result | Danh sách chọn | Không | All results | — | Có mặt, Vắng không phép, Vắng có phép, Đã huỷ kết quả. |
-| Xóa bộ lọc | Nút | — | — | — | Đặt lại bộ lọc. |
-| **Bảng Attendance results** | | | | | |
-| Ngày, Child, Class | Cột | — | — | — | Child có ảnh đại diện và tên. |
-| Kết quả | Cột (nhãn) | — | — | — | Có mặt, Vắng không phép, Vắng có phép, Đã huỷ kết quả; chỉ hiển thị trong tài liệu này. |
-| Giờ đến, Giờ về | Cột | — | "—" khi chưa có | — | HH:mm (BR-003). |
-| Người đưa, Người đón | Cột | — | "—" khi chưa có | — | BR-002. |
-| Quan hệ (2 cột) | Cột | — | "—" khi chưa có | — | Lấy tự động theo người đưa / người đón (BR-002). |
-| Picture | Biểu tượng ảnh | — | "—" khi chưa đón | — | Bấm mở popup "Ảnh bàn giao lúc đón" (FR-003; BR-005). |
-| ⋯ | Menu dòng | Theo quyền | — | — | Sửa, Changelog (US-002). |
+| Search | Ô nhập | Không | Trống | BR-001 | Tìm theo tên hoặc mã trẻ. |
+| Centre | Chọn | Không | Centre của người dùng | VAL-001 | Lọc theo Centre được cấp. |
+| Class | Chọn | Không | Tất cả | — | Lọc theo lớp. |
+| Date | Chọn ngày | Có | Ngày hiện tại | BR-005 | Lọc theo ngày, theo múi giờ của người dùng. |
+| Tên trẻ, lớp, Centre | Hiển thị | Có | Từ hồ sơ trẻ | BR-003 | Xác định trẻ. |
+| Giờ đến / Giờ về | Hiển thị | Khi có | "—" khi thiếu | BR-005 | Ngày giờ ghi nhận, theo múi giờ của người dùng. |
+| Người đưa / Người đón | Hiển thị | Khi có | "—" khi thiếu | BR-004 | Tên người đưa / người đón. |
+| Quan hệ | Hiển thị | Khi có | "—" khi thiếu | BR-004 | Quan hệ với trẻ; Someone else hoặc số xe bus. |
+| Ảnh lúc đưa / Ảnh lúc đón | Ảnh / mở | Khi có | Ảnh đã lưu | BR-001; FR-004 | Chọn để mở ảnh trẻ cùng người đưa / người đón. |
+| Đang ở trường | Hiển thị | Có | Từ dữ liệu SMS | BR-002 | Dấu hiệu trẻ đang ở trường. |
+| From date / To date | Chọn ngày | Khi xuất | From date = To date = ngày hiện tại | VAL-002 | Khoảng ngày xuất. |
+| Export data | Thao tác | Theo quyền | Theo điều kiện xuất | BR-001; BR-006; VAL-002 | Xuất theo mục 8 và quy tắc chuẩn. |
 
 #### Data and Audit (Dữ liệu và audit)
 
 | ID | Yêu cầu |
 |---|---|
-| DATA-001 | Mỗi kết quả điểm danh lưu thông tin đưa / đón: giờ đến, người đưa, quan hệ người đưa, nguồn ghi người đưa (App / SMS); giờ về, người đón, quan hệ người đón, nguồn ghi người đón (App / SMS); ảnh bàn giao lúc đón. |
+| DATA-001 | Dùng hồ sơ trẻ, Centre, lớp, ngày giờ đến / về, người đưa / người đón, quan hệ, ảnh bàn giao và nguồn ghi (App / SMS) để hiển thị và xuất dữ liệu. |
+| DATA-002 | Lưu lịch sử cập nhật thông tin đưa / đón, gồm cả dữ liệu mới nhất từ App: giá trị cũ, giá trị mới, người cập nhật, thời điểm. Xem danh sách hay mở ảnh không tạo bản ghi đưa / đón. |
 
 #### Acceptance Criteria (Tiêu chí nghiệm thu)
 
 | AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
-| AC-001 | Ethan được Serena Lim (Mother) đưa đến lúc 08:12 ngày 25/11/2026, chưa được đón | người dùng mở tab Attendance | dòng Ethan 25/11/2026: Giờ đến 08:12, Người đưa Serena Lim, Quan hệ Mother, Giờ về "—", Người đón "—", Picture "—" | FR-001; BR-001; DATA-001 |
-| AC-002 | Noah được người giúp việc Siti đưa đến | người dùng mở tab Attendance | Người đưa Siti, Quan hệ "Helper (Someone else)" | BR-002 |
-| AC-003 | Lucas đi xe bus Bus 2 đến và về | người dùng mở tab Attendance | Người đưa "Bus driver", Người đón "Bus attendant", Quan hệ "Bus 2" | BR-002 |
-| AC-004 | Ethan được Daniel Lim (Father) đón lúc 17:22 ngày 24/11/2026 | người dùng bấm ảnh ở cột Picture | popup "Ảnh bàn giao lúc đón" hiện ảnh trẻ cùng người đón, Daniel Lim, Father, 17:22, nguồn ghi | FR-003; BR-005 |
-| AC-005 | có dữ liệu các ngày 23–25/11/2026 | người dùng để trống Date | bảng hiện mọi ngày, 25/11 ở trên | FR-002; BR-004 |
-| AC-006 | Millie tạm nghỉ từ 24/11 đến 01/12/2026 | người dùng chọn Date 25/11/2026 | không có dòng của Millie | BR-004 |
-| AC-007 | Noah được đưa đến lúc 13:30 | người dùng mở tab Attendance | Giờ đến hiện 13:30 | BR-003 |
+| AC-001 | Người dùng có quyền vào Attendance | người dùng mở màn hình | mặc định Centre của người dùng và ngày hiện tại; hiển thị thông tin đưa / đón và ảnh trong phạm vi được cấp | FR-001; BR-001; BR-003 |
+| AC-002 | Có dữ liệu của nhiều Centre | người dùng tìm theo tên và chọn Centre, lớp, ngày | chỉ hiện dữ liệu khớp trong phạm vi được cấp | FR-002; BR-001; VAL-001 |
+| AC-003 | Ethan có giờ đến 08:12, chưa có giờ về | hệ thống tải dữ liệu | Ethan có dấu hiệu đang ở trường | BR-002 |
+| AC-004 | Ethan chưa có giờ về và ảnh lúc đón | hệ thống hiển thị danh sách | các ô thiếu hiện "—" | BR-003 |
+| AC-005 | Noah được người giúp việc Siti đưa đến; Lucas đi xe bus Bus 2 | hệ thống hiển thị danh sách | Noah: Người đưa Siti, Quan hệ "Helper (Someone else)"; Lucas: Người đưa "Bus driver", Quan hệ "Bus 2" | BR-004 |
+| AC-006 | Ethan có ảnh lúc đưa và ảnh lúc đón, người dùng có quyền xem | người dùng chọn từng ảnh | mở đúng ảnh tương ứng | FR-004; BR-001 |
+| AC-007 | Người dùng có quyền xuất, không đổi From date / To date mặc định | người dùng xuất dữ liệu | From date và To date là ngày hiện tại; file có các cột ở mục 8 và dữ liệu trong phạm vi được cấp | FR-003; BR-006 |
+| AC-008 | Ngày bắt đầu xuất sau ngày kết thúc | người dùng xuất | báo From date / To date không hợp lệ và không xuất | VAL-002 |
+| AC-009 | Noah được đưa đến lúc 13:30 | hệ thống hiển thị danh sách | Giờ đến 13:30 | BR-005 |
+| AC-010 | Millie tạm nghỉ từ 24/11 đến 01/12/2026 | người dùng chọn ngày 25/11/2026 | không có dòng của Millie | BR-007 |
 
 #### Dependencies (Phụ thuộc)
 
-App (nhận / trả trẻ, ghi người đưa / người đón và ảnh); danh sách người được phép đón (Children & Families); dịch vụ xe bus; Temporary Withdrawal (Joining & leaving).
+App (nhận / trả trẻ, người đưa / người đón, ảnh); danh sách người được phép đón (Children & Families); dịch vụ xe bus; Temporary Withdrawal (Joining & leaving).
 
-### 6.2 BBA-73: US-002 - Thêm, sửa, xóa thông tin đưa / đón
+### 6.2 BBA-73: US-002 - Ghi và sửa thông tin đưa / đón trên SMS
 
 #### User Story
 
-Là người dùng của Centre, tôi muốn thêm, sửa hoặc xóa thông tin đưa / đón ngay trên dòng của trẻ, để thông tin luôn đúng khi App chưa ghi hoặc ghi sai.
+Là Centre Director có quyền, tôi muốn ghi hoặc sửa thông tin đưa / đón trên SMS, để bổ sung thông tin còn thiếu hoặc sửa thông tin sai.
 
 #### Functional Requirements (Yêu cầu chức năng)
 
 | FR ID | Yêu cầu chức năng |
 |---|---|
-| FR-004 | Người dùng có quyền chọn Sửa ở menu ⋯ của một dòng để chỉnh thông tin đưa / đón ngay trên dòng đó (BR-006, BR-007, BR-008). |
-| FR-005 | Người dùng thêm, sửa hoặc xóa giờ đến, người đưa, giờ về, người đón; kể cả thông tin App ghi nhận (BR-006 đến BR-010). |
-| FR-006 | Mỗi lần lưu bắt buộc nhập lý do thay đổi; hệ thống ghi Changelog theo từng trường thay đổi (BR-011). |
-| FR-007 | Người dùng xem Changelog của một dòng (BR-012). |
+| FR-005 | Hệ thống phải cho người dùng có quyền ghi hoặc sửa thông tin đưa / đón trên SMS: giờ đến, người đưa, giờ về, người đón, ảnh bàn giao. |
+| FR-006 | Sau khi lưu, hệ thống phải hiển thị dữ liệu đã cập nhật và ghi lịch sử. |
 
 #### Functional Flow - Main (Luồng chính)
 
-1. Người dùng chọn ⋯ › Sửa ở dòng của trẻ; dòng chuyển sang chế độ chỉnh sửa, hiện "Đang chỉnh sửa · thay đổi trực tiếp ở các ô của dòng đã chọn." (FR-004).
-2. Người dùng nhập / sửa Giờ đến, chọn Người đưa, nhập / sửa Giờ về, chọn Người đón; cột Quan hệ tự cập nhật (FR-005; BR-006, BR-007).
-3. Người dùng nhập Lý do thay đổi, chọn Lưu thay đổi; hệ thống lưu, báo "Đã lưu kết quả điểm danh, log ghi theo từng trường." (FR-006).
+1. Người dùng mở Attendance, chọn trẻ, Centre, ngày cần ghi hoặc sửa trong phạm vi được cấp.
+2. Hệ thống hiển thị dữ liệu hiện có. Người dùng nhập hoặc sửa giờ đến, người đưa, giờ về, người đón, ảnh bàn giao.
+3. Người dùng chọn Save. Hệ thống kiểm tra quyền và dữ liệu (VAL-003 đến VAL-008); không cần lý do hay duyệt.
+4. Hệ thống lưu dữ liệu và ghi lịch sử.
 
 #### Functional Flow - Alternative (Luồng thay thế)
 
-1. Người đưa không có trong danh sách: chọn "+ Someone else — thêm người mới", nhập Họ tên và Quan hệ, chọn Lưu người đưa (BR-006).
-2. Xóa thông tin đón: để trống Giờ về và Người đón, nhập lý do, lưu (BR-009).
-3. Xóa thông tin đưa: để trống Giờ đến và Người đưa, cùng với thông tin đón, nhập lý do, lưu (BR-009).
-4. Người dùng chọn Đóng chỉnh sửa: không lưu thay đổi.
-5. Người dùng chọn ⋯ › Changelog: hiện lịch sử của dòng (FR-007).
+1. Người đưa không có trong danh sách: người dùng chọn Someone else, nhập họ tên và quan hệ với trẻ.
+2. Người dùng đóng màn hình hoặc chọn Cancel trước khi lưu: hệ thống không lưu thay đổi.
 
 #### Functional Flow - Exception (Luồng ngoại lệ)
 
-1. Thiếu lý do thay đổi: không lưu (VAL-001).
-2. Dữ liệu đưa / đón không hợp lệ: không lưu (VAL-002 đến VAL-007).
-3. Không có trường nào thay đổi: không lưu (VAL-008).
+1. Người dùng không có quyền sửa hoặc bản ghi ngoài phạm vi: hệ thống từ chối.
+2. Không lưu được thay đổi: hệ thống báo lỗi theo hành vi chuẩn và không hiển thị thay đổi chưa lưu như dữ liệu đã lưu.
 
 #### Business Rules (Quy tắc nghiệp vụ)
 
 | BR ID | Quy tắc |
 |---|---|
-| BR-006 | Người đưa chọn từ: người trong danh sách của trẻ (tên · quan hệ), Someone else (bắt buộc họ tên và quan hệ với trẻ), hoặc Bus driver · <số xe> (chỉ khi trẻ được gán dịch vụ xe bus). Someone else chỉ dùng cho người đưa. |
-| BR-007 | Người đón chọn từ: người trong danh sách người được phép đón của trẻ, hoặc Bus attendant · <số xe> (chỉ khi trẻ được gán dịch vụ xe bus). Không có lựa chọn người lạ hay đón tạm thời. |
-| BR-008 | Hệ thống tự ghi giờ đến / giờ về khi trẻ đến và về; người dùng sửa được. Giờ đến đi cùng người đưa, giờ về đi cùng người đón: phải nhập cả hai hoặc để trống cả hai. Giờ về không sớm hơn giờ đến. |
-| BR-009 | Chỉ ghi được thông tin đón khi đã có thông tin đưa. Xóa thông tin đưa thì phải xóa cả thông tin đón; xóa thông tin đón thì thông tin đưa giữ nguyên. |
-| BR-010 | Chỉ ghi thông tin đưa / đón khi kết quả điểm danh của ngày là Có mặt. |
-| BR-011 | Mỗi lần lưu bắt buộc có lý do thay đổi. Changelog ghi một dòng cho mỗi trường thay đổi: thời điểm, module, hành động, trường, giá trị cũ, giá trị mới, người thao tác, lý do. Thông tin đã xóa không còn hiển thị nhưng vẫn có trong Changelog. |
-| BR-012 | Changelog của một dòng hiển thị theo thứ tự thời gian, gồm cả lịch sử ghi từ App. |
+| BR-008 | Người dùng có quyền ghi hoặc sửa giờ đến, người đưa, giờ về, người đón, ảnh bàn giao, kể cả dữ liệu App đã ghi. Không cần lý do hay duyệt, không giới hạn thời gian sửa. |
+| BR-009 | Người đưa chọn từ người trong danh sách của trẻ, Someone else (bắt buộc họ tên và quan hệ) hoặc Bus driver (chỉ khi trẻ đi xe bus). Người đón chỉ chọn từ danh sách người được phép đón hoặc Bus attendant (chỉ khi trẻ đi xe bus); không có lựa chọn người lạ hay đón tạm thời. |
+| BR-010 | Giờ đến đi cùng người đưa, giờ về đi cùng người đón. Chỉ ghi được thông tin đón khi đã có thông tin đưa; giờ về không sớm hơn giờ đến. |
+| BR-011 | Lưu lịch sử mọi lần cập nhật thông tin đưa / đón: giá trị cũ, giá trị mới, người cập nhật, thời điểm. |
 
 #### Validation Rules (Quy tắc kiểm tra)
 
 | VAL ID | Điều kiện | Phản hồi của hệ thống |
 |---|---|---|
-| VAL-001 | Để trống Lý do thay đổi. | Không lưu; hiện "Nhập lý do chỉnh sửa để ghi Changelog." |
-| VAL-002 | Có giờ đến mà không có người đưa, hoặc ngược lại. | Không lưu; hiện "Giờ đến và người đưa phải được nhập cùng nhau." |
-| VAL-003 | Có giờ về mà không có người đón, hoặc ngược lại. | Không lưu; hiện "Giờ về và người đón phải được nhập cùng nhau." |
-| VAL-004 | Có thông tin đón mà không có thông tin đưa. | Không lưu; hiện "Phải có Drop-off trước khi ghi Pick-up." |
-| VAL-005 | Giờ về sớm hơn giờ đến. | Không lưu; hiện "Giờ trả trẻ không thể sớm hơn giờ đến." |
-| VAL-006 | Someone else thiếu họ tên hoặc quan hệ. | Không lưu; hiện "Enter the name and relationship of the adult." |
-| VAL-007 | Người đón không có trong danh sách người được phép đón; hoặc chọn Bus driver / Bus attendant khi trẻ không được gán xe bus. | Không lưu; hiện "Only a person authorised to collect this child may be named here." hoặc "Trẻ không được gán dịch vụ Bus." |
-| VAL-008 | Không có trường nào thay đổi. | Không lưu; hiện "Chưa có trường dữ liệu nào được thay đổi." |
+| VAL-003 | Người dùng không có quyền sửa hoặc bản ghi ngoài phạm vi. | Từ chối lưu thay đổi. |
+| VAL-004 | Có giờ đến mà không có người đưa (hoặc ngược lại); có giờ về mà không có người đón (hoặc ngược lại). | Báo lỗi tại trường và không lưu. |
+| VAL-005 | Có thông tin đón khi chưa có thông tin đưa. | Báo "Phải có Drop-off trước khi ghi Pick-up." và không lưu. |
+| VAL-006 | Giờ về sớm hơn giờ đến. | Báo "Giờ trả trẻ không thể sớm hơn giờ đến." và không lưu. |
+| VAL-007 | Someone else thiếu họ tên hoặc quan hệ. | Báo "Enter the name and relationship of the adult." và không lưu. |
+| VAL-008 | Người đón không có trong danh sách người được phép đón. | Báo "Only a person authorised to collect this child may be named here." và không lưu. |
 
 #### UI Reference (Tham chiếu giao diện)
 
 | Mã màn hình / Phiên bản | Tham chiếu / Link |
 |---|---|
-| Tab Attendance — chỉnh sửa trên dòng | UX/UI V13: BBA-73-74_Version_moi.html |
-| Someone else — người đưa trẻ (popup) | Như trên |
-| Changelog (popup) | Như trên |
+| BBA-73: UI-US-002 - Ghi và sửa thông tin đưa / đón trên SMS | |
 
 #### UI Components / Field Specification (Thành phần giao diện)
 
 | Trường / Điều khiển | Loại | Bắt buộc | Mặc định / Trạng thái | Kiểm tra | Hành vi |
 |---|---|---|---|---|---|
-| **Chỉnh sửa trên dòng** | | | | | |
-| ⋯ › Sửa | Mục menu | Theo quyền | Tắt khi đang sửa dòng khác | — | Mở chỉnh sửa dòng (FR-004). |
-| Giờ đến | Giờ | Cùng Người đưa | Giá trị hiện có | VAL-002; VAL-005. | HH:mm (BR-008). |
-| Người đưa | Danh sách chọn | Cùng Giờ đến | Giá trị hiện có | VAL-002; VAL-006. | "— Chọn người đưa —", người trong danh sách, "+ Someone else — thêm người mới", Bus driver · <xe> (BR-006). |
-| Giờ về | Giờ | Cùng Người đón | Giá trị hiện có | VAL-003; VAL-004; VAL-005. | HH:mm (BR-008). |
-| Người đón | Danh sách chọn | Cùng Giờ về | Giá trị hiện có | VAL-003; VAL-007. | "— Chọn người đón —", người được phép đón, Bus attendant · <xe> (BR-007). |
-| Quan hệ (2 cột) | Chỉ đọc | — | Theo người được chọn | — | BR-002. |
-| Lý do thay đổi | Ô nhập | Có | Trống | VAL-001. | Ghi vào Changelog (BR-011). |
-| Lưu thay đổi / Đóng chỉnh sửa | Nút | — | Hiện khi đang sửa | VAL-001 đến VAL-008. | Lưu hoặc bỏ thay đổi. |
-| **Someone else — người đưa trẻ** | | | | | |
-| Họ tên người đưa | Ô nhập | Có | Trống | VAL-006. | Ví dụ "Siti". |
-| Quan hệ với trẻ | Ô nhập | Có | Trống | VAL-006. | Ví dụ "Helper, Family driver". |
-| Hủy / Lưu người đưa | Nút | — | — | VAL-006. | Lưu thì người đưa hiện "<tên> · <quan hệ> (Someone else)" kèm nút Sửa thông tin. |
-| **Changelog** | | | | | |
-| Changelog · <tên trẻ> | Popup | — | — | — | Cột Thời điểm, Module, Action, Field, Old, New, User, Reason (BR-011; BR-012). |
+| Trẻ / Centre / Ngày | Hiển thị / chọn | Có | Theo bản ghi đã chọn | VAL-003 | Xác định dữ liệu cần ghi hoặc sửa. |
+| Giờ đến | Ngày giờ | Khi có người đưa | Giá trị hiện có hoặc trống | VAL-004; VAL-006 | Nhập hoặc sửa, theo múi giờ của người dùng (BR-005). |
+| Người đưa | Chọn | Khi có giờ đến | Giá trị hiện có | VAL-004; VAL-007 | Người trong danh sách, Someone else, Bus driver (BR-009). |
+| Họ tên, Quan hệ (Someone else) | Ô nhập | Khi chọn Someone else | Trống | VAL-007 | Thông tin người đưa ngoài danh sách. |
+| Giờ về | Ngày giờ | Khi có người đón | Giá trị hiện có hoặc trống | VAL-004; VAL-005; VAL-006 | Nhập hoặc sửa. |
+| Người đón | Chọn | Khi có giờ về | Giá trị hiện có | VAL-004; VAL-008 | Người được phép đón, Bus attendant (BR-009). |
+| Ảnh lúc đưa / Ảnh lúc đón | Ảnh | Khi có | Ảnh hiện có, nếu có | BR-001; BR-008 | Mở và cập nhật ảnh tương ứng. |
+| Save | Thao tác | Theo quyền | Khi ghi hoặc sửa | VAL-003 đến VAL-008 | Lưu và ghi lịch sử; không cần lý do hay duyệt. |
+| Cancel | Thao tác | — | Trong khi dùng màn hình | Hành vi chuẩn | Đóng màn hình, không lưu thay đổi. |
 
 #### Data and Audit (Dữ liệu và audit)
 
 | ID | Yêu cầu |
 |---|---|
-| DATA-002 | Mỗi lần lưu ghi Changelog: mã kết quả điểm danh, trẻ, ngày, hành động, từng trường thay đổi (giá trị cũ, giá trị mới), người thao tác, thời điểm, lý do. |
+| DATA-003 | Lưu dữ liệu người dùng ghi hoặc sửa, gồm cả ảnh bàn giao. Ghi lịch sử mọi lần cập nhật theo BR-011; không cần lý do hay thông tin duyệt. |
 
 #### Acceptance Criteria (Tiêu chí nghiệm thu)
 
 | AC ID | Given (Cho trước) | When (Khi) | Then (Thì) | Linked Rule |
 |---|---|---|---|---|
-| AC-008 | Ethan Có mặt, App chưa ghi người đón | người dùng chọn ⋯ › Sửa, nhập Giờ về 17:22, chọn Người đón Daniel Lim, Lý do "App chưa ghi", Lưu thay đổi | hiện "Đã lưu kết quả điểm danh, log ghi theo từng trường."; dòng Ethan có Giờ về 17:22, Người đón Daniel Lim, Quan hệ Father | FR-004; FR-005; BR-007 |
-| AC-009 | App ghi Ethan được Serena Lim đưa đến | người dùng sửa Người đưa thành Grandmother Lim, nhập lý do, lưu | Người đưa Grandmother Lim, Quan hệ Grandmother; Changelog có Old Serena Lim, New Grandmother Lim, người thao tác, lý do | FR-005; FR-006; BR-011; DATA-002 |
-| AC-010 | người dùng sửa dòng, để trống Lý do thay đổi | chọn Lưu thay đổi | không lưu, hiện "Nhập lý do chỉnh sửa để ghi Changelog." | VAL-001 |
-| AC-011 | người dùng chọn "+ Someone else — thêm người mới", để trống Quan hệ | chọn Lưu người đưa | không lưu, hiện "Enter the name and relationship of the adult." | BR-006; VAL-006 |
-| AC-012 | người dùng nhập Giờ về nhưng không chọn Người đón | chọn Lưu thay đổi | không lưu, hiện "Giờ về và người đón phải được nhập cùng nhau." | BR-008; VAL-003 |
-| AC-013 | người dùng chọn Người đưa nhưng để trống Giờ đến | chọn Lưu thay đổi | không lưu, hiện "Giờ đến và người đưa phải được nhập cùng nhau." | BR-008; VAL-002 |
-| AC-014 | Ethan đến lúc 08:12 | người dùng nhập Giờ về 07:50, chọn người đón, lưu | không lưu, hiện "Giờ trả trẻ không thể sớm hơn giờ đến." | BR-008; VAL-005 |
-| AC-015 | Mia chưa có thông tin đưa | người dùng nhập Giờ về và Người đón, lưu | không lưu, hiện "Phải có Drop-off trước khi ghi Pick-up." | BR-009; VAL-004 |
-| AC-016 | Ethan có thông tin đưa và đón | người dùng để trống Giờ về và Người đón, nhập lý do, lưu | Giờ về, Người đón, Picture hiện "—"; thông tin đưa giữ nguyên; Changelog có dòng xóa | BR-009; BR-011 |
-| AC-017 | Ethan không được gán xe bus | người dùng mở danh sách Người đưa | không có lựa chọn Bus driver; danh sách Người đón chỉ có người được phép đón của Ethan | BR-006; BR-007; VAL-007 |
-| AC-018 | người dùng mở Sửa nhưng không đổi gì | chọn Lưu thay đổi | không lưu, hiện "Chưa có trường dữ liệu nào được thay đổi." | VAL-008 |
-| AC-019 | dòng Ethan 24/11/2026 đã sửa 2 lần | người dùng chọn ⋯ › Changelog | popup hiện các dòng lịch sử với Thời điểm, Module, Action, Field, Old, New, User, Reason | FR-007; BR-012 |
-| AC-020 | Ava Vắng có phép ngày 25/11/2026 | người dùng nhập Giờ đến và Người đưa, lưu | không lưu; thông tin đưa / đón chỉ ghi khi kết quả Có mặt | BR-010 |
+| AC-011 | Người dùng có quyền, bản ghi trong phạm vi | người dùng sửa người đưa, giờ về, người đón, ảnh rồi lưu dữ liệu hợp lệ | hiển thị dữ liệu đã cập nhật, mở được ảnh mới; lịch sử có giá trị cũ / mới, người cập nhật, thời điểm | FR-005; FR-006; BR-011; DATA-003 |
+| AC-012 | App chưa ghi thông tin đón của Ethan | người dùng ghi giờ về 17:22 và người đón Daniel Lim rồi lưu | lưu dữ liệu; Ethan không còn dấu hiệu đang ở trường; lịch sử có dòng cập nhật | FR-005; BR-002; BR-011 |
+| AC-013 | Dữ liệu sửa hợp lệ, kể cả dữ liệu của ngày trước | người dùng lưu mà không nhập lý do | không cần lý do hay duyệt, không giới hạn thời gian; lưu dữ liệu và ghi lịch sử | BR-008; BR-011 |
+| AC-014 | Người dùng đang sửa | người dùng chọn Cancel trước khi lưu | đóng màn hình, không lưu thay đổi | FR-005 |
+| AC-015 | Người dùng không có quyền sửa | người dùng lưu thay đổi | hệ thống từ chối | VAL-003 |
+| AC-016 | Người dùng chọn Someone else, để trống quan hệ | người dùng lưu | báo "Enter the name and relationship of the adult." và không lưu | BR-009; VAL-007 |
+| AC-017 | Người dùng nhập giờ về nhưng không chọn người đón | người dùng lưu | báo lỗi tại trường và không lưu | BR-010; VAL-004 |
+| AC-018 | Mia chưa có thông tin đưa | người dùng ghi giờ về và người đón rồi lưu | báo "Phải có Drop-off trước khi ghi Pick-up." và không lưu | BR-010; VAL-005 |
+| AC-019 | Ethan đến lúc 08:12 | người dùng ghi giờ về 07:50 rồi lưu | báo "Giờ trả trẻ không thể sớm hơn giờ đến." và không lưu | BR-010; VAL-006 |
+| AC-020 | Danh sách người được phép đón của Ethan có Serena Lim và Daniel Lim; Ethan không đi xe bus | người dùng mở danh sách Người đón | chỉ có Serena Lim và Daniel Lim; không có Bus attendant | BR-009; VAL-008 |
 
 #### Dependencies (Phụ thuộc)
 
-US-001; danh sách người được phép đón (Children & Families); dịch vụ xe bus; kết quả điểm danh (BBA-77).
+US-001; danh sách người được phép đón (Children & Families); dịch vụ xe bus.
 
-## 7. Câu hỏi mở
-
-| Mã câu hỏi | Quyết định cần có | Người quyết định | Ưu tiên | Quyết định của BBA |
-|---|---|---|---|---|
-| OQ-01 | Thông tin đưa / đón được thêm, sửa, xóa trong khoảng thời gian nào (chỉ trong ngày hay cả ngày trước)? | Centre Director / HQ Ops | Cao | |
-
-## 8. Phụ lục
+## 7. Phụ lục
 
 ### Phụ lục A. Thuật ngữ
 
 | Thuật ngữ | Định nghĩa trong FRD này |
 |---|---|
-| Kết quả điểm danh | Bản ghi điểm danh của một trẻ trong một ngày: Có mặt, Vắng không phép, Vắng có phép, Đã huỷ kết quả. |
 | Đưa trẻ (Drop-off) | Trẻ được đưa đến Centre, kèm giờ đến và người đưa. |
 | Đón trẻ (Pick-up) | Trẻ được đón về, kèm giờ về và người đón. |
 | Người được phép đón | Người có trong danh sách đón của trẻ (dữ liệu có sẵn ở hồ sơ trẻ). |
 | Someone else | Người đưa trẻ không có trong danh sách của trẻ, ghi kèm họ tên và quan hệ. |
-| Ảnh bàn giao lúc đón | Ảnh trẻ cùng người đón, chụp trên App khi trả trẻ. |
-| Changelog | Lịch sử thay đổi theo từng trường, kèm người thao tác và lý do. |
+| Đang ở trường | Trẻ có giờ đến và chưa có giờ về. |
+| Nguồn ghi | App hoặc tài khoản ghi dữ liệu trên SMS. |
 
-### Phụ lục B. Danh mục
+## 8. Phụ lục B. Cột xuất dữ liệu đưa / đón
 
-| Danh mục | Mô tả | Phụ thuộc vào |
+File xuất gồm các cột sau, theo khoảng ngày đã chọn và phạm vi Centre được cấp. Thao tác xuất, định dạng file và bảo vệ dữ liệu theo chức năng xuất dữ liệu chuẩn.
+
+| STT | Cột | Ý nghĩa / Dữ liệu |
 |---|---|---|
-| Người đưa | Người trong danh sách của trẻ, Someone else, Bus driver. | Danh sách của trẻ; dịch vụ xe bus. |
-| Người đón | Người được phép đón, Bus attendant. | Danh sách người được phép đón; dịch vụ xe bus. |
-| Kết quả điểm danh | Có mặt, Vắng không phép, Vắng có phép, Đã huỷ kết quả. | BBA-77. |
+| 1 | Date | Ngày của bản ghi. |
+| 2 | Child ID | Mã trẻ. |
+| 3 | Child | Họ tên trẻ. |
+| 4 | Class | Lớp của trẻ. |
+| 5 | Centre | Centre của trẻ. |
+| 6 | Arrival | Giờ đến. |
+| 7 | Departure | Giờ về. |
+| 8 | In building | Yes khi trẻ đang ở trường (BR-002), No trong trường hợp khác. |

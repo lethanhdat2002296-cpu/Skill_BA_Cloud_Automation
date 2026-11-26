@@ -214,3 +214,12 @@
 - BBA-73: US-001 Xem và xuất thông tin đưa / đón (tìm, lọc Centre / lớp / ngày, ảnh lúc đưa và lúc đón, trẻ đang ở trường, xuất theo khoảng ngày, mục 8 cột xuất); US-002 Ghi và sửa trên SMS (không cần lý do / duyệt, không giới hạn thời gian như BBA-79; giữ các quy tắc người đưa / người đón và giờ).
 - BBA-74: US-001 Xem lần đo (tab Temperature, lọc Brand / Centre / lớp / ngày, tìm tên, mỗi lần đo một dòng, x of 3, ≥37.5 tô đỏ); US-002 Thêm / sửa / xóa / View audit (thêm từ dòng điểm danh hoặc tab; Measurement method Manual / Device; sửa xóa không cần lý do; giữ 36.0–40.0, Extra cần lý do, giờ hợp lệ). Bỏ cấu hình Round và bỏ "lý do bắt buộc" của bản V13.
 - Không đụng Plane. Chưa đẩy Drive / Git.
+
+---
+
+## 26/11/2026 — Update BBA-73, BBA-74 (khung BBA-79)
+
+**User:**
+> Update lên drive nhé
+
+**Claude:** Drive không có sửa mới. Upload BBA-73 (1Wggw3KEZeFsP3LLHMGoSbWiRcz13yEgN) và BBA-74 (19CDqUSUd-nH8byRIh8zffQ6AZq15RMHM) vào thư mục 1uZpPo7…, file cũ vào thùng rác, commit Git. Không cập nhật Plane.
