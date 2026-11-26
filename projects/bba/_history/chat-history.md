@@ -245,3 +245,9 @@
 **Hỏi:** Ghi lại BR-010 cho dễ hiểu.
 
 **Trả lời:** BR-010 mới: "Khi nhập thông tin đưa đón: (1) Nhập giờ trẻ đến thì phải chọn ai đưa trẻ đến; nhập giờ trẻ về thì phải chọn ai đón trẻ về. (2) Trẻ chưa có giờ đến thì chưa nhập được giờ về. (3) Giờ về phải sau giờ đến." VAL-005 và AC-018 đổi thông báo thành "Trẻ chưa có giờ đến, chưa nhập được giờ về." Chỉ sửa repo, chưa đẩy Drive.
+
+## 26/11/2026 — Không tự ý bịa
+
+**Hỏi:** "Với đừng tự ý bịa ra"
+
+**Trả lời:** BBA-73: BR-010 chỉ còn "Nhập giờ trẻ đến thì phải chọn ai đưa trẻ đến; nhập giờ trẻ về thì phải chọn ai đón trẻ về."; bỏ quy tắc tự suy (phải có giờ đến mới nhập giờ về; giờ về sau giờ đến) cùng VAL và AC tương ứng; đánh số lại (6 VAL, 18 AC). BBA-67: bỏ chi tiết tự suy (Export theo bộ lọc, nhãn chờ trả lời mất sau khi gửi). Chưa đẩy Drive.
