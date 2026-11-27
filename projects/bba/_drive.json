@@ -238,14 +238,14 @@
       "note": "23/11/2026: nền là bản user sửa trên Drive; GV xem toàn bộ tab Documents kể cả khi chuyển lớp; chỉ gửi lại khi Expired; bổ sung Q-73-04..15; đánh số lại. File cũ 1BKzrlWtk… trong thùng rác."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_VI": {
-      "file_id": "1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6",
-      "url": "https://drive.google.com/file/d/1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6/view",
+      "file_id": "1kOM9okrdUJv8d5hcSkAqE00NjGvsj4il",
+      "url": "https://drive.google.com/file/d/1kOM9okrdUJv8d5hcSkAqE00NjGvsj4il/view",
       "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
       "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "ffbdeb017130c6eb739d411459c6de948535743c556c8d2689933822981784f5",
-      "synced_at": "2026-11-26T04:15:47+00:00",
-      "note": "26/11/2026: gộp bản user sửa trên Drive 03:38; US-002 chỉ thêm mới (không sửa/xoá), có lý do + qua duyệt; tách BR người thân / xe bus / người đón; thêm nhiệt độ lúc đưa/đón, lý do; bỏ OQ. Thư mục mới 18AJ7fN7… (user đã chuyển). File cũ 1Wggw3KE… trong thùng rác. Không cập nhật Plane."
+      "source_sha256": "9c230469b68a5f07fbb67e09b3cdfff3d3d6dc71c65b76e6e16474eee505a451",
+      "synced_at": "2026-11-27T01:18:55+00:00",
+      "note": "27/11/2026: gộp sửa của user trên Drive 26/11 04:18 (bỏ cột Bắt buộc US-001, rút BR-010); bỏ toàn bộ nội dung Bus; giữ phần lọc. File cũ 1yWEvT7y… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-74_Temperature_Readings_VI": {
       "file_id": "19CDqUSUd-nH8byRIh8zffQ6AZq15RMHM",
@@ -1371,6 +1371,18 @@
       "note": "26/11/2026: sửa theo 7 comment của user (Enrolment, Enrichment, Guardians, Attendance, Health; Finance giữ nguyên); gắn lại 10 comment (7 user + 3 chị Hải), lưu ở _review/sprint4-qa/by-frd/BBA-67/drive-comments.*. File cũ 1ggBSCBB… trong thùng rác. Không cập nhật Plane.",
       "key": "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI",
       "replaced_at": "2026-11-26T10:22:01+00:00"
+    },
+    {
+      "file_id": "1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6",
+      "url": "https://drive.google.com/file/d/1yWEvT7yfDM4k79MhlhsJ7F-Pa4-TTQK6/view",
+      "folder_id": "18AJ7fN7O118NO3zuQGpF5ZmlaYgtNTJ5",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "ffbdeb017130c6eb739d411459c6de948535743c556c8d2689933822981784f5",
+      "synced_at": "2026-11-26T04:15:47+00:00",
+      "note": "26/11/2026: gộp bản user sửa trên Drive 03:38; US-002 chỉ thêm mới (không sửa/xoá), có lý do + qua duyệt; tách BR người thân / xe bus / người đón; thêm nhiệt độ lúc đưa/đón, lý do; bỏ OQ. Thư mục mới 18AJ7fN7… (user đã chuyển). File cũ 1Wggw3KE… trong thùng rác. Không cập nhật Plane.",
+      "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
+      "replaced_at": "2026-11-27T01:18:55+00:00"
     }
   ]
 }
