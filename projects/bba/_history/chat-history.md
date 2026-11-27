@@ -359,3 +359,9 @@
 **Hỏi:** "Tài liệu BBA-72 — liên quan đến Bus bỏ ra nha"
 
 **Trả lời:** BBA-72 (repo và bản Drive) không có nội dung nào về Bus — "bus" chỉ khớp chữ "Business Analysis". Bus có ở BBA-73 (Bus driver / Bus attendant, BR-005) và BBA-67 (xe đưa rước ở tab Attendance). Hỏi lại user muốn bỏ ở tài liệu nào. Đồng thời gộp sửa của user trên Drive BBA-72 (08:11) vào repo: tên US "Chuyển cả lớp lên level mới", lớp đích/nguồn → lớp mới/hiện tại, BR-002 bỏ phần Graduation, xoá link prototype ở UI Reference, OQ còn 2, bỏ Phụ lục C. Chưa đẩy Drive.
+
+## 27/11/2026 — BBA-73 bỏ phần Bus
+
+**Hỏi:** "À BBA 73 tao nhầm" — bỏ nội dung liên quan Bus ở BBA-73.
+
+**Trả lời:** Gộp trước sửa của user trên Drive (04:18): bỏ cột "Bắt buộc" ở bảng UI US-001; BR-010 rút còn "Trên SMS chỉ được thêm mới thông tin đưa / đón;". Bỏ Bus: xoá BR xe bus (Bus driver / Bus attendant), bỏ "số xe bus" ở cột Quan hệ, bỏ phần Lucas đi bus ở AC-005, bỏ Bus driver / Bus attendant ở ô chọn người đưa / người đón và AC người đón, bỏ "dịch vụ xe bus" ở phụ thuộc. Đánh số lại còn 13 BR. Chưa đẩy Drive.
