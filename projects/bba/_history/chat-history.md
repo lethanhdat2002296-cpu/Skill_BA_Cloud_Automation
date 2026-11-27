@@ -401,3 +401,9 @@
 **Hỏi:** "Update BBA-67 lên drive nhé"
 
 **Trả lời:** Drive không có sửa mới. Upload → 1ymK7zSO_K0TiISFcJz5WGfWcWBZPH4Cf, gắn lại 3 comment còn liên quan (Attendance của user; "Dư thừa", "Liệt kê đủ các tab" của chị Hải); 4 comment về Guardians, Health, xóa người giám hộ, Flag không gắn lại vì nội dung đã bỏ (lưu ở drive-comments.md). File cũ 1hcaY9mO… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
+
+## 27/11/2026 — BBA-72 check số thứ tự sau khi user sửa trên Drive
+
+**Hỏi:** BBA-72 vừa cập nhật trên Drive, check lại số thứ tự đánh số.
+
+**Trả lời:** Gộp sửa của user (09:21): tên "Bulk Class Promotion"; bỏ Class Viewer; FR-005 chỉ hiển thị số lượng trẻ đã chuyển; bỏ Retry; BR-001, BR-008, BR-009, BR-010 rút gọn; bỏ AC-014 cũ (Retry); bỏ mục Câu hỏi mở, Phụ lục thành mục 7. Đánh số lại: chỉ AC-015 → AC-014 (bị hở sau khi xóa AC-014). FR-001..006, BR-001..010, VAL-001..002, DATA-001..002, AC-001..014 liên tục; luồng 1..n và mục 1..7 đúng. Sửa 3 lỗi gõ nhỏ ("số lượng số lượng", thiếu dấu ";" ở AC-011, dấu ";" thừa ở AC-013). Chưa đẩy Drive.
