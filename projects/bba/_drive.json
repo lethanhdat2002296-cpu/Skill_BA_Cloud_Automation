@@ -523,6 +523,26 @@
       "source_sha256": "a60324ec2a5797ab6ecc26b94e6de1b980f1bc5a70ff6d8ec68fa8b6b05e1b36",
       "synced_at": "2026-11-26T10:22:01+00:00",
       "note": "26/11/2026: US-002 UI theo wireframe; gộp sửa của user trên Drive 09:38; làm rõ BR-002 (flag), thêm OQ-03; gắn lại 7 comment đang mở. File cũ 1orjPYgy… trong thùng rác. Không cập nhật Plane."
+    },
+    "FSD/Sprint 4/BBA-73_Handover_Recording_EN": {
+      "file_id": "1Rv-0WXAja-i9VAYcCBhPpc2mx8cWGgX5",
+      "url": "https://drive.google.com/file/d/1Rv-0WXAja-i9VAYcCBhPpc2mx8cWGgX5/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRS] BBA-73-3.2.1.01_Handover_Recording_V0.1_EN.docx",
+      "version": "0.1",
+      "source_sha256": "80a69061c44ac80590910481ff2b052a2a4d640b81cf4aeb588be3f1de2a18cd",
+      "synced_at": "2026-11-27T06:51:45+00:00",
+      "note": "27/11/2026: bản tiếng Anh dịch từ bản VI mới nhất (từ ngữ dễ hiểu, thuật ngữ giáo dục mầm non). Không cập nhật Plane."
+    },
+    "FSD/Sprint 4/BBA-74_Temperature_Readings_EN": {
+      "file_id": "1pkPY5goMoaroCHf3upHuCtoHDGFKkUP1",
+      "url": "https://drive.google.com/file/d/1pkPY5goMoaroCHf3upHuCtoHDGFKkUP1/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRS] BBA-74-3.2.1.02_Temperature_Readings_V0.1_EN.docx",
+      "version": "0.1",
+      "source_sha256": "080af3785bd7eaffc401a4f5227a2c4f0196cb9aecaa3bc58a28d1d0be714ff8",
+      "synced_at": "2026-11-27T06:51:45+00:00",
+      "note": "27/11/2026: bản tiếng Anh dịch từ bản VI mới nhất (từ ngữ dễ hiểu, thuật ngữ giáo dục mầm non). Không cập nhật Plane."
     }
   },
   "folders_used": {

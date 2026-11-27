@@ -383,3 +383,9 @@
 **Hỏi:** "Update"
 
 **Trả lời:** Drive BBA-73 không có sửa mới. Upload vào thư mục 18AJ7fN7… → 1kOM9okrdUJv8d5hcSkAqE00NjGvsj4il (đã bỏ Bus, giữ lọc, gộp sửa của user 26/11). File cũ 1yWEvT7y… vào thùng rác; cập nhật _drive.json; commit Git. BBA-72 (đã gộp sửa của user trên Drive 08:11) chưa đẩy, chờ user. Không cập nhật Plane.
+
+## 27/11/2026 — Dịch BBA-73, BBA-74 sang tiếng Anh
+
+**Hỏi:** Dịch BBA-73 và BBA-74 sang tiếng Anh vào folder 1KqkgghHymUu7T9_xco51AIjnoSufVg7_; từ ngữ dễ hiểu, thuật ngữ mảng giáo dục.
+
+**Trả lời:** Kiểm tra Drive: BBA-73, BBA-74 bản VI không có sửa mới. Dịch từ bản VI mới nhất (BBA-73 đã bỏ Bus, giữ lọc). Thuật ngữ: drop-off / pick-up, drop-off adult / pick-up adult, authorised collector, still at the centre, temporary withdrawal, Centre Director, reading, Round. Thông báo lỗi tiếng Việt trong BBA-74 (VAL-003, VAL-005) dịch sang tiếng Anh. Upload: BBA-73 EN → 1Rv-0WXAja-i9VAYcCBhPpc2mx8cWGgX5; BBA-74 EN → 1pkPY5goMoaroCHf3upHuCtoHDGFKkUP1. Bản VI giữ nguyên. Commit Git. Không cập nhật Plane.
