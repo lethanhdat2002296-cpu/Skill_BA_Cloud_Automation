@@ -365,3 +365,9 @@
 **Hỏi:** "À BBA 73 tao nhầm" — bỏ nội dung liên quan Bus ở BBA-73.
 
 **Trả lời:** Gộp trước sửa của user trên Drive (04:18): bỏ cột "Bắt buộc" ở bảng UI US-001; BR-010 rút còn "Trên SMS chỉ được thêm mới thông tin đưa / đón;". Bỏ Bus: xoá BR xe bus (Bus driver / Bus attendant), bỏ "số xe bus" ở cột Quan hệ, bỏ phần Lucas đi bus ở AC-005, bỏ Bus driver / Bus attendant ở ô chọn người đưa / người đón và AC người đón, bỏ "dịch vụ xe bus" ở phụ thuộc. Đánh số lại còn 13 BR. Chưa đẩy Drive.
+
+## 27/11/2026 — BBA-73 bỏ phần lọc
+
+**Hỏi:** "Phần lọc bỏ luôn nha"
+
+**Trả lời:** Bỏ lọc theo Centre, lớp, ngày, kết quả điểm danh ở BBA-73: FR-002 chỉ còn tìm theo tên / mã trẻ; bỏ 3 ô Centre, Class, Date ở UI; sửa mục đích, phạm vi, vai trò, mục 5, User Story, luồng chính; AC-001 bỏ mặc định Centre / ngày; AC-002 chỉ tìm theo tên; AC-010 không còn chọn ngày. Giữ ô Search. Chưa đẩy Drive.
