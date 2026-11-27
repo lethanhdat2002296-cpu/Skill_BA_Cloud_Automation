@@ -395,3 +395,9 @@
 **Hỏi:** BBA-67 chỉ mô tả 5 tab Enrolment, Enrichment, Attendance, Finance, Communication. Tab Enrolment theo file HTML (bỏ phần Flag). Tab Enrichment theo HTML, mô tả luôn UX/UI.
 
 **Trả lời:** Drive BBA-67 không có sửa mới. Bỏ US Guardians, Health, Documents, History; còn 5 US (Enrolment, Enrichment, Attendance, Finance, Communication); Guardians / Health / Documents / History và Flag đưa vào Ngoài phạm vi; bỏ OQ về guardian và flag. Enrolment theo wireframe: bảng Enrolments (Centre, Level, Class, Programme, Academic year, Enrolled on, Start date, End date, Status, Legal entity), Status Active / Transferred / Completed, tóm tắt "n enrolments · n running now", nút "⋯" (Start withdrawal / temporary withdrawal / transfer) chỉ hiện với người có quyền, chuyển sang Joining & leaving, ghi change log; không mô tả Flag. Enrichment: thêm mục UX / UI (bố cục, tóm tắt bên phải, tên Programme đậm, dòng Waiting nền nhạt, badge Waiting vàng / Active xanh / Completed, Withdrawn xám, không thao tác, định dạng ngày giờ). Finance giữ nguyên. 11 FR, 16 BR, 19 AC. Chưa đẩy Drive.
+
+## 27/11/2026 — Update BBA-67 (5 tab) lên Drive
+
+**Hỏi:** "Update BBA-67 lên drive nhé"
+
+**Trả lời:** Drive không có sửa mới. Upload → 1ymK7zSO_K0TiISFcJz5WGfWcWBZPH4Cf, gắn lại 3 comment còn liên quan (Attendance của user; "Dư thừa", "Liệt kê đủ các tab" của chị Hải); 4 comment về Guardians, Health, xóa người giám hộ, Flag không gắn lại vì nội dung đã bỏ (lưu ở drive-comments.md). File cũ 1hcaY9mO… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.

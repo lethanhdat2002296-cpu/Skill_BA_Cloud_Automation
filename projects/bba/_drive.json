@@ -515,14 +515,14 @@
       "note": "26/11/2026: gom 1 US (Lên lớp cả lớp), bỏ phần tác động; giữ comment chị Hải (BR-009). File cũ 1nc2zHpf… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
-      "file_id": "1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc",
-      "url": "https://drive.google.com/file/d/1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc/view",
+      "file_id": "1ymK7zSO_K0TiISFcJz5WGfWcWBZPH4Cf",
+      "url": "https://drive.google.com/file/d/1ymK7zSO_K0TiISFcJz5WGfWcWBZPH4Cf/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-67-3.1.1.02-Child Record Tabs – All_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "a60324ec2a5797ab6ecc26b94e6de1b980f1bc5a70ff6d8ec68fa8b6b05e1b36",
-      "synced_at": "2026-11-26T10:22:01+00:00",
-      "note": "26/11/2026: US-002 UI theo wireframe; gộp sửa của user trên Drive 09:38; làm rõ BR-002 (flag), thêm OQ-03; gắn lại 7 comment đang mở. File cũ 1orjPYgy… trong thùng rác. Không cập nhật Plane."
+      "source_sha256": "527c6df3e2742ef46ec0a236b501a50fb2d17191b2927bc731401acfe94ca413",
+      "synced_at": "2026-11-27T07:15:51+00:00",
+      "note": "27/11/2026: rút còn 5 tab (Enrolment, Enrichment, Attendance, Finance, Communication); Enrolment theo wireframe (bỏ Flag); Enrichment theo wireframe + mục UX/UI; gắn lại 3 comment còn liên quan. File cũ 1hcaY9mO… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-73_Handover_Recording_EN": {
       "file_id": "1Rv-0WXAja-i9VAYcCBhPpc2mx8cWGgX5",
@@ -1403,6 +1403,18 @@
       "note": "26/11/2026: gộp bản user sửa trên Drive 03:38; US-002 chỉ thêm mới (không sửa/xoá), có lý do + qua duyệt; tách BR người thân / xe bus / người đón; thêm nhiệt độ lúc đưa/đón, lý do; bỏ OQ. Thư mục mới 18AJ7fN7… (user đã chuyển). File cũ 1Wggw3KE… trong thùng rác. Không cập nhật Plane.",
       "key": "FSD/Sprint 4/BBA-73_Handover_Recording_VI",
       "replaced_at": "2026-11-27T01:18:55+00:00"
+    },
+    {
+      "file_id": "1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc",
+      "url": "https://drive.google.com/file/d/1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-67-3.1.1.02-Child Record Tabs – All_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "a60324ec2a5797ab6ecc26b94e6de1b980f1bc5a70ff6d8ec68fa8b6b05e1b36",
+      "synced_at": "2026-11-26T10:22:01+00:00",
+      "note": "26/11/2026: US-002 UI theo wireframe; gộp sửa của user trên Drive 09:38; làm rõ BR-002 (flag), thêm OQ-03; gắn lại 7 comment đang mở. File cũ 1orjPYgy… trong thùng rác. Không cập nhật Plane.",
+      "key": "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI",
+      "replaced_at": "2026-11-27T07:15:51+00:00"
     }
   ]
 }
