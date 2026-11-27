@@ -371,3 +371,9 @@
 **Hỏi:** "Phần lọc bỏ luôn nha"
 
 **Trả lời:** Bỏ lọc theo Centre, lớp, ngày, kết quả điểm danh ở BBA-73: FR-002 chỉ còn tìm theo tên / mã trẻ; bỏ 3 ô Centre, Class, Date ở UI; sửa mục đích, phạm vi, vai trò, mục 5, User Story, luồng chính; AC-001 bỏ mặc định Centre / ngày; AC-002 chỉ tìm theo tên; AC-010 không còn chọn ngày. Giữ ô Search. Chưa đẩy Drive.
+
+## 27/11/2026 — BBA-73 khôi phục phần lọc
+
+**Hỏi:** "Quay lại bản cũ đi. Phần lọc bỏ đi cái lọc của bus và các thông tin liên quan đến bus."
+
+**Trả lời:** Khôi phục phần lọc như trước (Centre, lớp, ngày, kết quả điểm danh; 3 ô Centre, Class, Date; AC-001, AC-002, AC-010 như cũ). Bộ lọc của BBA-73 không có lọc Bus; các thông tin Bus khác đã bỏ ở lần trước — trong tài liệu không còn chữ "bus". Chưa đẩy Drive.
