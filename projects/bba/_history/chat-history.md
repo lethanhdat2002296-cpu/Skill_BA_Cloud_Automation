@@ -353,3 +353,9 @@
 **Hỏi:** "update lên drive"
 
 **Trả lời:** Drive có sửa mới 09:38 và comment mới "Cái này cần làm rõ" ở BR-002. Gộp sửa của user: bỏ tác nhân Read-only User; rút gọn User Story US-001; FR-003 "từ tab Enrolment"; bỏ "không mở popup" ở luồng thay thế; xoá link prototype ở UI Reference (Enrolment, Guardians, Attendance); FR-005 "đã đăng ký"; bỏ câu nhắc tiêm chủng ở BR-019; bỏ "vai trò khác chỉ đọc" ở BR-022; "xoá" → "xóa". Làm rõ BR-002 theo prototype (3 flag Yes / No; Staff Child gắn Staff child discount; SUG / KA chưa có quy tắc tính phí) + OQ-03 (ý nghĩa SUG / KA, Staff Child có tự áp giảm giá không). Upload → 1hcaY9mOxw-jwL74_u39yHwrm0WlHPuCc, gắn lại 7 comment đang mở (comment đã resolve không gắn lại). File cũ 1orjPYgy… vào thùng rác; commit Git. Không cập nhật Plane.
+
+## 27/11/2026 — BBA-72 bỏ phần liên quan Bus
+
+**Hỏi:** "Tài liệu BBA-72 — liên quan đến Bus bỏ ra nha"
+
+**Trả lời:** BBA-72 (repo và bản Drive) không có nội dung nào về Bus — "bus" chỉ khớp chữ "Business Analysis". Bus có ở BBA-73 (Bus driver / Bus attendant, BR-005) và BBA-67 (xe đưa rước ở tab Attendance). Hỏi lại user muốn bỏ ở tài liệu nào. Đồng thời gộp sửa của user trên Drive BBA-72 (08:11) vào repo: tên US "Chuyển cả lớp lên level mới", lớp đích/nguồn → lớp mới/hiện tại, BR-002 bỏ phần Graduation, xoá link prototype ở UI Reference, OQ còn 2, bỏ Phụ lục C. Chưa đẩy Drive.
