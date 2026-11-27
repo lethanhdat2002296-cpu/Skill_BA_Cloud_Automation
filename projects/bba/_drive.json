@@ -505,14 +505,14 @@
       "note": "Cột Temperatures chỉ hiển thị (bỏ link Add reading) theo wireframe BBA-73 của user. File cũ 1eGQdzd65E_6kBQH5tH1YtCdtvZr_nA-x trong thùng rác."
     },
     "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI": {
-      "file_id": "1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU",
-      "url": "https://drive.google.com/file/d/1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU/view",
+      "file_id": "1ixzxP1n2W6R8mB1cHS_fSsjNRJq9KTk1",
+      "url": "https://drive.google.com/file/d/1ixzxP1n2W6R8mB1cHS_fSsjNRJq9KTk1/view",
       "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
       "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
       "version": "0.1",
-      "source_sha256": "21d25560aadc7a71ec5b2501add03effd097a90218ca2a03da4a8082834a6f15",
-      "synced_at": "2026-11-26T07:42:38+00:00",
-      "note": "26/11/2026: gom 1 US (Lên lớp cả lớp), bỏ phần tác động; giữ comment chị Hải (BR-009). File cũ 1nc2zHpf… trong thùng rác. Không cập nhật Plane."
+      "source_sha256": "0e8901c49a12968980d7d258d9fc9124659a866ec3383ca85d1deeb6e6158eeb",
+      "synced_at": "2026-11-27T09:29:52+00:00",
+      "note": "27/11/2026: gộp sửa của user trên Drive 26/11 08:11 và 27/11 09:21 (Bulk Class Promotion, bỏ Retry, bỏ OQ); đánh số lại AC; sửa lỗi gõ. Comment chị Hải đã được user resolve, không gắn lại. File cũ 1QB6mSpP… trong thùng rác. Không cập nhật Plane."
     },
     "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI": {
       "file_id": "1ymK7zSO_K0TiISFcJz5WGfWcWBZPH4Cf",
@@ -543,6 +543,16 @@
       "source_sha256": "080af3785bd7eaffc401a4f5227a2c4f0196cb9aecaa3bc58a28d1d0be714ff8",
       "synced_at": "2026-11-27T06:51:45+00:00",
       "note": "27/11/2026: bản tiếng Anh dịch từ bản VI mới nhất (từ ngữ dễ hiểu, thuật ngữ giáo dục mầm non). Không cập nhật Plane."
+    },
+    "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_EN": {
+      "file_id": "1DOiw_vxvi9s76a5HRfP94nm4d9YCI1En",
+      "url": "https://drive.google.com/file/d/1DOiw_vxvi9s76a5HRfP94nm4d9YCI1En/view",
+      "folder_id": "1KqkgghHymUu7T9_xco51AIjnoSufVg7_",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_EN.docx",
+      "version": "0.1",
+      "source_sha256": "816f1a94f8b9841889fc0c6fdb2e4dc2f839a6e40ec4468a57cd4badeaf3d2b5",
+      "synced_at": "2026-11-27T09:29:52+00:00",
+      "note": "27/11/2026: bản tiếng Anh dịch từ bản VI mới nhất. Không cập nhật Plane."
     }
   },
   "folders_used": {
@@ -1415,6 +1425,18 @@
       "note": "26/11/2026: US-002 UI theo wireframe; gộp sửa của user trên Drive 09:38; làm rõ BR-002 (flag), thêm OQ-03; gắn lại 7 comment đang mở. File cũ 1orjPYgy… trong thùng rác. Không cập nhật Plane.",
       "key": "FSD/Sprint 4/BBA-67_Child_Record_Tabs_VI",
       "replaced_at": "2026-11-27T07:15:51+00:00"
+    },
+    {
+      "file_id": "1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU",
+      "url": "https://drive.google.com/file/d/1QB6mSpPzkWOr7TKJQOcSCLxPq8Tfi3YU/view",
+      "folder_id": "1uZpPo7_llnNwvzQrLIbVcp8sYXk3jkwn",
+      "title": "[FRS] BBA-72-3.1.5.01_Bulk_Class_Promotion_V0.1_VI.docx",
+      "version": "0.1",
+      "source_sha256": "21d25560aadc7a71ec5b2501add03effd097a90218ca2a03da4a8082834a6f15",
+      "synced_at": "2026-11-26T07:42:38+00:00",
+      "note": "26/11/2026: gom 1 US (Lên lớp cả lớp), bỏ phần tác động; giữ comment chị Hải (BR-009). File cũ 1nc2zHpf… trong thùng rác. Không cập nhật Plane.",
+      "key": "FSD/Sprint 4/BBA-72_Bulk_Class_Promotion_VI",
+      "replaced_at": "2026-11-27T09:29:52+00:00"
     }
   ]
 }

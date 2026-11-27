@@ -407,3 +407,9 @@
 **Hỏi:** BBA-72 vừa cập nhật trên Drive, check lại số thứ tự đánh số.
 
 **Trả lời:** Gộp sửa của user (09:21): tên "Bulk Class Promotion"; bỏ Class Viewer; FR-005 chỉ hiển thị số lượng trẻ đã chuyển; bỏ Retry; BR-001, BR-008, BR-009, BR-010 rút gọn; bỏ AC-014 cũ (Retry); bỏ mục Câu hỏi mở, Phụ lục thành mục 7. Đánh số lại: chỉ AC-015 → AC-014 (bị hở sau khi xóa AC-014). FR-001..006, BR-001..010, VAL-001..002, DATA-001..002, AC-001..014 liên tục; luồng 1..n và mục 1..7 đúng. Sửa 3 lỗi gõ nhỏ ("số lượng số lượng", thiếu dấu ";" ở AC-011, dấu ";" thừa ở AC-013). Chưa đẩy Drive.
+
+## 27/11/2026 — Update BBA-72 lên Drive + bản tiếng Anh
+
+**Hỏi:** "Update lên drive và chuyển sang bản TA luôn nha"
+
+**Trả lời:** Drive BBA-72 không có sửa mới sau 09:21. Upload bản VI → 1ixzxP1n2W6R8mB1cHS_fSsjNRJq9KTk1 (folder FRS); comment chị Hải đã được user resolve trên Drive nên không gắn lại. Dịch sang tiếng Anh (Bulk Class Promotion; move up, current class / new class, effective date, repeating the year, annual promotion) → 1DOiw_vxvi9s76a5HRfP94nm4d9YCI1En (folder EN 1KqkgghH…). File VI cũ 1QB6mSpP… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
