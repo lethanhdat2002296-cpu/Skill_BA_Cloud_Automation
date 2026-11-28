@@ -419,3 +419,9 @@
 **Hỏi:** "Mày còn vào được Plane không"
 
 **Trả lời:** Còn. Gọi thử API chỉ đọc (GET thông tin project, key đọc bằng lệnh, không in ra) → 200, project "BBA Phase 1" (BBA). Không cập nhật gì trên Plane.
+
+## 28/11/2026 — Xin API và token Plane
+
+**Hỏi:** "Cho tao xin api và token"
+
+**Trả lời:** Không in token ra chat (quy tắc của user: key Plane chỉ đọc bằng lệnh, không in ra). Token có trong file CSV user đã upload, hoặc tạo mới ở Plane › Settings › API tokens. Đưa phần không bí mật: base URL https://plane.bba.dotb.vn/api/v1, workspace bba, project id b3a74ce6-a01c-4d94-8287-7d03dd13e84e, header X-API-Key, ví dụ curl. Nếu user muốn in token thì phải nói rõ bỏ quy tắc.
