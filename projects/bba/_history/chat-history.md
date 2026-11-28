@@ -413,3 +413,9 @@
 **Hỏi:** "Update lên drive và chuyển sang bản TA luôn nha"
 
 **Trả lời:** Drive BBA-72 không có sửa mới sau 09:21. Upload bản VI → 1ixzxP1n2W6R8mB1cHS_fSsjNRJq9KTk1 (folder FRS); comment chị Hải đã được user resolve trên Drive nên không gắn lại. Dịch sang tiếng Anh (Bulk Class Promotion; move up, current class / new class, effective date, repeating the year, annual promotion) → 1DOiw_vxvi9s76a5HRfP94nm4d9YCI1En (folder EN 1KqkgghH…). File VI cũ 1QB6mSpP… vào thùng rác; cập nhật _drive.json; commit Git. Không cập nhật Plane.
+
+## 28/11/2026 — Kiểm tra truy cập Plane
+
+**Hỏi:** "Mày còn vào được Plane không"
+
+**Trả lời:** Còn. Gọi thử API chỉ đọc (GET thông tin project, key đọc bằng lệnh, không in ra) → 200, project "BBA Phase 1" (BBA). Không cập nhật gì trên Plane.
