@@ -425,3 +425,9 @@
 **Hỏi:** "Cho tao xin api và token"
 
 **Trả lời:** Không in token ra chat (quy tắc của user: key Plane chỉ đọc bằng lệnh, không in ra). Token có trong file CSV user đã upload, hoặc tạo mới ở Plane › Settings › API tokens. Đưa phần không bí mật: base URL https://plane.bba.dotb.vn/api/v1, workspace bba, project id b3a74ce6-a01c-4d94-8287-7d03dd13e84e, header X-API-Key, ví dụ curl. Nếu user muốn in token thì phải nói rõ bỏ quy tắc.
+
+## 28/11/2026 — Tổng hợp task Sprint 5 được assign
+
+**Hỏi:** Tổng hợp task được assign ở Sprint 5: mô tả từng task, có phản hồi của khách không, output để copy.
+
+**Trả lời:** Token Plane cũ báo không hợp lệ (403) → user nhập token mới qua form bảo mật (proxy tự gắn, không in ra). Cycle "S5 – Invoice engine, journeys, safeguarding, lifecycle" (07/12–18/12/2026): 13 task [BA] assign cho dat.le, đều Backlog — BBA-667 (BBA-114 Checklist templates), 669 (115 Rating scales), 671 (116 Portfolio layouts), 673 (117 Release calendar), 675 (118 Centre logbook), 677 (119 Incident – record), 679 (120 Incident – escalate), 729 (145 Child switcher), 731 (146 Routines), 733 (148 Routines – bulk record), 735 (149 Handover photo capture), 737 (150 Authorised pickup verification), 739 (151 Gate temperature entry). Phản hồi của khách: không có — 0 comment ở cả 13 task BA và 13 task cha; file Excel Q&A không có câu hỏi nào cho các mã này. Chỉ đọc, không cập nhật Plane.
